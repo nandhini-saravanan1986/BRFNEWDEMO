@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bornfire</groupId>
-	<artifactId>BRF</artifactId>
+	<artifactId>BRFNEWDEMO</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>BRFNEWDEMO</name>
