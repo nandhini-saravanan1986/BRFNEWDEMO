@@ -220,5 +220,31 @@ public class CBUAE_BRF_ReportsController {
 		    }
 		}
 
+		@RequestMapping(value = "downloadDetailExcel", method = RequestMethod.GET)
+		@ResponseBody
+		public ResponseEntity<ByteArrayResource> downloadDetailExcel(@RequestParam("filename") String filename,
+				@RequestParam("fromdate") String fromdate, @RequestParam("todate") String todate) {
+
+			try {
+				System.out.println("came to controller");
+				byte[] data = regreportServices.getDownloadDetailFile(filename, fromdate, todate);
+
+				if (data == null || data.length == 0) {
+					return ResponseEntity.noContent().build();
+				}
+
+				ByteArrayResource resource = new ByteArrayResource(data);
+
+				HttpHeaders headers = new HttpHeaders();
+				headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename + ".xls");
+
+				return ResponseEntity.ok().headers(headers).contentLength(data.length)
+						.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(resource);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
+		}
 		
 }

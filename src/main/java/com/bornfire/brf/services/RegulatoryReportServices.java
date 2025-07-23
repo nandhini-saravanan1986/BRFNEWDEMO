@@ -157,6 +157,7 @@ public class RegulatoryReportServices {
 				break;
 				
 				
+				
 			case "BRF2_1":
 				try {
 					repfile = cbuae_brf2_1_reportservice.getBRF2_1Excel(filename, reportId, fromdate, todate, currency, dtltype);
@@ -202,5 +203,17 @@ public class RegulatoryReportServices {
 		
 		return repfile;
 	}
+	public byte[] getDownloadDetailFile(String filename, String fromdate, String todate) {
+	    System.out.println("Came to common service");
+	    
+	    if ("BRF2_4Detail".equals(filename)) {
+	        return cbuae_brf2_4_reportservice.getBRF2_4DetailExcel(filename, fromdate, todate);
+	    } else {
+	        System.out.println("Default");
+	    }
+	    
+	    return new byte[0];
+	}
 
 }
+
