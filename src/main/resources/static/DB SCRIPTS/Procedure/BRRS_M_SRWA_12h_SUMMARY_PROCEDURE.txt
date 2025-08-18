@@ -1,0 +1,3533 @@
+﻿create or replace PROCEDURE BRRS_M_SRWA_12h_SUMMARY_PROCEDURE(Report_date VARCHAR2)
+IS
+V_REPORT_DATE DATE := TO_DATE(Report_date, 'DD-MM-YYYY');
+
+
+-- Main summary variables -- 
+
+
+V_R11_PRODUCT                        VARCHAR2(100) := ' ';
+V_R11_ISSUER                         NUMBER(24,3) := 0;
+V_R11_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R11_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R11_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R11_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R11_OTHER                          NUMBER(24,3) := 0;
+V_R11_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R11_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R12_PRODUCT                        VARCHAR2(100) := 'Eligible Collateral for Credit Risk* ';
+V_R12_ISSUER                         NUMBER(24,3) := 0;
+V_R12_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R12_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R12_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R12_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R12_OTHER                          NUMBER(24,3) := 0;
+V_R12_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R12_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R13_PRODUCT                        VARCHAR2(100) := ' ';
+V_R13_ISSUER                         NUMBER(24,3) := 0;
+V_R13_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R13_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R13_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R13_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R13_OTHER                          NUMBER(24,3) := 0;
+V_R13_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R13_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R14_PRODUCT                        VARCHAR2(100) := ' ';
+V_R14_ISSUER                         NUMBER(24,3) := 0;
+V_R14_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R14_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R14_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R14_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R14_OTHER                          NUMBER(24,3) := 0;
+V_R14_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R14_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R15_PRODUCT                        VARCHAR2(100) := ' ';
+V_R15_ISSUER                         NUMBER(24,3) := 0;
+V_R15_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R15_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R15_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R15_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R15_OTHER                          NUMBER(24,3) := 0;
+V_R15_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R15_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R16_PRODUCT                        VARCHAR2(100) := ' ';
+V_R16_ISSUER                         NUMBER(24,3) := 0;
+V_R16_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R16_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R16_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R16_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R16_OTHER                          NUMBER(24,3) := 0;
+V_R16_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R16_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R17_PRODUCT                        VARCHAR2(100) := ' ';
+V_R17_ISSUER                         NUMBER(24,3) := 0;
+V_R17_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R17_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R17_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R17_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R17_OTHER                          NUMBER(24,3) := 0;
+V_R17_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R17_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R18_PRODUCT                        VARCHAR2(100) := ' ';
+V_R18_ISSUER                         NUMBER(24,3) := 0;
+V_R18_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R18_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R18_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R18_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R18_OTHER                          NUMBER(24,3) := 0;
+V_R18_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R18_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R19_PRODUCT                        VARCHAR2(100) := ' ';
+V_R19_ISSUER                         NUMBER(24,3) := 0;
+V_R19_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R19_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R19_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R19_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R19_OTHER                          NUMBER(24,3) := 0;
+V_R19_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R19_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R20_PRODUCT                        VARCHAR2(100) := ' ';
+V_R20_ISSUER                         NUMBER(24,3) := 0;
+V_R20_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R20_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R20_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R20_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R20_OTHER                          NUMBER(24,3) := 0;
+V_R20_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R20_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R21_PRODUCT                        VARCHAR2(100) := ' ';
+V_R21_ISSUER                         NUMBER(24,3) := 0;
+V_R21_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R21_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R21_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R21_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R21_OTHER                          NUMBER(24,3) := 0;
+V_R21_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R21_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R22_PRODUCT                        VARCHAR2(100) := ' ';
+V_R22_ISSUER                         NUMBER(24,3) := 0;
+V_R22_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R22_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R22_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R22_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R22_OTHER                          NUMBER(24,3) := 0;
+V_R22_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R22_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R23_PRODUCT                        VARCHAR2(100) := ' ';
+V_R23_ISSUER                         NUMBER(24,3) := 0;
+V_R23_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R23_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R23_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R23_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R23_OTHER                          NUMBER(24,3) := 0;
+V_R23_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R23_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R24_PRODUCT                        VARCHAR2(100) := ' ';
+V_R24_ISSUER                         NUMBER(24,3) := 0;
+V_R24_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R24_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R24_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R24_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R24_OTHER                          NUMBER(24,3) := 0;
+V_R24_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R24_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R25_PRODUCT                        VARCHAR2(100) := ' ';
+V_R25_ISSUER                         NUMBER(24,3) := 0;
+V_R25_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R25_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R25_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R25_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R25_OTHER                          NUMBER(24,3) := 0;
+V_R25_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R25_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R26_PRODUCT                        VARCHAR2(100) := ' ';
+V_R26_ISSUER                         NUMBER(24,3) := 0;
+V_R26_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R26_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R26_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R26_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R26_OTHER                          NUMBER(24,3) := 0;
+V_R26_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R26_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R27_PRODUCT                        VARCHAR2(100) := ' ';
+V_R27_ISSUER                         NUMBER(24,3) := 0;
+V_R27_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R27_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R27_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R27_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R27_OTHER                          NUMBER(24,3) := 0;
+V_R27_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R27_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R28_PRODUCT                        VARCHAR2(100) := ' ';
+V_R28_ISSUER                         NUMBER(24,3) := 0;
+V_R28_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R28_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R28_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R28_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R28_OTHER                          NUMBER(24,3) := 0;
+V_R28_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R28_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R29_PRODUCT                        VARCHAR2(100) := ' ';
+V_R29_ISSUER                         NUMBER(24,3) := 0;
+V_R29_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R29_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R29_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R29_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R29_OTHER                          NUMBER(24,3) := 0;
+V_R29_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R29_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R30_PRODUCT                        VARCHAR2(100) := ' ';
+V_R30_ISSUER                         NUMBER(24,3) := 0;
+V_R30_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R30_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R30_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R30_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R30_OTHER                          NUMBER(24,3) := 0;
+V_R30_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R30_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R31_PRODUCT                        VARCHAR2(100) := ' ';
+V_R31_ISSUER                         NUMBER(24,3) := 0;
+V_R31_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R31_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R31_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R31_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R31_OTHER                          NUMBER(24,3) := 0;
+V_R31_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R31_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R32_PRODUCT                        VARCHAR2(100) := ' ';
+V_R32_ISSUER                         NUMBER(24,3) := 0;
+V_R32_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R32_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R32_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R32_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R32_OTHER                          NUMBER(24,3) := 0;
+V_R32_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R32_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R33_PRODUCT                        VARCHAR2(100) := ' ';
+V_R33_ISSUER                         NUMBER(24,3) := 0;
+V_R33_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R33_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R33_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R33_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R33_OTHER                          NUMBER(24,3) := 0;
+V_R33_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R33_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R34_PRODUCT                        VARCHAR2(100) := ' ';
+V_R34_ISSUER                         NUMBER(24,3) := 0;
+V_R34_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R34_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R34_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R34_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R34_OTHER                          NUMBER(24,3) := 0;
+V_R34_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R34_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R35_PRODUCT                        VARCHAR2(100) := ' ';
+V_R35_ISSUER                         NUMBER(24,3) := 0;
+V_R35_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R35_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R35_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R35_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R35_OTHER                          NUMBER(24,3) := 0;
+V_R35_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R35_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R36_PRODUCT                        VARCHAR2(100) := ' ';
+V_R36_ISSUER                         NUMBER(24,3) := 0;
+V_R36_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R36_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R36_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R36_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R36_OTHER                          NUMBER(24,3) := 0;
+V_R36_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R36_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R37_PRODUCT                        VARCHAR2(100) := ' ';
+V_R37_ISSUER                         NUMBER(24,3) := 0;
+V_R37_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R37_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R37_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R37_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R37_OTHER                          NUMBER(24,3) := 0;
+V_R37_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R37_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R38_PRODUCT                        VARCHAR2(100) := ' ';
+V_R38_ISSUER                         NUMBER(24,3) := 0;
+V_R38_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R38_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R38_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R38_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R38_OTHER                          NUMBER(24,3) := 0;
+V_R38_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R38_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R39_PRODUCT                        VARCHAR2(100) := ' ';
+V_R39_ISSUER                         NUMBER(24,3) := 0;
+V_R39_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R39_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R39_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R39_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R39_OTHER                          NUMBER(24,3) := 0;
+V_R39_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R39_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R40_PRODUCT                        VARCHAR2(100) := ' ';
+V_R40_ISSUER                         NUMBER(24,3) := 0;
+V_R40_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R40_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R40_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R40_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R40_OTHER                          NUMBER(24,3) := 0;
+V_R40_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R40_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R41_PRODUCT                        VARCHAR2(100) := ' ';
+V_R41_ISSUER                         NUMBER(24,3) := 0;
+V_R41_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R41_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R41_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R41_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R41_OTHER                          NUMBER(24,3) := 0;
+V_R41_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R41_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R42_PRODUCT                        VARCHAR2(100) := ' ';
+V_R42_ISSUER                         NUMBER(24,3) := 0;
+V_R42_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R42_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R42_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R42_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R42_OTHER                          NUMBER(24,3) := 0;
+V_R42_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R42_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R43_PRODUCT                        VARCHAR2(100) := ' ';
+V_R43_ISSUER                         NUMBER(24,3) := 0;
+V_R43_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R43_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R43_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R43_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R43_OTHER                          NUMBER(24,3) := 0;
+V_R43_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R43_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R44_PRODUCT                        VARCHAR2(100) := ' ';
+V_R44_ISSUER                         NUMBER(24,3) := 0;
+V_R44_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R44_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R44_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R44_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R44_OTHER                          NUMBER(24,3) := 0;
+V_R44_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R44_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R45_PRODUCT                        VARCHAR2(100) := ' ';
+V_R45_ISSUER                         NUMBER(24,3) := 0;
+V_R45_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R45_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R45_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R45_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R45_OTHER                          NUMBER(24,3) := 0;
+V_R45_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R45_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R46_PRODUCT                        VARCHAR2(100) := ' ';
+V_R46_ISSUER                         NUMBER(24,3) := 0;
+V_R46_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R46_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R46_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R46_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R46_OTHER                          NUMBER(24,3) := 0;
+V_R46_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R46_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R47_PRODUCT                        VARCHAR2(100) := ' ';
+V_R47_ISSUER                         NUMBER(24,3) := 0;
+V_R47_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R47_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R47_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R47_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R47_OTHER                          NUMBER(24,3) := 0;
+V_R47_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R47_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R48_PRODUCT                        VARCHAR2(100) := ' ';
+V_R48_ISSUER                         NUMBER(24,3) := 0;
+V_R48_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R48_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R48_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R48_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R48_OTHER                          NUMBER(24,3) := 0;
+V_R48_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R48_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R49_PRODUCT                        VARCHAR2(100) := ' ';
+V_R49_ISSUER                         NUMBER(24,3) := 0;
+V_R49_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R49_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R49_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R49_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R49_OTHER                          NUMBER(24,3) := 0;
+V_R49_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R49_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R50_PRODUCT                        VARCHAR2(100) := ' ';
+V_R50_ISSUER                         NUMBER(24,3) := 0;
+V_R50_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R50_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R50_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R50_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R50_OTHER                          NUMBER(24,3) := 0;
+V_R50_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R50_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R51_PRODUCT                        VARCHAR2(100) := ' ';
+V_R51_ISSUER                         NUMBER(24,3) := 0;
+V_R51_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R51_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R51_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R51_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R51_OTHER                          NUMBER(24,3) := 0;
+V_R51_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R51_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R52_PRODUCT                        VARCHAR2(100) := ' ';
+V_R52_ISSUER                         NUMBER(24,3) := 0;
+V_R52_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R52_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R52_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R52_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R52_OTHER                          NUMBER(24,3) := 0;
+V_R52_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R52_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R53_PRODUCT                        VARCHAR2(100) := 'Eligible Guarantors/Protection Providers for Credit Risk * ';
+V_R53_ISSUER                         NUMBER(24,3) := 0;
+V_R53_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R53_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R53_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R53_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R53_OTHER                          NUMBER(24,3) := 0;
+V_R53_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R53_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R54_PRODUCT                        VARCHAR2(100) := ' ';
+V_R54_ISSUER                         NUMBER(24,3) := 0;
+V_R54_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R54_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R54_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R54_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R54_OTHER                          NUMBER(24,3) := 0;
+V_R54_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R54_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R55_PRODUCT                        VARCHAR2(100) := ' ';
+V_R55_ISSUER                         NUMBER(24,3) := 0;
+V_R55_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R55_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R55_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R55_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R55_OTHER                          NUMBER(24,3) := 0;
+V_R55_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R55_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R56_PRODUCT                        VARCHAR2(100) := ' ';
+V_R56_ISSUER                         NUMBER(24,3) := 0;
+V_R56_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R56_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R56_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R56_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R56_OTHER                          NUMBER(24,3) := 0;
+V_R56_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R56_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R57_PRODUCT                        VARCHAR2(100) := ' ';
+V_R57_ISSUER                         NUMBER(24,3) := 0;
+V_R57_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R57_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R57_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R57_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R57_OTHER                          NUMBER(24,3) := 0;
+V_R57_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R57_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R58_PRODUCT                        VARCHAR2(100) := ' ';
+V_R58_ISSUER                         NUMBER(24,3) := 0;
+V_R58_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R58_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R58_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R58_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R58_OTHER                          NUMBER(24,3) := 0;
+V_R58_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R58_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R59_PRODUCT                        VARCHAR2(100) := ' ';
+V_R59_ISSUER                         NUMBER(24,3) := 0;
+V_R59_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R59_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R59_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R59_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R59_OTHER                          NUMBER(24,3) := 0;
+V_R59_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R59_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R60_PRODUCT                        VARCHAR2(100) := ' ';
+V_R60_ISSUER                         NUMBER(24,3) := 0;
+V_R60_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R60_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R60_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R60_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R60_OTHER                          NUMBER(24,3) := 0;
+V_R60_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R60_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R61_PRODUCT                        VARCHAR2(100) := ' ';
+V_R61_ISSUER                         NUMBER(24,3) := 0;
+V_R61_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R61_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R61_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R61_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R61_OTHER                          NUMBER(24,3) := 0;
+V_R61_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R61_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R62_PRODUCT                        VARCHAR2(100) := ' ';
+V_R62_ISSUER                         NUMBER(24,3) := 0;
+V_R62_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R62_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R62_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R62_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R62_OTHER                          NUMBER(24,3) := 0;
+V_R62_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R62_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R63_PRODUCT                        VARCHAR2(100) := ' ';
+V_R63_ISSUER                         NUMBER(24,3) := 0;
+V_R63_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R63_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R63_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R63_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R63_OTHER                          NUMBER(24,3) := 0;
+V_R63_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R63_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R64_PRODUCT                        VARCHAR2(100) := ' ';
+V_R64_ISSUER                         NUMBER(24,3) := 0;
+V_R64_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R64_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R64_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R64_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R64_OTHER                          NUMBER(24,3) := 0;
+V_R64_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R64_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R65_PRODUCT                        VARCHAR2(100) := ' ';
+V_R65_ISSUER                         NUMBER(24,3) := 0;
+V_R65_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R65_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R65_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R65_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R65_OTHER                          NUMBER(24,3) := 0;
+V_R65_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R65_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R66_PRODUCT                        VARCHAR2(100) := ' ';
+V_R66_ISSUER                         NUMBER(24,3) := 0;
+V_R66_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R66_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R66_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R66_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R66_OTHER                          NUMBER(24,3) := 0;
+V_R66_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R66_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R67_PRODUCT                        VARCHAR2(100) := ' ';
+V_R67_ISSUER                         NUMBER(24,3) := 0;
+V_R67_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R67_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R67_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R67_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R67_OTHER                          NUMBER(24,3) := 0;
+V_R67_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R67_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R68_PRODUCT                        VARCHAR2(100) := ' ';
+V_R68_ISSUER                         NUMBER(24,3) := 0;
+V_R68_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R68_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R68_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R68_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R68_OTHER                          NUMBER(24,3) := 0;
+V_R68_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R68_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R69_PRODUCT                        VARCHAR2(100) := ' ';
+V_R69_ISSUER                         NUMBER(24,3) := 0;
+V_R69_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R69_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R69_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R69_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R69_OTHER                          NUMBER(24,3) := 0;
+V_R69_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R69_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R70_PRODUCT                        VARCHAR2(100) := ' ';
+V_R70_ISSUER                         NUMBER(24,3) := 0;
+V_R70_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R70_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R70_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R70_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R70_OTHER                          NUMBER(24,3) := 0;
+V_R70_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R70_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R71_PRODUCT                        VARCHAR2(100) := ' ';
+V_R71_ISSUER                         NUMBER(24,3) := 0;
+V_R71_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R71_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R71_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R71_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R71_OTHER                          NUMBER(24,3) := 0;
+V_R71_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R71_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R72_PRODUCT                        VARCHAR2(100) := ' ';
+V_R72_ISSUER                         NUMBER(24,3) := 0;
+V_R72_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R72_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R72_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R72_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R72_OTHER                          NUMBER(24,3) := 0;
+V_R72_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R72_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R73_PRODUCT                        VARCHAR2(100) := ' ';
+V_R73_ISSUER                         NUMBER(24,3) := 0;
+V_R73_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R73_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R73_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R73_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R73_OTHER                          NUMBER(24,3) := 0;
+V_R73_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R73_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R74_PRODUCT                        VARCHAR2(100) := ' ';
+V_R74_ISSUER                         NUMBER(24,3) := 0;
+V_R74_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R74_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R74_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R74_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R74_OTHER                          NUMBER(24,3) := 0;
+V_R74_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R74_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R75_PRODUCT                        VARCHAR2(100) := ' ';
+V_R75_ISSUER                         NUMBER(24,3) := 0;
+V_R75_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R75_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R75_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R75_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R75_OTHER                          NUMBER(24,3) := 0;
+V_R75_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R75_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R76_PRODUCT                        VARCHAR2(100) := ' ';
+V_R76_ISSUER                         NUMBER(24,3) := 0;
+V_R76_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R76_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R76_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R76_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R76_OTHER                          NUMBER(24,3) := 0;
+V_R76_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R76_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R77_PRODUCT                        VARCHAR2(100) := ' ';
+V_R77_ISSUER                         NUMBER(24,3) := 0;
+V_R77_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R77_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R77_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R77_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R77_OTHER                          NUMBER(24,3) := 0;
+V_R77_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R77_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R78_PRODUCT                        VARCHAR2(100) := ' ';
+V_R78_ISSUER                         NUMBER(24,3) := 0;
+V_R78_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R78_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R78_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R78_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R78_OTHER                          NUMBER(24,3) := 0;
+V_R78_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R78_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R79_PRODUCT                        VARCHAR2(100) := ' ';
+V_R79_ISSUER                         NUMBER(24,3) := 0;
+V_R79_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R79_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R79_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R79_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R79_OTHER                          NUMBER(24,3) := 0;
+V_R79_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R79_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R80_PRODUCT                        VARCHAR2(100) := ' ';
+V_R80_ISSUER                         NUMBER(24,3) := 0;
+V_R80_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R80_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R80_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R80_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R80_OTHER                          NUMBER(24,3) := 0;
+V_R80_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R80_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+V_R81_PRODUCT                        VARCHAR2(100) := ' ';
+V_R81_ISSUER                         NUMBER(24,3) := 0;
+V_R81_ISSUES_RATING                 NUMBER(24,3) := 0;
+V_R81_1YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R81_1YR_5YR_VAL_OF_CRM             NUMBER(24,3) := 0;
+V_R81_5YR_VAL_OF_CRM                 NUMBER(24,3) := 0;
+V_R81_OTHER                          NUMBER(24,3) := 0;
+V_R81_STD_SUPERVISORY_HAIRCUT        NUMBER(24,3) := 0;
+V_R81_APPLICABLE_RISK_WEIGHT         NUMBER(24,3) := 0;
+
+
+
+
+BEGIN
+    -- Step 1: Remove old summary data --
+    DELETE FROM BRRS_M_SRWA_12H_SUMMARYTABLE WHERE REPORT_DATE = V_REPORT_DATE;
+    COMMIT;
+
+
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R11_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R11' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R12_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R12' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R13_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R13' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R14_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R14' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R15_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R15' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R16_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R16' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R17_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R17' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R18_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R18' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R19_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R19' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R20_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R20' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R21_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R21' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R22_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R22' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R23_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R23' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R24_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R24' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R25_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R25' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R26_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R26' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R27_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R27' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R28_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R28' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R29_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R29' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R30_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R30' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R31_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R31' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R32_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R32' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R33_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R33' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R34_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R34' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R35_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R35' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R36_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R36' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R37_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R37' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R38_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R38' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R39_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R39' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R40_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R40' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R41_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R41' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R42_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R42' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R43_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R43' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R44_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R44' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R45_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R45' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R46_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R46' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R47_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R47' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R48_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R48' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R49_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R49' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R50_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R50' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R51_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R51' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R52_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R52' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R53_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R53' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R54_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R54' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R55_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R55' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R56_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R56' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R57_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R57' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R58_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R58' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R59_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R59' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R60_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R60' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R61_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R61' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R62_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R62' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R63_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R63' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R64_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R64' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R65_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R65' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R66_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R66' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R67_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R67' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R68_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R68' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R69_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R69' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R70_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R70' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R71_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R71' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R72_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R72' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R73_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R73' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R74_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R74' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R75_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R75' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R76_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R76' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R77_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R77' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R78_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R78' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R79_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R79' AND COLUMN_ID = 'C4';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R80_1YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R80' AND COLUMN_ID = 'C4';
+
+
+
+
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R11_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R11' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R12_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R12' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R13_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R13' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R14_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R14' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R15_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R15' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R16_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R16' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R17_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R17' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R18_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R18' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R19_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R19' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R20_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R20' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R21_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R21' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R22_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R22' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R23_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R23' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R24_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R24' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R25_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R25' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R26_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R26' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R27_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R27' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R28_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R28' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R29_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R29' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R30_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R30' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R31_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R31' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R32_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R32' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R33_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R33' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R34_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R34' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R35_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R35' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R36_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R36' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R37_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R37' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R38_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R38' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R39_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R39' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R40_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R40' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R41_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R41' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R42_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R42' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R43_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R43' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R44_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R44' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R45_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R45' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R46_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R46' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R47_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R47' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R48_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R48' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R49_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R49' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R50_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R50' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R51_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R51' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R52_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R52' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R53_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R53' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R54_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R54' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R55_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R55' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R56_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R56' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R57_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R57' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R58_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R58' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R59_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R59' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R60_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R60' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R61_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R61' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R62_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R62' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R63_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R63' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R64_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R64' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R65_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R65' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R66_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R66' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R67_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R67' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R68_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R68' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R69_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R69' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R70_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R70' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R71_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R71' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R72_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R72' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R73_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R73' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R74_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R74' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R75_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R75' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R76_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R76' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R77_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R77' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R78_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R78' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R79_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R79' AND COLUMN_ID = 'C5';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R80_1YR_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R80' AND COLUMN_ID = 'C5';
+
+
+
+
+
+
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R11_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R11' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R12_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R12' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R13_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R13' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R14_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R14' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R15_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R15' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R16_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R16' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R17_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R17' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R18_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R18' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R19_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R19' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R20_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R20' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R21_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R21' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R22_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R22' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R23_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R23' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R24_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R24' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R25_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R25' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R26_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R26' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R27_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R27' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R28_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R28' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R29_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R29' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R30_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R30' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R31_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R31' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R32_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R32' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R33_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R33' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R34_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R34' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R35_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R35' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R36_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R36' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R37_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R37' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R38_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R38' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R39_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R39' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R40_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R40' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R41_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R41' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R42_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R42' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R43_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R43' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R44_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R44' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R45_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R45' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R46_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R46' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R47_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R47' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R48_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R48' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R49_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R49' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R50_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R50' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R51_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R51' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R52_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R52' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R53_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R53' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R54_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R54' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R55_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R55' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R56_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R56' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R57_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R57' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R58_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R58' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R59_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R59' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R60_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R60' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R61_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R61' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R62_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R62' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R63_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R63' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R64_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R64' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R65_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R65' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R66_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R66' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R67_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R67' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R68_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R68' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R69_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R69' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R70_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R70' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R71_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R71' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R72_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R72' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R73_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R73' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R74_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R74' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R75_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R75' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R76_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R76' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R77_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R77' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R78_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R78' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R79_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R79' AND COLUMN_ID = 'C6';
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R80_5YR_VAL_OF_CRM
+FROM BRRS_M_SRWA_12H_DETAILTABLE
+WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R80' AND COLUMN_ID = 'C6';
+
+
+
+
+
+
+V_R81_1YR_VAL_OF_CRM :=
+V_R54_1YR_VAL_OF_CRM +
+V_R55_1YR_VAL_OF_CRM +
+V_R56_1YR_VAL_OF_CRM +
+V_R57_1YR_VAL_OF_CRM +
+V_R58_1YR_VAL_OF_CRM;
+
+
+V_R81_1YR_5YR_VAL_OF_CRM :=
+V_R54_1YR_5YR_VAL_OF_CRM +
+V_R55_1YR_5YR_VAL_OF_CRM +
+V_R56_1YR_5YR_VAL_OF_CRM +
+V_R57_1YR_5YR_VAL_OF_CRM +
+V_R58_1YR_5YR_VAL_OF_CRM;
+
+
+V_R81_5YR_VAL_OF_CRM :=
+V_R12_5YR_VAL_OF_CRM +
+V_R13_5YR_VAL_OF_CRM +
+V_R14_5YR_VAL_OF_CRM  +
+V_R15_5YR_VAL_OF_CRM  +
+V_R16_5YR_VAL_OF_CRM +
+V_R17_5YR_VAL_OF_CRM +
+V_R18_5YR_VAL_OF_CRM +
+V_R19_5YR_VAL_OF_CRM +
+V_R20_5YR_VAL_OF_CRM +
+V_R21_5YR_VAL_OF_CRM +
+V_R22_5YR_VAL_OF_CRM +
+V_R23_5YR_VAL_OF_CRM +
+V_R24_5YR_VAL_OF_CRM +
+V_R25_5YR_VAL_OF_CRM +
+V_R26_5YR_VAL_OF_CRM +
+V_R27_5YR_VAL_OF_CRM +
+V_R28_5YR_VAL_OF_CRM +
+V_R29_5YR_VAL_OF_CRM +
+V_R30_5YR_VAL_OF_CRM +
+V_R31_5YR_VAL_OF_CRM +
+V_R32_5YR_VAL_OF_CRM +
+V_R33_5YR_VAL_OF_CRM +
+V_R34_5YR_VAL_OF_CRM +
+V_R35_5YR_VAL_OF_CRM +
+V_R36_5YR_VAL_OF_CRM +
+V_R37_5YR_VAL_OF_CRM +
+V_R38_5YR_VAL_OF_CRM +
+V_R39_5YR_VAL_OF_CRM +
+V_R40_5YR_VAL_OF_CRM +
+V_R41_5YR_VAL_OF_CRM +
+V_R42_5YR_VAL_OF_CRM +
+V_R43_5YR_VAL_OF_CRM +
+V_R44_5YR_VAL_OF_CRM +
+V_R45_5YR_VAL_OF_CRM +
+V_R46_5YR_VAL_OF_CRM +
+V_R47_5YR_VAL_OF_CRM +
+V_R48_5YR_VAL_OF_CRM +
+V_R49_5YR_VAL_OF_CRM +
+V_R50_5YR_VAL_OF_CRM +
+V_R51_5YR_VAL_OF_CRM +
+V_R52_5YR_VAL_OF_CRM +
+V_R53_5YR_VAL_OF_CRM +
+V_R54_5YR_VAL_OF_CRM +
+V_R55_5YR_VAL_OF_CRM +
+V_R56_5YR_VAL_OF_CRM +
+V_R57_5YR_VAL_OF_CRM +
+V_R58_5YR_VAL_OF_CRM +
+V_R59_5YR_VAL_OF_CRM +
+V_R60_5YR_VAL_OF_CRM +
+V_R61_5YR_VAL_OF_CRM +
+V_R62_5YR_VAL_OF_CRM +
+V_R63_5YR_VAL_OF_CRM +
+V_R64_5YR_VAL_OF_CRM +
+V_R65_5YR_VAL_OF_CRM +
+V_R66_5YR_VAL_OF_CRM + 
+V_R67_5YR_VAL_OF_CRM +
+V_R68_5YR_VAL_OF_CRM +
+V_R69_5YR_VAL_OF_CRM +
+V_R70_5YR_VAL_OF_CRM +
+V_R71_5YR_VAL_OF_CRM +
+V_R72_5YR_VAL_OF_CRM +
+V_R73_5YR_VAL_OF_CRM +
+V_R74_5YR_VAL_OF_CRM +
+V_R75_5YR_VAL_OF_CRM +
+V_R76_5YR_VAL_OF_CRM +
+V_R77_5YR_VAL_OF_CRM +
+V_R78_5YR_VAL_OF_CRM +
+V_R79_5YR_VAL_OF_CRM +
+V_R80_5YR_VAL_OF_CRM;
+
+
+INSERT INTO BRRS_M_SRWA_12H_SUMMARYTABLE (
+
+
+R11_PRODUCT,
+R11_ISSUER,
+R11_ISSUES_RATING,
+R11_1YR_VAL_OF_CRM,
+R11_1YR_5YR_VAL_OF_CRM,
+R11_5YR_VAL_OF_CRM,
+R11_OTHER,
+R11_STD_SUPERVISORY_HAIRCUT,
+R11_APPLICABLE_RISK_WEIGHT,
+
+
+R12_PRODUCT,
+R12_ISSUER,
+R12_ISSUES_RATING,
+R12_1YR_VAL_OF_CRM,
+R12_1YR_5YR_VAL_OF_CRM,
+R12_5YR_VAL_OF_CRM,
+R12_OTHER,
+R12_STD_SUPERVISORY_HAIRCUT,
+R12_APPLICABLE_RISK_WEIGHT,
+
+
+R13_PRODUCT,
+R13_ISSUER,
+R13_ISSUES_RATING,
+R13_1YR_VAL_OF_CRM,
+R13_1YR_5YR_VAL_OF_CRM,
+R13_5YR_VAL_OF_CRM,
+R13_OTHER,
+R13_STD_SUPERVISORY_HAIRCUT,
+R13_APPLICABLE_RISK_WEIGHT,
+
+
+R14_PRODUCT,
+R14_ISSUER,
+R14_ISSUES_RATING,
+R14_1YR_VAL_OF_CRM,
+R14_1YR_5YR_VAL_OF_CRM,
+R14_5YR_VAL_OF_CRM,
+R14_OTHER,
+R14_STD_SUPERVISORY_HAIRCUT,
+R14_APPLICABLE_RISK_WEIGHT,
+
+
+R15_PRODUCT,
+R15_ISSUER,
+R15_ISSUES_RATING,
+R15_1YR_VAL_OF_CRM,
+R15_1YR_5YR_VAL_OF_CRM,
+R15_5YR_VAL_OF_CRM,
+R15_OTHER,
+R15_STD_SUPERVISORY_HAIRCUT,
+R15_APPLICABLE_RISK_WEIGHT,
+
+
+R16_PRODUCT,
+R16_ISSUER,
+R16_ISSUES_RATING,
+R16_1YR_VAL_OF_CRM,
+R16_1YR_5YR_VAL_OF_CRM,
+R16_5YR_VAL_OF_CRM,
+R16_OTHER,
+R16_STD_SUPERVISORY_HAIRCUT,
+R16_APPLICABLE_RISK_WEIGHT,
+
+
+R17_PRODUCT,
+R17_ISSUER,
+R17_ISSUES_RATING,
+R17_1YR_VAL_OF_CRM,
+R17_1YR_5YR_VAL_OF_CRM,
+R17_5YR_VAL_OF_CRM,
+R17_OTHER,
+R17_STD_SUPERVISORY_HAIRCUT,
+R17_APPLICABLE_RISK_WEIGHT,
+
+
+R18_PRODUCT,
+R18_ISSUER,
+R18_ISSUES_RATING,
+R18_1YR_VAL_OF_CRM,
+R18_1YR_5YR_VAL_OF_CRM,
+R18_5YR_VAL_OF_CRM,
+R18_OTHER,
+R18_STD_SUPERVISORY_HAIRCUT,
+R18_APPLICABLE_RISK_WEIGHT,
+
+
+R19_PRODUCT,
+R19_ISSUER,
+R19_ISSUES_RATING,
+R19_1YR_VAL_OF_CRM,
+R19_1YR_5YR_VAL_OF_CRM,
+R19_5YR_VAL_OF_CRM,
+R19_OTHER,
+R19_STD_SUPERVISORY_HAIRCUT,
+R19_APPLICABLE_RISK_WEIGHT,
+
+
+R20_PRODUCT,
+R20_ISSUER,
+R20_ISSUES_RATING,
+R20_1YR_VAL_OF_CRM,
+R20_1YR_5YR_VAL_OF_CRM,
+R20_5YR_VAL_OF_CRM,
+R20_OTHER,
+R20_STD_SUPERVISORY_HAIRCUT,
+R20_APPLICABLE_RISK_WEIGHT,
+
+
+R21_PRODUCT,
+R21_ISSUER,
+R21_ISSUES_RATING,
+R21_1YR_VAL_OF_CRM,
+R21_1YR_5YR_VAL_OF_CRM,
+R21_5YR_VAL_OF_CRM,
+R21_OTHER,
+R21_STD_SUPERVISORY_HAIRCUT,
+R21_APPLICABLE_RISK_WEIGHT,
+
+
+R22_PRODUCT,
+R22_ISSUER,
+R22_ISSUES_RATING,
+R22_1YR_VAL_OF_CRM,
+R22_1YR_5YR_VAL_OF_CRM,
+R22_5YR_VAL_OF_CRM,
+R22_OTHER,
+R22_STD_SUPERVISORY_HAIRCUT,
+R22_APPLICABLE_RISK_WEIGHT,
+
+
+R23_PRODUCT,
+R23_ISSUER,
+R23_ISSUES_RATING,
+R23_1YR_VAL_OF_CRM,
+R23_1YR_5YR_VAL_OF_CRM,
+R23_5YR_VAL_OF_CRM,
+R23_OTHER,
+R23_STD_SUPERVISORY_HAIRCUT,
+R23_APPLICABLE_RISK_WEIGHT,
+
+
+R24_PRODUCT,
+R24_ISSUER,
+R24_ISSUES_RATING,
+R24_1YR_VAL_OF_CRM,
+R24_1YR_5YR_VAL_OF_CRM,
+R24_5YR_VAL_OF_CRM,
+R24_OTHER,
+R24_STD_SUPERVISORY_HAIRCUT,
+R24_APPLICABLE_RISK_WEIGHT,
+
+
+R25_PRODUCT,
+R25_ISSUER,
+R25_ISSUES_RATING,
+R25_1YR_VAL_OF_CRM,
+R25_1YR_5YR_VAL_OF_CRM,
+R25_5YR_VAL_OF_CRM,
+R25_OTHER,
+R25_STD_SUPERVISORY_HAIRCUT,
+R25_APPLICABLE_RISK_WEIGHT,
+
+
+R26_PRODUCT,
+R26_ISSUER,
+R26_ISSUES_RATING,
+R26_1YR_VAL_OF_CRM,
+R26_1YR_5YR_VAL_OF_CRM,
+R26_5YR_VAL_OF_CRM,
+R26_OTHER,
+R26_STD_SUPERVISORY_HAIRCUT,
+R26_APPLICABLE_RISK_WEIGHT,
+
+
+R27_PRODUCT,
+R27_ISSUER,
+R27_ISSUES_RATING,
+R27_1YR_VAL_OF_CRM,
+R27_1YR_5YR_VAL_OF_CRM,
+R27_5YR_VAL_OF_CRM,
+R27_OTHER,
+R27_STD_SUPERVISORY_HAIRCUT,
+R27_APPLICABLE_RISK_WEIGHT,
+
+
+R28_PRODUCT,
+R28_ISSUER,
+R28_ISSUES_RATING,
+R28_1YR_VAL_OF_CRM,
+R28_1YR_5YR_VAL_OF_CRM,
+R28_5YR_VAL_OF_CRM,
+R28_OTHER,
+R28_STD_SUPERVISORY_HAIRCUT,
+R28_APPLICABLE_RISK_WEIGHT,
+
+
+R29_PRODUCT,
+R29_ISSUER,
+R29_ISSUES_RATING,
+R29_1YR_VAL_OF_CRM,
+R29_1YR_5YR_VAL_OF_CRM,
+R29_5YR_VAL_OF_CRM,
+R29_OTHER,
+R29_STD_SUPERVISORY_HAIRCUT,
+R29_APPLICABLE_RISK_WEIGHT,
+
+
+R30_PRODUCT,
+R30_ISSUER,
+R30_ISSUES_RATING,
+R30_1YR_VAL_OF_CRM,
+R30_1YR_5YR_VAL_OF_CRM,
+R30_5YR_VAL_OF_CRM,
+R30_OTHER,
+R30_STD_SUPERVISORY_HAIRCUT,
+R30_APPLICABLE_RISK_WEIGHT,
+
+
+R31_PRODUCT,
+R31_ISSUER,
+R31_ISSUES_RATING,
+R31_1YR_VAL_OF_CRM,
+R31_1YR_5YR_VAL_OF_CRM,
+R31_5YR_VAL_OF_CRM,
+R31_OTHER,
+R31_STD_SUPERVISORY_HAIRCUT,
+R31_APPLICABLE_RISK_WEIGHT,
+
+
+R32_PRODUCT,
+R32_ISSUER,
+R32_ISSUES_RATING,
+R32_1YR_VAL_OF_CRM,
+R32_1YR_5YR_VAL_OF_CRM,
+R32_5YR_VAL_OF_CRM,
+R32_OTHER,
+R32_STD_SUPERVISORY_HAIRCUT,
+R32_APPLICABLE_RISK_WEIGHT,
+
+
+R33_PRODUCT,
+R33_ISSUER,
+R33_ISSUES_RATING,
+R33_1YR_VAL_OF_CRM,
+R33_1YR_5YR_VAL_OF_CRM,
+R33_5YR_VAL_OF_CRM,
+R33_OTHER,
+R33_STD_SUPERVISORY_HAIRCUT,
+R33_APPLICABLE_RISK_WEIGHT,
+
+
+R34_PRODUCT,
+R34_ISSUER,
+R34_ISSUES_RATING,
+R34_1YR_VAL_OF_CRM,
+R34_1YR_5YR_VAL_OF_CRM,
+R34_5YR_VAL_OF_CRM,
+R34_OTHER,
+R34_STD_SUPERVISORY_HAIRCUT,
+R34_APPLICABLE_RISK_WEIGHT,
+
+
+R35_PRODUCT,
+R35_ISSUER,
+R35_ISSUES_RATING,
+R35_1YR_VAL_OF_CRM,
+R35_1YR_5YR_VAL_OF_CRM,
+R35_5YR_VAL_OF_CRM,
+R35_OTHER,
+R35_STD_SUPERVISORY_HAIRCUT,
+R35_APPLICABLE_RISK_WEIGHT,
+
+
+R36_PRODUCT,
+R36_ISSUER,
+R36_ISSUES_RATING,
+R36_1YR_VAL_OF_CRM,
+R36_1YR_5YR_VAL_OF_CRM,
+R36_5YR_VAL_OF_CRM,
+R36_OTHER,
+R36_STD_SUPERVISORY_HAIRCUT,
+R36_APPLICABLE_RISK_WEIGHT,
+
+
+R37_PRODUCT,
+R37_ISSUER,
+R37_ISSUES_RATING,
+R37_1YR_VAL_OF_CRM,
+R37_1YR_5YR_VAL_OF_CRM,
+R37_5YR_VAL_OF_CRM,
+R37_OTHER,
+R37_STD_SUPERVISORY_HAIRCUT,
+R37_APPLICABLE_RISK_WEIGHT,
+
+
+R38_PRODUCT,
+R38_ISSUER,
+R38_ISSUES_RATING,
+R38_1YR_VAL_OF_CRM,
+R38_1YR_5YR_VAL_OF_CRM,
+R38_5YR_VAL_OF_CRM,
+R38_OTHER,
+R38_STD_SUPERVISORY_HAIRCUT,
+R38_APPLICABLE_RISK_WEIGHT,
+
+
+R39_PRODUCT,
+R39_ISSUER,
+R39_ISSUES_RATING,
+R39_1YR_VAL_OF_CRM,
+R39_1YR_5YR_VAL_OF_CRM,
+R39_5YR_VAL_OF_CRM,
+R39_OTHER,
+R39_STD_SUPERVISORY_HAIRCUT,
+R39_APPLICABLE_RISK_WEIGHT,
+
+
+R40_PRODUCT,
+R40_ISSUER,
+R40_ISSUES_RATING,
+R40_1YR_VAL_OF_CRM,
+R40_1YR_5YR_VAL_OF_CRM,
+R40_5YR_VAL_OF_CRM,
+R40_OTHER,
+R40_STD_SUPERVISORY_HAIRCUT,
+R40_APPLICABLE_RISK_WEIGHT,
+
+
+
+
+R41_PRODUCT,
+R41_ISSUER,
+R41_ISSUES_RATING,
+R41_1YR_VAL_OF_CRM,
+R41_1YR_5YR_VAL_OF_CRM,
+R41_5YR_VAL_OF_CRM,
+R41_OTHER,
+R41_STD_SUPERVISORY_HAIRCUT,
+R41_APPLICABLE_RISK_WEIGHT,
+
+
+R42_PRODUCT,
+R42_ISSUER,
+R42_ISSUES_RATING,
+R42_1YR_VAL_OF_CRM,
+R42_1YR_5YR_VAL_OF_CRM,
+R42_5YR_VAL_OF_CRM,
+R42_OTHER,
+R42_STD_SUPERVISORY_HAIRCUT,
+R42_APPLICABLE_RISK_WEIGHT,
+
+
+R43_PRODUCT,
+R43_ISSUER,
+R43_ISSUES_RATING,
+R43_1YR_VAL_OF_CRM,
+R43_1YR_5YR_VAL_OF_CRM,
+R43_5YR_VAL_OF_CRM,
+R43_OTHER,
+R43_STD_SUPERVISORY_HAIRCUT,
+R43_APPLICABLE_RISK_WEIGHT,
+
+
+R44_PRODUCT,
+R44_ISSUER,
+R44_ISSUES_RATING,
+R44_1YR_VAL_OF_CRM,
+R44_1YR_5YR_VAL_OF_CRM,
+R44_5YR_VAL_OF_CRM,
+R44_OTHER,
+R44_STD_SUPERVISORY_HAIRCUT,
+R44_APPLICABLE_RISK_WEIGHT,
+
+
+R45_PRODUCT,
+R45_ISSUER,
+R45_ISSUES_RATING,
+R45_1YR_VAL_OF_CRM,
+R45_1YR_5YR_VAL_OF_CRM,
+R45_5YR_VAL_OF_CRM,
+R45_OTHER,
+R45_STD_SUPERVISORY_HAIRCUT,
+R45_APPLICABLE_RISK_WEIGHT,
+
+
+R46_PRODUCT,
+R46_ISSUER,
+R46_ISSUES_RATING,
+R46_1YR_VAL_OF_CRM,
+R46_1YR_5YR_VAL_OF_CRM,
+R46_5YR_VAL_OF_CRM,
+R46_OTHER,
+R46_STD_SUPERVISORY_HAIRCUT,
+R46_APPLICABLE_RISK_WEIGHT,
+
+
+R47_PRODUCT,
+R47_ISSUER,
+R47_ISSUES_RATING,
+R47_1YR_VAL_OF_CRM,
+R47_1YR_5YR_VAL_OF_CRM,
+R47_5YR_VAL_OF_CRM,
+R47_OTHER,
+R47_STD_SUPERVISORY_HAIRCUT,
+R47_APPLICABLE_RISK_WEIGHT,
+
+
+R48_PRODUCT,
+R48_ISSUER,
+R48_ISSUES_RATING,
+R48_1YR_VAL_OF_CRM,
+R48_1YR_5YR_VAL_OF_CRM,
+R48_5YR_VAL_OF_CRM,
+R48_OTHER,
+R48_STD_SUPERVISORY_HAIRCUT,
+R48_APPLICABLE_RISK_WEIGHT,
+
+
+R49_PRODUCT,
+R49_ISSUER,
+R49_ISSUES_RATING,
+R49_1YR_VAL_OF_CRM,
+R49_1YR_5YR_VAL_OF_CRM,
+R49_5YR_VAL_OF_CRM,
+R49_OTHER,
+R49_STD_SUPERVISORY_HAIRCUT,
+R49_APPLICABLE_RISK_WEIGHT,
+
+
+R50_PRODUCT,
+R50_ISSUER,
+R50_ISSUES_RATING,
+R50_1YR_VAL_OF_CRM,
+R50_1YR_5YR_VAL_OF_CRM,
+R50_5YR_VAL_OF_CRM,
+R50_OTHER,
+R50_STD_SUPERVISORY_HAIRCUT,
+R50_APPLICABLE_RISK_WEIGHT,
+
+
+R51_PRODUCT,
+R51_ISSUER,
+R51_ISSUES_RATING,
+R51_1YR_VAL_OF_CRM,
+R51_1YR_5YR_VAL_OF_CRM,
+R51_5YR_VAL_OF_CRM,
+R51_OTHER,
+R51_STD_SUPERVISORY_HAIRCUT,
+R51_APPLICABLE_RISK_WEIGHT,
+
+
+R52_PRODUCT,
+R52_ISSUER,
+R52_ISSUES_RATING,
+R52_1YR_VAL_OF_CRM,
+R52_1YR_5YR_VAL_OF_CRM,
+R52_5YR_VAL_OF_CRM,
+R52_OTHER,
+R52_STD_SUPERVISORY_HAIRCUT,
+R52_APPLICABLE_RISK_WEIGHT,
+
+
+R53_PRODUCT,
+R53_ISSUER,
+R53_ISSUES_RATING,
+R53_1YR_VAL_OF_CRM,
+R53_1YR_5YR_VAL_OF_CRM,
+R53_5YR_VAL_OF_CRM,
+R53_OTHER,
+R53_STD_SUPERVISORY_HAIRCUT,
+R53_APPLICABLE_RISK_WEIGHT,
+
+
+R54_PRODUCT,
+R54_ISSUER,
+R54_ISSUES_RATING,
+R54_1YR_VAL_OF_CRM,
+R54_1YR_5YR_VAL_OF_CRM,
+R54_5YR_VAL_OF_CRM,
+R54_OTHER,
+R54_STD_SUPERVISORY_HAIRCUT,
+R54_APPLICABLE_RISK_WEIGHT,
+
+
+R55_PRODUCT,
+R55_ISSUER,
+R55_ISSUES_RATING,
+R55_1YR_VAL_OF_CRM,
+R55_1YR_5YR_VAL_OF_CRM,
+R55_5YR_VAL_OF_CRM,
+R55_OTHER,
+R55_STD_SUPERVISORY_HAIRCUT,
+R55_APPLICABLE_RISK_WEIGHT,
+
+
+R56_PRODUCT,
+R56_ISSUER,
+R56_ISSUES_RATING,
+R56_1YR_VAL_OF_CRM,
+R56_1YR_5YR_VAL_OF_CRM,
+R56_5YR_VAL_OF_CRM,
+R56_OTHER,
+R56_STD_SUPERVISORY_HAIRCUT,
+R56_APPLICABLE_RISK_WEIGHT,
+
+
+R57_PRODUCT,
+R57_ISSUER,
+R57_ISSUES_RATING,
+R57_1YR_VAL_OF_CRM,
+R57_1YR_5YR_VAL_OF_CRM,
+R57_5YR_VAL_OF_CRM,
+R57_OTHER,
+R57_STD_SUPERVISORY_HAIRCUT,
+R57_APPLICABLE_RISK_WEIGHT,
+
+
+R58_PRODUCT,
+R58_ISSUER,
+R58_ISSUES_RATING,
+R58_1YR_VAL_OF_CRM,
+R58_1YR_5YR_VAL_OF_CRM,
+R58_5YR_VAL_OF_CRM,
+R58_OTHER,
+R58_STD_SUPERVISORY_HAIRCUT,
+R58_APPLICABLE_RISK_WEIGHT,
+
+
+R59_PRODUCT,
+R59_ISSUER,
+R59_ISSUES_RATING,
+R59_1YR_VAL_OF_CRM,
+R59_1YR_5YR_VAL_OF_CRM,
+R59_5YR_VAL_OF_CRM,
+R59_OTHER,
+R59_STD_SUPERVISORY_HAIRCUT,
+R59_APPLICABLE_RISK_WEIGHT,
+
+
+R60_PRODUCT,
+R60_ISSUER,
+R60_ISSUES_RATING,
+R60_1YR_VAL_OF_CRM,
+R60_1YR_5YR_VAL_OF_CRM,
+R60_5YR_VAL_OF_CRM,
+R60_OTHER,
+R60_STD_SUPERVISORY_HAIRCUT,
+R60_APPLICABLE_RISK_WEIGHT,
+
+
+R61_PRODUCT,
+R61_ISSUER,
+R61_ISSUES_RATING,
+R61_1YR_VAL_OF_CRM,
+R61_1YR_5YR_VAL_OF_CRM,
+R61_5YR_VAL_OF_CRM,
+R61_OTHER,
+R61_STD_SUPERVISORY_HAIRCUT,
+R61_APPLICABLE_RISK_WEIGHT,
+
+
+R62_PRODUCT,
+R62_ISSUER,
+R62_ISSUES_RATING,
+R62_1YR_VAL_OF_CRM,
+R62_1YR_5YR_VAL_OF_CRM,
+R62_5YR_VAL_OF_CRM,
+R62_OTHER,
+R62_STD_SUPERVISORY_HAIRCUT,
+R62_APPLICABLE_RISK_WEIGHT,
+
+
+R63_PRODUCT,
+R63_ISSUER,
+R63_ISSUES_RATING,
+R63_1YR_VAL_OF_CRM,
+R63_1YR_5YR_VAL_OF_CRM,
+R63_5YR_VAL_OF_CRM,
+R63_OTHER,
+R63_STD_SUPERVISORY_HAIRCUT,
+R63_APPLICABLE_RISK_WEIGHT,
+
+
+R64_PRODUCT,
+R64_ISSUER,
+R64_ISSUES_RATING,
+R64_1YR_VAL_OF_CRM,
+R64_1YR_5YR_VAL_OF_CRM,
+R64_5YR_VAL_OF_CRM,
+R64_OTHER,
+R64_STD_SUPERVISORY_HAIRCUT,
+R64_APPLICABLE_RISK_WEIGHT,
+
+
+R65_PRODUCT,
+R65_ISSUER,
+R65_ISSUES_RATING,
+R65_1YR_VAL_OF_CRM,
+R65_1YR_5YR_VAL_OF_CRM,
+R65_5YR_VAL_OF_CRM,
+R65_OTHER,
+R65_STD_SUPERVISORY_HAIRCUT,
+R65_APPLICABLE_RISK_WEIGHT,
+
+
+R66_PRODUCT,
+R66_ISSUER,
+R66_ISSUES_RATING,
+R66_1YR_VAL_OF_CRM,
+R66_1YR_5YR_VAL_OF_CRM,
+R66_5YR_VAL_OF_CRM,
+R66_OTHER,
+R66_STD_SUPERVISORY_HAIRCUT,
+R66_APPLICABLE_RISK_WEIGHT,
+
+
+R67_PRODUCT,
+R67_ISSUER,
+R67_ISSUES_RATING,
+R67_1YR_VAL_OF_CRM,
+R67_1YR_5YR_VAL_OF_CRM,
+R67_5YR_VAL_OF_CRM,
+R67_OTHER,
+R67_STD_SUPERVISORY_HAIRCUT,
+R67_APPLICABLE_RISK_WEIGHT,
+
+
+R68_PRODUCT,
+R68_ISSUER,
+R68_ISSUES_RATING,
+R68_1YR_VAL_OF_CRM,
+R68_1YR_5YR_VAL_OF_CRM,
+R68_5YR_VAL_OF_CRM,
+R68_OTHER,
+R68_STD_SUPERVISORY_HAIRCUT,
+R68_APPLICABLE_RISK_WEIGHT,
+
+
+R69_PRODUCT,
+R69_ISSUER,
+R69_ISSUES_RATING,
+R69_1YR_VAL_OF_CRM,
+R69_1YR_5YR_VAL_OF_CRM,
+R69_5YR_VAL_OF_CRM,
+R69_OTHER,
+R69_STD_SUPERVISORY_HAIRCUT,
+R69_APPLICABLE_RISK_WEIGHT,
+
+
+R70_PRODUCT,
+R70_ISSUER,
+R70_ISSUES_RATING,
+R70_1YR_VAL_OF_CRM,
+R70_1YR_5YR_VAL_OF_CRM,
+R70_5YR_VAL_OF_CRM,
+R70_OTHER,
+R70_STD_SUPERVISORY_HAIRCUT,
+R70_APPLICABLE_RISK_WEIGHT,
+
+
+R71_PRODUCT,
+R71_ISSUER,
+R71_ISSUES_RATING,
+R71_1YR_VAL_OF_CRM,
+R71_1YR_5YR_VAL_OF_CRM,
+R71_5YR_VAL_OF_CRM,
+R71_OTHER,
+R71_STD_SUPERVISORY_HAIRCUT,
+R71_APPLICABLE_RISK_WEIGHT,
+
+
+R72_PRODUCT,
+R72_ISSUER,
+R72_ISSUES_RATING,
+R72_1YR_VAL_OF_CRM,
+R72_1YR_5YR_VAL_OF_CRM,
+R72_5YR_VAL_OF_CRM,
+R72_OTHER,
+R72_STD_SUPERVISORY_HAIRCUT,
+R72_APPLICABLE_RISK_WEIGHT,
+
+
+R73_PRODUCT,
+R73_ISSUER,
+R73_ISSUES_RATING,
+R73_1YR_VAL_OF_CRM,
+R73_1YR_5YR_VAL_OF_CRM,
+R73_5YR_VAL_OF_CRM,
+R73_OTHER,
+R73_STD_SUPERVISORY_HAIRCUT,
+R73_APPLICABLE_RISK_WEIGHT,
+
+
+R74_PRODUCT,
+R74_ISSUER,
+R74_ISSUES_RATING,
+R74_1YR_VAL_OF_CRM,
+R74_1YR_5YR_VAL_OF_CRM,
+R74_5YR_VAL_OF_CRM,
+R74_OTHER,
+R74_STD_SUPERVISORY_HAIRCUT,
+R74_APPLICABLE_RISK_WEIGHT,
+
+
+R75_PRODUCT,
+R75_ISSUER,
+R75_ISSUES_RATING,
+R75_1YR_VAL_OF_CRM,
+R75_1YR_5YR_VAL_OF_CRM,
+R75_5YR_VAL_OF_CRM,
+R75_OTHER,
+R75_STD_SUPERVISORY_HAIRCUT,
+R75_APPLICABLE_RISK_WEIGHT,
+
+
+R76_PRODUCT,
+R76_ISSUER,
+R76_ISSUES_RATING,
+R76_1YR_VAL_OF_CRM,
+R76_1YR_5YR_VAL_OF_CRM,
+R76_5YR_VAL_OF_CRM,
+R76_OTHER,
+R76_STD_SUPERVISORY_HAIRCUT,
+R76_APPLICABLE_RISK_WEIGHT,
+
+
+R77_PRODUCT,
+R77_ISSUER,
+R77_ISSUES_RATING,
+R77_1YR_VAL_OF_CRM,
+R77_1YR_5YR_VAL_OF_CRM,
+R77_5YR_VAL_OF_CRM,
+R77_OTHER,
+R77_STD_SUPERVISORY_HAIRCUT,
+R77_APPLICABLE_RISK_WEIGHT,
+
+
+R78_PRODUCT,
+R78_ISSUER,
+R78_ISSUES_RATING,
+R78_1YR_VAL_OF_CRM,
+R78_1YR_5YR_VAL_OF_CRM,
+R78_5YR_VAL_OF_CRM,
+R78_OTHER,
+R78_STD_SUPERVISORY_HAIRCUT,
+R78_APPLICABLE_RISK_WEIGHT,
+
+
+R79_PRODUCT,
+R79_ISSUER,
+R79_ISSUES_RATING,
+R79_1YR_VAL_OF_CRM,
+R79_1YR_5YR_VAL_OF_CRM,
+R79_5YR_VAL_OF_CRM,
+R79_OTHER,
+R79_STD_SUPERVISORY_HAIRCUT,
+R79_APPLICABLE_RISK_WEIGHT,
+
+
+R80_PRODUCT,
+R80_ISSUER,
+R80_ISSUES_RATING,
+R80_1YR_VAL_OF_CRM,
+R80_1YR_5YR_VAL_OF_CRM,
+R80_5YR_VAL_OF_CRM,
+R80_OTHER,
+R80_STD_SUPERVISORY_HAIRCUT,
+R80_APPLICABLE_RISK_WEIGHT,
+
+
+R81_PRODUCT,
+R81_ISSUER,
+R81_ISSUES_RATING,
+R81_1YR_VAL_OF_CRM,
+R81_1YR_5YR_VAL_OF_CRM,
+R81_5YR_VAL_OF_CRM,
+R81_OTHER,
+R81_STD_SUPERVISORY_HAIRCUT,
+R81_APPLICABLE_RISK_WEIGHT,
+
+
+
+
+REPORT_DATE
+)
+
+
+VALUES (
+V_R11_PRODUCT,
+V_R11_ISSUER,
+V_R11_ISSUES_RATING,
+V_R11_1YR_VAL_OF_CRM,
+V_R11_1YR_5YR_VAL_OF_CRM,
+V_R11_5YR_VAL_OF_CRM,
+V_R11_OTHER,
+V_R11_STD_SUPERVISORY_HAIRCUT,
+V_R11_APPLICABLE_RISK_WEIGHT,
+
+
+V_R12_PRODUCT,
+V_R12_ISSUER,
+V_R12_ISSUES_RATING,
+V_R12_1YR_VAL_OF_CRM,
+V_R12_1YR_5YR_VAL_OF_CRM,
+V_R12_5YR_VAL_OF_CRM,
+V_R12_OTHER,
+V_R12_STD_SUPERVISORY_HAIRCUT,
+V_R12_APPLICABLE_RISK_WEIGHT,
+
+
+V_R13_PRODUCT,
+V_R13_ISSUER,
+V_R13_ISSUES_RATING,
+V_R13_1YR_VAL_OF_CRM,
+V_R13_1YR_5YR_VAL_OF_CRM,
+V_R13_5YR_VAL_OF_CRM,
+V_R13_OTHER,
+V_R13_STD_SUPERVISORY_HAIRCUT,
+V_R13_APPLICABLE_RISK_WEIGHT,
+
+
+V_R14_PRODUCT,
+V_R14_ISSUER,
+V_R14_ISSUES_RATING,
+V_R14_1YR_VAL_OF_CRM,
+V_R14_1YR_5YR_VAL_OF_CRM,
+V_R14_5YR_VAL_OF_CRM,
+V_R14_OTHER,
+V_R14_STD_SUPERVISORY_HAIRCUT,
+V_R14_APPLICABLE_RISK_WEIGHT,
+
+
+V_R15_PRODUCT,
+V_R15_ISSUER,
+V_R15_ISSUES_RATING,
+V_R15_1YR_VAL_OF_CRM,
+V_R15_1YR_5YR_VAL_OF_CRM,
+V_R15_5YR_VAL_OF_CRM,
+V_R15_OTHER,
+V_R15_STD_SUPERVISORY_HAIRCUT,
+V_R15_APPLICABLE_RISK_WEIGHT,
+
+
+V_R16_PRODUCT,
+V_R16_ISSUER,
+V_R16_ISSUES_RATING,
+V_R16_1YR_VAL_OF_CRM,
+V_R16_1YR_5YR_VAL_OF_CRM,
+V_R16_5YR_VAL_OF_CRM,
+V_R16_OTHER,
+V_R16_STD_SUPERVISORY_HAIRCUT,
+V_R16_APPLICABLE_RISK_WEIGHT,
+
+
+V_R17_PRODUCT,
+V_R17_ISSUER,
+V_R17_ISSUES_RATING,
+V_R17_1YR_VAL_OF_CRM,
+V_R17_1YR_5YR_VAL_OF_CRM,
+V_R17_5YR_VAL_OF_CRM,
+V_R17_OTHER,
+V_R17_STD_SUPERVISORY_HAIRCUT,
+V_R17_APPLICABLE_RISK_WEIGHT,
+
+
+V_R18_PRODUCT,
+V_R18_ISSUER,
+V_R18_ISSUES_RATING,
+V_R18_1YR_VAL_OF_CRM,
+V_R18_1YR_5YR_VAL_OF_CRM,
+V_R18_5YR_VAL_OF_CRM,
+V_R18_OTHER,
+V_R18_STD_SUPERVISORY_HAIRCUT,
+V_R18_APPLICABLE_RISK_WEIGHT,
+
+
+V_R19_PRODUCT,
+V_R19_ISSUER,
+V_R19_ISSUES_RATING,
+V_R19_1YR_VAL_OF_CRM,
+V_R19_1YR_5YR_VAL_OF_CRM,
+V_R19_5YR_VAL_OF_CRM,
+V_R19_OTHER,
+V_R19_STD_SUPERVISORY_HAIRCUT,
+V_R19_APPLICABLE_RISK_WEIGHT,
+
+
+V_R20_PRODUCT,
+V_R20_ISSUER,
+V_R20_ISSUES_RATING,
+V_R20_1YR_VAL_OF_CRM,
+V_R20_1YR_5YR_VAL_OF_CRM,
+V_R20_5YR_VAL_OF_CRM,
+V_R20_OTHER,
+V_R20_STD_SUPERVISORY_HAIRCUT,
+V_R20_APPLICABLE_RISK_WEIGHT,
+
+
+V_R21_PRODUCT,
+V_R21_ISSUER,
+V_R21_ISSUES_RATING,
+V_R21_1YR_VAL_OF_CRM,
+V_R21_1YR_5YR_VAL_OF_CRM,
+V_R21_5YR_VAL_OF_CRM,
+V_R21_OTHER,
+V_R21_STD_SUPERVISORY_HAIRCUT,
+V_R21_APPLICABLE_RISK_WEIGHT,
+
+
+V_R22_PRODUCT,
+V_R22_ISSUER,
+V_R22_ISSUES_RATING,
+V_R22_1YR_VAL_OF_CRM,
+V_R22_1YR_5YR_VAL_OF_CRM,
+V_R22_5YR_VAL_OF_CRM,
+V_R22_OTHER,
+V_R22_STD_SUPERVISORY_HAIRCUT,
+V_R22_APPLICABLE_RISK_WEIGHT,
+
+
+V_R23_PRODUCT,
+V_R23_ISSUER,
+V_R23_ISSUES_RATING,
+V_R23_1YR_VAL_OF_CRM,
+V_R23_1YR_5YR_VAL_OF_CRM,
+V_R23_5YR_VAL_OF_CRM,
+V_R23_OTHER,
+V_R23_STD_SUPERVISORY_HAIRCUT,
+V_R23_APPLICABLE_RISK_WEIGHT,
+
+
+V_R24_PRODUCT,
+V_R24_ISSUER,
+V_R24_ISSUES_RATING,
+V_R24_1YR_VAL_OF_CRM,
+V_R24_1YR_5YR_VAL_OF_CRM,
+V_R24_5YR_VAL_OF_CRM,
+V_R24_OTHER,
+V_R24_STD_SUPERVISORY_HAIRCUT,
+V_R24_APPLICABLE_RISK_WEIGHT,
+
+
+V_R25_PRODUCT,
+V_R25_ISSUER,
+V_R25_ISSUES_RATING,
+V_R25_1YR_VAL_OF_CRM,
+V_R25_1YR_5YR_VAL_OF_CRM,
+V_R25_5YR_VAL_OF_CRM,
+V_R25_OTHER,
+V_R25_STD_SUPERVISORY_HAIRCUT,
+V_R25_APPLICABLE_RISK_WEIGHT,
+
+
+V_R26_PRODUCT,
+V_R26_ISSUER,
+V_R26_ISSUES_RATING,
+V_R26_1YR_VAL_OF_CRM,
+V_R26_1YR_5YR_VAL_OF_CRM,
+V_R26_5YR_VAL_OF_CRM,
+V_R26_OTHER,
+V_R26_STD_SUPERVISORY_HAIRCUT,
+V_R26_APPLICABLE_RISK_WEIGHT,
+
+
+V_R27_PRODUCT,
+V_R27_ISSUER,
+V_R27_ISSUES_RATING,
+V_R27_1YR_VAL_OF_CRM,
+V_R27_1YR_5YR_VAL_OF_CRM,
+V_R27_5YR_VAL_OF_CRM,
+V_R27_OTHER,
+V_R27_STD_SUPERVISORY_HAIRCUT,
+V_R27_APPLICABLE_RISK_WEIGHT,
+
+
+V_R28_PRODUCT,
+V_R28_ISSUER,
+V_R28_ISSUES_RATING,
+V_R28_1YR_VAL_OF_CRM,
+V_R28_1YR_5YR_VAL_OF_CRM,
+V_R28_5YR_VAL_OF_CRM,
+V_R28_OTHER,
+V_R28_STD_SUPERVISORY_HAIRCUT,
+V_R28_APPLICABLE_RISK_WEIGHT,
+
+
+V_R29_PRODUCT,
+V_R29_ISSUER,
+V_R29_ISSUES_RATING,
+V_R29_1YR_VAL_OF_CRM,
+V_R29_1YR_5YR_VAL_OF_CRM,
+V_R29_5YR_VAL_OF_CRM,
+V_R29_OTHER,
+V_R29_STD_SUPERVISORY_HAIRCUT,
+V_R29_APPLICABLE_RISK_WEIGHT,
+
+
+V_R30_PRODUCT,
+V_R30_ISSUER,
+V_R30_ISSUES_RATING,
+V_R30_1YR_VAL_OF_CRM,
+V_R30_1YR_5YR_VAL_OF_CRM,
+V_R30_5YR_VAL_OF_CRM,
+V_R30_OTHER,
+V_R30_STD_SUPERVISORY_HAIRCUT,
+V_R30_APPLICABLE_RISK_WEIGHT,
+
+
+V_R31_PRODUCT,
+V_R31_ISSUER,
+V_R31_ISSUES_RATING,
+V_R31_1YR_VAL_OF_CRM,
+V_R31_1YR_5YR_VAL_OF_CRM,
+V_R31_5YR_VAL_OF_CRM,
+V_R31_OTHER,
+V_R31_STD_SUPERVISORY_HAIRCUT,
+V_R31_APPLICABLE_RISK_WEIGHT,
+
+
+V_R32_PRODUCT,
+V_R32_ISSUER,
+V_R32_ISSUES_RATING,
+V_R32_1YR_VAL_OF_CRM,
+V_R32_1YR_5YR_VAL_OF_CRM,
+V_R32_5YR_VAL_OF_CRM,
+V_R32_OTHER,
+V_R32_STD_SUPERVISORY_HAIRCUT,
+V_R32_APPLICABLE_RISK_WEIGHT,
+
+
+V_R33_PRODUCT,
+V_R33_ISSUER,
+V_R33_ISSUES_RATING,
+V_R33_1YR_VAL_OF_CRM,
+V_R33_1YR_5YR_VAL_OF_CRM,
+V_R33_5YR_VAL_OF_CRM,
+V_R33_OTHER,
+V_R33_STD_SUPERVISORY_HAIRCUT,
+V_R33_APPLICABLE_RISK_WEIGHT,
+
+
+V_R34_PRODUCT,
+V_R34_ISSUER,
+V_R34_ISSUES_RATING,
+V_R34_1YR_VAL_OF_CRM,
+V_R34_1YR_5YR_VAL_OF_CRM,
+V_R34_5YR_VAL_OF_CRM,
+V_R34_OTHER,
+V_R34_STD_SUPERVISORY_HAIRCUT,
+V_R34_APPLICABLE_RISK_WEIGHT,
+
+
+V_R35_PRODUCT,
+V_R35_ISSUER,
+V_R35_ISSUES_RATING,
+V_R35_1YR_VAL_OF_CRM,
+V_R35_1YR_5YR_VAL_OF_CRM,
+V_R35_5YR_VAL_OF_CRM,
+V_R35_OTHER,
+V_R35_STD_SUPERVISORY_HAIRCUT,
+V_R35_APPLICABLE_RISK_WEIGHT,
+
+
+V_R36_PRODUCT,
+V_R36_ISSUER,
+V_R36_ISSUES_RATING,
+V_R36_1YR_VAL_OF_CRM,
+V_R36_1YR_5YR_VAL_OF_CRM,
+V_R36_5YR_VAL_OF_CRM,
+V_R36_OTHER,
+V_R36_STD_SUPERVISORY_HAIRCUT,
+V_R36_APPLICABLE_RISK_WEIGHT,
+
+
+V_R37_PRODUCT,
+V_R37_ISSUER,
+V_R37_ISSUES_RATING,
+V_R37_1YR_VAL_OF_CRM,
+V_R37_1YR_5YR_VAL_OF_CRM,
+V_R37_5YR_VAL_OF_CRM,
+V_R37_OTHER,
+V_R37_STD_SUPERVISORY_HAIRCUT,
+V_R37_APPLICABLE_RISK_WEIGHT,
+
+
+V_R38_PRODUCT,
+V_R38_ISSUER,
+V_R38_ISSUES_RATING,
+V_R38_1YR_VAL_OF_CRM,
+V_R38_1YR_5YR_VAL_OF_CRM,
+V_R38_5YR_VAL_OF_CRM,
+V_R38_OTHER,
+V_R38_STD_SUPERVISORY_HAIRCUT,
+V_R38_APPLICABLE_RISK_WEIGHT,
+
+
+V_R39_PRODUCT,
+V_R39_ISSUER,
+V_R39_ISSUES_RATING,
+V_R39_1YR_VAL_OF_CRM,
+V_R39_1YR_5YR_VAL_OF_CRM,
+V_R39_5YR_VAL_OF_CRM,
+V_R39_OTHER,
+V_R39_STD_SUPERVISORY_HAIRCUT,
+V_R39_APPLICABLE_RISK_WEIGHT,
+
+
+V_R40_PRODUCT,
+V_R40_ISSUER,
+V_R40_ISSUES_RATING,
+V_R40_1YR_VAL_OF_CRM,
+V_R40_1YR_5YR_VAL_OF_CRM,
+V_R40_5YR_VAL_OF_CRM,
+V_R40_OTHER,
+V_R40_STD_SUPERVISORY_HAIRCUT,
+V_R40_APPLICABLE_RISK_WEIGHT,
+
+
+V_R41_PRODUCT,
+V_R41_ISSUER,
+V_R41_ISSUES_RATING,
+V_R41_1YR_VAL_OF_CRM,
+V_R41_1YR_5YR_VAL_OF_CRM,
+V_R41_5YR_VAL_OF_CRM,
+V_R41_OTHER,
+V_R41_STD_SUPERVISORY_HAIRCUT,
+V_R41_APPLICABLE_RISK_WEIGHT,
+
+
+V_R42_PRODUCT,
+V_R42_ISSUER,
+V_R42_ISSUES_RATING,
+V_R42_1YR_VAL_OF_CRM,
+V_R42_1YR_5YR_VAL_OF_CRM,
+V_R42_5YR_VAL_OF_CRM,
+V_R42_OTHER,
+V_R42_STD_SUPERVISORY_HAIRCUT,
+V_R42_APPLICABLE_RISK_WEIGHT,
+
+
+V_R43_PRODUCT,
+V_R43_ISSUER,
+V_R43_ISSUES_RATING,
+V_R43_1YR_VAL_OF_CRM,
+V_R43_1YR_5YR_VAL_OF_CRM,
+V_R43_5YR_VAL_OF_CRM,
+V_R43_OTHER,
+V_R43_STD_SUPERVISORY_HAIRCUT,
+V_R43_APPLICABLE_RISK_WEIGHT,
+
+
+V_R44_PRODUCT,
+V_R44_ISSUER,
+V_R44_ISSUES_RATING,
+V_R44_1YR_VAL_OF_CRM,
+V_R44_1YR_5YR_VAL_OF_CRM,
+V_R44_5YR_VAL_OF_CRM,
+V_R44_OTHER,
+V_R44_STD_SUPERVISORY_HAIRCUT,
+V_R44_APPLICABLE_RISK_WEIGHT,
+
+
+V_R45_PRODUCT,
+V_R45_ISSUER,
+V_R45_ISSUES_RATING,
+V_R45_1YR_VAL_OF_CRM,
+V_R45_1YR_5YR_VAL_OF_CRM,
+V_R45_5YR_VAL_OF_CRM,
+V_R45_OTHER,
+V_R45_STD_SUPERVISORY_HAIRCUT,
+V_R45_APPLICABLE_RISK_WEIGHT,
+
+
+V_R46_PRODUCT,
+V_R46_ISSUER,
+V_R46_ISSUES_RATING,
+V_R46_1YR_VAL_OF_CRM,
+V_R46_1YR_5YR_VAL_OF_CRM,
+V_R46_5YR_VAL_OF_CRM,
+V_R46_OTHER,
+V_R46_STD_SUPERVISORY_HAIRCUT,
+V_R46_APPLICABLE_RISK_WEIGHT,
+
+
+V_R47_PRODUCT,
+V_R47_ISSUER,
+V_R47_ISSUES_RATING,
+V_R47_1YR_VAL_OF_CRM,
+V_R47_1YR_5YR_VAL_OF_CRM,
+V_R47_5YR_VAL_OF_CRM,
+V_R47_OTHER,
+V_R47_STD_SUPERVISORY_HAIRCUT,
+V_R47_APPLICABLE_RISK_WEIGHT,
+
+
+V_R48_PRODUCT,
+V_R48_ISSUER,
+V_R48_ISSUES_RATING,
+V_R48_1YR_VAL_OF_CRM,
+V_R48_1YR_5YR_VAL_OF_CRM,
+V_R48_5YR_VAL_OF_CRM,
+V_R48_OTHER,
+V_R48_STD_SUPERVISORY_HAIRCUT,
+V_R48_APPLICABLE_RISK_WEIGHT,
+
+
+V_R49_PRODUCT,
+V_R49_ISSUER,
+V_R49_ISSUES_RATING,
+V_R49_1YR_VAL_OF_CRM,
+V_R49_1YR_5YR_VAL_OF_CRM,
+V_R49_5YR_VAL_OF_CRM,
+V_R49_OTHER,
+V_R49_STD_SUPERVISORY_HAIRCUT,
+V_R49_APPLICABLE_RISK_WEIGHT,
+
+
+V_R50_PRODUCT,
+V_R50_ISSUER,
+V_R50_ISSUES_RATING,
+V_R50_1YR_VAL_OF_CRM,
+V_R50_1YR_5YR_VAL_OF_CRM,
+V_R50_5YR_VAL_OF_CRM,
+V_R50_OTHER,
+V_R50_STD_SUPERVISORY_HAIRCUT,
+V_R50_APPLICABLE_RISK_WEIGHT,
+
+
+V_R51_PRODUCT,
+V_R51_ISSUER,
+V_R51_ISSUES_RATING,
+V_R51_1YR_VAL_OF_CRM,
+V_R51_1YR_5YR_VAL_OF_CRM,
+V_R51_5YR_VAL_OF_CRM,
+V_R51_OTHER,
+V_R51_STD_SUPERVISORY_HAIRCUT,
+V_R51_APPLICABLE_RISK_WEIGHT,
+
+
+V_R52_PRODUCT,
+V_R52_ISSUER,
+V_R52_ISSUES_RATING,
+V_R52_1YR_VAL_OF_CRM,
+V_R52_1YR_5YR_VAL_OF_CRM,
+V_R52_5YR_VAL_OF_CRM,
+V_R52_OTHER,
+V_R52_STD_SUPERVISORY_HAIRCUT,
+V_R52_APPLICABLE_RISK_WEIGHT,
+
+
+V_R53_PRODUCT,
+V_R53_ISSUER,
+V_R53_ISSUES_RATING,
+V_R53_1YR_VAL_OF_CRM,
+V_R53_1YR_5YR_VAL_OF_CRM,
+V_R53_5YR_VAL_OF_CRM,
+V_R53_OTHER,
+V_R53_STD_SUPERVISORY_HAIRCUT,
+V_R53_APPLICABLE_RISK_WEIGHT,
+
+
+V_R54_PRODUCT,
+V_R54_ISSUER,
+V_R54_ISSUES_RATING,
+V_R54_1YR_VAL_OF_CRM,
+V_R54_1YR_5YR_VAL_OF_CRM,
+V_R54_5YR_VAL_OF_CRM,
+V_R54_OTHER,
+V_R54_STD_SUPERVISORY_HAIRCUT,
+V_R54_APPLICABLE_RISK_WEIGHT,
+
+
+V_R55_PRODUCT,
+V_R55_ISSUER,
+V_R55_ISSUES_RATING,
+V_R55_1YR_VAL_OF_CRM,
+V_R55_1YR_5YR_VAL_OF_CRM,
+V_R55_5YR_VAL_OF_CRM,
+V_R55_OTHER,
+V_R55_STD_SUPERVISORY_HAIRCUT,
+V_R55_APPLICABLE_RISK_WEIGHT,
+
+
+V_R56_PRODUCT,
+V_R56_ISSUER,
+V_R56_ISSUES_RATING,
+V_R56_1YR_VAL_OF_CRM,
+V_R56_1YR_5YR_VAL_OF_CRM,
+V_R56_5YR_VAL_OF_CRM,
+V_R56_OTHER,
+V_R56_STD_SUPERVISORY_HAIRCUT,
+V_R56_APPLICABLE_RISK_WEIGHT,
+
+
+V_R57_PRODUCT,
+V_R57_ISSUER,
+V_R57_ISSUES_RATING,
+V_R57_1YR_VAL_OF_CRM,
+V_R57_1YR_5YR_VAL_OF_CRM,
+V_R57_5YR_VAL_OF_CRM,
+V_R57_OTHER,
+V_R57_STD_SUPERVISORY_HAIRCUT,
+V_R57_APPLICABLE_RISK_WEIGHT,
+
+
+V_R58_PRODUCT,
+V_R58_ISSUER,
+V_R58_ISSUES_RATING,
+V_R58_1YR_VAL_OF_CRM,
+V_R58_1YR_5YR_VAL_OF_CRM,
+V_R58_5YR_VAL_OF_CRM,
+V_R58_OTHER,
+V_R58_STD_SUPERVISORY_HAIRCUT,
+V_R58_APPLICABLE_RISK_WEIGHT,
+
+
+V_R59_PRODUCT,
+V_R59_ISSUER,
+V_R59_ISSUES_RATING,
+V_R59_1YR_VAL_OF_CRM,
+V_R59_1YR_5YR_VAL_OF_CRM,
+V_R59_5YR_VAL_OF_CRM,
+V_R59_OTHER,
+V_R59_STD_SUPERVISORY_HAIRCUT,
+V_R59_APPLICABLE_RISK_WEIGHT,
+
+
+V_R60_PRODUCT,
+V_R60_ISSUER,
+V_R60_ISSUES_RATING,
+V_R60_1YR_VAL_OF_CRM,
+V_R60_1YR_5YR_VAL_OF_CRM,
+V_R60_5YR_VAL_OF_CRM,
+V_R60_OTHER,
+V_R60_STD_SUPERVISORY_HAIRCUT,
+V_R60_APPLICABLE_RISK_WEIGHT,
+
+
+V_R61_PRODUCT,
+V_R61_ISSUER,
+V_R61_ISSUES_RATING,
+V_R61_1YR_VAL_OF_CRM,
+V_R61_1YR_5YR_VAL_OF_CRM,
+V_R61_5YR_VAL_OF_CRM,
+V_R61_OTHER,
+V_R61_STD_SUPERVISORY_HAIRCUT,
+V_R61_APPLICABLE_RISK_WEIGHT,
+
+
+V_R62_PRODUCT,
+V_R62_ISSUER,
+V_R62_ISSUES_RATING,
+V_R62_1YR_VAL_OF_CRM,
+V_R62_1YR_5YR_VAL_OF_CRM,
+V_R62_5YR_VAL_OF_CRM,
+V_R62_OTHER,
+V_R62_STD_SUPERVISORY_HAIRCUT,
+V_R62_APPLICABLE_RISK_WEIGHT,
+
+
+V_R63_PRODUCT,
+V_R63_ISSUER,
+V_R63_ISSUES_RATING,
+V_R63_1YR_VAL_OF_CRM,
+V_R63_1YR_5YR_VAL_OF_CRM,
+V_R63_5YR_VAL_OF_CRM,
+V_R63_OTHER,
+V_R63_STD_SUPERVISORY_HAIRCUT,
+V_R63_APPLICABLE_RISK_WEIGHT,
+
+
+V_R64_PRODUCT,
+V_R64_ISSUER,
+V_R64_ISSUES_RATING,
+V_R64_1YR_VAL_OF_CRM,
+V_R64_1YR_5YR_VAL_OF_CRM,
+V_R64_5YR_VAL_OF_CRM,
+V_R64_OTHER,
+V_R64_STD_SUPERVISORY_HAIRCUT,
+V_R64_APPLICABLE_RISK_WEIGHT,
+
+
+V_R65_PRODUCT,
+V_R65_ISSUER,
+V_R65_ISSUES_RATING,
+V_R65_1YR_VAL_OF_CRM,
+V_R65_1YR_5YR_VAL_OF_CRM,
+V_R65_5YR_VAL_OF_CRM,
+V_R65_OTHER,
+V_R65_STD_SUPERVISORY_HAIRCUT,
+V_R65_APPLICABLE_RISK_WEIGHT,
+
+
+V_R66_PRODUCT,
+V_R66_ISSUER,
+V_R66_ISSUES_RATING,
+V_R66_1YR_VAL_OF_CRM,
+V_R66_1YR_5YR_VAL_OF_CRM,
+V_R66_5YR_VAL_OF_CRM,
+V_R66_OTHER,
+V_R66_STD_SUPERVISORY_HAIRCUT,
+V_R66_APPLICABLE_RISK_WEIGHT,
+
+
+V_R67_PRODUCT,
+V_R67_ISSUER,
+V_R67_ISSUES_RATING,
+V_R67_1YR_VAL_OF_CRM,
+V_R67_1YR_5YR_VAL_OF_CRM,
+V_R67_5YR_VAL_OF_CRM,
+V_R67_OTHER,
+V_R67_STD_SUPERVISORY_HAIRCUT,
+V_R67_APPLICABLE_RISK_WEIGHT,
+
+
+V_R68_PRODUCT,
+V_R68_ISSUER,
+V_R68_ISSUES_RATING,
+V_R68_1YR_VAL_OF_CRM,
+V_R68_1YR_5YR_VAL_OF_CRM,
+V_R68_5YR_VAL_OF_CRM,
+V_R68_OTHER,
+V_R68_STD_SUPERVISORY_HAIRCUT,
+V_R68_APPLICABLE_RISK_WEIGHT,
+
+
+V_R69_PRODUCT,
+V_R69_ISSUER,
+V_R69_ISSUES_RATING,
+V_R69_1YR_VAL_OF_CRM,
+V_R69_1YR_5YR_VAL_OF_CRM,
+V_R69_5YR_VAL_OF_CRM,
+V_R69_OTHER,
+V_R69_STD_SUPERVISORY_HAIRCUT,
+V_R69_APPLICABLE_RISK_WEIGHT,
+
+
+V_R70_PRODUCT,
+V_R70_ISSUER,
+V_R70_ISSUES_RATING,
+V_R70_1YR_VAL_OF_CRM,
+V_R70_1YR_5YR_VAL_OF_CRM,
+V_R70_5YR_VAL_OF_CRM,
+V_R70_OTHER,
+V_R70_STD_SUPERVISORY_HAIRCUT,
+V_R70_APPLICABLE_RISK_WEIGHT,
+
+
+V_R71_PRODUCT,
+V_R71_ISSUER,
+V_R71_ISSUES_RATING,
+V_R71_1YR_VAL_OF_CRM,
+V_R71_1YR_5YR_VAL_OF_CRM,
+V_R71_5YR_VAL_OF_CRM,
+V_R71_OTHER,
+V_R71_STD_SUPERVISORY_HAIRCUT,
+V_R71_APPLICABLE_RISK_WEIGHT,
+
+
+V_R72_PRODUCT,
+V_R72_ISSUER,
+V_R72_ISSUES_RATING,
+V_R72_1YR_VAL_OF_CRM,
+V_R72_1YR_5YR_VAL_OF_CRM,
+V_R72_5YR_VAL_OF_CRM,
+V_R72_OTHER,
+V_R72_STD_SUPERVISORY_HAIRCUT,
+V_R72_APPLICABLE_RISK_WEIGHT,
+
+
+V_R73_PRODUCT,
+V_R73_ISSUER,
+V_R73_ISSUES_RATING,
+V_R73_1YR_VAL_OF_CRM,
+V_R73_1YR_5YR_VAL_OF_CRM,
+V_R73_5YR_VAL_OF_CRM,
+V_R73_OTHER,
+V_R73_STD_SUPERVISORY_HAIRCUT,
+V_R73_APPLICABLE_RISK_WEIGHT,
+
+
+V_R74_PRODUCT,
+V_R74_ISSUER,
+V_R74_ISSUES_RATING,
+V_R74_1YR_VAL_OF_CRM,
+V_R74_1YR_5YR_VAL_OF_CRM,
+V_R74_5YR_VAL_OF_CRM,
+V_R74_OTHER,
+V_R74_STD_SUPERVISORY_HAIRCUT,
+V_R74_APPLICABLE_RISK_WEIGHT,
+
+
+V_R75_PRODUCT,
+V_R75_ISSUER,
+V_R75_ISSUES_RATING,
+V_R75_1YR_VAL_OF_CRM,
+V_R75_1YR_5YR_VAL_OF_CRM,
+V_R75_5YR_VAL_OF_CRM,
+V_R75_OTHER,
+V_R75_STD_SUPERVISORY_HAIRCUT,
+V_R75_APPLICABLE_RISK_WEIGHT,
+
+
+V_R76_PRODUCT,
+V_R76_ISSUER,
+V_R76_ISSUES_RATING,
+V_R76_1YR_VAL_OF_CRM,
+V_R76_1YR_5YR_VAL_OF_CRM,
+V_R76_5YR_VAL_OF_CRM,
+V_R76_OTHER,
+V_R76_STD_SUPERVISORY_HAIRCUT,
+V_R76_APPLICABLE_RISK_WEIGHT,
+
+
+V_R77_PRODUCT,
+V_R77_ISSUER,
+V_R77_ISSUES_RATING,
+V_R77_1YR_VAL_OF_CRM,
+V_R77_1YR_5YR_VAL_OF_CRM,
+V_R77_5YR_VAL_OF_CRM,
+V_R77_OTHER,
+V_R77_STD_SUPERVISORY_HAIRCUT,
+V_R77_APPLICABLE_RISK_WEIGHT,
+
+
+V_R78_PRODUCT,
+V_R78_ISSUER,
+V_R78_ISSUES_RATING,
+V_R78_1YR_VAL_OF_CRM,
+V_R78_1YR_5YR_VAL_OF_CRM,
+V_R78_5YR_VAL_OF_CRM,
+V_R78_OTHER,
+V_R78_STD_SUPERVISORY_HAIRCUT,
+V_R78_APPLICABLE_RISK_WEIGHT,
+
+
+V_R79_PRODUCT,
+V_R79_ISSUER,
+V_R79_ISSUES_RATING,
+V_R79_1YR_VAL_OF_CRM,
+V_R79_1YR_5YR_VAL_OF_CRM,
+V_R79_5YR_VAL_OF_CRM,
+V_R79_OTHER,
+V_R79_STD_SUPERVISORY_HAIRCUT,
+V_R79_APPLICABLE_RISK_WEIGHT,
+
+
+V_R80_PRODUCT,
+V_R80_ISSUER,
+V_R80_ISSUES_RATING,
+V_R80_1YR_VAL_OF_CRM,
+V_R80_1YR_5YR_VAL_OF_CRM,
+V_R80_5YR_VAL_OF_CRM,
+V_R80_OTHER,
+V_R80_STD_SUPERVISORY_HAIRCUT,
+V_R80_APPLICABLE_RISK_WEIGHT,
+
+
+V_R81_PRODUCT,
+V_R81_ISSUER,
+V_R81_ISSUES_RATING,
+V_R81_1YR_VAL_OF_CRM,
+V_R81_1YR_5YR_VAL_OF_CRM,
+V_R81_5YR_VAL_OF_CRM,
+V_R81_OTHER,
+V_R81_STD_SUPERVISORY_HAIRCUT,
+V_R81_APPLICABLE_RISK_WEIGHT,
+
+
+
+
+V_REPORT_DATE
+);
+
+
+COMMIT;
+END;
