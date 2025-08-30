@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -127,17 +130,15 @@ public class CBUAE_BRF_ReportsController {
 				@RequestParam(value = "instancecode", required = false) String instancecode,
 				@RequestParam(value = "filter", required = false) String filter, @RequestParam("asondate") String asondate,
 				@RequestParam("fromdate") String fromdate, @RequestParam("todate") String todate,
-				@RequestParam("currency") String currency,
+				@RequestParam("currency") String currency, @RequestParam(value = "type", required = false) String type,
+				@RequestParam(value = "version", required = false) String version,
 				@RequestParam(value = "subreportid", required = false) String subreportid,
 				@RequestParam(value = "secid", required = false) String secid,
 				@RequestParam(value = "dtltype", required = false) String dtltype,
-				@RequestParam(value = "page", required = false) Optional<Integer> page,
-				@RequestParam(value = "size", required = false) Optional<Integer> size,
+				@RequestParam(defaultValue = "0") int page,
+	            @RequestParam(defaultValue = "100") int size,
 				@RequestParam(value = "reportingTime", required = false) String reportingTime, Model md) {
 
-			
-
-			
 			md.addAttribute("reportid", reportid);
 			md.addAttribute("asondate", asondate);
 			md.addAttribute("fromdate", fromdate);
@@ -146,12 +147,13 @@ public class CBUAE_BRF_ReportsController {
 			md.addAttribute("currency", currency);
 			md.addAttribute("dtltype", dtltype);
 			md.addAttribute("reportingTime", reportingTime);
+			md.addAttribute("type", type);
+			md.addAttribute("version", version);
 			// md.addAttribute("instancecode", Integer.parseInt(instancecode));
-			//md.addAttribute("reportTitle", reportServices.getReportName(reportid));
+			// md.addAttribute("reportTitle", reportServices.getReportName(reportid));
 			md.addAttribute("displaymode", "detail");
 
-			int currentPage = page.orElse(0);
-			int pageSize = size.orElse(Integer.parseInt(pagesize));
+
 			try {
 				asondate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(asondate));
 				fromdate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(fromdate));
@@ -160,9 +162,10 @@ public class CBUAE_BRF_ReportsController {
 				e.printStackTrace();
 			}
 
-			//logger.info("Getting ModelandView :" + reportid);
+			// logger.info("Getting ModelandView :" + reportid);
 			ModelAndView mv = regreportServices.getReportDetails(reportid, instancecode, asondate, fromdate, todate,
-					currency, reportingTime, dtltype, subreportid, secid, PageRequest.of(currentPage, pageSize), filter);
+					currency, reportingTime, dtltype, subreportid, secid, PageRequest.of(page, size), filter,
+					type, version);
 
 			return mv;
 		}
@@ -220,31 +223,73 @@ public class CBUAE_BRF_ReportsController {
 		    }
 		}
 
-		@RequestMapping(value = "downloadDetailExcel", method = RequestMethod.GET)
+		@RequestMapping(value = "downloaddetailExcel", method = { RequestMethod.GET, RequestMethod.POST })
 		@ResponseBody
-		public ResponseEntity<ByteArrayResource> downloadDetailExcel(@RequestParam("filename") String filename,
-				@RequestParam("fromdate") String fromdate, @RequestParam("todate") String todate) {
+		public ResponseEntity<ByteArrayResource> detailDownload(HttpServletResponse response,
+				@RequestParam("jobId") String jobId,
+				@RequestParam("filename") String filename
+				)
+				throws SQLException, FileNotFoundException {
 
+			response.setContentType("application/octet-stream");
+
+			
 			try {
-				System.out.println("came to controller");
-				byte[] data = regreportServices.getDownloadDetailFile(filename, fromdate, todate);
-
-				if (data == null || data.length == 0) {
+				byte[] excelData=null;
+				
+					excelData = regreportServices.getReport(jobId);;
+				
+				if (excelData == null || excelData.length == 0) {
+					logger.warn("Controller: Service returned no data. Responding with 204 No Content.");
 					return ResponseEntity.noContent().build();
 				}
 
-				ByteArrayResource resource = new ByteArrayResource(data);
+				ByteArrayResource resource = new ByteArrayResource(excelData);
 
 				HttpHeaders headers = new HttpHeaders();
-				headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename + ".xls");
+				filename = filename + ".xls";
+				headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
 
-				return ResponseEntity.ok().headers(headers).contentLength(data.length)
+				logger.info("Controller: Sending file '{}' to client ({} bytes).", filename, excelData.length);
+				return ResponseEntity.ok().headers(headers).contentLength(excelData.length)
 						.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(resource);
 
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error("Controller ERROR: A critical error occurred during file generation.", e);
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
 		}
 		
+		@RequestMapping(value = "/startreport", method = { RequestMethod.GET, RequestMethod.POST })
+	    @ResponseBody  // forces raw text instead of HTML view
+	    public String startReport(@RequestParam String filename,
+	    						@RequestParam("fromdate") String fromdate,
+	    						@RequestParam("todate") String todate,
+	                            @RequestParam String currency,
+	                            @RequestParam("dtltype") String dtltype,
+	                            @RequestParam("type") String type, 
+	                            @RequestParam(value = "version", required = false) String version) 	
+	   {
+	        String jobId = UUID.randomUUID().toString();
+			regreportServices.generateReportAsync(jobId, filename, fromdate, todate, dtltype, type, currency, version);
+	        //RT_SLSServices.generateReportAsync(jobId, filename, reportdate, currency,version);
+	        return jobId;
+	    }
+		
+		 @RequestMapping(value = "/checkreport", method = { RequestMethod.GET, RequestMethod.POST })
+		    @ResponseBody  // forces raw text instead of HTML view
+		    public ResponseEntity<String> checkReport(@RequestParam String jobId) {
+		        byte[] report = regreportServices.getReport(jobId);
+		        //System.out.println("Report generation completed for: " + jobId);
+		        if (report == null) {
+		            return ResponseEntity.ok("PROCESSING");
+		        }
+		        
+		        String content = new String(report, StandardCharsets.UTF_8);
+		        if ("Nodata".equals(content)) {
+		            return ResponseEntity.ok("ERROR");
+		        }
+		        return ResponseEntity.ok("READY");
+		    }
+				
 }

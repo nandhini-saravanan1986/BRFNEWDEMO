@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.transaction.Transactional;
 
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
+
 import com.bornfire.brf.services.CBUAE_BRF1_1_ReportService;
 
 import net.sf.jasperreports.engine.JRException;
@@ -488,6 +491,44 @@ public class RegulatoryReportServices {
 	    
 	    return new byte[0];
 	}
+	
+private final ConcurrentHashMap<String, byte[]> jobStorage = new ConcurrentHashMap<>();
+
+	
+    @Async
+    public void generateReportAsync(String jobId, String filename, String fromdate,String todate, String dtltype,String type,String currency, String version) {
+        //System.out.println("Starting report generation for: " + filename);
+		        
+		byte[] fileData =null;
+				
+
+				if("M_ISDetail".equals(filename)) {
+			    	fileData = BRRS_M_IS_reportservice.BRRS_M_ISDetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if ("MSFinP2Detail".equals(filename)) {
+			        fileData = BRRS_M_SFINP2_reportservice.BRRS_M_SFINP2DetailExcel(filename, fromdate, todate);
+			    }
+				
+				
+												
+
+			
+		if (fileData == null) {
+		    logger.warn("Excel generation failed or no data for jobId: {}", jobId);
+		    jobStorage.put(jobId, "Nodata".getBytes()); 
+		} else {
+		    jobStorage.put(jobId, fileData);
+		}
+
+		System.out.println("Report generation completed for: " + filename);
+    }
+
+    
+    public byte[] getReport(String jobId) {
+    	 //System.out.println("Report generation completed for: " + jobId);
+        return jobStorage.get(jobId);
+    }
 	
 
 }
