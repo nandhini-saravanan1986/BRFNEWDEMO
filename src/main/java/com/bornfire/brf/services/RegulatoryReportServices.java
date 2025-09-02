@@ -509,6 +509,38 @@ private final ConcurrentHashMap<String, byte[]> jobStorage = new ConcurrentHashM
 				else if ("MSFinP2Detail".equals(filename)) {
 			        fileData = BRRS_M_SFINP2_reportservice.BRRS_M_SFINP2DetailExcel(filename, fromdate, todate);
 			    }
+				else if("M_CA6Detail".equals(filename)) {
+			    	fileData = BRRS_M_CA6_reportservice.BRRS_M_CA6DetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if("M_SRWA_12FDetail".equals(filename)) {
+			    	fileData = BRRS_M_SRWA_12F_reportservice.BRRS_M_SRWA_12FDetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if("M_SRWA_12HDetail".equals(filename)) {
+			    	fileData = BRRS_M_SRWA_12H_reportservice.BRRS_M_SRWA_12HDetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if("M_MRCDetail".equals(filename)) {
+			    	fileData = BRRS_M_MRC_reportservice.BRRS_M_MRCDetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if("M_SRWA_12CDetail".equals(filename)) {
+			    	fileData = BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CDetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if("M_CA1Detail".equals(filename)) {
+			    	fileData = BRRS_M_CA1_reportservice.geBRRS_M_CA1DetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if("M_CA3Detail".equals(filename)) {
+			    	fileData = BRRS_M_CA3_reportservice.getBRRS_M_CA3DetailExcel(filename, fromdate, todate);
+			    
+			    }
+				else if("M_PIDetail".equals(filename)) {
+			    	fileData = BRRS_M_PI_reportservice.getBRRS_M_PIDetailExcel(filename, fromdate, todate);
+			    
+			    }
 				
 				
 												
