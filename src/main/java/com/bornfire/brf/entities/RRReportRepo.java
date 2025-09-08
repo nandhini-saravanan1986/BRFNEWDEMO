@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface RRReportRepo extends JpaRepository<RRReport, Integer> {
+	
+	@Query(value = "select * from RR_RPT_MASTER WHERE REMARKS_5 = 'M' ORDER BY rpt_code", nativeQuery = true)
+	List<RRReport> getReportListbrf();
+
 	@Query(value = "select * from RR_RPT_MASTER WHERE REMARKS_5 = 'M1' ORDER BY rpt_code", nativeQuery = true)
 	List<RRReport> getReportListmonthly1();
 	

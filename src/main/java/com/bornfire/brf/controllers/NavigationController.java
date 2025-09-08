@@ -67,6 +67,7 @@ import com.bornfire.brf.services.AccessAndRolesServices;
 import com.bornfire.brf.services.LoginServices;
 import com.bornfire.brf.services.NostroAccBalDataService;
 import com.bornfire.brf.services.RT_DataControlService;
+import com.bornfire.brf.services.RegulatoryReportServices;
 
 @Controller
 @ConfigurationProperties("default")
@@ -81,6 +82,11 @@ public class NavigationController {
 	
 	@Autowired
 	CBUAE_BRFValidationsRepo cbuae_brfvalidationsRepo;
+	
+	@Autowired
+	RegulatoryReportServices regulatoryreportservices;
+
+	
 	@Autowired
 	RRReportRepo rrReportlist;
 
@@ -431,6 +437,46 @@ public class NavigationController {
 	  return "BRF/RRReports";
 	  
 	  }
+	  
+
+	  
+	  @RequestMapping(value = "Monthly1-Archival", method = { RequestMethod.GET,RequestMethod.POST })
+	  public String brrsArchival(Model md, HttpServletRequest req)
+	  {
+		  System.out.println("Testting");
+	//String roleId = (String) req.getSession().getAttribute("ROLEID");
+	  //String domainid = (String) req.getSession().getAttribute("DOMAINID");
+	  md.addAttribute("menu", "BRRS - BRRS ARCHIVAL");
+	System.out.println("count"+rrReportlist.getReportListmonthly1().size());
+	  md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
+	  
+	  return "BRRS/BRRSArchival";
+	  
+	  }
+
+	  
+	  @RequestMapping(value = "Archival", method = { RequestMethod.GET,RequestMethod.POST })
+	  public String Archival(Model md,@RequestParam(value = "rptcode", required = false) String rptcode, HttpServletRequest req)
+	  {
+	//String roleId = (String) req.getSession().getAttribute("ROLEID");
+	  //String domainid = (String) req.getSession().getAttribute("DOMAINID");
+		  RRReport data=rrReportlist.getReportbyrptcode(rptcode);
+		  md.addAttribute("reportlist", data);
+		  md.addAttribute("menu", data.getRptDescription());
+		  md.addAttribute("domain", data.getDomainId());
+		  md.addAttribute("rptcode", data.getRptCode());
+		  List<Object> Archivaldata=regulatoryreportservices.getArchival(rptcode);
+		  md.addAttribute("Archivaldata",Archivaldata);
+
+//		  md.addAttribute("reportlist", rrReportlist.getReportListbrf());
+		  md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
+		  
+
+	 
+	  return "BRRS/BRRSArchivalform";
+	 
+	  }
+
 	 
 
 	@RequestMapping(value = "BRFValidations", method = { RequestMethod.GET, RequestMethod.POST })

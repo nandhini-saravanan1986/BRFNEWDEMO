@@ -78,6 +78,7 @@ public class CBUAE_BRF_ReportsController {
 				@RequestParam(value = "secid", required = false) String secid,
 				@RequestParam(value = "dtltype", required = false) String dtltype,
 				@RequestParam(value = "type", required = false) String type,
+				@RequestParam(value = "version", required = false) String version,
 				@RequestParam(value = "page", required = false) Optional<Integer> page,
 				@RequestParam(value = "size", required = false) Optional<Integer> size,
 				@RequestParam(value = "reportingTime", required = false) String reportingTime, Model md,
@@ -105,6 +106,7 @@ public class CBUAE_BRF_ReportsController {
 			md.addAttribute("currency", currency);
 			md.addAttribute("dtltype", dtltype);
 			md.addAttribute("type", type);
+			md.addAttribute("version", version);
 			md.addAttribute("reportingTime", reportingTime);
 			//md.addAttribute("reportTitle", reportServices.getReportName(reportid));
 			
@@ -119,7 +121,7 @@ public class CBUAE_BRF_ReportsController {
 			ModelAndView mv = new ModelAndView();
 
 			mv = regreportServices.getReportView(reportid, asondate, fromdate, todate, currency, dtltype, subreportid,
-					secid, reportingTime, PageRequest.of(currentPage, pageSize), srl_no, userid);
+					secid, reportingTime, PageRequest.of(currentPage, pageSize), srl_no, userid,type,version);
 
 			return mv;
 
@@ -182,6 +184,8 @@ public class CBUAE_BRF_ReportsController {
 		        @RequestParam(value = "secid", required = false) String secid,
 		        @RequestParam(value = "dtltype", required = false) String dtltype,
 		        @RequestParam(value = "reportingTime", required = false) String reportingTime,
+		        @RequestParam(value = "type", required = false) String type,
+		        @RequestParam(value = "version", required = false) String version,
 		        @RequestParam(value = "filename", required = false) String filename,
 		        @RequestParam(value = "instancecode", required = false) String instancecode,
 		        @RequestParam(value = "filter", required = false) String filter)
@@ -197,7 +201,7 @@ public class CBUAE_BRF_ReportsController {
 			}
 		    try {
 		        byte[] excelData = regreportServices.getDownloadFile(reportid, filename, asondate, fromdate, todate, currency,
-		                subreportid, secid, dtltype, reportingTime, instancecode, filter);
+		                subreportid, secid, dtltype, reportingTime, instancecode, filter,type,version);
 
 		        if (excelData.length == 0) {
 		            logger.warn("Controller: Service returned no data. Responding with 204 No Content.");
