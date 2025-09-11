@@ -338,40 +338,41 @@ $(window).on('beforeunload', function() {
 	
 	//to fetch summary from the database - called from the summary button
 	function showdetails() {
-    
-    var Callurl;
-    	$('#loader').modal('show');
-        Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype})}]]*/ 
-        location.href = Callurl;
-        	console.log(Callurl);
-   /*  $.ajax({
-        type: 'get',
-        url: Callurl,
-        beforeSend: function () {
-            $('#loader').modal('show'); // 🔄 Show loader
-        },
-        success: function (data) {
-            $('.content').html(data);
-            //$("#detailsbtn").addClass("active");
-            //tablepagination();
-        },
-        complete: function () {
-            $('#loader').modal('hide'); 
-        },
-        error: function () {
-        	  $('#loader').modal('hide');
-            alert("Something went wrongss. Please try again.");
-          
-        }
-    }); */
-}
-	
-	function showsummary() {
-		$('#loader').modal('show');
-		var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type}, asondate=${asondate})}]]*/;								
-		location.href = Callurl;
 
-	}
+					var Callurl;
+					$('#loader').modal('show');
+					Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype},type=${type},version=${version})}]]*/
+						location.href = Callurl;
+					console.log(Callurl);
+					/*  $.ajax({
+						 type: 'get',
+						 url: Callurl,
+						 beforeSend: function () {
+							 $('#loader').modal('show'); // 🔄 Show loader
+						 },
+						 success: function (data) {
+							 $('.content').html(data);
+							 //$("#detailsbtn").addClass("active");
+							 //tablepagination();
+						 },
+						 complete: function () {
+							 $('#loader').modal('hide');
+						 },
+						 error: function () {
+								  $('#loader').modal('hide');
+							 alert("Something went wrongss. Please try again.");
+						  
+						 }
+					 }); */
+				}
+		
+				function showsummary() {
+							var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
+							loader.show();
+							var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type},version=${version}, asondate=${asondate})}]]*/
+								location.href = Callurl;
+
+						}
     </script>
 
 <script>
@@ -403,58 +404,64 @@ window.onload = function() {
 
 
 function downloadfile(button) {
-	var reportid = button.getAttribute('data-reportid');
-	var asondate = button.getAttribute('data-asondate');
-	var fromdate = button.getAttribute('data-fromdate');
-	var todate = button.getAttribute('data-todate');
-	var currency = button.getAttribute('data-currency');
-	var subreportid = button.getAttribute('data-subreportid');
-	var secid = button.getAttribute('data-secid');
-	var dtltype = button.getAttribute('data-dtltype');
-	var filename = button.getAttribute('data-filename');
-	
-	$('#loader').modal('show');
+			var reportid = button.getAttribute('data-reportid');
+			var asondate = button.getAttribute('data-asondate');
+			var fromdate = button.getAttribute('data-fromdate');
+			var todate = button.getAttribute('data-todate');
+			var currency = button.getAttribute('data-currency');
+			var subreportid = button.getAttribute('data-subreportid');
+			var secid = button.getAttribute('data-secid');
+			var dtltype = button.getAttribute('data-dtltype');
+			var filename = button.getAttribute('data-filename');
+			var type = button.getAttribute('data-type');
+			var version = button.getAttribute('data-version');
 
-	$.ajax({
-		url: './downloadExcel?reportid=' + reportid +
-			'&fromdate=' + fromdate +
-			'&asondate=' + asondate +
-			'&todate=' + todate +
-			'&currency=' + currency +
-			'&subreportid=' + subreportid +
-			'&secid=' + secid +
-			'&filename=' + filename,
-		type: 'GET',
-		xhrFields: {
-			responseType: 'blob'
-		},
-		success: function (data) {
-			$('#loader').modal('hide');
 
-			if (data && data.size > 100) {
-				const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
-				const url = window.URL.createObjectURL(blob);
-				const a = document.createElement('a');
-				a.style.display = 'none';
-				a.href = url;
-				a.download = filename;
-				document.body.appendChild(a);
-				a.click();
-				window.URL.revokeObjectURL(url);
-				document.body.removeChild(a);
+			var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
+			loader.show();
 
-				showResultModal('Success', 'The file has been downloaded successfully.');
-			} else {
-				showResultModal('Information', 'No data was available to create a download.');
-			}
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-			$('#loader').modal('hide');
-			console.error("Download failed:", textStatus, errorThrown);
-			showResultModal('Error', 'An error occurred while downloading the file. Please try again.');
+			$.ajax({
+				url: './downloadExcel?reportid=' + reportid +
+					'&fromdate=' + fromdate +
+					'&asondate=' + asondate +
+					'&todate=' + todate +
+					'&currency=' + currency +
+					'&subreportid=' + subreportid +
+					'&secid=' + secid +
+					'&filename=' + filename +
+					'&type=' + type +
+					'&version=' + version,
+				type: 'GET',
+				xhrFields: {
+					responseType: 'blob'
+				},
+				success: function (data) {
+					$('#loader').modal('hide');
+
+					if (data && data.size > 100) {
+						const blob = new Blob([data], {type: 'application/vnd.ms-excel'});
+						const url = window.URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.style.display = 'none';
+						a.href = url;
+						a.download = filename;
+						document.body.appendChild(a);
+						a.click();
+						window.URL.revokeObjectURL(url);
+						document.body.removeChild(a);
+
+						showResultModal('Success', filename + ' downloaded successfully.');
+					} else {
+						showResultModal('Information', 'No data was available to create a download.');
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					$('#loader').modal('hide');
+					console.error("Download failed:", textStatus, errorThrown);
+					showResultModal('Error', 'An error occurred while downloading the file. Please try again.');
+				}
+			});
 		}
-	});
-}
 
 function editRecord(){
 	showResultModal('Alert', 'Development in progress');
@@ -670,33 +677,30 @@ function showdetailsbyRowAndColumn(a) {
         <input type="hidden" id="selectedTab" th:value="${displaymode}">
         <button type="button" class="custom-tab-btn" id="custom-tab-btnSummary" onclick="showsummary();" th:if="${displaymode == 'Details'}">Summary</button>
         <button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();" th:if="${displaymode == 'summary'}">Details</button>
-        <button type="button" class="custom-tab-btn" id="custom-tab-btnAdd" th:if="${displaymode == 'summary'}"
-            th:attr="data-reportid=${reportid}, 
-                     data-asondate=${asondate}, 
-                     data-fromdate=${fromdate}, 
-                     data-todate=${todate}, 
-                     data-currency=${currency},  
-                     data-dtltype=${dtltype}, 
-                     data-filename='M_PI.xls',
-                     data-type=${type},
-                     data-version=${version}"
-                     
-            onclick="downloadfile(this);">
-            <i class="fa fa-download"></i>
-        </button>
-        <button
-		  type="button"
-		  class="custom-tab-btn"
-		  id="custom-tab-btnAdd"
-		  th:if="${displaymode == 'Details'}"
-		  onclick="startReport(this);"
-		  th:attr="
-		    data-fromdate=${fromdate},
-		    data-todate=${todate},
-		    data-filename='M_PIDetail'
-		  ">
-		  <i class="fa fa-download"></i>
-		</button>
+		<button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+									th:if="${displaymode == 'summary'}" th:attr="data-reportid=${reportid}, 
+		                     data-asondate=${asondate}, 
+		                     data-fromdate=${fromdate}, 
+		                     data-todate=${todate}, 
+		                     data-currency=${currency},  
+		                     data-dtltype=${dtltype}, 
+		                     data-filename='M_PI.xls',
+		                     data-type=${type},
+		                     data-version=${version}" onclick="downloadfile(this);">
+									<i class="fa fa-download"></i>
+								</button>
+								<button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+															th:if="${displaymode == 'Details'}" onclick="startReport(this);" th:attr="
+										    data-fromdate=${fromdate},
+										    data-todate=${todate},
+											data-currency=${currency},  
+														data-dtltype=${dtltype}, 
+										    data-filename='M_PIDetail',
+											data-type=${type},
+														data-version=${version}
+										  ">
+															<i class="fa fa-download"></i>
+														</button>
 					</div>
 				</div>
 			
@@ -974,46 +978,49 @@ function showdetailsbyRowAndColumn(a) {
 				</div>
 
 				<div th:if="${displaymode == 'Details'}">
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="table-responsive scrollable-table-container"
-								style="border-right: 1px solid #dee2e6;">
-								<table
-									class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
-									id="reports">
-									<thead class="thead-light">
-										<tr>
-											<th></th>
-											<th>CUST ID</th>
-											<th>ACCT NO</th>
-											<th>ACCT NAME</th>
-											<th style="text-align: right;">ACCT BALANCE</th>
-											<th style="text-align: left;">ROWID</th>
-											<th>COLUMNID</th>
-											<th>REPORT_DATE</th>
-										</tr>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="table-responsive scrollable-table-container"
+												style="border-right: 1px solid #dee2e6;">
+												<table
+													class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
+													id="reportss">
+																					<thead class="thead-light">
+														<tr>
+															<th></th>
+															<th>CUST ID</th>
+															<th>ACCT NO</th>
+															<th>ACCT NAME</th>
+															<th style="text-align: right;">ACCT BALANCE</th>
+															<th style="text-align: left;">ROWID</th>
+															<th>COLUMNID</th>
+															<th>REPORT_DATE</th>
+														</tr>
 
-									</thead>
+													</thead>
 
-									<tbody
-										style="font-family: Arial;">
-										<tr th:each="report: ${reportdetails}">
-											<td><a data-toggle="tooltip" class="editrec"
-												title="Click to Edit this Record"> <i
-													class="fas fa-edit" onclick="editRecord(this)"></i>
-											</a></td>
-											<td th:text="${report.CUST_ID}"></td>
-											<td th:text="${report.ACCT_NUMBER}"></td>
-											<td th:text="${report.ACCT_NAME}"></td>
-											<td th:text="${#numbers.formatDecimal(report.ACCT_BALANCE_IN_PULA, 1, 3)}" style="text-align: right;"></td>
-											<td style="text-align: left;" th:text="${report.ROW_ID}"></td>
-											<td th:text="${report.COLUMN_ID}"></td>
-											<td
-												th:text="${#dates.format(report.REPORT_DATE, 'dd-MM-yyyy')}"></td>
+													<tbody 
+														style="font-family: Arial;">
+														<tr th:each="report: ${reportdetails}">
+															<td><a data-toggle="tooltip" class="editrec"
+																title="Click to Edit this Record"> <i
+																	class="fas fa-edit" onclick="editRecord(this)"></i>
+															</a></td>
+															<td th:text="${report.custId}"></td>
+															<td th:text="${report.acctNumber}"></td>
+															<td th:text="${report.acctName}"></td>
+														<!---	<td th:text="${report.acctBalanceInpula} "></td> -->
+														<td th:text="${#numbers.formatDecimal(report.acctBalanceInpula, 1, 2)}" style="text-align: right;"></td>
 
-										</tr>
-									</tbody>
-								</table>
+															<td style="text-align: left;" th:text="${report.rowId}"></td>
+															<td th:text="${report.columnId}"></td>
+															<td
+																th:text="${#dates.format(report.reportDate, 'dd-MM-yyyy')}"></td>
+
+														</tr>
+													</tbody>
+													
+												</table>
 								<div style="margin-top:20px; text-align:center;" th:if="${pagination=='YES'}">
 																																	   
 																																	    

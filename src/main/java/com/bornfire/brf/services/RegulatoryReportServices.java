@@ -188,7 +188,7 @@ public class RegulatoryReportServices {
 
 		case "M_PI":
 			repsummary = BRRS_M_PI_reportservice.getBRRS_M_PIView(reportId, fromdate, todate, currency, dtltype,
-					pageable);
+					pageable,type,version);
 			break;
 			
 		
@@ -303,7 +303,7 @@ public class RegulatoryReportServices {
 		case "M_PI":
 			repdetail = BRRS_M_PI_reportservice.getBRRS_M_PIcurrentDtl(reportId, fromdate, todate, currency, dtltype,
 
-					pageable, Filter);
+					pageable, Filter,type,version);
 			break;
 
 		}
@@ -480,7 +480,7 @@ public class RegulatoryReportServices {
 		case "M_PI":
 			try {
 				repfile = BRRS_M_PI_reportservice.getBRRS_M_PIExcel(filename, reportId, fromdate, todate, currency,
-						dtltype);
+						dtltype,type,version);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -508,7 +508,7 @@ public class RegulatoryReportServices {
 	
 
 	public byte[] getDownloadDetailFile(String filename, String fromdate, String todate, String currency,
-			String dtltype, String type, String version) {
+			String dtltype,String type, String version ) {
 		System.out.println("Came to common service1");
 
 		if ("MSFinP2Detail".equals(filename)) {
@@ -548,7 +548,8 @@ public class RegulatoryReportServices {
 			return BRRS_M_CA3_reportservice.getBRRS_M_CA3DetailExcel(filename, fromdate, todate);
 
 		} else if ("M_PIDetail".equals(filename)) {
-			return BRRS_M_PI_reportservice.getBRRS_M_PIDetailExcel(filename, fromdate, todate);
+			return BRRS_M_PI_reportservice.BRRS_M_PIDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
 
 		}
 
@@ -577,6 +578,15 @@ public class RegulatoryReportServices {
 		case "M_IS":
 			try {
 				archivalData = BRRS_M_IS_reportservice.getM_ISArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "M_PI":
+			try {
+				archivalData = BRRS_M_PI_reportservice.getM_PIArchival();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -626,7 +636,8 @@ public class RegulatoryReportServices {
 			fileData = BRRS_M_CA3_reportservice.getBRRS_M_CA3DetailExcel(filename, fromdate, todate);
 
 		} else if ("M_PIDetail".equals(filename)) {
-			fileData = BRRS_M_PI_reportservice.getBRRS_M_PIDetailExcel(filename, fromdate, todate);
+			fileData = BRRS_M_PI_reportservice.BRRS_M_PIDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
 
 		}
 

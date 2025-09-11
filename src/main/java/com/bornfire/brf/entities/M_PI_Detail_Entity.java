@@ -13,272 +13,249 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "BRRS_M_PI_DETAILTABLE")
 public class M_PI_Detail_Entity {
-      @Id
-    @Column(name = "CUST_ID", length = 100)
-    private String CUST_ID;
+	@Id
+    @Column(name = "CUST_ID")
+    private String custId;
 
-    @Column(name = "ACCT_NUMBER", length = 100)
-    private String ACCT_NUMBER;
+    @Column(name = "ACCT_NUMBER")
+    private String acctNumber;
 
-    @Column(name = "ACCT_NAME", length = 100)
-    private String ACCT_NAME;
+    @Column(name = "ACCT_NAME")
+    private String acctName;
 
-    @Column(name = "DATA_TYPE", length = 100)
-    private String DATA_TYPE;
+    @Column(name = "DATA_TYPE")
+    private String dataType;
 
-    @Column(name = "ROW_ID", length = 100)
-    private String ROW_ID;
+    @Column(name = "COLUMN_ID")
+    private String columnId;
+    
+    @Column(name = "ROW_ID")
+    private String rowId;
 
-    @Column(name = "COLUMN_ID", length = 100)
-    private String COLUMN_ID;
+    @Column(name = "REPORT_REMARKS")
+    private String reportRemarks;
 
-    @Column(name = "REPORT_REMARKS", length = 100)
-    private String REPORT_REMARKS;
+    @Column(name = "MODIFICATION_REMARKS")
+    private String modificationRemarks;
 
-    @Column(name = "MODIFICATION_REMARKS", length = 100)
-    private String MODIFICATION_REMARKS;
-
-    @Column(name = "DATA_ENTRY_VERSION", length = 100)
-    private String DATA_ENTRY_VERSION;
+    @Column(name = "DATA_ENTRY_VERSION")
+    private String dataEntryVersion;
 
     @Column(name = "ACCT_BALANCE_IN_PULA", precision = 24, scale = 3)
-    private BigDecimal ACCT_BALANCE_IN_PULA;
+    private BigDecimal acctBalanceInpula;
+
 
     @Column(name = "REPORT_DATE")
-   @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date REPORT_DATE;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date reportDate;
 
-    @Column(name = "REPORT_NAME", length = 100)
-    private String REPORT_NAME;
+    @Column(name = "REPORT_NAME")
+    private String reportName;
 
-    @Column(name = "CREATE_USER", length = 100)
-    private String CREATE_USER;
+    @Column(name = "CREATE_USER")
+    private String createUser;
 
     @Column(name = "CREATE_TIME")
-     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date CREATE_TIME;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date createTime;
 
-    @Column(name = "MODIFY_USER", length = 50)
-    private String MODIFY_USER;
+    @Column(name = "MODIFY_USER")
+    private String modifyUser;
+
 
     @Column(name = "MODIFY_TIME")
-   @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date MODIFY_TIME;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date modifyTime;
 
-    @Column(name = "VERIFY_USER", length = 50)
-    private String VERIFY_USER;
+    @Column(name = "VERIFY_USER")
+    private String verifyUser;
+
 
     @Column(name = "VERIFY_TIME")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date VERIFY_TIME;
+    private Date verifyTime;
 
-    @Column(name = "ENTITY_FLG", length = 1)
-    private String ENTITY_FLG;
+    @Column(name = "ENTITY_FLG")
+    private char entityFlg;
 
-    @Column(name = "MODIFY_FLG", length = 1)
-    private String MODIFY_FLG;
+    @Column(name = "MODIFY_FLG")
+    private char modifyFlg;
 
-    @Column(name = "DEL_FLG", length = 1)
-    private String DEL_FLG;
+    @Column(name = "DEL_FLG")
+    private char delFlg;
 
-    public M_PI_Detail_Entity(String cUST_ID, String aCCT_NUMBER, String aCCT_NAME, String dATA_TYPE,
-            String rOW_ID, String cOLUMN_ID, String rEPORT_REMARKS, String mODIFICATION_REMARKS,
-            String dATA_ENTRY_VERSION, BigDecimal aCCT_BALANCE_IN_PULA, Date rEPORT_DATE, String rEPORT_NAME,
-            String cREATE_USER, Date cREATE_TIME, String mODIFY_USER, Date mODIFY_TIME, String vERIFY_USER,
-            Date vERIFY_TIME, String eNTITY_FLG, String mODIFY_FLG, String dEL_FLG) {
-        CUST_ID = cUST_ID;
-        ACCT_NUMBER = aCCT_NUMBER;
-        ACCT_NAME = aCCT_NAME;
-        DATA_TYPE = dATA_TYPE;
-        ROW_ID = rOW_ID;
-        COLUMN_ID = cOLUMN_ID;
-        REPORT_REMARKS = rEPORT_REMARKS;
-        MODIFICATION_REMARKS = mODIFICATION_REMARKS;
-        DATA_ENTRY_VERSION = dATA_ENTRY_VERSION;
-        ACCT_BALANCE_IN_PULA = aCCT_BALANCE_IN_PULA;
-        REPORT_DATE = rEPORT_DATE;
-        REPORT_NAME = rEPORT_NAME;
-        CREATE_USER = cREATE_USER;
-        CREATE_TIME = cREATE_TIME;
-        MODIFY_USER = mODIFY_USER;
-        MODIFY_TIME = mODIFY_TIME;
-        VERIFY_USER = vERIFY_USER;
-        VERIFY_TIME = vERIFY_TIME;
-        ENTITY_FLG = eNTITY_FLG;
-        MODIFY_FLG = mODIFY_FLG;
-        DEL_FLG = dEL_FLG;
-    }
+	public String getCustId() {
+		return custId;
+	}
 
-    public String getCUST_ID() {
-        return CUST_ID;
-    }
+	public void setCustId(String custId) {
+		this.custId = custId;
+	}
 
-    public void setCUST_ID(String cUST_ID) {
-        CUST_ID = cUST_ID;
-    }
+	public String getAcctNumber() {
+		return acctNumber;
+	}
 
-    public String getACCT_NUMBER() {
-        return ACCT_NUMBER;
-    }
+	public void setAcctNumber(String acctNumber) {
+		this.acctNumber = acctNumber;
+	}
 
-    public void setACCT_NUMBER(String aCCT_NUMBER) {
-        ACCT_NUMBER = aCCT_NUMBER;
-    }
+	public String getAcctName() {
+		return acctName;
+	}
 
-    public String getACCT_NAME() {
-        return ACCT_NAME;
-    }
+	public void setAcctName(String acctName) {
+		this.acctName = acctName;
+	}
 
-    public void setACCT_NAME(String aCCT_NAME) {
-        ACCT_NAME = aCCT_NAME;
-    }
+	public String getDataType() {
+		return dataType;
+	}
 
-    public String getDATA_TYPE() {
-        return DATA_TYPE;
-    }
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
+	}
 
-    public void setDATA_TYPE(String dATA_TYPE) {
-        DATA_TYPE = dATA_TYPE;
-    }
+	public String getColumnId() {
+		return columnId;
+	}
 
-    public String getROW_ID() {
-        return ROW_ID;
-    }
+	public void setColumnId(String columnId) {
+		this.columnId = columnId;
+	}
 
-    public void setROW_ID(String rOW_ID) {
-        ROW_ID = rOW_ID;
-    }
+	public String getRowId() {
+		return rowId;
+	}
 
-    public String getCOLUMN_ID() {
-        return COLUMN_ID;
-    }
+	public void setRowId(String rowId) {
+		this.rowId = rowId;
+	}
 
-    public void setCOLUMN_ID(String cOLUMN_ID) {
-        COLUMN_ID = cOLUMN_ID;
-    }
+	public String getReportRemarks() {
+		return reportRemarks;
+	}
 
-    public String getREPORT_REMARKS() {
-        return REPORT_REMARKS;
-    }
+	public void setReportRemarks(String reportRemarks) {
+		this.reportRemarks = reportRemarks;
+	}
 
-    public void setREPORT_REMARKS(String rEPORT_REMARKS) {
-        REPORT_REMARKS = rEPORT_REMARKS;
-    }
+	public String getModificationRemarks() {
+		return modificationRemarks;
+	}
 
-    public String getMODIFICATION_REMARKS() {
-        return MODIFICATION_REMARKS;
-    }
+	public void setModificationRemarks(String modificationRemarks) {
+		this.modificationRemarks = modificationRemarks;
+	}
 
-    public void setMODIFICATION_REMARKS(String mODIFICATION_REMARKS) {
-        MODIFICATION_REMARKS = mODIFICATION_REMARKS;
-    }
+	public String getDataEntryVersion() {
+		return dataEntryVersion;
+	}
 
-    public String getDATA_ENTRY_VERSION() {
-        return DATA_ENTRY_VERSION;
-    }
+	public void setDataEntryVersion(String dataEntryVersion) {
+		this.dataEntryVersion = dataEntryVersion;
+	}
 
-    public void setDATA_ENTRY_VERSION(String dATA_ENTRY_VERSION) {
-        DATA_ENTRY_VERSION = dATA_ENTRY_VERSION;
-    }
+	public BigDecimal getAcctBalanceInpula() {
+		return acctBalanceInpula;
+	}
 
-    public BigDecimal getACCT_BALANCE_IN_PULA() {
-        return ACCT_BALANCE_IN_PULA;
-    }
+	public void setAcctBalanceInpula(BigDecimal acctBalanceInpula) {
+		this.acctBalanceInpula = acctBalanceInpula;
+	}
 
-    public void setACCT_BALANCE_IN_PULA(BigDecimal aCCT_BALANCE_IN_PULA) {
-        ACCT_BALANCE_IN_PULA = aCCT_BALANCE_IN_PULA;
-    }
+	public Date getReportDate() {
+		return reportDate;
+	}
 
-    public Date getREPORT_DATE() {
-        return REPORT_DATE;
-    }
+	public void setReportDate(Date reportDate) {
+		this.reportDate = reportDate;
+	}
 
-    public void setREPORT_DATE(Date rEPORT_DATE) {
-        REPORT_DATE = rEPORT_DATE;
-    }
+	public String getReportName() {
+		return reportName;
+	}
 
-    public String getREPORT_NAME() {
-        return REPORT_NAME;
-    }
+	public void setReportName(String reportName) {
+		this.reportName = reportName;
+	}
 
-    public void setREPORT_NAME(String rEPORT_NAME) {
-        REPORT_NAME = rEPORT_NAME;
-    }
+	public String getCreateUser() {
+		return createUser;
+	}
 
-    public String getCREATE_USER() {
-        return CREATE_USER;
-    }
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
 
-    public void setCREATE_USER(String cREATE_USER) {
-        CREATE_USER = cREATE_USER;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getCREATE_TIME() {
-        return CREATE_TIME;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setCREATE_TIME(Date cREATE_TIME) {
-        CREATE_TIME = cREATE_TIME;
-    }
+	public String getModifyUser() {
+		return modifyUser;
+	}
 
-    public String getMODIFY_USER() {
-        return MODIFY_USER;
-    }
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
+	}
 
-    public void setMODIFY_USER(String mODIFY_USER) {
-        MODIFY_USER = mODIFY_USER;
-    }
+	public Date getModifyTime() {
+		return modifyTime;
+	}
 
-    public Date getMODIFY_TIME() {
-        return MODIFY_TIME;
-    }
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 
-    public void setMODIFY_TIME(Date mODIFY_TIME) {
-        MODIFY_TIME = mODIFY_TIME;
-    }
+	public String getVerifyUser() {
+		return verifyUser;
+	}
 
-    public String getVERIFY_USER() {
-        return VERIFY_USER;
-    }
+	public void setVerifyUser(String verifyUser) {
+		this.verifyUser = verifyUser;
+	}
 
-    public void setVERIFY_USER(String vERIFY_USER) {
-        VERIFY_USER = vERIFY_USER;
-    }
+	public Date getVerifyTime() {
+		return verifyTime;
+	}
 
-    public Date getVERIFY_TIME() {
-        return VERIFY_TIME;
-    }
+	public void setVerifyTime(Date verifyTime) {
+		this.verifyTime = verifyTime;
+	}
 
-    public void setVERIFY_TIME(Date vERIFY_TIME) {
-        VERIFY_TIME = vERIFY_TIME;
-    }
+	public char getEntityFlg() {
+		return entityFlg;
+	}
 
-    public String getENTITY_FLG() {
-        return ENTITY_FLG;
-    }
+	public void setEntityFlg(char entityFlg) {
+		this.entityFlg = entityFlg;
+	}
 
-    public void setENTITY_FLG(String eNTITY_FLG) {
-        ENTITY_FLG = eNTITY_FLG;
-    }
+	public char getModifyFlg() {
+		return modifyFlg;
+	}
 
-    public String getMODIFY_FLG() {
-        return MODIFY_FLG;
-    }
+	public void setModifyFlg(char modifyFlg) {
+		this.modifyFlg = modifyFlg;
+	}
 
-    public void setMODIFY_FLG(String mODIFY_FLG) {
-        MODIFY_FLG = mODIFY_FLG;
-    }
+	public char getDelFlg() {
+		return delFlg;
+	}
 
-    public String getDEL_FLG() {
-        return DEL_FLG;
-    }
+	public void setDelFlg(char delFlg) {
+		this.delFlg = delFlg;
+	}
 
-    public void setDEL_FLG(String dEL_FLG) {
-        DEL_FLG = dEL_FLG;
-    }
-
-    public M_PI_Detail_Entity() {
+	public M_PI_Detail_Entity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+    
+    
 }
