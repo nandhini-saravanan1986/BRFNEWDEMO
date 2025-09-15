@@ -83,7 +83,8 @@ public class RegulatoryReportServices {
 	
 	@Autowired
 	BRRS_M_IS_ReportService BRRS_M_IS_Reportservice;
-	
+	@Autowired
+	M_GALOR_ReportService M_GALOR_ReportService;
 
 
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
@@ -145,10 +146,11 @@ public class RegulatoryReportServices {
 			break;
 
 		case "M_CA7":
-			repsummary = M_CA7_ReportService.getM_CA7View(reportId, fromdate, todate, currency, dtltype, pageable);
+			repsummary = M_CA7_ReportService.getM_CA7View(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
 			break;
 		case "M_SIR":
-			repsummary = M_SIR_ReportService.getM_SIRView(reportId, fromdate, todate, currency, dtltype, pageable);
+			repsummary = M_SIR_ReportService.getM_SIRView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
 		
 
@@ -191,7 +193,10 @@ public class RegulatoryReportServices {
 					pageable,type,version);
 			break;
 			
-		
+		case "M_GALOR":
+			repsummary = M_GALOR_ReportService.getM_GALORView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
+			break;
+				
 
 
 		}
@@ -250,16 +255,15 @@ public class RegulatoryReportServices {
 
 		case "M_CA7":
 			repdetail = M_CA7_ReportService.getM_CA7currentDtl(reportId, fromdate, todate, currency, dtltype,
-					pageable, Filter);
+					pageable, Filter,type,version);
 			break;
 	
-	//getM_SIRcurrentDtl
+	
 
 		case "M_SIR":
 			repdetail = M_SIR_ReportService.getM_SIRcurrentDtl(reportId, fromdate, todate, currency, dtltype,
-					pageable, Filter);
+					pageable, Filter,type,version);
 			break;
-			
 		case "M_IS":
 			repdetail = BRRS_M_IS_reportservice.getM_IScurrentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type,version);
@@ -303,6 +307,11 @@ public class RegulatoryReportServices {
 		case "M_PI":
 			repdetail = BRRS_M_PI_reportservice.getBRRS_M_PIcurrentDtl(reportId, fromdate, todate, currency, dtltype,
 
+					pageable, Filter,type,version);
+			break;
+			
+		case "M_GALOR":
+			repdetail = M_GALOR_ReportService.getM_GALORcurrentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type,version);
 			break;
 
@@ -380,16 +389,24 @@ public class RegulatoryReportServices {
 		
 			case "M_CA7":
 				try {
-					repfile = M_CA7_ReportService.getM_CA7Excel(filename, reportId, fromdate, todate, currency, dtltype);
+					repfile = M_CA7_ReportService.getM_CA7Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
-
+			case "M_GALOR":
+				try {
+					repfile = M_GALOR_ReportService.getM_GALORExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
 			case "M_SIR":
 				try {
-					repfile = M_SIR_ReportService.getM_SIRExcel(filename, reportId, fromdate, todate, currency, dtltype);
+					repfile = M_SIR_ReportService.getM_SIRExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+				
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -551,6 +568,18 @@ public class RegulatoryReportServices {
 			return BRRS_M_PI_reportservice.BRRS_M_PIDetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
+		}else if ("M_CA_7Details".equals(filename)) {
+			return M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
+		}else if ("M_SIRDetails".equals(filename)) {
+			return M_SIR_ReportService.getM_SIRDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
+		}else if ("BRRS_M_GALORDetails".equals(filename)) {
+			return M_GALOR_ReportService.BRRS_M_GALORDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
 		}
 
 		else {
@@ -592,7 +621,31 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
-			
+
+		case "M_CA7":
+			try {
+				archivalData = M_CA7_ReportService.getM_CA7Archival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "M_SIR":
+			try {
+				archivalData = M_SIR_ReportService.getM_SIRArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "M_GALOR":
+			try {
+				archivalData = M_GALOR_ReportService.getM_GALORArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
 		}
 		return archivalData;
@@ -637,6 +690,18 @@ public class RegulatoryReportServices {
 
 		} else if ("M_PIDetail".equals(filename)) {
 			fileData = BRRS_M_PI_reportservice.BRRS_M_PIDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
+		}else if ("M_CA_7Details".equals(filename)) {
+			fileData = M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
+		}else if ("M_SIRDetails".equals(filename)) {
+			fileData = M_SIR_ReportService.getM_SIRDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
+		}else if ("BRRS_M_GALORDetails".equals(filename)) {
+			fileData = M_GALOR_ReportService.BRRS_M_GALORDetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
 		}

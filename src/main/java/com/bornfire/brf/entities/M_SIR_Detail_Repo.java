@@ -8,15 +8,20 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface M_SIR_Detail_Repo extends JpaRepository<M_SIR_Detail_Entity, String> {
 
-	@Query(value = "select * from BRRS_M_SIR_DETAILTABLE  ", nativeQuery = true)
+	@Query(value = "select * from BRRS_M_SIR_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2 AND REPORT_DATE=?3", nativeQuery = true)
+	List<M_SIR_Detail_Entity> GetDataByRowIdAndColumnId(String rowId,String ColumnId,Date reportdate);
+	
+	
+	@Query(value = "select * from BRRS_M_SIR_DETAILTABLE where REPORT_DATE =?1  ", nativeQuery = true)
 	List<M_SIR_Detail_Entity> getdatabydateList(Date reportdate);
 	
-	@Query(value = "select * from BRRS_M_SIR_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2", nativeQuery = true)
-	List<M_SIR_Detail_Entity> getDataByRowIdAndColumnId(String rowId,String ColumnId);
 
-	@Query(value = "select * from BRRS_M_SIR_DETAILTABLE where REPORT_DATE=?1 offset ?2 rows fetch next ?3 rows only", nativeQuery = true)
-	List<M_SIR_Detail_Entity> getdatabydateList(Date reportdate,int startpage,int endpage);
+    @Query(value = "select * from BRRS_M_SIR_DETAILTABLE where REPORT_DATE = ?1 offset ?2 rows fetch next ?3 rows only", nativeQuery = true)
+    List<M_SIR_Detail_Entity> getdatabydateList(Date reportdate, int offset, int limit);
+
+    
+    @Query(value = "select count(*) from BRRS_M_SIR_DETAILTABLE where REPORT_DATE = ?1", nativeQuery = true)
+    int getdatacount(Date reportdate);
 	
-	@Query(value = "select count(*) from BRRS_M_SIR_DETAILTABLE where REPORT_DATE=?1", nativeQuery = true)
-	int getdatacount(Date reportdate);
+	
 }

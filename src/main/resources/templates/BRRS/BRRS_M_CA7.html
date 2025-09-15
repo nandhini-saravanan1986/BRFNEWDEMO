@@ -338,7 +338,7 @@ $(window).on('beforeunload', function() {
     
     var Callurl;
     	$('#loader').modal('show');
-        Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype})}]]*/ 
+        Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype},type=${type},version=${version})}]]*/ 
         location.href = Callurl;
         	console.log(Callurl);
    /*  $.ajax({
@@ -365,8 +365,11 @@ $(window).on('beforeunload', function() {
 	
 	function showsummary() {
 		$('#loader').modal('show');
-		var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type}, asondate=${asondate})}]]*/;								
-		location.href = Callurl;
+			var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
+									loader.show();
+			var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type},version=${version}, asondate=${asondate})}]]*/
+										location.href = Callurl;
+
 
 	}
     </script>
@@ -409,6 +412,8 @@ function downloadfile(button) {
 	var secid = button.getAttribute('data-secid');
 	var dtltype = button.getAttribute('data-dtltype');
 	var filename = button.getAttribute('data-filename');
+	var type = button.getAttribute('data-type');
+		var version = button.getAttribute('data-version');
 
 	$('#loader').modal('show');
 
@@ -420,7 +425,9 @@ function downloadfile(button) {
 			'&currency=' + currency +
 			'&subreportid=' + subreportid +
 			'&secid=' + secid +
-			'&filename=' + filename,
+			'&filename=' + filename			+
+								'&type=' + type +
+								'&version=' + version,
 		type: 'GET',
 		xhrFields: {
 			responseType: 'blob'
@@ -877,7 +884,7 @@ function showdetailsbyRowAndColumn(a) {
 															<td th:text="${report.cust_id}"></td>
 															<td th:text="${report.acct_number}"></td>
 															<td th:text="${report.acct_name}"></td>
-															<td th:text="${report.acct_balance_in_pula}"></td>
+															<td th:text="${#numbers.formatDecimal(report.acct_balance_in_pula, 1, 2)}" style="text-align: right;"></td>
 															<td th:text="${report.row_id}"></td>
 															<td th:text="${report.column_id}"></td>
 															<td th:text="${#dates.format(report.report_date, 'dd-MM-yyyy')}"></td>
@@ -909,22 +916,22 @@ function showdetailsbyRowAndColumn(a) {
 																    <span>Page [[${currentPage / 100 + 1}]] of [[${totalPages}]]</span>
 																
 																    
-																    <a th:if="${currentPage < (totalPages - 1) * 100}"
-																    	
-																    th:href="@{'/Reports/' + ${reportid} + '/Details'(
-																    asondate=${asondate},
-																    fromdate=${fromdate},
-																    todate=${todate},
-																    currency=${currency},
-																    dtltype=${dtltype},
-																    type=${type},
-																    version=${version},
-																    page=${currentPage + 100},
-																    size=100
-																)}">	
-																    Next
-																    </a>
-																</div> 
+																	<a th:if="${currentPage < (totalPages - 1) * 100}"
+																																																    	
+																																																    th:href="@{'/Reports/' + ${reportid} + '/Details'(
+																																																    asondate=${asondate},
+																																																    fromdate=${fromdate},
+																																																    todate=${todate},
+																																																    currency=${currency},
+																																																    dtltype=${dtltype},
+																																																    type=${type},
+																																																    version=${version},
+																																																    page=${currentPage + 100},
+																																																    size=100
+																																																)}">	
+																																																    Next
+																																																    </a>
+																																																</div>
 											</div>
 
 
@@ -962,6 +969,27 @@ function showdetailsbyRowAndColumn(a) {
 
 
 
+	<!-- Custom Alert/Result Modal (Matches your existing style) -->
+	<div class="modal fade" id="resultModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<!-- Your custom styled header -->
+				<div class="menu-title-header">
+					<div class="modal-title" id="resultModalLabel"
+						style="text-align: center; color: white;">
+						<!-- Title will be set by JavaScript -->
+					</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; font-size: 1.1rem;">
+					<p id="resultModalBody"></p>
+					<!-- Your custom styled button -->
+					<button type="button" class="custom-tab-btn" onclick="closemodel()"
+						data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Custom Cellresult Modal -->
 			<div class="modal fade" id="cellresultModal">
 			  <div class="modal-dialog modal-dialog-centered">

@@ -7,17 +7,26 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface M_CA7_Detail_Repo extends JpaRepository<M_CA7_Detail_Entity, String> {
-
-	@Query(value = "select * from BRRS_M_CA7_DETAILTABLE  ", nativeQuery = true)
+@Query(value = "select * from BRRS_M_CA7_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2 AND REPORT_DATE=?3", nativeQuery = true)
+	List<M_CA7_Detail_Entity> GetDataByRowIdAndColumnId(String rowId,String ColumnId,Date reportdate);
+	
+	
+	@Query(value = "select * from BRRS_M_CA7_DETAILTABLE where REPORT_DATE =?1  ", nativeQuery = true)
 	List<M_CA7_Detail_Entity> getdatabydateList(Date reportdate);
 	
-	@Query(value = "select * from BRRS_M_CA7_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2", nativeQuery = true)
-	List<M_CA7_Detail_Entity> GetDataByRowIdAndColumnId(String rowId,String ColumnId);
+	// ✅ Pagination fixed → use OFFSET and LIMIT correctly
+    @Query(value = "select * from BRRS_M_CA7_DETAILTABLE where REPORT_DATE = ?1 offset ?2 rows fetch next ?3 rows only", nativeQuery = true)
+    List<M_CA7_Detail_Entity> getdatabydateList(Date reportdate, int offset, int limit);
 
-	@Query(value = "select * from BRRS_M_CA7_DETAILTABLE where REPORT_DATE=?1 offset ?2 rows fetch next ?3 rows only", nativeQuery = true)
-	List<M_CA7_Detail_Entity> getdatabydateList(Date reportdate,int startpage,int endpage);
+    // Count rows by date
+    @Query(value = "select count(*) from BRRS_M_CA7_DETAILTABLE where REPORT_DATE = ?1", nativeQuery = true)
+    int getdatacount(Date reportdate);
+
+   
 	
-	@Query(value = "select count(*) from BRRS_M_CA7_DETAILTABLE where REPORT_DATE=?1", nativeQuery = true)
-	int getdatacount(Date reportdate);
+	
+	
+	
+	
 
 }
