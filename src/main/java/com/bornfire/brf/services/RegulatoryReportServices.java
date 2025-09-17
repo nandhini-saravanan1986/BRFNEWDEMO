@@ -85,9 +85,18 @@ public class RegulatoryReportServices {
 	BRRS_M_IS_ReportService BRRS_M_IS_Reportservice;
 	@Autowired
 	M_GALOR_ReportService M_GALOR_ReportService;
+
 	@Autowired
 	M_LA5_ReportService M_LA5_ReportService;
 	
+
+	
+	@Autowired
+	BRRS_M_AIDP_ReportService M_AIDP_ReportService;
+
+
+
+
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
 
 	public ModelAndView getReportView(String reportId, String reportDate, String fromdate, String todate,
@@ -198,11 +207,16 @@ public class RegulatoryReportServices {
 			repsummary = M_GALOR_ReportService.getM_GALORView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
 
+
 		case "M_LA5":
 			repsummary = M_LA5_ReportService.getBRRS_M_LA5View(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
 		
 		
+		case "M_AIDP":
+			repsummary = M_AIDP_ReportService.getM_AIDPView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
+			break;
+				
 
 
 		}
