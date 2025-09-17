@@ -85,8 +85,9 @@ public class RegulatoryReportServices {
 	BRRS_M_IS_ReportService BRRS_M_IS_Reportservice;
 	@Autowired
 	M_GALOR_ReportService M_GALOR_ReportService;
-
-
+	@Autowired
+	M_LA5_ReportService M_LA5_ReportService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
 
 	public ModelAndView getReportView(String reportId, String reportDate, String fromdate, String todate,
@@ -196,7 +197,12 @@ public class RegulatoryReportServices {
 		case "M_GALOR":
 			repsummary = M_GALOR_ReportService.getM_GALORView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
-				
+
+		case "M_LA5":
+			repsummary = M_LA5_ReportService.getBRRS_M_LA5View(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
+			break;
+		
+		
 
 
 		}
@@ -314,7 +320,10 @@ public class RegulatoryReportServices {
 			repdetail = M_GALOR_ReportService.getM_GALORcurrentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type,version);
 			break;
-
+		case "M_LA5":
+			repdetail = M_LA5_ReportService.getBRRS_M_LA5currentDtl(reportId, fromdate, todate, currency, dtltype,
+					pageable, Filter,type,version);
+			break;
 		}
 
 		return repdetail;
@@ -503,6 +512,15 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
+		case "M_LA5":
+			try {
+				repfile = M_LA5_ReportService.getBRRS_M_LA5Excel(filename, reportId, fromdate, todate, currency,
+						dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
 		}
 
@@ -581,6 +599,11 @@ public class RegulatoryReportServices {
 					type, version);
 
 		}
+		else if ("M_LA5Details".equals(filename)) {
+			return M_LA5_ReportService.BRRS_M_LA5DetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
+		}
 
 		else {
 			System.out.println("Default");
@@ -646,6 +669,15 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "M_LA5":
+			try {
+				archivalData = M_LA5_ReportService.getM_LA5Archival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
 		}
 		return archivalData;
@@ -704,7 +736,12 @@ public class RegulatoryReportServices {
 			fileData = M_GALOR_ReportService.BRRS_M_GALORDetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
+		}else if ("M_LA5Details".equals(filename)) {
+			fileData = M_LA5_ReportService.BRRS_M_LA5DetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+
 		}
+
 
 
 		if (fileData == null) {
