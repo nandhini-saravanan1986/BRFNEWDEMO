@@ -1,0 +1,1057 @@
+package com.bornfire.xbrl.entities.BRSS;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+@Entity
+@Table(name="T2_RL_RESTRUCTURED_LOAN_SECTOR_WISE")
+public class T2_RLORReport {
+	private String	A_PRODUCT;
+	private BigDecimal	A_OUTSTANDING_CREDIT;
+	private BigDecimal	A_RST_LOAN_PERF;
+	private BigDecimal	A_RST_LOAN_NONPERF;
+	private BigDecimal	A_SPECIFIC_PROVISIONS;
+	private String	B_PRODUCT;
+	private BigDecimal	B_OUTSTANDING_CREDIT;
+	private BigDecimal	B_RST_LOAN_PERF;
+	private BigDecimal	B_RST_LOAN_NONPERF;
+	private BigDecimal	B_SPECIFIC_PROVISIONS;
+	private String	C_PRODUCT;
+	private BigDecimal	C_OUTSTANDING_CREDIT;
+	private BigDecimal	C_RST_LOAN_PERF;
+	private BigDecimal	C_RST_LOAN_NONPERF;
+	private BigDecimal	C_SPECIFIC_PROVISIONS;
+	private String	F_PRODUCT;
+	private BigDecimal	F_OUTSTANDING_CREDIT;
+	private BigDecimal	F_RST_LOAN_PERF;
+	private BigDecimal	F_RST_LOAN_NONPERF;
+	private BigDecimal	F_SPECIFIC_PROVISIONS;
+	private String	G_PRODUCT;
+	private BigDecimal	G_OUTSTANDING_CREDIT;
+	private BigDecimal	G_RST_LOAN_PERF;
+	private BigDecimal	G_RST_LOAN_NONPERF;
+	private BigDecimal	G_SPECIFIC_PROVISIONS;
+	private String	H_PRODUCT;
+	private BigDecimal	H_OUTSTANDING_CREDIT;
+	private BigDecimal	H_RST_LOAN_PERF;
+	private BigDecimal	H_RST_LOAN_NONPERF;
+	private BigDecimal	H_SPECIFIC_PROVISIONS;
+	private String	I_PRODUCT;
+	private BigDecimal	I_OUTSTANDING_CREDIT;
+	private BigDecimal	I_RST_LOAN_PERF;
+	private BigDecimal	I_RST_LOAN_NONPERF;
+	private BigDecimal	I_SPECIFIC_PROVISIONS;
+	private String	J_PRODUCT;
+	private BigDecimal	J_OUTSTANDING_CREDIT;
+	private BigDecimal	J_RST_LOAN_PERF;
+	private BigDecimal	J_RST_LOAN_NONPERF;
+	private BigDecimal	J_SPECIFIC_PROVISIONS;
+	private String	L_PRODUCT;
+	private BigDecimal	L_OUTSTANDING_CREDIT;
+	private BigDecimal	L_RST_LOAN_PERF;
+	private BigDecimal	L_RST_LOAN_NONPERF;
+	private BigDecimal	L_SPECIFIC_PROVISIONS;
+	private String	SERVICE_PRODUCT;
+	private BigDecimal	SERVICE_OUTSTANDING_CREDIT;
+	private BigDecimal	SERVICE_RST_LOAN_PERF;
+	private BigDecimal	SERVICE_RST_LOAN_NONPERF;
+	private BigDecimal	SERVICE_SPECIFIC_PROVISIONS;
+	private String	GBCS_PRODUCT;
+	private BigDecimal	GBCS_OUTSTANDING_CREDIT;
+	private BigDecimal	GBCS_RST_LOAN_PERF;
+	private BigDecimal	GBCS_RST_LOAN_NONPERF;
+	private BigDecimal	GBCS_SPECIFIC_PROVISIONS;
+	private String	HH_PRODUCT;
+	private BigDecimal	HH_OUTSTANDING_CREDIT;
+	private BigDecimal	HH_RST_LOAN_PERF;
+	private BigDecimal	HH_RST_LOAN_NONPERF;
+	private BigDecimal	HH_SPECIFIC_PROVISIONS;
+	private String	HH1_PRODUCT;
+	private BigDecimal	HH2_OUTSTANDING_CREDIT;
+	private BigDecimal	HH3_RST_LOAN_PERF;
+	private BigDecimal	HH4_RST_LOAN_NONPERF;
+	private BigDecimal	HH5_SPECIFIC_PROVISIONS;
+	private String	OTHER_PRODUCT;
+	private BigDecimal	OTHER_OUTSTANDING_CREDIT;
+	private BigDecimal	OTHER_RST_LOAN_PERF;
+	private BigDecimal	OTHER_RST_LOAN_NONPERF;
+	private BigDecimal	OTHER_SPECIFIC_PROVISIONS;
+	private String	OTH_NON_PRODUCT;
+	private BigDecimal	OTH_NON_OUTSTANDING_CREDIT;
+	private BigDecimal	OTH_NON_RST_LOAN_PERF;
+	private BigDecimal	OTH_NON_RST_LOAN_NONPERF;
+	private BigDecimal	OTH_NON_SPECIFIC_PROVISIONS;
+	private String	TOTAL_PRODUCT;
+	private BigDecimal	TOTAL_OUTSTANDING_CREDIT;
+	private BigDecimal	TOTAL_RST_LOAN_PERF;
+	private BigDecimal	TOTAL_RST_LOAN_NONPERF;
+	private BigDecimal	TOTAL_SPECIFIC_PROVISIONS;
+	private String	GRAND_TOTAL_PRODUCT;
+	private BigDecimal	GRAND_TOTAL_OUTSTANDING_CREDIT;
+	private BigDecimal	GRAND_TOTAL_RST_LOAN_PERF;
+	private BigDecimal	GRAND_TOTAL_RST_LOAN_NONPERF;
+	private BigDecimal	GRAND_TOTAL_SPECIFIC_PROVISIONS;
+	private String	REPORT_CODE;
+	private String	REPORT_NAME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Id
+	private Date	REPORT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REPORT_DUE_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_SUBMIT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_FROM;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_TO;
+	private String	REP_FREQ;
+	private String	NIL_REPORT_FLG;
+	private String	ARCH_FLG;
+	private String	ENTITY_FLG;
+	private String	DEL_FLG;
+	private String	MODIFY_FLG;
+	private String	ENTRY_USER;
+	private String	MODIFY_USER;
+	private String	VERIFY_USER;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	ENTRY_TIME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	MODIFY_TIME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	VERIFY_TIME;
+	private String	QTR_FLG;
+	private BigDecimal TOTAL_A_LOAN;
+	private BigDecimal TOTAL_B_LOAN;
+	private BigDecimal TOTAL_C_LOAN;
+	private BigDecimal TOTAL_F_LOAN;
+	private BigDecimal TOTAL_G_LOAN;
+	private BigDecimal TOTAL_H_LOAN;
+	private BigDecimal TOTAL_I_LOAN;
+	private BigDecimal TOTAL_J_LOAN;
+	private BigDecimal TOTAL_L_LOAN;
+	private BigDecimal TOTAL_SER_LOAN;
+	private BigDecimal TOTAL_TOTAL_LOAN;
+	private BigDecimal TOTAL_GBC_LOAN;
+	private BigDecimal TOTAL_HOUSE_LOAN;
+	private BigDecimal TOTAL_HOUSEHOLD_LOAN;
+	private BigDecimal TOTAL_OTHER_LOAN;
+	private BigDecimal TOTAL_OTHER_NON_LOAN;
+	private BigDecimal TOTAL_GRAND_LOAN;
+
+	public String getA_PRODUCT() {
+		return A_PRODUCT;
+	}
+	public void setA_PRODUCT(String a_PRODUCT) {
+		A_PRODUCT = a_PRODUCT;
+	}
+	public BigDecimal getA_OUTSTANDING_CREDIT() {
+		return A_OUTSTANDING_CREDIT;
+	}
+	public void setA_OUTSTANDING_CREDIT(BigDecimal a_OUTSTANDING_CREDIT) {
+		A_OUTSTANDING_CREDIT = a_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getA_RST_LOAN_PERF() {
+		return A_RST_LOAN_PERF;
+	}
+	public void setA_RST_LOAN_PERF(BigDecimal a_RST_LOAN_PERF) {
+		A_RST_LOAN_PERF = a_RST_LOAN_PERF;
+	}
+	public BigDecimal getA_RST_LOAN_NONPERF() {
+		return A_RST_LOAN_NONPERF;
+	}
+	public void setA_RST_LOAN_NONPERF(BigDecimal a_RST_LOAN_NONPERF) {
+		A_RST_LOAN_NONPERF = a_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getA_SPECIFIC_PROVISIONS() {
+		return A_SPECIFIC_PROVISIONS;
+	}
+	public void setA_SPECIFIC_PROVISIONS(BigDecimal a_SPECIFIC_PROVISIONS) {
+		A_SPECIFIC_PROVISIONS = a_SPECIFIC_PROVISIONS;
+	}
+	public String getB_PRODUCT() {
+		return B_PRODUCT;
+	}
+	public void setB_PRODUCT(String b_PRODUCT) {
+		B_PRODUCT = b_PRODUCT;
+	}
+	public BigDecimal getB_OUTSTANDING_CREDIT() {
+		return B_OUTSTANDING_CREDIT;
+	}
+	public void setB_OUTSTANDING_CREDIT(BigDecimal b_OUTSTANDING_CREDIT) {
+		B_OUTSTANDING_CREDIT = b_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getB_RST_LOAN_PERF() {
+		return B_RST_LOAN_PERF;
+	}
+	public void setB_RST_LOAN_PERF(BigDecimal b_RST_LOAN_PERF) {
+		B_RST_LOAN_PERF = b_RST_LOAN_PERF;
+	}
+	public BigDecimal getB_RST_LOAN_NONPERF() {
+		return B_RST_LOAN_NONPERF;
+	}
+	public void setB_RST_LOAN_NONPERF(BigDecimal b_RST_LOAN_NONPERF) {
+		B_RST_LOAN_NONPERF = b_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getB_SPECIFIC_PROVISIONS() {
+		return B_SPECIFIC_PROVISIONS;
+	}
+	public void setB_SPECIFIC_PROVISIONS(BigDecimal b_SPECIFIC_PROVISIONS) {
+		B_SPECIFIC_PROVISIONS = b_SPECIFIC_PROVISIONS;
+	}
+	public String getC_PRODUCT() {
+		return C_PRODUCT;
+	}
+	public void setC_PRODUCT(String c_PRODUCT) {
+		C_PRODUCT = c_PRODUCT;
+	}
+	public BigDecimal getC_OUTSTANDING_CREDIT() {
+		return C_OUTSTANDING_CREDIT;
+	}
+	public void setC_OUTSTANDING_CREDIT(BigDecimal c_OUTSTANDING_CREDIT) {
+		C_OUTSTANDING_CREDIT = c_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getC_RST_LOAN_PERF() {
+		return C_RST_LOAN_PERF;
+	}
+	public void setC_RST_LOAN_PERF(BigDecimal c_RST_LOAN_PERF) {
+		C_RST_LOAN_PERF = c_RST_LOAN_PERF;
+	}
+	public BigDecimal getC_RST_LOAN_NONPERF() {
+		return C_RST_LOAN_NONPERF;
+	}
+	public void setC_RST_LOAN_NONPERF(BigDecimal c_RST_LOAN_NONPERF) {
+		C_RST_LOAN_NONPERF = c_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getC_SPECIFIC_PROVISIONS() {
+		return C_SPECIFIC_PROVISIONS;
+	}
+	public void setC_SPECIFIC_PROVISIONS(BigDecimal c_SPECIFIC_PROVISIONS) {
+		C_SPECIFIC_PROVISIONS = c_SPECIFIC_PROVISIONS;
+	}
+	public String getF_PRODUCT() {
+		return F_PRODUCT;
+	}
+	public void setF_PRODUCT(String f_PRODUCT) {
+		F_PRODUCT = f_PRODUCT;
+	}
+	public BigDecimal getF_OUTSTANDING_CREDIT() {
+		return F_OUTSTANDING_CREDIT;
+	}
+	public void setF_OUTSTANDING_CREDIT(BigDecimal f_OUTSTANDING_CREDIT) {
+		F_OUTSTANDING_CREDIT = f_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getF_RST_LOAN_PERF() {
+		return F_RST_LOAN_PERF;
+	}
+	public void setF_RST_LOAN_PERF(BigDecimal f_RST_LOAN_PERF) {
+		F_RST_LOAN_PERF = f_RST_LOAN_PERF;
+	}
+	public BigDecimal getF_RST_LOAN_NONPERF() {
+		return F_RST_LOAN_NONPERF;
+	}
+	public void setF_RST_LOAN_NONPERF(BigDecimal f_RST_LOAN_NONPERF) {
+		F_RST_LOAN_NONPERF = f_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getF_SPECIFIC_PROVISIONS() {
+		return F_SPECIFIC_PROVISIONS;
+	}
+	public void setF_SPECIFIC_PROVISIONS(BigDecimal f_SPECIFIC_PROVISIONS) {
+		F_SPECIFIC_PROVISIONS = f_SPECIFIC_PROVISIONS;
+	}
+	public String getG_PRODUCT() {
+		return G_PRODUCT;
+	}
+	public void setG_PRODUCT(String g_PRODUCT) {
+		G_PRODUCT = g_PRODUCT;
+	}
+	public BigDecimal getG_OUTSTANDING_CREDIT() {
+		return G_OUTSTANDING_CREDIT;
+	}
+	public void setG_OUTSTANDING_CREDIT(BigDecimal g_OUTSTANDING_CREDIT) {
+		G_OUTSTANDING_CREDIT = g_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getG_RST_LOAN_PERF() {
+		return G_RST_LOAN_PERF;
+	}
+	public void setG_RST_LOAN_PERF(BigDecimal g_RST_LOAN_PERF) {
+		G_RST_LOAN_PERF = g_RST_LOAN_PERF;
+	}
+	public BigDecimal getG_RST_LOAN_NONPERF() {
+		return G_RST_LOAN_NONPERF;
+	}
+	public void setG_RST_LOAN_NONPERF(BigDecimal g_RST_LOAN_NONPERF) {
+		G_RST_LOAN_NONPERF = g_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getG_SPECIFIC_PROVISIONS() {
+		return G_SPECIFIC_PROVISIONS;
+	}
+	public void setG_SPECIFIC_PROVISIONS(BigDecimal g_SPECIFIC_PROVISIONS) {
+		G_SPECIFIC_PROVISIONS = g_SPECIFIC_PROVISIONS;
+	}
+	public String getH_PRODUCT() {
+		return H_PRODUCT;
+	}
+	public void setH_PRODUCT(String h_PRODUCT) {
+		H_PRODUCT = h_PRODUCT;
+	}
+	public BigDecimal getH_OUTSTANDING_CREDIT() {
+		return H_OUTSTANDING_CREDIT;
+	}
+	public void setH_OUTSTANDING_CREDIT(BigDecimal h_OUTSTANDING_CREDIT) {
+		H_OUTSTANDING_CREDIT = h_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getH_RST_LOAN_PERF() {
+		return H_RST_LOAN_PERF;
+	}
+	public void setH_RST_LOAN_PERF(BigDecimal h_RST_LOAN_PERF) {
+		H_RST_LOAN_PERF = h_RST_LOAN_PERF;
+	}
+	public BigDecimal getH_RST_LOAN_NONPERF() {
+		return H_RST_LOAN_NONPERF;
+	}
+	public void setH_RST_LOAN_NONPERF(BigDecimal h_RST_LOAN_NONPERF) {
+		H_RST_LOAN_NONPERF = h_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getH_SPECIFIC_PROVISIONS() {
+		return H_SPECIFIC_PROVISIONS;
+	}
+	public void setH_SPECIFIC_PROVISIONS(BigDecimal h_SPECIFIC_PROVISIONS) {
+		H_SPECIFIC_PROVISIONS = h_SPECIFIC_PROVISIONS;
+	}
+	public String getI_PRODUCT() {
+		return I_PRODUCT;
+	}
+	public void setI_PRODUCT(String i_PRODUCT) {
+		I_PRODUCT = i_PRODUCT;
+	}
+	public BigDecimal getI_OUTSTANDING_CREDIT() {
+		return I_OUTSTANDING_CREDIT;
+	}
+	public void setI_OUTSTANDING_CREDIT(BigDecimal i_OUTSTANDING_CREDIT) {
+		I_OUTSTANDING_CREDIT = i_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getI_RST_LOAN_PERF() {
+		return I_RST_LOAN_PERF;
+	}
+	public void setI_RST_LOAN_PERF(BigDecimal i_RST_LOAN_PERF) {
+		I_RST_LOAN_PERF = i_RST_LOAN_PERF;
+	}
+	public BigDecimal getI_RST_LOAN_NONPERF() {
+		return I_RST_LOAN_NONPERF;
+	}
+	public void setI_RST_LOAN_NONPERF(BigDecimal i_RST_LOAN_NONPERF) {
+		I_RST_LOAN_NONPERF = i_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getI_SPECIFIC_PROVISIONS() {
+		return I_SPECIFIC_PROVISIONS;
+	}
+	public void setI_SPECIFIC_PROVISIONS(BigDecimal i_SPECIFIC_PROVISIONS) {
+		I_SPECIFIC_PROVISIONS = i_SPECIFIC_PROVISIONS;
+	}
+	public String getJ_PRODUCT() {
+		return J_PRODUCT;
+	}
+	public void setJ_PRODUCT(String j_PRODUCT) {
+		J_PRODUCT = j_PRODUCT;
+	}
+	public BigDecimal getJ_OUTSTANDING_CREDIT() {
+		return J_OUTSTANDING_CREDIT;
+	}
+	public void setJ_OUTSTANDING_CREDIT(BigDecimal j_OUTSTANDING_CREDIT) {
+		J_OUTSTANDING_CREDIT = j_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getJ_RST_LOAN_PERF() {
+		return J_RST_LOAN_PERF;
+	}
+	public void setJ_RST_LOAN_PERF(BigDecimal j_RST_LOAN_PERF) {
+		J_RST_LOAN_PERF = j_RST_LOAN_PERF;
+	}
+	public BigDecimal getJ_RST_LOAN_NONPERF() {
+		return J_RST_LOAN_NONPERF;
+	}
+	public void setJ_RST_LOAN_NONPERF(BigDecimal j_RST_LOAN_NONPERF) {
+		J_RST_LOAN_NONPERF = j_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getJ_SPECIFIC_PROVISIONS() {
+		return J_SPECIFIC_PROVISIONS;
+	}
+	public void setJ_SPECIFIC_PROVISIONS(BigDecimal j_SPECIFIC_PROVISIONS) {
+		J_SPECIFIC_PROVISIONS = j_SPECIFIC_PROVISIONS;
+	}
+	public String getL_PRODUCT() {
+		return L_PRODUCT;
+	}
+	public void setL_PRODUCT(String l_PRODUCT) {
+		L_PRODUCT = l_PRODUCT;
+	}
+	public BigDecimal getL_OUTSTANDING_CREDIT() {
+		return L_OUTSTANDING_CREDIT;
+	}
+	public void setL_OUTSTANDING_CREDIT(BigDecimal l_OUTSTANDING_CREDIT) {
+		L_OUTSTANDING_CREDIT = l_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getL_RST_LOAN_PERF() {
+		return L_RST_LOAN_PERF;
+	}
+	public void setL_RST_LOAN_PERF(BigDecimal l_RST_LOAN_PERF) {
+		L_RST_LOAN_PERF = l_RST_LOAN_PERF;
+	}
+	public BigDecimal getL_RST_LOAN_NONPERF() {
+		return L_RST_LOAN_NONPERF;
+	}
+	public void setL_RST_LOAN_NONPERF(BigDecimal l_RST_LOAN_NONPERF) {
+		L_RST_LOAN_NONPERF = l_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getL_SPECIFIC_PROVISIONS() {
+		return L_SPECIFIC_PROVISIONS;
+	}
+	public void setL_SPECIFIC_PROVISIONS(BigDecimal l_SPECIFIC_PROVISIONS) {
+		L_SPECIFIC_PROVISIONS = l_SPECIFIC_PROVISIONS;
+	}
+	public String getSERVICE_PRODUCT() {
+		return SERVICE_PRODUCT;
+	}
+	public void setSERVICE_PRODUCT(String sERVICE_PRODUCT) {
+		SERVICE_PRODUCT = sERVICE_PRODUCT;
+	}
+	public BigDecimal getSERVICE_OUTSTANDING_CREDIT() {
+		return SERVICE_OUTSTANDING_CREDIT;
+	}
+	public void setSERVICE_OUTSTANDING_CREDIT(BigDecimal sERVICE_OUTSTANDING_CREDIT) {
+		SERVICE_OUTSTANDING_CREDIT = sERVICE_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getSERVICE_RST_LOAN_PERF() {
+		return SERVICE_RST_LOAN_PERF;
+	}
+	public void setSERVICE_RST_LOAN_PERF(BigDecimal sERVICE_RST_LOAN_PERF) {
+		SERVICE_RST_LOAN_PERF = sERVICE_RST_LOAN_PERF;
+	}
+	public BigDecimal getSERVICE_RST_LOAN_NONPERF() {
+		return SERVICE_RST_LOAN_NONPERF;
+	}
+	public void setSERVICE_RST_LOAN_NONPERF(BigDecimal sERVICE_RST_LOAN_NONPERF) {
+		SERVICE_RST_LOAN_NONPERF = sERVICE_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getSERVICE_SPECIFIC_PROVISIONS() {
+		return SERVICE_SPECIFIC_PROVISIONS;
+	}
+	public void setSERVICE_SPECIFIC_PROVISIONS(BigDecimal sERVICE_SPECIFIC_PROVISIONS) {
+		SERVICE_SPECIFIC_PROVISIONS = sERVICE_SPECIFIC_PROVISIONS;
+	}
+	public String getGBCS_PRODUCT() {
+		return GBCS_PRODUCT;
+	}
+	public void setGBCS_PRODUCT(String gBCS_PRODUCT) {
+		GBCS_PRODUCT = gBCS_PRODUCT;
+	}
+	public BigDecimal getGBCS_OUTSTANDING_CREDIT() {
+		return GBCS_OUTSTANDING_CREDIT;
+	}
+	public void setGBCS_OUTSTANDING_CREDIT(BigDecimal gBCS_OUTSTANDING_CREDIT) {
+		GBCS_OUTSTANDING_CREDIT = gBCS_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getGBCS_RST_LOAN_PERF() {
+		return GBCS_RST_LOAN_PERF;
+	}
+	public void setGBCS_RST_LOAN_PERF(BigDecimal gBCS_RST_LOAN_PERF) {
+		GBCS_RST_LOAN_PERF = gBCS_RST_LOAN_PERF;
+	}
+	public BigDecimal getGBCS_RST_LOAN_NONPERF() {
+		return GBCS_RST_LOAN_NONPERF;
+	}
+	public void setGBCS_RST_LOAN_NONPERF(BigDecimal gBCS_RST_LOAN_NONPERF) {
+		GBCS_RST_LOAN_NONPERF = gBCS_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getGBCS_SPECIFIC_PROVISIONS() {
+		return GBCS_SPECIFIC_PROVISIONS;
+	}
+	public void setGBCS_SPECIFIC_PROVISIONS(BigDecimal gBCS_SPECIFIC_PROVISIONS) {
+		GBCS_SPECIFIC_PROVISIONS = gBCS_SPECIFIC_PROVISIONS;
+	}
+	public String getHH_PRODUCT() {
+		return HH_PRODUCT;
+	}
+	public void setHH_PRODUCT(String hH_PRODUCT) {
+		HH_PRODUCT = hH_PRODUCT;
+	}
+	public BigDecimal getHH_OUTSTANDING_CREDIT() {
+		return HH_OUTSTANDING_CREDIT;
+	}
+	public void setHH_OUTSTANDING_CREDIT(BigDecimal hH_OUTSTANDING_CREDIT) {
+		HH_OUTSTANDING_CREDIT = hH_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getHH_RST_LOAN_PERF() {
+		return HH_RST_LOAN_PERF;
+	}
+	public void setHH_RST_LOAN_PERF(BigDecimal hH_RST_LOAN_PERF) {
+		HH_RST_LOAN_PERF = hH_RST_LOAN_PERF;
+	}
+	public BigDecimal getHH_RST_LOAN_NONPERF() {
+		return HH_RST_LOAN_NONPERF;
+	}
+	public void setHH_RST_LOAN_NONPERF(BigDecimal hH_RST_LOAN_NONPERF) {
+		HH_RST_LOAN_NONPERF = hH_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getHH_SPECIFIC_PROVISIONS() {
+		return HH_SPECIFIC_PROVISIONS;
+	}
+	public void setHH_SPECIFIC_PROVISIONS(BigDecimal hH_SPECIFIC_PROVISIONS) {
+		HH_SPECIFIC_PROVISIONS = hH_SPECIFIC_PROVISIONS;
+	}
+	public String getHH1_PRODUCT() {
+		return HH1_PRODUCT;
+	}
+	public void setHH1_PRODUCT(String hH1_PRODUCT) {
+		HH1_PRODUCT = hH1_PRODUCT;
+	}
+	public BigDecimal getHH2_OUTSTANDING_CREDIT() {
+		return HH2_OUTSTANDING_CREDIT;
+	}
+	public void setHH2_OUTSTANDING_CREDIT(BigDecimal hH2_OUTSTANDING_CREDIT) {
+		HH2_OUTSTANDING_CREDIT = hH2_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getHH3_RST_LOAN_PERF() {
+		return HH3_RST_LOAN_PERF;
+	}
+	public void setHH3_RST_LOAN_PERF(BigDecimal hH3_RST_LOAN_PERF) {
+		HH3_RST_LOAN_PERF = hH3_RST_LOAN_PERF;
+	}
+	public BigDecimal getHH4_RST_LOAN_NONPERF() {
+		return HH4_RST_LOAN_NONPERF;
+	}
+	public void setHH4_RST_LOAN_NONPERF(BigDecimal hH4_RST_LOAN_NONPERF) {
+		HH4_RST_LOAN_NONPERF = hH4_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getHH5_SPECIFIC_PROVISIONS() {
+		return HH5_SPECIFIC_PROVISIONS;
+	}
+	public void setHH5_SPECIFIC_PROVISIONS(BigDecimal hH5_SPECIFIC_PROVISIONS) {
+		HH5_SPECIFIC_PROVISIONS = hH5_SPECIFIC_PROVISIONS;
+	}
+	public String getOTHER_PRODUCT() {
+		return OTHER_PRODUCT;
+	}
+	public void setOTHER_PRODUCT(String oTHER_PRODUCT) {
+		OTHER_PRODUCT = oTHER_PRODUCT;
+	}
+	public BigDecimal getOTHER_OUTSTANDING_CREDIT() {
+		return OTHER_OUTSTANDING_CREDIT;
+	}
+	public void setOTHER_OUTSTANDING_CREDIT(BigDecimal oTHER_OUTSTANDING_CREDIT) {
+		OTHER_OUTSTANDING_CREDIT = oTHER_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getOTHER_RST_LOAN_PERF() {
+		return OTHER_RST_LOAN_PERF;
+	}
+	public void setOTHER_RST_LOAN_PERF(BigDecimal oTHER_RST_LOAN_PERF) {
+		OTHER_RST_LOAN_PERF = oTHER_RST_LOAN_PERF;
+	}
+	public BigDecimal getOTHER_RST_LOAN_NONPERF() {
+		return OTHER_RST_LOAN_NONPERF;
+	}
+	public void setOTHER_RST_LOAN_NONPERF(BigDecimal oTHER_RST_LOAN_NONPERF) {
+		OTHER_RST_LOAN_NONPERF = oTHER_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getOTHER_SPECIFIC_PROVISIONS() {
+		return OTHER_SPECIFIC_PROVISIONS;
+	}
+	public void setOTHER_SPECIFIC_PROVISIONS(BigDecimal oTHER_SPECIFIC_PROVISIONS) {
+		OTHER_SPECIFIC_PROVISIONS = oTHER_SPECIFIC_PROVISIONS;
+	}
+	public String getOTH_NON_PRODUCT() {
+		return OTH_NON_PRODUCT;
+	}
+	public void setOTH_NON_PRODUCT(String oTH_NON_PRODUCT) {
+		OTH_NON_PRODUCT = oTH_NON_PRODUCT;
+	}
+	public BigDecimal getOTH_NON_OUTSTANDING_CREDIT() {
+		return OTH_NON_OUTSTANDING_CREDIT;
+	}
+	public void setOTH_NON_OUTSTANDING_CREDIT(BigDecimal oTH_NON_OUTSTANDING_CREDIT) {
+		OTH_NON_OUTSTANDING_CREDIT = oTH_NON_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getOTH_NON_RST_LOAN_PERF() {
+		return OTH_NON_RST_LOAN_PERF;
+	}
+	public void setOTH_NON_RST_LOAN_PERF(BigDecimal oTH_NON_RST_LOAN_PERF) {
+		OTH_NON_RST_LOAN_PERF = oTH_NON_RST_LOAN_PERF;
+	}
+	public BigDecimal getOTH_NON_RST_LOAN_NONPERF() {
+		return OTH_NON_RST_LOAN_NONPERF;
+	}
+	public void setOTH_NON_RST_LOAN_NONPERF(BigDecimal oTH_NON_RST_LOAN_NONPERF) {
+		OTH_NON_RST_LOAN_NONPERF = oTH_NON_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getOTH_NON_SPECIFIC_PROVISIONS() {
+		return OTH_NON_SPECIFIC_PROVISIONS;
+	}
+	public void setOTH_NON_SPECIFIC_PROVISIONS(BigDecimal oTH_NON_SPECIFIC_PROVISIONS) {
+		OTH_NON_SPECIFIC_PROVISIONS = oTH_NON_SPECIFIC_PROVISIONS;
+	}
+	public String getTOTAL_PRODUCT() {
+		return TOTAL_PRODUCT;
+	}
+	public void setTOTAL_PRODUCT(String tOTAL_PRODUCT) {
+		TOTAL_PRODUCT = tOTAL_PRODUCT;
+	}
+	public BigDecimal getTOTAL_OUTSTANDING_CREDIT() {
+		return TOTAL_OUTSTANDING_CREDIT;
+	}
+	public void setTOTAL_OUTSTANDING_CREDIT(BigDecimal tOTAL_OUTSTANDING_CREDIT) {
+		TOTAL_OUTSTANDING_CREDIT = tOTAL_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getTOTAL_RST_LOAN_PERF() {
+		return TOTAL_RST_LOAN_PERF;
+	}
+	public void setTOTAL_RST_LOAN_PERF(BigDecimal tOTAL_RST_LOAN_PERF) {
+		TOTAL_RST_LOAN_PERF = tOTAL_RST_LOAN_PERF;
+	}
+	public BigDecimal getTOTAL_RST_LOAN_NONPERF() {
+		return TOTAL_RST_LOAN_NONPERF;
+	}
+	public void setTOTAL_RST_LOAN_NONPERF(BigDecimal tOTAL_RST_LOAN_NONPERF) {
+		TOTAL_RST_LOAN_NONPERF = tOTAL_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getTOTAL_SPECIFIC_PROVISIONS() {
+		return TOTAL_SPECIFIC_PROVISIONS;
+	}
+	public void setTOTAL_SPECIFIC_PROVISIONS(BigDecimal tOTAL_SPECIFIC_PROVISIONS) {
+		TOTAL_SPECIFIC_PROVISIONS = tOTAL_SPECIFIC_PROVISIONS;
+	}
+	public String getGRAND_TOTAL_PRODUCT() {
+		return GRAND_TOTAL_PRODUCT;
+	}
+	public void setGRAND_TOTAL_PRODUCT(String gRAND_TOTAL_PRODUCT) {
+		GRAND_TOTAL_PRODUCT = gRAND_TOTAL_PRODUCT;
+	}
+	public BigDecimal getGRAND_TOTAL_OUTSTANDING_CREDIT() {
+		return GRAND_TOTAL_OUTSTANDING_CREDIT;
+	}
+	public void setGRAND_TOTAL_OUTSTANDING_CREDIT(BigDecimal gRAND_TOTAL_OUTSTANDING_CREDIT) {
+		GRAND_TOTAL_OUTSTANDING_CREDIT = gRAND_TOTAL_OUTSTANDING_CREDIT;
+	}
+	public BigDecimal getGRAND_TOTAL_RST_LOAN_PERF() {
+		return GRAND_TOTAL_RST_LOAN_PERF;
+	}
+	public void setGRAND_TOTAL_RST_LOAN_PERF(BigDecimal gRAND_TOTAL_RST_LOAN_PERF) {
+		GRAND_TOTAL_RST_LOAN_PERF = gRAND_TOTAL_RST_LOAN_PERF;
+	}
+	public BigDecimal getGRAND_TOTAL_RST_LOAN_NONPERF() {
+		return GRAND_TOTAL_RST_LOAN_NONPERF;
+	}
+	public void setGRAND_TOTAL_RST_LOAN_NONPERF(BigDecimal gRAND_TOTAL_RST_LOAN_NONPERF) {
+		GRAND_TOTAL_RST_LOAN_NONPERF = gRAND_TOTAL_RST_LOAN_NONPERF;
+	}
+	public BigDecimal getGRAND_TOTAL_SPECIFIC_PROVISIONS() {
+		return GRAND_TOTAL_SPECIFIC_PROVISIONS;
+	}
+	public void setGRAND_TOTAL_SPECIFIC_PROVISIONS(BigDecimal gRAND_TOTAL_SPECIFIC_PROVISIONS) {
+		GRAND_TOTAL_SPECIFIC_PROVISIONS = gRAND_TOTAL_SPECIFIC_PROVISIONS;
+	}
+	public String getREPORT_CODE() {
+		return REPORT_CODE;
+	}
+	public void setREPORT_CODE(String rEPORT_CODE) {
+		REPORT_CODE = rEPORT_CODE;
+	}
+	public String getREPORT_NAME() {
+		return REPORT_NAME;
+	}
+	public void setREPORT_NAME(String rEPORT_NAME) {
+		REPORT_NAME = rEPORT_NAME;
+	}
+	public Date getREPORT_DATE() {
+		return REPORT_DATE;
+	}
+	public void setREPORT_DATE(Date rEPORT_DATE) {
+		REPORT_DATE = rEPORT_DATE;
+	}
+	public Date getREPORT_DUE_DATE() {
+		return REPORT_DUE_DATE;
+	}
+	public void setREPORT_DUE_DATE(Date rEPORT_DUE_DATE) {
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+	}
+	public Date getREP_SUBMIT_DATE() {
+		return REP_SUBMIT_DATE;
+	}
+	public void setREP_SUBMIT_DATE(Date rEP_SUBMIT_DATE) {
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+	}
+	public Date getREP_PERIOD_FROM() {
+		return REP_PERIOD_FROM;
+	}
+	public void setREP_PERIOD_FROM(Date rEP_PERIOD_FROM) {
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+	}
+	public Date getREP_PERIOD_TO() {
+		return REP_PERIOD_TO;
+	}
+	public void setREP_PERIOD_TO(Date rEP_PERIOD_TO) {
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+	}
+	public String getREP_FREQ() {
+		return REP_FREQ;
+	}
+	public void setREP_FREQ(String rEP_FREQ) {
+		REP_FREQ = rEP_FREQ;
+	}
+	public String getNIL_REPORT_FLG() {
+		return NIL_REPORT_FLG;
+	}
+	public void setNIL_REPORT_FLG(String nIL_REPORT_FLG) {
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+	}
+	public String getARCH_FLG() {
+		return ARCH_FLG;
+	}
+	public void setARCH_FLG(String aRCH_FLG) {
+		ARCH_FLG = aRCH_FLG;
+	}
+	public String getENTITY_FLG() {
+		return ENTITY_FLG;
+	}
+	public void setENTITY_FLG(String eNTITY_FLG) {
+		ENTITY_FLG = eNTITY_FLG;
+	}
+	public String getDEL_FLG() {
+		return DEL_FLG;
+	}
+	public void setDEL_FLG(String dEL_FLG) {
+		DEL_FLG = dEL_FLG;
+	}
+	public String getMODIFY_FLG() {
+		return MODIFY_FLG;
+	}
+	public void setMODIFY_FLG(String mODIFY_FLG) {
+		MODIFY_FLG = mODIFY_FLG;
+	}
+	public String getENTRY_USER() {
+		return ENTRY_USER;
+	}
+	public void setENTRY_USER(String eNTRY_USER) {
+		ENTRY_USER = eNTRY_USER;
+	}
+	public String getMODIFY_USER() {
+		return MODIFY_USER;
+	}
+	public void setMODIFY_USER(String mODIFY_USER) {
+		MODIFY_USER = mODIFY_USER;
+	}
+	public String getVERIFY_USER() {
+		return VERIFY_USER;
+	}
+	public void setVERIFY_USER(String vERIFY_USER) {
+		VERIFY_USER = vERIFY_USER;
+	}
+	public Date getENTRY_TIME() {
+		return ENTRY_TIME;
+	}
+	public void setENTRY_TIME(Date eNTRY_TIME) {
+		ENTRY_TIME = eNTRY_TIME;
+	}
+	public Date getMODIFY_TIME() {
+		return MODIFY_TIME;
+	}
+	public void setMODIFY_TIME(Date mODIFY_TIME) {
+		MODIFY_TIME = mODIFY_TIME;
+	}
+	public Date getVERIFY_TIME() {
+		return VERIFY_TIME;
+	}
+	public void setVERIFY_TIME(Date vERIFY_TIME) {
+		VERIFY_TIME = vERIFY_TIME;
+	}
+	public String getQTR_FLG() {
+		return QTR_FLG;
+	}
+	public void setQTR_FLG(String qTR_FLG) {
+		QTR_FLG = qTR_FLG;
+	}
+	
+	public BigDecimal getTOTAL_A_LOAN() {
+		return TOTAL_A_LOAN;
+	}
+	public void setTOTAL_A_LOAN(BigDecimal tOTAL_A_LOAN) {
+		TOTAL_A_LOAN = tOTAL_A_LOAN;
+	}
+	public BigDecimal getTOTAL_B_LOAN() {
+		return TOTAL_B_LOAN;
+	}
+	public void setTOTAL_B_LOAN(BigDecimal tOTAL_B_LOAN) {
+		TOTAL_B_LOAN = tOTAL_B_LOAN;
+	}
+	public BigDecimal getTOTAL_C_LOAN() {
+		return TOTAL_C_LOAN;
+	}
+	public void setTOTAL_C_LOAN(BigDecimal tOTAL_C_LOAN) {
+		TOTAL_C_LOAN = tOTAL_C_LOAN;
+	}
+	public BigDecimal getTOTAL_F_LOAN() {
+		return TOTAL_F_LOAN;
+	}
+	public void setTOTAL_F_LOAN(BigDecimal tOTAL_F_LOAN) {
+		TOTAL_F_LOAN = tOTAL_F_LOAN;
+	}
+	public BigDecimal getTOTAL_G_LOAN() {
+		return TOTAL_G_LOAN;
+	}
+	public void setTOTAL_G_LOAN(BigDecimal tOTAL_G_LOAN) {
+		TOTAL_G_LOAN = tOTAL_G_LOAN;
+	}
+	public BigDecimal getTOTAL_H_LOAN() {
+		return TOTAL_H_LOAN;
+	}
+	public void setTOTAL_H_LOAN(BigDecimal tOTAL_H_LOAN) {
+		TOTAL_H_LOAN = tOTAL_H_LOAN;
+	}
+	public BigDecimal getTOTAL_I_LOAN() {
+		return TOTAL_I_LOAN;
+	}
+	public void setTOTAL_I_LOAN(BigDecimal tOTAL_I_LOAN) {
+		TOTAL_I_LOAN = tOTAL_I_LOAN;
+	}
+	public BigDecimal getTOTAL_J_LOAN() {
+		return TOTAL_J_LOAN;
+	}
+	public void setTOTAL_J_LOAN(BigDecimal tOTAL_J_LOAN) {
+		TOTAL_J_LOAN = tOTAL_J_LOAN;
+	}
+	public BigDecimal getTOTAL_L_LOAN() {
+		return TOTAL_L_LOAN;
+	}
+	public void setTOTAL_L_LOAN(BigDecimal tOTAL_L_LOAN) {
+		TOTAL_L_LOAN = tOTAL_L_LOAN;
+	}
+	public BigDecimal getTOTAL_SER_LOAN() {
+		return TOTAL_SER_LOAN;
+	}
+	public void setTOTAL_SER_LOAN(BigDecimal tOTAL_SER_LOAN) {
+		TOTAL_SER_LOAN = tOTAL_SER_LOAN;
+	}
+	public BigDecimal getTOTAL_TOTAL_LOAN() {
+		return TOTAL_TOTAL_LOAN;
+	}
+	public void setTOTAL_TOTAL_LOAN(BigDecimal tOTAL_TOTAL_LOAN) {
+		TOTAL_TOTAL_LOAN = tOTAL_TOTAL_LOAN;
+	}
+	public BigDecimal getTOTAL_GBC_LOAN() {
+		return TOTAL_GBC_LOAN;
+	}
+	public void setTOTAL_GBC_LOAN(BigDecimal tOTAL_GBC_LOAN) {
+		TOTAL_GBC_LOAN = tOTAL_GBC_LOAN;
+	}
+	public BigDecimal getTOTAL_HOUSE_LOAN() {
+		return TOTAL_HOUSE_LOAN;
+	}
+	public void setTOTAL_HOUSE_LOAN(BigDecimal tOTAL_HOUSE_LOAN) {
+		TOTAL_HOUSE_LOAN = tOTAL_HOUSE_LOAN;
+	}
+	public BigDecimal getTOTAL_HOUSEHOLD_LOAN() {
+		return TOTAL_HOUSEHOLD_LOAN;
+	}
+	public void setTOTAL_HOUSEHOLD_LOAN(BigDecimal tOTAL_HOUSEHOLD_LOAN) {
+		TOTAL_HOUSEHOLD_LOAN = tOTAL_HOUSEHOLD_LOAN;
+	}
+	public BigDecimal getTOTAL_OTHER_LOAN() {
+		return TOTAL_OTHER_LOAN;
+	}
+	public void setTOTAL_OTHER_LOAN(BigDecimal tOTAL_OTHER_LOAN) {
+		TOTAL_OTHER_LOAN = tOTAL_OTHER_LOAN;
+	}
+	public BigDecimal getTOTAL_OTHER_NON_LOAN() {
+		return TOTAL_OTHER_NON_LOAN;
+	}
+	public void setTOTAL_OTHER_NON_LOAN(BigDecimal tOTAL_OTHER_NON_LOAN) {
+		TOTAL_OTHER_NON_LOAN = tOTAL_OTHER_NON_LOAN;
+	}
+	public BigDecimal getTOTAL_GRAND_LOAN() {
+		return TOTAL_GRAND_LOAN;
+	}
+	public void setTOTAL_GRAND_LOAN(BigDecimal tOTAL_GRAND_LOAN) {
+		TOTAL_GRAND_LOAN = tOTAL_GRAND_LOAN;
+	}
+	public T2_RLORReport() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public T2_RLORReport(String a_PRODUCT, BigDecimal a_OUTSTANDING_CREDIT, BigDecimal a_RST_LOAN_PERF,
+			BigDecimal a_RST_LOAN_NONPERF, BigDecimal a_SPECIFIC_PROVISIONS, String b_PRODUCT,
+			BigDecimal b_OUTSTANDING_CREDIT, BigDecimal b_RST_LOAN_PERF, BigDecimal b_RST_LOAN_NONPERF,
+			BigDecimal b_SPECIFIC_PROVISIONS, String c_PRODUCT, BigDecimal c_OUTSTANDING_CREDIT,
+			BigDecimal c_RST_LOAN_PERF, BigDecimal c_RST_LOAN_NONPERF, BigDecimal c_SPECIFIC_PROVISIONS,
+			String f_PRODUCT, BigDecimal f_OUTSTANDING_CREDIT, BigDecimal f_RST_LOAN_PERF,
+			BigDecimal f_RST_LOAN_NONPERF, BigDecimal f_SPECIFIC_PROVISIONS, String g_PRODUCT,
+			BigDecimal g_OUTSTANDING_CREDIT, BigDecimal g_RST_LOAN_PERF, BigDecimal g_RST_LOAN_NONPERF,
+			BigDecimal g_SPECIFIC_PROVISIONS, String h_PRODUCT, BigDecimal h_OUTSTANDING_CREDIT,
+			BigDecimal h_RST_LOAN_PERF, BigDecimal h_RST_LOAN_NONPERF, BigDecimal h_SPECIFIC_PROVISIONS,
+			String i_PRODUCT, BigDecimal i_OUTSTANDING_CREDIT, BigDecimal i_RST_LOAN_PERF,
+			BigDecimal i_RST_LOAN_NONPERF, BigDecimal i_SPECIFIC_PROVISIONS, String j_PRODUCT,
+			BigDecimal j_OUTSTANDING_CREDIT, BigDecimal j_RST_LOAN_PERF, BigDecimal j_RST_LOAN_NONPERF,
+			BigDecimal j_SPECIFIC_PROVISIONS, String l_PRODUCT, BigDecimal l_OUTSTANDING_CREDIT,
+			BigDecimal l_RST_LOAN_PERF, BigDecimal l_RST_LOAN_NONPERF, BigDecimal l_SPECIFIC_PROVISIONS,
+			String sERVICE_PRODUCT, BigDecimal sERVICE_OUTSTANDING_CREDIT, BigDecimal sERVICE_RST_LOAN_PERF,
+			BigDecimal sERVICE_RST_LOAN_NONPERF, BigDecimal sERVICE_SPECIFIC_PROVISIONS, String gBCS_PRODUCT,
+			BigDecimal gBCS_OUTSTANDING_CREDIT, BigDecimal gBCS_RST_LOAN_PERF, BigDecimal gBCS_RST_LOAN_NONPERF,
+			BigDecimal gBCS_SPECIFIC_PROVISIONS, String hH_PRODUCT, BigDecimal hH_OUTSTANDING_CREDIT,
+			BigDecimal hH_RST_LOAN_PERF, BigDecimal hH_RST_LOAN_NONPERF, BigDecimal hH_SPECIFIC_PROVISIONS,
+			String hH1_PRODUCT, BigDecimal hH2_OUTSTANDING_CREDIT, BigDecimal hH3_RST_LOAN_PERF,
+			BigDecimal hH4_RST_LOAN_NONPERF, BigDecimal hH5_SPECIFIC_PROVISIONS, String oTHER_PRODUCT,
+			BigDecimal oTHER_OUTSTANDING_CREDIT, BigDecimal oTHER_RST_LOAN_PERF, BigDecimal oTHER_RST_LOAN_NONPERF,
+			BigDecimal oTHER_SPECIFIC_PROVISIONS, String oTH_NON_PRODUCT, BigDecimal oTH_NON_OUTSTANDING_CREDIT,
+			BigDecimal oTH_NON_RST_LOAN_PERF, BigDecimal oTH_NON_RST_LOAN_NONPERF,
+			BigDecimal oTH_NON_SPECIFIC_PROVISIONS, String tOTAL_PRODUCT, BigDecimal tOTAL_OUTSTANDING_CREDIT,
+			BigDecimal tOTAL_RST_LOAN_PERF, BigDecimal tOTAL_RST_LOAN_NONPERF, BigDecimal tOTAL_SPECIFIC_PROVISIONS,
+			String gRAND_TOTAL_PRODUCT, BigDecimal gRAND_TOTAL_OUTSTANDING_CREDIT, BigDecimal gRAND_TOTAL_RST_LOAN_PERF,
+			BigDecimal gRAND_TOTAL_RST_LOAN_NONPERF, BigDecimal gRAND_TOTAL_SPECIFIC_PROVISIONS, String rEPORT_CODE,
+			String rEPORT_NAME, Date rEPORT_DATE, Date rEPORT_DUE_DATE, Date rEP_SUBMIT_DATE, Date rEP_PERIOD_FROM,
+			Date rEP_PERIOD_TO, String rEP_FREQ, String nIL_REPORT_FLG, String aRCH_FLG, String eNTITY_FLG,
+			String dEL_FLG, String mODIFY_FLG, String eNTRY_USER, String mODIFY_USER, String vERIFY_USER,
+			Date eNTRY_TIME, Date mODIFY_TIME, Date vERIFY_TIME, String qTR_FLG, BigDecimal tOTAL_A_LOAN,
+			BigDecimal tOTAL_B_LOAN, BigDecimal tOTAL_C_LOAN, BigDecimal tOTAL_F_LOAN, BigDecimal tOTAL_G_LOAN,
+			BigDecimal tOTAL_H_LOAN, BigDecimal tOTAL_I_LOAN, BigDecimal tOTAL_J_LOAN, BigDecimal tOTAL_L_LOAN,
+			BigDecimal tOTAL_SER_LOAN, BigDecimal tOTAL_TOTAL_LOAN, BigDecimal tOTAL_GBC_LOAN,
+			BigDecimal tOTAL_HOUSE_LOAN, BigDecimal tOTAL_HOUSEHOLD_LOAN, BigDecimal tOTAL_OTHER_LOAN,
+			BigDecimal tOTAL_OTHER_NON_LOAN, BigDecimal tOTAL_GRAND_LOAN) {
+		super();
+		A_PRODUCT = a_PRODUCT;
+		A_OUTSTANDING_CREDIT = a_OUTSTANDING_CREDIT;
+		A_RST_LOAN_PERF = a_RST_LOAN_PERF;
+		A_RST_LOAN_NONPERF = a_RST_LOAN_NONPERF;
+		A_SPECIFIC_PROVISIONS = a_SPECIFIC_PROVISIONS;
+		B_PRODUCT = b_PRODUCT;
+		B_OUTSTANDING_CREDIT = b_OUTSTANDING_CREDIT;
+		B_RST_LOAN_PERF = b_RST_LOAN_PERF;
+		B_RST_LOAN_NONPERF = b_RST_LOAN_NONPERF;
+		B_SPECIFIC_PROVISIONS = b_SPECIFIC_PROVISIONS;
+		C_PRODUCT = c_PRODUCT;
+		C_OUTSTANDING_CREDIT = c_OUTSTANDING_CREDIT;
+		C_RST_LOAN_PERF = c_RST_LOAN_PERF;
+		C_RST_LOAN_NONPERF = c_RST_LOAN_NONPERF;
+		C_SPECIFIC_PROVISIONS = c_SPECIFIC_PROVISIONS;
+		F_PRODUCT = f_PRODUCT;
+		F_OUTSTANDING_CREDIT = f_OUTSTANDING_CREDIT;
+		F_RST_LOAN_PERF = f_RST_LOAN_PERF;
+		F_RST_LOAN_NONPERF = f_RST_LOAN_NONPERF;
+		F_SPECIFIC_PROVISIONS = f_SPECIFIC_PROVISIONS;
+		G_PRODUCT = g_PRODUCT;
+		G_OUTSTANDING_CREDIT = g_OUTSTANDING_CREDIT;
+		G_RST_LOAN_PERF = g_RST_LOAN_PERF;
+		G_RST_LOAN_NONPERF = g_RST_LOAN_NONPERF;
+		G_SPECIFIC_PROVISIONS = g_SPECIFIC_PROVISIONS;
+		H_PRODUCT = h_PRODUCT;
+		H_OUTSTANDING_CREDIT = h_OUTSTANDING_CREDIT;
+		H_RST_LOAN_PERF = h_RST_LOAN_PERF;
+		H_RST_LOAN_NONPERF = h_RST_LOAN_NONPERF;
+		H_SPECIFIC_PROVISIONS = h_SPECIFIC_PROVISIONS;
+		I_PRODUCT = i_PRODUCT;
+		I_OUTSTANDING_CREDIT = i_OUTSTANDING_CREDIT;
+		I_RST_LOAN_PERF = i_RST_LOAN_PERF;
+		I_RST_LOAN_NONPERF = i_RST_LOAN_NONPERF;
+		I_SPECIFIC_PROVISIONS = i_SPECIFIC_PROVISIONS;
+		J_PRODUCT = j_PRODUCT;
+		J_OUTSTANDING_CREDIT = j_OUTSTANDING_CREDIT;
+		J_RST_LOAN_PERF = j_RST_LOAN_PERF;
+		J_RST_LOAN_NONPERF = j_RST_LOAN_NONPERF;
+		J_SPECIFIC_PROVISIONS = j_SPECIFIC_PROVISIONS;
+		L_PRODUCT = l_PRODUCT;
+		L_OUTSTANDING_CREDIT = l_OUTSTANDING_CREDIT;
+		L_RST_LOAN_PERF = l_RST_LOAN_PERF;
+		L_RST_LOAN_NONPERF = l_RST_LOAN_NONPERF;
+		L_SPECIFIC_PROVISIONS = l_SPECIFIC_PROVISIONS;
+		SERVICE_PRODUCT = sERVICE_PRODUCT;
+		SERVICE_OUTSTANDING_CREDIT = sERVICE_OUTSTANDING_CREDIT;
+		SERVICE_RST_LOAN_PERF = sERVICE_RST_LOAN_PERF;
+		SERVICE_RST_LOAN_NONPERF = sERVICE_RST_LOAN_NONPERF;
+		SERVICE_SPECIFIC_PROVISIONS = sERVICE_SPECIFIC_PROVISIONS;
+		GBCS_PRODUCT = gBCS_PRODUCT;
+		GBCS_OUTSTANDING_CREDIT = gBCS_OUTSTANDING_CREDIT;
+		GBCS_RST_LOAN_PERF = gBCS_RST_LOAN_PERF;
+		GBCS_RST_LOAN_NONPERF = gBCS_RST_LOAN_NONPERF;
+		GBCS_SPECIFIC_PROVISIONS = gBCS_SPECIFIC_PROVISIONS;
+		HH_PRODUCT = hH_PRODUCT;
+		HH_OUTSTANDING_CREDIT = hH_OUTSTANDING_CREDIT;
+		HH_RST_LOAN_PERF = hH_RST_LOAN_PERF;
+		HH_RST_LOAN_NONPERF = hH_RST_LOAN_NONPERF;
+		HH_SPECIFIC_PROVISIONS = hH_SPECIFIC_PROVISIONS;
+		HH1_PRODUCT = hH1_PRODUCT;
+		HH2_OUTSTANDING_CREDIT = hH2_OUTSTANDING_CREDIT;
+		HH3_RST_LOAN_PERF = hH3_RST_LOAN_PERF;
+		HH4_RST_LOAN_NONPERF = hH4_RST_LOAN_NONPERF;
+		HH5_SPECIFIC_PROVISIONS = hH5_SPECIFIC_PROVISIONS;
+		OTHER_PRODUCT = oTHER_PRODUCT;
+		OTHER_OUTSTANDING_CREDIT = oTHER_OUTSTANDING_CREDIT;
+		OTHER_RST_LOAN_PERF = oTHER_RST_LOAN_PERF;
+		OTHER_RST_LOAN_NONPERF = oTHER_RST_LOAN_NONPERF;
+		OTHER_SPECIFIC_PROVISIONS = oTHER_SPECIFIC_PROVISIONS;
+		OTH_NON_PRODUCT = oTH_NON_PRODUCT;
+		OTH_NON_OUTSTANDING_CREDIT = oTH_NON_OUTSTANDING_CREDIT;
+		OTH_NON_RST_LOAN_PERF = oTH_NON_RST_LOAN_PERF;
+		OTH_NON_RST_LOAN_NONPERF = oTH_NON_RST_LOAN_NONPERF;
+		OTH_NON_SPECIFIC_PROVISIONS = oTH_NON_SPECIFIC_PROVISIONS;
+		TOTAL_PRODUCT = tOTAL_PRODUCT;
+		TOTAL_OUTSTANDING_CREDIT = tOTAL_OUTSTANDING_CREDIT;
+		TOTAL_RST_LOAN_PERF = tOTAL_RST_LOAN_PERF;
+		TOTAL_RST_LOAN_NONPERF = tOTAL_RST_LOAN_NONPERF;
+		TOTAL_SPECIFIC_PROVISIONS = tOTAL_SPECIFIC_PROVISIONS;
+		GRAND_TOTAL_PRODUCT = gRAND_TOTAL_PRODUCT;
+		GRAND_TOTAL_OUTSTANDING_CREDIT = gRAND_TOTAL_OUTSTANDING_CREDIT;
+		GRAND_TOTAL_RST_LOAN_PERF = gRAND_TOTAL_RST_LOAN_PERF;
+		GRAND_TOTAL_RST_LOAN_NONPERF = gRAND_TOTAL_RST_LOAN_NONPERF;
+		GRAND_TOTAL_SPECIFIC_PROVISIONS = gRAND_TOTAL_SPECIFIC_PROVISIONS;
+		REPORT_CODE = rEPORT_CODE;
+		REPORT_NAME = rEPORT_NAME;
+		REPORT_DATE = rEPORT_DATE;
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+		REP_FREQ = rEP_FREQ;
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+		ARCH_FLG = aRCH_FLG;
+		ENTITY_FLG = eNTITY_FLG;
+		DEL_FLG = dEL_FLG;
+		MODIFY_FLG = mODIFY_FLG;
+		ENTRY_USER = eNTRY_USER;
+		MODIFY_USER = mODIFY_USER;
+		VERIFY_USER = vERIFY_USER;
+		ENTRY_TIME = eNTRY_TIME;
+		MODIFY_TIME = mODIFY_TIME;
+		VERIFY_TIME = vERIFY_TIME;
+		QTR_FLG = qTR_FLG;
+		TOTAL_A_LOAN = tOTAL_A_LOAN;
+		TOTAL_B_LOAN = tOTAL_B_LOAN;
+		TOTAL_C_LOAN = tOTAL_C_LOAN;
+		TOTAL_F_LOAN = tOTAL_F_LOAN;
+		TOTAL_G_LOAN = tOTAL_G_LOAN;
+		TOTAL_H_LOAN = tOTAL_H_LOAN;
+		TOTAL_I_LOAN = tOTAL_I_LOAN;
+		TOTAL_J_LOAN = tOTAL_J_LOAN;
+		TOTAL_L_LOAN = tOTAL_L_LOAN;
+		TOTAL_SER_LOAN = tOTAL_SER_LOAN;
+		TOTAL_TOTAL_LOAN = tOTAL_TOTAL_LOAN;
+		TOTAL_GBC_LOAN = tOTAL_GBC_LOAN;
+		TOTAL_HOUSE_LOAN = tOTAL_HOUSE_LOAN;
+		TOTAL_HOUSEHOLD_LOAN = tOTAL_HOUSEHOLD_LOAN;
+		TOTAL_OTHER_LOAN = tOTAL_OTHER_LOAN;
+		TOTAL_OTHER_NON_LOAN = tOTAL_OTHER_NON_LOAN;
+		TOTAL_GRAND_LOAN = tOTAL_GRAND_LOAN;
+	}
+	
+
+}

@@ -1,0 +1,1912 @@
+package com.bornfire.xbrl.controllers;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.bornfire.xbrl.entities.BankMaster;
+import com.bornfire.xbrl.entities.CustomRepDownloadRep;
+import com.bornfire.xbrl.entities.CustomReportParms;
+import com.bornfire.xbrl.entities.CustomReportsParmsRepo;
+import com.bornfire.xbrl.entities.GenRefCodeMast;
+import com.bornfire.xbrl.entities.UserProfile;
+import com.bornfire.xbrl.entities.BRBS.RBSReportRepo;
+import com.bornfire.xbrl.entities.BRECON.AccMasterRepo;
+import com.bornfire.xbrl.entities.BRECON.EPINDataEntity;
+import com.bornfire.xbrl.entities.BRECON.EPINDataRepo;
+import com.bornfire.xbrl.entities.BRECON.HostDataEntity;
+import com.bornfire.xbrl.entities.BRECON.HostDataRepo;
+import com.bornfire.xbrl.entities.BRECON.RECONAccMaster;
+import com.bornfire.xbrl.entities.BRECON.RECONProceduresRepo;
+import com.bornfire.xbrl.entities.BRECON.ReconMasterRepo;
+import com.bornfire.xbrl.entities.BRECON.ReconOprRepo;
+import com.bornfire.xbrl.entities.BRECON.ReconStatus;
+import com.bornfire.xbrl.entities.BRECON.ReconSummaryRepo;
+import com.bornfire.xbrl.entities.BRECON.ReconSummaryReport;
+import com.bornfire.xbrl.entities.BRECON.RuleEngine;
+import com.bornfire.xbrl.entities.BRECON.RuleEngineRepo;
+import com.bornfire.xbrl.services.BRECONEPINServices;
+import com.bornfire.xbrl.services.BRECONMasterServices;
+import com.bornfire.xbrl.services.BRECONRuleEngineServices;
+import com.bornfire.xbrl.services.BankServices;
+import com.bornfire.xbrl.services.CustomRepGeneratorServices;
+import com.bornfire.xbrl.services.CustomRepParamServices;
+import com.bornfire.xbrl.services.EtlServices;
+import com.bornfire.xbrl.services.GlSubHeadConfigService;
+import com.bornfire.xbrl.services.LoginServices;
+import com.bornfire.xbrl.services.ReconOperationServices;
+import com.bornfire.xbrl.services.ReconReportServices;
+import com.bornfire.xbrl.services.ReferenceCodeConfigure;
+import com.bornfire.xbrl.services.ReportCodeMappingService;
+import com.bornfire.xbrl.services.ReportServices;
+import com.bornfire.xbrl.services.ReportServices.ReportTitle;
+
+import net.sf.jasperreports.engine.JRException;
+
+@Controller
+@ConfigurationProperties("default")
+public class XBRLNavigationController {
+
+	private static final Logger logger = LoggerFactory.getLogger(XBRLNavigationController.class);
+
+	@Autowired
+	LoginServices loginServices;
+
+	@Autowired
+	ReportServices reportServices;
+
+	@Autowired
+	ReferenceCodeConfigure referenceCodeConfigure;
+
+	@Autowired
+	BankServices bankServices;
+
+	@Autowired
+	ReportCodeMappingService reportCodeMappingService;
+
+	@Autowired
+	EtlServices etlServices;
+
+	@Autowired
+	GlSubHeadConfigService glSubHeadConfigService;
+
+	@Autowired
+	CustomRepGeneratorServices customerRepGenServices;
+
+	@Autowired
+	CustomReportsParmsRepo custReportsParmsRepo;
+
+	@Autowired
+	CustomReportsParmsRepo customReportsParmsRepo;
+
+	@Autowired
+	CustomRepDownloadRep customRepDownloadRep;
+
+	@Autowired
+	CustomRepParamServices customRepParamServices;
+
+	@Autowired
+	RBSReportRepo rbsReportlist;
+
+	@Autowired
+	HostDataRepo hostDataRepo;
+
+	@Autowired
+	EPINDataRepo ePINDataRepo;
+
+	@Autowired
+	ReconMasterRepo reconMasterRepo;
+
+	@Autowired
+	AccMasterRepo accMasterRepo;
+
+	@Autowired
+	BRECONMasterServices bRECONMasterServices;
+
+	@Autowired
+	ReconOprRepo reconOprRepo;
+
+	@Autowired
+	BRECONRuleEngineServices bRECONRuleEngineServices;
+
+	@Autowired
+	RuleEngineRepo ruleEngineRepo;
+
+	@Autowired
+	RECONProceduresRepo rECONProceduresRepo;
+
+	@Autowired
+	ReconOperationServices reconOperationServices;
+
+	@Autowired
+	BRECONEPINServices bRECONEPINServices;
+
+	@Autowired
+	ReconReportServices reconReportServices;
+
+	@Autowired
+	ReconSummaryRepo reconSummaryRepo;
+
+	private String pagesize;
+
+	public String getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(String pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
+	public String getdashboard(Model md, HttpServletRequest req) {
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		md.addAttribute("menu", "Dashboard");
+		md.addAttribute("checkpassExpiry", loginServices.checkpassexpirty(userid));
+		md.addAttribute("checkAcctExpiry", loginServices.checkAcctexpirty(userid));
+		md.addAttribute("changepassword", loginServices.checkPasswordChangeReq(userid));
+
+		int completed = 0;
+		int uncompleted = 0;
+
+		List<ReportTitle> ls = reportServices.getDashBoardRepList(domainid);
+
+		for (ReportTitle var : ls) {
+			if (var.getCompletedFlg().equals('Y')) {
+				completed++;
+			} else {
+				uncompleted++;
+			}
+		}
+
+		md.addAttribute("reportList", ls);
+		md.addAttribute("completed", completed);
+		md.addAttribute("uncompleted", uncompleted);
+		md.addAttribute("menu", "Dashboard");
+		return "XBRLDashboard";
+	}
+
+	@RequestMapping(value = "Dashboard", method = { RequestMethod.GET, RequestMethod.POST })
+	public String dashboard(Model md, HttpServletRequest req) {
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		md.addAttribute("changepassword", loginServices.checkPasswordChangeReq(userid));
+		md.addAttribute("checkpassExpiry", loginServices.checkpassexpirty(userid));
+		md.addAttribute("checkAcctExpiry", loginServices.checkAcctexpirty(userid));
+		int completed = 0;
+		int uncompleted = 0;
+
+		List<ReportTitle> ls = reportServices.getDashBoardRepList(domainid);
+
+		for (ReportTitle var : ls) {
+			if (var.getCompletedFlg().equals('Y')) {
+				completed++;
+			} else {
+				uncompleted++;
+			}
+		}
+
+		md.addAttribute("reportList", ls);
+		md.addAttribute("completed", completed);
+		md.addAttribute("uncompleted", uncompleted);
+		md.addAttribute("menu", "Dashboard");
+		return "XBRLDashboard";
+	}
+
+	@RequestMapping(value = "UserProfile", method = { RequestMethod.GET, RequestMethod.POST })
+	public String userprofile(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String userid,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		String loginuserid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("USERPROFILE", "M2", req.getSession().getId(), loginuserid, req.getRemoteAddr(),
+				"ACTIVE");
+
+		md.addAttribute("menu", "UserProfile"); // To highlight the menu
+
+		if (formmode == null || formmode.equals("list")) {
+
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("userProfiles", loginServices.getUsersList());
+
+		} else if (formmode.equals("edit")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("domains", reportServices.getDomainList());
+			md.addAttribute("userProfile", loginServices.getUser(userid));
+
+		} else {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("domains", reportServices.getDomainList());
+			md.addAttribute("FinUserProfiles", loginServices.getFinUsersList());
+			md.addAttribute("userProfile", loginServices.getUser(""));
+
+		}
+
+		return "XBRLUserprofile";
+	}
+
+	@RequestMapping(value = "BankMaster", method = RequestMethod.GET)
+	public String bankmaster(Model md, HttpServletRequest req) {
+		// Logging Navigation
+		// System.out.print("fgdfh");
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		loginServices.SessionLogging("BANKMAST", "M3", req.getSession().getId(), userid, req.getRemoteAddr(), "ACTIVE");
+
+		md.addAttribute("bankdata", bankServices.getBankData());
+		md.addAttribute("singledetail", new BankMaster());
+		md.addAttribute("menu", "BankMaster");
+
+		return "XBRLBankMaster";
+	}
+
+	@RequestMapping(value = "EtlMonitor", method = RequestMethod.GET)
+	public String etlMonitor(Model md, HttpServletRequest req) {
+		// Logging Navigation
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		// loginServices.SessionLogging("", "M3", req.getSession().getId(), userid,
+		// req.getRemoteAddr(), "ACTIVE");
+
+		md.addAttribute("EtlError", etlServices.getEtlError());
+		md.addAttribute("EtlStatus", etlServices.getEtlStatus());
+		md.addAttribute("menu", "EtlMonitor");
+
+		return "XBRLEtlMonitor";
+	}
+
+	@RequestMapping(value = "GlSubHead", method = RequestMethod.GET)
+	public ModelAndView glSubHead(Model md, HttpServletRequest req,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size) {
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		logger.info("xbrlnavigationcontroller -> glSubHead()");
+
+		md.addAttribute("menu", "GlSubHead");
+		md.addAttribute("displaymode", "detail");
+		ModelAndView mv = glSubHeadConfigService.getGlSubHeadMeta(PageRequest.of(currentPage, pageSize));
+		// md.addAttribute("singledetail", new BankMaster());
+
+		return mv;
+	}
+
+	@RequestMapping(value = "BranchMaster", method = RequestMethod.GET)
+	public String branchMaster(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("BRANCHMAST", "M3", req.getSession().getId(), userid, req.getRemoteAddr(),
+				"ACTIVE");
+
+		md.addAttribute("branchList", bankServices.getBranchList());
+
+		md.addAttribute("menu", "BranchMaster");
+
+		return "XBRLBranchMaster";
+	}
+
+	@RequestMapping(value = "ReferenceCode", method = RequestMethod.GET)
+	public String refcode(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		// Logging Navigation
+		loginServices.SessionLogging("REFCODE", "M6", req.getSession().getId(), userid, req.getRemoteAddr(), "ACTIVE");
+
+		md.addAttribute("menu", "ReferenceCode");
+		md.addAttribute("refCodeTypeList", referenceCodeConfigure.genRefCodeDescList());
+		md.addAttribute("referdetail", new GenRefCodeMast());
+		return "XBRLRefCodeConfig";
+	}
+
+	@RequestMapping(value = "ReportCode", method = RequestMethod.GET)
+	public String repcode(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("REPCODE", "M7", req.getSession().getId(), userid, req.getRemoteAddr(), "ACTIVE");
+
+		md.addAttribute("menu", "ReportCode");
+		return "XBRLRepCodeConfig";
+	}
+
+	@RequestMapping(value = "ReportCodeMaintain", method = RequestMethod.GET)
+	public String repmain(Model md, HttpServletRequest req, @RequestParam(required = false) String dtltype,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size,
+			@RequestParam(required = false) String acctnum) {
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("REPCODE", "M7", req.getSession().getId(), userid, req.getRemoteAddr(), "ACTIVE");
+
+		md.addAttribute("menu", "ReportCodeMaintain");
+
+		if (dtltype == null) {
+
+			md.addAttribute("repcodelist",
+					reportCodeMappingService.getRepCodeMapLists(PageRequest.of(currentPage, pageSize)));
+			return "XBRLRepCodeMain";
+
+		} else if (dtltype.equals("page")) {
+
+			md.addAttribute("repcodelist",
+					reportCodeMappingService.getRepCodeMapLists(PageRequest.of(currentPage, pageSize)));
+			return "XBRLRepCodeMain :: repcodeconfig";
+
+		} else {
+
+			md.addAttribute("repcodelist",
+					reportCodeMappingService.getSearchResult(acctnum, PageRequest.of(currentPage, pageSize)));
+			return "XBRLRepCodeMain :: repcodeconfig";
+		}
+
+	}
+
+	@RequestMapping(value = "ReportCodeMaintain2", method = RequestMethod.GET)
+	public String repmain2(Model md, HttpServletRequest req, @RequestParam(required = false) String dtltype,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size,
+			@RequestParam(required = false) String acctnum) {
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("REPCODE", "M7", req.getSession().getId(), userid, req.getRemoteAddr(), "ACTIVE");
+
+		md.addAttribute("menu", "ReportCodeMaintain2");
+
+		if (dtltype == null) {
+
+			md.addAttribute("repcodelist",
+					reportCodeMappingService.getRepCodeMapLists(PageRequest.of(currentPage, pageSize)));
+			return "XBRLRepCodeMain2";
+
+		} else if (dtltype.equals("page")) {
+
+			md.addAttribute("repcodelist",
+					reportCodeMappingService.getRepCodeMapLists(PageRequest.of(currentPage, pageSize)));
+			return "XBRLRepCodeMain2 :: repcodeconfig";
+
+		} else {
+
+			md.addAttribute("repcodelist",
+					reportCodeMappingService.getSearchResult(acctnum, PageRequest.of(currentPage, pageSize)));
+			return "XBRLRepCodeMain2 :: repcodeconfig";
+		}
+
+	}
+
+	@RequestMapping(value = "ReportMaster", method = RequestMethod.GET)
+	public String reportMaster(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("REPORTMAST", "M5", req.getSession().getId(), userid, req.getRemoteAddr(),
+				"ACTIVE");
+
+		md.addAttribute("menu", "ReportMaster");
+		md.addAttribute("reportList", reportServices.getReportsMaster());
+		return "XBRLReportMaster";
+	}
+
+	@RequestMapping(value = "Audit", method = RequestMethod.GET)
+	public String audit(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("AUDIT", "M11", req.getSession().getId(), userid, req.getRemoteAddr(), "ACTIVE");
+
+		LocalDateTime localDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+		md.addAttribute("menu", "Audit");
+		md.addAttribute("auditlogs", reportServices.getAuditLog(
+				Date.from(localDateTime.plusDays(-5).atZone(ZoneId.systemDefault()).toInstant()), new Date()));
+		return "XBRLAudit";
+	}
+
+	@RequestMapping(value = "Userlog", method = RequestMethod.GET)
+	public String userlog(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("USERLOG", "M4", req.getSession().getId(), userid, req.getRemoteAddr(), "ACTIVE");
+
+		LocalDateTime localDateTime = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+		md.addAttribute("menu", "Userlog");
+		md.addAttribute("userlog", loginServices.getUserLog(
+				Date.from(localDateTime.plusDays(-5).atZone(ZoneId.systemDefault()).toInstant()), new Date()));
+
+		return "XBRLUserLogs";
+	}
+
+	@RequestMapping(value = "XBRLReports", method = RequestMethod.GET)
+	public String xbrlrep(Model md, HttpServletRequest req) {
+
+		md.addAttribute("menu", "XBRLReports");
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+
+		md.addAttribute("reportlist", reportServices.getReportsList(domainid));
+		return "XBRLReports";
+	}
+
+	@RequestMapping(value = "XBRLFileUpload", method = RequestMethod.GET)
+	public String xbrlFileUpload(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		// Logging Navigation
+		loginServices.SessionLogging("FILEUPLOAD", "M10", req.getSession().getId(), userid, req.getRemoteAddr(),
+				"ACTIVE");
+
+		md.addAttribute("menu", "XBRLFileUpload");
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+
+		md.addAttribute("reportlist", reportServices.getFileUploadList());
+		return "XBRLFileUpload";
+	}
+
+	@RequestMapping(value = "XBRLArchives", method = RequestMethod.GET)
+	public String xbrlarch(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		// Logging Navigation
+		loginServices.SessionLogging("ARCHREPORTS", "M9", req.getSession().getId(), userid, req.getRemoteAddr(),
+				"ACTIVE");
+
+		md.addAttribute("menu", "XBRLArchives");
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+
+		md.addAttribute("reportlist", reportServices.getArchReportsList(domainid));
+
+		return "XBRLArchive";
+	}
+
+	@RequestMapping(value = "MISReports", method = RequestMethod.GET)
+	public String xbrlMISReports(Model md, HttpServletRequest req) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		// Logging Navigation
+		loginServices.SessionLogging("MISREPORTS", "M12", req.getSession().getId(), userid, req.getRemoteAddr(),
+				"ACTIVE");
+
+		md.addAttribute("menu", "MISReports");
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+
+		md.addAttribute("reportlist", reportServices.getMISReportsList(domainid));
+
+		return "XBRLMISReports";
+	}
+
+	@RequestMapping(value = "Finuserdata", method = RequestMethod.GET)
+	public ModelAndView Finuserdata(@RequestParam String userid) {
+		ModelAndView mv = new ModelAndView("XBRLUserprofile::finuserapply");
+		mv.addObject("formmode", "add");
+		mv.addObject("userProfile", loginServices.getFinUser(userid));
+		return mv;
+
+	}
+
+	@RequestMapping(value = "createUser", method = RequestMethod.POST)
+	@ResponseBody
+	public String createUser(@RequestParam("formmode") String formmode, @ModelAttribute UserProfile userprofile,
+			Model md, HttpServletRequest rq) {
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		String msg = loginServices.addUser(userprofile, formmode, userid);
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "verifyUser", method = RequestMethod.POST)
+	@ResponseBody
+	public String verifyUser(@ModelAttribute UserProfile userprofile, Model md, HttpServletRequest rq) {
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		String msg = loginServices.verifyUser(userprofile, userid);
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "passwordReset", method = RequestMethod.POST)
+	@ResponseBody
+	public String passwordReset(@ModelAttribute UserProfile userprofile, Model md, HttpServletRequest rq) {
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		String msg = loginServices.passwordReset(userprofile, userid);
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "changePassword", method = RequestMethod.POST)
+	@ResponseBody
+	public String changePassword(@RequestParam("oldpass") String oldpass, @RequestParam("newpass") String newpass,
+			Model md, HttpServletRequest rq) {
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		String msg = loginServices.changePassword(oldpass, newpass, userid);
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "updateValidity", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateValidity(@RequestParam("reportid") String reportid, String valid, HttpServletRequest rq) {
+
+		String userid = (String) rq.getSession().getAttribute("USERID");
+
+		return reportServices.updateValidity(reportid, valid, userid);
+
+	}
+
+	@RequestMapping(value = "userLogs/Download", method = RequestMethod.GET)
+	@ResponseBody
+	public InputStreamResource UserDownload(HttpServletResponse response, @RequestParam String fromdate,
+			@RequestParam String todate) throws IOException, SQLException {
+		response.setContentType("application/octet-stream");
+
+		InputStreamResource resource = null;
+
+		try {
+			Date fromdate2 = new SimpleDateFormat("dd-MM-yyyy").parse(fromdate);
+			Date todate2 = new SimpleDateFormat("dd-MM-yyyy").parse(todate);
+			File repfile = loginServices.getUserLogFile(fromdate2, todate2);
+			response.setHeader("Content-Disposition", "attachment; filename=" + repfile.getName());
+			resource = new InputStreamResource(new FileInputStream(repfile));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resource;
+	}
+
+	@RequestMapping(value = "auditLogs/Download", method = RequestMethod.GET)
+	@ResponseBody
+	public InputStreamResource auditDownload(HttpServletResponse response, @RequestParam String fromdate,
+			@RequestParam String todate) throws IOException, SQLException {
+		response.setContentType("application/octet-stream");
+
+		InputStreamResource resource = null;
+
+		try {
+			Date fromdate2 = new SimpleDateFormat("dd-MM-yyyy").parse(fromdate);
+			Date todate2 = new SimpleDateFormat("dd-MM-yyyy").parse(todate);
+			File repfile = reportServices.getAuditLogFile(fromdate2, todate2);
+			response.setHeader("Content-Disposition", "attachment; filename=" + repfile.getName());
+			resource = new InputStreamResource(new FileInputStream(repfile));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resource;
+	}
+
+	@RequestMapping(value = "repCodeMain/Download", method = RequestMethod.GET)
+	@ResponseBody
+	public InputStreamResource repCodeMainDownload(HttpServletResponse response, @RequestParam String function)
+			throws IOException, SQLException {
+
+		response.setContentType("application/octet-stream");
+
+		logger.info("Function Selected--->>>" + function);
+
+		InputStreamResource resource = null;
+
+		try {
+
+			File repfile = reportCodeMappingService.getDownloadFile(function);
+			response.setHeader("Content-Disposition", "attachment; filename=" + repfile.getName());
+			resource = new InputStreamResource(new FileInputStream(repfile));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resource;
+	}
+
+	@RequestMapping(value = "logoutUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String logoutUpdate(HttpServletRequest req) {
+
+		String msg;
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+
+		try {
+			logger.info("Updating Logout");
+			loginServices.SessionLogging("LOGOUT", "M0", req.getSession().getId(), userid, req.getRemoteAddr(),
+					"IN-ACTIVE");
+			msg = "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg = "failed";
+		}
+		return msg;
+	}
+
+	@PostMapping("repCodeMain/Upload")
+	@ResponseBody
+	public String FileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest rq)
+			throws IOException, SQLException {
+
+		String msg = "";
+
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		msg = reportCodeMappingService.processUploadFiles(file, userid);
+
+		return msg;
+	}
+
+	@RequestMapping(value = "CustomReports", method = { RequestMethod.GET, RequestMethod.POST })
+	public String CustomReports(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String rpt_ref_no, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		// md.addAttribute("AMLRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menuname", "Reports Parameter");
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("repParameter", custReportsParmsRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("add")) {
+
+			md.addAttribute("menuname", "Reports Parameter - Add");
+			md.addAttribute("formmode", "add");
+
+		} else if (formmode.equals("edit")) {
+
+			md.addAttribute("menuname", "Reports Parameter - Edit");
+			md.addAttribute("formmode", "edit");
+			md.addAttribute("Parameter", customRepParamServices.getParam(rpt_ref_no));
+
+		} else if (formmode.equals("verify")) {
+
+			md.addAttribute("menuname", "Reports Parameter - Verify");
+			md.addAttribute("formmode", "verify");
+			md.addAttribute("Parameter", customRepParamServices.getParam(rpt_ref_no));
+
+		} else if (formmode.equals("view")) {
+
+			md.addAttribute("menuname", "Reports Parameter - Inquiry");
+			md.addAttribute("formmode", "view");
+			md.addAttribute("Parameter", customRepParamServices.getParam(rpt_ref_no));
+
+		}
+
+		return "CustomRepParameter";
+	}
+
+	@RequestMapping(value = "createRepParam", method = RequestMethod.POST)
+	@ResponseBody
+	public String createRepParam(@RequestParam("formmode") String formmode,
+			@ModelAttribute CustomReportParms customReportParms, Model md, HttpServletRequest rq)
+			throws IOException, SQLException {
+
+		String msg = customRepParamServices.customParam(customReportParms, formmode);
+		md.addAttribute("adminflag", "adminflag");
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "CustomRepGen", method = { RequestMethod.GET, RequestMethod.POST })
+	public String CustomRepGen(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String userid, @RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		String userid1 = (String) req.getSession().getAttribute("USERID");
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		// md.addAttribute("AMLRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "Report Generator");
+			md.addAttribute("userProfile", loginServices.getUser(userid1));
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("repParameter", custReportsParmsRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+		}
+
+		return "CustomRepGeneration";
+	}
+
+	@RequestMapping(value = "CustomRepDown", method = { RequestMethod.GET, RequestMethod.POST })
+	public String CustomRepDown(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String userid, @RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		String userid1 = (String) req.getSession().getAttribute("USERID");
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		// md.addAttribute("AMLRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "Report Generator");
+			md.addAttribute("userProfile", loginServices.getUser(userid1));
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("repParameter", customRepDownloadRep.findAllCustom(PageRequest.of(currentPage, pageSize)));
+		}
+
+		return "CustomRepDownload";
+	}
+
+	@RequestMapping(value = "ExecuteRep", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ExecuteRep(@RequestParam(value = "ref_id", required = false) String ref_id,
+			@RequestParam(value = "Param1", required = false) String input1,
+			@RequestParam(value = "Param1", required = false) String input2,
+			@RequestParam(value = "Param1", required = false) String input3,
+			@RequestParam(value = "Param1", required = false) String input4,
+			@RequestParam(value = "Param1", required = false) String input5,
+			@RequestParam(required = false) String userid, @RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws SQLException {
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		// md.addAttribute("AMLRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("adminflag", "adminflag");
+
+		try {
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("headers", customerRepGenServices.getHeaders(ref_id));
+			md.addAttribute("repList",
+					customerRepGenServices.parameterlistwithdecode(ref_id, PageRequest.of(currentPage, pageSize)));
+
+			CustomReportParms up = customReportsParmsRepo.findByIdcustom(ref_id);
+			md.addAttribute("CustomReportParam", up);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "ReportExecutePage";
+
+	}
+
+	/**************************************************************************
+	 * RBS REPORTS
+	 **************************************************************************/
+
+	@RequestMapping(value = "rbsreports", method = { RequestMethod.GET, RequestMethod.POST })
+	public String RbsReports(Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		// md.addAttribute("reportvalue", "RBS Reports");
+		// md.addAttribute("reportid", "RBSReports");
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+		md.addAttribute("reportsflag", "reportsflag");
+		md.addAttribute("menu", "RBS Report");
+
+		md.addAttribute("reportlist", rbsReportlist.getReportList());
+
+		return "RBS_AML/RBSReports";
+	}
+
+	@RequestMapping(value = "orrbsreports", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ORRbsReports(Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		// md.addAttribute("reportvalue", "RBS Reports");
+		// md.addAttribute("reportid", "RBSReports");
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+		md.addAttribute("reportsflag", "reportsflag");
+		md.addAttribute("menu", "RBS Report");
+
+		md.addAttribute("reportlist", rbsReportlist.getReportListOR());
+
+		return "OR_RBS/OR_RBSReports";
+	}
+
+	@RequestMapping(value = "ReconFileUpload", method = { RequestMethod.GET, RequestMethod.POST })
+	public String Debit_Card_Fileupload(Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		// md.addAttribute("reportvalue", "RBS Reports");
+		// md.addAttribute("reportid", "RBSReports");
+		md.addAttribute("menu", "ReconFileUpload");
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+
+		return "BRECON/ReconFileupload";
+	}
+
+	@RequestMapping(value = "ReconProcess", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconProcess(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String card_num, @RequestParam(required = false) String tran_date,
+			@RequestParam(required = false) String tran_time, @RequestParam(required = false) String card_num1,
+			@RequestParam(required = false) String tran_date1, @RequestParam(required = false) String tran_time1,
+			@RequestParam(required = false) String seq_no3, @RequestParam(required = false) String opr_date,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws ParseException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+
+		if (formmode == null || formmode.equals("main")) {
+			md.addAttribute("menu", "ReconProcess");
+			md.addAttribute("formmode", "main"); // to set which form - valid values are "edit" , "add" & "list"
+
+		} else if (formmode.equals("matched")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("menu", "ReconProcess");
+			md.addAttribute("HOST", reconMasterRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			System.out.println("HOST" + reconMasterRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("unmatched")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("menu", "ReconProcess");
+			md.addAttribute("seq_no3", seq_no3);
+			md.addAttribute("opr_date", opr_date);
+			md.addAttribute("acct_num", acct_num);
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("unmatched1")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("menu", "ReconProcess");
+			md.addAttribute("seq_no3", seq_no3);
+			md.addAttribute("opr_date", opr_date);
+			md.addAttribute("acct_num", acct_num);
+			md.addAttribute("HOST", hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			md.addAttribute("EPIN", ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("edit")) {
+
+			md.addAttribute("formmode", "edit");
+			md.addAttribute("menu", "ReconProcess");
+			md.addAttribute("Parameter", bRECONEPINServices.getParam(card_num, tran_date, tran_time));
+
+		} else if (formmode.equals("edit1")) {
+
+			md.addAttribute("formmode", "edit1");
+			md.addAttribute("menu", "ReconProcess");
+
+			md.addAttribute("Parameter", bRECONEPINServices.getParam1(card_num1, tran_date1, tran_time1));
+
+		}
+		return "BRECON/ReconProcess";
+
+	}
+
+	@RequestMapping(value = "ReconProcessSearch", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconProcessSearch(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String searchor, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) String seq_no3,
+			@RequestParam(required = false) String seq_no2, @RequestParam(required = false) String acct_holder,
+			@RequestParam(required = false) String opr_date, @RequestParam(required = false) String acct_num,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		md.addAttribute("menu", "ReconProcess");
+		md.addAttribute("formmode", "unmatched");
+		md.addAttribute("seq_no3", seq_no3);
+		md.addAttribute("opr_date", opr_date);
+		md.addAttribute("acct_num", acct_num);
+		md.addAttribute("acct_holder", acct_holder);
+		md.addAttribute("seq_no2", seq_no2);
+
+		md.addAttribute("HOST", hostDataRepo.findAllCustom1(PageRequest.of(currentPage, pageSize), searchor));
+		// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+		// pageSize)));
+		md.addAttribute("EPIN", ePINDataRepo.findAllCustom1(PageRequest.of(currentPage, pageSize), searchor));
+
+		return "BRECON/ReconProcess";
+
+	}
+
+	@RequestMapping(value = "AccMaster", method = { RequestMethod.GET, RequestMethod.POST })
+	public String AccMaster(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "AccMaster");
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("Master", accMasterRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+		} else if (formmode.equals("add")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("menu", "AccMaster");
+			md.addAttribute("HOST", reconMasterRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			System.out.println("HOST" + reconMasterRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("edit")) {
+			md.addAttribute("menu", "AccMaster");
+			md.addAttribute("menuname", "Reports Parameter - Edit");
+			md.addAttribute("formmode", "edit");
+			md.addAttribute("Parameter", bRECONMasterServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("view")) {
+			md.addAttribute("menu", "AccMaster");
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("Parameter", bRECONMasterServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("verify")) {
+			md.addAttribute("menu", "AccMaster");
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("Parameter", bRECONMasterServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("delete")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("Parameter", bRECONMasterServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		}
+		return "BRECON/ReconAccountMaster";
+
+	}
+
+	@RequestMapping(value = "createAccountMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public String createAccountMaster(@RequestParam("formmode") String formmode,
+			@ModelAttribute RECONAccMaster rECONAccMaster, Model md, HttpServletRequest rq)
+			throws IOException, SQLException {
+
+		String msg = bRECONMasterServices.customParam(rECONAccMaster, formmode);
+		// md.addAttribute("adminflag", "adminflag");
+
+		return msg;
+
+	}
+
+	/***************
+	 * ReconOperations
+	 * 
+	 * @throws SQLException
+	 * @throws IOException
+	 * @throws ParseException
+	 *****************/
+
+	@RequestMapping(value = "ReconOperations", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconOperations(@RequestParam(required = false) String formmode,
+			@RequestParam(value = "opr_date", required = false) String date,
+			@RequestParam(required = false) String srl_no, @RequestParam(required = false) String acct_num,
+			@RequestParam(required = false) String userid, @RequestParam(required = false) Optional<Integer> page,
+			@ModelAttribute ReconStatus reconStatus,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws IOException, SQLException, ParseException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		String opr_date = "";
+		if (date == null) {
+			DateFormat dateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+			opr_date = dateFormat1.format(new Date());
+			// reportDate = dateFormat.format(new
+			// SimpleDateFormat("dd-MM-yyyy").parse(reportDate1));
+
+		} else {
+			opr_date = date;
+		}
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("opr_date", opr_date);
+			// md.addAttribute("acct_num", reconOprRepo.findByIdDate(opr_date));
+
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+		} else if (formmode.equals("list1")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "list1"); // to set which form - valid values are "edit" , "add" & "list"
+			reconOperationServices.customParam(reconStatus, acct_num, opr_date);
+			reconOperationServices.customParam11(reconStatus, acct_num, opr_date);
+
+			md.addAttribute("opr_date", opr_date);
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR11", reconOprRepo.findByDate1(opr_date));
+
+		}
+		return "BRECON/ReconOperations";
+
+	}
+
+	/******************
+	 * ReconStatus
+	 * 
+	 * @throws SQLException
+	 * @throws ParseException
+	 *************************/
+
+	@RequestMapping(value = "ReconStatus", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconStatus(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) String seq_no, @RequestParam(required = false) String opr_date,
+			@RequestParam(required = false) Optional<Integer> page,
+			@ModelAttribute ReconSummaryReport reconSummaryReport,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws ParseException, SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		System.out.println(opr_date);
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		if (formmode == null || formmode.equals("list")) {
+
+			md.addAttribute("menu", "ReconStatus");
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("STATUS", reconOprRepo.findAllCustom1(PageRequest.of(currentPage, pageSize)));
+		} else if (formmode.equals("status")) {
+			String st1 = reconOprRepo.findStatus1(acct_num, opr_date);
+			String st2 = reconOprRepo.findStatus2(acct_num, opr_date);
+			String st3 = reconOprRepo.findStatus3(acct_num, opr_date);
+			System.out.println("st3" + st3);
+			String st4 = reconOprRepo.findStatus4(acct_num, opr_date);
+			String st5 = reconOprRepo.findStatus5(acct_num, opr_date);
+			String st6 = reconOprRepo.findStatus6(acct_num, opr_date);
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "status");
+			md.addAttribute("STATUS", accMasterRepo.findAllCustom11(acct_num));
+			System.out.println("Master" + accMasterRepo.findAllCustom11(acct_num));
+			md.addAttribute("STATUS1", reconOprRepo.findAllCustom111(acct_num, seq_no));
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+
+			/*********** st3 **********/
+			String unmatchCount3 = reconSummaryRepo.findCountUnmatched(opr_date);
+			System.out.println(unmatchCount3);
+			BigDecimal amount3 = reconSummaryRepo.findSumAmt(opr_date);
+
+			/********* st4 **************/
+			String unmatchCount4 = reconSummaryRepo.findCountUnmatched1(opr_date);
+			System.out.println(unmatchCount4);
+			BigDecimal amount4 = reconSummaryRepo.findSumAmt1(opr_date);
+
+			/********* st5 **************/
+			String unmatchCount5 = reconSummaryRepo.findCountUnmatched2(opr_date);
+			System.out.println(unmatchCount4);
+			BigDecimal amount5 = reconSummaryRepo.findSumAmt2(opr_date);
+
+			if (st2.equals("Completed")) {
+				reconOperationServices.insertRPT(reconSummaryReport, opr_date);
+
+				md.addAttribute("reconsummary",
+						reconSummaryRepo.findAllCustom(PageRequest.of(currentPage, pageSize), opr_date));
+			} else {
+			}
+
+			if (st3.equals("Completed")) {
+				System.out.println("I  m in");
+				// md.addAttribute("reconsummary1",
+				// reconSummaryRepo.findCountUnmatched(opr_date));
+
+				System.out.println(amount3);
+				reconOperationServices.insertRPT1(reconSummaryReport, opr_date, unmatchCount3, amount3);
+
+				md.addAttribute("reconsummary1",
+						reconSummaryRepo.findAllCustom(PageRequest.of(currentPage, pageSize), opr_date));
+
+			} else {
+			}
+
+			if (st4.equals("Completed")) {
+				System.out.println("I m in4");
+				// md.addAttribute("reconsummary1",
+				// reconSummaryRepo.findCountUnmatched(opr_date));
+
+				System.out.println(amount4);
+				reconOperationServices.insertRPT2(reconSummaryReport, opr_date, unmatchCount3, amount3, unmatchCount4,
+						amount4);
+
+				md.addAttribute("reconsummary2",
+						reconSummaryRepo.findAllCustom(PageRequest.of(currentPage, pageSize), opr_date));
+
+			} else {
+			}
+
+			if (st5.equals("Completed")) {
+				System.out.println("I m in5");
+				// md.addAttribute("reconsummary1",
+				// reconSummaryRepo.findCountUnmatched(opr_date));
+
+				System.out.println(amount5);
+				reconOperationServices.insertRPT3(reconSummaryReport, opr_date, unmatchCount3, amount3, unmatchCount4,
+						amount4, unmatchCount5, amount5);
+
+				md.addAttribute("reconsummary3",
+						reconSummaryRepo.findAllCustom(PageRequest.of(currentPage, pageSize), opr_date));
+
+			} else {
+			}
+
+			md.addAttribute("opn_bal", reconOprRepo.findByBal(opr_date));
+
+			md.addAttribute("opn_bal", reconOprRepo.findByBal(opr_date));
+			System.out.println("opn_bal" + reconOprRepo.findByBal(opr_date));
+			md.addAttribute("cls_bal", reconOprRepo.findByBal1(opr_date));
+			System.out.println("cls_bal" + reconOprRepo.findByBal1(opr_date));
+
+		}
+		return "BRECON/ReconStatus";
+
+	}
+
+	/********************************
+	 * Recon Operations
+	 *************************************/
+	@RequestMapping(value = "ReconReports", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconReports(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) String seq_no, @RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		if (formmode == null || formmode.equals("list")) {
+
+			md.addAttribute("menu", "ReconStatus");
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("STATUS", reconOprRepo.findAllCustom1(PageRequest.of(currentPage, pageSize)));
+		} else if (formmode.equals("status")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "status");
+			md.addAttribute("STATUS", accMasterRepo.findAllCustom11(acct_num));
+			System.out.println("Master" + accMasterRepo.findAllCustom11(acct_num));
+			md.addAttribute("STATUS1", reconOprRepo.findAllCustom111(acct_num, seq_no));
+
+			// md.addAttribute("Parameter", bRECONMasterServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		}
+		return "BRECON/ReconStatus";
+
+	}
+
+	/************************ REngine *************************/
+
+	@RequestMapping(value = "REngine", method = { RequestMethod.GET, RequestMethod.POST })
+	public String REngine(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "REngine");
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("REngine", ruleEngineRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+		} else if (formmode.equals("add")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("menu", "REngine");
+			md.addAttribute("REngine", ruleEngineRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			System.out.println("REngine" + ruleEngineRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("edit")) {
+			md.addAttribute("menu", "REngine");
+			md.addAttribute("menuname", "Reports Parameter - Edit");
+			md.addAttribute("formmode", "edit");
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("view")) {
+			md.addAttribute("menu", "REngine");
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("verify")) {
+			md.addAttribute("menu", "AccMaster");
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("delete")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		}
+		return "BRECON/ReconREngine";
+
+	}
+
+	@RequestMapping(value = "createREngine", method = RequestMethod.POST)
+	@ResponseBody
+	public String createREngine(@RequestParam("formmode") String formmode, @ModelAttribute RuleEngine ruleEngine,
+			Model md, HttpServletRequest rq) throws IOException, SQLException {
+
+		String msg = bRECONRuleEngineServices.customParam(ruleEngine, formmode);
+		// md.addAttribute("adminflag", "adminflag");
+
+		return msg;
+
+	}
+
+	/************************ "BatchJobs" *************************/
+
+	@RequestMapping(value = "BatchJobs", method = { RequestMethod.GET, RequestMethod.POST })
+	public String BatchJobs(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "BatchJobs");
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("REngine", ruleEngineRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+		} else if (formmode.equals("add")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("menu", "BatchJobs");
+			md.addAttribute("REngine", ruleEngineRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			System.out.println("REngine" + ruleEngineRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("edit")) {
+			md.addAttribute("menu", "BatchJobs");
+			md.addAttribute("menuname", "Reports Parameter - Edit");
+			md.addAttribute("formmode", "edit");
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("view")) {
+			md.addAttribute("menu", "BatchJobs");
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("verify")) {
+			md.addAttribute("menu", "BatchJobs");
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		} else if (formmode.equals("delete")) {
+			md.addAttribute("menu", "BatchJobs");
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("REngine", bRECONRuleEngineServices.getParam(acct_num));
+			// md.addAttribute("HOST",
+			// hostDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+			// System.out.println("HOST1"+hostDataRepo.findAllCustom(PageRequest.of(currentPage,
+			// pageSize)));
+			// md.addAttribute("EPIN",
+			// ePINDataRepo.findAllCustom(PageRequest.of(currentPage, pageSize)));
+
+		}
+		return "BRECON/ReconBatchJobs";
+
+	}
+
+	@RequestMapping(value = "createBatchJobs", method = RequestMethod.POST)
+	@ResponseBody
+	public String createBatchJobs(@RequestParam("formmode") String formmode, @ModelAttribute RuleEngine ruleEngine,
+			Model md, HttpServletRequest rq) throws IOException, SQLException {
+
+		String msg = bRECONRuleEngineServices.customParam(ruleEngine, formmode);
+		// md.addAttribute("adminflag", "adminflag");
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "runProcedure", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String runProcedure(@RequestParam("rpt_date") String rpt_date, Model md, HttpServletRequest rq)
+			throws IOException, SQLException {
+
+		String msg = reconOperationServices.saveReport(rpt_date);
+		// md.addAttribute("adminflag", "adminflag");
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "runAutoRecProcedure", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String runAutoRecProcedure(@RequestParam("opr_date") String opr_date,
+			@RequestParam("acct_num") String acct_num, @RequestParam("seq_no1") String seq_no1,
+			@ModelAttribute ReconStatus reconStatus, Model md, HttpServletRequest rq)
+			throws IOException, SQLException, ParseException {
+
+		String msg = reconOperationServices.saveReport1(opr_date);
+
+		// reconOperationServices.customParam(reconStatus,acct_num);
+		reconOperationServices.customParam1(reconStatus, acct_num, seq_no1, opr_date);
+
+		// md.addAttribute("adminflag", "adminflag");
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "ReconOperationsdate", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconOperationsdate(@RequestParam(required = false) String formmode,
+			@RequestParam(value = "opr_date", required = false) String date,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String srl_no,
+			@RequestParam(required = false) String acct_holder, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page, @ModelAttribute ReconStatus reconStatus,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws IOException, SQLException, ParseException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		logger.info(date);
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		String opr_date = "";
+		if (date == null) {
+			DateFormat dateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+			opr_date = dateFormat1.format(new Date());
+			// reportDate = dateFormat.format(new
+			// SimpleDateFormat("dd-MM-yyyy").parse(reportDate1));
+
+		} else {
+			opr_date = date;
+		}
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("opr_date", opr_date);
+
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+		} else if (formmode.equals("list1")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "list1"); // to set which form - valid values are "edit" , "add" & "list"
+			reconOperationServices.customParam3(reconStatus, opr_date, acct_num);
+			md.addAttribute("opr_date", opr_date);
+			reconOperationServices.customParam(reconStatus, acct_num, opr_date);
+
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR11", reconOprRepo.findByDate1(opr_date));
+			md.addAttribute("OPR112", reconOprRepo.findByDate12(opr_date));
+			md.addAttribute("OPR113", reconOprRepo.findByDate13(opr_date));
+			md.addAttribute("OPR19", accMasterRepo.findByIdcustom1(PageRequest.of(currentPage, pageSize), acct_holder));
+
+		}
+		return "BRECON/ReconOperations";
+
+	}
+
+	@RequestMapping(value = "createReconProcess", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String createReconProcess(@RequestParam("formmode") String formmode,
+			@RequestParam("card_num") String card_num, @RequestParam("tran_date") String tran_date,
+			@RequestParam("tran_time") String tran_time, @RequestParam("dest_amt") String dest_amt,
+			@RequestParam("tran_code") String tran_code, @ModelAttribute EPINDataEntity ePINDataEntity, Model md,
+			HttpServletRequest rq) throws IOException, SQLException, ParseException {
+		System.out.println(ePINDataEntity);
+
+		String msg = reconOperationServices.customParam4(ePINDataEntity, formmode, card_num, tran_date, tran_time,
+				dest_amt);
+		// md.addAttribute("adminflag", "adminflag");
+		System.out.println(msg);
+		return msg;
+
+	}
+
+	@RequestMapping(value = "createReconProcess1", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String createReconProcess1(@RequestParam("formmode") String formmode,
+			@RequestParam("card_num") String card_num, @RequestParam("tran_date") String tran_date,
+			@RequestParam("tran_time") String tran_time, @RequestParam("dest_amt") String dest_amt,
+			@RequestParam("tran_code") String tran_code, @ModelAttribute HostDataEntity hostDataEntity, Model md,
+			HttpServletRequest rq) throws IOException, SQLException, ParseException {
+		System.out.println(hostDataEntity);
+		System.out.println(card_num);
+		System.out.println(tran_date);
+		System.out.println(tran_time);
+
+		String msg = reconOperationServices.customParam5(hostDataEntity, formmode, card_num, tran_date, tran_time,
+				dest_amt);
+		// md.addAttribute("adminflag", "adminflag");
+		System.out.println(msg);
+		return msg;
+
+	}
+
+	@RequestMapping(value = "DownloadReport", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public InputStreamResource DownloadWeeklyReport(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "formmode", required = false) String formmode,
+			@RequestParam(value = "recon_per", required = false) String recon_per,
+			@RequestParam(value = "start_date", required = false) String start_date,
+			@RequestParam(value = "end_date", required = false) String end_date,
+			@RequestParam(value = "acct_holder", required = false) String acct_holder,
+			@RequestParam(value = "acct_summary", required = false) String acct_summary,
+			@RequestParam(value = "acct_no", required = false) String acct_no,
+			@RequestParam(value = "mirror_acct_no", required = false) String mirror_acct_no,
+			@RequestParam(value = "acct_name", required = false) String acct_name,
+			@RequestParam(value = "mirror_acct_name", required = false) String mirror_acct_name,
+			@RequestParam(value = "crncy_code", required = false) String crncy_code,
+			@RequestParam(value = "crncy_code1", required = false) String crncy_code1,
+			@RequestParam(value = "filetype", required = false) String filetype,
+			@RequestParam(value = "reportid", required = false) String reportid) throws IOException, SQLException {
+		response.setContentType("application/octet-stream");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+		InputStreamResource resource = null;
+		try {
+
+			File repfile = reconReportServices.getFile(formmode, filetype, recon_per, start_date, end_date, acct_holder,
+					acct_summary, acct_no, mirror_acct_no, acct_name, mirror_acct_name, crncy_code, crncy_code1);
+
+			response.setHeader("Content-Disposition", "attachment; filename=" + repfile.getName());
+			resource = new InputStreamResource(new FileInputStream(repfile));
+		} catch (JRException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		return resource;
+	}
+
+	@RequestMapping(value = "DownloadReportDet", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public InputStreamResource DetailDown(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "formmode", required = false) String formmode,
+			@RequestParam(value = "report_date", required = false) String report_date,
+			@RequestParam(value = "filetype", required = false) String filetype,
+			@RequestParam(value = "reportid", required = false) String reportid) throws IOException, SQLException {
+		response.setContentType("application/octet-stream");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+		InputStreamResource resource = null;
+		try {
+
+			File repfile = reconReportServices.getDetFile(formmode, filetype,report_date);
+
+			response.setHeader("Content-Disposition", "attachment; filename=" + repfile.getName());
+			resource = new InputStreamResource(new FileInputStream(repfile));
+		} catch (JRException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		return resource;
+	}
+
+	@RequestMapping(value = "ReconOperationsdate1", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconOperationsdate1(@RequestParam(required = false) String formmode,
+			@RequestParam(value = "opr_date", required = false) String date,
+			@RequestParam(required = false) String acct_holder, @RequestParam(required = false) String srl_no,
+			@RequestParam(required = false) String seq_no2, @RequestParam(required = false) String acct_num,
+			@RequestParam(required = false) String userid, @RequestParam(required = false) Optional<Integer> page,
+			@ModelAttribute ReconStatus reconStatus,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws IOException, SQLException, ParseException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		logger.info(date);
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		String opr_date = "";
+		if (date == null) {
+			DateFormat dateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+			opr_date = dateFormat1.format(new Date());
+			// reportDate = dateFormat.format(new
+			// SimpleDateFormat("dd-MM-yyyy").parse(reportDate1));
+
+		} else {
+			opr_date = date;
+		}
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("opr_date", opr_date);
+
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+		} else if (formmode.equals("list1")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "list1"); // to set which form - valid values are "edit" , "add" & "list"
+			reconOperationServices.customParam3(reconStatus, opr_date, acct_num);
+			md.addAttribute("OPR113", reconOprRepo.findByDate13(opr_date));
+
+			reconOperationServices.customParam33(reconStatus, opr_date, acct_num, seq_no2);
+
+			md.addAttribute("opr_date", opr_date);
+
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+			md.addAttribute("OPR19", accMasterRepo.findByIdcustom1(PageRequest.of(currentPage, pageSize), acct_holder));
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR11", reconOprRepo.findByDate1(opr_date));
+			md.addAttribute("OPR112", reconOprRepo.findByDate12(opr_date));
+			md.addAttribute("OPR114", accMasterRepo.findByDate14(acct_num));
+
+		} else if (formmode.equals("upload")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "upload"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("acct_name", accMasterRepo.findByIdname(acct_num));
+			md.addAttribute("acct", acct_num);
+			md.addAttribute("seq_no2", seq_no2);
+			md.addAttribute("seq_no3", reconOprRepo.findByDate122(opr_date));
+			md.addAttribute("acct_holder", acct_holder);
+
+		}
+		return "BRECON/ReconOperations";
+
+	}
+
+	@RequestMapping(value = "ReconOperationsdate11", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconOperationsdate11(@RequestParam(required = false) String formmode,
+			@RequestParam(value = "opr_date", required = false) String date,
+			@RequestParam(required = false) String acct_holder, @RequestParam(required = false) String seq_no3,
+			@RequestParam(required = false) String srl_no, @RequestParam(required = false) String seq_no2,
+			@RequestParam(required = false) String acct_num, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page, @ModelAttribute ReconStatus reconStatus,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws IOException, SQLException, ParseException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		System.out.println(seq_no3);
+		System.out.println(seq_no2);
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		logger.info(date);
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		String opr_date = "";
+		if (date == null) {
+			DateFormat dateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+			opr_date = dateFormat1.format(new Date());
+			// reportDate = dateFormat.format(new
+			// SimpleDateFormat("dd-MM-yyyy").parse(reportDate1));
+
+		} else {
+			opr_date = date;
+		}
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("opr_date", opr_date);
+
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+		} else if (formmode.equals("list1")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "list1"); // to set which form - valid values are "edit" , "add" & "list"
+			reconOperationServices.customParam3(reconStatus, opr_date, acct_num);
+			md.addAttribute("OPR113", reconOprRepo.findByDate13(opr_date));
+			md.addAttribute("OPR115", reconOprRepo.findByDate15(opr_date));
+
+			System.out.println("seq_no2" + seq_no2);
+			System.out.println("seq_no3" + seq_no3);
+
+			reconOperationServices.customParam33(reconStatus, opr_date, acct_num, seq_no2);
+
+			md.addAttribute("opr_date", opr_date);
+
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+			md.addAttribute("OPR19", accMasterRepo.findByIdcustom1(PageRequest.of(currentPage, pageSize), acct_holder));
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR11", reconOprRepo.findByDate1(opr_date));
+			md.addAttribute("OPR112", reconOprRepo.findByDate12(opr_date));
+			md.addAttribute("OPR114", accMasterRepo.findByDate14(acct_num));
+
+			System.out.println("seq_no3" + seq_no3);
+
+			reconOperationServices.customParam44(reconStatus, opr_date, acct_num, seq_no3);
+
+		} else if (formmode.equals("upload")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "upload"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("acct_name", accMasterRepo.findByIdname(acct_num));
+			md.addAttribute("acct", acct_num);
+			md.addAttribute("seq_no2", seq_no2);
+			md.addAttribute("acct_holder", acct_holder);
+			md.addAttribute("seq_no2", seq_no2);
+			md.addAttribute("seq_no3", reconOprRepo.findByDate122(opr_date));
+
+			/*
+			 * reconOperationServices.customParam3(reconStatus, opr_date,acct_num);
+			 * md.addAttribute("OPR113", reconOprRepo.findByDate13(opr_date));
+			 * 
+			 * reconOperationServices.customParam33(reconStatus, opr_date,acct_num,seq_no2);
+			 * 
+			 * md.addAttribute("opr_date", opr_date);
+			 * 
+			 * md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+			 * md.addAttribute("OPR19",
+			 * accMasterRepo.findByIdcustom1(PageRequest.of(currentPage, pageSize),
+			 * acct_holder)); md.addAttribute("OPR",
+			 * reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			 * md.addAttribute("OPR11", reconOprRepo.findByDate1(opr_date));
+			 * md.addAttribute("OPR112", reconOprRepo.findByDate12(opr_date));
+			 * md.addAttribute("OPR114", accMasterRepo.findByDate14(acct_num));
+			 */
+		}
+		return "BRECON/ReconOperations";
+
+	}
+
+	@RequestMapping(value = "createReconDst", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String createReconDst(@RequestParam("formmode") String formmode,
+			@ModelAttribute HostDataEntity hostDataEntity, Model md, HttpServletRequest rq)
+			throws IOException, SQLException, ParseException {
+		System.out.println(hostDataEntity);
+
+		String msg = reconOperationServices.editDestination(hostDataEntity, formmode);
+		// md.addAttribute("adminflag", "adminflag");
+		System.out.println(msg);
+		return msg;
+
+	}
+
+	@RequestMapping(value = "createReconSrc", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String createReconSrc(@RequestParam("formmode") String formmode,
+			@ModelAttribute EPINDataEntity ePINDataEntity, Model md, HttpServletRequest rq)
+			throws IOException, SQLException, ParseException {
+		System.out.println(ePINDataEntity);
+
+		String msg = reconOperationServices.editSource(ePINDataEntity, formmode);
+		// md.addAttribute("adminflag", "adminflag");
+		System.out.println(msg);
+		return msg;
+
+	}
+
+	@RequestMapping(value = "ReconOperationsdate111", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ReconOperationsdate111(@RequestParam(required = false) String formmode,
+			@RequestParam(value = "opr_date", required = false) String date,
+			@RequestParam(required = false) String acct_holder, @RequestParam(required = false) String seq_no3,
+			@RequestParam(required = false) String seq_no4, @RequestParam(required = false) String srl_no,
+			@RequestParam(required = false) String seq_no2, @RequestParam(required = false) String acct_num,
+			@RequestParam(required = false) String userid, @RequestParam(required = false) Optional<Integer> page,
+			@ModelAttribute ReconStatus reconStatus,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req)
+			throws IOException, SQLException, ParseException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		logger.info(date);
+		System.out.println("page" + currentPage);
+		System.out.println("page" + pageSize);
+		String opr_date = "";
+		if (date == null) {
+			DateFormat dateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+			opr_date = dateFormat1.format(new Date());
+			// reportDate = dateFormat.format(new
+			// SimpleDateFormat("dd-MM-yyyy").parse(reportDate1));
+
+		} else {
+			opr_date = date;
+		}
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("opr_date", opr_date);
+
+			md.addAttribute("formmode", "list"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+		} else if (formmode.equals("list1")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "list1"); // to set which form - valid values are "edit" , "add" & "list"
+			// reconOperationServices.customParam3(reconStatus, opr_date, acct_num);
+			md.addAttribute("OPR113", reconOprRepo.findByDate13(opr_date));
+			md.addAttribute("OPR115", reconOprRepo.findByDate15(opr_date));
+
+			System.out.println("seq_no2" + seq_no2);
+			System.out.println("seq_no3" + seq_no3);
+			System.out.println("seq_no4" + seq_no4);
+
+			reconOperationServices.customParam33(reconStatus, opr_date, acct_num, seq_no2);
+
+			md.addAttribute("opr_date", opr_date);
+
+			md.addAttribute("OPR1", accMasterRepo.findByIdcustom(acct_num));
+			md.addAttribute("OPR19", accMasterRepo.findByIdcustom1(PageRequest.of(currentPage, pageSize), acct_holder));
+			md.addAttribute("OPR", reconOprRepo.findByDate(PageRequest.of(currentPage, pageSize), opr_date));
+			md.addAttribute("OPR11", reconOprRepo.findByDate1(opr_date));
+			md.addAttribute("OPR112", reconOprRepo.findByDate12(opr_date));
+			md.addAttribute("OPR114", accMasterRepo.findByDate14(acct_num));
+			reconOperationServices.revoradj(reconStatus, seq_no4, opr_date, acct_num);
+
+			System.out.println("seq_no3" + seq_no4);
+
+			// reconOperationServices.customParam44(reconStatus, opr_date, acct_num,
+			// seq_no3);
+
+		} else if (formmode.equals("upload")) {
+			md.addAttribute("menu", "ReconOperations");
+			md.addAttribute("formmode", "upload"); // to set which form - valid values are "edit" , "add" & "list"
+			md.addAttribute("acct_name", accMasterRepo.findByIdname(acct_num));
+			md.addAttribute("acct", acct_num);
+			md.addAttribute("seq_no2", seq_no2);
+			md.addAttribute("acct_holder", acct_holder);
+			md.addAttribute("seq_no2", seq_no2);
+			md.addAttribute("seq_no3", reconOprRepo.findByDate122(opr_date));
+
+		}
+		return "BRECON/ReconOperations";
+
+	}
+}

@@ -1,0 +1,1001 @@
+package com.bornfire.xbrl.entities.BRSS;
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+@Entity
+@Table(name="T23_OR_DISRUPTIONS_OPERATIONS_TABLE")
+
+public class T23ORReport {
+
+	private String	A1_PRODUCT;
+	private String	A2_PRODUCT;
+	private BigDecimal	A2_NO_OF_EVENTS;
+	private BigDecimal	A2_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A2_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A2_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A2_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A2_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A2_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A2_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A3_PRODUCT;
+	private BigDecimal	A3_NO_OF_EVENTS;
+	private BigDecimal	A3_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A3_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A3_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A3_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A3_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A3_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A3_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A4_PRODUCT;
+	private String	A5_PRODUCT;
+	private BigDecimal	A5_NO_OF_EVENTS;
+	private BigDecimal	A5_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A5_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A5_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A5_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A5_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A5_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A5_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A6_PRODUCT;
+	private BigDecimal	A6_NO_OF_EVENTS;
+	private BigDecimal	A6_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A6_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A6_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A6_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A6_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A6_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A6_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A7_PRODUCT;
+	private String	A8_PRODUCT;
+	private BigDecimal	A8_NO_OF_EVENTS;
+	private BigDecimal	A8_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A8_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A8_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A8_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A8_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A8_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A8_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A9_PRODUCT;
+	private BigDecimal	A9_NO_OF_EVENTS;
+	private BigDecimal	A9_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A9_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A9_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A9_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A9_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A9_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A9_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A10_PRODUCT;
+	private String	A11_PRODUCT;
+	private BigDecimal	A11_NO_OF_EVENTS;
+	private BigDecimal	A11_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A11_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A11_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A11_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A11_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A11_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A11_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A12_PRODUCT;
+	private BigDecimal	A12_NO_OF_EVENTS;
+	private BigDecimal	A12_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A12_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A12_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A12_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A12_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A12_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A12_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A13_PRODUCT;
+	private String	A14_PRODUCT;
+	private BigDecimal	A14_NO_OF_EVENTS;
+	private BigDecimal	A14_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A14_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A14_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A14_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A14_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A14_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A14_TOTAL_NO_OF_NEAR_MISSES;
+	private String	A15_PRODUCT;
+	private BigDecimal	A15_NO_OF_EVENTS;
+	private BigDecimal	A15_NO_OF_FUNCTIONAL_AREA;
+	private BigDecimal	A15_LIST_OF_FUNCT_AREA;
+	private BigDecimal	A15_TOTAL_DUR_OF_DISRUPTION;
+	private BigDecimal	A15_MAX_DUR_OF_DISRUPTION;
+	private BigDecimal	A15_TOTAL_AMT_OF_LOSS;
+	private BigDecimal	A15_TOTAL_AMT_NET_LOSS;
+	private BigDecimal	A15_TOTAL_NO_OF_NEAR_MISSES;
+	private String	REPORT_CODE;
+	private String	REPORT_NAME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Id
+	private Date	REPORT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REPORT_DUE_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_SUBMIT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_FROM;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_TO;
+	private String	REP_FREQ;
+	private String	NIL_REPORT_FLG;
+	private String	ARCH_FLG;
+	private String	ENTITY_FLG;
+	private String	DEL_FLG;
+	private String	MODIFY_FLG;
+	private String	ENTRY_USER;
+	private String	MODIFY_USER;
+	private String	VERIFY_USER;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	ENTRY_TIME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	MODIFY_TIME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	VERIFY_TIME;
+	private String	QTR_FLG;
+	public String getA1_PRODUCT() {
+		return A1_PRODUCT;
+	}
+	public void setA1_PRODUCT(String a1_PRODUCT) {
+		A1_PRODUCT = a1_PRODUCT;
+	}
+	public String getA2_PRODUCT() {
+		return A2_PRODUCT;
+	}
+	public void setA2_PRODUCT(String a2_PRODUCT) {
+		A2_PRODUCT = a2_PRODUCT;
+	}
+	public BigDecimal getA2_NO_OF_EVENTS() {
+		return A2_NO_OF_EVENTS;
+	}
+	public void setA2_NO_OF_EVENTS(BigDecimal a2_NO_OF_EVENTS) {
+		A2_NO_OF_EVENTS = a2_NO_OF_EVENTS;
+	}
+	public BigDecimal getA2_NO_OF_FUNCTIONAL_AREA() {
+		return A2_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA2_NO_OF_FUNCTIONAL_AREA(BigDecimal a2_NO_OF_FUNCTIONAL_AREA) {
+		A2_NO_OF_FUNCTIONAL_AREA = a2_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA2_LIST_OF_FUNCT_AREA() {
+		return A2_LIST_OF_FUNCT_AREA;
+	}
+	public void setA2_LIST_OF_FUNCT_AREA(BigDecimal a2_LIST_OF_FUNCT_AREA) {
+		A2_LIST_OF_FUNCT_AREA = a2_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA2_TOTAL_DUR_OF_DISRUPTION() {
+		return A2_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA2_TOTAL_DUR_OF_DISRUPTION(BigDecimal a2_TOTAL_DUR_OF_DISRUPTION) {
+		A2_TOTAL_DUR_OF_DISRUPTION = a2_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA2_MAX_DUR_OF_DISRUPTION() {
+		return A2_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA2_MAX_DUR_OF_DISRUPTION(BigDecimal a2_MAX_DUR_OF_DISRUPTION) {
+		A2_MAX_DUR_OF_DISRUPTION = a2_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA2_TOTAL_AMT_OF_LOSS() {
+		return A2_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA2_TOTAL_AMT_OF_LOSS(BigDecimal a2_TOTAL_AMT_OF_LOSS) {
+		A2_TOTAL_AMT_OF_LOSS = a2_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA2_TOTAL_AMT_NET_LOSS() {
+		return A2_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA2_TOTAL_AMT_NET_LOSS(BigDecimal a2_TOTAL_AMT_NET_LOSS) {
+		A2_TOTAL_AMT_NET_LOSS = a2_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA2_TOTAL_NO_OF_NEAR_MISSES() {
+		return A2_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA2_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a2_TOTAL_NO_OF_NEAR_MISSES) {
+		A2_TOTAL_NO_OF_NEAR_MISSES = a2_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA3_PRODUCT() {
+		return A3_PRODUCT;
+	}
+	public void setA3_PRODUCT(String a3_PRODUCT) {
+		A3_PRODUCT = a3_PRODUCT;
+	}
+	public BigDecimal getA3_NO_OF_EVENTS() {
+		return A3_NO_OF_EVENTS;
+	}
+	public void setA3_NO_OF_EVENTS(BigDecimal a3_NO_OF_EVENTS) {
+		A3_NO_OF_EVENTS = a3_NO_OF_EVENTS;
+	}
+	public BigDecimal getA3_NO_OF_FUNCTIONAL_AREA() {
+		return A3_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA3_NO_OF_FUNCTIONAL_AREA(BigDecimal a3_NO_OF_FUNCTIONAL_AREA) {
+		A3_NO_OF_FUNCTIONAL_AREA = a3_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA3_LIST_OF_FUNCT_AREA() {
+		return A3_LIST_OF_FUNCT_AREA;
+	}
+	public void setA3_LIST_OF_FUNCT_AREA(BigDecimal a3_LIST_OF_FUNCT_AREA) {
+		A3_LIST_OF_FUNCT_AREA = a3_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA3_TOTAL_DUR_OF_DISRUPTION() {
+		return A3_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA3_TOTAL_DUR_OF_DISRUPTION(BigDecimal a3_TOTAL_DUR_OF_DISRUPTION) {
+		A3_TOTAL_DUR_OF_DISRUPTION = a3_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA3_MAX_DUR_OF_DISRUPTION() {
+		return A3_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA3_MAX_DUR_OF_DISRUPTION(BigDecimal a3_MAX_DUR_OF_DISRUPTION) {
+		A3_MAX_DUR_OF_DISRUPTION = a3_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA3_TOTAL_AMT_OF_LOSS() {
+		return A3_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA3_TOTAL_AMT_OF_LOSS(BigDecimal a3_TOTAL_AMT_OF_LOSS) {
+		A3_TOTAL_AMT_OF_LOSS = a3_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA3_TOTAL_AMT_NET_LOSS() {
+		return A3_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA3_TOTAL_AMT_NET_LOSS(BigDecimal a3_TOTAL_AMT_NET_LOSS) {
+		A3_TOTAL_AMT_NET_LOSS = a3_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA3_TOTAL_NO_OF_NEAR_MISSES() {
+		return A3_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA3_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a3_TOTAL_NO_OF_NEAR_MISSES) {
+		A3_TOTAL_NO_OF_NEAR_MISSES = a3_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA4_PRODUCT() {
+		return A4_PRODUCT;
+	}
+	public void setA4_PRODUCT(String a4_PRODUCT) {
+		A4_PRODUCT = a4_PRODUCT;
+	}
+	public String getA5_PRODUCT() {
+		return A5_PRODUCT;
+	}
+	public void setA5_PRODUCT(String a5_PRODUCT) {
+		A5_PRODUCT = a5_PRODUCT;
+	}
+	public BigDecimal getA5_NO_OF_EVENTS() {
+		return A5_NO_OF_EVENTS;
+	}
+	public void setA5_NO_OF_EVENTS(BigDecimal a5_NO_OF_EVENTS) {
+		A5_NO_OF_EVENTS = a5_NO_OF_EVENTS;
+	}
+	public BigDecimal getA5_NO_OF_FUNCTIONAL_AREA() {
+		return A5_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA5_NO_OF_FUNCTIONAL_AREA(BigDecimal a5_NO_OF_FUNCTIONAL_AREA) {
+		A5_NO_OF_FUNCTIONAL_AREA = a5_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA5_LIST_OF_FUNCT_AREA() {
+		return A5_LIST_OF_FUNCT_AREA;
+	}
+	public void setA5_LIST_OF_FUNCT_AREA(BigDecimal a5_LIST_OF_FUNCT_AREA) {
+		A5_LIST_OF_FUNCT_AREA = a5_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA5_TOTAL_DUR_OF_DISRUPTION() {
+		return A5_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA5_TOTAL_DUR_OF_DISRUPTION(BigDecimal a5_TOTAL_DUR_OF_DISRUPTION) {
+		A5_TOTAL_DUR_OF_DISRUPTION = a5_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA5_MAX_DUR_OF_DISRUPTION() {
+		return A5_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA5_MAX_DUR_OF_DISRUPTION(BigDecimal a5_MAX_DUR_OF_DISRUPTION) {
+		A5_MAX_DUR_OF_DISRUPTION = a5_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA5_TOTAL_AMT_OF_LOSS() {
+		return A5_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA5_TOTAL_AMT_OF_LOSS(BigDecimal a5_TOTAL_AMT_OF_LOSS) {
+		A5_TOTAL_AMT_OF_LOSS = a5_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA5_TOTAL_AMT_NET_LOSS() {
+		return A5_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA5_TOTAL_AMT_NET_LOSS(BigDecimal a5_TOTAL_AMT_NET_LOSS) {
+		A5_TOTAL_AMT_NET_LOSS = a5_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA5_TOTAL_NO_OF_NEAR_MISSES() {
+		return A5_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA5_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a5_TOTAL_NO_OF_NEAR_MISSES) {
+		A5_TOTAL_NO_OF_NEAR_MISSES = a5_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA6_PRODUCT() {
+		return A6_PRODUCT;
+	}
+	public void setA6_PRODUCT(String a6_PRODUCT) {
+		A6_PRODUCT = a6_PRODUCT;
+	}
+	public BigDecimal getA6_NO_OF_EVENTS() {
+		return A6_NO_OF_EVENTS;
+	}
+	public void setA6_NO_OF_EVENTS(BigDecimal a6_NO_OF_EVENTS) {
+		A6_NO_OF_EVENTS = a6_NO_OF_EVENTS;
+	}
+	public BigDecimal getA6_NO_OF_FUNCTIONAL_AREA() {
+		return A6_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA6_NO_OF_FUNCTIONAL_AREA(BigDecimal a6_NO_OF_FUNCTIONAL_AREA) {
+		A6_NO_OF_FUNCTIONAL_AREA = a6_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA6_LIST_OF_FUNCT_AREA() {
+		return A6_LIST_OF_FUNCT_AREA;
+	}
+	public void setA6_LIST_OF_FUNCT_AREA(BigDecimal a6_LIST_OF_FUNCT_AREA) {
+		A6_LIST_OF_FUNCT_AREA = a6_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA6_TOTAL_DUR_OF_DISRUPTION() {
+		return A6_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA6_TOTAL_DUR_OF_DISRUPTION(BigDecimal a6_TOTAL_DUR_OF_DISRUPTION) {
+		A6_TOTAL_DUR_OF_DISRUPTION = a6_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA6_MAX_DUR_OF_DISRUPTION() {
+		return A6_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA6_MAX_DUR_OF_DISRUPTION(BigDecimal a6_MAX_DUR_OF_DISRUPTION) {
+		A6_MAX_DUR_OF_DISRUPTION = a6_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA6_TOTAL_AMT_OF_LOSS() {
+		return A6_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA6_TOTAL_AMT_OF_LOSS(BigDecimal a6_TOTAL_AMT_OF_LOSS) {
+		A6_TOTAL_AMT_OF_LOSS = a6_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA6_TOTAL_AMT_NET_LOSS() {
+		return A6_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA6_TOTAL_AMT_NET_LOSS(BigDecimal a6_TOTAL_AMT_NET_LOSS) {
+		A6_TOTAL_AMT_NET_LOSS = a6_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA6_TOTAL_NO_OF_NEAR_MISSES() {
+		return A6_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA6_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a6_TOTAL_NO_OF_NEAR_MISSES) {
+		A6_TOTAL_NO_OF_NEAR_MISSES = a6_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA7_PRODUCT() {
+		return A7_PRODUCT;
+	}
+	public void setA7_PRODUCT(String a7_PRODUCT) {
+		A7_PRODUCT = a7_PRODUCT;
+	}
+	public String getA8_PRODUCT() {
+		return A8_PRODUCT;
+	}
+	public void setA8_PRODUCT(String a8_PRODUCT) {
+		A8_PRODUCT = a8_PRODUCT;
+	}
+	public BigDecimal getA8_NO_OF_EVENTS() {
+		return A8_NO_OF_EVENTS;
+	}
+	public void setA8_NO_OF_EVENTS(BigDecimal a8_NO_OF_EVENTS) {
+		A8_NO_OF_EVENTS = a8_NO_OF_EVENTS;
+	}
+	public BigDecimal getA8_NO_OF_FUNCTIONAL_AREA() {
+		return A8_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA8_NO_OF_FUNCTIONAL_AREA(BigDecimal a8_NO_OF_FUNCTIONAL_AREA) {
+		A8_NO_OF_FUNCTIONAL_AREA = a8_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA8_LIST_OF_FUNCT_AREA() {
+		return A8_LIST_OF_FUNCT_AREA;
+	}
+	public void setA8_LIST_OF_FUNCT_AREA(BigDecimal a8_LIST_OF_FUNCT_AREA) {
+		A8_LIST_OF_FUNCT_AREA = a8_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA8_TOTAL_DUR_OF_DISRUPTION() {
+		return A8_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA8_TOTAL_DUR_OF_DISRUPTION(BigDecimal a8_TOTAL_DUR_OF_DISRUPTION) {
+		A8_TOTAL_DUR_OF_DISRUPTION = a8_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA8_MAX_DUR_OF_DISRUPTION() {
+		return A8_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA8_MAX_DUR_OF_DISRUPTION(BigDecimal a8_MAX_DUR_OF_DISRUPTION) {
+		A8_MAX_DUR_OF_DISRUPTION = a8_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA8_TOTAL_AMT_OF_LOSS() {
+		return A8_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA8_TOTAL_AMT_OF_LOSS(BigDecimal a8_TOTAL_AMT_OF_LOSS) {
+		A8_TOTAL_AMT_OF_LOSS = a8_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA8_TOTAL_AMT_NET_LOSS() {
+		return A8_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA8_TOTAL_AMT_NET_LOSS(BigDecimal a8_TOTAL_AMT_NET_LOSS) {
+		A8_TOTAL_AMT_NET_LOSS = a8_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA8_TOTAL_NO_OF_NEAR_MISSES() {
+		return A8_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA8_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a8_TOTAL_NO_OF_NEAR_MISSES) {
+		A8_TOTAL_NO_OF_NEAR_MISSES = a8_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA9_PRODUCT() {
+		return A9_PRODUCT;
+	}
+	public void setA9_PRODUCT(String a9_PRODUCT) {
+		A9_PRODUCT = a9_PRODUCT;
+	}
+	public BigDecimal getA9_NO_OF_EVENTS() {
+		return A9_NO_OF_EVENTS;
+	}
+	public void setA9_NO_OF_EVENTS(BigDecimal a9_NO_OF_EVENTS) {
+		A9_NO_OF_EVENTS = a9_NO_OF_EVENTS;
+	}
+	public BigDecimal getA9_NO_OF_FUNCTIONAL_AREA() {
+		return A9_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA9_NO_OF_FUNCTIONAL_AREA(BigDecimal a9_NO_OF_FUNCTIONAL_AREA) {
+		A9_NO_OF_FUNCTIONAL_AREA = a9_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA9_LIST_OF_FUNCT_AREA() {
+		return A9_LIST_OF_FUNCT_AREA;
+	}
+	public void setA9_LIST_OF_FUNCT_AREA(BigDecimal a9_LIST_OF_FUNCT_AREA) {
+		A9_LIST_OF_FUNCT_AREA = a9_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA9_TOTAL_DUR_OF_DISRUPTION() {
+		return A9_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA9_TOTAL_DUR_OF_DISRUPTION(BigDecimal a9_TOTAL_DUR_OF_DISRUPTION) {
+		A9_TOTAL_DUR_OF_DISRUPTION = a9_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA9_MAX_DUR_OF_DISRUPTION() {
+		return A9_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA9_MAX_DUR_OF_DISRUPTION(BigDecimal a9_MAX_DUR_OF_DISRUPTION) {
+		A9_MAX_DUR_OF_DISRUPTION = a9_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA9_TOTAL_AMT_OF_LOSS() {
+		return A9_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA9_TOTAL_AMT_OF_LOSS(BigDecimal a9_TOTAL_AMT_OF_LOSS) {
+		A9_TOTAL_AMT_OF_LOSS = a9_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA9_TOTAL_AMT_NET_LOSS() {
+		return A9_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA9_TOTAL_AMT_NET_LOSS(BigDecimal a9_TOTAL_AMT_NET_LOSS) {
+		A9_TOTAL_AMT_NET_LOSS = a9_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA9_TOTAL_NO_OF_NEAR_MISSES() {
+		return A9_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA9_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a9_TOTAL_NO_OF_NEAR_MISSES) {
+		A9_TOTAL_NO_OF_NEAR_MISSES = a9_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA10_PRODUCT() {
+		return A10_PRODUCT;
+	}
+	public void setA10_PRODUCT(String a10_PRODUCT) {
+		A10_PRODUCT = a10_PRODUCT;
+	}
+	public String getA11_PRODUCT() {
+		return A11_PRODUCT;
+	}
+	public void setA11_PRODUCT(String a11_PRODUCT) {
+		A11_PRODUCT = a11_PRODUCT;
+	}
+	public BigDecimal getA11_NO_OF_EVENTS() {
+		return A11_NO_OF_EVENTS;
+	}
+	public void setA11_NO_OF_EVENTS(BigDecimal a11_NO_OF_EVENTS) {
+		A11_NO_OF_EVENTS = a11_NO_OF_EVENTS;
+	}
+	public BigDecimal getA11_NO_OF_FUNCTIONAL_AREA() {
+		return A11_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA11_NO_OF_FUNCTIONAL_AREA(BigDecimal a11_NO_OF_FUNCTIONAL_AREA) {
+		A11_NO_OF_FUNCTIONAL_AREA = a11_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA11_LIST_OF_FUNCT_AREA() {
+		return A11_LIST_OF_FUNCT_AREA;
+	}
+	public void setA11_LIST_OF_FUNCT_AREA(BigDecimal a11_LIST_OF_FUNCT_AREA) {
+		A11_LIST_OF_FUNCT_AREA = a11_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA11_TOTAL_DUR_OF_DISRUPTION() {
+		return A11_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA11_TOTAL_DUR_OF_DISRUPTION(BigDecimal a11_TOTAL_DUR_OF_DISRUPTION) {
+		A11_TOTAL_DUR_OF_DISRUPTION = a11_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA11_MAX_DUR_OF_DISRUPTION() {
+		return A11_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA11_MAX_DUR_OF_DISRUPTION(BigDecimal a11_MAX_DUR_OF_DISRUPTION) {
+		A11_MAX_DUR_OF_DISRUPTION = a11_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA11_TOTAL_AMT_OF_LOSS() {
+		return A11_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA11_TOTAL_AMT_OF_LOSS(BigDecimal a11_TOTAL_AMT_OF_LOSS) {
+		A11_TOTAL_AMT_OF_LOSS = a11_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA11_TOTAL_AMT_NET_LOSS() {
+		return A11_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA11_TOTAL_AMT_NET_LOSS(BigDecimal a11_TOTAL_AMT_NET_LOSS) {
+		A11_TOTAL_AMT_NET_LOSS = a11_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA11_TOTAL_NO_OF_NEAR_MISSES() {
+		return A11_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA11_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a11_TOTAL_NO_OF_NEAR_MISSES) {
+		A11_TOTAL_NO_OF_NEAR_MISSES = a11_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA12_PRODUCT() {
+		return A12_PRODUCT;
+	}
+	public void setA12_PRODUCT(String a12_PRODUCT) {
+		A12_PRODUCT = a12_PRODUCT;
+	}
+	public BigDecimal getA12_NO_OF_EVENTS() {
+		return A12_NO_OF_EVENTS;
+	}
+	public void setA12_NO_OF_EVENTS(BigDecimal a12_NO_OF_EVENTS) {
+		A12_NO_OF_EVENTS = a12_NO_OF_EVENTS;
+	}
+	public BigDecimal getA12_NO_OF_FUNCTIONAL_AREA() {
+		return A12_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA12_NO_OF_FUNCTIONAL_AREA(BigDecimal a12_NO_OF_FUNCTIONAL_AREA) {
+		A12_NO_OF_FUNCTIONAL_AREA = a12_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA12_LIST_OF_FUNCT_AREA() {
+		return A12_LIST_OF_FUNCT_AREA;
+	}
+	public void setA12_LIST_OF_FUNCT_AREA(BigDecimal a12_LIST_OF_FUNCT_AREA) {
+		A12_LIST_OF_FUNCT_AREA = a12_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA12_TOTAL_DUR_OF_DISRUPTION() {
+		return A12_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA12_TOTAL_DUR_OF_DISRUPTION(BigDecimal a12_TOTAL_DUR_OF_DISRUPTION) {
+		A12_TOTAL_DUR_OF_DISRUPTION = a12_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA12_MAX_DUR_OF_DISRUPTION() {
+		return A12_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA12_MAX_DUR_OF_DISRUPTION(BigDecimal a12_MAX_DUR_OF_DISRUPTION) {
+		A12_MAX_DUR_OF_DISRUPTION = a12_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA12_TOTAL_AMT_OF_LOSS() {
+		return A12_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA12_TOTAL_AMT_OF_LOSS(BigDecimal a12_TOTAL_AMT_OF_LOSS) {
+		A12_TOTAL_AMT_OF_LOSS = a12_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA12_TOTAL_AMT_NET_LOSS() {
+		return A12_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA12_TOTAL_AMT_NET_LOSS(BigDecimal a12_TOTAL_AMT_NET_LOSS) {
+		A12_TOTAL_AMT_NET_LOSS = a12_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA12_TOTAL_NO_OF_NEAR_MISSES() {
+		return A12_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA12_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a12_TOTAL_NO_OF_NEAR_MISSES) {
+		A12_TOTAL_NO_OF_NEAR_MISSES = a12_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA13_PRODUCT() {
+		return A13_PRODUCT;
+	}
+	public void setA13_PRODUCT(String a13_PRODUCT) {
+		A13_PRODUCT = a13_PRODUCT;
+	}
+	public String getA14_PRODUCT() {
+		return A14_PRODUCT;
+	}
+	public void setA14_PRODUCT(String a14_PRODUCT) {
+		A14_PRODUCT = a14_PRODUCT;
+	}
+	public BigDecimal getA14_NO_OF_EVENTS() {
+		return A14_NO_OF_EVENTS;
+	}
+	public void setA14_NO_OF_EVENTS(BigDecimal a14_NO_OF_EVENTS) {
+		A14_NO_OF_EVENTS = a14_NO_OF_EVENTS;
+	}
+	public BigDecimal getA14_NO_OF_FUNCTIONAL_AREA() {
+		return A14_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA14_NO_OF_FUNCTIONAL_AREA(BigDecimal a14_NO_OF_FUNCTIONAL_AREA) {
+		A14_NO_OF_FUNCTIONAL_AREA = a14_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA14_LIST_OF_FUNCT_AREA() {
+		return A14_LIST_OF_FUNCT_AREA;
+	}
+	public void setA14_LIST_OF_FUNCT_AREA(BigDecimal a14_LIST_OF_FUNCT_AREA) {
+		A14_LIST_OF_FUNCT_AREA = a14_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA14_TOTAL_DUR_OF_DISRUPTION() {
+		return A14_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA14_TOTAL_DUR_OF_DISRUPTION(BigDecimal a14_TOTAL_DUR_OF_DISRUPTION) {
+		A14_TOTAL_DUR_OF_DISRUPTION = a14_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA14_MAX_DUR_OF_DISRUPTION() {
+		return A14_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA14_MAX_DUR_OF_DISRUPTION(BigDecimal a14_MAX_DUR_OF_DISRUPTION) {
+		A14_MAX_DUR_OF_DISRUPTION = a14_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA14_TOTAL_AMT_OF_LOSS() {
+		return A14_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA14_TOTAL_AMT_OF_LOSS(BigDecimal a14_TOTAL_AMT_OF_LOSS) {
+		A14_TOTAL_AMT_OF_LOSS = a14_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA14_TOTAL_AMT_NET_LOSS() {
+		return A14_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA14_TOTAL_AMT_NET_LOSS(BigDecimal a14_TOTAL_AMT_NET_LOSS) {
+		A14_TOTAL_AMT_NET_LOSS = a14_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA14_TOTAL_NO_OF_NEAR_MISSES() {
+		return A14_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA14_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a14_TOTAL_NO_OF_NEAR_MISSES) {
+		A14_TOTAL_NO_OF_NEAR_MISSES = a14_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getA15_PRODUCT() {
+		return A15_PRODUCT;
+	}
+	public void setA15_PRODUCT(String a15_PRODUCT) {
+		A15_PRODUCT = a15_PRODUCT;
+	}
+	public BigDecimal getA15_NO_OF_EVENTS() {
+		return A15_NO_OF_EVENTS;
+	}
+	public void setA15_NO_OF_EVENTS(BigDecimal a15_NO_OF_EVENTS) {
+		A15_NO_OF_EVENTS = a15_NO_OF_EVENTS;
+	}
+	public BigDecimal getA15_NO_OF_FUNCTIONAL_AREA() {
+		return A15_NO_OF_FUNCTIONAL_AREA;
+	}
+	public void setA15_NO_OF_FUNCTIONAL_AREA(BigDecimal a15_NO_OF_FUNCTIONAL_AREA) {
+		A15_NO_OF_FUNCTIONAL_AREA = a15_NO_OF_FUNCTIONAL_AREA;
+	}
+	public BigDecimal getA15_LIST_OF_FUNCT_AREA() {
+		return A15_LIST_OF_FUNCT_AREA;
+	}
+	public void setA15_LIST_OF_FUNCT_AREA(BigDecimal a15_LIST_OF_FUNCT_AREA) {
+		A15_LIST_OF_FUNCT_AREA = a15_LIST_OF_FUNCT_AREA;
+	}
+	public BigDecimal getA15_TOTAL_DUR_OF_DISRUPTION() {
+		return A15_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public void setA15_TOTAL_DUR_OF_DISRUPTION(BigDecimal a15_TOTAL_DUR_OF_DISRUPTION) {
+		A15_TOTAL_DUR_OF_DISRUPTION = a15_TOTAL_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA15_MAX_DUR_OF_DISRUPTION() {
+		return A15_MAX_DUR_OF_DISRUPTION;
+	}
+	public void setA15_MAX_DUR_OF_DISRUPTION(BigDecimal a15_MAX_DUR_OF_DISRUPTION) {
+		A15_MAX_DUR_OF_DISRUPTION = a15_MAX_DUR_OF_DISRUPTION;
+	}
+	public BigDecimal getA15_TOTAL_AMT_OF_LOSS() {
+		return A15_TOTAL_AMT_OF_LOSS;
+	}
+	public void setA15_TOTAL_AMT_OF_LOSS(BigDecimal a15_TOTAL_AMT_OF_LOSS) {
+		A15_TOTAL_AMT_OF_LOSS = a15_TOTAL_AMT_OF_LOSS;
+	}
+	public BigDecimal getA15_TOTAL_AMT_NET_LOSS() {
+		return A15_TOTAL_AMT_NET_LOSS;
+	}
+	public void setA15_TOTAL_AMT_NET_LOSS(BigDecimal a15_TOTAL_AMT_NET_LOSS) {
+		A15_TOTAL_AMT_NET_LOSS = a15_TOTAL_AMT_NET_LOSS;
+	}
+	public BigDecimal getA15_TOTAL_NO_OF_NEAR_MISSES() {
+		return A15_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public void setA15_TOTAL_NO_OF_NEAR_MISSES(BigDecimal a15_TOTAL_NO_OF_NEAR_MISSES) {
+		A15_TOTAL_NO_OF_NEAR_MISSES = a15_TOTAL_NO_OF_NEAR_MISSES;
+	}
+	public String getREPORT_CODE() {
+		return REPORT_CODE;
+	}
+	public void setREPORT_CODE(String rEPORT_CODE) {
+		REPORT_CODE = rEPORT_CODE;
+	}
+	public String getREPORT_NAME() {
+		return REPORT_NAME;
+	}
+	public void setREPORT_NAME(String rEPORT_NAME) {
+		REPORT_NAME = rEPORT_NAME;
+	}
+	public Date getREPORT_DATE() {
+		return REPORT_DATE;
+	}
+	public void setREPORT_DATE(Date rEPORT_DATE) {
+		REPORT_DATE = rEPORT_DATE;
+	}
+	public Date getREPORT_DUE_DATE() {
+		return REPORT_DUE_DATE;
+	}
+	public void setREPORT_DUE_DATE(Date rEPORT_DUE_DATE) {
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+	}
+	public Date getREP_SUBMIT_DATE() {
+		return REP_SUBMIT_DATE;
+	}
+	public void setREP_SUBMIT_DATE(Date rEP_SUBMIT_DATE) {
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+	}
+	public Date getREP_PERIOD_FROM() {
+		return REP_PERIOD_FROM;
+	}
+	public void setREP_PERIOD_FROM(Date rEP_PERIOD_FROM) {
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+	}
+	public Date getREP_PERIOD_TO() {
+		return REP_PERIOD_TO;
+	}
+	public void setREP_PERIOD_TO(Date rEP_PERIOD_TO) {
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+	}
+	public String getREP_FREQ() {
+		return REP_FREQ;
+	}
+	public void setREP_FREQ(String rEP_FREQ) {
+		REP_FREQ = rEP_FREQ;
+	}
+	public String getNIL_REPORT_FLG() {
+		return NIL_REPORT_FLG;
+	}
+	public void setNIL_REPORT_FLG(String nIL_REPORT_FLG) {
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+	}
+	public String getARCH_FLG() {
+		return ARCH_FLG;
+	}
+	public void setARCH_FLG(String aRCH_FLG) {
+		ARCH_FLG = aRCH_FLG;
+	}
+	public String getENTITY_FLG() {
+		return ENTITY_FLG;
+	}
+	public void setENTITY_FLG(String eNTITY_FLG) {
+		ENTITY_FLG = eNTITY_FLG;
+	}
+	public String getDEL_FLG() {
+		return DEL_FLG;
+	}
+	public void setDEL_FLG(String dEL_FLG) {
+		DEL_FLG = dEL_FLG;
+	}
+	public String getMODIFY_FLG() {
+		return MODIFY_FLG;
+	}
+	public void setMODIFY_FLG(String mODIFY_FLG) {
+		MODIFY_FLG = mODIFY_FLG;
+	}
+	public String getENTRY_USER() {
+		return ENTRY_USER;
+	}
+	public void setENTRY_USER(String eNTRY_USER) {
+		ENTRY_USER = eNTRY_USER;
+	}
+	public String getMODIFY_USER() {
+		return MODIFY_USER;
+	}
+	public void setMODIFY_USER(String mODIFY_USER) {
+		MODIFY_USER = mODIFY_USER;
+	}
+	public String getVERIFY_USER() {
+		return VERIFY_USER;
+	}
+	public void setVERIFY_USER(String vERIFY_USER) {
+		VERIFY_USER = vERIFY_USER;
+	}
+	public Date getENTRY_TIME() {
+		return ENTRY_TIME;
+	}
+	public void setENTRY_TIME(Date eNTRY_TIME) {
+		ENTRY_TIME = eNTRY_TIME;
+	}
+	public Date getMODIFY_TIME() {
+		return MODIFY_TIME;
+	}
+	public void setMODIFY_TIME(Date mODIFY_TIME) {
+		MODIFY_TIME = mODIFY_TIME;
+	}
+	public Date getVERIFY_TIME() {
+		return VERIFY_TIME;
+	}
+	public void setVERIFY_TIME(Date vERIFY_TIME) {
+		VERIFY_TIME = vERIFY_TIME;
+	}
+	public String getQTR_FLG() {
+		return QTR_FLG;
+	}
+	public void setQTR_FLG(String qTR_FLG) {
+		QTR_FLG = qTR_FLG;
+	}
+	public T23ORReport(String a1_PRODUCT, String a2_PRODUCT, BigDecimal a2_NO_OF_EVENTS,
+			BigDecimal a2_NO_OF_FUNCTIONAL_AREA, BigDecimal a2_LIST_OF_FUNCT_AREA,
+			BigDecimal a2_TOTAL_DUR_OF_DISRUPTION, BigDecimal a2_MAX_DUR_OF_DISRUPTION, BigDecimal a2_TOTAL_AMT_OF_LOSS,
+			BigDecimal a2_TOTAL_AMT_NET_LOSS, BigDecimal a2_TOTAL_NO_OF_NEAR_MISSES, String a3_PRODUCT,
+			BigDecimal a3_NO_OF_EVENTS, BigDecimal a3_NO_OF_FUNCTIONAL_AREA, BigDecimal a3_LIST_OF_FUNCT_AREA,
+			BigDecimal a3_TOTAL_DUR_OF_DISRUPTION, BigDecimal a3_MAX_DUR_OF_DISRUPTION, BigDecimal a3_TOTAL_AMT_OF_LOSS,
+			BigDecimal a3_TOTAL_AMT_NET_LOSS, BigDecimal a3_TOTAL_NO_OF_NEAR_MISSES, String a4_PRODUCT,
+			String a5_PRODUCT, BigDecimal a5_NO_OF_EVENTS, BigDecimal a5_NO_OF_FUNCTIONAL_AREA,
+			BigDecimal a5_LIST_OF_FUNCT_AREA, BigDecimal a5_TOTAL_DUR_OF_DISRUPTION,
+			BigDecimal a5_MAX_DUR_OF_DISRUPTION, BigDecimal a5_TOTAL_AMT_OF_LOSS, BigDecimal a5_TOTAL_AMT_NET_LOSS,
+			BigDecimal a5_TOTAL_NO_OF_NEAR_MISSES, String a6_PRODUCT, BigDecimal a6_NO_OF_EVENTS,
+			BigDecimal a6_NO_OF_FUNCTIONAL_AREA, BigDecimal a6_LIST_OF_FUNCT_AREA,
+			BigDecimal a6_TOTAL_DUR_OF_DISRUPTION, BigDecimal a6_MAX_DUR_OF_DISRUPTION, BigDecimal a6_TOTAL_AMT_OF_LOSS,
+			BigDecimal a6_TOTAL_AMT_NET_LOSS, BigDecimal a6_TOTAL_NO_OF_NEAR_MISSES, String a7_PRODUCT,
+			String a8_PRODUCT, BigDecimal a8_NO_OF_EVENTS, BigDecimal a8_NO_OF_FUNCTIONAL_AREA,
+			BigDecimal a8_LIST_OF_FUNCT_AREA, BigDecimal a8_TOTAL_DUR_OF_DISRUPTION,
+			BigDecimal a8_MAX_DUR_OF_DISRUPTION, BigDecimal a8_TOTAL_AMT_OF_LOSS, BigDecimal a8_TOTAL_AMT_NET_LOSS,
+			BigDecimal a8_TOTAL_NO_OF_NEAR_MISSES, String a9_PRODUCT, BigDecimal a9_NO_OF_EVENTS,
+			BigDecimal a9_NO_OF_FUNCTIONAL_AREA, BigDecimal a9_LIST_OF_FUNCT_AREA,
+			BigDecimal a9_TOTAL_DUR_OF_DISRUPTION, BigDecimal a9_MAX_DUR_OF_DISRUPTION, BigDecimal a9_TOTAL_AMT_OF_LOSS,
+			BigDecimal a9_TOTAL_AMT_NET_LOSS, BigDecimal a9_TOTAL_NO_OF_NEAR_MISSES, String a10_PRODUCT,
+			String a11_PRODUCT, BigDecimal a11_NO_OF_EVENTS, BigDecimal a11_NO_OF_FUNCTIONAL_AREA,
+			BigDecimal a11_LIST_OF_FUNCT_AREA, BigDecimal a11_TOTAL_DUR_OF_DISRUPTION,
+			BigDecimal a11_MAX_DUR_OF_DISRUPTION, BigDecimal a11_TOTAL_AMT_OF_LOSS, BigDecimal a11_TOTAL_AMT_NET_LOSS,
+			BigDecimal a11_TOTAL_NO_OF_NEAR_MISSES, String a12_PRODUCT, BigDecimal a12_NO_OF_EVENTS,
+			BigDecimal a12_NO_OF_FUNCTIONAL_AREA, BigDecimal a12_LIST_OF_FUNCT_AREA,
+			BigDecimal a12_TOTAL_DUR_OF_DISRUPTION, BigDecimal a12_MAX_DUR_OF_DISRUPTION,
+			BigDecimal a12_TOTAL_AMT_OF_LOSS, BigDecimal a12_TOTAL_AMT_NET_LOSS, BigDecimal a12_TOTAL_NO_OF_NEAR_MISSES,
+			String a13_PRODUCT, String a14_PRODUCT, BigDecimal a14_NO_OF_EVENTS, BigDecimal a14_NO_OF_FUNCTIONAL_AREA,
+			BigDecimal a14_LIST_OF_FUNCT_AREA, BigDecimal a14_TOTAL_DUR_OF_DISRUPTION,
+			BigDecimal a14_MAX_DUR_OF_DISRUPTION, BigDecimal a14_TOTAL_AMT_OF_LOSS, BigDecimal a14_TOTAL_AMT_NET_LOSS,
+			BigDecimal a14_TOTAL_NO_OF_NEAR_MISSES, String a15_PRODUCT, BigDecimal a15_NO_OF_EVENTS,
+			BigDecimal a15_NO_OF_FUNCTIONAL_AREA, BigDecimal a15_LIST_OF_FUNCT_AREA,
+			BigDecimal a15_TOTAL_DUR_OF_DISRUPTION, BigDecimal a15_MAX_DUR_OF_DISRUPTION,
+			BigDecimal a15_TOTAL_AMT_OF_LOSS, BigDecimal a15_TOTAL_AMT_NET_LOSS, BigDecimal a15_TOTAL_NO_OF_NEAR_MISSES,
+			String rEPORT_CODE, String rEPORT_NAME, Date rEPORT_DATE, Date rEPORT_DUE_DATE, Date rEP_SUBMIT_DATE,
+			Date rEP_PERIOD_FROM, Date rEP_PERIOD_TO, String rEP_FREQ, String nIL_REPORT_FLG, String aRCH_FLG,
+			String eNTITY_FLG, String dEL_FLG, String mODIFY_FLG, String eNTRY_USER, String mODIFY_USER,
+			String vERIFY_USER, Date eNTRY_TIME, Date mODIFY_TIME, Date vERIFY_TIME, String qTR_FLG) {
+		super();
+		A1_PRODUCT = a1_PRODUCT;
+		A2_PRODUCT = a2_PRODUCT;
+		A2_NO_OF_EVENTS = a2_NO_OF_EVENTS;
+		A2_NO_OF_FUNCTIONAL_AREA = a2_NO_OF_FUNCTIONAL_AREA;
+		A2_LIST_OF_FUNCT_AREA = a2_LIST_OF_FUNCT_AREA;
+		A2_TOTAL_DUR_OF_DISRUPTION = a2_TOTAL_DUR_OF_DISRUPTION;
+		A2_MAX_DUR_OF_DISRUPTION = a2_MAX_DUR_OF_DISRUPTION;
+		A2_TOTAL_AMT_OF_LOSS = a2_TOTAL_AMT_OF_LOSS;
+		A2_TOTAL_AMT_NET_LOSS = a2_TOTAL_AMT_NET_LOSS;
+		A2_TOTAL_NO_OF_NEAR_MISSES = a2_TOTAL_NO_OF_NEAR_MISSES;
+		A3_PRODUCT = a3_PRODUCT;
+		A3_NO_OF_EVENTS = a3_NO_OF_EVENTS;
+		A3_NO_OF_FUNCTIONAL_AREA = a3_NO_OF_FUNCTIONAL_AREA;
+		A3_LIST_OF_FUNCT_AREA = a3_LIST_OF_FUNCT_AREA;
+		A3_TOTAL_DUR_OF_DISRUPTION = a3_TOTAL_DUR_OF_DISRUPTION;
+		A3_MAX_DUR_OF_DISRUPTION = a3_MAX_DUR_OF_DISRUPTION;
+		A3_TOTAL_AMT_OF_LOSS = a3_TOTAL_AMT_OF_LOSS;
+		A3_TOTAL_AMT_NET_LOSS = a3_TOTAL_AMT_NET_LOSS;
+		A3_TOTAL_NO_OF_NEAR_MISSES = a3_TOTAL_NO_OF_NEAR_MISSES;
+		A4_PRODUCT = a4_PRODUCT;
+		A5_PRODUCT = a5_PRODUCT;
+		A5_NO_OF_EVENTS = a5_NO_OF_EVENTS;
+		A5_NO_OF_FUNCTIONAL_AREA = a5_NO_OF_FUNCTIONAL_AREA;
+		A5_LIST_OF_FUNCT_AREA = a5_LIST_OF_FUNCT_AREA;
+		A5_TOTAL_DUR_OF_DISRUPTION = a5_TOTAL_DUR_OF_DISRUPTION;
+		A5_MAX_DUR_OF_DISRUPTION = a5_MAX_DUR_OF_DISRUPTION;
+		A5_TOTAL_AMT_OF_LOSS = a5_TOTAL_AMT_OF_LOSS;
+		A5_TOTAL_AMT_NET_LOSS = a5_TOTAL_AMT_NET_LOSS;
+		A5_TOTAL_NO_OF_NEAR_MISSES = a5_TOTAL_NO_OF_NEAR_MISSES;
+		A6_PRODUCT = a6_PRODUCT;
+		A6_NO_OF_EVENTS = a6_NO_OF_EVENTS;
+		A6_NO_OF_FUNCTIONAL_AREA = a6_NO_OF_FUNCTIONAL_AREA;
+		A6_LIST_OF_FUNCT_AREA = a6_LIST_OF_FUNCT_AREA;
+		A6_TOTAL_DUR_OF_DISRUPTION = a6_TOTAL_DUR_OF_DISRUPTION;
+		A6_MAX_DUR_OF_DISRUPTION = a6_MAX_DUR_OF_DISRUPTION;
+		A6_TOTAL_AMT_OF_LOSS = a6_TOTAL_AMT_OF_LOSS;
+		A6_TOTAL_AMT_NET_LOSS = a6_TOTAL_AMT_NET_LOSS;
+		A6_TOTAL_NO_OF_NEAR_MISSES = a6_TOTAL_NO_OF_NEAR_MISSES;
+		A7_PRODUCT = a7_PRODUCT;
+		A8_PRODUCT = a8_PRODUCT;
+		A8_NO_OF_EVENTS = a8_NO_OF_EVENTS;
+		A8_NO_OF_FUNCTIONAL_AREA = a8_NO_OF_FUNCTIONAL_AREA;
+		A8_LIST_OF_FUNCT_AREA = a8_LIST_OF_FUNCT_AREA;
+		A8_TOTAL_DUR_OF_DISRUPTION = a8_TOTAL_DUR_OF_DISRUPTION;
+		A8_MAX_DUR_OF_DISRUPTION = a8_MAX_DUR_OF_DISRUPTION;
+		A8_TOTAL_AMT_OF_LOSS = a8_TOTAL_AMT_OF_LOSS;
+		A8_TOTAL_AMT_NET_LOSS = a8_TOTAL_AMT_NET_LOSS;
+		A8_TOTAL_NO_OF_NEAR_MISSES = a8_TOTAL_NO_OF_NEAR_MISSES;
+		A9_PRODUCT = a9_PRODUCT;
+		A9_NO_OF_EVENTS = a9_NO_OF_EVENTS;
+		A9_NO_OF_FUNCTIONAL_AREA = a9_NO_OF_FUNCTIONAL_AREA;
+		A9_LIST_OF_FUNCT_AREA = a9_LIST_OF_FUNCT_AREA;
+		A9_TOTAL_DUR_OF_DISRUPTION = a9_TOTAL_DUR_OF_DISRUPTION;
+		A9_MAX_DUR_OF_DISRUPTION = a9_MAX_DUR_OF_DISRUPTION;
+		A9_TOTAL_AMT_OF_LOSS = a9_TOTAL_AMT_OF_LOSS;
+		A9_TOTAL_AMT_NET_LOSS = a9_TOTAL_AMT_NET_LOSS;
+		A9_TOTAL_NO_OF_NEAR_MISSES = a9_TOTAL_NO_OF_NEAR_MISSES;
+		A10_PRODUCT = a10_PRODUCT;
+		A11_PRODUCT = a11_PRODUCT;
+		A11_NO_OF_EVENTS = a11_NO_OF_EVENTS;
+		A11_NO_OF_FUNCTIONAL_AREA = a11_NO_OF_FUNCTIONAL_AREA;
+		A11_LIST_OF_FUNCT_AREA = a11_LIST_OF_FUNCT_AREA;
+		A11_TOTAL_DUR_OF_DISRUPTION = a11_TOTAL_DUR_OF_DISRUPTION;
+		A11_MAX_DUR_OF_DISRUPTION = a11_MAX_DUR_OF_DISRUPTION;
+		A11_TOTAL_AMT_OF_LOSS = a11_TOTAL_AMT_OF_LOSS;
+		A11_TOTAL_AMT_NET_LOSS = a11_TOTAL_AMT_NET_LOSS;
+		A11_TOTAL_NO_OF_NEAR_MISSES = a11_TOTAL_NO_OF_NEAR_MISSES;
+		A12_PRODUCT = a12_PRODUCT;
+		A12_NO_OF_EVENTS = a12_NO_OF_EVENTS;
+		A12_NO_OF_FUNCTIONAL_AREA = a12_NO_OF_FUNCTIONAL_AREA;
+		A12_LIST_OF_FUNCT_AREA = a12_LIST_OF_FUNCT_AREA;
+		A12_TOTAL_DUR_OF_DISRUPTION = a12_TOTAL_DUR_OF_DISRUPTION;
+		A12_MAX_DUR_OF_DISRUPTION = a12_MAX_DUR_OF_DISRUPTION;
+		A12_TOTAL_AMT_OF_LOSS = a12_TOTAL_AMT_OF_LOSS;
+		A12_TOTAL_AMT_NET_LOSS = a12_TOTAL_AMT_NET_LOSS;
+		A12_TOTAL_NO_OF_NEAR_MISSES = a12_TOTAL_NO_OF_NEAR_MISSES;
+		A13_PRODUCT = a13_PRODUCT;
+		A14_PRODUCT = a14_PRODUCT;
+		A14_NO_OF_EVENTS = a14_NO_OF_EVENTS;
+		A14_NO_OF_FUNCTIONAL_AREA = a14_NO_OF_FUNCTIONAL_AREA;
+		A14_LIST_OF_FUNCT_AREA = a14_LIST_OF_FUNCT_AREA;
+		A14_TOTAL_DUR_OF_DISRUPTION = a14_TOTAL_DUR_OF_DISRUPTION;
+		A14_MAX_DUR_OF_DISRUPTION = a14_MAX_DUR_OF_DISRUPTION;
+		A14_TOTAL_AMT_OF_LOSS = a14_TOTAL_AMT_OF_LOSS;
+		A14_TOTAL_AMT_NET_LOSS = a14_TOTAL_AMT_NET_LOSS;
+		A14_TOTAL_NO_OF_NEAR_MISSES = a14_TOTAL_NO_OF_NEAR_MISSES;
+		A15_PRODUCT = a15_PRODUCT;
+		A15_NO_OF_EVENTS = a15_NO_OF_EVENTS;
+		A15_NO_OF_FUNCTIONAL_AREA = a15_NO_OF_FUNCTIONAL_AREA;
+		A15_LIST_OF_FUNCT_AREA = a15_LIST_OF_FUNCT_AREA;
+		A15_TOTAL_DUR_OF_DISRUPTION = a15_TOTAL_DUR_OF_DISRUPTION;
+		A15_MAX_DUR_OF_DISRUPTION = a15_MAX_DUR_OF_DISRUPTION;
+		A15_TOTAL_AMT_OF_LOSS = a15_TOTAL_AMT_OF_LOSS;
+		A15_TOTAL_AMT_NET_LOSS = a15_TOTAL_AMT_NET_LOSS;
+		A15_TOTAL_NO_OF_NEAR_MISSES = a15_TOTAL_NO_OF_NEAR_MISSES;
+		REPORT_CODE = rEPORT_CODE;
+		REPORT_NAME = rEPORT_NAME;
+		REPORT_DATE = rEPORT_DATE;
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+		REP_FREQ = rEP_FREQ;
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+		ARCH_FLG = aRCH_FLG;
+		ENTITY_FLG = eNTITY_FLG;
+		DEL_FLG = dEL_FLG;
+		MODIFY_FLG = mODIFY_FLG;
+		ENTRY_USER = eNTRY_USER;
+		MODIFY_USER = mODIFY_USER;
+		VERIFY_USER = vERIFY_USER;
+		ENTRY_TIME = eNTRY_TIME;
+		MODIFY_TIME = mODIFY_TIME;
+		VERIFY_TIME = vERIFY_TIME;
+		QTR_FLG = qTR_FLG;
+	}
+	public T23ORReport() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+}

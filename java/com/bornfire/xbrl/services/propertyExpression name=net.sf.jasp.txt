@@ -1,0 +1,1 @@
+					<propertyExpression name="net.sf.jasperreports.export.xls.formula"><![CDATA["=+E10+G10+I10+K10+M10+O10+Q10+S10+U10+W10+Y10"]]></propertyExpression>

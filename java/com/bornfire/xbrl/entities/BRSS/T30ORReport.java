@@ -1,0 +1,1173 @@
+package com.bornfire.xbrl.entities.BRSS;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+@Entity
+@Table(name="T30_OR_IT_RELATED_HUMAN_RESOURCES_TABLE")
+public class T30ORReport {
+	
+	private String	A1_PRODUCT;
+	private BigDecimal	A1A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A1B_NUMBER_OF_SERVICE;
+	private String	A2_PRODUCT;
+	private BigDecimal	A2A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A2B_NUMBER_OF_SERVICE;
+	private String	A3_PRODUCT;
+	private BigDecimal	A3A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A3B_NUMBER_OF_SERVICE;
+	private String	A4_PRODUCT;
+	private BigDecimal	A4A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A4B_NUMBER_OF_SERVICE;
+	private String	A5_PRODUCT;
+	private BigDecimal	A5A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A5B_NUMBER_OF_SERVICE;
+	private String	A6_PRODUCT;
+	private BigDecimal	A6A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A6B_NUMBER_OF_SERVICE;
+	private String	A7_PRODUCT;
+	private BigDecimal	A7A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A7B_NUMBER_OF_SERVICE;
+	private String	A8_PRODUCT;
+	private BigDecimal	A8A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A8B_NUMBER_OF_SERVICE;
+	private String	A9_PRODUCT;
+	private BigDecimal	A9A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A9B_NUMBER_OF_SERVICE;
+	private String	A10_PRODUCT;
+	private BigDecimal	A10A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A10B_NUMBER_OF_SERVICE;
+	private String	A11_PRODUCT;
+	private BigDecimal	A11A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A11B_NUMBER_OF_SERVICE;
+	private String	A12_PRODUCT;
+	private BigDecimal	A12A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A12B_NUMBER_OF_SERVICE;
+	private String	A13_PRODUCT;
+	private BigDecimal	A13A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A13B_NUMBER_OF_SERVICE;
+	private String	A14_PRODUCT;
+	private BigDecimal	A14A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A14B_NUMBER_OF_SERVICE;
+	private String	A15_PRODUCT;
+	private BigDecimal	A15A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A15B_NUMBER_OF_SERVICE;
+	private String	A16_PRODUCT;
+	private BigDecimal	A16A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A16B_NUMBER_OF_SERVICE;
+	private String	A17_PRODUCT;
+	private BigDecimal	A17A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A17B_NUMBER_OF_SERVICE;
+	private String	A18_PRODUCT;
+	private BigDecimal	A18A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A18B_NUMBER_OF_SERVICE;
+	private String	A19_PRODUCT;
+	private BigDecimal	A19A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A19B_NUMBER_OF_SERVICE;
+	private String	A20_PRODUCT;
+	private BigDecimal	A20A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A20B_NUMBER_OF_SERVICE;
+	private String	A21_PRODUCT;
+	private BigDecimal	A21A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A21B_NUMBER_OF_SERVICE;
+	private String	A22_PRODUCT;
+	private String	A22A_DESCRIPTION;
+	private String	A23_PRODUCT;
+	private BigDecimal	A23A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A23B_NUMBER_OF_SERVICE;
+	private String	A24_PRODUCT;
+	private BigDecimal	A24A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A24B_NUMBER_OF_SERVICE;
+	private String	A25_PRODUCT;
+	private BigDecimal	A25A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A25B_NUMBER_OF_SERVICE;
+	private String	A26_PRODUCT;
+	private BigDecimal	A26A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A26B_NUMBER_OF_SERVICE;
+	private String	A27_PRODUCT;
+	private BigDecimal	A27A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A27B_NUMBER_OF_SERVICE;
+	private String	A28_PRODUCT;
+	private String	A28A_DESCRIPTION;
+	private String	A29_PRODUCT;
+	private BigDecimal	A29A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A29B_NUMBER_OF_SERVICE;
+	private String	A30_PRODUCT;
+	private BigDecimal	A30A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A30B_NUMBER_OF_SERVICE;
+	private String	A31_PRODUCT;
+	private BigDecimal	A31A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A31B_NUMBER_OF_SERVICE;
+	private String	A32_PRODUCT;
+	private BigDecimal	A32A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A32B_NUMBER_OF_SERVICE;
+	private String	A33_PRODUCT;
+	private BigDecimal	A33A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A33B_NUMBER_OF_SERVICE;
+	private String	A34_PRODUCT;
+	private String	A34A_DESCRIPTION;
+	private String	A35_PRODUCT;
+	private BigDecimal	A35A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A35B_NUMBER_OF_SERVICE;
+	private String	A36_PRODUCT;
+	private BigDecimal	A36A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A36B_NUMBER_OF_SERVICE;
+	private String	A37_PRODUCT;
+	private BigDecimal	A37A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A37B_NUMBER_OF_SERVICE;
+	private String	A38_PRODUCT;
+	private BigDecimal	A38A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A38B_NUMBER_OF_SERVICE;
+	private String	A39_PRODUCT;
+	private BigDecimal	A39A_NUMBER_0F_EMPLOYEES;
+	private BigDecimal	A39B_NUMBER_OF_SERVICE;
+	private String	A40_PRODUCT;
+	private String	A40A_DESCRIPTION;
+	private String	REPORT_CODE;
+	private String	REPORT_NAME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Id
+	private Date	REPORT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REPORT_DUE_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_SUBMIT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_FROM;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_TO;
+	private String	REP_FREQ;
+	private String	NIL_REPORT_FLG;
+	private String	ARCH_FLG;
+	private String	ENTITY_FLG;
+	private String	DEL_FLG;
+	private String	MODIFY_FLG;
+	private String	ENTRY_USER;
+	private String	MODIFY_USER;
+	private String	VERIFY_USER;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	ENTRY_TIME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	MODIFY_TIME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	VERIFY_TIME;
+	private String	QTR_FLG;
+	public String getA1_PRODUCT() {
+		return A1_PRODUCT;
+	}
+	public void setA1_PRODUCT(String a1_PRODUCT) {
+		A1_PRODUCT = a1_PRODUCT;
+	}
+	public BigDecimal getA1A_NUMBER_0F_EMPLOYEES() {
+		return A1A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA1A_NUMBER_0F_EMPLOYEES(BigDecimal a1a_NUMBER_0F_EMPLOYEES) {
+		A1A_NUMBER_0F_EMPLOYEES = a1a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA1B_NUMBER_OF_SERVICE() {
+		return A1B_NUMBER_OF_SERVICE;
+	}
+	public void setA1B_NUMBER_OF_SERVICE(BigDecimal a1b_NUMBER_OF_SERVICE) {
+		A1B_NUMBER_OF_SERVICE = a1b_NUMBER_OF_SERVICE;
+	}
+	public String getA2_PRODUCT() {
+		return A2_PRODUCT;
+	}
+	public void setA2_PRODUCT(String a2_PRODUCT) {
+		A2_PRODUCT = a2_PRODUCT;
+	}
+	public BigDecimal getA2A_NUMBER_0F_EMPLOYEES() {
+		return A2A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA2A_NUMBER_0F_EMPLOYEES(BigDecimal a2a_NUMBER_0F_EMPLOYEES) {
+		A2A_NUMBER_0F_EMPLOYEES = a2a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA2B_NUMBER_OF_SERVICE() {
+		return A2B_NUMBER_OF_SERVICE;
+	}
+	public void setA2B_NUMBER_OF_SERVICE(BigDecimal a2b_NUMBER_OF_SERVICE) {
+		A2B_NUMBER_OF_SERVICE = a2b_NUMBER_OF_SERVICE;
+	}
+	public String getA3_PRODUCT() {
+		return A3_PRODUCT;
+	}
+	public void setA3_PRODUCT(String a3_PRODUCT) {
+		A3_PRODUCT = a3_PRODUCT;
+	}
+	public BigDecimal getA3A_NUMBER_0F_EMPLOYEES() {
+		return A3A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA3A_NUMBER_0F_EMPLOYEES(BigDecimal a3a_NUMBER_0F_EMPLOYEES) {
+		A3A_NUMBER_0F_EMPLOYEES = a3a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA3B_NUMBER_OF_SERVICE() {
+		return A3B_NUMBER_OF_SERVICE;
+	}
+	public void setA3B_NUMBER_OF_SERVICE(BigDecimal a3b_NUMBER_OF_SERVICE) {
+		A3B_NUMBER_OF_SERVICE = a3b_NUMBER_OF_SERVICE;
+	}
+	public String getA4_PRODUCT() {
+		return A4_PRODUCT;
+	}
+	public void setA4_PRODUCT(String a4_PRODUCT) {
+		A4_PRODUCT = a4_PRODUCT;
+	}
+	public BigDecimal getA4A_NUMBER_0F_EMPLOYEES() {
+		return A4A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA4A_NUMBER_0F_EMPLOYEES(BigDecimal a4a_NUMBER_0F_EMPLOYEES) {
+		A4A_NUMBER_0F_EMPLOYEES = a4a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA4B_NUMBER_OF_SERVICE() {
+		return A4B_NUMBER_OF_SERVICE;
+	}
+	public void setA4B_NUMBER_OF_SERVICE(BigDecimal a4b_NUMBER_OF_SERVICE) {
+		A4B_NUMBER_OF_SERVICE = a4b_NUMBER_OF_SERVICE;
+	}
+	public String getA5_PRODUCT() {
+		return A5_PRODUCT;
+	}
+	public void setA5_PRODUCT(String a5_PRODUCT) {
+		A5_PRODUCT = a5_PRODUCT;
+	}
+	public BigDecimal getA5A_NUMBER_0F_EMPLOYEES() {
+		return A5A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA5A_NUMBER_0F_EMPLOYEES(BigDecimal a5a_NUMBER_0F_EMPLOYEES) {
+		A5A_NUMBER_0F_EMPLOYEES = a5a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA5B_NUMBER_OF_SERVICE() {
+		return A5B_NUMBER_OF_SERVICE;
+	}
+	public void setA5B_NUMBER_OF_SERVICE(BigDecimal a5b_NUMBER_OF_SERVICE) {
+		A5B_NUMBER_OF_SERVICE = a5b_NUMBER_OF_SERVICE;
+	}
+	public String getA6_PRODUCT() {
+		return A6_PRODUCT;
+	}
+	public void setA6_PRODUCT(String a6_PRODUCT) {
+		A6_PRODUCT = a6_PRODUCT;
+	}
+	public BigDecimal getA6A_NUMBER_0F_EMPLOYEES() {
+		return A6A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA6A_NUMBER_0F_EMPLOYEES(BigDecimal a6a_NUMBER_0F_EMPLOYEES) {
+		A6A_NUMBER_0F_EMPLOYEES = a6a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA6B_NUMBER_OF_SERVICE() {
+		return A6B_NUMBER_OF_SERVICE;
+	}
+	public void setA6B_NUMBER_OF_SERVICE(BigDecimal a6b_NUMBER_OF_SERVICE) {
+		A6B_NUMBER_OF_SERVICE = a6b_NUMBER_OF_SERVICE;
+	}
+	public String getA7_PRODUCT() {
+		return A7_PRODUCT;
+	}
+	public void setA7_PRODUCT(String a7_PRODUCT) {
+		A7_PRODUCT = a7_PRODUCT;
+	}
+	public BigDecimal getA7A_NUMBER_0F_EMPLOYEES() {
+		return A7A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA7A_NUMBER_0F_EMPLOYEES(BigDecimal a7a_NUMBER_0F_EMPLOYEES) {
+		A7A_NUMBER_0F_EMPLOYEES = a7a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA7B_NUMBER_OF_SERVICE() {
+		return A7B_NUMBER_OF_SERVICE;
+	}
+	public void setA7B_NUMBER_OF_SERVICE(BigDecimal a7b_NUMBER_OF_SERVICE) {
+		A7B_NUMBER_OF_SERVICE = a7b_NUMBER_OF_SERVICE;
+	}
+	public String getA8_PRODUCT() {
+		return A8_PRODUCT;
+	}
+	public void setA8_PRODUCT(String a8_PRODUCT) {
+		A8_PRODUCT = a8_PRODUCT;
+	}
+	public BigDecimal getA8A_NUMBER_0F_EMPLOYEES() {
+		return A8A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA8A_NUMBER_0F_EMPLOYEES(BigDecimal a8a_NUMBER_0F_EMPLOYEES) {
+		A8A_NUMBER_0F_EMPLOYEES = a8a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA8B_NUMBER_OF_SERVICE() {
+		return A8B_NUMBER_OF_SERVICE;
+	}
+	public void setA8B_NUMBER_OF_SERVICE(BigDecimal a8b_NUMBER_OF_SERVICE) {
+		A8B_NUMBER_OF_SERVICE = a8b_NUMBER_OF_SERVICE;
+	}
+	public String getA9_PRODUCT() {
+		return A9_PRODUCT;
+	}
+	public void setA9_PRODUCT(String a9_PRODUCT) {
+		A9_PRODUCT = a9_PRODUCT;
+	}
+	public BigDecimal getA9A_NUMBER_0F_EMPLOYEES() {
+		return A9A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA9A_NUMBER_0F_EMPLOYEES(BigDecimal a9a_NUMBER_0F_EMPLOYEES) {
+		A9A_NUMBER_0F_EMPLOYEES = a9a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA9B_NUMBER_OF_SERVICE() {
+		return A9B_NUMBER_OF_SERVICE;
+	}
+	public void setA9B_NUMBER_OF_SERVICE(BigDecimal a9b_NUMBER_OF_SERVICE) {
+		A9B_NUMBER_OF_SERVICE = a9b_NUMBER_OF_SERVICE;
+	}
+	public String getA10_PRODUCT() {
+		return A10_PRODUCT;
+	}
+	public void setA10_PRODUCT(String a10_PRODUCT) {
+		A10_PRODUCT = a10_PRODUCT;
+	}
+	public BigDecimal getA10A_NUMBER_0F_EMPLOYEES() {
+		return A10A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA10A_NUMBER_0F_EMPLOYEES(BigDecimal a10a_NUMBER_0F_EMPLOYEES) {
+		A10A_NUMBER_0F_EMPLOYEES = a10a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA10B_NUMBER_OF_SERVICE() {
+		return A10B_NUMBER_OF_SERVICE;
+	}
+	public void setA10B_NUMBER_OF_SERVICE(BigDecimal a10b_NUMBER_OF_SERVICE) {
+		A10B_NUMBER_OF_SERVICE = a10b_NUMBER_OF_SERVICE;
+	}
+	public String getA11_PRODUCT() {
+		return A11_PRODUCT;
+	}
+	public void setA11_PRODUCT(String a11_PRODUCT) {
+		A11_PRODUCT = a11_PRODUCT;
+	}
+	public BigDecimal getA11A_NUMBER_0F_EMPLOYEES() {
+		return A11A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA11A_NUMBER_0F_EMPLOYEES(BigDecimal a11a_NUMBER_0F_EMPLOYEES) {
+		A11A_NUMBER_0F_EMPLOYEES = a11a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA11B_NUMBER_OF_SERVICE() {
+		return A11B_NUMBER_OF_SERVICE;
+	}
+	public void setA11B_NUMBER_OF_SERVICE(BigDecimal a11b_NUMBER_OF_SERVICE) {
+		A11B_NUMBER_OF_SERVICE = a11b_NUMBER_OF_SERVICE;
+	}
+	public String getA12_PRODUCT() {
+		return A12_PRODUCT;
+	}
+	public void setA12_PRODUCT(String a12_PRODUCT) {
+		A12_PRODUCT = a12_PRODUCT;
+	}
+	public BigDecimal getA12A_NUMBER_0F_EMPLOYEES() {
+		return A12A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA12A_NUMBER_0F_EMPLOYEES(BigDecimal a12a_NUMBER_0F_EMPLOYEES) {
+		A12A_NUMBER_0F_EMPLOYEES = a12a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA12B_NUMBER_OF_SERVICE() {
+		return A12B_NUMBER_OF_SERVICE;
+	}
+	public void setA12B_NUMBER_OF_SERVICE(BigDecimal a12b_NUMBER_OF_SERVICE) {
+		A12B_NUMBER_OF_SERVICE = a12b_NUMBER_OF_SERVICE;
+	}
+	public String getA13_PRODUCT() {
+		return A13_PRODUCT;
+	}
+	public void setA13_PRODUCT(String a13_PRODUCT) {
+		A13_PRODUCT = a13_PRODUCT;
+	}
+	public BigDecimal getA13A_NUMBER_0F_EMPLOYEES() {
+		return A13A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA13A_NUMBER_0F_EMPLOYEES(BigDecimal a13a_NUMBER_0F_EMPLOYEES) {
+		A13A_NUMBER_0F_EMPLOYEES = a13a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA13B_NUMBER_OF_SERVICE() {
+		return A13B_NUMBER_OF_SERVICE;
+	}
+	public void setA13B_NUMBER_OF_SERVICE(BigDecimal a13b_NUMBER_OF_SERVICE) {
+		A13B_NUMBER_OF_SERVICE = a13b_NUMBER_OF_SERVICE;
+	}
+	public String getA14_PRODUCT() {
+		return A14_PRODUCT;
+	}
+	public void setA14_PRODUCT(String a14_PRODUCT) {
+		A14_PRODUCT = a14_PRODUCT;
+	}
+	public BigDecimal getA14A_NUMBER_0F_EMPLOYEES() {
+		return A14A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA14A_NUMBER_0F_EMPLOYEES(BigDecimal a14a_NUMBER_0F_EMPLOYEES) {
+		A14A_NUMBER_0F_EMPLOYEES = a14a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA14B_NUMBER_OF_SERVICE() {
+		return A14B_NUMBER_OF_SERVICE;
+	}
+	public void setA14B_NUMBER_OF_SERVICE(BigDecimal a14b_NUMBER_OF_SERVICE) {
+		A14B_NUMBER_OF_SERVICE = a14b_NUMBER_OF_SERVICE;
+	}
+	public String getA15_PRODUCT() {
+		return A15_PRODUCT;
+	}
+	public void setA15_PRODUCT(String a15_PRODUCT) {
+		A15_PRODUCT = a15_PRODUCT;
+	}
+	public BigDecimal getA15A_NUMBER_0F_EMPLOYEES() {
+		return A15A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA15A_NUMBER_0F_EMPLOYEES(BigDecimal a15a_NUMBER_0F_EMPLOYEES) {
+		A15A_NUMBER_0F_EMPLOYEES = a15a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA15B_NUMBER_OF_SERVICE() {
+		return A15B_NUMBER_OF_SERVICE;
+	}
+	public void setA15B_NUMBER_OF_SERVICE(BigDecimal a15b_NUMBER_OF_SERVICE) {
+		A15B_NUMBER_OF_SERVICE = a15b_NUMBER_OF_SERVICE;
+	}
+	public String getA16_PRODUCT() {
+		return A16_PRODUCT;
+	}
+	public void setA16_PRODUCT(String a16_PRODUCT) {
+		A16_PRODUCT = a16_PRODUCT;
+	}
+	public BigDecimal getA16A_NUMBER_0F_EMPLOYEES() {
+		return A16A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA16A_NUMBER_0F_EMPLOYEES(BigDecimal a16a_NUMBER_0F_EMPLOYEES) {
+		A16A_NUMBER_0F_EMPLOYEES = a16a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA16B_NUMBER_OF_SERVICE() {
+		return A16B_NUMBER_OF_SERVICE;
+	}
+	public void setA16B_NUMBER_OF_SERVICE(BigDecimal a16b_NUMBER_OF_SERVICE) {
+		A16B_NUMBER_OF_SERVICE = a16b_NUMBER_OF_SERVICE;
+	}
+	public String getA17_PRODUCT() {
+		return A17_PRODUCT;
+	}
+	public void setA17_PRODUCT(String a17_PRODUCT) {
+		A17_PRODUCT = a17_PRODUCT;
+	}
+	public BigDecimal getA17A_NUMBER_0F_EMPLOYEES() {
+		return A17A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA17A_NUMBER_0F_EMPLOYEES(BigDecimal a17a_NUMBER_0F_EMPLOYEES) {
+		A17A_NUMBER_0F_EMPLOYEES = a17a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA17B_NUMBER_OF_SERVICE() {
+		return A17B_NUMBER_OF_SERVICE;
+	}
+	public void setA17B_NUMBER_OF_SERVICE(BigDecimal a17b_NUMBER_OF_SERVICE) {
+		A17B_NUMBER_OF_SERVICE = a17b_NUMBER_OF_SERVICE;
+	}
+	public String getA18_PRODUCT() {
+		return A18_PRODUCT;
+	}
+	public void setA18_PRODUCT(String a18_PRODUCT) {
+		A18_PRODUCT = a18_PRODUCT;
+	}
+	public BigDecimal getA18A_NUMBER_0F_EMPLOYEES() {
+		return A18A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA18A_NUMBER_0F_EMPLOYEES(BigDecimal a18a_NUMBER_0F_EMPLOYEES) {
+		A18A_NUMBER_0F_EMPLOYEES = a18a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA18B_NUMBER_OF_SERVICE() {
+		return A18B_NUMBER_OF_SERVICE;
+	}
+	public void setA18B_NUMBER_OF_SERVICE(BigDecimal a18b_NUMBER_OF_SERVICE) {
+		A18B_NUMBER_OF_SERVICE = a18b_NUMBER_OF_SERVICE;
+	}
+	public String getA19_PRODUCT() {
+		return A19_PRODUCT;
+	}
+	public void setA19_PRODUCT(String a19_PRODUCT) {
+		A19_PRODUCT = a19_PRODUCT;
+	}
+	public BigDecimal getA19A_NUMBER_0F_EMPLOYEES() {
+		return A19A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA19A_NUMBER_0F_EMPLOYEES(BigDecimal a19a_NUMBER_0F_EMPLOYEES) {
+		A19A_NUMBER_0F_EMPLOYEES = a19a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA19B_NUMBER_OF_SERVICE() {
+		return A19B_NUMBER_OF_SERVICE;
+	}
+	public void setA19B_NUMBER_OF_SERVICE(BigDecimal a19b_NUMBER_OF_SERVICE) {
+		A19B_NUMBER_OF_SERVICE = a19b_NUMBER_OF_SERVICE;
+	}
+	public String getA20_PRODUCT() {
+		return A20_PRODUCT;
+	}
+	public void setA20_PRODUCT(String a20_PRODUCT) {
+		A20_PRODUCT = a20_PRODUCT;
+	}
+	public BigDecimal getA20A_NUMBER_0F_EMPLOYEES() {
+		return A20A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA20A_NUMBER_0F_EMPLOYEES(BigDecimal a20a_NUMBER_0F_EMPLOYEES) {
+		A20A_NUMBER_0F_EMPLOYEES = a20a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA20B_NUMBER_OF_SERVICE() {
+		return A20B_NUMBER_OF_SERVICE;
+	}
+	public void setA20B_NUMBER_OF_SERVICE(BigDecimal a20b_NUMBER_OF_SERVICE) {
+		A20B_NUMBER_OF_SERVICE = a20b_NUMBER_OF_SERVICE;
+	}
+	public String getA21_PRODUCT() {
+		return A21_PRODUCT;
+	}
+	public void setA21_PRODUCT(String a21_PRODUCT) {
+		A21_PRODUCT = a21_PRODUCT;
+	}
+	public BigDecimal getA21A_NUMBER_0F_EMPLOYEES() {
+		return A21A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA21A_NUMBER_0F_EMPLOYEES(BigDecimal a21a_NUMBER_0F_EMPLOYEES) {
+		A21A_NUMBER_0F_EMPLOYEES = a21a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA21B_NUMBER_OF_SERVICE() {
+		return A21B_NUMBER_OF_SERVICE;
+	}
+	public void setA21B_NUMBER_OF_SERVICE(BigDecimal a21b_NUMBER_OF_SERVICE) {
+		A21B_NUMBER_OF_SERVICE = a21b_NUMBER_OF_SERVICE;
+	}
+	public String getA22_PRODUCT() {
+		return A22_PRODUCT;
+	}
+	public void setA22_PRODUCT(String a22_PRODUCT) {
+		A22_PRODUCT = a22_PRODUCT;
+	}
+	public String getA22A_DESCRIPTION() {
+		return A22A_DESCRIPTION;
+	}
+	public void setA22A_DESCRIPTION(String a22a_DESCRIPTION) {
+		A22A_DESCRIPTION = a22a_DESCRIPTION;
+	}
+	public String getA23_PRODUCT() {
+		return A23_PRODUCT;
+	}
+	public void setA23_PRODUCT(String a23_PRODUCT) {
+		A23_PRODUCT = a23_PRODUCT;
+	}
+	public BigDecimal getA23A_NUMBER_0F_EMPLOYEES() {
+		return A23A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA23A_NUMBER_0F_EMPLOYEES(BigDecimal a23a_NUMBER_0F_EMPLOYEES) {
+		A23A_NUMBER_0F_EMPLOYEES = a23a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA23B_NUMBER_OF_SERVICE() {
+		return A23B_NUMBER_OF_SERVICE;
+	}
+	public void setA23B_NUMBER_OF_SERVICE(BigDecimal a23b_NUMBER_OF_SERVICE) {
+		A23B_NUMBER_OF_SERVICE = a23b_NUMBER_OF_SERVICE;
+	}
+	public String getA24_PRODUCT() {
+		return A24_PRODUCT;
+	}
+	public void setA24_PRODUCT(String a24_PRODUCT) {
+		A24_PRODUCT = a24_PRODUCT;
+	}
+	public BigDecimal getA24A_NUMBER_0F_EMPLOYEES() {
+		return A24A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA24A_NUMBER_0F_EMPLOYEES(BigDecimal a24a_NUMBER_0F_EMPLOYEES) {
+		A24A_NUMBER_0F_EMPLOYEES = a24a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA24B_NUMBER_OF_SERVICE() {
+		return A24B_NUMBER_OF_SERVICE;
+	}
+	public void setA24B_NUMBER_OF_SERVICE(BigDecimal a24b_NUMBER_OF_SERVICE) {
+		A24B_NUMBER_OF_SERVICE = a24b_NUMBER_OF_SERVICE;
+	}
+	public String getA25_PRODUCT() {
+		return A25_PRODUCT;
+	}
+	public void setA25_PRODUCT(String a25_PRODUCT) {
+		A25_PRODUCT = a25_PRODUCT;
+	}
+	public BigDecimal getA25A_NUMBER_0F_EMPLOYEES() {
+		return A25A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA25A_NUMBER_0F_EMPLOYEES(BigDecimal a25a_NUMBER_0F_EMPLOYEES) {
+		A25A_NUMBER_0F_EMPLOYEES = a25a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA25B_NUMBER_OF_SERVICE() {
+		return A25B_NUMBER_OF_SERVICE;
+	}
+	public void setA25B_NUMBER_OF_SERVICE(BigDecimal a25b_NUMBER_OF_SERVICE) {
+		A25B_NUMBER_OF_SERVICE = a25b_NUMBER_OF_SERVICE;
+	}
+	public String getA26_PRODUCT() {
+		return A26_PRODUCT;
+	}
+	public void setA26_PRODUCT(String a26_PRODUCT) {
+		A26_PRODUCT = a26_PRODUCT;
+	}
+	public BigDecimal getA26A_NUMBER_0F_EMPLOYEES() {
+		return A26A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA26A_NUMBER_0F_EMPLOYEES(BigDecimal a26a_NUMBER_0F_EMPLOYEES) {
+		A26A_NUMBER_0F_EMPLOYEES = a26a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA26B_NUMBER_OF_SERVICE() {
+		return A26B_NUMBER_OF_SERVICE;
+	}
+	public void setA26B_NUMBER_OF_SERVICE(BigDecimal a26b_NUMBER_OF_SERVICE) {
+		A26B_NUMBER_OF_SERVICE = a26b_NUMBER_OF_SERVICE;
+	}
+	public String getA27_PRODUCT() {
+		return A27_PRODUCT;
+	}
+	public void setA27_PRODUCT(String a27_PRODUCT) {
+		A27_PRODUCT = a27_PRODUCT;
+	}
+	public BigDecimal getA27A_NUMBER_0F_EMPLOYEES() {
+		return A27A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA27A_NUMBER_0F_EMPLOYEES(BigDecimal a27a_NUMBER_0F_EMPLOYEES) {
+		A27A_NUMBER_0F_EMPLOYEES = a27a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA27B_NUMBER_OF_SERVICE() {
+		return A27B_NUMBER_OF_SERVICE;
+	}
+	public void setA27B_NUMBER_OF_SERVICE(BigDecimal a27b_NUMBER_OF_SERVICE) {
+		A27B_NUMBER_OF_SERVICE = a27b_NUMBER_OF_SERVICE;
+	}
+	public String getA28_PRODUCT() {
+		return A28_PRODUCT;
+	}
+	public void setA28_PRODUCT(String a28_PRODUCT) {
+		A28_PRODUCT = a28_PRODUCT;
+	}
+	public String getA28A_DESCRIPTION() {
+		return A28A_DESCRIPTION;
+	}
+	public void setA28A_DESCRIPTION(String a28a_DESCRIPTION) {
+		A28A_DESCRIPTION = a28a_DESCRIPTION;
+	}
+	public String getA29_PRODUCT() {
+		return A29_PRODUCT;
+	}
+	public void setA29_PRODUCT(String a29_PRODUCT) {
+		A29_PRODUCT = a29_PRODUCT;
+	}
+	public BigDecimal getA29A_NUMBER_0F_EMPLOYEES() {
+		return A29A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA29A_NUMBER_0F_EMPLOYEES(BigDecimal a29a_NUMBER_0F_EMPLOYEES) {
+		A29A_NUMBER_0F_EMPLOYEES = a29a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA29B_NUMBER_OF_SERVICE() {
+		return A29B_NUMBER_OF_SERVICE;
+	}
+	public void setA29B_NUMBER_OF_SERVICE(BigDecimal a29b_NUMBER_OF_SERVICE) {
+		A29B_NUMBER_OF_SERVICE = a29b_NUMBER_OF_SERVICE;
+	}
+	public String getA30_PRODUCT() {
+		return A30_PRODUCT;
+	}
+	public void setA30_PRODUCT(String a30_PRODUCT) {
+		A30_PRODUCT = a30_PRODUCT;
+	}
+	public BigDecimal getA30A_NUMBER_0F_EMPLOYEES() {
+		return A30A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA30A_NUMBER_0F_EMPLOYEES(BigDecimal a30a_NUMBER_0F_EMPLOYEES) {
+		A30A_NUMBER_0F_EMPLOYEES = a30a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA30B_NUMBER_OF_SERVICE() {
+		return A30B_NUMBER_OF_SERVICE;
+	}
+	public void setA30B_NUMBER_OF_SERVICE(BigDecimal a30b_NUMBER_OF_SERVICE) {
+		A30B_NUMBER_OF_SERVICE = a30b_NUMBER_OF_SERVICE;
+	}
+	public String getA31_PRODUCT() {
+		return A31_PRODUCT;
+	}
+	public void setA31_PRODUCT(String a31_PRODUCT) {
+		A31_PRODUCT = a31_PRODUCT;
+	}
+	public BigDecimal getA31A_NUMBER_0F_EMPLOYEES() {
+		return A31A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA31A_NUMBER_0F_EMPLOYEES(BigDecimal a31a_NUMBER_0F_EMPLOYEES) {
+		A31A_NUMBER_0F_EMPLOYEES = a31a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA31B_NUMBER_OF_SERVICE() {
+		return A31B_NUMBER_OF_SERVICE;
+	}
+	public void setA31B_NUMBER_OF_SERVICE(BigDecimal a31b_NUMBER_OF_SERVICE) {
+		A31B_NUMBER_OF_SERVICE = a31b_NUMBER_OF_SERVICE;
+	}
+	public String getA32_PRODUCT() {
+		return A32_PRODUCT;
+	}
+	public void setA32_PRODUCT(String a32_PRODUCT) {
+		A32_PRODUCT = a32_PRODUCT;
+	}
+	public BigDecimal getA32A_NUMBER_0F_EMPLOYEES() {
+		return A32A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA32A_NUMBER_0F_EMPLOYEES(BigDecimal a32a_NUMBER_0F_EMPLOYEES) {
+		A32A_NUMBER_0F_EMPLOYEES = a32a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA32B_NUMBER_OF_SERVICE() {
+		return A32B_NUMBER_OF_SERVICE;
+	}
+	public void setA32B_NUMBER_OF_SERVICE(BigDecimal a32b_NUMBER_OF_SERVICE) {
+		A32B_NUMBER_OF_SERVICE = a32b_NUMBER_OF_SERVICE;
+	}
+	public String getA33_PRODUCT() {
+		return A33_PRODUCT;
+	}
+	public void setA33_PRODUCT(String a33_PRODUCT) {
+		A33_PRODUCT = a33_PRODUCT;
+	}
+	public BigDecimal getA33A_NUMBER_0F_EMPLOYEES() {
+		return A33A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA33A_NUMBER_0F_EMPLOYEES(BigDecimal a33a_NUMBER_0F_EMPLOYEES) {
+		A33A_NUMBER_0F_EMPLOYEES = a33a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA33B_NUMBER_OF_SERVICE() {
+		return A33B_NUMBER_OF_SERVICE;
+	}
+	public void setA33B_NUMBER_OF_SERVICE(BigDecimal a33b_NUMBER_OF_SERVICE) {
+		A33B_NUMBER_OF_SERVICE = a33b_NUMBER_OF_SERVICE;
+	}
+	public String getA34_PRODUCT() {
+		return A34_PRODUCT;
+	}
+	public void setA34_PRODUCT(String a34_PRODUCT) {
+		A34_PRODUCT = a34_PRODUCT;
+	}
+	public String getA34A_DESCRIPTION() {
+		return A34A_DESCRIPTION;
+	}
+	public void setA34A_DESCRIPTION(String a34a_DESCRIPTION) {
+		A34A_DESCRIPTION = a34a_DESCRIPTION;
+	}
+	public String getA35_PRODUCT() {
+		return A35_PRODUCT;
+	}
+	public void setA35_PRODUCT(String a35_PRODUCT) {
+		A35_PRODUCT = a35_PRODUCT;
+	}
+	public BigDecimal getA35A_NUMBER_0F_EMPLOYEES() {
+		return A35A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA35A_NUMBER_0F_EMPLOYEES(BigDecimal a35a_NUMBER_0F_EMPLOYEES) {
+		A35A_NUMBER_0F_EMPLOYEES = a35a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA35B_NUMBER_OF_SERVICE() {
+		return A35B_NUMBER_OF_SERVICE;
+	}
+	public void setA35B_NUMBER_OF_SERVICE(BigDecimal a35b_NUMBER_OF_SERVICE) {
+		A35B_NUMBER_OF_SERVICE = a35b_NUMBER_OF_SERVICE;
+	}
+	public String getA36_PRODUCT() {
+		return A36_PRODUCT;
+	}
+	public void setA36_PRODUCT(String a36_PRODUCT) {
+		A36_PRODUCT = a36_PRODUCT;
+	}
+	public BigDecimal getA36A_NUMBER_0F_EMPLOYEES() {
+		return A36A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA36A_NUMBER_0F_EMPLOYEES(BigDecimal a36a_NUMBER_0F_EMPLOYEES) {
+		A36A_NUMBER_0F_EMPLOYEES = a36a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA36B_NUMBER_OF_SERVICE() {
+		return A36B_NUMBER_OF_SERVICE;
+	}
+	public void setA36B_NUMBER_OF_SERVICE(BigDecimal a36b_NUMBER_OF_SERVICE) {
+		A36B_NUMBER_OF_SERVICE = a36b_NUMBER_OF_SERVICE;
+	}
+	public String getA37_PRODUCT() {
+		return A37_PRODUCT;
+	}
+	public void setA37_PRODUCT(String a37_PRODUCT) {
+		A37_PRODUCT = a37_PRODUCT;
+	}
+	public BigDecimal getA37A_NUMBER_0F_EMPLOYEES() {
+		return A37A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA37A_NUMBER_0F_EMPLOYEES(BigDecimal a37a_NUMBER_0F_EMPLOYEES) {
+		A37A_NUMBER_0F_EMPLOYEES = a37a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA37B_NUMBER_OF_SERVICE() {
+		return A37B_NUMBER_OF_SERVICE;
+	}
+	public void setA37B_NUMBER_OF_SERVICE(BigDecimal a37b_NUMBER_OF_SERVICE) {
+		A37B_NUMBER_OF_SERVICE = a37b_NUMBER_OF_SERVICE;
+	}
+	public String getA38_PRODUCT() {
+		return A38_PRODUCT;
+	}
+	public void setA38_PRODUCT(String a38_PRODUCT) {
+		A38_PRODUCT = a38_PRODUCT;
+	}
+	public BigDecimal getA38A_NUMBER_0F_EMPLOYEES() {
+		return A38A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA38A_NUMBER_0F_EMPLOYEES(BigDecimal a38a_NUMBER_0F_EMPLOYEES) {
+		A38A_NUMBER_0F_EMPLOYEES = a38a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA38B_NUMBER_OF_SERVICE() {
+		return A38B_NUMBER_OF_SERVICE;
+	}
+	public void setA38B_NUMBER_OF_SERVICE(BigDecimal a38b_NUMBER_OF_SERVICE) {
+		A38B_NUMBER_OF_SERVICE = a38b_NUMBER_OF_SERVICE;
+	}
+	public String getA39_PRODUCT() {
+		return A39_PRODUCT;
+	}
+	public void setA39_PRODUCT(String a39_PRODUCT) {
+		A39_PRODUCT = a39_PRODUCT;
+	}
+	public BigDecimal getA39A_NUMBER_0F_EMPLOYEES() {
+		return A39A_NUMBER_0F_EMPLOYEES;
+	}
+	public void setA39A_NUMBER_0F_EMPLOYEES(BigDecimal a39a_NUMBER_0F_EMPLOYEES) {
+		A39A_NUMBER_0F_EMPLOYEES = a39a_NUMBER_0F_EMPLOYEES;
+	}
+	public BigDecimal getA39B_NUMBER_OF_SERVICE() {
+		return A39B_NUMBER_OF_SERVICE;
+	}
+	public void setA39B_NUMBER_OF_SERVICE(BigDecimal a39b_NUMBER_OF_SERVICE) {
+		A39B_NUMBER_OF_SERVICE = a39b_NUMBER_OF_SERVICE;
+	}
+	public String getA40_PRODUCT() {
+		return A40_PRODUCT;
+	}
+	public void setA40_PRODUCT(String a40_PRODUCT) {
+		A40_PRODUCT = a40_PRODUCT;
+	}
+	public String getA40A_DESCRIPTION() {
+		return A40A_DESCRIPTION;
+	}
+	public void setA40A_DESCRIPTION(String a40a_DESCRIPTION) {
+		A40A_DESCRIPTION = a40a_DESCRIPTION;
+	}
+	public String getREPORT_CODE() {
+		return REPORT_CODE;
+	}
+	public void setREPORT_CODE(String rEPORT_CODE) {
+		REPORT_CODE = rEPORT_CODE;
+	}
+	public String getREPORT_NAME() {
+		return REPORT_NAME;
+	}
+	public void setREPORT_NAME(String rEPORT_NAME) {
+		REPORT_NAME = rEPORT_NAME;
+	}
+	public Date getREPORT_DATE() {
+		return REPORT_DATE;
+	}
+	public void setREPORT_DATE(Date rEPORT_DATE) {
+		REPORT_DATE = rEPORT_DATE;
+	}
+	public Date getREPORT_DUE_DATE() {
+		return REPORT_DUE_DATE;
+	}
+	public void setREPORT_DUE_DATE(Date rEPORT_DUE_DATE) {
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+	}
+	public Date getREP_SUBMIT_DATE() {
+		return REP_SUBMIT_DATE;
+	}
+	public void setREP_SUBMIT_DATE(Date rEP_SUBMIT_DATE) {
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+	}
+	public Date getREP_PERIOD_FROM() {
+		return REP_PERIOD_FROM;
+	}
+	public void setREP_PERIOD_FROM(Date rEP_PERIOD_FROM) {
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+	}
+	public Date getREP_PERIOD_TO() {
+		return REP_PERIOD_TO;
+	}
+	public void setREP_PERIOD_TO(Date rEP_PERIOD_TO) {
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+	}
+	public String getREP_FREQ() {
+		return REP_FREQ;
+	}
+	public void setREP_FREQ(String rEP_FREQ) {
+		REP_FREQ = rEP_FREQ;
+	}
+	public String getNIL_REPORT_FLG() {
+		return NIL_REPORT_FLG;
+	}
+	public void setNIL_REPORT_FLG(String nIL_REPORT_FLG) {
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+	}
+	public String getARCH_FLG() {
+		return ARCH_FLG;
+	}
+	public void setARCH_FLG(String aRCH_FLG) {
+		ARCH_FLG = aRCH_FLG;
+	}
+	public String getENTITY_FLG() {
+		return ENTITY_FLG;
+	}
+	public void setENTITY_FLG(String eNTITY_FLG) {
+		ENTITY_FLG = eNTITY_FLG;
+	}
+	public String getDEL_FLG() {
+		return DEL_FLG;
+	}
+	public void setDEL_FLG(String dEL_FLG) {
+		DEL_FLG = dEL_FLG;
+	}
+	public String getMODIFY_FLG() {
+		return MODIFY_FLG;
+	}
+	public void setMODIFY_FLG(String mODIFY_FLG) {
+		MODIFY_FLG = mODIFY_FLG;
+	}
+	public String getENTRY_USER() {
+		return ENTRY_USER;
+	}
+	public void setENTRY_USER(String eNTRY_USER) {
+		ENTRY_USER = eNTRY_USER;
+	}
+	public String getMODIFY_USER() {
+		return MODIFY_USER;
+	}
+	public void setMODIFY_USER(String mODIFY_USER) {
+		MODIFY_USER = mODIFY_USER;
+	}
+	public String getVERIFY_USER() {
+		return VERIFY_USER;
+	}
+	public void setVERIFY_USER(String vERIFY_USER) {
+		VERIFY_USER = vERIFY_USER;
+	}
+	public Date getENTRY_TIME() {
+		return ENTRY_TIME;
+	}
+	public void setENTRY_TIME(Date eNTRY_TIME) {
+		ENTRY_TIME = eNTRY_TIME;
+	}
+	public Date getMODIFY_TIME() {
+		return MODIFY_TIME;
+	}
+	public void setMODIFY_TIME(Date mODIFY_TIME) {
+		MODIFY_TIME = mODIFY_TIME;
+	}
+	public Date getVERIFY_TIME() {
+		return VERIFY_TIME;
+	}
+	public void setVERIFY_TIME(Date vERIFY_TIME) {
+		VERIFY_TIME = vERIFY_TIME;
+	}
+	public String getQTR_FLG() {
+		return QTR_FLG;
+	}
+	public void setQTR_FLG(String qTR_FLG) {
+		QTR_FLG = qTR_FLG;
+	}
+	public T30ORReport(String a1_PRODUCT, BigDecimal a1a_NUMBER_0F_EMPLOYEES, BigDecimal a1b_NUMBER_OF_SERVICE,
+			String a2_PRODUCT, BigDecimal a2a_NUMBER_0F_EMPLOYEES, BigDecimal a2b_NUMBER_OF_SERVICE, String a3_PRODUCT,
+			BigDecimal a3a_NUMBER_0F_EMPLOYEES, BigDecimal a3b_NUMBER_OF_SERVICE, String a4_PRODUCT,
+			BigDecimal a4a_NUMBER_0F_EMPLOYEES, BigDecimal a4b_NUMBER_OF_SERVICE, String a5_PRODUCT,
+			BigDecimal a5a_NUMBER_0F_EMPLOYEES, BigDecimal a5b_NUMBER_OF_SERVICE, String a6_PRODUCT,
+			BigDecimal a6a_NUMBER_0F_EMPLOYEES, BigDecimal a6b_NUMBER_OF_SERVICE, String a7_PRODUCT,
+			BigDecimal a7a_NUMBER_0F_EMPLOYEES, BigDecimal a7b_NUMBER_OF_SERVICE, String a8_PRODUCT,
+			BigDecimal a8a_NUMBER_0F_EMPLOYEES, BigDecimal a8b_NUMBER_OF_SERVICE, String a9_PRODUCT,
+			BigDecimal a9a_NUMBER_0F_EMPLOYEES, BigDecimal a9b_NUMBER_OF_SERVICE, String a10_PRODUCT,
+			BigDecimal a10a_NUMBER_0F_EMPLOYEES, BigDecimal a10b_NUMBER_OF_SERVICE, String a11_PRODUCT,
+			BigDecimal a11a_NUMBER_0F_EMPLOYEES, BigDecimal a11b_NUMBER_OF_SERVICE, String a12_PRODUCT,
+			BigDecimal a12a_NUMBER_0F_EMPLOYEES, BigDecimal a12b_NUMBER_OF_SERVICE, String a13_PRODUCT,
+			BigDecimal a13a_NUMBER_0F_EMPLOYEES, BigDecimal a13b_NUMBER_OF_SERVICE, String a14_PRODUCT,
+			BigDecimal a14a_NUMBER_0F_EMPLOYEES, BigDecimal a14b_NUMBER_OF_SERVICE, String a15_PRODUCT,
+			BigDecimal a15a_NUMBER_0F_EMPLOYEES, BigDecimal a15b_NUMBER_OF_SERVICE, String a16_PRODUCT,
+			BigDecimal a16a_NUMBER_0F_EMPLOYEES, BigDecimal a16b_NUMBER_OF_SERVICE, String a17_PRODUCT,
+			BigDecimal a17a_NUMBER_0F_EMPLOYEES, BigDecimal a17b_NUMBER_OF_SERVICE, String a18_PRODUCT,
+			BigDecimal a18a_NUMBER_0F_EMPLOYEES, BigDecimal a18b_NUMBER_OF_SERVICE, String a19_PRODUCT,
+			BigDecimal a19a_NUMBER_0F_EMPLOYEES, BigDecimal a19b_NUMBER_OF_SERVICE, String a20_PRODUCT,
+			BigDecimal a20a_NUMBER_0F_EMPLOYEES, BigDecimal a20b_NUMBER_OF_SERVICE, String a21_PRODUCT,
+			BigDecimal a21a_NUMBER_0F_EMPLOYEES, BigDecimal a21b_NUMBER_OF_SERVICE, String a22_PRODUCT,
+			String a22a_DESCRIPTION, String a23_PRODUCT, BigDecimal a23a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a23b_NUMBER_OF_SERVICE, String a24_PRODUCT, BigDecimal a24a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a24b_NUMBER_OF_SERVICE, String a25_PRODUCT, BigDecimal a25a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a25b_NUMBER_OF_SERVICE, String a26_PRODUCT, BigDecimal a26a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a26b_NUMBER_OF_SERVICE, String a27_PRODUCT, BigDecimal a27a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a27b_NUMBER_OF_SERVICE, String a28_PRODUCT, String a28a_DESCRIPTION, String a29_PRODUCT,
+			BigDecimal a29a_NUMBER_0F_EMPLOYEES, BigDecimal a29b_NUMBER_OF_SERVICE, String a30_PRODUCT,
+			BigDecimal a30a_NUMBER_0F_EMPLOYEES, BigDecimal a30b_NUMBER_OF_SERVICE, String a31_PRODUCT,
+			BigDecimal a31a_NUMBER_0F_EMPLOYEES, BigDecimal a31b_NUMBER_OF_SERVICE, String a32_PRODUCT,
+			BigDecimal a32a_NUMBER_0F_EMPLOYEES, BigDecimal a32b_NUMBER_OF_SERVICE, String a33_PRODUCT,
+			BigDecimal a33a_NUMBER_0F_EMPLOYEES, BigDecimal a33b_NUMBER_OF_SERVICE, String a34_PRODUCT,
+			String a34a_DESCRIPTION, String a35_PRODUCT, BigDecimal a35a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a35b_NUMBER_OF_SERVICE, String a36_PRODUCT, BigDecimal a36a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a36b_NUMBER_OF_SERVICE, String a37_PRODUCT, BigDecimal a37a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a37b_NUMBER_OF_SERVICE, String a38_PRODUCT, BigDecimal a38a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a38b_NUMBER_OF_SERVICE, String a39_PRODUCT, BigDecimal a39a_NUMBER_0F_EMPLOYEES,
+			BigDecimal a39b_NUMBER_OF_SERVICE, String a40_PRODUCT, String a40a_DESCRIPTION, String rEPORT_CODE,
+			String rEPORT_NAME, Date rEPORT_DATE, Date rEPORT_DUE_DATE, Date rEP_SUBMIT_DATE, Date rEP_PERIOD_FROM,
+			Date rEP_PERIOD_TO, String rEP_FREQ, String nIL_REPORT_FLG, String aRCH_FLG, String eNTITY_FLG,
+			String dEL_FLG, String mODIFY_FLG, String eNTRY_USER, String mODIFY_USER, String vERIFY_USER,
+			Date eNTRY_TIME, Date mODIFY_TIME, Date vERIFY_TIME, String qTR_FLG) {
+		super();
+		A1_PRODUCT = a1_PRODUCT;
+		A1A_NUMBER_0F_EMPLOYEES = a1a_NUMBER_0F_EMPLOYEES;
+		A1B_NUMBER_OF_SERVICE = a1b_NUMBER_OF_SERVICE;
+		A2_PRODUCT = a2_PRODUCT;
+		A2A_NUMBER_0F_EMPLOYEES = a2a_NUMBER_0F_EMPLOYEES;
+		A2B_NUMBER_OF_SERVICE = a2b_NUMBER_OF_SERVICE;
+		A3_PRODUCT = a3_PRODUCT;
+		A3A_NUMBER_0F_EMPLOYEES = a3a_NUMBER_0F_EMPLOYEES;
+		A3B_NUMBER_OF_SERVICE = a3b_NUMBER_OF_SERVICE;
+		A4_PRODUCT = a4_PRODUCT;
+		A4A_NUMBER_0F_EMPLOYEES = a4a_NUMBER_0F_EMPLOYEES;
+		A4B_NUMBER_OF_SERVICE = a4b_NUMBER_OF_SERVICE;
+		A5_PRODUCT = a5_PRODUCT;
+		A5A_NUMBER_0F_EMPLOYEES = a5a_NUMBER_0F_EMPLOYEES;
+		A5B_NUMBER_OF_SERVICE = a5b_NUMBER_OF_SERVICE;
+		A6_PRODUCT = a6_PRODUCT;
+		A6A_NUMBER_0F_EMPLOYEES = a6a_NUMBER_0F_EMPLOYEES;
+		A6B_NUMBER_OF_SERVICE = a6b_NUMBER_OF_SERVICE;
+		A7_PRODUCT = a7_PRODUCT;
+		A7A_NUMBER_0F_EMPLOYEES = a7a_NUMBER_0F_EMPLOYEES;
+		A7B_NUMBER_OF_SERVICE = a7b_NUMBER_OF_SERVICE;
+		A8_PRODUCT = a8_PRODUCT;
+		A8A_NUMBER_0F_EMPLOYEES = a8a_NUMBER_0F_EMPLOYEES;
+		A8B_NUMBER_OF_SERVICE = a8b_NUMBER_OF_SERVICE;
+		A9_PRODUCT = a9_PRODUCT;
+		A9A_NUMBER_0F_EMPLOYEES = a9a_NUMBER_0F_EMPLOYEES;
+		A9B_NUMBER_OF_SERVICE = a9b_NUMBER_OF_SERVICE;
+		A10_PRODUCT = a10_PRODUCT;
+		A10A_NUMBER_0F_EMPLOYEES = a10a_NUMBER_0F_EMPLOYEES;
+		A10B_NUMBER_OF_SERVICE = a10b_NUMBER_OF_SERVICE;
+		A11_PRODUCT = a11_PRODUCT;
+		A11A_NUMBER_0F_EMPLOYEES = a11a_NUMBER_0F_EMPLOYEES;
+		A11B_NUMBER_OF_SERVICE = a11b_NUMBER_OF_SERVICE;
+		A12_PRODUCT = a12_PRODUCT;
+		A12A_NUMBER_0F_EMPLOYEES = a12a_NUMBER_0F_EMPLOYEES;
+		A12B_NUMBER_OF_SERVICE = a12b_NUMBER_OF_SERVICE;
+		A13_PRODUCT = a13_PRODUCT;
+		A13A_NUMBER_0F_EMPLOYEES = a13a_NUMBER_0F_EMPLOYEES;
+		A13B_NUMBER_OF_SERVICE = a13b_NUMBER_OF_SERVICE;
+		A14_PRODUCT = a14_PRODUCT;
+		A14A_NUMBER_0F_EMPLOYEES = a14a_NUMBER_0F_EMPLOYEES;
+		A14B_NUMBER_OF_SERVICE = a14b_NUMBER_OF_SERVICE;
+		A15_PRODUCT = a15_PRODUCT;
+		A15A_NUMBER_0F_EMPLOYEES = a15a_NUMBER_0F_EMPLOYEES;
+		A15B_NUMBER_OF_SERVICE = a15b_NUMBER_OF_SERVICE;
+		A16_PRODUCT = a16_PRODUCT;
+		A16A_NUMBER_0F_EMPLOYEES = a16a_NUMBER_0F_EMPLOYEES;
+		A16B_NUMBER_OF_SERVICE = a16b_NUMBER_OF_SERVICE;
+		A17_PRODUCT = a17_PRODUCT;
+		A17A_NUMBER_0F_EMPLOYEES = a17a_NUMBER_0F_EMPLOYEES;
+		A17B_NUMBER_OF_SERVICE = a17b_NUMBER_OF_SERVICE;
+		A18_PRODUCT = a18_PRODUCT;
+		A18A_NUMBER_0F_EMPLOYEES = a18a_NUMBER_0F_EMPLOYEES;
+		A18B_NUMBER_OF_SERVICE = a18b_NUMBER_OF_SERVICE;
+		A19_PRODUCT = a19_PRODUCT;
+		A19A_NUMBER_0F_EMPLOYEES = a19a_NUMBER_0F_EMPLOYEES;
+		A19B_NUMBER_OF_SERVICE = a19b_NUMBER_OF_SERVICE;
+		A20_PRODUCT = a20_PRODUCT;
+		A20A_NUMBER_0F_EMPLOYEES = a20a_NUMBER_0F_EMPLOYEES;
+		A20B_NUMBER_OF_SERVICE = a20b_NUMBER_OF_SERVICE;
+		A21_PRODUCT = a21_PRODUCT;
+		A21A_NUMBER_0F_EMPLOYEES = a21a_NUMBER_0F_EMPLOYEES;
+		A21B_NUMBER_OF_SERVICE = a21b_NUMBER_OF_SERVICE;
+		A22_PRODUCT = a22_PRODUCT;
+		A22A_DESCRIPTION = a22a_DESCRIPTION;
+		A23_PRODUCT = a23_PRODUCT;
+		A23A_NUMBER_0F_EMPLOYEES = a23a_NUMBER_0F_EMPLOYEES;
+		A23B_NUMBER_OF_SERVICE = a23b_NUMBER_OF_SERVICE;
+		A24_PRODUCT = a24_PRODUCT;
+		A24A_NUMBER_0F_EMPLOYEES = a24a_NUMBER_0F_EMPLOYEES;
+		A24B_NUMBER_OF_SERVICE = a24b_NUMBER_OF_SERVICE;
+		A25_PRODUCT = a25_PRODUCT;
+		A25A_NUMBER_0F_EMPLOYEES = a25a_NUMBER_0F_EMPLOYEES;
+		A25B_NUMBER_OF_SERVICE = a25b_NUMBER_OF_SERVICE;
+		A26_PRODUCT = a26_PRODUCT;
+		A26A_NUMBER_0F_EMPLOYEES = a26a_NUMBER_0F_EMPLOYEES;
+		A26B_NUMBER_OF_SERVICE = a26b_NUMBER_OF_SERVICE;
+		A27_PRODUCT = a27_PRODUCT;
+		A27A_NUMBER_0F_EMPLOYEES = a27a_NUMBER_0F_EMPLOYEES;
+		A27B_NUMBER_OF_SERVICE = a27b_NUMBER_OF_SERVICE;
+		A28_PRODUCT = a28_PRODUCT;
+		A28A_DESCRIPTION = a28a_DESCRIPTION;
+		A29_PRODUCT = a29_PRODUCT;
+		A29A_NUMBER_0F_EMPLOYEES = a29a_NUMBER_0F_EMPLOYEES;
+		A29B_NUMBER_OF_SERVICE = a29b_NUMBER_OF_SERVICE;
+		A30_PRODUCT = a30_PRODUCT;
+		A30A_NUMBER_0F_EMPLOYEES = a30a_NUMBER_0F_EMPLOYEES;
+		A30B_NUMBER_OF_SERVICE = a30b_NUMBER_OF_SERVICE;
+		A31_PRODUCT = a31_PRODUCT;
+		A31A_NUMBER_0F_EMPLOYEES = a31a_NUMBER_0F_EMPLOYEES;
+		A31B_NUMBER_OF_SERVICE = a31b_NUMBER_OF_SERVICE;
+		A32_PRODUCT = a32_PRODUCT;
+		A32A_NUMBER_0F_EMPLOYEES = a32a_NUMBER_0F_EMPLOYEES;
+		A32B_NUMBER_OF_SERVICE = a32b_NUMBER_OF_SERVICE;
+		A33_PRODUCT = a33_PRODUCT;
+		A33A_NUMBER_0F_EMPLOYEES = a33a_NUMBER_0F_EMPLOYEES;
+		A33B_NUMBER_OF_SERVICE = a33b_NUMBER_OF_SERVICE;
+		A34_PRODUCT = a34_PRODUCT;
+		A34A_DESCRIPTION = a34a_DESCRIPTION;
+		A35_PRODUCT = a35_PRODUCT;
+		A35A_NUMBER_0F_EMPLOYEES = a35a_NUMBER_0F_EMPLOYEES;
+		A35B_NUMBER_OF_SERVICE = a35b_NUMBER_OF_SERVICE;
+		A36_PRODUCT = a36_PRODUCT;
+		A36A_NUMBER_0F_EMPLOYEES = a36a_NUMBER_0F_EMPLOYEES;
+		A36B_NUMBER_OF_SERVICE = a36b_NUMBER_OF_SERVICE;
+		A37_PRODUCT = a37_PRODUCT;
+		A37A_NUMBER_0F_EMPLOYEES = a37a_NUMBER_0F_EMPLOYEES;
+		A37B_NUMBER_OF_SERVICE = a37b_NUMBER_OF_SERVICE;
+		A38_PRODUCT = a38_PRODUCT;
+		A38A_NUMBER_0F_EMPLOYEES = a38a_NUMBER_0F_EMPLOYEES;
+		A38B_NUMBER_OF_SERVICE = a38b_NUMBER_OF_SERVICE;
+		A39_PRODUCT = a39_PRODUCT;
+		A39A_NUMBER_0F_EMPLOYEES = a39a_NUMBER_0F_EMPLOYEES;
+		A39B_NUMBER_OF_SERVICE = a39b_NUMBER_OF_SERVICE;
+		A40_PRODUCT = a40_PRODUCT;
+		A40A_DESCRIPTION = a40a_DESCRIPTION;
+		REPORT_CODE = rEPORT_CODE;
+		REPORT_NAME = rEPORT_NAME;
+		REPORT_DATE = rEPORT_DATE;
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+		REP_FREQ = rEP_FREQ;
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+		ARCH_FLG = aRCH_FLG;
+		ENTITY_FLG = eNTITY_FLG;
+		DEL_FLG = dEL_FLG;
+		MODIFY_FLG = mODIFY_FLG;
+		ENTRY_USER = eNTRY_USER;
+		MODIFY_USER = mODIFY_USER;
+		VERIFY_USER = vERIFY_USER;
+		ENTRY_TIME = eNTRY_TIME;
+		MODIFY_TIME = mODIFY_TIME;
+		VERIFY_TIME = vERIFY_TIME;
+		QTR_FLG = qTR_FLG;
+	}
+	public T30ORReport() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+ 
+	
+
+}

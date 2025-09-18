@@ -1,0 +1,297 @@
+package com.bornfire.xbrl.entities.BRSS;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+@Entity
+@Table(name = "T12H_CDD_TRAN_TERM_TABLE")
+public class T12HReport {
+
+	
+	private String	D4A_CUR_CDD_TRAN_TERM;
+	private String	D5A_CUR_AMLCFT_TRAN_TERM;
+	private String	D6A_CUR_TOTAL_TRAN;
+	private BigDecimal	C4B_CUR_CDD_TRAN_TERM_NOT_LOW;
+	private BigDecimal	C5B_CUR_AMLCFT_TRAN_TERM_NOT_LOW;
+	private BigDecimal	C6B_CUR_TOTAL_NOT_LOW;
+	private BigDecimal	C4C_CUR_CDD_TRAN_TERM_TAMT_LOW;
+	private BigDecimal	C5C_CUR_AMLCFT_TRAN_TERM_TAMT_LOW;
+	private BigDecimal	C6C_CUR_TOTAL_TAMT_LOW;
+	private BigDecimal	C4D_CUR_CDD_TRAN_TERM_NOT_MED;
+	private BigDecimal	C5D_CUR_AMLCFT_TRAN_TERM_NOT_MED;
+	private BigDecimal	C6D_CUR_TOTAL_NOT_MED;
+	private BigDecimal	C4E_CUR_CDD_TRAN_TERM_TAMT_MED;
+	private BigDecimal	C5E_CUR_AMLCFT_TRAN_TERM_TAMT_MED;
+	private BigDecimal	C6E_CUR_TOTAL_TAMT_MED;
+	private BigDecimal	C4F_CUR_CDD_TRAN_TERM_NOT_HIG;
+	private BigDecimal	C5F_CUR_AMLCFT_TRAN_TERM_NOT_HIG;
+	private BigDecimal	C6F_CUR_TOTAL_NOT_HIG;
+	private BigDecimal	C4G_CUR_CDD_TRAN_TERM_TAMT_HIG;
+	private BigDecimal	C5G_CUR_AMLCFT_TRAN_TERM_TAMT_HIG;
+	private BigDecimal	C6G_CUR_TOTAL_TAMT_HIG;
+	private String	REPORT_CODE;
+	private String	REPORT_NAME;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Id
+	private Date	REPORT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REPORT_DUE_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_SUBMIT_DATE;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_FROM;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date	REP_PERIOD_TO;
+	private String	REP_FREQ;
+	private String	NIL_REPORT_FLG;
+	private String	ARCH_FLG;
+	public String getD4A_CUR_CDD_TRAN_TERM() {
+		return D4A_CUR_CDD_TRAN_TERM;
+	}
+	public void setD4A_CUR_CDD_TRAN_TERM(String d4a_CUR_CDD_TRAN_TERM) {
+		D4A_CUR_CDD_TRAN_TERM = d4a_CUR_CDD_TRAN_TERM;
+	}
+	public String getD5A_CUR_AMLCFT_TRAN_TERM() {
+		return D5A_CUR_AMLCFT_TRAN_TERM;
+	}
+	public void setD5A_CUR_AMLCFT_TRAN_TERM(String d5a_CUR_AMLCFT_TRAN_TERM) {
+		D5A_CUR_AMLCFT_TRAN_TERM = d5a_CUR_AMLCFT_TRAN_TERM;
+	}
+	public String getD6A_CUR_TOTAL_TRAN() {
+		return D6A_CUR_TOTAL_TRAN;
+	}
+	public void setD6A_CUR_TOTAL_TRAN(String d6a_CUR_TOTAL_TRAN) {
+		D6A_CUR_TOTAL_TRAN = d6a_CUR_TOTAL_TRAN;
+	}
+	public BigDecimal getC4B_CUR_CDD_TRAN_TERM_NOT_LOW() {
+		return C4B_CUR_CDD_TRAN_TERM_NOT_LOW;
+	}
+	public void setC4B_CUR_CDD_TRAN_TERM_NOT_LOW(BigDecimal c4b_CUR_CDD_TRAN_TERM_NOT_LOW) {
+		C4B_CUR_CDD_TRAN_TERM_NOT_LOW = c4b_CUR_CDD_TRAN_TERM_NOT_LOW;
+	}
+	public BigDecimal getC5B_CUR_AMLCFT_TRAN_TERM_NOT_LOW() {
+		return C5B_CUR_AMLCFT_TRAN_TERM_NOT_LOW;
+	}
+	public void setC5B_CUR_AMLCFT_TRAN_TERM_NOT_LOW(BigDecimal c5b_CUR_AMLCFT_TRAN_TERM_NOT_LOW) {
+		C5B_CUR_AMLCFT_TRAN_TERM_NOT_LOW = c5b_CUR_AMLCFT_TRAN_TERM_NOT_LOW;
+	}
+	public BigDecimal getC6B_CUR_TOTAL_NOT_LOW() {
+		return C6B_CUR_TOTAL_NOT_LOW;
+	}
+	public void setC6B_CUR_TOTAL_NOT_LOW(BigDecimal c6b_CUR_TOTAL_NOT_LOW) {
+		C6B_CUR_TOTAL_NOT_LOW = c6b_CUR_TOTAL_NOT_LOW;
+	}
+	public BigDecimal getC4C_CUR_CDD_TRAN_TERM_TAMT_LOW() {
+		return C4C_CUR_CDD_TRAN_TERM_TAMT_LOW;
+	}
+	public void setC4C_CUR_CDD_TRAN_TERM_TAMT_LOW(BigDecimal c4c_CUR_CDD_TRAN_TERM_TAMT_LOW) {
+		C4C_CUR_CDD_TRAN_TERM_TAMT_LOW = c4c_CUR_CDD_TRAN_TERM_TAMT_LOW;
+	}
+	public BigDecimal getC5C_CUR_AMLCFT_TRAN_TERM_TAMT_LOW() {
+		return C5C_CUR_AMLCFT_TRAN_TERM_TAMT_LOW;
+	}
+	public void setC5C_CUR_AMLCFT_TRAN_TERM_TAMT_LOW(BigDecimal c5c_CUR_AMLCFT_TRAN_TERM_TAMT_LOW) {
+		C5C_CUR_AMLCFT_TRAN_TERM_TAMT_LOW = c5c_CUR_AMLCFT_TRAN_TERM_TAMT_LOW;
+	}
+	public BigDecimal getC6C_CUR_TOTAL_TAMT_LOW() {
+		return C6C_CUR_TOTAL_TAMT_LOW;
+	}
+	public void setC6C_CUR_TOTAL_TAMT_LOW(BigDecimal c6c_CUR_TOTAL_TAMT_LOW) {
+		C6C_CUR_TOTAL_TAMT_LOW = c6c_CUR_TOTAL_TAMT_LOW;
+	}
+	public BigDecimal getC4D_CUR_CDD_TRAN_TERM_NOT_MED() {
+		return C4D_CUR_CDD_TRAN_TERM_NOT_MED;
+	}
+	public void setC4D_CUR_CDD_TRAN_TERM_NOT_MED(BigDecimal c4d_CUR_CDD_TRAN_TERM_NOT_MED) {
+		C4D_CUR_CDD_TRAN_TERM_NOT_MED = c4d_CUR_CDD_TRAN_TERM_NOT_MED;
+	}
+	public BigDecimal getC5D_CUR_AMLCFT_TRAN_TERM_NOT_MED() {
+		return C5D_CUR_AMLCFT_TRAN_TERM_NOT_MED;
+	}
+	public void setC5D_CUR_AMLCFT_TRAN_TERM_NOT_MED(BigDecimal c5d_CUR_AMLCFT_TRAN_TERM_NOT_MED) {
+		C5D_CUR_AMLCFT_TRAN_TERM_NOT_MED = c5d_CUR_AMLCFT_TRAN_TERM_NOT_MED;
+	}
+	public BigDecimal getC6D_CUR_TOTAL_NOT_MED() {
+		return C6D_CUR_TOTAL_NOT_MED;
+	}
+	public void setC6D_CUR_TOTAL_NOT_MED(BigDecimal c6d_CUR_TOTAL_NOT_MED) {
+		C6D_CUR_TOTAL_NOT_MED = c6d_CUR_TOTAL_NOT_MED;
+	}
+	public BigDecimal getC4E_CUR_CDD_TRAN_TERM_TAMT_MED() {
+		return C4E_CUR_CDD_TRAN_TERM_TAMT_MED;
+	}
+	public void setC4E_CUR_CDD_TRAN_TERM_TAMT_MED(BigDecimal c4e_CUR_CDD_TRAN_TERM_TAMT_MED) {
+		C4E_CUR_CDD_TRAN_TERM_TAMT_MED = c4e_CUR_CDD_TRAN_TERM_TAMT_MED;
+	}
+	public BigDecimal getC5E_CUR_AMLCFT_TRAN_TERM_TAMT_MED() {
+		return C5E_CUR_AMLCFT_TRAN_TERM_TAMT_MED;
+	}
+	public void setC5E_CUR_AMLCFT_TRAN_TERM_TAMT_MED(BigDecimal c5e_CUR_AMLCFT_TRAN_TERM_TAMT_MED) {
+		C5E_CUR_AMLCFT_TRAN_TERM_TAMT_MED = c5e_CUR_AMLCFT_TRAN_TERM_TAMT_MED;
+	}
+	public BigDecimal getC6E_CUR_TOTAL_TAMT_MED() {
+		return C6E_CUR_TOTAL_TAMT_MED;
+	}
+	public void setC6E_CUR_TOTAL_TAMT_MED(BigDecimal c6e_CUR_TOTAL_TAMT_MED) {
+		C6E_CUR_TOTAL_TAMT_MED = c6e_CUR_TOTAL_TAMT_MED;
+	}
+	public BigDecimal getC4F_CUR_CDD_TRAN_TERM_NOT_HIG() {
+		return C4F_CUR_CDD_TRAN_TERM_NOT_HIG;
+	}
+	public void setC4F_CUR_CDD_TRAN_TERM_NOT_HIG(BigDecimal c4f_CUR_CDD_TRAN_TERM_NOT_HIG) {
+		C4F_CUR_CDD_TRAN_TERM_NOT_HIG = c4f_CUR_CDD_TRAN_TERM_NOT_HIG;
+	}
+	public BigDecimal getC5F_CUR_AMLCFT_TRAN_TERM_NOT_HIG() {
+		return C5F_CUR_AMLCFT_TRAN_TERM_NOT_HIG;
+	}
+	public void setC5F_CUR_AMLCFT_TRAN_TERM_NOT_HIG(BigDecimal c5f_CUR_AMLCFT_TRAN_TERM_NOT_HIG) {
+		C5F_CUR_AMLCFT_TRAN_TERM_NOT_HIG = c5f_CUR_AMLCFT_TRAN_TERM_NOT_HIG;
+	}
+	public BigDecimal getC6F_CUR_TOTAL_NOT_HIG() {
+		return C6F_CUR_TOTAL_NOT_HIG;
+	}
+	public void setC6F_CUR_TOTAL_NOT_HIG(BigDecimal c6f_CUR_TOTAL_NOT_HIG) {
+		C6F_CUR_TOTAL_NOT_HIG = c6f_CUR_TOTAL_NOT_HIG;
+	}
+	public BigDecimal getC4G_CUR_CDD_TRAN_TERM_TAMT_HIG() {
+		return C4G_CUR_CDD_TRAN_TERM_TAMT_HIG;
+	}
+	public void setC4G_CUR_CDD_TRAN_TERM_TAMT_HIG(BigDecimal c4g_CUR_CDD_TRAN_TERM_TAMT_HIG) {
+		C4G_CUR_CDD_TRAN_TERM_TAMT_HIG = c4g_CUR_CDD_TRAN_TERM_TAMT_HIG;
+	}
+	public BigDecimal getC5G_CUR_AMLCFT_TRAN_TERM_TAMT_HIG() {
+		return C5G_CUR_AMLCFT_TRAN_TERM_TAMT_HIG;
+	}
+	public void setC5G_CUR_AMLCFT_TRAN_TERM_TAMT_HIG(BigDecimal c5g_CUR_AMLCFT_TRAN_TERM_TAMT_HIG) {
+		C5G_CUR_AMLCFT_TRAN_TERM_TAMT_HIG = c5g_CUR_AMLCFT_TRAN_TERM_TAMT_HIG;
+	}
+	public BigDecimal getC6G_CUR_TOTAL_TAMT_HIG() {
+		return C6G_CUR_TOTAL_TAMT_HIG;
+	}
+	public void setC6G_CUR_TOTAL_TAMT_HIG(BigDecimal c6g_CUR_TOTAL_TAMT_HIG) {
+		C6G_CUR_TOTAL_TAMT_HIG = c6g_CUR_TOTAL_TAMT_HIG;
+	}
+	public String getREPORT_CODE() {
+		return REPORT_CODE;
+	}
+	public void setREPORT_CODE(String rEPORT_CODE) {
+		REPORT_CODE = rEPORT_CODE;
+	}
+	public String getREPORT_NAME() {
+		return REPORT_NAME;
+	}
+	public void setREPORT_NAME(String rEPORT_NAME) {
+		REPORT_NAME = rEPORT_NAME;
+	}
+	public Date getREPORT_DATE() {
+		return REPORT_DATE;
+	}
+	public void setREPORT_DATE(Date rEPORT_DATE) {
+		REPORT_DATE = rEPORT_DATE;
+	}
+	public Date getREPORT_DUE_DATE() {
+		return REPORT_DUE_DATE;
+	}
+	public void setREPORT_DUE_DATE(Date rEPORT_DUE_DATE) {
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+	}
+	public Date getREP_SUBMIT_DATE() {
+		return REP_SUBMIT_DATE;
+	}
+	public void setREP_SUBMIT_DATE(Date rEP_SUBMIT_DATE) {
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+	}
+	public Date getREP_PERIOD_FROM() {
+		return REP_PERIOD_FROM;
+	}
+	public void setREP_PERIOD_FROM(Date rEP_PERIOD_FROM) {
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+	}
+	public Date getREP_PERIOD_TO() {
+		return REP_PERIOD_TO;
+	}
+	public void setREP_PERIOD_TO(Date rEP_PERIOD_TO) {
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+	}
+	public String getREP_FREQ() {
+		return REP_FREQ;
+	}
+	public void setREP_FREQ(String rEP_FREQ) {
+		REP_FREQ = rEP_FREQ;
+	}
+	public String getNIL_REPORT_FLG() {
+		return NIL_REPORT_FLG;
+	}
+	public void setNIL_REPORT_FLG(String nIL_REPORT_FLG) {
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+	}
+	public String getARCH_FLG() {
+		return ARCH_FLG;
+	}
+	public void setARCH_FLG(String aRCH_FLG) {
+		ARCH_FLG = aRCH_FLG;
+	}
+	public T12HReport(String d4a_CUR_CDD_TRAN_TERM, String d5a_CUR_AMLCFT_TRAN_TERM, String d6a_CUR_TOTAL_TRAN,
+			BigDecimal c4b_CUR_CDD_TRAN_TERM_NOT_LOW, BigDecimal c5b_CUR_AMLCFT_TRAN_TERM_NOT_LOW,
+			BigDecimal c6b_CUR_TOTAL_NOT_LOW, BigDecimal c4c_CUR_CDD_TRAN_TERM_TAMT_LOW,
+			BigDecimal c5c_CUR_AMLCFT_TRAN_TERM_TAMT_LOW, BigDecimal c6c_CUR_TOTAL_TAMT_LOW,
+			BigDecimal c4d_CUR_CDD_TRAN_TERM_NOT_MED, BigDecimal c5d_CUR_AMLCFT_TRAN_TERM_NOT_MED,
+			BigDecimal c6d_CUR_TOTAL_NOT_MED, BigDecimal c4e_CUR_CDD_TRAN_TERM_TAMT_MED,
+			BigDecimal c5e_CUR_AMLCFT_TRAN_TERM_TAMT_MED, BigDecimal c6e_CUR_TOTAL_TAMT_MED,
+			BigDecimal c4f_CUR_CDD_TRAN_TERM_NOT_HIG, BigDecimal c5f_CUR_AMLCFT_TRAN_TERM_NOT_HIG,
+			BigDecimal c6f_CUR_TOTAL_NOT_HIG, BigDecimal c4g_CUR_CDD_TRAN_TERM_TAMT_HIG,
+			BigDecimal c5g_CUR_AMLCFT_TRAN_TERM_TAMT_HIG, BigDecimal c6g_CUR_TOTAL_TAMT_HIG, String rEPORT_CODE,
+			String rEPORT_NAME, Date rEPORT_DATE, Date rEPORT_DUE_DATE, Date rEP_SUBMIT_DATE, Date rEP_PERIOD_FROM,
+			Date rEP_PERIOD_TO, String rEP_FREQ, String nIL_REPORT_FLG, String aRCH_FLG) {
+		super();
+		D4A_CUR_CDD_TRAN_TERM = d4a_CUR_CDD_TRAN_TERM;
+		D5A_CUR_AMLCFT_TRAN_TERM = d5a_CUR_AMLCFT_TRAN_TERM;
+		D6A_CUR_TOTAL_TRAN = d6a_CUR_TOTAL_TRAN;
+		C4B_CUR_CDD_TRAN_TERM_NOT_LOW = c4b_CUR_CDD_TRAN_TERM_NOT_LOW;
+		C5B_CUR_AMLCFT_TRAN_TERM_NOT_LOW = c5b_CUR_AMLCFT_TRAN_TERM_NOT_LOW;
+		C6B_CUR_TOTAL_NOT_LOW = c6b_CUR_TOTAL_NOT_LOW;
+		C4C_CUR_CDD_TRAN_TERM_TAMT_LOW = c4c_CUR_CDD_TRAN_TERM_TAMT_LOW;
+		C5C_CUR_AMLCFT_TRAN_TERM_TAMT_LOW = c5c_CUR_AMLCFT_TRAN_TERM_TAMT_LOW;
+		C6C_CUR_TOTAL_TAMT_LOW = c6c_CUR_TOTAL_TAMT_LOW;
+		C4D_CUR_CDD_TRAN_TERM_NOT_MED = c4d_CUR_CDD_TRAN_TERM_NOT_MED;
+		C5D_CUR_AMLCFT_TRAN_TERM_NOT_MED = c5d_CUR_AMLCFT_TRAN_TERM_NOT_MED;
+		C6D_CUR_TOTAL_NOT_MED = c6d_CUR_TOTAL_NOT_MED;
+		C4E_CUR_CDD_TRAN_TERM_TAMT_MED = c4e_CUR_CDD_TRAN_TERM_TAMT_MED;
+		C5E_CUR_AMLCFT_TRAN_TERM_TAMT_MED = c5e_CUR_AMLCFT_TRAN_TERM_TAMT_MED;
+		C6E_CUR_TOTAL_TAMT_MED = c6e_CUR_TOTAL_TAMT_MED;
+		C4F_CUR_CDD_TRAN_TERM_NOT_HIG = c4f_CUR_CDD_TRAN_TERM_NOT_HIG;
+		C5F_CUR_AMLCFT_TRAN_TERM_NOT_HIG = c5f_CUR_AMLCFT_TRAN_TERM_NOT_HIG;
+		C6F_CUR_TOTAL_NOT_HIG = c6f_CUR_TOTAL_NOT_HIG;
+		C4G_CUR_CDD_TRAN_TERM_TAMT_HIG = c4g_CUR_CDD_TRAN_TERM_TAMT_HIG;
+		C5G_CUR_AMLCFT_TRAN_TERM_TAMT_HIG = c5g_CUR_AMLCFT_TRAN_TERM_TAMT_HIG;
+		C6G_CUR_TOTAL_TAMT_HIG = c6g_CUR_TOTAL_TAMT_HIG;
+		REPORT_CODE = rEPORT_CODE;
+		REPORT_NAME = rEPORT_NAME;
+		REPORT_DATE = rEPORT_DATE;
+		REPORT_DUE_DATE = rEPORT_DUE_DATE;
+		REP_SUBMIT_DATE = rEP_SUBMIT_DATE;
+		REP_PERIOD_FROM = rEP_PERIOD_FROM;
+		REP_PERIOD_TO = rEP_PERIOD_TO;
+		REP_FREQ = rEP_FREQ;
+		NIL_REPORT_FLG = nIL_REPORT_FLG;
+		ARCH_FLG = aRCH_FLG;
+	}
+	public T12HReport() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+}
