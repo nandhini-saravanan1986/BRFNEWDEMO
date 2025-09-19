@@ -637,9 +637,477 @@ function showdetailsbyRowAndColumn(a) {
     }
 }
 </script>
+<script>
+	function showmodify(btn) {
+	$(".show_input").removeAttr("readonly").removeAttr("disabled");
+	
+	for(let i = 13; i <=17; i++){
+		$("#r" + i + "_amt_6m").hide();
+		$("#r" + i + "_risk_6m").hide();
+		$("#r" + i + "_capital_6m").hide();
+		$("#r" + i + "amt_6to24m").hide();
+		$("#r" + i + "risk_6to24m").hide();
+		$("#r" + i + "capital_6to24m").hide();
+		$("#r" + i + "amt_gt24m").hide();
+		$("#r" + i + "risk_gt24m").hide();
+		$("#r" + i + "capital_gt24m").hide();
+		
+		$("#r" + i + "_amt_6m").show();
+		$("#r" + i + "_risk_6m").show();
+		$("#r" + i + "_capital_6m").show();
+		$("#r" + i + "amt_6to24m").show();
+		$("#r" + i + "risk_6to24m").show();
+		$("#r" + i + "capital_6to24m").show();
+		$("#r" + i + "amt_gt24m").show();
+		$("#r" + i + "risk_gt24m").show();
+		$("#r" + i + "capital_gt24m").show();
+		}
+		
+		
+	for(let i=19;i<=23;i++){
+		$("#r" + i + "_amt_6m").hide();
+		$("#r" + i + "_risk_6m").hide();
+		$("#r" + i + "_capital_6m").hide();
+		$("#r" + i + "amt_6to24m").hide();
+		$("#r" + i + "risk_6to24m").hide();
+		$("#r" + i + "capital_6to24m").hide();
+		$("#r" + i + "amt_gt24m").hide();
+		$("#r" + i + "risk_gt24m").hide();
+		$("#r" + i + "capital_gt24m").hide();
+		
+		$("#r" + i + "_amt_6m").show();
+		$("#r" + i + "_risk_6m").show();
+		$("#r" + i + "_capital_6m").show();
+		$("#r" + i + "amt_6to24m").show();
+		$("#r" + i + "risk_6to24m").show();
+		$("#r" + i + "capital_6to24m").show();
+		$("#r" + i + "amt_gt24m").show();
+		$("#r" + i + "risk_gt24m").show();
+		$("#r" + i + "capital_gt24m").show();
+	}
+	
+	for(let i=24;i<=26;i++){
+			$("#r" + i + "_amt_6m").hide();
+			$("#r" + i + "_risk_6m").hide();
+			$("#r" + i + "_capital_6m").hide();
+			$("#r" + i + "amt_6to24m").hide();
+			$("#r" + i + "risk_6to24m").hide();
+			$("#r" + i + "capital_6to24m").hide();
+			$("#r" + i + "amt_gt24m").hide();
+			$("#r" + i + "risk_gt24m").hide();
+			$("#r" + i + "capital_gt24m").hide();
+			
+			$("#r" + i + "_amt_6m").show();
+			$("#r" + i + "_risk_6m").show();
+			$("#r" + i + "_capital_6m").show();
+			$("#r" + i + "amt_6to24m").show();
+			$("#r" + i + "risk_6to24m").show();
+			$("#r" + i + "capital_6to24m").show();
+			$("#r" + i + "amt_gt24m").show();
+			$("#r" + i + "risk_gt24m").show();
+			$("#r" + i + "capital_gt24m").show();
+		}
+		
+		for(let i=28;i<=32;i++){
+					$("#r" + i + "_amt_6m").hide();
+					$("#r" + i + "_risk_6m").hide();
+					$("#r" + i + "_capital_6m").hide();
+					$("#r" + i + "amt_6to24m").hide();
+					$("#r" + i + "risk_6to24m").hide();
+					$("#r" + i + "capital_6to24m").hide();
+					$("#r" + i + "amt_gt24m").hide();
+					$("#r" + i + "risk_gt24m").hide();
+					$("#r" + i + "capital_gt24m").hide();
+					
+					$("#r" + i + "_amt_6m").show();
+					$("#r" + i + "_risk_6m").show();
+					$("#r" + i + "_capital_6m").show();
+					$("#r" + i + "amt_6to24m").show();
+					$("#r" + i + "risk_6to24m").show();
+					$("#r" + i + "capital_6to24m").show();
+					$("#r" + i + "amt_gt24m").show();
+					$("#r" + i + "risk_gt24m").show();
+					$("#r" + i + "capital_gt24m").show();
+				}
+		// Toggle buttons
+		$("#submitButton, #btnBack_edit").show();
+		$("#btnBack").hide();
+
+		// Show Cancel button only when Modify is clicked
+		$("#cancelRecord").show();
+
+		// Optionally hide the clicked Modify button
+		$(btn).hide();
+	}	
+	
+
+	//Cancel / Reset function
+	function cancelModify() {
+	    if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
+	        // ✅ Only when user clicks YES
+	        location.reload();
+	        
+	        $(".Show_input").attr("readonly", true).attr("disabled", true);
+
+	    
+		 	for(let i = 13; i <=17; i++){
+				
+
+				$("#r" + i + "_amt_6m").show();
+				$("#r" + i + "_risk_6m").show();
+				$("#r" + i + "_capital_6m").show();
+				$("#r" + i + "amt_6to24m").show();
+				$("#r" + i + "risk_6to24m").show();
+				$("#r" + i + "capital_6to24m").show();
+				$("#r" + i + "amt_gt24m").show();
+				$("#r" + i + "risk_gt24m").show();
+				$("#r" + i + "capital_gt24m").show();
+				
+				$("#r" + i + "_amt_6m").hide();
+				$("#r" + i + "_risk_6m").hide();
+				$("#r" + i + "_capital_6m").hide();
+				$("#r" + i + "amt_6to24m").hide();
+				$("#r" + i + "risk_6to24m").hide();
+				$("#r" + i + "capital_6to24m").hide();
+				$("#r" + i + "amt_gt24m").hide();
+				$("#r" + i + "risk_gt24m").hide();
+				$("#r" + i + "capital_gt24m").hide();
+					
+					
+			}
+			for(let i = 19; i <=23; i++){
+
+				$("#r" + i + "_amt_6m").show();
+				$("#r" + i + "_risk_6m").show();
+				$("#r" + i + "_capital_6m").show();
+				$("#r" + i + "amt_6to24m").show();
+				$("#r" + i + "risk_6to24m").show();
+				$("#r" + i + "capital_6to24m").show();
+				$("#r" + i + "amt_gt24m").show();
+				$("#r" + i + "risk_gt24m").show();
+				$("#r" + i + "capital_gt24m").show();
+				
+				$("#r" + i + "_amt_6m").hide();
+				$("#r" + i + "_risk_6m").hide();
+				$("#r" + i + "_capital_6m").hide();
+				$("#r" + i + "amt_6to24m").hide();
+				$("#r" + i + "risk_6to24m").hide();
+				$("#r" + i + "capital_6to24m").hide();
+				$("#r" + i + "amt_gt24m").hide();
+				$("#r" + i + "risk_gt24m").hide();
+				$("#r" + i + "capital_gt24m").hide();
+					
+			}
+			
+			
+
+			for(let i=28;i<=32;i++){
+						$("#r" + i + "_amt_6m").hide();
+						$("#r" + i + "_risk_6m").hide();
+						$("#r" + i + "_capital_6m").hide();
+						$("#r" + i + "amt_6to24m").hide();
+						$("#r" + i + "risk_6to24m").hide();
+						$("#r" + i + "capital_6to24m").hide();
+						$("#r" + i + "amt_gt24m").hide();
+						$("#r" + i + "risk_gt24m").hide();
+						$("#r" + i + "capital_gt24m").hide();
+						
+						$("#r" + i + "_amt_6m").show();
+						$("#r" + i + "_risk_6m").show();
+						$("#r" + i + "_capital_6m").show();
+						$("#r" + i + "amt_6to24m").show();
+						$("#r" + i + "risk_6to24m").show();
+						$("#r" + i + "capital_6to24m").show();
+						$("#r" + i + "amt_gt24m").show();
+						$("#r" + i + "risk_gt24m").show();
+						$("#r" + i + "capital_gt24m").show();
+					}
+	        $("#submitButton, #btnBack_edit").hide();
+	        $("#btnBack").show();
+
+	        // Hide Cancel button again
+	        $("#cancelRecord").hide();
+
+	        // Show all Modify buttons
+	        $("#addRecord").show();
+	    }
+	    // ❌ If user clicks CANCEL, nothing happens
+	}
 
 
-</head>
+</script>
+
+<script>
+function calculateR12Totals(){
+    let tot_amt6m = 0, tot_risk6m = 0, tot_capital6m = 0;
+    let tot_amt6m24m = 0, tot_risk6m24 = 0, tot_capital6m24m = 0;
+    let tot_amtgt24m = 0, tot_riskgt24m = 0, tot_capitalgt24m = 0;
+
+    for(let i = 13; i <= 17; i++){
+        let amt6m       = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
+        let risk6m      = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
+        
+        let amt6m24m    = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
+        let risk6m24    = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
+        
+        let amtgt24m    = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
+        let riskgt24m   = parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
+       
+		
+		let capital6m = amt6m * risk6m;
+		let capital6m24m = amt6m24m * risk6m24;
+		let capitalgt24m = amtgt24m * riskgt24m;
+		
+		$("#r" + i + "_capital_6m").val(capital6m);
+		$("#r" + i + "_capital_6to24m").val(capital6m24m);
+		$("#r" + i + "_capital_gt24m").val(capitalgt24m);
+		
+        tot_amt6m       +=  amt6m;
+        tot_risk6m      += risk6m;
+        tot_capital6m   += capital6m;
+
+        tot_amt6m24m    += amt6m24m;
+        tot_risk6m24    += risk6m24;
+        tot_capital6m24m+= capital6m24m;
+
+        tot_amtgt24m    += amtgt24m;
+        tot_riskgt24m   += riskgt24m;
+        tot_capitalgt24m+= capitalgt24m;
+    }
+
+    //calculation for 12 = sum(13:17)
+    $("#r12_amt_6m").val(tot_amt6m);
+    $("#r12_risk_6m").val(tot_risk6m);
+    $("#r12_capital_6m").val(tot_capital6m);
+
+    $("#r12_amt_6to24m").val(tot_amt6m24m);
+    $("#r12_risk_6to24m").val(tot_risk6m24);
+    $("#r12_capital_6to24m").val(tot_capital6m24m);
+
+    $("#r12_amt_gt24m").val(tot_amtgt24m);
+    $("#r12_risk_gt24m").val(tot_riskgt24m);
+    $("#r12_capital_gt24m").val(tot_capitalgt24m);
+}
+
+$(document).ready(function() {
+    
+    calculateR12Totals();
+
+    for (let i = 13; i <= 17; i++) {
+        $(
+          "#r" + i + "_amt_6m, " +
+          "#r" + i + "_risk_6m, " +
+          "#r" + i + "_capital_6m, " +
+          "#r" + i + "_amt_6to24m, " +
+          "#r" + i + "_risk_6to24m, " +
+          "#r" + i + "_capital_6to24m, " +
+          "#r" + i + "_amt_gt24m, " +
+          "#r" + i + "_risk_gt24m, " +
+          "#r" + i + "_capital_gt24m"
+        ).on("input", function () {
+            calculateR12Totals();
+        });
+    }
+});
+</script>
+<script>
+function calculateR18Totals(){
+	let tot1_amt6m = 0, tot1_risk6m = 0, tot1_capital6m = 0;
+    let tot1_amt6m24m = 0, tot1_risk6m24 = 0, tot1_capital6m24m = 0;
+    let tot1_amtgt24m = 0, tot1_riskgt24m = 0, tot1_capitalgt24m = 0;
+	
+	for(let i = 19; i <= 23; i++){
+	        let t1amt6m       = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
+	        let t1risk6m      = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
+	        
+	        let t1amt6m24m    = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
+	        let t1risk6m24    = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
+	        
+	        let t1amtgt24m    = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
+	        let t1riskgt24m   = parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
+	       
+			
+			let t1capital6m = t1amt6m * t1risk6m;
+			let t1capital6m24m = t1amt6m24m * t1risk6m24;
+			let t1capitalgt24m = t1amtgt24m * t1riskgt24m;
+			
+			$("#r" + i + "_capital_6m").val(t1capital6m);
+			$("#r" + i + "_capital_6to24m").val(t1capital6m24m);
+			$("#r" + i + "_capital_gt24m").val(t1capitalgt24m);
+			
+	        tot1_amt6m       += t1amt6m;
+	        tot1_risk6m      += t1risk6m;
+	        tot1_capital6m   += t1capital6m;
+
+	        tot1_amt6m24m    += t1amt6m24m;
+	        tot1_risk6m24    += t1risk6m24;
+	        tot1_capital6m24m+= t1capital6m24m;
+
+	        tot1_amtgt24m    += t1amtgt24m;
+	        tot1_riskgt24m   += t1riskgt24m;
+	        tot1_capitalgt24m+= t1capitalgt24m;
+
+			 }
+
+			    //calculation for 18 = sum(19:23)
+			    $("#r18_amt_6m").val(tot1_amt6m);
+			    $("#r18_risk_6m").val(tot1_risk6m);
+			    $("#r18_capital_6m").val(tot1_capital6m);
+
+			    $("#r18_amt_6to24m").val(tot1_amt6m24m);
+			    $("#r18_risk_6to24m").val(tot1_risk6m24);
+			    $("#r18_capital_6to24m").val(tot1_capital6m24m);
+
+			    $("#r18_amt_gt24m").val(tot1_amtgt24m);
+			    $("#r18_risk_gt24m").val(tot1_riskgt24m);
+			    $("#r18_capital_gt24m").val(tot1_capitalgt24m);
+			}
+
+			$(document).ready(function() {
+			    
+			    calculateR18Totals();
+
+			    for (let i = 19; i <= 23; i++) {
+			        $(
+			          "#r" + i + "_amt_6m, " +
+			          "#r" + i + "_risk_6m, " +
+			          "#r" + i + "_capital_6m, " +
+			          "#r" + i + "_amt_6to24m, " +
+			          "#r" + i + "_risk_6to24m, " +
+			          "#r" + i + "_capital_6to24m, " +
+			          "#r" + i + "_amt_gt24m, " +
+			          "#r" + i + "_risk_gt24m, " +
+			          "#r" + i + "_capital_gt24m"
+			        ).on("input", function () {
+			            calculateR18Totals();
+			        });
+			    }
+			});
+	
+
+</script>
+
+<script>
+function calculate24_25_26Totals(){
+    for (let i = 24; i <= 26; i++) {
+        let t2amt6m    = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
+        let t2risk6m   = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
+
+        let t2amt6m24m = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
+        let t2risk6m24 = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
+
+        let t2amtgt24m = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
+        let t2riskgt24m= parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
+
+        // calculate per-row capital = amount + risk
+        let t2capital6m    = t2amt6m * t2risk6m;
+        let t2capital6m24m = t2amt6m24m * t2risk6m24;
+        let t2capitalgt24m = t2amtgt24m * t2riskgt24m;
+
+        // write back into inputs
+        $("#r" + i + "_capital_6m").val(t2capital6m);
+        $("#r" + i + "_capital_6to24m").val(t2capital6m24m);
+        $("#r" + i + "_capital_gt24m").val(t2capitalgt24m);
+    }
+}
+
+$(document).ready(function() {
+    // initial calculation
+    calculate24_25_26Totals();
+
+    // re-calc whenever amount/risk changes
+    for (let i = 24; i <= 26; i++) {
+        $(
+          "#r" + i + "_amt_6m, " +
+          "#r" + i + "_risk_6m, " +
+          "#r" + i + "_amt_6to24m, " +
+          "#r" + i + "_risk_6to24m, " +
+          "#r" + i + "_amt_gt24m, " +
+          "#r" + i + "_risk_gt24m"
+        ).on("input", function () {
+            calculate24_25_26Totals();
+        });
+    }
+});
+</script>
+
+<script>
+function calculateR27Totals(){
+	let tot4_amt6m = 0, tot4_risk6m = 0, tot4_capital6m = 0;
+    let tot4_amt6m24m = 0, tot4_risk6m24 = 0, tot4_capital6m24m = 0;
+    let tot4_amtgt24m = 0, tot4_riskgt24m = 0, tot4_capitalgt24m = 0;
+	
+	for(let i = 28; i <= 32; i++){
+	        let t4amt6m       = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
+	        let t4risk6m      = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
+	        
+	        let t4amt6m24m    = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
+	        let t4risk6m24    = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
+	        
+	        let t4amtgt24m    = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
+	        let t4riskgt24m   = parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
+	       
+			
+			let t4capital6m = t4amt6m * t4risk6m;
+			let t4capital6m24m = t4amt6m24m * t4risk6m24;
+			let t4capitalgt24m = t4amtgt24m * t4riskgt24m;
+			
+			$("#r" + i + "_capital_6m").val(t4capital6m);
+			$("#r" + i + "_capital_6to24m").val(t4capital6m24m);
+			$("#r" + i + "_capital_gt24m").val(t4capitalgt24m);
+			
+	        tot4_amt6m       += t4amt6m;
+	        tot4_risk6m      += t4risk6m;
+	        tot4_capital6m   += t4capital6m;
+
+	        tot4_amt6m24m    += t4amt6m24m;
+	        tot4_risk6m24    += t4risk6m24;
+	        tot4_capital6m24m+= t4capital6m24m;
+
+	        tot4_amtgt24m    += t4amtgt24m;
+	        tot4_riskgt24m   += t4riskgt24m;
+	        tot4_capitalgt24m+= t4capitalgt24m;
+
+			 }
+
+			    //calculation for 18 = sum(19:23)
+			    $("#r27_amt_6m").val(tot4_amt6m);
+			    $("#r27_risk_6m").val(tot4_risk6m);
+			    $("#r27_capital_6m").val(tot4_capital6m);
+
+			    $("#r27_amt_6to24m").val(tot4_amt6m24m);
+			    $("#r27_risk_6to24m").val(tot4_risk6m24);
+			    $("#r27_capital_6to24m").val(tot4_capital6m24m);
+
+			    $("#r27_amt_gt24m").val(tot4_amtgt24m);
+			    $("#r27_risk_gt24m").val(tot4_riskgt24m);
+			    $("#r27_capital_gt24m").val(tot4_capitalgt24m);
+			}
+
+			$(document).ready(function() {
+			    
+			    calculateR27Totals();
+
+			    for (let i = 28; i <= 32; i++) {
+			        $(
+			          "#r" + i + "_amt_6m, " +
+			          "#r" + i + "_risk_6m, " +
+			          "#r" + i + "_capital_6m, " +
+			          "#r" + i + "_amt_6to24m, " +
+			          "#r" + i + "_risk_6to24m, " +
+			          "#r" + i + "_capital_6to24m, " +
+			          "#r" + i + "_amt_gt24m, " +
+			          "#r" + i + "_risk_gt24m, " +
+			          "#r" + i + "_capital_gt24m"
+			        ).on("input", function () {
+			            calculateR27Totals();
+			        });
+			    }
+			});
+	
+
+</script>
+</script>
 
 
 
@@ -678,6 +1146,20 @@ function showdetailsbyRowAndColumn(a) {
 						<!-- Buttons -->
         <input type="hidden" id="selectedTab" th:value="${displaymode}">
         <button type="button" class="custom-tab-btn" id="custom-tab-btnSummary" onclick="showsummary();" th:if="${displaymode == 'Details'}">Summary</button>
+		<!-- Modify button -->
+				<button type="button" class="custom-tab-btn"
+				        onclick="showmodify(this);"
+				        title="Click to EDIT Records"
+				        th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
+				        id="addRecord">Modify</button>
+
+				<!-- Cancel button (hidden initially) -->
+				<button type="button" class="custom-tab-btn"
+				        title="Cancel editing"
+				        id="cancelRecord"
+				        onclick="cancelModify();"
+				        style="display: none;">Cancel</button>
+
         <button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();" th:if="${displaymode == 'summary'}">Details</button>
         <button type="button" class="custom-tab-btn" id="custom-tab-btnAdd" th:if="${displaymode == 'summary'}"
             th:attr="data-reportid=${reportid}, 
@@ -693,6 +1175,7 @@ function showdetailsbyRowAndColumn(a) {
             onclick="downloadfile(this);">
             <i class="fa fa-download"></i>
         </button>
+		
         <button
 		  type="button"
 		  class="custom-tab-btn"
@@ -712,12 +1195,13 @@ function showdetailsbyRowAndColumn(a) {
 			<div th:if="${displaymode == 'summary'}">
 			<div class="row" >
 				<div class="col-sm-12">
-					<div class="table-wrapper table-responsive scrollable-table-container" style="border-right: 1px solid #dee2e6; ">
-						<table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports">
-							<thead>
+					<form action="#" method="POST" id="fileupload">
+						<div class="table-wrapper table-responsive scrollable-table-container" 
+						     style="border-right: 1px solid #dee2e6;">
+						    <table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports">
+							<theadclass="thead-light">
 								<tr>
-													       <th rowspan="4" class="line-col">Line</th>
-													       <th rowspan="4" class="cat-col"></th>
+													       <th rowspan="4" class="line-col">Line</th>													       
 													       <th colspan="9"style=" text-align: center;">Remaining Maturities</th>
 													     </tr>
 													     <tr>
@@ -748,580 +1232,2324 @@ function showdetailsbyRowAndColumn(a) {
 													       <th style="text-align: center;">Charge</th>
 												   		</tr>
 												  
-						    </thead>
+						    </theadclass="thead-light">
 
 							                  	
 												
-							<tbody  th:each="report : ${reportsummary}">
-
-
-												<!--R12-->
-												<tr>
-												        <td  style="text-align: center;">1</td>
-												        <td style="text-align: left;" th:text="${report.r12_product}"></td>
-												        <td th:text="${report.r12_amt_6m}" style="text-align: right;background-color: #92D050;"></td>
-												        <td style="background-color: #BFBFBF;"></td>
-												        <td th:text="${report.r12_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-												        <td th:text="${report.r12_amt_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-												        <td style="background-color: #BFBFBF;"></td>
-												        <td  th:text="${report.r12_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-												        <td  th:text="${report.r12_amt_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-												        <td style="background-color: #BFBFBF;"></td>
-												        <td  th:text="${report.r12_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-												  </tr>
-													<tr><!--R13-->
-													        <td class="text-center">2</td>
-													        <td th:text="${report.r13_product}" style="text-align: left;"></td>
-													        <td th:text="${report.r13_amt_6m}" style="text-align: right;"
-															th:attr="Row_Id='R13', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													        <td th:text="${report.r13_risk_6m}" style="text-align: center; background-color: #999999;"
-															    th:attr="Row_Id='R13', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													        <td th:text="${report.r13_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-													        <td th:text="${report.r13_amt_6to24m}" style="text-align: right;"
-															th:attr="Row_Id='R13', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													        <td	th:text="${report.r13_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																th:attr="Row_Id='R13', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													        <td th:text="${report.r12_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-													        <td th:text="${report.r13_amt_gt24m}" style="text-align: right;"
-															th:attr="Row_Id='R13', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													        <td th:text="${report.r13_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																th:attr="Row_Id='R13', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													        <td  th:text="${report.r13_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-													  </tr>
-													  <tr><!--R14-->
-													      <td class="text-center">3</td>
-													      <td th:text="${report.r14_product}" style="text-align: left;"></td>
-													      <td th:text="${report.r14_amt_6m}" style="text-align: right;"
-													          th:attr="Row_Id='R14', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													      <td th:text="${report.r14_risk_6m}" style="text-align: center;background-color: #999999;"
-													          th:attr="Row_Id='R14', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													      <td th:text="${report.r14_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-													      <td th:text="${report.r14_amt_6to24m}" style="text-align: right;"
-													          th:attr="Row_Id='R14', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													      <td th:text="${report.r14_risk_6to24m}" style="text-align: center;background-color: #999999;"
-													          th:attr="Row_Id='R14', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													      <td th:text="${report.r14_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-													      <td th:text="${report.r14_amt_gt24m}" style="text-align: right;"
-													          th:attr="Row_Id='R14', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													      <td th:text="${report.r14_risk_gt24m}" style="text-align: center;background-color: #999999;"
-													          th:attr="Row_Id='R14', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-													      <td th:text="${report.r14_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-													  </tr>
-
-														  <tr><!--R15-->
-														          <td class="text-center">4</td>
-														          <td th:text="${report.r15_product}" style="text-align: left;"></td>
-														          <td th:text="${report.r15_amt_6m}" style="text-align: right;"
-														  		th:attr="Row_Id='R15', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-														          <td th:text="${report.r15_risk_6m}" style="text-align: center;background-color: #999999;"
-														  		    th:attr="Row_Id='R15', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-														          <td th:text="${report.r15_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-														          <td th:text="${report.r15_amt_6to24m}" style="text-align: right;"
-														  		th:attr="Row_Id='R15', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-														          <td	th:text="${report.r15_risk_6to24m}" style="text-align: center;background-color: #999999;"
-														  			th:attr="Row_Id='R15', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-														          <td th:text="${report.r15_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-														          <td th:text="${report.r15_amt_gt24m}" style="text-align: right;"
-														  		th:attr="Row_Id='R15', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-														          <td th:text="${report.r15_risk_gt24m}" style="text-align: center;background-color: #999999;"
-														  			th:attr="Row_Id='R15', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-														          <td  th:text="${report.r15_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-														    </tr>
-
-															  <tr><!--R16-->
-															          <td class="text-center">5</td>
-															          <td th:text="${report.r16_product}" style="text-align: left;"></td>
-															          <td th:text="${report.r16_amt_6m}" style="text-align: right;"
-															  		th:attr="Row_Id='R16', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-															          <td th:text="${report.r16_risk_6m}" style="text-align: center;background-color: #999999;"
-															  		    th:attr="Row_Id='R16', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-															          <td th:text="${report.r16_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-															          <td th:text="${report.r16_amt_6to24m}" style="text-align: right;"
-															  		th:attr="Row_Id='R16', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-															          <td	th:text="${report.r16_risk_6to24m}" style="text-align: center;background-color: #999999;"
-															  			th:attr="Row_Id='R16', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-															          <td th:text="${report.r16_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-															          <td th:text="${report.r16_amt_gt24m}" style="text-align: right;"
-															  		th:attr="Row_Id='R16', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-															          <td th:text="${report.r16_risk_gt24m}" style="text-align: center;background-color: #999999;"
-															  			th:attr="Row_Id='R16', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-															          <td  th:text="${report.r16_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-															    </tr>
-																<tr><!--R17-->
-																    <td class="text-center">6</td>
-																    <td th:text="${report.r17_product}" style="text-align: left;"></td>
-																    
-																    <td th:text="${report.r17_amt_6m}" style="text-align: right;"
-																        th:attr="Row_Id='R17', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																    
-																    <td th:text="${report.r17_risk_6m}" style="text-align: center;background-color: #999999;"
-																        th:attr="Row_Id='R17', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																    
-																    <td th:text="${report.r17_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-																    
-																    <td th:text="${report.r17_amt_6to24m}" style="text-align: right;"
-																        th:attr="Row_Id='R17', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																    
-																    <td th:text="${report.r17_risk_6to24m}" style="text-align: center;background-color: #999999;"
-																        th:attr="Row_Id='R17', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																    
-																    <td th:text="${report.r17_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																    
-																    <td th:text="${report.r17_amt_gt24m}" style="text-align: right;"
-																        th:attr="Row_Id='R17', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																    
-																    <td th:text="${report.r17_risk_gt24m}" style="text-align: center;background-color: #999999;"
-																        th:attr="Row_Id='R17', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																    
-																    <td th:text="${report.r17_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																</tr>
-
-
-																	  <!--R18-->
-																	  <tr>
-																	          <td class="text-center">7</td>
-																	          <td th:text="${report.r18_product}" style="text-align: left;"></td>
-																	          <td th:text="${report.r18_amt_6m}" style="text-align: right;background-color: #92D050;"></td>
-																	          <td style="background-color: #BFBFBF;"></td>
-																	          <td th:text="${report.r18_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-																	          <td th:text="${report.r18_amt_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																	          <td style="background-color: #BFBFBF;"></td>
-																	          <td  th:text="${report.r18_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																	          <td  th:text="${report.r18_amt_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																	          <td style="background-color: #BFBFBF;"></td>
-																	          <td  th:text="${report.r18_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																	    </tr>
-																		<tr><!--R19-->
-																		    <td class="text-center">8</td>
-																		    <td th:text="${report.r19_product}" style="text-align: left;"></td>
-																		    
-																		    <td th:text="${report.r19_amt_6m}" style="text-align: right;"
-																		        th:attr="Row_Id='R19', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r19_risk_6m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R19', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r19_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-																		    
-																		    <td th:text="${report.r19_amt_6to24m}" style="text-align: right;"
-																		        th:attr="Row_Id='R19', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r19_risk_6to24m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R19', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r19_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																		    
-																		    <td th:text="${report.r19_amt_gt24m}" style="text-align: right;"
-																		        th:attr="Row_Id='R19', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r19_risk_gt24m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R19', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r19_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																		</tr>
-																		<tr><!--R20-->
-																		    <td class="text-center">9</td>
-																		    <td th:text="${report.r20_product}" style="text-align: left;"></td>
-																		    
-																		    <td th:text="${report.r20_amt_6m}" style="text-align: right;"
-																		        th:attr="Row_Id='R20', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r20_risk_6m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R20', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r20_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-																		    
-																		    <td th:text="${report.r20_amt_6to24m}" style="text-align: right;"
-																		        th:attr="Row_Id='R20', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r20_risk_6to24m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R20', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r20_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																		    
-																		    <td th:text="${report.r20_amt_gt24m}" style="text-align: right;"
-																		        th:attr="Row_Id='R20', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r20_risk_gt24m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R20', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r20_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																		</tr>
-
-																		<tr><!--R21-->
-																		    <td class="text-center">10</td>
-																		    <td th:text="${report.r21_product}" style="text-align: left;"></td>
-																		    
-																		    <td th:text="${report.r21_amt_6m}" style="text-align: right;"
-																		        th:attr="Row_Id='R21', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r21_risk_6m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R21', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r21_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-																		    
-																		    <td th:text="${report.r21_amt_6to24m}" style="text-align: right;"
-																		        th:attr="Row_Id='R21', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r21_risk_6to24m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R21', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r21_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																		    
-																		    <td th:text="${report.r21_amt_gt24m}" style="text-align: right;"
-																		        th:attr="Row_Id='R21', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r21_risk_gt24m}" style="text-align: center;background-color: #999999;"
-																		        th:attr="Row_Id='R21', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		    
-																		    <td th:text="${report.r21_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																		</tr>
-
-																		
-																		<tr><!--R22-->
-																		  <td class="text-center">11</td>
-																		  <td th:text="${report.r22_product}" style="text-align: left;"></td>
-																		  
-																		  <td th:text="${report.r22_amt_6m}" style="text-align: right;"
-																		      th:attr="Row_Id='R22', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		  
-																		  <td th:text="${report.r22_risk_6m}" style="text-align: center;background-color: #999999;"
-																		      th:attr="Row_Id='R22', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		  
-																		  <td th:text="${report.r22_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-																		  
-																		  <td th:text="${report.r22_amt_6to24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R22', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		  
-																		  <td th:text="${report.r22_risk_6to24m}" style="text-align: center;background-color: #999999;"
-																		      th:attr="Row_Id='R22', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		  
-																		  <td th:text="${report.r22_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																		  
-																		  <td th:text="${report.r22_amt_gt24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R22', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		  
-																		  <td th:text="${report.r22_risk_gt24m}" style="text-align: center;background-color: #999999;"
-																		      th:attr="Row_Id='R22', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-																		  
-																		  <td th:text="${report.r22_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																		</tr>
-
-																		<tr><!--R23-->
-																		  <td class="text-center">12</td>
-																		  <td th:text="${report.r23_product}" style="text-align: left;"></td>
-
-																		  <td th:text="${report.r23_amt_6m}" style="text-align: right;"
-																		      th:attr="Row_Id='R23', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r23_risk_6m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R23', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r23_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r23_amt_6to24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R23', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r23_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R23', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r23_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r23_amt_gt24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R23', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r23_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R23', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r23_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																		</tr>
-
-																		<tr><!--R24-->
-																		  <td class="text-center">13</td>
-																		  <td th:text="${report.r24_product}" style="text-align: left;"></td>
-
-																		  <td th:text="${report.r24_amt_6m}" style="text-align: right;"
-																		      th:attr="Row_Id='R24', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r24_risk_6m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R24', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r24_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r24_amt_6to24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R24', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r24_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R24', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r24_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r24_amt_gt24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R24', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r24_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R24', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r24_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																		</tr>
-
-																		<tr><!--R25-->
-																		  <td class="text-center">14</td>
-																		  <td th:text="${report.r25_product}" style="text-align: left;"></td>
-
-																		  <td th:text="${report.r25_amt_6m}" style="text-align: right;"
-																		      th:attr="Row_Id='R25', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r25_risk_6m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R25', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r25_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r25_amt_6to24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R25', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r25_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R25', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r25_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r25_amt_gt24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R25', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r25_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R25', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r25_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																		</tr>
-																		<tr><!--R26-->
-																		  <td class="text-center">15</td>
-																		  <td th:text="${report.r26_product}" style="text-align: left;"></td>
-
-																		  <td th:text="${report.r26_amt_6m}" style="text-align: right;"
-																		      th:attr="Row_Id='R26', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r26_risk_6m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R26', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r26_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r26_amt_6to24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R26', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r26_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R26', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r26_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																		  <td th:text="${report.r26_amt_gt24m}" style="text-align: right;"
-																		      th:attr="Row_Id='R26', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r26_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																		      th:attr="Row_Id='R26', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																		  <td th:text="${report.r26_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																		</tr>
-
-																  <!--R27-->
-																  <tr>
-																          <td class="text-center">16</td>
-																          <td th:text="${report.r27_product}" style="text-align: left;background-color: #92D050;"></td>
-																          <td th:text="${report.r27_amt_6m}" style="text-align: right;background-color: #92D050;"></td>
-																          <td style="background-color: #BFBFBF;" ></td >
-																          <td th:text="${report.r27_capital_6m}" style="text-align: right;background-color: #92D050;"></td>
-																          <td th:text="${report.r27_amt_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																          <td style="background-color: #BFBFBF;"></td>
-																          <td  th:text="${report.r27_capital_6to24m}" style="text-align: right;background-color: #92D050;"></td>
-																          <td  th:text="${report.r27_amt_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																          <td style="background-color: #BFBFBF;" ></td >
-																          <td  th:text="${report.r27_capital_gt24m}" style="text-align: right;background-color: #92D050;"></td>
-																    </tr>
-																	<tr><!--R28-->
-																	  <td class="text-center">17</td>
-																	  <td th:text="${report.r28_product}" style="text-align: left;"></td>
-
-																	  <td th:text="${report.r28_amt_6m}" style="text-align: right;"
-																	      th:attr="Row_Id='R28', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r28_risk_6m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R28', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r28_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r28_amt_6to24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R28', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r28_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R28', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r28_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r28_amt_gt24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R28', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r28_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R28', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r28_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																	</tr>
-
-																	<tr><!--R29-->
-																	  <td class="text-center">18</td>
-																	  <td th:text="${report.r29_product}" style="text-align: left;"></td>
-
-																	  <td th:text="${report.r29_amt_6m}" style="text-align: right;"
-																	      th:attr="Row_Id='R29', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r29_risk_6m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R29', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r29_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r29_amt_6to24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R29', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r29_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R29', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r29_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r29_amt_gt24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R29', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r29_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R29', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r29_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																	</tr>
-
-																	<tr><!--R30-->
-																	  <td class="text-center">19</td>
-																	  <td th:text="${report.r30_product}" style="text-align: left;"></td>
-
-																	  <td th:text="${report.r30_amt_6m}" style="text-align: right;"
-																	      th:attr="Row_Id='R30', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r30_risk_6m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R30', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r30_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r30_amt_6to24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R30', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r30_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R30', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r30_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r30_amt_gt24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R30', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r30_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R30', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r30_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																	</tr>
-
-																	<tr><!--R31-->
-																	  <td class="text-center">20</td>
-																	  <td th:text="${report.r31_product}" style="text-align: left;"></td>
-
-																	  <td th:text="${report.r31_amt_6m}" style="text-align: right;"
-																	      th:attr="Row_Id='R31', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r31_risk_6m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R31', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r31_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r31_amt_6to24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R31', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r31_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R31', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r31_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r31_amt_gt24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R31', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r31_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R31', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r31_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																	</tr>
-
-																	<tr><!--R32-->
-																	  <td class="text-center">21</td>
-																	  <td th:text="${report.r32_product}" style="text-align: left;"></td>
-
-																	  <td th:text="${report.r32_amt_6m}" style="text-align: right;"
-																	      th:attr="Row_Id='R32', Column_Id='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r32_risk_6m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R32', Column_Id='C3'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r32_capital_6m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r32_amt_6to24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R32', Column_Id='C5'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r32_risk_6to24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R32', Column_Id='C6'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r32_capital_6to24m}" style="text-align: right; background-color: #92D050;"></td>
-
-																	  <td th:text="${report.r32_amt_gt24m}" style="text-align: right;"
-																	      th:attr="Row_Id='R32', Column_Id='C8'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r32_risk_gt24m}" style="text-align: center; background-color: #999999;"
-																	      th:attr="Row_Id='R32', Column_Id='C9'" onclick="showdetailsbyRowAndColumn(this)"></td>
-
-																	  <td th:text="${report.r32_capital_gt24m}" style="text-align: right; background-color: #92D050;"></td>
-																	</tr>
-
-
-																			  <!--R33-->
-								  											<tr>
-								  											        <td class="text-center">22</td>
-								  											        <td th:text="${report.r33_product}" style="text-align: left;"></td>
-								  											        <td style="background-color: black;" ></td>
-								  											        <td  style="background-color: black;" ></td>
-								  											        <td th:text="${report.r33_capital_6m}" style="text-align: right; background-color: #999999;"></td>
-								  											        <td style="text-align: right;">A</td>
-								  											        <td style="background-color: black;" ></td>
-								  											        <td th:text="${report.r33_capital_6to24m}" style="text-align: right; background-color: #999999;"></td>
-								  											        <td style="text-align: right;">B</td>
-								  											        <td  style="background-color: black;" ></td>
-								  											        <td  th:text="${report.r33_capital_gt24m}" style="text-align: right; background-color: #999999;"></td>
-								  											  </tr>
-
-																			  <!--R35-->
-			  					  											<tr>
-			  					  											        <td></td>
-			  					  											        <td  style="text-align: right;">Total Specific Risk Charge</td>
-			  					  											        <td></td>
-			  					  											        <td></td>
-			  					  											        <td th:text="${report.r35_tot_spec_risk_ch}" style="																					background-color: #FFCC00; 
-																					           color: black; 
-																					           border: 1px solid black; text-align: left;"></td>
-			  					  											        <td style="text-align: left;">D = Sum (A:C)</td>
-			  					  											        <td></td>
-			  					  											        <td></td>
-			  					  											        <td></td>
-			  					  											        <td></td>
-			  					  											        <td></td>
-			  					  											  </tr>
-
-
-
-
-
-													  
-							                  </tbody>
+<tbody  th:each="report : ${reportsummary}">
+
+	<tr>
+	  
+	  <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${#strings.defaultString(report.r12_product, 'N/A')}"
+	           id="r12_product"
+	           name="r12_product"
+	           style="background-color:#FFFFFF; width: 200px; height: 28px; 
+	                  border-color: transparent; text-align: left;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r12_amt_6m != null ? #numbers.formatDecimal(report.r12_amt_6m,1,'COMMA',0,'POINT'):'0'}"
+	           id="r12_amt_6m"
+	           name="r12_amt_6m"
+	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	 
+	  <td>
+	      <input class="display-input show_input"
+	             type="text"
+	             th:value="${report.r12_risk_6m != null ? #numbers.formatDecimal(report.r12_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	             id="r12_risk_6m"
+	             name="r12_risk_6m"
+	             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             readonly />
+	    </td>
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r12_capital_6m != null ? #numbers.formatDecimal(report.r12_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r12_capital_6m"
+	           name="r12_capital_6m"
+	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+	  
+	  <td>
+	      <input class="display-input show_input"
+	             type="text"
+	             th:value="${report.r12_amt_6to24m != null ? #numbers.formatDecimal(report.r12_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             id="r12_amt_6to24m"
+	             name="r12_amt_6to24m"
+	             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             readonly />
+	    </td>
+		
+		<td>
+		    <input class="display-input show_input"
+		           type="text"
+		           th:value="${report.r12_risk_6to24m != null ? #numbers.formatDecimal(report.r12_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		           id="r12_risk_6to24m"
+		           name="r12_risk_6to24m"
+		           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		           readonly />
+		  </td>
+		  
+		  <td>
+		      <input class="display-input show_input"
+		             type="text"
+		             th:value="${report.r12_capital_6to24m != null ? #numbers.formatDecimal(report.r12_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		             id="r12_capital_6to24m"
+		             name="r12_capital_6to24m"
+		             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		             readonly />
+		    </td>
+
+			<td>
+			    <input class="display-input show_input"
+			           type="text"
+			           th:value="${report.r12_amt_gt24m != null ? #numbers.formatDecimal(report.r12_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			           id="r12_amt_gt24m"
+			           name="r12_amt_gt24m"
+			           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			           readonly />
+			  </td>
+
+			<td>
+			    <input class="display-input show_input"
+			           type="text"
+			           th:value="${report.r12_risk_gt24m != null ? #numbers.formatDecimal(report.r12_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			           id="r12_risk_gt24m"
+			           name="r12_risk_gt24m"
+			           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			           readonly />
+			  </td>
+			  
+			  <td>
+			      <input class="display-input show_input"
+			             type="text"
+			             th:value="${report.r12_capital_gt24m != null ? #numbers.formatDecimal(report.r12_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			             id="r12_capital_gt24m"
+			             name="r12_capital_gt24m"
+			             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			             readonly />
+			    </td>
+				
+				
+
+	</tr>
+				
+	<tr>
+	  
+	  <td id="ROW13" style="padding-left: 20px; font-weight: bold;">
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${#strings.defaultString(report.r13_product, 'N/A')}"
+	           id="r13_product"
+	           name="r13_product"
+	           style="background-color: #FFFFFF; width: 200px; height: 28px; 
+	                  border-color: transparent; text-align: left;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r13_amt_6m != null ? #numbers.formatDecimal(report.r13_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r13_amt_6m"
+	           name="r13_amt_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r13_risk_6m != null ?  #numbers.formatDecimal(report.r13_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r13_risk_6m"
+	           name="r13_risk_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r13_capital_6m != null ? #numbers.formatDecimal(report.r13_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r13_capital_6m"
+	           name="r13_capital_6m"
+	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+	  
+	  <td>
+	      <input class="display-input show_input"
+	             type="text"
+	             th:value="${report.r13_amt_6to24m != null ? #numbers.formatDecimal(report.r13_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             id="r13_amt_6to24m"
+	             name="r13_amt_6to24m"
+	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             readonly />
+	    </td>
+	    
+	    <td>
+	        <input class="display-input show_input"
+	               type="text"
+	               th:value="${report.r13_risk_6to24m != null ? #numbers.formatDecimal(report.r13_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               id="r13_risk_6to24m"
+	               name="r13_risk_6to24m"
+	               style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	               readonly />
+	      </td>
+	      
+	      <td>
+	          <input class="display-input show_input"
+	                 type="text"
+	                 th:value="${report.r13_capital_6to24m != null ? #numbers.formatDecimal(report.r13_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 id="r13_capital_6to24m"
+	                 name="r13_capital_6to24m"
+	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 readonly />
+	        </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r13_amt_gt24m != null ? #numbers.formatDecimal(report.r13_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r13_amt_gt24m"
+	                   name="r13_amt_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r13_risk_gt24m != null ? #numbers.formatDecimal(report.r13_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r13_risk_gt24m"
+	                   name="r13_risk_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+	          
+	          <td>
+	              <input class="display-input show_input"
+	                     type="text"
+	                     th:value="${report.r13_capital_gt24m != null ? #numbers.formatDecimal(report.r13_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     id="r13_capital_gt24m"
+	                     name="r13_capital_gt24m"
+	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     readonly />
+	            </td>
+
+	</tr>
+	<tr>
+	  
+	  <td id="ROW14" style="padding-left: 20px; font-weight: bold;">
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${#strings.defaultString(report.r14_product, 'N/A')}"
+	           id="r14_product"
+	           name="r14_product"
+	           style="background-color: #FFFFFF; width: 200px; height: 28px; 
+	                  border-color: transparent; text-align: left;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r14_amt_6m != null ? #numbers.formatDecimal(report.r14_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r14_amt_6m"
+	           name="r14_amt_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r14_risk_6m != null ?  #numbers.formatDecimal(report.r14_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r14_risk_6m"
+	           name="r14_risk_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r14_capital_6m != null ? #numbers.formatDecimal(report.r14_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r14_capital_6m"
+	           name="r14_capital_6m"
+	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+	  
+	  <td>
+	      <input class="display-input show_input"
+	             type="text"
+	             th:value="${report.r14_amt_6to24m != null ? #numbers.formatDecimal(report.r14_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             id="r14_amt_6to24m"
+	             name="r14_amt_6to24m"
+	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             readonly />
+	    </td>
+	    
+	    <td>
+	        <input class="display-input show_input"
+	               type="text"
+	               th:value="${report.r14_risk_6to24m != null ? #numbers.formatDecimal(report.r14_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               id="r14_risk_6to24m"
+	               name="r14_risk_6to24m"
+	               style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	               readonly />
+	      </td>
+	      
+	      <td>
+	          <input class="display-input show_input"
+	                 type="text"
+	                 th:value="${report.r14_capital_6to24m != null ? #numbers.formatDecimal(report.r14_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 id="r14_capital_6to24m"
+	                 name="r14_capital_6to24m"
+	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 readonly />
+	        </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r14_amt_gt24m != null ? #numbers.formatDecimal(report.r14_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r14_amt_gt24m"
+	                   name="r14_amt_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r14_risk_gt24m != null ? #numbers.formatDecimal(report.r14_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r14_risk_gt24m"
+	                   name="r14_risk_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+	          
+	          <td>
+	              <input class="display-input show_input"
+	                     type="text"
+	                     th:value="${report.r14_capital_gt24m != null ? #numbers.formatDecimal(report.r14_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     id="r14_capital_gt24m"
+	                     name="r14_capital_gt24m"
+	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     readonly />
+	            </td>
+
+	</tr>
+	<tr>
+	  
+	  <td id="ROW15" style="padding-left: 20px; font-weight: bold;">
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${#strings.defaultString(report.r15_product, 'N/A')}"
+	           id="r15_product"
+	           name="r15_product"
+	           style="background-color: #FFFFFF; width: 200px; height: 28px; 
+	                  border-color: transparent; text-align: left;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r15_amt_6m != null ? #numbers.formatDecimal(report.r15_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r15_amt_6m"
+	           name="r15_amt_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r15_risk_6m != null ?  #numbers.formatDecimal(report.r15_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r15_risk_6m"
+	           name="r15_risk_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r15_capital_6m != null ? #numbers.formatDecimal(report.r15_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r15_capital_6m"
+	           name="r15_capital_6m"
+	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+	  
+	  <td>
+	      <input class="display-input show_input"
+	             type="text"
+	             th:value="${report.r15_amt_6to24m != null ? #numbers.formatDecimal(report.r15_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             id="r15_amt_6to24m"
+	             name="r15_amt_6to24m"
+	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             readonly />
+	    </td>
+	    
+	    <td>
+	        <input class="display-input show_input"
+	               type="text"
+	               th:value="${report.r15_risk_6to24m != null ? #numbers.formatDecimal(report.r15_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               id="r15_risk_6to24m"
+	               name="r15_risk_6to24m"
+	               style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	               readonly />
+	      </td>
+	      
+	      <td>
+	          <input class="display-input show_input"
+	                 type="text"
+	                 th:value="${report.r15_capital_6to24m != null ? #numbers.formatDecimal(report.r15_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 id="r15_capital_6to24m"
+	                 name="r15_capital_6to24m"
+	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 readonly />
+	        </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r15_amt_gt24m != null ? #numbers.formatDecimal(report.r15_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r15_amt_gt24m"
+	                   name="r15_amt_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r15_risk_gt24m != null ? #numbers.formatDecimal(report.r15_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r15_risk_gt24m"
+	                   name="r15_risk_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+	          
+	          <td>
+	              <input class="display-input show_input"
+	                     type="text"
+	                     th:value="${report.r15_capital_gt24m != null ? #numbers.formatDecimal(report.r15_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     id="r15_capital_gt24m"
+	                     name="r15_capital_gt24m"
+	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     readonly />
+	            </td>
+
+	</tr>
+	<tr>
+	  
+	  <td id="ROW16" style="padding-left: 20px; font-weight: bold;">
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${#strings.defaultString(report.r16_product, 'N/A')}"
+	           id="r16_product"
+	           name="r16_product"
+	           style="background-color: #FFFFFF; width: 200px; height: 28px; 
+	                  border-color: transparent; text-align: left;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r16_amt_6m != null ? #numbers.formatDecimal(report.r16_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r16_amt_6m"
+	           name="r16_amt_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r16_risk_6m != null ?#numbers.formatDecimal(report.r16_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r16_risk_6m"
+	           name="r16_risk_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r16_capital_6m != null ? #numbers.formatDecimal(report.r16_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r16_capital_6m"
+	           name="r16_capital_6m"
+	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+	  
+	  <td>
+	      <input class="display-input show_input"
+	             type="text"
+	             th:value="${report.r16_amt_6to24m != null ? #numbers.formatDecimal(report.r16_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             id="r16_amt_6to24m"
+	             name="r16_amt_6to24m"
+	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             readonly />
+	    </td>
+	    
+	    <td>
+	        <input class="display-input show_input"
+	               type="text"
+	               th:value="${report.r16_risk_6to24m != null ? #numbers.formatDecimal(report.r16_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               id="r16_risk_6to24m"
+	               name="r16_risk_6to24m"
+	               style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	               readonly />
+	      </td>
+	      
+	      <td>
+	          <input class="display-input show_input"
+	                 type="text"
+	                 th:value="${report.r16_capital_6to24m != null ? #numbers.formatDecimal(report.r16_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 id="r16_capital_6to24m"
+	                 name="r16_capital_6to24m"
+	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 readonly />
+	        </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r16_amt_gt24m != null ? #numbers.formatDecimal(report.r16_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r16_amt_gt24m"
+	                   name="r16_amt_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r16_risk_gt24m != null ? #numbers.formatDecimal(report.r16_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r16_risk_gt24m"
+	                   name="r16_risk_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+	          
+	          <td>
+	              <input class="display-input show_input"
+	                     type="text"
+	                     th:value="${report.r16_capital_gt24m != null ? #numbers.formatDecimal(report.r16_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     id="r16_capital_gt24m"
+	                     name="r16_capital_gt24m"
+	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     readonly />
+	            </td>
+
+	</tr>
+	<tr>
+	  
+	  <td id="ROW17" style="padding-left: 20px; font-weight: bold;">
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${#strings.defaultString(report.r17_product, 'N/A')}"
+	           id="r17_product"
+	           name="r17_product"
+	           style="background-color: #FFFFFF; width: 200px; height: 28px; 
+	                  border-color: transparent; text-align: left;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r17_amt_6m != null ? #numbers.formatDecimal(report.r17_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r17_amt_6m"
+	           name="r17_amt_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r17_risk_6m != null ?  #numbers.formatDecimal(report.r17_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r17_risk_6m"
+	           name="r17_risk_6m"
+	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+
+	  <td>
+	    <input class="display-input show_input"
+	           type="text"
+	           th:value="${report.r17_capital_6m != null ? #numbers.formatDecimal(report.r17_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           id="r17_capital_6m"
+	           name="r17_capital_6m"
+	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           readonly />
+	  </td>
+	  
+	  <td>
+	      <input class="display-input show_input"
+	             type="text"
+	             th:value="${report.r17_amt_6to24m != null ? #numbers.formatDecimal(report.r17_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             id="r17_amt_6to24m"
+	             name="r17_amt_6to24m"
+	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             readonly />
+	    </td>
+	    
+	    <td>
+	        <input class="display-input show_input"
+	               type="text"
+	               th:value="${report.r17_risk_6to24m != null ? #numbers.formatDecimal(report.r17_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               id="r17_risk_6to24m"
+	               name="r17_risk_6to24m"
+	               style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	               readonly />
+	      </td>
+	      
+	      <td>
+	          <input class="display-input show_input"
+	                 type="text"
+	                 th:value="${report.r17_capital_6to24m != null ? #numbers.formatDecimal(report.r17_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 id="r17_capital_6to24m"
+	                 name="r17_capital_6to24m"
+	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 readonly />
+	        </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r17_amt_gt24m != null ? #numbers.formatDecimal(report.r17_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r17_amt_gt24m"
+	                   name="r17_amt_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+
+	        <td>
+	            <input class="display-input show_input"
+	                   type="text"
+	                   th:value="${report.r17_risk_gt24m != null ? #numbers.formatDecimal(report.r17_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   id="r17_risk_gt24m"
+	                   name="r17_risk_gt24m"
+	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   readonly />
+	          </td>
+	          
+	          <td>
+	              <input class="display-input show_input"
+	                     type="text"
+	                     th:value="${report.r17_capital_gt24m != null ? #numbers.formatDecimal(report.r17_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     id="r17_capital_gt24m"
+	                     name="r17_capital_gt24m"
+	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     readonly />
+	            </td>
+
+	</tr>
+	<tr>
+
+		<td id="ROW18" style="padding-left: 20px; font-weight: bold;">
+		  <input class="display-input show_input"
+		         type="text"
+		         th:value="${#strings.defaultString(report.r18_product, 'Foreign Public Sector Entities')}"
+		         id="r18_product"
+		         name="r18_product"
+		         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+		                border-color: transparent; text-align: left;"
+		         readonly />
+		</td>
+
+		<td>
+		  <input class="display-input show_input"
+		         type="text"
+		         th:value="${report.r18_amt_6m != null ? #numbers.formatDecimal(report.r18_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+		         id="r18_amt_6m"
+		         name="r18_amt_6m"
+		         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		         readonly />
+		</td>
+
+		<td>
+		  <input class="display-input show_input"
+		         type="text"
+		         th:value="${report.r18_risk_6m != null ?  #numbers.formatDecimal(report.r18_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+		         id="r18_risk_6m"
+		         name="r18_risk_6m"
+		         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		         readonly />
+		</td>
+
+		<td>
+		  <input class="display-input show_input"
+		         type="text"
+		         th:value="${report.r18_capital_6m != null ? #numbers.formatDecimal(report.r18_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+		         id="r18_capital_6m"
+		         name="r18_capital_6m"
+		         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		         readonly />
+		</td>
+
+		<td>
+		    <input class="display-input show_input"
+		           type="text"
+		           th:value="${report.r18_amt_6to24m != null ? #numbers.formatDecimal(report.r18_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		           id="r18_amt_6to24m"
+		           name="r18_amt_6to24m"
+		           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		           readonly />
+		  </td>
+		  
+		  <td>
+		      <input class="display-input show_input"
+		             type="text"
+		             th:value="${report.r18_risk_6to24m != null ? #numbers.formatDecimal(report.r18_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		             id="r18_risk_6to24m"
+		             name="r18_risk_6to24m"
+		             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		             readonly />
+		    </td>
+		    
+		    <td>
+		        <input class="display-input show_input"
+		               type="text"
+		               th:value="${report.r18_capital_6to24m != null ? #numbers.formatDecimal(report.r18_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		               id="r18_capital_6to24m"
+		               name="r18_capital_6to24m"
+		               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		               readonly />
+		      </td>
+
+		      <td>
+		          <input class="display-input show_input"
+		                 type="text"
+		                 th:value="${report.r18_amt_gt24m != null ? #numbers.formatDecimal(report.r18_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+		                 id="r18_amt_gt24m"
+		                 name="r18_amt_gt24m"
+		                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		                 readonly />
+		        </td>
+
+		      <td>
+		          <input class="display-input show_input"
+		                 type="text"
+		                 th:value="${report.r18_risk_gt24m != null ? #numbers.formatDecimal(report.r18_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+		                 id="r18_risk_gt24m"
+		                 name="r18_risk_gt24m"
+		                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		                 readonly />
+		        </td>
+		        
+		        <td>
+		            <input class="display-input show_input"
+		                   type="text"
+		                   th:value="${report.r18_capital_gt24m != null ? #numbers.formatDecimal(report.r18_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+		                   id="r18_capital_gt24m"
+		                   name="r18_capital_gt24m"
+		                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		                   readonly />
+		          </td>
+
+
+	</tr>
+
+	<tr>
+
+			<td id="ROW18" style="padding-left: 20px; font-weight: bold;">
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${#strings.defaultString(report.r19_product, 'Foreign Public Sector Entities')}"
+			         id="r19_product"
+			         name="r19_product"
+			         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+			                border-color: transparent; text-align: left;"
+			         readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${report.r19_amt_6m != null ? #numbers.formatDecimal(report.r19_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         id="r19_amt_6m"
+			         name="r19_amt_6m"
+			         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${report.r19_risk_6m != null ?  #numbers.formatDecimal(report.r19_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         id="r19_risk_6m"
+			         name="r19_risk_6m"
+			         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${report.r19_capital_6m != null ? #numbers.formatDecimal(report.r19_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         id="r19_capital_6m"
+			         name="r19_capital_6m"
+			         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         readonly />
+			</td>
+
+			<td>
+			    <input class="display-input show_input"
+			           type="text"
+			           th:value="${report.r19_amt_6to24m != null ? #numbers.formatDecimal(report.r19_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			           id="r19_amt_6to24m"
+			           name="r19_amt_6to24m"
+			           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			           readonly />
+			  </td>
+			  
+			  <td>
+			      <input class="display-input show_input"
+			             type="text"
+			             th:value="${report.r19_risk_6to24m != null ? #numbers.formatDecimal(report.r19_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			             id="r19_risk_6to24m"
+			             name="r19_risk_6to24m"
+			             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			             readonly />
+			    </td>
+			    
+			    <td>
+			        <input class="display-input show_input"
+			               type="text"
+			               th:value="${report.r19_capital_6to24m != null ? #numbers.formatDecimal(report.r19_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			               id="r19_capital_6to24m"
+			               name="r19_capital_6to24m"
+			               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			               readonly />
+			      </td>
+
+			      <td>
+			          <input class="display-input show_input"
+			                 type="text"
+			                 th:value="${report.r19_amt_gt24m != null ? #numbers.formatDecimal(report.r19_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 id="r19_amt_gt24m"
+			                 name="r19_amt_gt24m"
+			                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                 readonly />
+			        </td>
+
+			      <td>
+			          <input class="display-input show_input"
+			                 type="text"
+			                 th:value="${report.r19_risk_gt24m != null ? #numbers.formatDecimal(report.r19_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 id="r19_risk_gt24m"
+			                 name="r19_risk_gt24m"
+			                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                 readonly />
+			        </td>
+			        
+			        <td>
+			            <input class="display-input show_input"
+			                   type="text"
+			                   th:value="${report.r19_capital_gt24m != null ? #numbers.formatDecimal(report.r19_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                   id="r19_capital_gt24m"
+			                   name="r19_capital_gt24m"
+			                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                   readonly />
+			          </td>
+
+
+		</tr>
+
+
+		<tr>
+
+				<td id="ROW18" style="padding-left: 20px; font-weight: bold;">
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${#strings.defaultString(report.r20_product, 'N/A')}"
+				         id="r20_product"
+				         name="r20_product"
+				         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+				                border-color: transparent; text-align: left;"
+				         readonly />
+				</td>
+
+				<td>
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${report.r20_amt_6m != null ? #numbers.formatDecimal(report.r20_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         id="r20_amt_6m"
+				         name="r20_amt_6m"
+				         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         readonly />
+				</td>
+
+				<td>
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${report.r20_risk_6m != null ?  #numbers.formatDecimal(report.r20_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         id="r20_risk_6m"
+				         name="r20_risk_6m"
+				         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         readonly />
+				</td>
+
+				<td>
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${report.r20_capital_6m != null ? #numbers.formatDecimal(report.r20_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         id="r20_capital_6m"
+				         name="r20_capital_6m"
+				         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         readonly />
+				</td>
+
+				<td>
+				    <input class="display-input show_input"
+				           type="text"
+				           th:value="${report.r20_amt_6to24m != null ? #numbers.formatDecimal(report.r20_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				           id="r20_amt_6to24m"
+				           name="r20_amt_6to24m"
+				           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				           readonly />
+				  </td>
+				  
+				  <td>
+				      <input class="display-input show_input"
+				             type="text"
+				             th:value="${report.r20_risk_6to24m != null ? #numbers.formatDecimal(report.r20_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				             id="r20_risk_6to24m"
+				             name="r20_risk_6to24m"
+				             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				             readonly />
+				    </td>
+				    
+				    <td>
+				        <input class="display-input show_input"
+				               type="text"
+				               th:value="${report.r20_capital_6to24m != null ? #numbers.formatDecimal(report.r20_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				               id="r20_capital_6to24m"
+				               name="r20_capital_6to24m"
+				               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				               readonly />
+				      </td>
+
+				      <td>
+				          <input class="display-input show_input"
+				                 type="text"
+				                 th:value="${report.r20_amt_gt24m != null ? #numbers.formatDecimal(report.r20_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 id="r20_amt_gt24m"
+				                 name="r20_amt_gt24m"
+				                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                 readonly />
+				        </td>
+
+				      <td>
+				          <input class="display-input show_input"
+				                 type="text"
+				                 th:value="${report.r20_risk_gt24m != null ? #numbers.formatDecimal(report.r20_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 id="r20_risk_gt24m"
+				                 name="r20_risk_gt24m"
+				                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                 readonly />
+				        </td>
+				        
+				        <td>
+				            <input class="display-input show_input"
+				                   type="text"
+				                   th:value="${report.r20_capital_gt24m != null ? #numbers.formatDecimal(report.r20_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                   id="r20_capital_gt24m"
+				                   name="r20_capital_gt24m"
+				                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                   readonly />
+				          </td>
+
+
+			</tr>
+
+			<tr>
+
+					<td id="ROW18" style="padding-left: 20px; font-weight: bold;">
+					  <input class="display-input show_input"
+					         type="text"
+					         th:value="${#strings.defaultString(report.r21_product, 'N/A')}"
+					         id="r21_product"
+					         name="r21_product"
+					         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+					                border-color: transparent; text-align: left;"
+					         readonly />
+					</td>
+
+					<td>
+					  <input class="display-input show_input"
+					         type="text"
+					         th:value="${report.r21_amt_6m != null ? #numbers.formatDecimal(report.r21_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					         id="r21_amt_6m"
+					         name="r21_amt_6m"
+					         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					         readonly />
+					</td>
+
+					<td>
+					  <input class="display-input show_input"
+					         type="text"
+					         th:value="${report.r21_risk_6m != null ?  #numbers.formatDecimal(report.r21_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					         id="r21_risk_6m"
+					         name="r21_risk_6m"
+					         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					         readonly />
+					</td>
+
+					<td>
+					  <input class="display-input show_input"
+					         type="text"
+					         th:value="${report.r21_capital_6m != null ? #numbers.formatDecimal(report.r21_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					         id="r21_capital_6m"
+					         name="r21_capital_6m"
+					         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					         readonly />
+					</td>
+
+					<td>
+					    <input class="display-input show_input"
+					           type="text"
+					           th:value="${report.r21_amt_6to24m != null ? #numbers.formatDecimal(report.r21_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					           id="r21_amt_6to24m"
+					           name="r21_amt_6to24m"
+					           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					           readonly />
+					  </td>
+					  
+					  <td>
+					      <input class="display-input show_input"
+					             type="text"
+					             th:value="${report.r21_risk_6to24m != null ? #numbers.formatDecimal(report.r21_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					             id="r21_risk_6to24m"
+					             name="r21_risk_6to24m"
+					             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					             readonly />
+					    </td>
+					    
+					    <td>
+					        <input class="display-input show_input"
+					               type="text"
+					               th:value="${report.r21_capital_6to24m != null ? #numbers.formatDecimal(report.r21_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					               id="r21_capital_6to24m"
+					               name="r21_capital_6to24m"
+					               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					               readonly />
+					      </td>
+
+					      <td>
+					          <input class="display-input show_input"
+					                 type="text"
+					                 th:value="${report.r21_amt_gt24m != null ? #numbers.formatDecimal(report.r21_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+					                 id="r21_amt_gt24m"
+					                 name="r21_amt_gt24m"
+					                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					                 readonly />
+					        </td>
+
+					      <td>
+					          <input class="display-input show_input"
+					                 type="text"
+					                 th:value="${report.r21_risk_gt24m != null ? #numbers.formatDecimal(report.r21_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+					                 id="r21_risk_gt24m"
+					                 name="r21_risk_gt24m"
+					                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					                 readonly />
+					        </td>
+					        
+					        <td>
+					            <input class="display-input show_input"
+					                   type="text"
+					                   th:value="${report.r21_capital_gt24m != null ? #numbers.formatDecimal(report.r21_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+					                   id="r21_capital_gt24m"
+					                   name="r21_capital_gt24m"
+					                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					                   readonly />
+					          </td>
+
+
+				</tr>
+
+				<tr>
+
+						<td id="ROW18" style="padding-left: 20px; font-weight: bold;">
+						  <input class="display-input show_input"
+						         type="text"
+						         th:value="${#strings.defaultString(report.r22_product, 'N/A')}"
+						         id="r22_product"
+						         name="r22_product"
+						         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+						                border-color: transparent; text-align: left;"
+						         readonly />
+						</td>
+
+						<td>
+						  <input class="display-input show_input"
+						         type="text"
+						         th:value="${report.r22_amt_6m != null ? #numbers.formatDecimal(report.r22_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+						         id="r22_amt_6m"
+						         name="r22_amt_6m"
+						         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						         readonly />
+						</td>
+
+						<td>
+						  <input class="display-input show_input"
+						         type="text"
+						         th:value="${report.r22_risk_6m != null ?  #numbers.formatDecimal(report.r22_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+						         id="r22_risk_6m"
+						         name="r22_risk_6m"
+						         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						         readonly />
+						</td>
+
+						<td>
+						  <input class="display-input show_input"
+						         type="text"
+						         th:value="${report.r22_capital_6m != null ? #numbers.formatDecimal(report.r22_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+						         id="r22_capital_6m"
+						         name="r22_capital_6m"
+						         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						         readonly />
+						</td>
+
+						<td>
+						    <input class="display-input show_input"
+						           type="text"
+						           th:value="${report.r22_amt_6to24m != null ? #numbers.formatDecimal(report.r22_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						           id="r22_amt_6to24m"
+						           name="r22_amt_6to24m"
+						           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						           readonly />
+						  </td>
+						  
+						  <td>
+						      <input class="display-input show_input"
+						             type="text"
+						             th:value="${report.r22_risk_6to24m != null ? #numbers.formatDecimal(report.r22_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						             id="r22_risk_6to24m"
+						             name="r22_risk_6to24m"
+						             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						             readonly />
+						    </td>
+						    
+						    <td>
+						        <input class="display-input show_input"
+						               type="text"
+						               th:value="${report.r22_capital_6to24m != null ? #numbers.formatDecimal(report.r22_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						               id="r22_capital_6to24m"
+						               name="r22_capital_6to24m"
+						               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						               readonly />
+						      </td>
+
+						      <td>
+						          <input class="display-input show_input"
+						                 type="text"
+						                 th:value="${report.r22_amt_gt24m != null ? #numbers.formatDecimal(report.r22_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+						                 id="r22_amt_gt24m"
+						                 name="r22_amt_gt24m"
+						                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						                 readonly />
+						        </td>
+
+						      <td>
+						          <input class="display-input show_input"
+						                 type="text"
+						                 th:value="${report.r22_risk_gt24m != null ? #numbers.formatDecimal(report.r22_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+						                 id="r22_risk_gt24m"
+						                 name="r22_risk_gt24m"
+						                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						                 readonly />
+						        </td>
+						        
+						        <td>
+						            <input class="display-input show_input"
+						                   type="text"
+						                   th:value="${report.r22_capital_gt24m != null ? #numbers.formatDecimal(report.r22_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+						                   id="r22_capital_gt24m"
+						                   name="r22_capital_gt24m"
+						                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						                   readonly />
+						          </td>
+
+
+					</tr>
+
+					<tr>
+
+							<td id="ROW23" style="padding-left: 20px; font-weight: bold;">
+							  <input class="display-input show_input"
+							         type="text"
+							         th:value="${#strings.defaultString(report.r23_product, 'Foreign Public Sector Entities')}"
+							         id="r23_product"
+							         name="r23_product"
+							         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+							                border-color: transparent; text-align: left;"
+							         readonly />
+							</td>
+
+							<td>
+							  <input class="display-input show_input"
+							         type="text"
+							         th:value="${report.r23_amt_6m != null ? #numbers.formatDecimal(report.r23_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+							         id="r23_amt_6m"
+							         name="r23_amt_6m"
+							         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							         readonly />
+							</td>
+
+							<td>
+							  <input class="display-input show_input"
+							         type="text"
+							         th:value="${report.r23_risk_6m != null ?  #numbers.formatDecimal(report.r23_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+							         id="r23_risk_6m"
+							         name="r23_risk_6m"
+							         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							         readonly />
+							</td>
+
+							<td>
+							  <input class="display-input show_input"
+							         type="text"
+							         th:value="${report.r23_capital_6m != null ? #numbers.formatDecimal(report.r23_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+							         id="r23_capital_6m"
+							         name="r23_capital_6m"
+							         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							         readonly />
+							</td>
+
+							<td>
+							    <input class="display-input show_input"
+							           type="text"
+							           th:value="${report.r23_amt_6to24m != null ? #numbers.formatDecimal(report.r23_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+							           id="r23_amt_6to24m"
+							           name="r23_amt_6to24m"
+							           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							           readonly />
+							  </td>
+							  
+							  <td>
+							      <input class="display-input show_input"
+							             type="text"
+							             th:value="${report.r23_risk_6to24m != null ? #numbers.formatDecimal(report.r23_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+							             id="r23_risk_6to24m"
+							             name="r23_risk_6to24m"
+							             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							             readonly />
+							    </td>
+							    
+							    <td>
+							        <input class="display-input show_input"
+							               type="text"
+							               th:value="${report.r23_capital_6to24m != null ? #numbers.formatDecimal(report.r23_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+							               id="r23_capital_6to24m"
+							               name="r23_capital_6to24m"
+							               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							               readonly />
+							      </td>
+
+							      <td>
+							          <input class="display-input show_input"
+							                 type="text"
+							                 th:value="${report.r23_amt_gt24m != null ? #numbers.formatDecimal(report.r23_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							                 id="r23_amt_gt24m"
+							                 name="r23_amt_gt24m"
+							                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							                 readonly />
+							        </td>
+
+							      <td>
+							          <input class="display-input show_input"
+							                 type="text"
+							                 th:value="${report.r23_risk_gt24m != null ? #numbers.formatDecimal(report.r23_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							                 id="r23_risk_gt24m"
+							                 name="r23_risk_gt24m"
+							                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							                 readonly />
+							        </td>
+							        
+							        <td>
+							            <input class="display-input show_input"
+							                   type="text"
+							                   th:value="${report.r23_capital_gt24m != null ? #numbers.formatDecimal(report.r23_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							                   id="r23_capital_gt24m"
+							                   name="r23_capital_gt24m"
+							                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							                   readonly />
+							          </td>
+
+
+						</tr>
+
+						<tr>
+
+								<td id="ROW24" style="padding-left: 20px; font-weight: bold;">
+								  <input class="display-input show_input"
+								         type="text"
+								         th:value="${#strings.defaultString(report.r24_product, 'N/A')}"
+								         id="r24_product"
+								         name="r24_product"
+								         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+								                border-color: transparent; text-align: left;"
+								         readonly />
+								</td>
+
+								<td>
+								  <input class="display-input show_input"
+								         type="text"
+								         th:value="${report.r24_amt_6m != null ? #numbers.formatDecimal(report.r24_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+								         id="r24_amt_6m"
+								         name="r24_amt_6m"
+								         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+								         readonly />
+								</td>
+
+								<td>
+								  <input class="display-input show_input"
+								         type="text"
+								         th:value="${report.r24_risk_6m != null ?  #numbers.formatDecimal(report.r24_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+								         id="r24_risk_6m"
+								         name="r24_risk_6m"
+								         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+								         readonly />
+								</td>
+
+								<td>
+								  <input class="display-input show_input"
+								         type="text"
+								         th:value="${report.r24_capital_6m != null ? #numbers.formatDecimal(report.r24_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+								         id="r24_capital_6m"
+								         name="r24_capital_6m"
+								         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+								         readonly />
+								</td>
+
+								<td>
+								    <input class="display-input show_input"
+								           type="text"
+								           th:value="${report.r24_amt_6to24m != null ? #numbers.formatDecimal(report.r24_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+								           id="r24_amt_6to24m"
+								           name="r24_amt_6to24m"
+								           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+								           readonly />
+								  </td>
+								  
+								  <td>
+								      <input class="display-input show_input"
+								             type="text"
+								             th:value="${report.r24_risk_6to24m != null ? #numbers.formatDecimal(report.r24_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+								             id="r24_risk_6to24m"
+								             name="r24_risk_6to24m"
+								             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+								             readonly />
+								    </td>
+								    
+								    <td>
+								        <input class="display-input show_input"
+								               type="text"
+								               th:value="${report.r24_capital_6to24m != null ? #numbers.formatDecimal(report.r24_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+								               id="r24_capital_6to24m"
+								               name="r24_capital_6to24m"
+								               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+								               readonly />
+								      </td>
+
+								      <td>
+								          <input class="display-input show_input"
+								                 type="text"
+								                 th:value="${report.r24_amt_gt24m != null ? #numbers.formatDecimal(report.r24_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+								                 id="r24_amt_gt24m"
+								                 name="r24_amt_gt24m"
+								                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+								                 readonly />
+								        </td>
+
+								      <td>
+								          <input class="display-input show_input"
+								                 type="text"
+								                 th:value="${report.r24_risk_gt24m != null ? #numbers.formatDecimal(report.r24_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+								                 id="r24_risk_gt24m"
+								                 name="r24_risk_gt24m"
+								                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+								                 readonly />
+								        </td>
+								        
+								        <td>
+								            <input class="display-input show_input"
+								                   type="text"
+								                   th:value="${report.r24_capital_gt24m != null ? #numbers.formatDecimal(report.r24_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+								                   id="r24_capital_gt24m"
+								                   name="r24_capital_gt24m"
+								                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+								                   readonly />
+								          </td>
+
+
+							</tr>
+
+							<tr>
+
+									<td id="ROW25" style="padding-left: 20px; font-weight: bold;">
+									  <input class="display-input show_input"
+									         type="text"
+									         th:value="${#strings.defaultString(report.r25_product, 'N/A')}"
+									         id="r25_product"
+									         name="r25_product"
+									         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+									                border-color: transparent; text-align: left;"
+									         readonly />
+									</td>
+
+									<td>
+									  <input class="display-input show_input"
+									         type="text"
+									         th:value="${report.r25_amt_6m != null ? #numbers.formatDecimal(report.r25_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									         id="r25_amt_6m"
+									         name="r25_amt_6m"
+									         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+									         readonly />
+									</td>
+
+									<td>
+									  <input class="display-input show_input"
+									         type="text"
+									         th:value="${report.r25_risk_6m != null ?  #numbers.formatDecimal(report.r25_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									         id="r25_risk_6m"
+									         name="r25_risk_6m"
+									         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+									         readonly />
+									</td>
+
+									<td>
+									  <input class="display-input show_input"
+									         type="text"
+									         th:value="${report.r25_capital_6m != null ? #numbers.formatDecimal(report.r25_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									         id="r25_capital_6m"
+									         name="r25_capital_6m"
+									         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									         readonly />
+									</td>
+
+									<td>
+									    <input class="display-input show_input"
+									           type="text"
+									           th:value="${report.r25_amt_6to24m != null ? #numbers.formatDecimal(report.r25_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									           id="r25_amt_6to24m"
+									           name="r25_amt_6to24m"
+									           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+									           readonly />
+									  </td>
+									  
+									  <td>
+									      <input class="display-input show_input"
+									             type="text"
+									             th:value="${report.r25_risk_6to24m != null ? #numbers.formatDecimal(report.r25_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									             id="r25_risk_6to24m"
+									             name="r25_risk_6to24m"
+									             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+									             readonly />
+									    </td>
+									    
+									    <td>
+									        <input class="display-input show_input"
+									               type="text"
+									               th:value="${report.r25_capital_6to24m != null ? #numbers.formatDecimal(report.r25_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									               id="r25_capital_6to24m"
+									               name="r25_capital_6to24m"
+									               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									               readonly />
+									      </td>
+
+									      <td>
+									          <input class="display-input show_input"
+									                 type="text"
+									                 th:value="${report.r25_amt_gt24m != null ? #numbers.formatDecimal(report.r25_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+									                 id="r25_amt_gt24m"
+									                 name="r25_amt_gt24m"
+									                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+									                 readonly />
+									        </td>
+
+									      <td>
+									          <input class="display-input show_input"
+									                 type="text"
+									                 th:value="${report.r25_risk_gt24m != null ? #numbers.formatDecimal(report.r25_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+									                 id="r25_risk_gt24m"
+									                 name="r25_risk_gt24m"
+									                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+									                 readonly />
+									        </td>
+									        
+									        <td>
+									            <input class="display-input show_input"
+									                   type="text"
+									                   th:value="${report.r25_capital_gt24m != null ? #numbers.formatDecimal(report.r25_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+									                   id="r25_capital_gt24m"
+									                   name="r25_capital_gt24m"
+									                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									                   readonly />
+									          </td>
+
+
+								</tr>
+
+								<tr>
+
+										<td id="ROW26" style="padding-left: 20px; font-weight: bold;">
+										  <input class="display-input show_input"
+										         type="text"
+										         th:value="${#strings.defaultString(report.r26_product, 'N/A')}"
+										         id="r26_product"
+										         name="r26_product"
+										         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+										                border-color: transparent; text-align: left;"
+										         readonly />
+										</td>
+
+										<td>
+										  <input class="display-input show_input"
+										         type="text"
+										         th:value="${report.r26_amt_6m != null ? #numbers.formatDecimal(report.r26_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+										         id="r26_amt_6m"
+										         name="r26_amt_6m"
+										         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+										         readonly />
+										</td>
+
+										<td>
+										  <input class="display-input show_input"
+										         type="text"
+										         th:value="${report.r26_risk_6m != null ?  #numbers.formatDecimal(report.r26_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+										         id="r26_risk_6m"
+										         name="r26_risk_6m"
+										         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+										         readonly />
+										</td>
+
+										<td>
+										  <input class="display-input show_input"
+										         type="text"
+										         th:value="${report.r26_capital_6m != null ? #numbers.formatDecimal(report.r26_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+										         id="r26_capital_6m"
+										         name="r26_capital_6m"
+										         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										         readonly />
+										</td>
+
+										<td>
+										    <input class="display-input show_input"
+										           type="text"
+										           th:value="${report.r26_amt_6to24m != null ? #numbers.formatDecimal(report.r26_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										           id="r26_amt_6to24m"
+										           name="r26_amt_6to24m"
+										           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+										           readonly />
+										  </td>
+										  
+										  <td>
+										      <input class="display-input show_input"
+										             type="text"
+										             th:value="${report.r26_risk_6to24m != null ? #numbers.formatDecimal(report.r26_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										             id="r26_risk_6to24m"
+										             name="r26_risk_6to24m"
+										             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+										             readonly />
+										    </td>
+										    
+										    <td>
+										        <input class="display-input show_input"
+										               type="text"
+										               th:value="${report.r26_capital_6to24m != null ? #numbers.formatDecimal(report.r26_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										               id="r26_capital_6to24m"
+										               name="r26_capital_6to24m"
+										               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										               readonly />
+										      </td>
+
+										      <td>
+										          <input class="display-input show_input"
+										                 type="text"
+										                 th:value="${report.r26_amt_gt24m != null ? #numbers.formatDecimal(report.r26_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+										                 id="r26_amt_gt24m"
+										                 name="r26_amt_gt24m"
+										                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+										                 readonly />
+										        </td>
+
+										      <td>
+										          <input class="display-input show_input"
+										                 type="text"
+										                 th:value="${report.r26_risk_gt24m != null ? #numbers.formatDecimal(report.r26_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+										                 id="r26_risk_gt24m"
+										                 name="r26_risk_gt24m"
+										                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+										                 readonly />
+										        </td>
+										        
+										        <td>
+										            <input class="display-input show_input"
+										                   type="text"
+										                   th:value="${report.r26_capital_gt24m != null ? #numbers.formatDecimal(report.r26_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+										                   id="r26_capital_gt24m"
+										                   name="r26_capital_gt24m"
+										                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										                   readonly />
+										          </td>
+
+
+									</tr>
+									
+
+									<tr>
+									  
+									  <td id="ROW27" style="padding-left: 20px; font-weight: bold;">
+									    <input class="display-input show_input"
+									           type="text"
+									           th:value="${#strings.defaultString(report.r27_product, 'N/A')}"
+									           id="r27_product"
+									           name="r27_product"
+									           style="background-color:#FFFFFF; width: 200px; height: 28px; 
+									                  border-color: transparent; text-align: left;"
+									           readonly />
+									  </td>
+
+									  <td>
+									    <input class="display-input show_input"
+									           type="text"
+									           th:value="${report.r27_amt_6m != null ? #numbers.formatDecimal(report.r27_amt_6m,1,'COMMA',0,'POINT'):'0'}"
+									           id="r27_amt_6m"
+									           name="r27_amt_6m"
+									           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									           readonly />
+									  </td>
+
+									 
+									  <td>
+									      <input class="display-input show_input"
+									             type="text"
+									             th:value="${report.r27_risk_6m != null ? #numbers.formatDecimal(report.r27_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									             id="r27_risk_6m"
+									             name="r27_risk_6m"
+									             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									             readonly />
+									    </td>
+									  <td>
+									    <input class="display-input show_input"
+									           type="text"
+									           th:value="${report.r27_capital_6m != null ? #numbers.formatDecimal(report.r27_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									           id="r27_capital_6m"
+									           name="r27_capital_6m"
+									           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									           readonly />
+									  </td>
+									  
+									  <td>
+									      <input class="display-input show_input"
+									             type="text"
+									             th:value="${report.r27_amt_6to24m != null ? #numbers.formatDecimal(report.r27_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									             id="r27_amt_6to24m"
+									             name="r27_amt_6to24m"
+									             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									             readonly />
+									    </td>
+										
+										<td>
+										    <input class="display-input show_input"
+										           type="text"
+										           th:value="${report.r27_risk_6to24m != null ? #numbers.formatDecimal(report.r27_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										           id="r27_risk_6to24m"
+										           name="r27_risk_6to24m"
+										           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										           readonly />
+										  </td>
+										  
+										  <td>
+										      <input class="display-input show_input"
+										             type="text"
+										             th:value="${report.r27_capital_6to24m != null ? #numbers.formatDecimal(report.r27_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										             id="r27_capital_6to24m"
+										             name="r27_capital_6to24m"
+										             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										             readonly />
+										    </td>
+
+											<td>
+											    <input class="display-input show_input"
+											           type="text"
+											           th:value="${report.r27_amt_gt24m != null ? #numbers.formatDecimal(report.r27_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+											           id="r27_amt_gt24m"
+											           name="r27_amt_gt24m"
+											           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+											           readonly />
+											  </td>
+
+											<td>
+											    <input class="display-input show_input"
+											           type="text"
+											           th:value="${report.r27_risk_gt24m != null ? #numbers.formatDecimal(report.r27_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+											           id="r27_risk_gt24m"
+											           name="r27_risk_gt24m"
+											           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+											           readonly />
+											  </td>
+											  
+											  <td>
+											      <input class="display-input show_input"
+											             type="text"
+											             th:value="${report.r27_capital_gt24m != null ? #numbers.formatDecimal(report.r27_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+											             id="r27_capital_gt24m"
+											             name="r27_capital_gt24m"
+											             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+											             readonly />
+											    </td>
+												
+												
+
+									</tr>
+									
+	<tr>
+
+				<td id="ROW28" style="padding-left: 20px; font-weight: bold;">
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${#strings.defaultString(report.r28_product, 'N/A')}"
+				         id="r28_product"
+				         name="r28_product"
+				         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+				                border-color: transparent; text-align: left;"
+				         readonly />
+				</td>
+
+				<td>
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${report.r28_amt_6m != null ? #numbers.formatDecimal(report.r28_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         id="r28_amt_6m"
+				         name="r28_amt_6m"
+				         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         readonly />
+				</td>
+
+				<td>
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${report.r28_risk_6m != null ?  #numbers.formatDecimal(report.r28_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         id="r28_risk_6m"
+				         name="r28_risk_6m"
+				         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         readonly />
+				</td>
+
+				<td>
+				  <input class="display-input show_input"
+				         type="text"
+				         th:value="${report.r28_capital_6m != null ? #numbers.formatDecimal(report.r28_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         id="r28_capital_6m"
+				         name="r28_capital_6m"
+				         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         readonly />
+				</td>
+
+				<td>
+				    <input class="display-input show_input"
+				           type="text"
+				           th:value="${report.r28_amt_6to24m != null ? #numbers.formatDecimal(report.r28_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				           id="r28_amt_6to24m"
+				           name="r28_amt_6to24m"
+				           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				           readonly />
+				  </td>
+				  
+				  <td>
+				      <input class="display-input show_input"
+				             type="text"
+				             th:value="${report.r28_risk_6to24m != null ? #numbers.formatDecimal(report.r28_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				             id="r28_risk_6to24m"
+				             name="r28_risk_6to24m"
+				             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				             readonly />
+				    </td>
+				    
+				    <td>
+				        <input class="display-input show_input"
+				               type="text"
+				               th:value="${report.r28_capital_6to24m != null ? #numbers.formatDecimal(report.r28_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				               id="r28_capital_6to24m"
+				               name="r28_capital_6to24m"
+				               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				               readonly />
+				      </td>
+
+				      <td>
+				          <input class="display-input show_input"
+				                 type="text"
+				                 th:value="${report.r28_amt_gt24m != null ? #numbers.formatDecimal(report.r28_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 id="r28_amt_gt24m"
+				                 name="r28_amt_gt24m"
+				                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                 readonly />
+				        </td>
+
+				      <td>
+				          <input class="display-input show_input"
+				                 type="text"
+				                 th:value="${report.r28_risk_gt24m != null ? #numbers.formatDecimal(report.r28_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 id="r28_risk_gt24m"
+				                 name="r28_risk_gt24m"
+				                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                 readonly />
+				        </td>
+				        
+				        <td>
+				            <input class="display-input show_input"
+				                   type="text"
+				                   th:value="${report.r28_capital_gt24m != null ? #numbers.formatDecimal(report.r28_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                   id="r28_capital_gt24m"
+				                   name="r28_capital_gt24m"
+				                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                   readonly />
+				          </td>
+
+
+			</tr>
+	<tr>
+
+			<td id="ROW29" style="padding-left: 20px; font-weight: bold;">
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${#strings.defaultString(report.r29_product, 'N/A')}"
+			         id="r29_product"
+			         name="r29_product"
+			         style="background-color: #FFFFFF; width: 200px; height: 28px; 
+			                border-color: transparent; text-align: left;"
+			         readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${report.r29_amt_6m != null ? #numbers.formatDecimal(report.r29_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         id="r29_amt_6m"
+			         name="r29_amt_6m"
+			         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${report.r29_risk_6m != null ?  #numbers.formatDecimal(report.r29_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         id="r29_risk_6m"
+			         name="r29_risk_6m"
+			         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+			         type="text"
+			         th:value="${report.r29_capital_6m != null ? #numbers.formatDecimal(report.r29_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         id="r29_capital_6m"
+			         name="r29_capital_6m"
+			         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         readonly />
+			</td>
+
+			<td>
+			    <input class="display-input show_input"
+			           type="text"
+			           th:value="${report.r29_amt_6to24m != null ? #numbers.formatDecimal(report.r29_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			           id="r29_amt_6to24m"
+			           name="r29_amt_6to24m"
+			           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			           readonly />
+			  </td>
+			  
+			  <td>
+			      <input class="display-input show_input"
+			             type="text"
+			             th:value="${report.r29_risk_6to24m != null ? #numbers.formatDecimal(report.r29_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			             id="r29_risk_6to24m"
+			             name="r29_risk_6to24m"
+			             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			             readonly />
+			    </td>
+			    
+			    <td>
+			        <input class="display-input show_input"
+			               type="text"
+			               th:value="${report.r29_capital_6to24m != null ? #numbers.formatDecimal(report.r29_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			               id="r29_capital_6to24m"
+			               name="r29_capital_6to24m"
+			               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			               readonly />
+			      </td>
+
+			      <td>
+			          <input class="display-input show_input"
+			                 type="text"
+			                 th:value="${report.r29_amt_gt24m != null ? #numbers.formatDecimal(report.r29_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 id="r29_amt_gt24m"
+			                 name="r29_amt_gt24m"
+			                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                 readonly />
+			        </td>
+
+			      <td>
+			          <input class="display-input show_input"
+			                 type="text"
+			                 th:value="${report.r29_risk_gt24m != null ? #numbers.formatDecimal(report.r29_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 id="r29_risk_gt24m"
+			                 name="r29_risk_gt24m"
+			                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                 readonly />
+			        </td>
+			        
+			        <td>
+			            <input class="display-input show_input"
+			                   type="text"
+			                   th:value="${report.r29_capital_gt24m != null ? #numbers.formatDecimal(report.r29_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                   id="r29_capital_gt24m"
+			                   name="r29_capital_gt24m"
+			                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                   readonly />
+			          </td>
+
+
+		</tr>
+												
+		<tr>
+
+			<td id="ROW30" style="padding-left: 20px; font-weight: bold;">
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${#strings.defaultString(report.r30_product, 'N/A')}"
+					 id="r30_product"
+					 name="r30_product"
+					 style="background-color: #FFFFFF; width: 200px; height: 28px; 
+							border-color: transparent; text-align: left;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r30_amt_6m != null ? #numbers.formatDecimal(report.r30_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r30_amt_6m"
+					 name="r30_amt_6m"
+					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r30_risk_6m != null ?  #numbers.formatDecimal(report.r30_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r30_risk_6m"
+					 name="r30_risk_6m"
+					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r30_capital_6m != null ? #numbers.formatDecimal(report.r30_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r30_capital_6m"
+					 name="r30_capital_6m"
+					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+				<input class="display-input show_input"
+					   type="text"
+					   th:value="${report.r30_amt_6to24m != null ? #numbers.formatDecimal(report.r30_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					   id="r30_amt_6to24m"
+					   name="r30_amt_6to24m"
+					   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					   readonly />
+			  </td>
+			  
+			  <td>
+				  <input class="display-input show_input"
+						 type="text"
+						 th:value="${report.r30_risk_6to24m != null ? #numbers.formatDecimal(report.r30_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						 id="r30_risk_6to24m"
+						 name="r30_risk_6to24m"
+						 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						 readonly />
+				</td>
+				
+				<td>
+					<input class="display-input show_input"
+						   type="text"
+						   th:value="${report.r30_capital_6to24m != null ? #numbers.formatDecimal(report.r30_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   id="r30_capital_6to24m"
+						   name="r30_capital_6to24m"
+						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   readonly />
+				  </td>
+
+				  <td>
+					  <input class="display-input show_input"
+							 type="text"
+							 th:value="${report.r30_amt_gt24m != null ? #numbers.formatDecimal(report.r30_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 id="r30_amt_gt24m"
+							 name="r30_amt_gt24m"
+							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							 readonly />
+					</td>
+
+				  <td>
+					  <input class="display-input show_input"
+							 type="text"
+							 th:value="${report.r30_risk_gt24m != null ? #numbers.formatDecimal(report.r30_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 id="r30_risk_gt24m"
+							 name="r30_risk_gt24m"
+							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							 readonly />
+					</td>
+					
+					<td>
+						<input class="display-input show_input"
+							   type="text"
+							   th:value="${report.r30_capital_gt24m != null ? #numbers.formatDecimal(report.r30_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   id="r30_capital_gt24m"
+							   name="r30_capital_gt24m"
+							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   readonly />
+					  </td>
+
+
+		</tr>
+		
+		<tr>
+
+			<td id="ROW31" style="padding-left: 20px; font-weight: bold;">
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${#strings.defaultString(report.r31_product, 'N/A')}"
+					 id="r31_product"
+					 name="r31_product"
+					 style="background-color: #FFFFFF; width: 200px; height: 28px; 
+							border-color: transparent; text-align: left;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r31_amt_6m != null ? #numbers.formatDecimal(report.r31_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r31_amt_6m"
+					 name="r31_amt_6m"
+					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r31_risk_6m != null ?  #numbers.formatDecimal(report.r31_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r31_risk_6m"
+					 name="r31_risk_6m"
+					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r31_capital_6m != null ? #numbers.formatDecimal(report.r31_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r31_capital_6m"
+					 name="r31_capital_6m"
+					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+				<input class="display-input show_input"
+					   type="text"
+					   th:value="${report.r31_amt_6to24m != null ? #numbers.formatDecimal(report.r31_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					   id="r31_amt_6to24m"
+					   name="r31_amt_6to24m"
+					   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					   readonly />
+			  </td>
+			  
+			  <td>
+				  <input class="display-input show_input"
+						 type="text"
+						 th:value="${report.r31_risk_6to24m != null ? #numbers.formatDecimal(report.r31_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						 id="r31_risk_6to24m"
+						 name="r31_risk_6to24m"
+						 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						 readonly />
+				</td>
+				
+				<td>
+					<input class="display-input show_input"
+						   type="text"
+						   th:value="${report.r31_capital_6to24m != null ? #numbers.formatDecimal(report.r31_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   id="r31_capital_6to24m"
+						   name="r31_capital_6to24m"
+						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   readonly />
+				  </td>
+
+				  <td>
+					  <input class="display-input show_input"
+							 type="text"
+							 th:value="${report.r31_amt_gt24m != null ? #numbers.formatDecimal(report.r31_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 id="r31_amt_gt24m"
+							 name="r31_amt_gt24m"
+							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							 readonly />
+					</td>
+
+				  <td>
+					  <input class="display-input show_input"
+							 type="text"
+							 th:value="${report.r31_risk_gt24m != null ? #numbers.formatDecimal(report.r31_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 id="r31_risk_gt24m"
+							 name="r31_risk_gt24m"
+							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							 readonly />
+					</td>
+					
+					<td>
+						<input class="display-input show_input"
+							   type="text"
+							   th:value="${report.r31_capital_gt24m != null ? #numbers.formatDecimal(report.r31_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   id="r31_capital_gt24m"
+							   name="r31_capital_gt24m"
+							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   readonly />
+					  </td>
+
+
+		</tr>
+		
+		<tr>
+
+			<td id="ROW32" style="padding-left: 20px; font-weight: bold;">
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${#strings.defaultString(report.r32_product, 'N/A')}"
+					 id="r32_product"
+					 name="r32_product"
+					 style="background-color: #FFFFFF; width: 200px; height: 28px; 
+							border-color: transparent; text-align: left;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r32_amt_6m != null ? #numbers.formatDecimal(report.r32_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r32_amt_6m"
+					 name="r32_amt_6m"
+					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r32_risk_6m != null ?  #numbers.formatDecimal(report.r32_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r32_risk_6m"
+					 name="r32_risk_6m"
+					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r32_capital_6m != null ? #numbers.formatDecimal(report.r32_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r32_capital_6m"
+					 name="r32_capital_6m"
+					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td>
+				<input class="display-input show_input"
+					   type="text"
+					   th:value="${report.r32_amt_6to24m != null ? #numbers.formatDecimal(report.r32_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					   id="r32_amt_6to24m"
+					   name="r32_amt_6to24m"
+					   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+					   readonly />
+			  </td>
+			  
+			  <td>
+				  <input class="display-input show_input"
+						 type="text"
+						 th:value="${report.r32_risk_6to24m != null ? #numbers.formatDecimal(report.r32_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						 id="r32_risk_6to24m"
+						 name="r32_risk_6to24m"
+						 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+						 readonly />
+				</td>
+				
+				<td>
+					<input class="display-input show_input"
+						   type="text"
+						   th:value="${report.r32_capital_6to24m != null ? #numbers.formatDecimal(report.r32_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   id="r32_capital_6to24m"
+						   name="r32_capital_6to24m"
+						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   readonly />
+				  </td>
+
+				  <td>
+					  <input class="display-input show_input"
+							 type="text"
+							 th:value="${report.r32_amt_gt24m != null ? #numbers.formatDecimal(report.r32_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 id="r32_amt_gt24m"
+							 name="r32_amt_gt24m"
+							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							 readonly />
+					</td>
+
+				  <td>
+					  <input class="display-input show_input"
+							 type="text"
+							 th:value="${report.r32_risk_gt24m != null ? #numbers.formatDecimal(report.r32_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 id="r32_risk_gt24m"
+							 name="r32_risk_gt24m"
+							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
+							 readonly />
+					</td>
+					
+					<td>
+						<input class="display-input show_input"
+							   type="text"
+							   th:value="${report.r32_capital_gt24m != null ? #numbers.formatDecimal(report.r32_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   id="r32_capital_gt24m"
+							   name="r32_capital_gt24m"
+							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   readonly />
+					  </td>
+
+
+		</tr>
+		
+		<tr>
+
+			<td id="ROW33" style="padding-left: 20px; font-weight: bold;">
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${#strings.defaultString(report.r33_product, 'N/A')}"
+					 id="r33_product"
+					 name="r33_product"
+					 style="background-color: #FFFFFF; width: 200px; height: 28px; 
+							border-color: transparent; text-align: left;"
+					 readonly />
+			</td>
+
+			<td style="background-color: black;" ></td>
+			<td  style="background-color: black;" ></td>
+
+			<td>
+			  <input class="display-input show_input"
+					 type="text"
+					 th:value="${report.r33_capital_6m != null ? #numbers.formatDecimal(report.r33_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 id="r33_capital_6m"
+					 name="r33_capital_6m"
+					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 readonly />
+			</td>
+
+			<td style="background-color:rgb(192, 192, 192);">A
+				
+			  </td>
+			  
+			  <td style="background-color: black;" ></td>	
+				<td>
+					<input class="display-input show_input"
+						   type="text"
+						   th:value="${report.r33_capital_6to24m != null ? #numbers.formatDecimal(report.r33_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   id="r33_capital_6to24m"
+						   name="r33_capital_6to24m"
+						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   readonly />
+				  </td>
+
+				 <td style="background-color:rgb(192, 192, 192);">B</td>
+
+					<td style="background-color: black;" ></td>
+					<td>
+						<input class="display-input show_input"
+							   type="text"
+							   th:value="${report.r33_capital_gt24m != null ? #numbers.formatDecimal(report.r33_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   id="r33_capital_gt24m"
+							   name="r33_capital_gt24m"
+							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   readonly />
+					  </td>
+
+
+		</tr>
+		<tr>
+			        <td></td>
+			        <td  style="text-align: right;">Total Specific Risk Charge</td>
+			        <td></td>
+	 <td>
+			<input class="display-input show_input"
+			   type="text"
+			   th:value="${report.r35_tot_spec_risk_ch != null ? #numbers.formatDecimal(report.r35_tot_spec_risk_ch,1,'COMMA',0,'POINT'):'0.00'}"
+			   id="r35_tot_spec_risk_ch"
+			   name="r35_tot_spec_risk_ch"
+			   style="background-color:rgb(255, 255, 0);width:200px;height:28px;border-color:transparent;text-align:right;"
+			   readonly />
+			</td>
+			        <td style="text-align: left;">D = Sum (A:C)</td>
+			        <td></td>
+			        <td></td>
+			        <td></td>
+			        <td></td>
+			        <td></td>
+			  </tr>
+
+
+		  
+                  </tbody>
 						</table>
-
+					</form>					<div style="text-align: center; margin-top: 10px;">
+													
+					    <button id="submitButton" 
+					            type="button"
+					            class="custom-tab-btn Show_input" 
+					            form="fileupload"
+					            th:attr="data-todate=${asondate}" 
+					            onclick="fileuploads(this);" 
+					            style="display: none;">
+					        Submit
+					    </button>
+					</div>
 							</div>
 
 
@@ -1329,121 +3557,20 @@ function showdetailsbyRowAndColumn(a) {
 					</div>
 				</div>
 
-				<div th:if="${displaymode == 'Details'}">
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="table-responsive scrollable-table-container"
-												style="border-right: 1px solid #dee2e6;">
-												<table
-													class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
-													id="reportSs">
-													<thead class="thead-light">
-														<tr>
-															<th></th>
-															<th>CUST ID</th>
-															<th>ACCT NO</th>
-															<th>ACCT NAME</th>
-															<th style="text-align: right;">ACCT BALANCE</th>
-															<th style="text-align: right;">ROWID</th>
-															<th>COLUMNID</th>
-															<th>REPORT_DATE</th>
-														</tr>
-
-													</thead>
-
-													<tbody 
-														style="font-family: Arial;">
-														<tr th:each="report: ${reportdetails}">
-															<td><a data-toggle="tooltip" class="editrec"
-																title="Click to Edit this Record"> <i
-																	class="fas fa-edit" onclick="editRecord(this)"></i>
-															</a></td>
-															<td th:text="${report.cust_id}"></td>
-															<td th:text="${report.acct_number}"></td>
-															<td th:text="${report.acct_name}"></td>
-															<td th:text="${#numbers.formatDecimal(report.acct_balance_in_pula, 1, 2)}" style="text-align: right;"></td>
-															<td style="text-align: left;" th:text="${report.row_id}"></td>
-															<td th:text="${report.column_id}"></td>
-															<td th:text="${#dates.format(report.report_date, 'dd-MM-yyyy')}"></td>
-
-														</tr>
-													</tbody>
-												</table>
-
-												<div style="margin-top:20px; text-align:center;" th:if="${pagination=='YES'}">
-																																									   
-															    
-															    
-															<a th:if="${currentPage > 0}"
-															 th:href="@{'/Reports/' + ${reportid} + '/Details'(
-															    asondate=${asondate},                             
-															    fromdate=${fromdate},
-															    todate=${todate},
-															    currency=${currency},
-															    dtltype=${dtltype},
-															    type=${type},
-															    version=${version},
-															    page=${currentPage - 100},
-															    size=100
-															)}">
-															    Previous
-															</a>
-									
-															    
-															    <span>Page [[${currentPage / 100 + 1}]] of [[${totalPages}]]</span>
-															
-															    
-															    <a th:if="${currentPage < (totalPages - 1) * 100}"
-															    	
-															    th:href="@{'/Reports/' + ${reportid} + '/Details'(
-															    asondate=${asondate},
-															    fromdate=${fromdate},
-															    todate=${todate},
-															    currency=${currency},
-															    dtltype=${dtltype},
-															    type=${type},
-															    version=${version},
-															    page=${currentPage + 100},
-															    size=100
-															)}">	
-															    Next
-															    </a>
-																		</div>
-
-</div>
-
-
-										</div>
+				
+				<div class="modal fade" id="loader" data-backdrop="static" data-keyboard="false">
+						<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+							<div class="modal-content" style="background: transparent;">
+								<div class="modal-body" style="text-align: center">
+									<div>
+										<img th:src=@{/images/loader.gif} id="bfirelogo"
+											style="width: 153px; height: auto; margin-left: 18px; background-color: transparent; border-color: transparent;"
+											alt="Bornfire">
 									</div>
 								</div>
-
-			</div>
-
-
-
-		</div>
-
-
-
-	</div>
-
-
-
-	<div class="modal fade" id="loader" data-backdrop="static"
-		data-keyboard="false">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-			<div class="modal-content" style="background: transparent;">
-				<div class="modal-body" style="text-align: center">
-					<div>
-						<img th:src=@{/images/loader.gif} id="bfirelogo"
-							style="width: 153px; height: auto; margin-left: 18px; background-color: transparent; border-color: transparent;"
-							alt="Bornfire">
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
@@ -1510,103 +3637,108 @@ function showdetailsbyRowAndColumn(a) {
 
 
 
-<style>
-/* Your existing CSS - this is the correct approach */
-.scrollable-table-container {
-	/* This is the key: it creates the scroll context */
-	max-height: 640px;
-	/* Or a suitable height like 80vh for responsive design */
-	overflow-y: auto;
-	border: 1px solid #ccc;
-}
-
-/* Your existing sticky header CSS, targeting the tr elements within the thead */
-.scrollable-table-container thead tr:nth-child(1) {
-	position: sticky;
-	top: 0;
-	background-color: #b3b6b9;
-	z-index: 5;
-}
-
-.scrollable-table-container thead tr:nth-child(2) {
-	position: sticky;
-	top: 36px; /* adjust based on row height */
-	background-color: #b3b6b9;
-	z-index: 4;
-}
-
-.scrollable-table-container thead tr:nth-child(3) {
-	position: sticky;
-	top: 72px; /* Adjust based on row height */
-	background-color: #b3b6b9;
-	z-index: 3;
-}
-
-.scrollable-table-container thead tr:nth-child(4) {
-	position: sticky;
-	top: 100px; /* Adjust based on row height */
-	background-color: #b3b6b9;
-	z-index: 2;
-}
-
-.scrollable-table-container thead tr:nth-child(5) {
-	position: sticky;
-	top: 135px; /* Adjust based on row height */
-	background-color: #b3b6b9;
-	z-index: 1;
-}
-</style>
+															<style>
+																/* Your existing CSS - this is the correct approach */
+																	.scrollable-table-container {
+																		/* This is the key: it creates the scroll context */
+																		max-height: 620px;
+																		/* Or a suitable height like 80vh for responsive design */
+																		overflow-y: auto;
+																		border: 1px solid #ccc;
+																	}
 
 
-<style>
-.inner {
-	max-height: 600px; /* Adjust height as needed */
-	overflow: auto;
-	border: 1px solid #dee2e6;
-}
+																/* Your existing sticky header CSS, targeting the tr elements within the thead */
+																.scrollable-table-container thead tr:nth-child(1) {
+																	position: sticky;
+																	top: 0;
+																	background-color: #b3b6b9;
+																	z-index: 5;
+																}
 
-/* Sticky thead */
-#reports thead th {
-	position: sticky;
-	top: 0;
-	background-color: #f8f9fa; /* Match Bootstrap thead-light */
-	z-index: 2;
-}
+																.scrollable-table-container thead tr:nth-child(2) {
+																	position: sticky;
+																	top: 36px;
+																	/* adjust based on row height */
+																	background-color: #b3b6b9;
+																	z-index: 4;
+																}
 
-div.dataTables_wrapper div.dataTables_paginate {
-	text-align: right !important;
-	float: right !important;
-	width: auto;
-	margin-top: 10px;
-}
+																.scrollable-table-container thead tr:nth-child(3) {
+																	position: sticky;
+																	top: 72px;
+																	/* Adjust based on row height */
+																	background-color: #b3b6b9;
+																	z-index: 3;
+																}
 
-/* Ensure info text (e.g., "Showing 1 to X") stays on the left */
-div.dataTables_wrapper div.dataTables_info {
-	float: left !important;
-	margin-top: 10px;
-}
+																.scrollable-table-container thead tr:nth-child(4) {
+																	position: sticky;
+																	top: 100px;
+																	/* Adjust based on row height */
+																	background-color: #b3b6b9;
+																	z-index: 2;
+																}
 
-.pagination {
-	margin: 0;
-}
+																.scrollable-table-container thead tr:nth-child(5) {
+																	position: sticky;
+																	top: 135px;
+																	/* Adjust based on row height */
+																	background-color: #b3b6b9;
+																	z-index: 1;
+																}
+															</style>
+															<style>
+																.inner {
+																	max-height: 600px;
+																	/* Adjust height as needed */
+																	overflow: auto;
+																	border: 1px solid #dee2e6;
+																}
 
-.page-item.active .page-link {
-	background-color: #386276;
-	border-color: #386276;
-}
+																/* Sticky thead */
+																#reports thead th {
+																	position: sticky;
+																	top: 0;
+																	background-color: #f8f9fa;
+																	/* Match Bootstrap thead-light */
+																	z-index: 2;
+																}
 
-.page-link {
-	color: #386276;
-}
+																div.dataTables_wrapper div.dataTables_paginate {
+																	text-align: right !important;
+																	float: right !important;
+																	width: auto;
+																	margin-top: 10px;
+																}
 
-.page-link:hover {
-	color: #2a4a5c;
-}
+																/* Ensure info text (e.g., "Showing 1 to X") stays on the left */
+																div.dataTables_wrapper div.dataTables_info {
+																	float: left !important;
+																	margin-top: 10px;
+																}
 
-.form-select {
-	display: inline-block;
-	width: auto;
-}
-</style>
+																.pagination {
+																	margin: 0;
+																}
 
-</html>
+																.page-item.active .page-link {
+																	background-color: #386276;
+																	border-color: #386276;
+																}
+
+																.page-link {
+																	color: #386276;
+																}
+
+																.page-link:hover {
+																	color: #2a4a5c;
+																}
+
+																.form-select {
+																	display: inline-block;
+																	width: auto;
+																}
+															</style>
+
+	</html>
