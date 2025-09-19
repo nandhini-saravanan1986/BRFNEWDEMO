@@ -1,0 +1,371 @@
+create or replace PROCEDURE BRRS_M_CA3_SUMMARY_PROCEDURE(Report_date VARCHAR2)
+IS
+    V_REPORT_DATE DATE := TO_DATE(Report_date, 'DD-MM-YYYY');
+
+	-- Main summary variables
+
+    V_R10_PRODUCT   VARCHAR2(1000) := 'Goodwill and other intangible assets';
+    V_R10_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R11_PRODUCT   VARCHAR2(1000) := 'Advances of a capital nature granted to connected persons';
+    V_R11_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R12_PRODUCT   VARCHAR2(1000) := 'Deferred tax assets (DTA) that rely on future profitability to be realised ';
+    V_R12_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R13_PRODUCT   VARCHAR2(1000) := 'Investments in own shares, whether directly or indirectly';
+    V_R13_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R14_PRODUCT   VARCHAR2(1000) := 'Unrealised revaluation losses on investments in securities';
+    V_R14_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R15_PRODUCT   VARCHAR2(1000) := 'Defined benefit pension fund assets';
+    V_R15_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R16_PRODUCT   VARCHAR2(1000) := 'Reciprocal holdings in the capital of banking, financial and insurance entities';
+    V_R16_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R17_PRODUCT   VARCHAR2(1000) := 'Cash flow hedge reserve';
+    V_R17_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R18_PRODUCT   VARCHAR2(1000) := 'Gain on sale related to securitisation transactions';
+    V_R18_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R19_PRODUCT   VARCHAR2(1000) := 'Regulatory adjustments applied to CET1 Capital due to insufficient Additional Tier 1 and Tier 2 Capital';
+    V_R19_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R20_PRODUCT   VARCHAR2(1000) := 'Full Deductions  applied to the calculation of CET1 Capital                        Line (22+23+24+25+26+27+28+29+30+31)';
+    V_R20_AMOUNT    NUMBER(24,2) := 0;
+
+    -- Skipping 21, 22, 23
+
+    V_R24_PRODUCT   VARCHAR2(1000) := 'Significant investments in the common shares of unconsolidated financial institutions, where a bank or its subsidiary owns more than 10% common shares of the issuing entity (banks, insurance and other financial entities) -  instead of full deduction, only deduct the excess above the 10% threshold, the remaining balance below thresholds shall be treated as other assets (para 3.16 - 3.18 Basel II Guidelines)';
+    V_R24_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R25_PRODUCT   VARCHAR2(1000) := 'Deferred tax assets (DTAs) that arise from temporary differences';
+    V_R25_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R26_PRODUCT   VARCHAR2(1000) := 'Mortgage servicing rights';
+    V_R26_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R27_PRODUCT   VARCHAR2(1000) := 'Aggregate non-siginificant investments by the bank or its subsidiary in the equity of other banks and financial institutions, where the aggregate investment is equal to or greater than 10 percent of the capital of the institution in which the investment is made -  instead of full deduction, only deduct the excess above the 10% threshold,  the remaining amount below the 10% threshold shall be treated as other assets.';
+    V_R27_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R28_PRODUCT   VARCHAR2(1000) := ' Threshold deductions applied to the calculation of CET1 Capital    Line (33+34+35+36)';
+    V_R28_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R29_PRODUCT   VARCHAR2(1000) := 'Total regulatory adjustments applied to the calculation of CET1 Capital  Line (32+37)';
+    V_R29_AMOUNT    NUMBER(24,2) := 0;
+
+    -- Skipping 30, 31, 32, 33, 34, 35
+
+    V_R36_PRODUCT   VARCHAR2(1000) := 'Direct investments in own Additional Tier 1 capital, net of any short positions, if the short positions involve no counterparty risk';
+    V_R36_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R37_PRODUCT   VARCHAR2(1000) := 'Indirect investments in own Additional Tier 1 capital (e.g. through holdings of index securities in which the bank itself is a constituent), net of any short positions';
+    V_R37_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R38_PRODUCT   VARCHAR2(1000) := 'Any own Additional Tier 1 capital which the bank could be contractually obliged to purchase';
+    V_R38_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R39_PRODUCT   VARCHAR2(1000) := 'Reciprocal cross holdings and the capital of banking, financial and insurance entities that are outside the scope of regulatory consolidation';
+    V_R39_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R40_PRODUCT   VARCHAR2(1000) := 'Significant investments in the common shares of unconsolidated financial institutions, where a bank or its subsidiary owns more than 10% common shares of the issuing entity (banks, insurance and other financial entities)';
+    V_R40_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R41_PRODUCT   VARCHAR2(1000) := 'Full deductions applied to the calculation of  Additional Tier1 Capital   Line (39+40+41+42+43)';
+    V_R41_AMOUNT    NUMBER(24,2) := 0;
+
+    -- Skipping 42, 43
+
+    V_R44_PRODUCT   VARCHAR2(1000) := 'Aggregate non-siginificant investments by the bank or its subsidiary in the equity of other banks and financial institutions, where the aggregate investment is equal to or greater than 10 percent of the capital of the institution in which the investment is made -  instead of full deduction, only deduct the excess above the 10% threshold,  the remaining amount below the 10% threshold shall be treated as other assets.';
+    V_R44_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R45_PRODUCT   VARCHAR2(1000) := 'Total threshold deductions appiled to the calculation of  Additional Tier 1 Capital';
+    V_R45_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R46_PRODUCT   VARCHAR2(1000) := 'Total regulatory adjustments applied to the calculation of  Additional Tier1 Capital  Line (44+46)';
+    V_R46_AMOUNT    NUMBER(24,2) := 0;
+
+    -- Skipping 47, 48, 49
+
+    V_R50_PRODUCT   VARCHAR2(1000) := 'Direct investments in own Tier 2 capital, net of any short positions, if the short positions involve no counterparty risk';
+    V_R50_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R51_PRODUCT   VARCHAR2(1000) := 'Indirect investments in own Tier 2 Capital (e.g., through holdings of index securities in which the bank itself  is a constituent), net of  any short positions';
+    V_R51_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R52_PRODUCT   VARCHAR2(1000) := 'Any own Tier 2 capital which the group could be contractually obliged to purchase';
+    V_R52_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R53_PRODUCT   VARCHAR2(1000) := 'Reciprocal cross holdings and the capital of banking, financial and insurance entities that are outside the scope of regulatory consolidation';
+    V_R53_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R54_PRODUCT   VARCHAR2(1000) := 'Significant investments in the common shares of unconsolidated financial institutions, where a bank or its subsidiary owns more than 10% common shares of the issuing entity (banks, insurance and other financial entities).';
+    V_R54_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R55_PRODUCT   VARCHAR2(1000) := ' Full decductions applied to the calculation of Tier2 Capital        Line (48+49+50+51+52)';
+    V_R55_AMOUNT    NUMBER(24,2) := 0;
+
+    -- Skipping 56, 57
+
+    V_R58_PRODUCT   VARCHAR2(1000) := 'Aggregate non-siginificant investments by the bank or its subsidiary in the equity of other banks and financial institutions, where the aggregate investment is equal to or greater than 10 percent of the capital of the institution in which the investment is made -  instead of full deduction, only deduct the excess above the 10% threshold,  the remaining amount below the 10% threshold shall be treated as other assets.';
+    V_R58_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R59_PRODUCT   VARCHAR2(1000) := 'Total threshold deductions appiled to the calculation of Tier 2 Capital';
+    V_R59_AMOUNT    NUMBER(24,2) := 0;
+
+    V_R60_PRODUCT   VARCHAR2(1000) := 'Total regulatory adjustments applied to the calculation of Tier2 Capital      Line (53+55)';
+    V_R60_AMOUNT    NUMBER(24,2) := 0;
+
+BEGIN
+    -- Step 1: Remove old summary data
+    DELETE FROM BRRS_M_CA3_SUMMARYTABLE WHERE REPORT_DATE = V_REPORT_DATE;
+    COMMIT;
+
+-------------------------------------------CALCULATION PART-------
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R10_AMOUNT FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R10' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R11_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R11' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R12_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R12' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R13_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R13' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R14_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R14' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R15_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R15' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R16_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R16' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R17_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R17' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R18_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R18' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R19_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R19' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R24_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R24' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R25_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R25' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R26_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R26' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R27_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R27' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R36_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R36' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R37_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R37' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R38_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R38' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R39_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R39' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R40_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R40' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R44_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R44' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R50_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R50' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R51_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R51' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R52_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R52' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R53_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R53' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R54_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R54' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) 
+INTO V_R58_AMOUNT 
+FROM BRRS_M_CA3_DETAILTABLE
+WHERE ROW_ID = 'R58' AND COLUMN_ID = 'C2' AND REPORT_DATE = V_REPORT_DATE;
+
+
+------total amount------
+
+V_R20_AMOUNT:=V_R10_AMOUNT+V_R11_AMOUNT+V_R12_AMOUNT+V_R13_AMOUNT+V_R14_AMOUNT+V_R15_AMOUNT+V_R16_AMOUNT+V_R17_AMOUNT+V_R18_AMOUNT+V_R19_AMOUNT;
+
+V_R28_AMOUNT:=V_R24_AMOUNT+V_R25_AMOUNT+V_R26_AMOUNT+V_R27_AMOUNT;
+
+V_R29_AMOUNT:=V_R20_AMOUNT+V_R28_AMOUNT;
+
+
+V_R41_AMOUNT:=V_R36_AMOUNT+V_R37_AMOUNT+V_R38_AMOUNT+V_R39_AMOUNT+V_R40_AMOUNT;
+
+V_R45_AMOUNT:=V_R44_AMOUNT;
+
+V_R46_AMOUNT:=V_R41_AMOUNT+V_R45_AMOUNT;
+
+V_R55_AMOUNT:=V_R50_AMOUNT+V_R51_AMOUNT+V_R52_AMOUNT+V_R53_AMOUNT+V_R54_AMOUNT;
+
+V_R59_AMOUNT:=V_R58_AMOUNT;
+
+V_R60_AMOUNT:=V_R55_AMOUNT+V_R59_AMOUNT;
+
+---------------------------------------------------------------------------------
+
+INSERT INTO BRRS_M_CA3_SUMMARYTABLE
+(
+    R10_PRODUCT, R10_AMOUNT,
+    R11_PRODUCT, R11_AMOUNT,
+    R12_PRODUCT, R12_AMOUNT,
+    R13_PRODUCT, R13_AMOUNT,
+    R14_PRODUCT, R14_AMOUNT,
+    R15_PRODUCT, R15_AMOUNT,
+    R16_PRODUCT, R16_AMOUNT,
+    R17_PRODUCT, R17_AMOUNT,
+    R18_PRODUCT, R18_AMOUNT,
+    R19_PRODUCT, R19_AMOUNT,
+    R20_PRODUCT, R20_AMOUNT,
+    R24_PRODUCT, R24_AMOUNT,
+    R25_PRODUCT, R25_AMOUNT,
+    R26_PRODUCT, R26_AMOUNT,
+    R27_PRODUCT, R27_AMOUNT,
+    R28_PRODUCT, R28_AMOUNT,
+    R29_PRODUCT, R29_AMOUNT,
+    R36_PRODUCT, R36_AMOUNT,
+    R37_PRODUCT, R37_AMOUNT,
+    R38_PRODUCT, R38_AMOUNT,
+    R39_PRODUCT, R39_AMOUNT,
+    R40_PRODUCT, R40_AMOUNT,
+    R41_PRODUCT, R41_AMOUNT,
+    R44_PRODUCT, R44_AMOUNT,
+    R45_PRODUCT, R45_AMOUNT,
+    R46_PRODUCT, R46_AMOUNT,
+    R50_PRODUCT, R50_AMOUNT,
+    R51_PRODUCT, R51_AMOUNT,
+    R52_PRODUCT, R52_AMOUNT,
+    R53_PRODUCT, R53_AMOUNT,
+    R54_PRODUCT, R54_AMOUNT,
+    R55_PRODUCT, R55_AMOUNT,
+    R58_PRODUCT, R58_AMOUNT,
+    R59_PRODUCT, R59_AMOUNT,
+    R60_PRODUCT, R60_AMOUNT,
+    REPORT_DATE
+)
+VALUES
+(
+    V_R10_PRODUCT, V_R10_AMOUNT,
+    V_R11_PRODUCT, V_R11_AMOUNT,
+    V_R12_PRODUCT, V_R12_AMOUNT,
+    V_R13_PRODUCT, V_R13_AMOUNT,
+    V_R14_PRODUCT, V_R14_AMOUNT,
+    V_R15_PRODUCT, V_R15_AMOUNT,
+    V_R16_PRODUCT, V_R16_AMOUNT,
+    V_R17_PRODUCT, V_R17_AMOUNT,
+    V_R18_PRODUCT, V_R18_AMOUNT,
+    V_R19_PRODUCT, V_R19_AMOUNT,
+    V_R20_PRODUCT, V_R20_AMOUNT,
+    V_R24_PRODUCT, V_R24_AMOUNT,
+    V_R25_PRODUCT, V_R25_AMOUNT,
+    V_R26_PRODUCT, V_R26_AMOUNT,
+    V_R27_PRODUCT, V_R27_AMOUNT,
+    V_R28_PRODUCT, V_R28_AMOUNT,
+    V_R29_PRODUCT, V_R29_AMOUNT,
+    V_R36_PRODUCT, V_R36_AMOUNT,
+    V_R37_PRODUCT, V_R37_AMOUNT,
+    V_R38_PRODUCT, V_R38_AMOUNT,
+    V_R39_PRODUCT, V_R39_AMOUNT,
+    V_R40_PRODUCT, V_R40_AMOUNT,
+    V_R41_PRODUCT, V_R41_AMOUNT,
+    V_R44_PRODUCT, V_R44_AMOUNT,
+    V_R45_PRODUCT, V_R45_AMOUNT,
+    V_R46_PRODUCT, V_R46_AMOUNT,
+    V_R50_PRODUCT, V_R50_AMOUNT,
+    V_R51_PRODUCT, V_R51_AMOUNT,
+    V_R52_PRODUCT, V_R52_AMOUNT,
+    V_R53_PRODUCT, V_R53_AMOUNT,
+    V_R54_PRODUCT, V_R54_AMOUNT,
+    V_R55_PRODUCT, V_R55_AMOUNT,
+    V_R58_PRODUCT, V_R58_AMOUNT,
+    V_R59_PRODUCT, V_R59_AMOUNT,
+    V_R60_PRODUCT, V_R60_AMOUNT,
+    V_REPORT_DATE
+);
+
+COMMIT;
+END;
+
