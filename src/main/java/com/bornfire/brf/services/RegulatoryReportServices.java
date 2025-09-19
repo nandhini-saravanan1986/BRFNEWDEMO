@@ -113,8 +113,19 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_LIQGAP_ReportService brrs_m_liqgap_reportservice;
 
-
-
+	@Autowired
+	BRRS_Q_SMME_DEP_ReportService BRRS_Q_SMME_DEP_ReportService;
+	
+	@Autowired
+	BRRS_M_SECA_ReportService BRRS_M_SECA_ReportService;
+	
+	@Autowired
+	BRRS_M_OB_ReportService BRRS_M_OB_ReportService;
+	
+	@Autowired
+	BRRS_M_PD_ReportService BRRS_M_PD_ReportService;
+	
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
 
