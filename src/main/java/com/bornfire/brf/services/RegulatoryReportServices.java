@@ -83,6 +83,7 @@ public class RegulatoryReportServices {
 	
 	@Autowired
 	BRRS_M_IS_ReportService BRRS_M_IS_Reportservice;
+
 	@Autowired
 	M_GALOR_ReportService M_GALOR_ReportService;
 
@@ -221,6 +222,7 @@ public class RegulatoryReportServices {
 					pageable,type,version);
 			break;
 			
+
 		case "M_GALOR":
 			repsummary = M_GALOR_ReportService.getM_GALORView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
@@ -779,6 +781,42 @@ public class RegulatoryReportServices {
 			}
 			break;
 			
+		case "Q_SMME_DEP":
+			try {
+				archivalData = BRRS_Q_SMME_DEP_ReportService.getQ_SMME_DEPArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "M_SECA":
+			try {
+				archivalData = BRRS_M_SECA_ReportService.getM_SECAArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		
+		case "M_OB":
+			try {
+				archivalData = BRRS_M_OB_ReportService.getM_OBArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "M_PD":
+			try {
+				archivalData = BRRS_M_PD_ReportService.getM_PDArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
 		case "M_IS":
 			try {
 				archivalData = BRRS_M_IS_reportservice.getM_ISArchival();
@@ -975,6 +1013,6 @@ public class RegulatoryReportServices {
 	public byte[] getReport(String jobId) {
 		// System.out.println("Report generation completed for: " + jobId);
 		return jobStorage.get(jobId);
-	}
+	} 
 
 }
