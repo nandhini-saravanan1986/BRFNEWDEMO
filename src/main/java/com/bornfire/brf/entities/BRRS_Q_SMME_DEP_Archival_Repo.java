@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface BRRS_Q_SMME_DEP_Archival_Repo extends JpaRepository<BRRS_Q_SMME_DEP_Archival_Entity, String> {
+public interface BRRS_Q_SMME_DEP_Archival_Repo extends JpaRepository<BRRS_Q_SMME_DEP_Archival_Entity, Date> {
 
 
 	

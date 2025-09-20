@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface BRRS_M_PD_Archival_Summary_Repo1 extends JpaRepository<BRRS_M_PD_Archival_Summary_Entity1, String> {
+public interface BRRS_M_PD_Archival_Summary_Repo1 extends JpaRepository<BRRS_M_PD_Archival_Summary_Entity1, Date> {
 
 
 	
