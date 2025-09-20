@@ -271,6 +271,26 @@ public class RegulatoryReportServices {
 		case "M_LIQGAP":
 			repsummary = brrs_m_liqgap_reportservice.getM_LIQGAPView(reportId, fromdate, todate, currency, dtltype, pageable,type, version);
 			break;
+			
+		case "Q_SMME_DEP":
+			repsummary = BRRS_Q_SMME_DEP_ReportService.getQ_SMME_DEPiew(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+			break;
+			
+		case "M_SECA":
+			repsummary = BRRS_M_SECA_ReportService.getM_SECAview(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+			break;
+			
+		case "M_OB":
+			repsummary = BRRS_M_OB_ReportService.getM_OBview(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+			break;
+			
+		case "M_PD":
+			repsummary = BRRS_M_PD_ReportService.getM_PDview(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+			break;
 				
 
 
@@ -422,6 +442,26 @@ public class RegulatoryReportServices {
 		case "M_LIQGAP":
 			repdetail = brrs_m_liqgap_reportservice.getM_LIQGAPcurrentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type, version);
+			break;
+			
+		case "Q_SMME_DEP":
+			repdetail = BRRS_Q_SMME_DEP_ReportService.getQ_SMME_DEPcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+					pageable, Filter, type, version);
+			break;
+			
+		case "M_SECA":
+			repdetail = BRRS_M_SECA_ReportService.getM_SECAcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+					pageable, Filter, type, version);
+			break;
+			
+		case "M_OB":
+			repdetail = BRRS_M_OB_ReportService.getM_OBcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+					pageable, Filter, type, version);
+			break;
+			
+		case "M_PD":
+			repdetail = BRRS_M_PD_ReportService.getM_PDcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+					pageable, Filter, type, version);
 			break;
 
 		}
@@ -666,6 +706,43 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "Q_SMME_DEP":
+			try {
+				repfile = BRRS_Q_SMME_DEP_ReportService.BRRS_Q_SMME_DEPExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+			
+		case "M_SECA":
+			try {
+				repfile = BRRS_M_SECA_ReportService.BRRS_M_SECAExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		
+		case "M_OB":
+			try {
+				repfile = BRRS_M_OB_ReportService.BRRS_M_OBExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "M_PD":
+			try {
+				repfile = BRRS_M_PD_ReportService.BRRS_M_PDExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
 		}
 
@@ -770,6 +847,26 @@ public class RegulatoryReportServices {
 	        return brrs_m_liqgap_reportservice.M_LIQGAPDetailExcel(filename, fromdate, todate);
 	    }
 
+	    else if ("Q_SMME_DEPDetail".equals(filename)) {
+			return BRRS_Q_SMME_DEP_ReportService.BRRS_Q_SMME_DEPDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+		} 
+		
+		else if ("M_SECADetail".equals(filename)) {
+			return BRRS_M_SECA_ReportService.BRRS_M_SECADetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+		}
+		
+		else if ("M_OBDetail".equals(filename)) {
+			return BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+		}
+		
+		else if ("M_PDDetail".equals(filename)) {
+			return BRRS_M_PD_ReportService.BRRS_M_PDDetailExcel(filename, fromdate, todate, currency, dtltype,
+					type, version);
+		}
+		
 		else {
 			System.out.println("Default");
 			System.out.println("Testting");
@@ -1007,6 +1104,26 @@ public class RegulatoryReportServices {
 		else if ("M_LIQGAPDetail".equals(filename)) {
 	        fileData = brrs_m_liqgap_reportservice.M_LIQGAPDetailExcel(filename, fromdate, todate);
 	    }
+		
+		else if ("Q_SMME_DEPDetail".equals(filename)) {
+				fileData = BRRS_Q_SMME_DEP_ReportService.BRRS_Q_SMME_DEPDetailExcel(filename, fromdate, todate, currency,dtltype, type, version);
+				
+		} 
+		
+		else if ("M_SECADetail".equals(filename)) {
+				fileData = BRRS_M_SECA_ReportService.BRRS_M_SECADetailExcel(filename, fromdate, todate, currency,
+						dtltype, type, version);
+		}
+		
+		else if ("M_OBDetail".equals(filename)) {
+				fileData = BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency,
+						dtltype, type, version);
+		}
+			
+		else if ("M_PDDetail".equals(filename)) {
+				fileData = BRRS_M_PD_ReportService.BRRS_M_PDDetailExcel(filename, fromdate, todate, currency,
+						dtltype, type, version);
+		}
 	    
 
 
