@@ -1,0 +1,591 @@
+create or replace PROCEDURE BRRS_M_PLL_SUMMARY_PROCEDURE(Report_date VARCHAR2)
+IS
+    V_REPORT_DATE DATE := TO_DATE(Report_date, 'DD-MM-YYYY');
+
+V_R11_PROVI_INS_SEC            VARCHAR2(100) :=  '1.  Non-financial institutional units (sum of lines (i) to (vii)):' ; 
+V_R11_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R12_PROVI_INS_SEC            VARCHAR2(100) :=  '   (i)    Central Government' ; 
+V_R12_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R13_PROVI_INS_SEC            VARCHAR2(100) :=  '   (ii)   Local Government' ; 
+V_R13_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R14_PROVI_INS_SEC            VARCHAR2(100) :=  '   (iii)  Public Non-Financial Corporations' ; 
+V_R14_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R15_PROVI_INS_SEC            VARCHAR2(100) :=  '   (iv)  Other Non-Financial Corporations (Private business enterprises) (sum of lines (a) to (m)):' ; 
+V_R15_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R16_PROVI_INS_SEC            VARCHAR2(100) :=  '         a) Agriculture, Forestry, Fishing' ; 
+V_R16_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R17_PROVI_INS_SEC            VARCHAR2(100) :=  '         b) Mining and Quarying' ; 
+V_R17_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R18_PROVI_INS_SEC            VARCHAR2(100) :=  '         c) Manufacturing' ; 
+V_R18_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R19_PROVI_INS_SEC            VARCHAR2(100) :=  '         d) Construction' ; 
+V_R19_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R20_PROVI_INS_SEC            VARCHAR2(100) :=  '         e) Commercial real estate' ; 
+V_R20_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R21_PROVI_INS_SEC            VARCHAR2(100) :=  '         f) Electricity' ; 
+V_R21_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R22_PROVI_INS_SEC            VARCHAR2(100) :=  '         g) Water' ; 
+V_R22_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R23_PROVI_INS_SEC            VARCHAR2(100) :=  '         h) Telecommunication and Post' ; 
+V_R23_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R24_PROVI_INS_SEC            VARCHAR2(100) :=  '         i) Tourism and hotels' ; 
+V_R24_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R25_PROVI_INS_SEC            VARCHAR2(100) :=  '         j)Transport and storage' ; 
+V_R25_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R26_PROVI_INS_SEC            VARCHAR2(100) :=  '         k) Trade, restaurants and bars' ; 
+V_R26_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R27_PROVI_INS_SEC            VARCHAR2(100) :=  '         l) Business Services' ; 
+V_R27_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R28_PROVI_INS_SEC            VARCHAR2(100) :=  '        m) Other community, social and personal services' ; 
+V_R28_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R29_PROVI_INS_SEC            VARCHAR2(100) :=  '   (v)  Households (sum of lines (a) to (g)):' ; 
+V_R29_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R30_PROVI_INS_SEC            VARCHAR2(100) :=  '        a) Residential property (owner occupied) ' ; 
+V_R30_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R31_PROVI_INS_SEC            VARCHAR2(100) :=  '        b) Residential property (rented)' ; 
+V_R31_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R32_PROVI_INS_SEC            VARCHAR2(100) :=  '       c) Personal Loans' ; 
+V_R32_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R33_PROVI_INS_SEC            VARCHAR2(100) :=  '        d) Motor vehicle' ; 
+V_R33_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R34_PROVI_INS_SEC            VARCHAR2(100) :=  '        e) Household goods' ; 
+V_R34_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R35_PROVI_INS_SEC            VARCHAR2(100) :=  '        f) Credit card loans' ; 
+V_R35_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R36_PROVI_INS_SEC            VARCHAR2(100) :=  '        g) Other*' ; 
+V_R36_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R37_PROVI_INS_SEC            VARCHAR2(100) :=  '   (vi)  Non-Profit Institutions Serving Households' ; 
+V_R37_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R38_PROVI_INS_SEC            VARCHAR2(100) :=  '   (vii) Non-Residents** (sum of lines (a) and (b)):' ; 
+V_R38_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R39_PROVI_INS_SEC            VARCHAR2(100) :=  '        a) OtherNon-Financial Corporations' ; 
+V_R39_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R40_PROVI_INS_SEC            VARCHAR2(100) :=  '        b) Households' ; 
+V_R40_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R41_PROVI_INS_SEC            VARCHAR2(100) :=  '2.  Financial institutional units (sum of lines (i) to (v)):' ; 
+V_R41_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R42_PROVI_INS_SEC            VARCHAR2(100) :=  '   (i)    Central Bank' ; 
+V_R42_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R43_PROVI_INS_SEC            VARCHAR2(100) :=  '   (ii)   Commercial Banks' ; 
+V_R43_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R44_PROVI_INS_SEC            VARCHAR2(100) :=  '   (iii)  Other Depository Corporations (sum of lines (a) to (d)):' ; 
+V_R44_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R45_PROVI_INS_SEC            VARCHAR2(100) :=  '        a) Botswana Savings Bank (BSB)' ; 
+V_R45_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R46_PROVI_INS_SEC            VARCHAR2(100) :=  '        b) Botswana Building Society (BBS)' ; 
+V_R46_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R47_PROVI_INS_SEC            VARCHAR2(100) :=  '        c) Domestic Money Market Unit Trusts' ; 
+V_R47_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R48_PROVI_INS_SEC            VARCHAR2(100) :=  '        d) Other (specify)*' ; 
+V_R48_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R49_PROVI_INS_SEC            VARCHAR2(100) :=  '    (iv)  Other Financial Corporations (sum of lines (a) to (c)):' ; 
+V_R49_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R50_PROVI_INS_SEC            VARCHAR2(100) :=  '        a) Insurance Companies' ; 
+V_R50_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R51_PROVI_INS_SEC            VARCHAR2(100) :=  '        b) Pension Funds' ; 
+V_R51_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R52_PROVI_INS_SEC            VARCHAR2(100) :=  '        c) Other Financial Intermediaries (sum 1 to 5)' ; 
+V_R52_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R53_PROVI_INS_SEC            VARCHAR2(100) :=  '             1.Assets managers' ; 
+V_R53_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R54_PROVI_INS_SEC            VARCHAR2(100) :=  '             2.Finance companies' ; 
+V_R54_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R55_PROVI_INS_SEC            VARCHAR2(100) :=  '             3.Medical Aid Schemes' ; 
+V_R55_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R56_PROVI_INS_SEC            VARCHAR2(100) :=  '             4.Public sector financial intermediaries' ; 
+V_R56_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R57_PROVI_INS_SEC            VARCHAR2(100) :=  '             5.SACCOs' ; 
+V_R57_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R58_PROVI_INS_SEC            VARCHAR2(100) :=  '        d) Financial Auxiliaries (sum 1 to 4)' ; 
+V_R58_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R59_PROVI_INS_SEC            VARCHAR2(100) :=  '             1. Insurance brokers' ; 
+V_R59_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R60_PROVI_INS_SEC            VARCHAR2(100) :=  '             2. Fund administrators' ; 
+V_R60_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R61_PROVI_INS_SEC            VARCHAR2(100) :=  '             3. Bureau de change' ; 
+V_R61_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R62_PROVI_INS_SEC            VARCHAR2(100) :=  '             4. Other (specify)*' ; 
+V_R62_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R63_PROVI_INS_SEC            VARCHAR2(100) :=  '     (v)  Non-residents' ; 
+V_R63_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+V_R64_PROVI_INS_SEC            VARCHAR2(100) :=  'PROVI_LOAN_LOSS (Sum of lines 1 and 2)' ; 
+V_R64_PROVI_LOAN_LOSS            NUMBER(24,2) :=  0 ; 
+
+------------------------------------------------------------------------------------------------------------------------- 
+BEGIN
+
+    DELETE FROM BRRS_M_PLL_SUMMARYTABLE WHERE REPORT_DATE = V_REPORT_DATE;
+
+    COMMIT;
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R12
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R12_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R12' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R13
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R13_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R13' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R14
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R14_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R14' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R16
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R16_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R16' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R17
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R17_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R17' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R18
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R18_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R18' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R19
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R19_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R19' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R20
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R20_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R20' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R21
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R21_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R21' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R22
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R22_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R22' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R23
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R23_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R23' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R24
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R24_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R24' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R25
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R25_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R25' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R26
+--C2
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R26_PROVI_LOAN_LOSS
+FROM BRRS_M_PLL_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R26' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R27
+--C2
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R27_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R27' AND COLUMN_ID = 'C2';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R28
+--C2
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R28_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R28' AND COLUMN_ID = 'C2';
+------------------------------------------------------------------------------------------------------------------------- 
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R30_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R30' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R31_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R31' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R32_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R32' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R33_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R33' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R34_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R34' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R35_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R35' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R36_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R36' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R37_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R37' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R39_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R39' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R40_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R40' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R42_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R42' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R43_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R43' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R45_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R45' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R46_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R46' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R47_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R47' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R48_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R48' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R50_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R50' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R51_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R51' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R53_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R53' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R54_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R54' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R55_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R55' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R56_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R56' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R57_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R57' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R59_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R59' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R60_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R60' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R61_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R61' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R62_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R62' AND COLUMN_ID = 'C2';
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R63_PROVI_LOAN_LOSS FROM BRRS_M_PLL_DETAILTABLE WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R63' AND COLUMN_ID = 'C2';
+
+
+------------------------------------------------------------------------------------------------------------------------- 
+-------------------------------------------------------------------------------------------------------------------------
+--calculation
+--I APPROACHED THIS CALCULATION PART FROM THE END OF REPORT BCZ SOME FORMULAS ARE PART OF SOME OTHER FORMULAS
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R58 , C2
+---------------------------------------
+--R58
+--C2
+V_R58_PROVI_LOAN_LOSS := V_R59_PROVI_LOAN_LOSS + V_R60_PROVI_LOAN_LOSS + V_R61_PROVI_LOAN_LOSS + V_R62_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R52 , C2
+---------------------------------------
+--R52
+--C2
+V_R52_PROVI_LOAN_LOSS := V_R53_PROVI_LOAN_LOSS + V_R54_PROVI_LOAN_LOSS + V_R55_PROVI_LOAN_LOSS + V_R56_PROVI_LOAN_LOSS + V_R57_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R49 , C2
+---------------------------------------
+--R49
+--C2
+V_R49_PROVI_LOAN_LOSS := V_R50_PROVI_LOAN_LOSS + V_R51_PROVI_LOAN_LOSS + V_R52_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R44 , C2
+---------------------------------------
+--R44
+--C2
+V_R44_PROVI_LOAN_LOSS := V_R45_PROVI_LOAN_LOSS + V_R46_PROVI_LOAN_LOSS + V_R47_PROVI_LOAN_LOSS + V_R48_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R41 , C2
+---------------------------------------
+--R41
+--C2
+V_R41_PROVI_LOAN_LOSS := V_R42_PROVI_LOAN_LOSS + V_R43_PROVI_LOAN_LOSS + V_R44_PROVI_LOAN_LOSS + V_R49_PROVI_LOAN_LOSS + V_R63_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R38 , C2
+---------------------------------------
+--R38
+--C2
+V_R38_PROVI_LOAN_LOSS := V_R39_PROVI_LOAN_LOSS + V_R40_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R29 , C2
+---------------------------------------
+--R29
+--C2
+V_R29_PROVI_LOAN_LOSS := V_R30_PROVI_LOAN_LOSS + V_R31_PROVI_LOAN_LOSS + V_R32_PROVI_LOAN_LOSS + V_R33_PROVI_LOAN_LOSS + V_R34_PROVI_LOAN_LOSS + V_R35_PROVI_LOAN_LOSS + V_R36_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R15 , C2
+---------------------------------------
+--R15
+--C2
+V_R15_PROVI_LOAN_LOSS := V_R16_PROVI_LOAN_LOSS + V_R17_PROVI_LOAN_LOSS + V_R18_PROVI_LOAN_LOSS + V_R19_PROVI_LOAN_LOSS + V_R20_PROVI_LOAN_LOSS + V_R21_PROVI_LOAN_LOSS + V_R22_PROVI_LOAN_LOSS + V_R23_PROVI_LOAN_LOSS + V_R24_PROVI_LOAN_LOSS + V_R25_PROVI_LOAN_LOSS + V_R26_PROVI_LOAN_LOSS + V_R27_PROVI_LOAN_LOSS + V_R28_PROVI_LOAN_LOSS;
+
+-------------------------------------------------------------------------------------------------------------------------
+--FOR R11 , C2
+---------------------------------------
+--R11
+--C2
+V_R11_PROVI_LOAN_LOSS := V_R12_PROVI_LOAN_LOSS + V_R13_PROVI_LOAN_LOSS + V_R14_PROVI_LOAN_LOSS + V_R15_PROVI_LOAN_LOSS + V_R29_PROVI_LOAN_LOSS + V_R37_PROVI_LOAN_LOSS + V_R38_PROVI_LOAN_LOSS;
+
+------------------------------------------------------------------------------------LAST ROW-------------------------------------
+--FOR R64 , C2
+---------------------------------------
+--R64
+--C2
+V_R64_PROVI_LOAN_LOSS := V_R41_PROVI_LOAN_LOSS + V_R11_PROVI_LOAN_LOSS;
+------------------------------------------------------------------------------------------------------------------------- 
+
+INSERT INTO  BRRS_M_PLL_SUMMARYTABLE (
+
+
+R11_PROVI_INS_SEC,
+R11_PROVI_LOAN_LOSS,
+R12_PROVI_INS_SEC,
+R12_PROVI_LOAN_LOSS,
+R13_PROVI_INS_SEC,
+R13_PROVI_LOAN_LOSS,
+R14_PROVI_INS_SEC,
+R14_PROVI_LOAN_LOSS,
+R15_PROVI_INS_SEC,
+R15_PROVI_LOAN_LOSS,
+R16_PROVI_INS_SEC,
+R16_PROVI_LOAN_LOSS,
+R17_PROVI_INS_SEC,
+R17_PROVI_LOAN_LOSS,
+R18_PROVI_INS_SEC,
+R18_PROVI_LOAN_LOSS,
+R19_PROVI_INS_SEC,
+R19_PROVI_LOAN_LOSS,
+R20_PROVI_INS_SEC,
+R20_PROVI_LOAN_LOSS,
+R21_PROVI_INS_SEC,
+R21_PROVI_LOAN_LOSS,
+R22_PROVI_INS_SEC,
+R22_PROVI_LOAN_LOSS,
+R23_PROVI_INS_SEC,
+R23_PROVI_LOAN_LOSS,
+R24_PROVI_INS_SEC,
+R24_PROVI_LOAN_LOSS,
+R25_PROVI_INS_SEC,
+R25_PROVI_LOAN_LOSS,
+R26_PROVI_INS_SEC,
+R26_PROVI_LOAN_LOSS,
+R27_PROVI_INS_SEC,
+R27_PROVI_LOAN_LOSS,
+R28_PROVI_INS_SEC,
+R28_PROVI_LOAN_LOSS,
+R29_PROVI_INS_SEC,
+R29_PROVI_LOAN_LOSS,
+R30_PROVI_INS_SEC,
+R30_PROVI_LOAN_LOSS,
+R31_PROVI_INS_SEC,
+R31_PROVI_LOAN_LOSS,
+R32_PROVI_INS_SEC,
+R32_PROVI_LOAN_LOSS,
+R33_PROVI_INS_SEC,
+R33_PROVI_LOAN_LOSS,
+R34_PROVI_INS_SEC,
+R34_PROVI_LOAN_LOSS,
+R35_PROVI_INS_SEC,
+R35_PROVI_LOAN_LOSS,
+R36_PROVI_INS_SEC,
+R36_PROVI_LOAN_LOSS,
+R37_PROVI_INS_SEC,
+R37_PROVI_LOAN_LOSS,
+R38_PROVI_INS_SEC,
+R38_PROVI_LOAN_LOSS,
+R39_PROVI_INS_SEC,
+R39_PROVI_LOAN_LOSS,
+R40_PROVI_INS_SEC,
+R40_PROVI_LOAN_LOSS,
+R41_PROVI_INS_SEC,
+R41_PROVI_LOAN_LOSS,
+R42_PROVI_INS_SEC,
+R42_PROVI_LOAN_LOSS,
+R43_PROVI_INS_SEC,
+R43_PROVI_LOAN_LOSS,
+R44_PROVI_INS_SEC,
+R44_PROVI_LOAN_LOSS,
+R45_PROVI_INS_SEC,
+R45_PROVI_LOAN_LOSS,
+R46_PROVI_INS_SEC,
+R46_PROVI_LOAN_LOSS,
+R47_PROVI_INS_SEC,
+R47_PROVI_LOAN_LOSS,
+R48_PROVI_INS_SEC,
+R48_PROVI_LOAN_LOSS,
+R49_PROVI_INS_SEC,
+R49_PROVI_LOAN_LOSS,
+R50_PROVI_INS_SEC,
+R50_PROVI_LOAN_LOSS,
+R51_PROVI_INS_SEC,
+R51_PROVI_LOAN_LOSS,
+R52_PROVI_INS_SEC,
+R52_PROVI_LOAN_LOSS,
+R53_PROVI_INS_SEC,
+R53_PROVI_LOAN_LOSS,
+R54_PROVI_INS_SEC,
+R54_PROVI_LOAN_LOSS,
+R55_PROVI_INS_SEC,
+R55_PROVI_LOAN_LOSS,
+R56_PROVI_INS_SEC,
+R56_PROVI_LOAN_LOSS,
+R57_PROVI_INS_SEC,
+R57_PROVI_LOAN_LOSS,
+R58_PROVI_INS_SEC,
+R58_PROVI_LOAN_LOSS,
+R59_PROVI_INS_SEC,
+R59_PROVI_LOAN_LOSS,
+R60_PROVI_INS_SEC,
+R60_PROVI_LOAN_LOSS,
+R61_PROVI_INS_SEC,
+R61_PROVI_LOAN_LOSS,
+R62_PROVI_INS_SEC,
+R62_PROVI_LOAN_LOSS,
+R63_PROVI_INS_SEC,
+R63_PROVI_LOAN_LOSS,
+R64_PROVI_INS_SEC,
+R64_PROVI_LOAN_LOSS,
+
+REPORT_DATE
+)
+
+VALUES (
+
+V_R11_PROVI_INS_SEC,
+V_R11_PROVI_LOAN_LOSS,
+V_R12_PROVI_INS_SEC,
+V_R12_PROVI_LOAN_LOSS,
+V_R13_PROVI_INS_SEC,
+V_R13_PROVI_LOAN_LOSS,
+V_R14_PROVI_INS_SEC,
+V_R14_PROVI_LOAN_LOSS,
+V_R15_PROVI_INS_SEC,
+V_R15_PROVI_LOAN_LOSS,
+V_R16_PROVI_INS_SEC,
+V_R16_PROVI_LOAN_LOSS,
+V_R17_PROVI_INS_SEC,
+V_R17_PROVI_LOAN_LOSS,
+V_R18_PROVI_INS_SEC,
+V_R18_PROVI_LOAN_LOSS,
+V_R19_PROVI_INS_SEC,
+V_R19_PROVI_LOAN_LOSS,
+V_R20_PROVI_INS_SEC,
+V_R20_PROVI_LOAN_LOSS,
+V_R21_PROVI_INS_SEC,
+V_R21_PROVI_LOAN_LOSS,
+V_R22_PROVI_INS_SEC,
+V_R22_PROVI_LOAN_LOSS,
+V_R23_PROVI_INS_SEC,
+V_R23_PROVI_LOAN_LOSS,
+V_R24_PROVI_INS_SEC,
+V_R24_PROVI_LOAN_LOSS,
+V_R25_PROVI_INS_SEC,
+V_R25_PROVI_LOAN_LOSS,
+V_R26_PROVI_INS_SEC,
+V_R26_PROVI_LOAN_LOSS,
+V_R27_PROVI_INS_SEC,
+V_R27_PROVI_LOAN_LOSS,
+V_R28_PROVI_INS_SEC,
+V_R28_PROVI_LOAN_LOSS,
+V_R29_PROVI_INS_SEC,
+V_R29_PROVI_LOAN_LOSS,
+V_R30_PROVI_INS_SEC,
+V_R30_PROVI_LOAN_LOSS,
+V_R31_PROVI_INS_SEC,
+V_R31_PROVI_LOAN_LOSS,
+V_R32_PROVI_INS_SEC,
+V_R32_PROVI_LOAN_LOSS,
+V_R33_PROVI_INS_SEC,
+V_R33_PROVI_LOAN_LOSS,
+V_R34_PROVI_INS_SEC,
+V_R34_PROVI_LOAN_LOSS,
+V_R35_PROVI_INS_SEC,
+V_R35_PROVI_LOAN_LOSS,
+V_R36_PROVI_INS_SEC,
+V_R36_PROVI_LOAN_LOSS,
+V_R37_PROVI_INS_SEC,
+V_R37_PROVI_LOAN_LOSS,
+V_R38_PROVI_INS_SEC,
+V_R38_PROVI_LOAN_LOSS,
+V_R39_PROVI_INS_SEC,
+V_R39_PROVI_LOAN_LOSS,
+V_R40_PROVI_INS_SEC,
+V_R40_PROVI_LOAN_LOSS,
+V_R41_PROVI_INS_SEC,
+V_R41_PROVI_LOAN_LOSS,
+V_R42_PROVI_INS_SEC,
+V_R42_PROVI_LOAN_LOSS,
+V_R43_PROVI_INS_SEC,
+V_R43_PROVI_LOAN_LOSS,
+V_R44_PROVI_INS_SEC,
+V_R44_PROVI_LOAN_LOSS,
+V_R45_PROVI_INS_SEC,
+V_R45_PROVI_LOAN_LOSS,
+V_R46_PROVI_INS_SEC,
+V_R46_PROVI_LOAN_LOSS,
+V_R47_PROVI_INS_SEC,
+V_R47_PROVI_LOAN_LOSS,
+V_R48_PROVI_INS_SEC,
+V_R48_PROVI_LOAN_LOSS,
+V_R49_PROVI_INS_SEC,
+V_R49_PROVI_LOAN_LOSS,
+V_R50_PROVI_INS_SEC,
+V_R50_PROVI_LOAN_LOSS,
+V_R51_PROVI_INS_SEC,
+V_R51_PROVI_LOAN_LOSS,
+V_R52_PROVI_INS_SEC,
+V_R52_PROVI_LOAN_LOSS,
+V_R53_PROVI_INS_SEC,
+V_R53_PROVI_LOAN_LOSS,
+V_R54_PROVI_INS_SEC,
+V_R54_PROVI_LOAN_LOSS,
+V_R55_PROVI_INS_SEC,
+V_R55_PROVI_LOAN_LOSS,
+V_R56_PROVI_INS_SEC,
+V_R56_PROVI_LOAN_LOSS,
+V_R57_PROVI_INS_SEC,
+V_R57_PROVI_LOAN_LOSS,
+V_R58_PROVI_INS_SEC,
+V_R58_PROVI_LOAN_LOSS,
+V_R59_PROVI_INS_SEC,
+V_R59_PROVI_LOAN_LOSS,
+V_R60_PROVI_INS_SEC,
+V_R60_PROVI_LOAN_LOSS,
+V_R61_PROVI_INS_SEC,
+V_R61_PROVI_LOAN_LOSS,
+V_R62_PROVI_INS_SEC,
+V_R62_PROVI_LOAN_LOSS,
+V_R63_PROVI_INS_SEC,
+V_R63_PROVI_LOAN_LOSS,
+V_R64_PROVI_INS_SEC,
+V_R64_PROVI_LOAN_LOSS,
+
+V_REPORT_DATE
+);
+
+COMMIT;
+END;

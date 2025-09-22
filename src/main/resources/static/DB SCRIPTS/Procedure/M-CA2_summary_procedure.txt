@@ -1,0 +1,549 @@
+create or replace PROCEDURE BRRS_M_CA2_SUMMARY_PROCEDURE(Report_date VARCHAR2)
+IS
+    V_REPORT_DATE DATE := TO_DATE(Report_date, 'DD-MM-YYYY');
+
+V_R10_PRODUCT            VARCHAR2(500) :=  'Common shares' ; 
+V_R10_AMOUNT_1            NUMBER(24,2); 
+V_R10_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R11_PRODUCT            VARCHAR2(500) :=  'Share premium resulting from the issue of common  share' ; 
+V_R11_AMOUNT_1            NUMBER(24,2); 
+V_R11_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R12_PRODUCT            VARCHAR2(500) :=  'Retained earnings' ; 
+V_R12_AMOUNT_1            NUMBER(24,2); 
+V_R12_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R13_PRODUCT            VARCHAR2(500) :=  'Retained earnings brought forward from the previous financial year' ; 
+V_R13_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R13_AMOUNT_2            NUMBER(24,2); 
+V_R14_PRODUCT            VARCHAR2(500) :=  'Add: Interim profits (audited by external auditor)' ; 
+V_R14_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R14_AMOUNT_2            NUMBER(24,2); 
+V_R15_PRODUCT            VARCHAR2(500) :=  'Less: dividend declared' ; 
+V_R15_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R15_AMOUNT_2            NUMBER(24,2); 
+V_R16_PRODUCT            VARCHAR2(500) :=  'Less: Dividend paid in the current financial year' ; 
+V_R16_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R16_AMOUNT_2            NUMBER(24,2); 
+V_R17_PRODUCT            VARCHAR2(500) :=  'Accumulated other Comprehensive income and other disclosed reserves' ; 
+V_R17_AMOUNT_1            NUMBER(24,2); 
+V_R17_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R18_PRODUCT            VARCHAR2(500) :=  'a. Statutory Credit Risk Reserve' ; 
+V_R18_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R18_AMOUNT_2            NUMBER(24,2); 
+V_R19_PRODUCT            VARCHAR2(500) :=  'b. Capital Buffer' ; 
+V_R19_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R19_AMOUNT_2            NUMBER(24,2); 
+V_R20_PRODUCT            VARCHAR2(500) :=  'c. Statutory Reserves' ; 
+V_R20_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R20_AMOUNT_2            NUMBER(24,2); 
+V_R21_PRODUCT            VARCHAR2(500) :=  'd. Other (specify)' ; 
+V_R21_AMOUNT_1            NUMBER(24,2) :=  0 ; 
+V_R21_AMOUNT_2            NUMBER(24,2); 
+V_R22_PRODUCT            VARCHAR2(500) :=  'Common shares issued by consolidated subsidiaries of the bank and held by third parties (Minority interst)' ; 
+V_R22_AMOUNT_1            NUMBER(24,2); 
+V_R22_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R23_PRODUCT            VARCHAR2(500) :=  'Regulatory adjustments applied in the calculation of CET1 Capital' ; 
+V_R23_AMOUNT_1            NUMBER(24,2); 
+V_R23_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R24_PRODUCT            VARCHAR2(500) :=  'IFRS 9 Provisions Transitional  Adjustments ' ; 
+V_R24_AMOUNT_1            NUMBER(24,2); 
+V_R24_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R25_PRODUCT            VARCHAR2(500) :=  'Transitional Adjustment Amount Added Back to CET1' ; 
+V_R25_AMOUNT_1            NUMBER(24,2); 
+V_R25_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R26_PRODUCT            VARCHAR2(500) :=  'CET1 Capital                                                          Lines (1+2+3+4+5-6)'; 
+V_R26_AMOUNT_1            NUMBER(24,2); 
+V_R26_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R31_PRODUCT            VARCHAR2(500) :=  'Instruments issued by the bank that meet the criteria for inclusion in Additional Tier 1 Capital as per paragraph 4.9 of the Capital Directive ' ; 
+V_R31_AMOUNT_1            NUMBER(24,2); 
+V_R31_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R32_PRODUCT            VARCHAR2(500) :=  'Stock surplus (Share premium) resulting from the issue of Additional Tier 1 capital instruments meeting all relevant criteria for inclusion' ; 
+V_R32_AMOUNT_1            NUMBER(24,2); 
+V_R32_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R33_PRODUCT            VARCHAR2(500) :=  'Instruments issued by consolidated subsidiaries of the bank and held by third parties that meet the criteria for inclusion in Additional Tier 1 capital and are not included in CET1subject to terms and conditions in 3.5' ; 
+V_R33_AMOUNT_1            NUMBER(24,2); 
+V_R33_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R34_PRODUCT            VARCHAR2(500) :=  'Regulatory adjustments applied in the calculation of Additional Tier 1 Capital' ; 
+V_R34_AMOUNT_1            NUMBER(24,2); 
+V_R34_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R35_PRODUCT            VARCHAR2(500) :=  'Additional Tier 1 Capital                                           Lines (9+10+11-12)            ' ; 
+V_R35_AMOUNT_1            NUMBER(24,2); 
+V_R35_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R36_PRODUCT            VARCHAR2(500) :=  'Total Tier 1 Capital                             Lines (7+13)' ; 
+V_R36_AMOUNT_1            NUMBER(24,2); 
+V_R36_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R41_PRODUCT            VARCHAR2(500) :=  'Instruments issued by the bank that meet the criteria for inclusion in Tier 2 capital (and are not included in Tier 1 capital);' ; 
+V_R41_AMOUNT_1            NUMBER(24,2); 
+V_R41_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R42_PRODUCT VARCHAR2(500) := 'Stock surplus (share premium) resulting from the issue of instruments included in Tier 2 capital.';
+V_R42_AMOUNT_1            NUMBER(24,2); 
+V_R42_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R43_PRODUCT            VARCHAR2(500) :=  'Unpublished Current Year''s Profits' ; 
+V_R43_AMOUNT_1            NUMBER(24,2); 
+V_R43_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R44_PRODUCT            VARCHAR2(500) :=  'Tier 2 capital instruments (subject to gradual phase-out treatment)' ; 
+V_R44_AMOUNT_1            NUMBER(24,2); 
+V_R44_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R45_PRODUCT            VARCHAR2(500) :=  'Instruments issued by consolidated subsidiaries of the bank and held by third parties that meet the criteria for inclusion in Tier 2 capital and are not included in Tier 1 capital (minority interests)' ; 
+V_R45_AMOUNT_1            NUMBER(24,2); 
+V_R45_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R46_PRODUCT            VARCHAR2(500) :=  'General provisions/general loan-loss reserves eligible for inclusion in Tier 2, limited to amaximum of 1.25 percentage points of credit risk-weighted risk assets calculated under the standardised approach' ; 
+V_R46_AMOUNT_1            NUMBER(24,2); 
+V_R46_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R47_PRODUCT            VARCHAR2(500) :=  'Regulatory adjustments applied in the calculation of Tier 2 Capital' ; 
+V_R47_AMOUNT_1            NUMBER(24,2); 
+V_R47_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R48_PRODUCT            VARCHAR2(500) :=  'Total Tier 2 Capital      Lines (16+17+18+19+20+21-22)' ; 
+V_R48_AMOUNT_1            NUMBER(24,2); 
+V_R48_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+V_R49_PRODUCT            VARCHAR2(500) :=  'Total Unimpaired Capital        Lines (14+23)' ; 
+V_R49_AMOUNT_1            NUMBER(24,2); 
+V_R49_AMOUNT_2            NUMBER(24,2) :=  0 ; 
+
+------------------------------------------------------------------------------------------------------------------------- 
+BEGIN
+
+    DELETE FROM BRRS_M_CA2_SUMMARYTABLE WHERE REPORT_DATE = V_REPORT_DATE;
+
+    COMMIT;
+
+------------------------------------------------------------------------------------------------------------------------- 
+
+--R10
+--C3
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R10_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R10' AND COLUMN_ID = 'C3';
+
+------------------------------------------------------------------------------------------------------------------------- 
+
+--R11
+--C3
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R11_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R11' AND COLUMN_ID = 'C3';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R13
+--C2
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R13_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R13' AND COLUMN_ID = 'C2';
+
+
+-------------------------------------------------------------------------------------------------------------------------
+--R14
+--C2
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R14_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R14' AND COLUMN_ID = 'C2';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R15
+--C2
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R15_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R15' AND COLUMN_ID = 'C2';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R16
+--C2	
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R16_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R16' AND COLUMN_ID = 'C2';
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--R18	
+--C2	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E18
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R18_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R18' AND COLUMN_ID = 'C2';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R19	
+--C2	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-AIDP (Domestic Interbank)'!H51
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R19_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R19' AND COLUMN_ID = 'C2';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R20
+--C2
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R20_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R20' AND COLUMN_ID = 'C2';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R21
+--C2
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R21_AMOUNT_1
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R21' AND COLUMN_ID = 'C2';
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--R22
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA4 (Minority Int.)'!H54
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R22_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R22' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--R23
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA3(Reg.Adjust.)'!C29
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R23_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R23' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--R24
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA7 (Transitional Adj. Amt)'!D12
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R24_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R24' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R25
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA7 (Transitional Adj. Amt)'!D12
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R25_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R25' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--R31
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA5 (Qual.Capital)'!J28
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R31_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R31' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--R32
+--C3
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R32_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R32' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R33
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA4 (Minority Int.)'!H57
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R33_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R33' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R34
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA3 (Reg.Adjust.)'!C46
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R34_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R34' AND COLUMN_ID = 'C3';
+
+
+-------------------------------------------------------------------------------------------------------------------------
+--R41
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA5 (Qual.Capital)'!L150
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R41_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R41' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R42
+--C3
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R42_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R42' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R43
+--C3
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R43_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R43' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R44
+--C3
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R44_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R44' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R45
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA4 (Minority Int.)'!H58
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R45_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R45' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R46
+--C3
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R46_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R46' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R47
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-CA3 (Reg.Adjust.)'!C60
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R47_AMOUNT_2
+FROM BRRS_M_CA2_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R47' AND COLUMN_ID = 'C3';
+
+-------------------------------------------------------------------------------------------------------------------------
+--calculations
+--R12
+V_R12_AMOUNT_2 := V_R13_AMOUNT_1 + V_R14_AMOUNT_1 - V_R15_AMOUNT_1 - V_R16_AMOUNT_1 ; 
+
+--R17
+V_R17_AMOUNT_2 := V_R18_AMOUNT_1 + V_R19_AMOUNT_1 + V_R20_AMOUNT_1 + V_R21_AMOUNT_1;
+
+--R26
+V_R26_AMOUNT_2 := V_R10_AMOUNT_2 + V_R11_AMOUNT_2 + V_R12_AMOUNT_2 + V_R17_AMOUNT_2 + V_R22_AMOUNT_2 - V_R23_AMOUNT_2 - V_R24_AMOUNT_2 + V_R25_AMOUNT_2;
+
+--R35
+V_R35_AMOUNT_2 := V_R31_AMOUNT_2 + V_R32_AMOUNT_2 + V_R33_AMOUNT_2 - V_R34_AMOUNT_2;
+
+--R36
+V_R36_AMOUNT_2 := V_R26_AMOUNT_2 + V_R35_AMOUNT_2;
+
+--R48
+V_R48_AMOUNT_2 := V_R41_AMOUNT_2 + V_R42_AMOUNT_2 + V_R43_AMOUNT_2 + V_R44_AMOUNT_2 + V_R45_AMOUNT_2 + V_R46_AMOUNT_2 - V_R47_AMOUNT_2;
+
+--R49
+V_R49_AMOUNT_2 := V_R36_AMOUNT_2 + V_R48_AMOUNT_2;
+-------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO  BRRS_M_CA2_SUMMARYTABLE (
+
+
+R10_PRODUCT,
+R10_AMOUNT_1,
+R10_AMOUNT_2,
+R11_PRODUCT,
+R11_AMOUNT_1,
+R11_AMOUNT_2,
+R12_PRODUCT,
+R12_AMOUNT_1,
+R12_AMOUNT_2,
+R13_PRODUCT,
+R13_AMOUNT_1,
+R13_AMOUNT_2,
+R14_PRODUCT,
+R14_AMOUNT_1,
+R14_AMOUNT_2,
+R15_PRODUCT,
+R15_AMOUNT_1,
+R15_AMOUNT_2,
+R16_PRODUCT,
+R16_AMOUNT_1,
+R16_AMOUNT_2,
+R17_PRODUCT,
+R17_AMOUNT_1,
+R17_AMOUNT_2,
+R18_PRODUCT,
+R18_AMOUNT_1,
+R18_AMOUNT_2,
+R19_PRODUCT,
+R19_AMOUNT_1,
+R19_AMOUNT_2,
+R20_PRODUCT,
+R20_AMOUNT_1,
+R20_AMOUNT_2,
+R21_PRODUCT,
+R21_AMOUNT_1,
+R21_AMOUNT_2,
+R22_PRODUCT,
+R22_AMOUNT_1,
+R22_AMOUNT_2,
+R23_PRODUCT,
+R23_AMOUNT_1,
+R23_AMOUNT_2,
+R24_PRODUCT,
+R24_AMOUNT_1,
+R24_AMOUNT_2,
+R25_PRODUCT,
+R25_AMOUNT_1,
+R25_AMOUNT_2,
+R26_PRODUCT,
+R26_AMOUNT_1,
+R26_AMOUNT_2,
+R31_PRODUCT,
+R31_AMOUNT_1,
+R31_AMOUNT_2,
+R32_PRODUCT,
+R32_AMOUNT_1,
+R32_AMOUNT_2,
+R33_PRODUCT,
+R33_AMOUNT_1,
+R33_AMOUNT_2,
+R34_PRODUCT,
+R34_AMOUNT_1,
+R34_AMOUNT_2,
+R35_PRODUCT,
+R35_AMOUNT_1,
+R35_AMOUNT_2,
+R36_PRODUCT,
+R36_AMOUNT_1,
+R36_AMOUNT_2,
+R41_PRODUCT,
+R41_AMOUNT_1,
+R41_AMOUNT_2,
+R42_PRODUCT,
+R42_AMOUNT_1,
+R42_AMOUNT_2,
+R43_PRODUCT,
+R43_AMOUNT_1,
+R43_AMOUNT_2,
+R44_PRODUCT,
+R44_AMOUNT_1,
+R44_AMOUNT_2,
+R45_PRODUCT,
+R45_AMOUNT_1,
+R45_AMOUNT_2,
+R46_PRODUCT,
+R46_AMOUNT_1,
+R46_AMOUNT_2,
+R47_PRODUCT,
+R47_AMOUNT_1,
+R47_AMOUNT_2,
+R48_PRODUCT,
+R48_AMOUNT_1,
+R48_AMOUNT_2,
+R49_PRODUCT,
+R49_AMOUNT_1,
+R49_AMOUNT_2,
+
+REPORT_DATE
+)
+
+VALUES (
+
+V_R10_PRODUCT,
+V_R10_AMOUNT_1,
+V_R10_AMOUNT_2,
+V_R11_PRODUCT,
+V_R11_AMOUNT_1,
+V_R11_AMOUNT_2,
+V_R12_PRODUCT,
+V_R12_AMOUNT_1,
+V_R12_AMOUNT_2,
+V_R13_PRODUCT,
+V_R13_AMOUNT_1,
+V_R13_AMOUNT_2,
+V_R14_PRODUCT,
+V_R14_AMOUNT_1,
+V_R14_AMOUNT_2,
+V_R15_PRODUCT,
+V_R15_AMOUNT_1,
+V_R15_AMOUNT_2,
+V_R16_PRODUCT,
+V_R16_AMOUNT_1,
+V_R16_AMOUNT_2,
+V_R17_PRODUCT,
+V_R17_AMOUNT_1,
+V_R17_AMOUNT_2,
+V_R18_PRODUCT,
+V_R18_AMOUNT_1,
+V_R18_AMOUNT_2,
+V_R19_PRODUCT,
+V_R19_AMOUNT_1,
+V_R19_AMOUNT_2,
+V_R20_PRODUCT,
+V_R20_AMOUNT_1,
+V_R20_AMOUNT_2,
+V_R21_PRODUCT,
+V_R21_AMOUNT_1,
+V_R21_AMOUNT_2,
+V_R22_PRODUCT,
+V_R22_AMOUNT_1,
+V_R22_AMOUNT_2,
+V_R23_PRODUCT,
+V_R23_AMOUNT_1,
+V_R23_AMOUNT_2,
+V_R24_PRODUCT,
+V_R24_AMOUNT_1,
+V_R24_AMOUNT_2,
+V_R25_PRODUCT,
+V_R25_AMOUNT_1,
+V_R25_AMOUNT_2,
+V_R26_PRODUCT,
+V_R26_AMOUNT_1,
+V_R26_AMOUNT_2,
+V_R31_PRODUCT,
+V_R31_AMOUNT_1,
+V_R31_AMOUNT_2,
+V_R32_PRODUCT,
+V_R32_AMOUNT_1,
+V_R32_AMOUNT_2,
+V_R33_PRODUCT,
+V_R33_AMOUNT_1,
+V_R33_AMOUNT_2,
+V_R34_PRODUCT,
+V_R34_AMOUNT_1,
+V_R34_AMOUNT_2,
+V_R35_PRODUCT,
+V_R35_AMOUNT_1,
+V_R35_AMOUNT_2,
+V_R36_PRODUCT,
+V_R36_AMOUNT_1,
+V_R36_AMOUNT_2,
+V_R41_PRODUCT,
+V_R41_AMOUNT_1,
+V_R41_AMOUNT_2,
+V_R42_PRODUCT,
+V_R42_AMOUNT_1,
+V_R42_AMOUNT_2,
+V_R43_PRODUCT,
+V_R43_AMOUNT_1,
+V_R43_AMOUNT_2,
+V_R44_PRODUCT,
+V_R44_AMOUNT_1,
+V_R44_AMOUNT_2,
+V_R45_PRODUCT,
+V_R45_AMOUNT_1,
+V_R45_AMOUNT_2,
+V_R46_PRODUCT,
+V_R46_AMOUNT_1,
+V_R46_AMOUNT_2,
+V_R47_PRODUCT,
+V_R47_AMOUNT_1,
+V_R47_AMOUNT_2,
+V_R48_PRODUCT,
+V_R48_AMOUNT_1,
+V_R48_AMOUNT_2,
+V_R49_PRODUCT,
+V_R49_AMOUNT_1,
+V_R49_AMOUNT_2,
+V_REPORT_DATE
+);
+
+COMMIT;
+END;

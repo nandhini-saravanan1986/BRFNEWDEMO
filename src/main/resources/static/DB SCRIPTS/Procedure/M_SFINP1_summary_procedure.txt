@@ -1,0 +1,1368 @@
+create or replace PROCEDURE BRRS_M_SFINP1_SUMMARY_PROCEDURE(Report_date VARCHAR2)
+IS
+    V_REPORT_DATE DATE := TO_DATE(Report_date, 'DD-MM-YYYY');
+
+V_R10_PRODUCT            VARCHAR2(100) :=  '1.   Pula notes 1' ; 
+V_R10_CROSS_REF            VARCHAR2(100) :=  'M-LIQ' ; 
+V_R10_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R10_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R11_PRODUCT            VARCHAR2(100) :=  '2.   Foreign notes and coin' ; 
+V_R11_CROSS_REF            VARCHAR2(100) :=  'M-LIQ' ; 
+V_R11_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R11_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R12_PRODUCT            VARCHAR2(100) :=  '3.   Balances due from Bank of Botswana (sum of lines 3 (a) and (c)):' ; 
+V_R12_CROSS_REF            VARCHAR2(100) :=  '' ; 
+V_R12_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R12_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R13_PRODUCT            VARCHAR2(100) :=  '       (a) Current account (Current Account)' ; 
+V_R13_CROSS_REF            VARCHAR2(100) :=  'M-LIQ' ; 
+V_R13_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R13_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R14_PRODUCT            VARCHAR2(100) :=  '       (b) Reserve requirement account' ; 
+V_R14_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R14_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R14_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R15_PRODUCT            VARCHAR2(100) :=  '       (c) Repurchase agreement ' ; 
+V_R15_CROSS_REF            VARCHAR2(100) :=  'M-LIQ' ; 
+V_R15_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R15_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R16_PRODUCT            VARCHAR2(100) :=  '       (d) Standing deposit facility ' ; 
+V_R16_CROSS_REF            VARCHAR2(100) :=  'M-LIQ' ; 
+V_R16_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R16_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R17_PRODUCT            VARCHAR2(100) :=  '4.   Bank of Botswana Certificates' ; 
+V_R17_CROSS_REF            VARCHAR2(100) :=  'M-IS' ; 
+V_R17_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R17_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R18_PRODUCT            VARCHAR2(100) :=  '5.   Balances due from domestic banks - on demand or less than 184 days' ; 
+V_R18_CROSS_REF            VARCHAR2(100) :=  'M-LIQ' ; 
+V_R18_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R18_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R19_PRODUCT            VARCHAR2(100) :=  '6.   Balances due from domestic banks - more than 184 days.' ; 
+V_R19_CROSS_REF            VARCHAR2(100) :=  'M-AIDP' ; 
+V_R19_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R19_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R20_PRODUCT            VARCHAR2(100) :=  '7.   Balances due from foreign banks (sum of lines 7 (a) and (b)):' ; 
+V_R20_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R20_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R20_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R21_PRODUCT            VARCHAR2(100) :=  '(a) Affiliated' ; 
+V_R21_CROSS_REF            VARCHAR2(100) :=  'M-NOSVOS' ; 
+V_R21_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R21_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R22_PRODUCT            VARCHAR2(100) :=  '(i)  Demand' ; 
+V_R22_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R22_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R22_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R23_PRODUCT            VARCHAR2(100) :=  '(ii) Time' ; 
+V_R23_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R23_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R23_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R24_PRODUCT            VARCHAR2(100) :=  '(b) Non-affiliated' ; 
+V_R24_CROSS_REF            VARCHAR2(100) :=  'M-NOSVOS' ; 
+V_R24_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R24_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R25_PRODUCT            VARCHAR2(100) :=  '(i)  Demand' ; 
+V_R25_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R25_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R25_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R26_PRODUCT            VARCHAR2(100) :=  '(ii) Time' ; 
+V_R26_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R26_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R26_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R27_PRODUCT            VARCHAR2(100) :=  '8.   Central governemt securities  (sum of lines 8 (a) and (c)' ; 
+V_R27_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R27_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R27_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R28_PRODUCT            VARCHAR2(100) :=  '      (a) Treasury bills' ; 
+V_R28_CROSS_REF            VARCHAR2(100) :=  'M-IS' ; 
+V_R28_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R28_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R29_PRODUCT            VARCHAR2(100) :=  '      (b) Bonds' ; 
+V_R29_CROSS_REF            VARCHAR2(100) :=  'M-IS' ; 
+V_R29_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R29_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R30_PRODUCT            VARCHAR2(100) :=  '      (c) Other government obligations' ; 
+V_R30_CROSS_REF            VARCHAR2(100) :=  'M-LIQ' ; 
+V_R30_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R30_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R31_PRODUCT            VARCHAR2(100) :=  '9.   Other securities (sum of lines 9 (a) and (b)' ; 
+V_R31_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R31_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R31_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R32_PRODUCT            VARCHAR2(100) :=  '     (a) Shares and other equities' ; 
+V_R32_CROSS_REF            VARCHAR2(100) :=  'M-IS' ; 
+V_R32_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R32_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R33_PRODUCT            VARCHAR2(100) :=  '     (b) Debt securities' ; 
+V_R33_CROSS_REF            VARCHAR2(100) :=  'M-IS' ; 
+V_R33_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R33_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R34_PRODUCT            VARCHAR2(100) :=  '10.  Balances due from related parties' ; 
+V_R34_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R34_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R34_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R35_PRODUCT            VARCHAR2(100) :=  '11.  Derivative instruments (sum of 11 (a) and (b)):' ; 
+V_R35_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R35_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R35_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R36_PRODUCT            VARCHAR2(100) :=  '(a) Qualifying for hedge accounting' ; 
+V_R36_CROSS_REF            VARCHAR2(100) :=  'M-TBS' ; 
+V_R36_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R36_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R37_PRODUCT            VARCHAR2(100) :=  '(b) Held for trading' ; 
+V_R37_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R37_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R37_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R38_PRODUCT            VARCHAR2(100) :=  '12.  Net loans and advances (13 minus 14)' ; 
+V_R38_CROSS_REF            VARCHAR2(100) :=  '' ; 
+V_R38_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R38_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R39_PRODUCT            VARCHAR2(100) :=  '13.  Gross Loans and Advances' ; 
+V_R39_CROSS_REF            VARCHAR2(100) :=  'M-LA1' ; 
+V_R39_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R39_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R40_PRODUCT            VARCHAR2(100) :=  '14.  Less impairments (sum of lines 14 (a) and (c)): ' ; 
+V_R40_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R40_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R40_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R41_PRODUCT            VARCHAR2(100) :=  '(a) impairments on loans and advances - Specific ' ; 
+V_R41_CROSS_REF            VARCHAR2(100) :=  ' M-SP' ; 
+V_R41_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R41_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R42_PRODUCT            VARCHAR2(100) :=  '(b) impairments on loans and advances - Portfolio' ; 
+V_R42_CROSS_REF            VARCHAR2(100) :=  ' M-GP' ; 
+V_R42_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R42_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R43_PRODUCT            VARCHAR2(100) :=  '(c) interest in suspense' ; 
+V_R43_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R43_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R43_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R44_PRODUCT            VARCHAR2(100) :=  '15.  Repurchase Agreements (sum of lines 15 (a) to (d))' ; 
+V_R44_CROSS_REF            VARCHAR2(100) :=  'M-SECA' ; 
+V_R44_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R44_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R45_PRODUCT            VARCHAR2(100) :=  '(a) Other depository corporations' ; 
+V_R45_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R45_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R45_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R46_PRODUCT            VARCHAR2(100) :=  '(b) Other financial corporations' ; 
+V_R46_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R46_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R46_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R47_PRODUCT            VARCHAR2(100) :=  '(c ) Other domestic ' ; 
+V_R47_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R47_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R47_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R48_PRODUCT            VARCHAR2(100) :=  '(d) Nonresident' ; 
+V_R48_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R48_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R48_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R49_PRODUCT            VARCHAR2(100) :=  '16.  Accounts receivable (sum of lines 16 (a) to (c)):' ; 
+V_R49_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R49_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R49_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R50_PRODUCT            VARCHAR2(100) :=  '(a) Cash items in process of collection' ; 
+V_R50_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R50_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R50_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R51_PRODUCT            VARCHAR2(100) :=  '(b) Intra-bank balances - gross ' ; 
+V_R51_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R51_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R51_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R52_PRODUCT            VARCHAR2(100) :=  '(c) Other accounts/bills receivable  ' ; 
+V_R52_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R52_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R52_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R53_PRODUCT            VARCHAR2(100) :=  '17.  Fixed assets' ; 
+V_R53_CROSS_REF            VARCHAR2(100) :=  'M-FAS' ; 
+V_R53_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R53_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R54_PRODUCT            VARCHAR2(100) :=  '18.  Armortised intangibles' ; 
+V_R54_CROSS_REF            VARCHAR2(100) :=  'M-FAS' ; 
+V_R54_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R54_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R55_PRODUCT            VARCHAR2(100) :=  '19.  Investments in associate companies' ; 
+V_R55_CROSS_REF            VARCHAR2(100) :=  'M-Uncsos Invest' ; 
+V_R55_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R55_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R56_PRODUCT            VARCHAR2(100) :=  '20.  Other assets (sum of lines 23 (a) to (d)):' ; 
+V_R56_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R56_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R56_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R57_PRODUCT            VARCHAR2(100) :=  '(a) Interest Receivables ' ; 
+V_R57_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R57_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R57_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R58_PRODUCT            VARCHAR2(100) :=  '(b)  Deffered Tax Assets' ; 
+V_R58_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R58_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R58_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R59_PRODUCT            VARCHAR2(100) :=  '(c)  Self Assessment Tax' ; 
+V_R59_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R59_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R59_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R60_PRODUCT            VARCHAR2(100) :=  '(d)  Others ' ; 
+V_R60_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R60_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R60_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+V_R61_PRODUCT            VARCHAR2(100) :=  '21. TOTAL ASSETS' ; 
+V_R61_CROSS_REF            VARCHAR2(100) :=  ' ' ; 
+V_R61_MONTH_END            NUMBER(24,2) :=  0 ; 
+V_R61_AVERAGE            NUMBER(24,2) :=  0 ; 
+
+------------------------------------------------------------------------------------------------------------------------- 
+BEGIN
+
+    DELETE FROM BRRS_M_SFINP1_SUMMARYTABLE WHERE REPORT_DATE = V_REPORT_DATE;
+
+    COMMIT;
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R10
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E12
+--select R12_TOTAL INTO V_R10_MONTH_END FROM BRRS_M_LIQ_SUMMARYTABLE WHERE
+--REPORT_DATE = V_REPORT_DATE;
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R10_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R10' AND COLUMN_ID = 'C3';
+
+--R10
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R10_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R10' AND COLUMN_ID = 'C4';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R11
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E13
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R11_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R11' AND COLUMN_ID = 'C3';
+
+--R11
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R11_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R11' AND COLUMN_ID = 'C4';
+
+------------------------------------------------------------------------------------------------------------------------- 
+--R13
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E15
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R13_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R13' AND COLUMN_ID = 'C3';
+
+--R13
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R13_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R13' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R14
+--C3
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R14_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R14' AND COLUMN_ID = 'C3';
+
+--R14
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R14_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R14' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R15
+--C3
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E16
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R15_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R15' AND COLUMN_ID = 'C3';
+
+--R15
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R15_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R15' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R16
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E17
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R16_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R16' AND COLUMN_ID = 'C3';
+
+--R16
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R16_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R16' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R17
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-IS'!I23+'E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-IS'!I24
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R17_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R17' AND COLUMN_ID = 'C3';
+
+--R17
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R17_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R17' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R18	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E18
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R18_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R18' AND COLUMN_ID = 'C3';
+
+--R18
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R18_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R18' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R19	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-AIDP (Domestic Interbank)'!H51
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R19_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R19' AND COLUMN_ID = 'C3';
+
+--R19
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R19_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R19' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R22	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-NOSVOS'!H220
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R22_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R22' AND COLUMN_ID = 'C3';
+
+--R22
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R22_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R22' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R23	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-NOSVOS'!I220
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R23_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R23' AND COLUMN_ID = 'C3';
+
+--R23
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R23_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R23' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R25	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-NOSVOS'!H112
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R25_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R25' AND COLUMN_ID = 'C3';
+
+--R25
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R25_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R25' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R26	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-NOSVOS'!I112
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R26_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R26' AND COLUMN_ID = 'C3';
+
+--R26
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R26_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R26' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R28	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-IS'!I21
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R28_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R28' AND COLUMN_ID = 'C3';
+
+--R28
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R28_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R28' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R29	
+--C3	
+--=SUM('E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-IS'!I25:I29)
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R29_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R29' AND COLUMN_ID = 'C3';
+
+--R29
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R29_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R29' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R30	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LIQ '!E22
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R30_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R30' AND COLUMN_ID = 'C3';
+
+--R30
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R30_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R30' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R32	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-IS'!I22
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R32_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R32' AND COLUMN_ID = 'C3';
+
+--R32
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R32_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R32' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R33	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-IS'!I30+'E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-IS'!I31
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R33_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R33' AND COLUMN_ID = 'C3';
+
+--R33
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R33_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R33' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R34	
+--C3	
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R34_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R34' AND COLUMN_ID = 'C3';
+
+--R34
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R34_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R34' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R36	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-TBS  (Trading Book Stmt)'!G55
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R36_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R36' AND COLUMN_ID = 'C3';
+
+--R36
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R36_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R36' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R37	
+--C3	
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R37_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R37' AND COLUMN_ID = 'C3';
+
+--R37
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R37_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R37' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R39	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-LA1 (Total Loans & Adv.)'!C64
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R39_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R39' AND COLUMN_ID = 'C3';
+
+--R39
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R39_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R39' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R41	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-SP (Specific Provisions)'!D62
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R41_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R41' AND COLUMN_ID = 'C3';
+
+--R41
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R41_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R41' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R42	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-GP (General Provisions)'!D64
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R42_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R42' AND COLUMN_ID = 'C3';
+
+--R42
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R42_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R42' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R43	
+--C3	
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R43_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R43' AND COLUMN_ID = 'C3';
+
+--R43
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R43_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R43' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R45	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-SECA (Securities - Assets)'!F38
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R45_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R45' AND COLUMN_ID = 'C3';
+
+--R45
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R45_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R45' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R46	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-SECA (Securities - Assets)'!F43
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R46_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R46' AND COLUMN_ID = 'C3';
+
+--R46
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R46_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R46' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R47	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-SECA (Securities - Assets)'!F37
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R47_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R47' AND COLUMN_ID = 'C3';
+
+--R47
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R47_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R47' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R48	
+--C3	
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-SECA (Securities - Assets)'!F57
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R48_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R48' AND COLUMN_ID = 'C3';
+
+--R48
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R48_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R48' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R50	
+--C3		
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R50_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R50' AND COLUMN_ID = 'C3';
+
+--R50
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R50_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R50' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R51	
+--C3		
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R51_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R51' AND COLUMN_ID = 'C3';
+
+--R51
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R51_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R51' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R52	
+--C3		
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R52_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R52' AND COLUMN_ID = 'C3';
+
+--R52
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R52_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R52' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R53	
+--C3		
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-FAS (Fixed Assets)'!F17
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R53_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R53' AND COLUMN_ID = 'C3';
+
+--R53
+--C4
+--default value
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R53_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R53' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R54	
+--C3		
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-FAS (Fixed Assets)'!G28
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R54_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R54' AND COLUMN_ID = 'C3';
+
+--R54
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R54_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R54' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R55	
+--C3		
+--='E:\Botswana New templates\Risk Based Returns-1\[Report1-1.xlsx]M-UNCONS. INVEST.'!D15
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R55_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R55' AND COLUMN_ID = 'C3';
+
+--R55
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R55_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R55' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R57	
+--C3		
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R57_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R57' AND COLUMN_ID = 'C3';
+
+--R57
+--C4
+--0
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R57_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R57' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R58	
+--C3		
+--='E:\Users\BM503772\Downloads\[BARODA SEP 2024 MONTHLY RETURNS (2).xlsx]M-SFinP'!B50
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R58_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R58' AND COLUMN_ID = 'C3';
+
+--R58
+--C4
+--=+'E:\Users\BM503772\Downloads\[BARODA SEP 2024 MONTHLY RETURNS (2).xlsx]M-SFinP'!D50
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R58_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R58' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R59	
+--C3		
+--='E:\Users\BM503772\Downloads\[BARODA SEP 2024 MONTHLY RETURNS (2).xlsx]M-SFinP'!B51
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R59_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R59' AND COLUMN_ID = 'C3';
+
+--R59
+--C4
+--=+'E:\Users\BM503772\Downloads\[BARODA SEP 2024 MONTHLY RETURNS (2).xlsx]M-SFinP'!D51
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R59_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R59' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--R60	
+--C3		
+--='E:\Users\BM503772\Downloads\[BARODA SEP 2024 MONTHLY RETURNS (2).xlsx]M-SFinP'!B52
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R60_MONTH_END
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R60' AND COLUMN_ID = 'C3';
+
+--R60
+--C4
+--=+'E:\Users\BM503772\Downloads\[BARODA SEP 2024 MONTHLY RETURNS (2).xlsx]M-SFinP'!D52
+
+SELECT ROUND(ABS(NVL(SUM(ACCT_BALANCE_IN_PULA)/1000, 0))) INTO V_R60_AVERAGE
+FROM BRRS_M_SFINP1_DETAILTABLE  WHERE REPORT_DATE = V_REPORT_DATE AND ROW_ID = 'R60' AND COLUMN_ID = 'C4';
+
+-------------------------------------------------------------------------------------------------------------------------
+--calculations
+--R12
+V_R12_MONTH_END := V_R13_MONTH_END + V_R14_MONTH_END + V_R15_MONTH_END + V_R16_MONTH_END ; 
+
+V_R12_AVERAGE := V_R13_AVERAGE + V_R14_AVERAGE + V_R15_AVERAGE + V_R16_AVERAGE;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R21
+V_R21_MONTH_END := V_R22_MONTH_END + V_R23_MONTH_END ; 
+
+V_R21_AVERAGE := V_R22_AVERAGE + V_R23_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R24
+V_R24_MONTH_END := V_R25_MONTH_END + V_R26_MONTH_END ; 
+
+V_R24_AVERAGE := V_R25_AVERAGE + V_R26_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R20
+V_R20_MONTH_END := V_R21_MONTH_END + V_R24_MONTH_END ; 
+
+V_R20_AVERAGE := V_R21_AVERAGE + V_R24_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R27
+V_R27_MONTH_END := V_R28_MONTH_END + V_R29_MONTH_END + V_R30_MONTH_END ; 
+
+V_R27_AVERAGE := V_R28_AVERAGE + V_R29_AVERAGE + V_R30_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R31
+V_R31_MONTH_END := V_R32_MONTH_END + V_R33_MONTH_END ; 
+
+V_R31_AVERAGE := V_R32_AVERAGE + V_R33_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R35
+V_R35_MONTH_END := V_R36_MONTH_END + V_R37_MONTH_END ; 
+
+V_R35_AVERAGE := V_R36_AVERAGE + V_R37_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R40
+V_R40_MONTH_END := V_R41_MONTH_END + V_R42_MONTH_END + V_R43_MONTH_END; 
+
+V_R40_AVERAGE := V_R41_AVERAGE + V_R42_AVERAGE + V_R43_AVERAGE;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R38
+V_R38_MONTH_END := V_R39_MONTH_END - V_R40_MONTH_END ; 
+
+V_R38_AVERAGE := V_R39_AVERAGE - V_R40_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R44
+V_R44_MONTH_END := V_R45_MONTH_END + V_R46_MONTH_END + V_R47_MONTH_END + V_R48_MONTH_END; 
+
+V_R44_AVERAGE := V_R45_AVERAGE + V_R46_AVERAGE + V_R47_AVERAGE + V_R48_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R49
+V_R49_MONTH_END := V_R50_MONTH_END + V_R51_MONTH_END + V_R52_MONTH_END ; 
+
+V_R49_AVERAGE := V_R50_AVERAGE + V_R51_AVERAGE + V_R52_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R56
+V_R56_MONTH_END := V_R57_MONTH_END + V_R58_MONTH_END + V_R59_MONTH_END + V_R60_MONTH_END; 
+
+V_R56_AVERAGE := V_R57_AVERAGE + V_R58_AVERAGE + V_R59_AVERAGE + V_R60_AVERAGE ;
+
+-------------------------------------------------------------------------------------------------------------------------
+--R61
+V_R61_MONTH_END := V_R10_MONTH_END + V_R11_MONTH_END + V_R12_MONTH_END + V_R17_MONTH_END + V_R18_MONTH_END + V_R19_MONTH_END + V_R20_MONTH_END + V_R27_MONTH_END + V_R31_MONTH_END + V_R34_MONTH_END + V_R35_MONTH_END + V_R38_MONTH_END + V_R44_MONTH_END + V_R49_MONTH_END + V_R53_MONTH_END + V_R54_MONTH_END + V_R55_MONTH_END + V_R56_MONTH_END; 
+
+V_R61_AVERAGE:= V_R10_AVERAGE+ V_R11_AVERAGE+ V_R12_AVERAGE+ V_R17_AVERAGE+ V_R18_AVERAGE+ V_R19_AVERAGE+ V_R20_AVERAGE+ V_R27_AVERAGE+ V_R31_AVERAGE+ V_R34_AVERAGE+ V_R35_AVERAGE+ V_R38_AVERAGE+ V_R44_AVERAGE+ V_R49_AVERAGE+ V_R53_AVERAGE+ V_R54_AVERAGE+ V_R55_AVERAGE+ V_R56_AVERAGE;
+
+-------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO  BRRS_M_SFINP1_SUMMARYTABLE (
+
+
+R10_PRODUCT,
+R10_CROSS_REF,
+R10_MONTH_END,
+R10_AVERAGE,
+R11_PRODUCT,
+R11_CROSS_REF,
+R11_MONTH_END,
+R11_AVERAGE,
+R12_PRODUCT,
+R12_CROSS_REF,
+R12_MONTH_END,
+R12_AVERAGE,
+R13_PRODUCT,
+R13_CROSS_REF,
+R13_MONTH_END,
+R13_AVERAGE,
+R14_PRODUCT,
+R14_CROSS_REF,
+R14_MONTH_END,
+R14_AVERAGE,
+R15_PRODUCT,
+R15_CROSS_REF,
+R15_MONTH_END,
+R15_AVERAGE,
+R16_PRODUCT,
+R16_CROSS_REF,
+R16_MONTH_END,
+R16_AVERAGE,
+R17_PRODUCT,
+R17_CROSS_REF,
+R17_MONTH_END,
+R17_AVERAGE,
+R18_PRODUCT,
+R18_CROSS_REF,
+R18_MONTH_END,
+R18_AVERAGE,
+R19_PRODUCT,
+R19_CROSS_REF,
+R19_MONTH_END,
+R19_AVERAGE,
+R20_PRODUCT,
+R20_CROSS_REF,
+R20_MONTH_END,
+R20_AVERAGE,
+R21_PRODUCT,
+R21_CROSS_REF,
+R21_MONTH_END,
+R21_AVERAGE,
+R22_PRODUCT,
+R22_CROSS_REF,
+R22_MONTH_END,
+R22_AVERAGE,
+R23_PRODUCT,
+R23_CROSS_REF,
+R23_MONTH_END,
+R23_AVERAGE,
+R24_PRODUCT,
+R24_CROSS_REF,
+R24_MONTH_END,
+R24_AVERAGE,
+R25_PRODUCT,
+R25_CROSS_REF,
+R25_MONTH_END,
+R25_AVERAGE,
+R26_PRODUCT,
+R26_CROSS_REF,
+R26_MONTH_END,
+R26_AVERAGE,
+R27_PRODUCT,
+R27_CROSS_REF,
+R27_MONTH_END,
+R27_AVERAGE,
+R28_PRODUCT,
+R28_CROSS_REF,
+R28_MONTH_END,
+R28_AVERAGE,
+R29_PRODUCT,
+R29_CROSS_REF,
+R29_MONTH_END,
+R29_AVERAGE,
+R30_PRODUCT,
+R30_CROSS_REF,
+R30_MONTH_END,
+R30_AVERAGE,
+R31_PRODUCT,
+R31_CROSS_REF,
+R31_MONTH_END,
+R31_AVERAGE,
+R32_PRODUCT,
+R32_CROSS_REF,
+R32_MONTH_END,
+R32_AVERAGE,
+R33_PRODUCT,
+R33_CROSS_REF,
+R33_MONTH_END,
+R33_AVERAGE,
+R34_PRODUCT,
+R34_CROSS_REF,
+R34_MONTH_END,
+R34_AVERAGE,
+R35_PRODUCT,
+R35_CROSS_REF,
+R35_MONTH_END,
+R35_AVERAGE,
+R36_PRODUCT,
+R36_CROSS_REF,
+R36_MONTH_END,
+R36_AVERAGE,
+R37_PRODUCT,
+R37_CROSS_REF,
+R37_MONTH_END,
+R37_AVERAGE,
+R38_PRODUCT,
+R38_CROSS_REF,
+R38_MONTH_END,
+R38_AVERAGE,
+R39_PRODUCT,
+R39_CROSS_REF,
+R39_MONTH_END,
+R39_AVERAGE,
+R40_PRODUCT,
+R40_CROSS_REF,
+R40_MONTH_END,
+R40_AVERAGE,
+R41_PRODUCT,
+R41_CROSS_REF,
+R41_MONTH_END,
+R41_AVERAGE,
+R42_PRODUCT,
+R42_CROSS_REF,
+R42_MONTH_END,
+R42_AVERAGE,
+R43_PRODUCT,
+R43_CROSS_REF,
+R43_MONTH_END,
+R43_AVERAGE,
+R44_PRODUCT,
+R44_CROSS_REF,
+R44_MONTH_END,
+R44_AVERAGE,
+R45_PRODUCT,
+R45_CROSS_REF,
+R45_MONTH_END,
+R45_AVERAGE,
+R46_PRODUCT,
+R46_CROSS_REF,
+R46_MONTH_END,
+R46_AVERAGE,
+R47_PRODUCT,
+R47_CROSS_REF,
+R47_MONTH_END,
+R47_AVERAGE,
+R48_PRODUCT,
+R48_CROSS_REF,
+R48_MONTH_END,
+R48_AVERAGE,
+R49_PRODUCT,
+R49_CROSS_REF,
+R49_MONTH_END,
+R49_AVERAGE,
+R50_PRODUCT,
+R50_CROSS_REF,
+R50_MONTH_END,
+R50_AVERAGE,
+R51_PRODUCT,
+R51_CROSS_REF,
+R51_MONTH_END,
+R51_AVERAGE,
+R52_PRODUCT,
+R52_CROSS_REF,
+R52_MONTH_END,
+R52_AVERAGE,
+R53_PRODUCT,
+R53_CROSS_REF,
+R53_MONTH_END,
+R53_AVERAGE,
+R54_PRODUCT,
+R54_CROSS_REF,
+R54_MONTH_END,
+R54_AVERAGE,
+R55_PRODUCT,
+R55_CROSS_REF,
+R55_MONTH_END,
+R55_AVERAGE,
+R56_PRODUCT,
+R56_CROSS_REF,
+R56_MONTH_END,
+R56_AVERAGE,
+R57_PRODUCT,
+R57_CROSS_REF,
+R57_MONTH_END,
+R57_AVERAGE,
+R58_PRODUCT,
+R58_CROSS_REF,
+R58_MONTH_END,
+R58_AVERAGE,
+R59_PRODUCT,
+R59_CROSS_REF,
+R59_MONTH_END,
+R59_AVERAGE,
+R60_PRODUCT,
+R60_CROSS_REF,
+R60_MONTH_END,
+R60_AVERAGE,
+R61_PRODUCT,
+R61_CROSS_REF,
+R61_MONTH_END,
+R61_AVERAGE,
+REPORT_DATE
+)
+
+VALUES (
+
+V_R10_PRODUCT,
+V_R10_CROSS_REF,
+V_R10_MONTH_END,
+V_R10_AVERAGE,
+V_R11_PRODUCT,
+V_R11_CROSS_REF,
+V_R11_MONTH_END,
+V_R11_AVERAGE,
+V_R12_PRODUCT,
+V_R12_CROSS_REF,
+V_R12_MONTH_END,
+V_R12_AVERAGE,
+V_R13_PRODUCT,
+V_R13_CROSS_REF,
+V_R13_MONTH_END,
+V_R13_AVERAGE,
+V_R14_PRODUCT,
+V_R14_CROSS_REF,
+V_R14_MONTH_END,
+V_R14_AVERAGE,
+V_R15_PRODUCT,
+V_R15_CROSS_REF,
+V_R15_MONTH_END,
+V_R15_AVERAGE,
+V_R16_PRODUCT,
+V_R16_CROSS_REF,
+V_R16_MONTH_END,
+V_R16_AVERAGE,
+V_R17_PRODUCT,
+V_R17_CROSS_REF,
+V_R17_MONTH_END,
+V_R17_AVERAGE,
+V_R18_PRODUCT,
+V_R18_CROSS_REF,
+V_R18_MONTH_END,
+V_R18_AVERAGE,
+V_R19_PRODUCT,
+V_R19_CROSS_REF,
+V_R19_MONTH_END,
+V_R19_AVERAGE,
+V_R20_PRODUCT,
+V_R20_CROSS_REF,
+V_R20_MONTH_END,
+V_R20_AVERAGE,
+V_R21_PRODUCT,
+V_R21_CROSS_REF,
+V_R21_MONTH_END,
+V_R21_AVERAGE,
+V_R22_PRODUCT,
+V_R22_CROSS_REF,
+V_R22_MONTH_END,
+V_R22_AVERAGE,
+V_R23_PRODUCT,
+V_R23_CROSS_REF,
+V_R23_MONTH_END,
+V_R23_AVERAGE,
+V_R24_PRODUCT,
+V_R24_CROSS_REF,
+V_R24_MONTH_END,
+V_R24_AVERAGE,
+V_R25_PRODUCT,
+V_R25_CROSS_REF,
+V_R25_MONTH_END,
+V_R25_AVERAGE,
+V_R26_PRODUCT,
+V_R26_CROSS_REF,
+V_R26_MONTH_END,
+V_R26_AVERAGE,
+V_R27_PRODUCT,
+V_R27_CROSS_REF,
+V_R27_MONTH_END,
+V_R27_AVERAGE,
+V_R28_PRODUCT,
+V_R28_CROSS_REF,
+V_R28_MONTH_END,
+V_R28_AVERAGE,
+V_R29_PRODUCT,
+V_R29_CROSS_REF,
+V_R29_MONTH_END,
+V_R29_AVERAGE,
+V_R30_PRODUCT,
+V_R30_CROSS_REF,
+V_R30_MONTH_END,
+V_R30_AVERAGE,
+V_R31_PRODUCT,
+V_R31_CROSS_REF,
+V_R31_MONTH_END,
+V_R31_AVERAGE,
+V_R32_PRODUCT,
+V_R32_CROSS_REF,
+V_R32_MONTH_END,
+V_R32_AVERAGE,
+V_R33_PRODUCT,
+V_R33_CROSS_REF,
+V_R33_MONTH_END,
+V_R33_AVERAGE,
+V_R34_PRODUCT,
+V_R34_CROSS_REF,
+V_R34_MONTH_END,
+V_R34_AVERAGE,
+V_R35_PRODUCT,
+V_R35_CROSS_REF,
+V_R35_MONTH_END,
+V_R35_AVERAGE,
+V_R36_PRODUCT,
+V_R36_CROSS_REF,
+V_R36_MONTH_END,
+V_R36_AVERAGE,
+V_R37_PRODUCT,
+V_R37_CROSS_REF,
+V_R37_MONTH_END,
+V_R37_AVERAGE,
+V_R38_PRODUCT,
+V_R38_CROSS_REF,
+V_R38_MONTH_END,
+V_R38_AVERAGE,
+V_R39_PRODUCT,
+V_R39_CROSS_REF,
+V_R39_MONTH_END,
+V_R39_AVERAGE,
+V_R40_PRODUCT,
+V_R40_CROSS_REF,
+V_R40_MONTH_END,
+V_R40_AVERAGE,
+V_R41_PRODUCT,
+V_R41_CROSS_REF,
+V_R41_MONTH_END,
+V_R41_AVERAGE,
+V_R42_PRODUCT,
+V_R42_CROSS_REF,
+V_R42_MONTH_END,
+V_R42_AVERAGE,
+V_R43_PRODUCT,
+V_R43_CROSS_REF,
+V_R43_MONTH_END,
+V_R43_AVERAGE,
+V_R44_PRODUCT,
+V_R44_CROSS_REF,
+V_R44_MONTH_END,
+V_R44_AVERAGE,
+V_R45_PRODUCT,
+V_R45_CROSS_REF,
+V_R45_MONTH_END,
+V_R45_AVERAGE,
+V_R46_PRODUCT,
+V_R46_CROSS_REF,
+V_R46_MONTH_END,
+V_R46_AVERAGE,
+V_R47_PRODUCT,
+V_R47_CROSS_REF,
+V_R47_MONTH_END,
+V_R47_AVERAGE,
+V_R48_PRODUCT,
+V_R48_CROSS_REF,
+V_R48_MONTH_END,
+V_R48_AVERAGE,
+V_R49_PRODUCT,
+V_R49_CROSS_REF,
+V_R49_MONTH_END,
+V_R49_AVERAGE,
+V_R50_PRODUCT,
+V_R50_CROSS_REF,
+V_R50_MONTH_END,
+V_R50_AVERAGE,
+V_R51_PRODUCT,
+V_R51_CROSS_REF,
+V_R51_MONTH_END,
+V_R51_AVERAGE,
+V_R52_PRODUCT,
+V_R52_CROSS_REF,
+V_R52_MONTH_END,
+V_R52_AVERAGE,
+V_R53_PRODUCT,
+V_R53_CROSS_REF,
+V_R53_MONTH_END,
+V_R53_AVERAGE,
+V_R54_PRODUCT,
+V_R54_CROSS_REF,
+V_R54_MONTH_END,
+V_R54_AVERAGE,
+V_R55_PRODUCT,
+V_R55_CROSS_REF,
+V_R55_MONTH_END,
+V_R55_AVERAGE,
+V_R56_PRODUCT,
+V_R56_CROSS_REF,
+V_R56_MONTH_END,
+V_R56_AVERAGE,
+V_R57_PRODUCT,
+V_R57_CROSS_REF,
+V_R57_MONTH_END,
+V_R57_AVERAGE,
+V_R58_PRODUCT,
+V_R58_CROSS_REF,
+V_R58_MONTH_END,
+V_R58_AVERAGE,
+V_R59_PRODUCT,
+V_R59_CROSS_REF,
+V_R59_MONTH_END,
+V_R59_AVERAGE,
+V_R60_PRODUCT,
+V_R60_CROSS_REF,
+V_R60_MONTH_END,
+V_R60_AVERAGE,
+V_R61_PRODUCT,
+V_R61_CROSS_REF,
+V_R61_MONTH_END,
+V_R61_AVERAGE,
+V_REPORT_DATE
+);
+
+COMMIT;
+END;
