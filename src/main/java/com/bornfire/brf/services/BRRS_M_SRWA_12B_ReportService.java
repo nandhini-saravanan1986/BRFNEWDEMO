@@ -433,8 +433,7 @@ if (!dataList7.isEmpty()) {
 								//createCell(2)<--this 2 is the index value of the excel cell
 								//i.e, A column is cell(0) B ->1, C->2....
 								//record is declared above to fetch from which entity
-  
-							
+					
 			private void populateEntity1Data(Sheet sheet, M_SRWA_12B_Summary_Entity1 record1, CellStyle textStyle, CellStyle numberStyle) {					
 				Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10, cell11, cell12, cell13, cell14, cell15, cell16,
 				cell17, cell18, cell19, cell20, cell21, cell22, cell23, cell24, cell25, cell26, cell27;				

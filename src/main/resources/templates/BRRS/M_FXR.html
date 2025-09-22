@@ -668,7 +668,7 @@ function cancelModify() {
 	    calculateR23Totals();
 
 	    // Recalculate whenever r21_net_position or r22_net_position changes
-	    $("#r23_net_position, #r23_net_position").on("input", function () {
+	    $("#r21_long, #r21_short, #r22_long, #r22_short").on("input", function () {
 	        calculateR23Totals();
 	    });
 	});
@@ -1613,6 +1613,7 @@ $("form").on("submit", function () {
             <th style="vertical-align: middle; text-align:left; color:black;">Short</th>
             <th style="vertical-align: middle; text-align:left; color:black;">Total Gross Long & Short Position</th>
             <th style="vertical-align: middle; text-align:left; color:black;">Net Position</th>
+            <th ></th>
           </tr>
         </thead>
         <tbody id="entity2" th:each="report: ${reportsummary2}" style="font-family: Arial;">
@@ -1651,6 +1652,7 @@ $("form").on("submit", function () {
                      style="background-color: #92D050; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
+            <td ></td>
           </tr>
 
           <tr>
@@ -1688,6 +1690,7 @@ $("form").on("submit", function () {
                      style="background-color: #92D050; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
+            <td ></td>
           </tr>
           <tr>
           <td colspan="3"></td>
@@ -1699,6 +1702,7 @@ $("form").on("submit", function () {
                      style="background-color: #92D050; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
+            <td style="text-align:left;min-width:150px;height:30px;">L</td>
           </tr> 
         </tbody>
       </table>
@@ -1708,7 +1712,7 @@ $("form").on("submit", function () {
 <table style="border-collapse: collapse;">
   <tr>
     <!-- Left texts -->
-    <td style="padding-right: 942px; padding-left:50px; vertical-align: top;">
+    <td style="padding-right: 841px; padding-left:50px; vertical-align: top;">
       <p style="font-weight:bold; width:153px; ">Capital Calculation</p>
     </td>
 
@@ -1718,8 +1722,8 @@ $("form").on("submit", function () {
         <thead class="thead-light">
           <tr>
           	<th></th>
-            <th style="text-align:left; color:black;">Greater of the Absolute Value of Net Long Position (J) or Net Short Position (K)</th>
-            <th style="text-align:left; color:black;">Absolute Value Net Gold Position (L)</th>
+            <th style="text-align:left; color:black;">Greater of the Absolute <br>Value of Net Long<br> Position (J) or Net Short <br>Position (K)</th>
+            <th style="text-align:left; color:black;">Absolute <br>Value Net<br> Gold Position (L)</th>
             <th style="text-align:left; color:black;">Capital Requirement</th>
             <th style="text-align:left; color:black;">Capital Charge</th>
           </tr>
@@ -1732,8 +1736,8 @@ $("form").on("submit", function () {
           </tr>
         </thead>
         <tbody id="entity3" th:each="report: ${reportsummary3}" style="font-family: Arial;">
-          <tr>
-          	<td style=font-weight:bold; text-align:left;">Genaral risk</td>
+            <tr>
+          	<td style="font-weight:bold; text-align:left;">General risk</td>
             <td style="padding-left: 20px; text-align:right;">
               <input class="display-input Show_input"
                      type="text"
