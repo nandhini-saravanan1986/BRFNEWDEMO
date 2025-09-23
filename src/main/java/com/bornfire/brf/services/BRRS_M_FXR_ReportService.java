@@ -45,6 +45,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 //import com.bornfire.brf.entities.M_FXR_Summary_Entity4;
 import com.bornfire.brf.entities.BRRS_M_FXR_Summary_Repo1;
 import com.bornfire.brf.entities.BRRS_M_FXR_Summary_Repo2;
@@ -59,6 +62,7 @@ import com.bornfire.brf.entities.M_SFINP2_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_SFINP2_Detail_Entity;
 import com.bornfire.brf.entities.M_SFINP2_Summary_Entity;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 
 
 @Component
@@ -159,4 +163,182 @@ public class BRRS_M_FXR_ReportService {
 		System.out.println("scv" + mv.getViewName());
 		return mv;
 	}
+	
+	
+	public void updateReport1(M_FXR_Summary_Entity1 updatedEntity) {
+	    System.out.println("Came to services1");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_FXR_Summary_Entity1 existing = BRRS_M_FXR_Summary_Repo1.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R11 to R16 and copy fields
+	        for (int i = 11; i <= 16; i++) {
+	            String prefix = "R" + i + "_";
+
+	            String[] fields = { "currency", "net_spot_position", "net_forward_position", "guarantees",
+	                                "net_future_inc_or_exp", "net_delta_wei_fx_opt_posi", "other_items",
+	                                "net_long_position", "or", "net_short_position" };
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field;
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_FXR_Summary_Entity1.class.getMethod(getterName);
+	                    Method setter = M_FXR_Summary_Entity1.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	        // 2️⃣ Handle R17 totals
+	        String[] totalFields = { "net_long_position", "net_short_position" };
+	        for (String field : totalFields) {
+	            String getterName = "getR17_" + field;
+	            String setterName = "setR17_" + field;
+
+	            try {
+	                Method getter = M_FXR_Summary_Entity1.class.getMethod(getterName);
+	                Method setter = M_FXR_Summary_Entity1.class.getMethod(setterName, getter.getReturnType());
+
+	                Object newValue = getter.invoke(updatedEntity);
+	                setter.invoke(existing, newValue);
+
+	            } catch (NoSuchMethodException e) {
+	                // Skip if not present
+	                continue;
+	            }
+	        }
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    BRRS_M_FXR_Summary_Repo1.save(existing);
+	}
+
+	public void updateReport2(M_FXR_Summary_Entity2 updatedEntity) {
+	    System.out.println("Came to services2");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_FXR_Summary_Entity2 existing = BRRS_M_FXR_Summary_Repo2.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R11 to R50 and copy fields
+	        for (int i = 21; i <= 22; i++) {
+	            String prefix = "R" + i + "_";
+
+	            String[] fields = { "long", "short" };
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field;
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_FXR_Summary_Entity2.class.getMethod(getterName);
+	                    Method setter = M_FXR_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	            String[] formulaFields = { "total_gross_long_short", "net_position" };
+	            for (String field : formulaFields) {
+	                String getterName = "get" + prefix + field;
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_FXR_Summary_Entity2.class.getMethod(getterName);
+	                    Method setter = M_FXR_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    continue;
+	                }
+	            }
+	        }
+
+	        // 2️⃣ Handle R23 totals
+	            String getterName = "getR23_net_position";
+	            String setterName = "setR23_net_position";
+
+	            try {
+	                Method getter = M_FXR_Summary_Entity2.class.getMethod(getterName);
+	                Method setter = M_FXR_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+
+	                Object newValue = getter.invoke(updatedEntity);
+	                setter.invoke(existing, newValue);
+
+	            } catch (NoSuchMethodException e) {
+	                // Skip if not present
+	                //continue;
+	            }
+	        
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    BRRS_M_FXR_Summary_Repo2.save(existing);
+	}
+
+	public void updateReport3(M_FXR_Summary_Entity3 updatedEntity) {
+	    System.out.println("Came to services3");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_FXR_Summary_Entity3 existing = BRRS_M_FXR_Summary_Repo3.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+
+	    try {
+
+	            String[] fields = {"greater_net_long_or_short", "abs_value_net_gold_posi", "capital_require", "capital_charge"};
+
+	            for (String field : fields) {
+	                String getterName = "getR29_" + field;
+	                String setterName = "setR29_" + field;
+
+	                try {
+	                    Method getter = M_FXR_Summary_Entity3.class.getMethod(getterName);
+	                    Method setter = M_FXR_Summary_Entity3.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	    
+	    }catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    BRRS_M_FXR_Summary_Repo3.save(existing);
+	}
 }
+	
+
+	    

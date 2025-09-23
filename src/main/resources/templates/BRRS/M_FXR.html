@@ -284,6 +284,8 @@ PURPOSE		: BRRSREPORT
 		.table-bordered th {
 			border: 1px solid #000 !important;
 		}
+		
+		
 	</style>
 	<script th:inline="javascript">
 		$(document).ready(function () {
@@ -464,8 +466,7 @@ function showmodify(btn) {
     }*/
     
     // Toggle buttons
-    $("#submitButton, #btnBack_edit").show();
-    $("#btnBack").hide();
+    $("#submitButton").show();
     
     // Show Cancel button only when Modify is clicked
     $("#cancelRecord").show();
@@ -674,6 +675,56 @@ function cancelModify() {
 	});
 	
 	
+	//Calculating Result for 29'th row G column	
+	function calculateR29GreaterNet() {
+	    // Get R17 values
+	    let r17Long = parseFloat($("#r17_net_long_position").val().replace(/,/g, "")) || 0;
+	    let r17Short = parseFloat($("#r17_net_short_position").val().replace(/,/g, "")) || 0;
+
+	    // Calculate greater of the two
+	    let greaterVal = Math.max(r17Long, r17Short);
+
+	    // Set the value in R29 greater_net_long_or_short
+	    $("#r29_greater_net_long_or_short").val(
+	        greaterVal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	    );
+	}
+	$(document).ready(function () {
+	    // Calculate once on load
+	    calculateR29GreaterNet();
+
+	 // Recalculate whenever R11–R16 values change
+	    for (let i = 11; i <= 16; i++) {
+	        $("#r" + i + "_net_long_position, #r" + i + "_net_short_position").on("input", function() {
+	            calculateR29GreaterNet();
+	        });
+	    }
+	});
+	
+	//Calculating Result for 29'th row H column	
+	function calculateR29NetGoldPosition() {
+	    // Get R23 value
+	    let r23result = parseFloat($("#r23_net_position").val().replace(/,/g, "")) || 0;
+
+	    // just copying r23_net_position value
+	    let answer = r23result;
+
+	    // Set the value in r29_abs_value_net_gold_posi 
+	    $("#r29_abs_value_net_gold_posi").val(
+	        answer.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	    );
+	}
+	$(document).ready(function () {
+	    // Calculate once on load
+	    calculateR29NetGoldPosition();
+
+	    // Recalculate whenever #r17_net_long_position or #r17_net_short_position changes
+	    $("#r21_long, #r21_short, #r22_long, #r22_short").on("input", function () {
+	    	calculateR29NetGoldPosition();
+	    });
+	});
+	
+	
 	//Calculating Result for 29'th row J column	
 	function calculateR29Result() {
 	    // Get the greater_net_long_or_short & abs_value_net_gold_posi & capital_require values from R29
@@ -693,184 +744,220 @@ function cancelModify() {
 	    // Calculate once on load
 	    calculateR29Result();
 
-	    // Recalculate whenever r29_greater_net_long_or_short or r29_abs_value_net_gold_posi or r29_capital_require changes
-	    $("#r29_greater_net_long_or_short, #r29_abs_value_net_gold_posi, #r29_capital_require").on("input", function () {
+	 // Recalculate whenever #r17_net_long_position or #r17_net_short_position changes
+	    $("#r21_long, #r21_short, #r22_long, #r22_short, #r29_capital_require").on("input", function () {
 	    	calculateR29Result();
 	    });
+	    // Recalculate whenever R11–R16 values change
+	    for (let i = 11; i <= 16; i++) {
+	        $("#r" + i + "_net_long_position, #r" + i + "_net_short_position").on("input", function() {
+	            calculateR29Result();
+	        });
+	    }
 	});
 
 </SCRIPT>
-<script>
-//this is for R29_capital_require cell bcz it is a percentage cell
-//so when user wants to give input, th percent symbol will go away and after the user's input
-//the percent will be visible in UI
-
-$(document).ready(function () {
-    let $input = $("#r29_capital_require");
-
-    function formatAsPercent() {
-        let val = parseFloat($input.val().replace(/,/g, "").replace("%", "")) || 0;
-        $input.val(val.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " %");
+<!-- <script>
+    // ✅ This function is for closing the modal after an action is complete.
+    function closemodel() {
+        $("#resultModal").modal("hide");
+        $('#loader').modal('hide');
+        setTimeout(function () {
+            location.reload();
+        }, 300);
     }
 
-    // Initial format
-    formatAsPercent();
+    // ✅ Percentage formatting logic for R29 cell
+    $(document).ready(function () {
+        let $r29Input = $("#r29_capital_require");
 
-    // Reformat on blur
-    $input.on("blur", function () {
+        function formatAsPercent() {
+            let val = parseFloat($r29Input.val().replace(/,/g, "").replace("%", "")) || 0;
+            $r29Input.val(
+                val.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " %"
+            );
+        }
+
+        // Initial format
         formatAsPercent();
+
+        // Reformat on blur
+        $r29Input.on("blur", function () {
+            formatAsPercent();
+        });
     });
-});
 
-//on submitting the percent symbol will be removed to store onl th number in DB
+    // ✅ File upload and submission logic
+    function fileuploads(btn) {
+        const asondate = btn.getAttribute("data-todate");
+        $('#loader').modal('show');
 
-$("form").on("submit", function () {
-    let $input = $("#r29_capital_require");
-    let val = $input.val().replace(/,/g, "").replace("%", "").trim();
+        // Step 1: Calculate totals
+        calculateR17Totals();
+        calculateR21Totals();
+        calculateR21Difference();
+        calculateR22Totals();
+        calculateR22Difference();
+        calculateR23Totals();
+        calculateR29Result();
 
-    // Put back only the number for submission
-    $input.val(val);
-});
+        // Step 2: Remove commas + special handling for % before sending
+        $("#fileupload input[type='text']").each(function () {
+            let val = $(this).val().replace(/,/g, '');
+            if (this.id === "r29_capital_require") {
+                val = val.replace("%", "").trim(); // strip % only for R29
+            }
+            $(this).val(val);
+        });
 
+        // Step 3: Validate form
+        if (!$("#fileupload").valid()) {
+            $('#loader').modal('hide');
+            return;
+        }
+
+        // Step 4: Build one FormData object for all entities
+        const formData = new FormData();
+        formData.append("asondate", asondate);
+
+        $('#fileupload').find(':input').each(function () {
+            const name = $(this).attr('name');
+            if (name) {
+                formData.append(name, $(this).val());
+            }
+        });
+
+        // Step 5: Send Ajax request
+        $.ajax({
+            url: './FXRupdateAll',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'text',
+            success: function () {
+                $("#resultModalLabel").text("Success");
+                $("#resultModalBody").text("All reports updated successfully.");
+                $("#resultModal").modal("show");
+            },
+            error: function (jqXHR) {
+                console.error("Error response:", jqXHR.responseText);
+                $("#resultModalLabel").text("Error");
+                $("#resultModalBody").text("Update failed. Check console for details.");
+                $("#resultModal").modal("show");
+            },
+            complete: function () {
+                $('#loader').modal('hide');
+            }
+        });
+    }
+</script> -->
+<script>
+function closemodel() {
+    $("#resultModal").modal("hide");
+    $('#loader').modal('hide');
+    setTimeout(function () {
+        location.reload();
+    }, 300);
+}
+
+function fileuploads(btn) {
+    var asondate = btn.getAttribute("data-todate");
+    $('#loader').modal('show');
+
+    // Pre-calculations
+    calculateR17Totals();
+    calculateR21Totals();
+    calculateR21Difference();
+    calculateR22Totals();
+    calculateR22Difference();
+    calculateR23Totals();
+    calculateR29Result();
+    calculateR29GreaterNet();
+    calculateR29NetGoldPosition();
+
+    // Remove commas from numeric inputs
+    $("#fileupload input[type='text']").each(function () {
+        var val = $(this).val();
+        if (val && val.includes(",")) {
+            $(this).val(val.replace(/,/g, ''));
+        }
+    });
+
+    if (!$("#fileupload").valid()) {
+        $('#loader').modal('hide');
+        return;
+    }
+
+    // ✅ One combined FormData for all entities
+    const formData = new FormData();
+    formData.append("asondate", asondate);
+
+    // --- Entity 1 fields (R10-R17) ---
+    for (let i = 10; i <= 17; i++) {
+        ["currency", "net_spot_position", "net_forward_position", "guarantees",
+        "net_future_inc_or_exp", "net_delta_wei_fx_opt_posi", "other_items",
+        "net_long_position", "or", "net_short_position"].forEach(field => {
+            const input = $("#r" + i + "_" + field);
+            if (input.length) {
+                formData.append(input.attr("name"), input.val());
+            }
+        });
+    }
+
+    // --- Entity 2 fields (R21-R23) ---
+    for (let i = 21; i <= 23; i++) {
+        ["long", "short", "total_gross_long_short", "net_position"].forEach(field => {
+            const input = $("#r" + i + "_" + field);
+            if (input.length) {
+                formData.append(input.attr("name"), input.val());
+            }
+        });
+    }
+
+    // --- Entity 3 fields (R29 only) ---
+    ["greater_net_long_or_short", "abs_value_net_gold_posi", "capital_require", "capital_charge"]
+        .forEach(field => {
+            const input = $("#r29_" + field);
+            if (input.length) {
+                formData.append(input.attr("name"), input.val());
+            }
+        });
+
+    // --- Optional Entity 4 (commented in your code) ---
+    // getEntityFields(147, 193, "R194_TOT").each(function () {
+    //     formData.append($(this).attr('name'), $(this).val());
+    // });
+
+    // ✅ Single AJAX call instead of 3
+    $.ajax({
+        url: './FXRupdateAll',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'text',
+        success: function (response) {
+            $("#resultModalLabel").text("Success");
+            $("#resultModalBody").text(response);
+            $("#resultModal").modal("show");
+        },
+        error: function (xhr) {
+            console.log("Error response:", xhr.responseText);
+            $("#resultModalLabel").text("Error");
+            $("#resultModalBody").text("Update failed. Check console for details.");
+            $("#resultModal").modal("show");
+        },
+        complete: function () {
+            $('#loader').modal('hide');
+        }
+    });
+}
 </script>
-
-	<script>
 	
-
-	// This function is for closing the modal after an action is complete.
-	// It hides the result and loader modals and reloads the page.
-	function closemodel() {
-	    $("#resultModal").modal("hide");
-	    $('#loader').modal('hide');
-
-	    // Reload the page after a short delay to ensure the modal animation completes smoothly.
-	    setTimeout(function () {
-	        location.reload();
-	    }, 300);
-	}
-
-	// This is the main function that orchestrates the entire form submission process.
-	// It is triggered by the "Update" button click.
-	function fileuploads(btn) {
-	    // Get the report date from the button's data attribute.
-	    var asondate = btn.getAttribute("data-todate");
-
-	    // Show the loading spinner modal to provide visual feedback to the user.
-	    $('#loader').modal('show');
-
-	    // 1. Pre-submission steps:
-	    // Ensure all total fields are correctly calculated before we proceed.
-	    calculateR51Totals();
-	    calculateR96Totals();
-	    calculateR142Totals();
-	    calculateR194Totals();
-
-	    // Remove commas from all number input fields. This is a crucial step
-	    // as commas can cause issues when the data is sent to the backend.
-	    $("#fileupload input[type='text']").each(function () {
-	        var val = $(this).val();
-	        if (val && val.includes(",")) {
-	            $(this).val(val.replace(/,/g, ''));
-	        }
-	    });
-
-	    // Check if the form is valid. If not, hide the loader and stop the function.
-	    if (!$("#fileupload").valid()) {
-	        $('#loader').modal('hide');
-	        return;
-	    }
-
-	    // 2. Prepare for splitting the submission:
-	    // Get all form fields once to avoid repeated DOM lookups, which improves performance.
-	    const $form = $('#fileupload');
-	    const $inputs = $form.find(':input');
-
-	    // This helper function isolates form fields for a specific "entity" or section.
-	    // It takes a range of row numbers (e.g., 11 to 50) and a total field prefix.
-	    const getEntityFields = (start, end, totalPrefix) => {
-	        // Use jQuery's filter method to select only the fields we need.
-	        return $inputs.filter(function () {
-	        	
-	            const name = $(this).attr('name');
-	            if (!name) return false;
-
-	            // Check for fields based on their row number (e.g., R11_, R12_, etc.)
-	            const rowNumberMatch = name.match(/R(\d+)_/);
-	            if (rowNumberMatch) {
-	                const rowNumber = parseInt(rowNumberMatch[1], 10);
-	                return rowNumber >= start && rowNumber <= end;
-	            }
-
-	            // Also, check for the specific total fields for this entity.
-	            return name.startsWith(totalPrefix);
-	        });
-	    };
-
-	    // 3. Create FormData objects for each entity:
-	    // Create a new FormData object for the first entity and append its fields.
-	    const formData1 = new FormData();
-	    formData1.append("asondate", asondate); // Append the date to the data.
-	    getEntityFields(11, 50, "R51_TOT").each(function () {
-	        formData1.append($(this).attr('name'), $(this).val());
-	    });
-
-	    // Repeat the process for the second, third, and fourth entities.
-	    const formData2 = new FormData();
-	    formData2.append("asondate", asondate);
-	    getEntityFields(56, 95, "R96_TOT").each(function () {
-	        formData2.append($(this).attr('name'), $(this).val());
-	    });
-	    
-	    const formData3 = new FormData();
-	    formData3.append("asondate", asondate);
-	    getEntityFields(101, 141, "R142_TOT").each(function () {
-	        formData3.append($(this).attr('name'), $(this).val());
-	    });
-
-	    const formData4 = new FormData();
-	    formData4.append("asondate", asondate);
-	    getEntityFields(147, 193, "R194_TOT").each(function () {
-	        formData4.append($(this).attr('name'), $(this).val());
-	    });
-
-	    // 4. Send the data:
-	    // Create an array of jQuery AJAX promises. Each promise represents a single HTTP request.
-	    const deferreds = [
-	        $.ajax({ url: './AIDPupdate', type: 'POST', data: formData1, processData: false, contentType: false, dataType: 'text' }),
-	        $.ajax({ url: './AIDPupdate2', type: 'POST', data: formData2, processData: false, contentType: false, dataType: 'text' }),
-	        $.ajax({ url: './AIDPupdate3', type: 'POST', data: formData3, processData: false, contentType: false, dataType: 'text' }),
-	        $.ajax({ url: './AIDPupdate4', type: 'POST', data: formData4, processData: false, contentType: false, dataType: 'text' })
-	    ];
-
-	    // 5. Handle the result:
-	    // Use $.when() to handle the outcome of all four requests simultaneously.
-	    // It will trigger the .done() callback only if ALL requests are successful.
-	    $.when(...deferreds)
-	        .done(function() {
-	            // This code runs if all four updates succeed.
-	            $("#resultModalLabel").text("Success");
-	            $("#resultModalBody").text("All reports updated successfully.");
-	            $("#resultModal").modal("show");
-	        })
-	        .fail(function(jqXHR) {
-	            // This code runs if even one of the updates fails.
-	            console.log("Error response:", jqXHR.responseText);
-	            $("#resultModalLabel").text("Error");
-	            $("#resultModalBody").text("One or more updates failed. Check console for details.");
-	            $("#resultModal").modal("show");
-	        })
-	        .always(function() {
-	             // This code always runs, regardless of success or failure.
-	             // It's a good place to hide the loader.
-	             $('#loader').modal('hide');
-	        });
-	}
-
-
-
-
-	</script>
 </head>
+
+
 <title>BRRS</title>
 
 <body>
@@ -955,6 +1042,8 @@ $("form").on("submit", function () {
 					<div class="row">
 						<div class="col-sm-12">
 						<form action="#" method="POST" id="fileupload">
+						<input type="hidden" name="asondate" id="asondate" th:value="${asondate}" />
+						
 							<div class="table-wrapper table-responsive scrollable-table-container"
 								style="border-right: 1px solid #dee2e6; ">
 								
@@ -1618,7 +1707,7 @@ $("form").on("submit", function () {
         </thead>
         <tbody id="entity2" th:each="report: ${reportsummary2}" style="font-family: Arial;">
           <tr>
-            <td style="padding-left: 20px; font-weight: bold;">
+            <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
                      th:value="${report.r21_long != null ? #numbers.formatDecimal(report.r21_long, 1, 'COMMA', 2, 'POINT') : '0.00'}"
@@ -1627,7 +1716,7 @@ $("form").on("submit", function () {
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; font-weight: bold;">
+            <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
                      th:value="${report.r21_short != null ? #numbers.formatDecimal(report.r21_short, 1, 'COMMA', 2, 'POINT') : '0.00'}"
@@ -1636,7 +1725,7 @@ $("form").on("submit", function () {
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
+            <td id="ROW21" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
               <input class="display-input Show_input"
                      type="text"
                      id="r21_total_gross_long_short"
@@ -1644,7 +1733,7 @@ $("form").on("submit", function () {
                      style="background-color: #92D050; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
+            <td id="ROW21" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
               <input class="display-input Show_input"
                      type="text"
                      id="r21_net_position"
@@ -1656,7 +1745,7 @@ $("form").on("submit", function () {
           </tr>
 
           <tr>
-            <td style="padding-left: 20px; font-weight: bold;">
+            <td id="ROW22" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
                      th:value="${report.r22_long != null ? #numbers.formatDecimal(report.r22_long, 1, 'COMMA', 2, 'POINT') : '0.00'}"
@@ -1665,7 +1754,7 @@ $("form").on("submit", function () {
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; font-weight: bold;">
+            <td id="ROW22" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
                      th:value="${report.r22_short != null ? #numbers.formatDecimal(report.r22_short, 1, 'COMMA', 2, 'POINT') : '0.00'}"
@@ -1674,7 +1763,7 @@ $("form").on("submit", function () {
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
+            <td id="ROW22" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
               <input class="display-input Show_input"
                      type="text"
                      id="r22_total_gross_long_short"
@@ -1682,7 +1771,7 @@ $("form").on("submit", function () {
                      style="background-color: #92D050; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
+            <td id="ROW22" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
               <input class="display-input Show_input"
                      type="text"
                      id="r22_net_position"
@@ -1694,7 +1783,7 @@ $("form").on("submit", function () {
           </tr>
           <tr>
           <td colspan="3"></td>
-          	<td style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
+          	<td id="ROW23" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
               <input class="display-input Show_input"
                      type="text"
                      id="r23_net_position"
@@ -1737,35 +1826,36 @@ $("form").on("submit", function () {
         </thead>
         <tbody id="entity3" th:each="report: ${reportsummary3}" style="font-family: Arial;">
             <tr>
-          	<td style="font-weight:bold; text-align:left;">General risk</td>
+          	<td id="ROW29" style="font-weight:bold; text-align:left;">General risk</td>
             <td style="padding-left: 20px; text-align:right;">
               <input class="display-input Show_input"
                      type="text"
-                     th:value="${report.r29_greater_net_long_or_short != null ? #numbers.formatDecimal(report.r29_greater_net_long_or_short, 1, 'COMMA', 2, 'POINT') : '0.00'}"
                      id="r29_greater_net_long_or_short"
                      name="r29_greater_net_long_or_short"
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; text-align:right;">
+            <td id="ROW29" style="padding-left: 20px; text-align:right;">
               <input class="display-input Show_input"
                      type="text"
-                     th:value="${report.r29_abs_value_net_gold_posi != null ? #numbers.formatDecimal(report.r29_abs_value_net_gold_posi, 1, 'COMMA', 2, 'POINT') : '0.00'}"
                      id="r29_abs_value_net_gold_posi"
                      name="r29_abs_value_net_gold_posi"
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
-            <td style="padding-left: 20px; font-weight: bold; background-color: grey;">
-              <input class="display-input Show_input"
-                     type="text"
-                     th:value="${report.r29_capital_require != null ? #numbers.formatDecimal(report.r29_capital_require, 1, 'COMMA', 2, 'POINT') : '0.00'}"
-                     id="r29_capital_require"
-                     name="r29_capital_require"
-                     style="background-color: grey; width: 200px; height: 28px; border-color: transparent; text-align: center;"
-                     readonly />
-            </td>
-            <td style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
+           <td id="ROW29" style="padding-left: 20px; font-weight: bold; background-color: grey; text-align: center; position: relative;">
+  <input class="display-input Show_input"
+         type="text"
+         th:value="${report.r29_capital_require != null ? #numbers.formatDecimal(report.r29_capital_require, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+         id="r29_capital_require"
+         name="r29_capital_require"
+         style="background-color: grey; width: 200px; height: 28px; border-color: transparent; text-align: right; padding-right: 20px; display: inline-block;"
+         readonly />
+  <span style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); pointer-events: none; color: black;">%</span>
+</td>
+
+
+            <td id="ROW29" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
               <input class="display-input Show_input"
                      type="text"
                      id="r29_capital_charge"
@@ -1802,7 +1892,7 @@ $("form").on("submit", function () {
 				
 			</div>
 		</div>
-	</div>
+	
 	
 	<!-- Custom Cellresult Modal -->
 		<div class="modal fade" id="cellresultModal">

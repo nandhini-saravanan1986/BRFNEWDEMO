@@ -83,6 +83,18 @@ public class M_FXR_Summary_Entity1{
 	private String r17_or;
 	private BigDecimal r17_net_short_position;
 
+
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Id
+	private Date report_date;
+	private String report_version;
+	private String report_frequency;
+	private String report_code;
+	private String report_desc;
+	private String entity_flg;
+	private String modify_flg;
+	private String del_flg;
 	
 	public String getR11_currency() {
 		return r11_currency;
@@ -652,18 +664,6 @@ public class M_FXR_Summary_Entity1{
 		this.del_flg = del_flg;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Id
-	private Date report_date;
-	private String report_version;
-	private String report_frequency;
-	private String report_code;
-	private String report_desc;
-	private String entity_flg;
-	private String modify_flg;
-	private String del_flg;
-	
 	public M_FXR_Summary_Entity1() {
 	super();
 	// TODO Auto-generated constructor stub

@@ -52,6 +52,12 @@ import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
 import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
+
+import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
+import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
+
 import com.bornfire.brf.services.RegulatoryReportServices;
 
 
@@ -306,6 +312,7 @@ public class CBUAE_BRF_ReportsController {
 		 @Autowired
 		 private BRRS_M_AIDP_ReportService AIDPreportService;
 		 
+		 
 		 @RequestMapping(value = "/AIDPupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
 		 @ResponseBody
 		 public ResponseEntity<String> updateAllReports(
@@ -331,6 +338,43 @@ public class CBUAE_BRF_ReportsController {
 		         AIDPreportService.updateReport2(request2);
 		         AIDPreportService.updateReport3(request3);
 		         AIDPreportService.updateReport4(request4);
+
+		         return ResponseEntity.ok("All Reports Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }	 
+		 
+		 
+		 @Autowired
+		 private BRRS_M_FXR_ReportService brrs_m_fxr_reportservice;
+		 
+
+		 @RequestMapping(value = "/FXRupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> updateAllReports(
+		         @RequestParam(required = false)
+		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+		         @ModelAttribute M_FXR_Summary_Entity1 request1,
+		         @ModelAttribute M_FXR_Summary_Entity2 request2,
+		         @ModelAttribute M_FXR_Summary_Entity3 request3
+		 ) {
+		     try {
+		         System.out.println("Came to single controller");
+
+		         // set date into all 3 entities
+		         request1.setReport_date(asondate);
+		         request2.setReport_date(asondate);
+		         request3.setReport_date(asondate);
+		     
+
+		         // call services
+		         brrs_m_fxr_reportservice.updateReport1(request1);
+		         brrs_m_fxr_reportservice.updateReport2(request2);
+		         brrs_m_fxr_reportservice.updateReport3(request3);
 
 		         return ResponseEntity.ok("All Reports Updated Successfully");
 		     } catch (Exception e) {
