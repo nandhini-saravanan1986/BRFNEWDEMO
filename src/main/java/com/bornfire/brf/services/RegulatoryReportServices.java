@@ -125,6 +125,10 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_PD_ReportService BRRS_M_PD_ReportService;
 	
+	@Autowired
+	BRRS_M_UNCONS_INVEST_ReportService BRRS_M_UNCONS_INVEST_ReportService;
+	
+	
 	
 
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
@@ -290,6 +294,10 @@ public class RegulatoryReportServices {
 		case "M_PD":
 			repsummary = BRRS_M_PD_ReportService.getM_PDview(reportId, fromdate, todate, currency, dtltype,
 					pageable, type, version);
+			break;
+			
+		case "M_UNCONS_INVEST":
+			repsummary = BRRS_M_UNCONS_INVEST_ReportService.getM_UNCONS_INVESTView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
 				
 
@@ -463,6 +471,8 @@ public class RegulatoryReportServices {
 			repdetail = BRRS_M_PD_ReportService.getM_PDcurrentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter, type, version);
 			break;
+			
+		
 
 		}
 
@@ -743,8 +753,19 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "M_UNCONS_INVEST":
+			try {
+				repfile = BRRS_M_UNCONS_INVEST_ReportService.BRRS_M_UNCONS_INVESTExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
 		}
+		
+		
 
 		return repfile;
 	}
@@ -1016,6 +1037,15 @@ public class RegulatoryReportServices {
 		case "M_LIQGAP":
 			try {
 				archivalData = brrs_m_liqgap_reportservice.getM_LIQGAPArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "M_UNCONS_INVEST":
+			try {
+				archivalData = BRRS_M_UNCONS_INVEST_ReportService.getM_UNCONS_INVESTArchival();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
