@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.ByteArrayResource;
@@ -51,15 +52,39 @@ import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity1;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity2;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity3;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity4;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity1;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity2;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity3;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity4;
 import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
+
 
 import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
 import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
 
+
+import com.bornfire.brf.services.BRRS_M_UNCONS_INVEST_ReportService;
+
 import com.bornfire.brf.services.RegulatoryReportServices;
 
+
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
+import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity1;
+import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity2;
+import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity3;
+import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity4;
+import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
+import com.bornfire.brf.services.BRRS_Q_BRANCHNET_ReportService;
+import com.bornfire.brf.services.RegulatoryReportServices;
 
 @Controller
 @ConfigurationProperties("default")
@@ -384,5 +409,169 @@ public class CBUAE_BRF_ReportsController {
 		     }
 		 }	 
 
+		 
+		 @Autowired
+		 private BRRS_M_UNCONS_INVEST_ReportService UNCreportService;
+		 
+		 @RequestMapping(value = "/UNCupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> updateUNCAllReports(
+		         @RequestParam(required = false)
+		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		         
+		         @RequestParam(required = false) String type,
+		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity1 request1,
+		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity2 request2,
+		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity3 request3,
+		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity4 request4
+		 ) {
+		     try {
+		         System.out.println("Came to single controller");
+		         System.out.println(type);
+
+		         // set date into all 4 entities
+		         request1.setREPORT_DATE(asondate);
+		         request2.setREPORT_DATE(asondate);
+		         request3.setREPORT_DATE(asondate);
+		         request4.setREPORT_DATE(asondate);
+
+		         if(type.equals("ARCHIVAL")) {
+		        	 M_UNCONS_INVEST_Archival_Summary_Entity1 Archivalrequest1 = new M_UNCONS_INVEST_Archival_Summary_Entity1();
+		        	 M_UNCONS_INVEST_Archival_Summary_Entity2 Archivalrequest2 = new M_UNCONS_INVEST_Archival_Summary_Entity2();
+		        	 M_UNCONS_INVEST_Archival_Summary_Entity3 Archivalrequest3 = new M_UNCONS_INVEST_Archival_Summary_Entity3();
+		        	 M_UNCONS_INVEST_Archival_Summary_Entity4 Archivalrequest4 = new M_UNCONS_INVEST_Archival_Summary_Entity4();
+		        	 BeanUtils.copyProperties(request1,Archivalrequest1);
+		        	 BeanUtils.copyProperties(request2,Archivalrequest2);
+		        	 BeanUtils.copyProperties(request3,Archivalrequest3);
+		        	 BeanUtils.copyProperties(request4,Archivalrequest4);
+		        	 UNCreportService.updateArchivalReport(Archivalrequest1);
+		        	 UNCreportService.updateArchivalReport2(Archivalrequest2);
+		        	 UNCreportService.updateArchivalReport3(Archivalrequest3);
+		        	 UNCreportService.updateArchivalReport4(Archivalrequest4);
+		         }
+		         else {
+		        	// call services
+			         UNCreportService.updateReport(request1);
+			         UNCreportService.updateReport2(request2);
+			         UNCreportService.updateReport3(request3);
+			         UNCreportService.updateReport4(request4);
+		        	 
+		         }
+		         
+
+		         return ResponseEntity.ok("All Reports Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+
+
+
+
+
+		 
+		 @Autowired
+		 private BRRS_Q_BRANCHNET_ReportService Q_BRANCHNETservice;
+		 
+		 @RequestMapping(value = "/QBRANCHNET1", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> QBranchnetUpdate1(
+		     @RequestParam(required = false) 
+		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		     @ModelAttribute Q_BRANCHNET_Summary_Entity1 request,
+		     HttpServletRequest req) {
+
+		     try {
+		         System.out.println("came to First controller");
+		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		        
+		         // ✅ set the asondate into entity
+		         request.setREPORT_DATE(asondate);
+
+		         Q_BRANCHNETservice.QBranchnetUpdate1(request);
+		         return ResponseEntity.ok("Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+
+		 @RequestMapping(value = "/QBRANCHNET2", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> QBranchnetUpdate2(
+		     @RequestParam(required = false) 
+		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		     @ModelAttribute Q_BRANCHNET_Summary_Entity2 request,
+		     HttpServletRequest req) {
+
+		     try {
+		         System.out.println("came to Second controller");
+		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		        
+		         // ✅ set the asondate into entity
+		         request.setREPORT_DATE(asondate);
+
+		         Q_BRANCHNETservice.QBranchnetUpdate2(request);
+		         return ResponseEntity.ok("Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+		 
+		 @RequestMapping(value = "/QBRANCHNET3", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> QBranchnetUpdate3(
+		     @RequestParam(required = false) 
+		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		     @ModelAttribute Q_BRANCHNET_Summary_Entity3 request,
+		     HttpServletRequest req) {
+
+		     try {
+		         System.out.println("came to Third controller");
+		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		       
+		         // ✅ set the asondate into entity
+		         request.setREPORT_DATE(asondate);
+
+		         Q_BRANCHNETservice.QBranchnetUpdate3(request);
+		         return ResponseEntity.ok("Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+		 
+		 @RequestMapping(value = "/QBRANCHNET4", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> QBranchnetUpdate4(
+		     @RequestParam(required = false) 
+		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		     @ModelAttribute Q_BRANCHNET_Summary_Entity4 request,
+		     HttpServletRequest req) {
+
+		     try {
+		         System.out.println("came to Fourth controller");
+		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		         
+		         // ✅ set the asondate into entity
+		         request.setREPORT_DATE(asondate);
+
+		         Q_BRANCHNETservice.QBranchnetUpdate4(request);
+		         return ResponseEntity.ok("Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+
+		 
+	}
 				
-}
+
