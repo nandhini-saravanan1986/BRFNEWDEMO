@@ -13,9 +13,9 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_M_FXR_SUMMARYTABLE1")
+@Table(name = "BRRS_M_FXR_ARCHIVALTABLE_SUMMARY1")
 
-public class M_FXR_Summary_Entity1{	
+public class M_FXR_Archival_Summary_Entity1{	
 	
 	
 	private String r11_currency;
@@ -950,7 +950,7 @@ public class M_FXR_Summary_Entity1{
 
 
 
-	public M_FXR_Summary_Entity1() {
+	public M_FXR_Archival_Summary_Entity1() {
 	super();
 	// TODO Auto-generated constructor stub
 }

@@ -994,7 +994,8 @@ function fileuploads(btn) {
 <button type="button" class="custom-tab-btn"
         onclick="showmodify(this);"
         title="Click to EDIT Records"
-        th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
+		th:if="${type != 'ARCHIVAL'}"
+       th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
         id="addRecord">Modify</button>
 
 <!-- Cancel button (hidden initially) -->
@@ -1012,7 +1013,7 @@ function fileuploads(btn) {
                     				 data-todate=${todate},
                     				 data-currency=${currency}, 
                     				 data-dtltype=${dtltype},
-                    				 data-filename='MSFinP2.xls',
+                    				 data-filename='M_FXR.xls',
 					 				 data-type=${type},
 					    			 data-version=${version}" onclick="downloadfile(this);">
 							<i class="fa fa-download"></i>

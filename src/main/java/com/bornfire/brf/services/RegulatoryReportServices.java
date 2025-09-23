@@ -842,7 +842,17 @@ public class RegulatoryReportServices {
 					e.printStackTrace();
 				}
 				break;				
-			
+
+		case "M_FXR":
+			try {
+					repfile = brrs_m_fxr_reportservice.getM_FXRExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;				
+
+				
 		case "M_CA5":
 			try {
 				repfile = brrs_m_ca5_reportservice.getM_CA5Excel(filename, reportId, fromdate, todate, currency, dtltype);
@@ -1282,7 +1292,16 @@ public class RegulatoryReportServices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			break;			
+			break;
+			
+		case "M_FXR":
+			try {
+				archivalData = brrs_m_fxr_reportservice.getM_FXRArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 			
 
 //		case "M_LA5":
