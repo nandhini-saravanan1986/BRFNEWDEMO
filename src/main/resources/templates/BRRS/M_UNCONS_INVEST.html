@@ -630,7 +630,8 @@ function cancelModify() {
 <button type="button" class="custom-tab-btn"
         onclick="showmodify(this);"
         title="Click to EDIT Records"
-       th:classappend="${(session.PERMISSIONS == 'W' and type != 'ARCHIVAL' and dtltype == 'report') ? 'addedit' : ''}"
+		th:if="${type != 'ARCHIVAL'}"
+       th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
         id="addRecord">Modify</button>
 
 <!-- Cancel button (hidden initially) -->
