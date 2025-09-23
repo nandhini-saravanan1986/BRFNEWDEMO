@@ -1,0 +1,2182 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!--
+CREATED BY	: KRISHNAPANDI MG
+CREATED ON	: 10.09.2025
+PURPOSE		: BWRBRREPORT
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+    <link rel="stylesheet" th:href="@{/css/CustomButton.css}" />
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon" />
+    <!-- JavaScript -->
+    <!-- jQuery core (required first) -->
+    <!-- ✅ Your manually placed jQuery validation
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	 <script th:src="/jquery/jquery.validate.min.js"></script>
+	 -->
+    <!-- jQuery (required first) -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+    <!-- ✅ jQuery Validation -->
+    <script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+        th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+    <!-- Bootstrap + Others -->
+    <script th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+    <script th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+    <style>
+        .btns {
+            float: right;
+            margin: 5px;
+        }
+
+        .col-sm-5 {
+            padding-bottom: 15px;
+        }
+
+        .list-body {
+            padding: 0px;
+        }
+
+        .error {
+            color: red;
+            padding-left: 10px;
+        }
+
+        .formline {
+            padding-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #E77400;
+            border-color: #0c0c0c;
+        }
+
+        .btn-primary:not (:disabled):not (.disabled).active,
+        .btn-primary:not (:disabled):not (.disabled):active,
+        .show>.btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #cc000000;
+            border-color: #161617;
+        }
+
+        #finusertb {
+            width: 460px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0px;
+        }
+    </style>
+    <style>
+        div span {
+            font-weight: bold;
+            color: white !important;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .card-header h5 {
+            font-size: 22px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .nav-tabs .nav-link {
+            font-weight: 500;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            background-color: #f1f1f1;
+            margin-right: 5px;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #ffffff;
+            border-color: #dee2e6 #dee2e6 #ffffff;
+        }
+
+        .table-responsive {
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f3f6f9;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: #e9ecf0;
+            z-index: 1;
+        }
+
+        .table td {
+            background-color: #FFFFFF;
+        }
+
+        .card-footer {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn-xs {
+            padding: 4px 12px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        #BRRSvalidation th,
+        #usertable td {
+            vertical-align: middle;
+            text-align: left;
+            font-size: 16px;
+            font-family: Arial;
+        }
+
+        .fa-edit:hover {
+            color: #28a745;
+            transform: scale(1.1);
+        }
+
+        td {
+            border: 1px solid rgb(0, 164, 166);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+
+        .error {
+            color: red;
+            padding-top: 15px;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus~.form-legend,
+        .form-control:not (:placeholder-shown)~.form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover~.form-legend {
+            color: #0056b3;
+            /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not (:focus)~.form-legend {
+            color: #aaa;
+            /* Normal label color */
+        }
+    </style>
+    <style>
+        /* Red border for invalid inputs */
+        input.error,
+        select.error {
+            border: 2px solid red !important;
+        }
+
+        /* Error message style */
+        label.error {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .underline {
+            text-decoration: underline;
+            color: #08a6f1;
+            cursor: pointer;
+        }
+
+        .left-arrow-circle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .left-arrow-circle i {
+            color: rgb(107, 122, 143);
+        }
+
+        .left-arrow-circle:hover {
+            background-color: rgb(107, 122, 143);
+            cursor: pointer;
+            transform: scale(1.05);
+            border: 2px solid white;
+        }
+
+        .left-arrow-circle:hover i {
+            color: white;
+        }
+
+        .white-text span {
+            color: white !important;
+        }
+
+        .table-cell tbody td:hover {
+            background-color: #f0f0f0;
+            /* Hover color for cell */
+            cursor: pointer;
+            /* Optional: pointer cursor */
+        }
+
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #000 !important;
+        }
+    </style>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            // hide loader on normal load
+            $('#loader').modal('hide');
+        });
+        $(window).on('pageshow', function () {
+            // hide loader on back/forward nav
+            $('#loader').modal('hide');
+        });
+        $(window).on('beforeunload', function () {
+            // hide loader on leaving page
+            $('#loader').modal('hide');
+        });
+
+        function home() {
+            $("#loader").modal("toggle");
+            location.href = 'Dashboard'
+        }
+        function back() {
+            $("#loader").modal("toggle");
+            window.history.back();
+        }
+
+        //to fetch summary from the database - called from the summary button
+        function showdetails() {
+            alert("Details page not available for Manual Report");
+        }
+
+        function showsummary() {
+            $('#loader').modal('show');
+            var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type}, asondate=${asondate})}]]*/;
+            location.href = Callurl;
+        }
+
+
+    </script>
+    <script>
+        function activateTab(tabName) {
+            // Remove 'active' from all buttons
+            document.querySelectorAll('.custom-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Add 'active' to selected button
+            if (tabName === 'summary') {
+                document.getElementById('custom-tab-btnSummary').classList.add('active');
+            } else if (tabName === 'Details') {
+                document.getElementById('custom-tab-btnDetails').classList.add('active');
+            }
+        }
+        window.onload = function () {
+            /* setTimeout(function() {
+                var selectedTab = document.getElementById("selectedTab").value;
+                alert(selectedTab);
+                activateTab(selectedTab);
+            }, 10000); */ // 10,000 milliseconds = 10 seconds
+
+            var selectedTab = document.getElementById("selectedTab").value;
+            activateTab(selectedTab);
+        };
+        function downloadfile(button) {
+            var reportid = button.getAttribute('data-reportid');
+            var asondate = button.getAttribute('data-asondate');
+            var fromdate = button.getAttribute('data-fromdate');
+            var todate = button.getAttribute('data-todate');
+            var currency = button.getAttribute('data-currency');
+            var subreportid = button.getAttribute('data-subreportid');
+            var secid = button.getAttribute('data-secid');
+            var dtltype = button.getAttribute('data-dtltype');
+            var filename = button.getAttribute('data-filename');
+            $('#loader').modal('show');
+            $.ajax({
+                url: './downloadExcel?reportid=' + reportid +
+                    '&fromdate=' + fromdate +
+                    '&asondate=' + asondate +
+                    '&todate=' + todate +
+                    '&currency=' + currency +
+                    '&subreportid=' + subreportid +
+                    '&secid=' + secid +
+                    '&filename=' + filename,
+                type: 'GET',
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (data) {
+                    $('#loader').modal('hide');
+                    if (data && data.size > 100) {
+                        const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = url;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                        showResultModal('BRRS', filename + ' downloaded successfully.');
+                    } else {
+                        showResultModal('Information', 'No data was available to create a download.');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $('#loader').modal('hide');
+                    console.error("Download failed:", textStatus, errorThrown);
+                    showResultModal('Error', 'An error occurred while downloading the file. Please try again.');
+                }
+            });
+        }
+        function editRecord() {
+            showResultModal('Alert', 'Development in progress');
+
+        }
+        function closemodel() {
+            $('#alert').modal('hide');
+            $('#resultModal').modal('hide');
+
+        }
+        function showResultModal(title, message) {
+            // Set the text for the modal elements
+            $('#resultModalLabel').text(title);
+            $('#resultModalBody').text(message);
+            // Show the modal
+            $('#resultModal').modal('show');
+        }
+    </script>
+
+
+
+
+
+
+
+
+    <script>
+        // Show Modify (enable inputs & dropdowns)
+        function showmodify(btn) {
+            $(".Show_input").removeAttr("readonly").removeAttr("disabled");
+
+            /* for (let i = 10; i <= 19; i++) {
+                 $("#r" + i + "_NO_OF_BRANCHES_TEXT").hide();
+                 $("#r" + i + "_NO_OF_SUB_BRANCHES_TEXT").hide();
+                 $("#r" + i + "_NO_OF_AGENCIES_TEXT").hide();
+         
+                 $("#r" + i + "_NO_OF_BRANCHES").show();
+                 $("#r" + i + "_NO_OF_SUB_BRANCHES").show();
+                 $("#r" + i + "_NO_OF_AGENCIES").show();
+             }
+         
+             for (let i = 25; i <= 34; i++) {
+                $("#r" + i + "_NO_OF_ATMS_TEXT").hide();
+                 $("#r" + i + "_NO_OF_MINI_ATMS_TEXT").hide();
+                 $("#r" + i + "_ENCASHMENT_POINTS_TEXT").hide();
+         
+                 $("#r" + i + "_NO_OF_ATMS").show();
+                 $("#r" + i + "_NO_OF_MINI_ATMS").show();
+                 $("#r" + i + "_ENCASHMENT_POINTS").show();
+             }
+             
+             for (let i = 40; i <= 49; i++) {
+               $("#r" + i + "_OPEING_NO_OF_CARDS_TEXT").hide();
+                 $("#r" + i + "_NO_OF_CARDS_ISSUED_TEXT").hide();
+                 $("#r" + i + "_NO_CARDS_OF_CLOSED_TEXT").hide();
+         
+                 $("#r" + i + "_OPEING_NO_OF_CARDS").show();
+                 $("#r" + i + "_NO_OF_CARDS_ISSUED").show();
+                 $("#r" + i + "_NO_CARDS_OF_CLOSED").show();
+             }
+             
+             for (let i = 55; i <= 64; i++) {
+                  $("#r" + i + "_OPEING_NO_OF_CARDS_TEXT").hide();
+                 $("#r" + i + "_NO_OF_CARDS_ISSUED_TEXT").hide();
+                 $("#r" + i + "_NO_CARDS_OF_CLOSED_TEXT").hide();
+         
+                 $("#r" + i + "_OPEING_NO_OF_CARDS").show();
+                 $("#r" + i + "_NO_OF_CARDS_ISSUED").show();
+                 $("#r" + i + "_NO_CARDS_OF_CLOSED").show();
+             }
+             */
+            // Toggle buttons
+            $("#submitButton, #btnBack_edit").show();
+            $("#btnBack").hide();
+
+            // Show Cancel button only when Modify is clicked
+            $("#cancelRecord").show();
+
+            // Optionally hide the clicked Modify button
+            $(btn).hide();
+        }
+
+        //Cancel / Reset function
+        function cancelModify() {
+            if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
+                // ✅ Only when user clicks YES
+                location.reload();
+
+                $(".Show_input").attr("readonly", true).attr("disabled", true);
+                /*
+                        for (let i = 10; i <= 19; i++)  {
+                         $("#r" + i + "_NO_OF_BRANCHES_TEXT").hide();
+                        $("#r" + i + "_NO_OF_SUB_BRANCHES_TEXT").hide();
+                        $("#r" + i + "_NO_OF_AGENCIES_TEXT").hide();
+                
+                        $("#r" + i + "_NO_OF_BRANCHES").show();
+                        $("#r" + i + "_NO_OF_SUB_BRANCHES").show();
+                        $("#r" + i + "_NO_OF_AGENCIES").show();
+                        }
+                */
+                $("#submitButton, #btnBack_edit").hide();
+                $("#btnBack").show();
+
+                // Hide Cancel button again
+                $("#cancelRecord").hide();
+
+                // Show all Modify buttons
+                $("#addRecord").show();
+            }
+            // ❌ If user clicks CANCEL, nothing happens
+        }
+    </script>
+
+    <SCRIPT>
+        // ---- R20 TOTAL (R10–R19) ----
+        function calculateR20Totals() {
+            let branches = 0, subBranches = 0, agencies = 0;
+
+            for (let i = 10; i <= 19; i++) {
+                let b = parseFloat($("#r" + i + "_no1_of_branches").val().replace(/,/g, "")) || 0;
+                let s = parseFloat($("#r" + i + "_no1_of_sub_branches").val().replace(/,/g, "")) || 0;
+                let a = parseFloat($("#r" + i + "_no1_of_agencies").val().replace(/,/g, "")) || 0;
+
+                branches += b;
+                subBranches += s;
+                agencies += a;
+            }
+
+            $("#r20_no1_of_branches").val(branches.toLocaleString('en-IN'));
+            $("#r20_no1_of_sub_branches").val(subBranches.toLocaleString('en-IN'));
+            $("#r20_no1_of_agencies").val(agencies.toLocaleString('en-IN'));
+        }
+
+        $(document).ready(function () {
+            calculateR20Totals();
+            for (let i = 10; i <= 19; i++) {
+                $("#r" + i + "_no1_of_branches, #r" + i + "_no1_of_sub_branches, #r" + i + "_no1_of_agencies")
+                    .on("input", calculateR20Totals);
+            }
+        });
+
+
+        // ---- R35 TOTAL (R25–R34) ----
+        function calculateR35Totals() {
+            let atm = 0, miniAtm = 0, encashmentPoints = 0;
+
+            for (let i = 25; i <= 34; i++) {
+                let a = parseFloat($("#r" + i + "_no_of_atms").val().replace(/,/g, "")) || 0;
+                let ma = parseFloat($("#r" + i + "_no_of_mini_atms").val().replace(/,/g, "")) || 0;
+                let ep = parseFloat($("#r" + i + "_encashment_points").val().replace(/,/g, "")) || 0;
+
+                atm += a;
+                miniAtm += ma;
+                encashmentPoints += ep;
+            }
+
+            $("#r35_no_of_atms").val(atm.toLocaleString('en-IN'));
+            $("#r35_no_of_mini_atms").val(miniAtm.toLocaleString('en-IN'));
+            $("#r35_encashment_points").val(encashmentPoints.toLocaleString('en-IN'));
+        }
+
+        $(document).ready(function () {
+            calculateR35Totals();
+            for (let i = 25; i <= 34; i++) {
+                // CORRECTED LINE: The selectors now match the input IDs for ATMs and Encashment Points.
+                $("#r" + i + "_no_of_atms, #r" + i + "_no_of_mini_atms, #r" + i + "_encashment_points")
+                    .on("input", calculateR35Totals);
+            }
+        });
+
+
+        // ---- R50 TOTAL (R40–R49) ----
+        function calculateR50Totals() {
+            let openingTotal = 0, issuedTotal = 0, closedTotal = 0, closingTotal = 0;
+
+            for (let i = 40; i <= 49; i++) {
+                let opening = parseFloat($("#r" + i + "_opeing_no_of_cards").val().replace(/,/g, "")) || 0;
+                let issued = parseFloat($("#r" + i + "_no_of_cards_issued").val().replace(/,/g, "")) || 0;
+                let closed = parseFloat($("#r" + i + "_no_cards_of_closed").val().replace(/,/g, "")) || 0;
+
+
+                // calculate closing balance for the row
+                let closing = opening + issued - closed;
+
+                // update the row’s closing balance cell
+                $("#r" + i + "_closing_bal_of_active_cards").val(closing.toLocaleString('en-IN'));
+
+                // accumulate totals
+                openingTotal += opening;
+                issuedTotal += issued;
+                closedTotal += closed;
+                closingTotal += closing;
+            }
+
+            // update TOTAL row (R50)
+            $("#r50_opeing_no_of_cards").val(openingTotal.toLocaleString('en-IN'));
+            $("#r50_no_of_cards_issued").val(issuedTotal.toLocaleString('en-IN'));
+            $("#r50_no_cards_of_closed").val(closedTotal.toLocaleString('en-IN'));
+            $("#r50_closing_bal_of_active_cards").val(closingTotal.toLocaleString('en-IN'));
+        }
+
+        $(document).ready(function () {
+            calculateR50Totals();
+
+            // re-calc when user edits inputs
+            for (let i = 40; i <= 49; i++) {
+                $("#r" + i + "_opeing_no_of_cards, #r" + i + "_no_of_cards_issued, #r" + i + "_no_cards_of_closed")
+                    .on("input", calculateR50Totals);
+            }
+        });
+
+
+        // ---- R65 TOTAL (R55–R64) ----
+        function calculateR65Totals() {
+            let openingTotal = 0, issuedTotal = 0, closedTotal = 0, closingTotal = 0;
+
+            for (let i = 55; i <= 64; i++) {
+                let opening = parseFloat($("#r" + i + "_opeing_no_of_cards").val().replace(/,/g, "")) || 0;
+                let issued = parseFloat($("#r" + i + "_no_of_cards_issued").val().replace(/,/g, "")) || 0;
+                let closed = parseFloat($("#r" + i + "_no_cards_of_closed").val().replace(/,/g, "")) || 0;
+
+                // closing balance per row
+                let closing = opening + issued - closed;
+
+                // update row’s closing balance
+                $("#r" + i + "_closing_bal_of_active_cards").val(closing.toLocaleString('en-IN'));
+
+                // add to totals
+                openingTotal += opening;
+                issuedTotal += issued;
+                closedTotal += closed;
+                closingTotal += closing;
+            }
+
+            // update TOTAL row (R65)
+            $("#r65_opeing_no_of_cards").val(openingTotal.toLocaleString('en-IN'));
+            $("#r65_no_of_cards_issued").val(issuedTotal.toLocaleString('en-IN'));
+            $("#r65_no_cards_of_closed").val(closedTotal.toLocaleString('en-IN'));
+            $("#r65_closing_bal_of_active_cards").val(closingTotal.toLocaleString('en-IN'));
+        }
+
+        $(document).ready(function () {
+            calculateR65Totals();
+            for (let i = 55; i <= 64; i++) {
+                $("#r" + i + "_opeing_no_of_cards, #r" + i + "_no_of_cards_issued, #r" + i + "_no_cards_of_closed")
+                    .on("input", calculateR65Totals);
+            }
+        });
+    </SCRIPT>
+
+
+    <script>
+        function closemodel() {
+            $("#resultModal").modal("hide");
+            $('#loader').modal('hide');
+            setTimeout(() => location.reload(), 300);
+        }
+
+        function fileuploads(btn) {
+            const asondate = btn.getAttribute("data-todate");
+            $('#loader').modal('show');
+
+            // Ensure totals are up-to-date
+            calculateR20Totals();
+            calculateR35Totals();
+            calculateR50Totals();
+            calculateR65Totals();
+
+            // Remove commas before sending
+            $("#fileupload input[type='text']").each(function () {
+                if (this.value.includes(",")) {
+                    this.value = this.value.replace(/,/g, '');
+                }
+            });
+
+            if (!$("#fileupload").valid()) {
+                $('#loader').modal('hide');
+                return;
+            }
+
+            const $form = $('#fileupload');
+            const $inputs = $form.find(':input');
+
+            // Helper to get all fields for a range + totals by prefix
+            const getEntityFields = (start, end, totalPrefix) =>
+                $inputs.filter(function () {
+                    const name = $(this).attr('name');
+                    if (!name) return false;
+                    const match = name.match(/R(\d+)_/i);
+                    if (match) {
+                        const row = parseInt(match[1], 10);
+                        return row >= start && row <= end;
+                    }
+                    return name.startsWith(totalPrefix);
+                });
+
+            // // Build form data for each entity
+            // const formData1 = new FormData();
+            // formData1.append("asondate", asondate);
+            // getEntityFields(10, 19, "R20_").each(function () {
+            //     formData1.append(this.name, this.value);
+            // });
+
+            const formData1 = new FormData();
+            formData1.append("asondate", asondate);
+
+
+            // Send AJAX requests
+            const deferreds = [
+                $.ajax({ url: './QBRANCHNET1', type: 'POST', data: formData1, processData: false, contentType: false }),
+                $.ajax({ url: './QBRANCHNET2', type: 'POST', data: formData2, processData: false, contentType: false }),
+                $.ajax({ url: './QBRANCHNET3', type: 'POST', data: formData3, processData: false, contentType: false }),
+                $.ajax({ url: './QBRANCHNET4', type: 'POST', data: formData4, processData: false, contentType: false })
+            ];
+
+            $.when(...deferreds)
+                .done(() => {
+                    $("#resultModalLabel").text("Success");
+                    $("#resultModalBody").text("All reports updated successfully.");
+                    $("#resultModal").modal("show");
+                })
+                .fail((jqXHR) => {
+                    console.error("Error:", jqXHR.status, jqXHR.responseText);
+                    $("#resultModalLabel").text("Error");
+                    $("#resultModalBody").text("One or more updates failed. Please try again.");
+                    $("#resultModal").modal("show");
+                })
+                .always(() => $('#loader').modal('hide'));
+        }
+    </script>
+    <script>
+        // Define the raw formulas as a list of strings
+        const rawFormulas = [
+            'C20=SUM(C10:C19)',
+            'D20=SUM(D10:D19)',
+            'E20=SUM(E10:E19)',
+            'C35=SUM(C25:C34)',
+            'D35=SUM(D25:D34)',
+            'E35=SUM(E25:E34)',
+            'C50=SUM(C40:C49)',
+            'D50=SUM(D40:D49)',
+            'E50=SUM(E40:E49)',
+            'C65=SUM(C55:C64)',
+            'D65=SUM(D55:D64)',
+            'E65=SUM(E55:E64)',
+            'F40=C40+D40-E40',
+            'F41=C41+D41-E41',
+            'F42=C42+D42-E42',
+            'F43=C43+D43-E43',
+            'F44=C44+D44-E44',
+            'F45=C45+D45-E45',
+            'F46=C46+D46-E46',
+            'F47=C47+D47-E47',
+            'F48=C48+D48-E48',
+            'F49=C49+D49-E49',
+            'F50=C50+D50-E50',
+            'F55=C55+D55-E55',
+            'F56=C56+D56-E56',
+            'F57=C57+D57-E57',
+            'F58=C58+D58-E58',
+            'F59=C59+D59-E59',
+            'F60=C60+D60-E60',
+            'F61=C61+D61-E61',
+            'F62=C62+D62-E62',
+            'F63=C63+D63-E63',
+            'F64=C64+D64-E64',
+            'F65=C65+D65-E65'
+        ];
+
+        function parseExcelFormula(formula) {
+            const parts = formula.split('=');
+            const targetCellId = parts[0];
+            const formulaStr = parts[1];
+
+            if (formulaStr.startsWith('SUM')) {
+                const rangeMatch = formulaStr.match(/SUM\(([A-Z]+\d+):([A-Z]+\d+)\)/);
+                if (!rangeMatch) return null;
+
+                const startCell = rangeMatch[1];
+                const endCell = rangeMatch[2];
+                const startCol = startCell.match(/[A-Z]+/)[0];
+                const startRow = parseInt(startCell.match(/\d+/)[0]);
+                const endCol = endCell.match(/[A-Z]+/)[0];
+                const endRow = parseInt(endCell.match(/\d+/)[0]);
+
+                const sourceCells = [];
+                const colStartCharCode = startCol.charCodeAt(0);
+                const colEndCharCode = endCol.charCodeAt(0);
+
+                for (let colCharCode = colStartCharCode; colCharCode <= colEndCharCode; colCharCode++) {
+                    const colLetter = String.fromCharCode(colCharCode);
+                    for (let row = startRow; row <= endRow; row++) {
+                        sourceCells.push(colLetter + row);
+                    }
+                }
+                return { target: targetCellId, type: 'sum', cells: sourceCells };
+            } else {
+                const cells = formulaStr.match(/[A-Z]+\d+/g);
+                return { target: targetCellId, type: 'arithmetic', expression: formulaStr, cells: cells };
+            }
+        }
+
+        const parsedFormulas = rawFormulas.map(parseExcelFormula);
+
+        function getCellValue(cellId) {
+            const cellElement = document.getElementById(cellId);
+            if (!cellElement) return 0;
+            const inputElement = cellElement.querySelector('input');
+            const value = inputElement ? parseFloat(inputElement.value) || 0 : parseFloat(cellElement.textContent) || 0;
+            return value;
+        }
+
+        function calculateValues() {
+            for (const formula of parsedFormulas) {
+                let result;
+                if (formula.type === 'sum') {
+                    result = 0;
+                    for (const cellId of formula.cells) {
+                        result += getCellValue(cellId);
+                    }
+                } else if (formula.type === 'arithmetic') {
+                    let expression = formula.expression;
+                    for (const cellId of formula.cells) {
+                        const value = getCellValue(cellId);
+                        expression = expression.replace(cellId, value);
+                    }
+                    // Use a safe way to evaluate the expression
+                    try {
+                        result = eval(expression); // Note: eval can be a security risk, but for this use case on a controlled page, it's acceptable.
+                    } catch (e) {
+                        result = 0;
+                    }
+                }
+
+                const targetElement = document.getElementById(formula.target);
+                if (targetElement) {
+                    targetElement.textContent = result.toString();
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', calculateValues);
+        document.addEventListener('input', calculateValues);
+    </script>
+
+</head>
+<title>BRRS</title>
+
+<body>
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+        <div class="row">
+            <div th:insert="HeaderMenu :: header"></div>
+            <div class="card">
+                <div class="card-header"
+                    style="background-color: rgb(107, 122, 143); display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center;" onclick="back();">
+                        <!-- ⬅️ Left circular arrow -->
+                        <div class="left-arrow-circle">
+                            <i class="fa fa-arrow-left"></i>
+                        </div>
+                        <!-- Title -->
+                        <h5
+                            style="font-family: arial; font-size: 20px; padding-top: 10px; font-weight: bold; color: white;">
+                            QUARTERLY SCHEDLE: BRANCH NETWORK"</h5>
+                    </div>
+                    <div class="custom-tab-btn-group nav-buttons"
+                        style="display: flex; color: white; align-items: center;">
+                        <!-- 📅 Date -->
+                        <span class="white-text"
+                            style="color: white !important; font-size: 16px; margin-right: 20px;">Report
+                            Date: <span th:text="${asondate}">2025-07-04</span>
+                        </span>
+                        <!-- Buttons -->
+                        <input type="hidden" id="selectedTab" th:value="${displaymode}">
+                        <button type="button" class="custom-tab-btn" id="custom-tab-btnSummary" onclick="showsummary();"
+                            th:if="${displaymode == 'Details'}">Summary</button>
+                        <button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();"
+                            th:if="${displaymode == 'summary'}">Details</button>
+
+                        <!-- Modify button -->
+                        <button type="button" class="custom-tab-btn" onclick="showmodify(this);"
+                            title="Click to EDIT Records"
+                            th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
+                            id="addRecord">Modify</button>
+
+                        <!-- Cancel button (hidden initially) -->
+                        <button type="button" class="custom-tab-btn" title="Cancel editing" id="cancelRecord"
+                            onclick="cancelModify();" style="display: none;">Cancel</button>
+
+
+                        <!-- <button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+							th:if="${displaymode == 'summary'}" th:attr="data-reportid=${reportid},
+                   				 data-asondate=${asondate},
+                   				 data-fromdate=${fromdate},
+                    				 data-todate=${todate},
+                    				 data-currency=${currency}, 
+                    				 data-dtltype=${dtltype},
+                    				 data-filename='MSFinP2.xls',
+					 				 data-type=${type},
+					    			 data-version=${version}" onclick="downloadfile(this);">
+							<i class="fa fa-download"></i>
+						</button>
+						
+						
+
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+							th:if="${displaymode == 'Details'}" onclick="startReport(this);" th:attr="
+								    data-fromdate=${fromdate},
+								    data-todate=${todate},
+									data-currency=${currency},  
+												data-dtltype=${dtltype}, 
+								    data-filename='MSFinP2Detail',
+									data-type=${type},
+												data-version=${version}
+								  ">
+							<i class="fa fa-download"></i>
+						</button> -->
+
+
+                    </div>
+
+                </div>
+                <div th:if="${displaymode == 'summary'}">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form action="#" method="POST" id="fileupload">
+                                <div class="table-wrapper table-responsive scrollable-table-container"
+                                    style="border-right: 1px solid #dee2e6;">
+
+                                    <!DOCTYPE html>
+                                    <html lang="en">
+
+                                    <head>
+                                        <meta charset="UTF-8">
+                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                        <title>Bank Report</title>
+                                        <style>
+                                            table {
+                                                border-collapse: collapse;
+                                                width: 100%;
+                                                font-family: Arial, sans-serif;
+                                                font-size: 14px;
+                                            }
+
+                                            th,
+                                            td {
+                                                border: 1px solid #000;
+                                                padding: 8px;
+                                                text-align: left;
+                                            }
+
+                                            th {
+                                                background-color: #ffffff;
+                                            }
+
+                                            .header-cell {
+                                                background-color: #ffffff;
+                                                font-weight: bold;
+                                                text-align: center;
+                                            }
+
+                                            .section-header {
+                                                background-color: #92D050;
+                                                font-weight: bold;
+                                            }
+
+                                            input[type="number"] {
+                                                width: 100%;
+                                                box-sizing: border-box;
+                                                border: none;
+                                                background: transparent;
+                                            }
+
+                                            .total-row td {
+                                                background-color: #92D050;
+                                                font-weight: bold;
+                                            }
+
+                                            input {
+                                                text-align: right;
+                                            }
+                                        </style>
+                                    </head>
+
+                                    <body>
+
+                                        <table>
+
+                                            <tbody th:each="report: ${reportsummary}">
+                                                
+                                                <tr>
+                                                    <th id="A8" colspan="4">(13A) Branches and Sub Branches</th>
+                                                </tr>
+                                                <tr>
+                                                    <td id="A9"></td>
+                                                    <th id="B9">District</th>
+                                                    <th id="C9">No. of Branches</th>
+                                                    <th id="D9">No. of Sub-branches</th>
+                                                    <th id="E9">No. of Agencies</th>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A10">1</td>
+                                                    <td id="B10">Central
+                                                        <input type="hidden" name="r10_bran_sub_bran_district"
+                                                            value="Central">
+                                                    </td>
+                                                    <td id="C10"><input type="number" id="C10_input"
+                                                            name="r10_no1_of_branches"
+                                                            th:value="${report.r10_no1_of_branches != null ? #numbers.formatDecimal(report.r10_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D10"><input type="number" id="D10_input"
+                                                            name="r10_no1_of_sub_branches"
+                                                            th:value="${report.r10_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r10_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E10"><input type="number" id="E10_input"
+                                                            name="r10_no1_of_agencies"
+                                                            th:value="${report.r10_no1_of_agencies != null ? #numbers.formatDecimal(report.r10_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A11">2</td>
+                                                    <td id="B11">Ghanzi
+                                                        <input type="hidden" name="r11_bran_sub_bran_district"
+                                                            value="Ghanzi">
+                                                    </td>
+                                                    <td id="C11"><input type="number" id="C11_input"
+                                                            name="r11_no1_of_branches"
+                                                            th:value="${report.r11_no1_of_branches != null ? #numbers.formatDecimal(report.r11_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D11"><input type="number" id="D11_input"
+                                                            name="r11_no1_of_sub_branches"
+                                                            th:value="${report.r11_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r11_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E11"><input type="number" id="E11_input"
+                                                            name="r11_no1_of_agencies"
+                                                            th:value="${report.r11_no1_of_agencies != null ? #numbers.formatDecimal(report.r11_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A12">3</td>
+                                                    <td id="B12">Kgalagadi
+                                                        <input type="hidden" name="r12_bran_sub_bran_district"
+                                                            value="Kgalagadi">
+                                                    </td>
+                                                    <td id="C12"><input type="number" id="C12_input"
+                                                            name="r12_no1_of_branches"
+                                                            th:value="${report.r12_no1_of_branches != null ? #numbers.formatDecimal(report.r12_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D12"><input type="number" id="D12_input"
+                                                            name="r12_no1_of_sub_branches"
+                                                            th:value="${report.r12_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r12_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E12"><input type="number" id="E12_input"
+                                                            name="r12_no1_of_agencies"
+                                                            th:value="${report.r12_no1_of_agencies != null ? #numbers.formatDecimal(report.r12_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A13">4</td>
+                                                    <td id="B13">Kgatleng
+                                                        <input type="hidden" name="r13_bran_sub_bran_district"
+                                                            value="Kgatleng">
+                                                    </td>
+                                                    <td id="C13"><input type="number" id="C13_input"
+                                                            name="r13_no1_of_branches"
+                                                            th:value="${report.r13_no1_of_branches != null ? #numbers.formatDecimal(report.r13_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D13"><input type="number" id="D13_input"
+                                                            name="r13_no1_of_sub_branches"
+                                                            th:value="${report.r13_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r13_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E13"><input type="number" id="E13_input"
+                                                            name="r13_no1_of_agencies"
+                                                            th:value="${report.r13_no1_of_agencies != null ? #numbers.formatDecimal(report.r13_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A14">5</td>
+                                                    <td id="B14">Kweneng
+                                                        <input type="hidden" name="r14_bran_sub_bran_district"
+                                                            value="Kweneng">
+                                                    </td>
+                                                    <td id="C14"><input type="number" id="C14_input"
+                                                            name="r14_no1_of_branches"
+                                                            th:value="${report.r14_no1_of_branches != null ? #numbers.formatDecimal(report.r14_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D14"><input type="number" id="D14_input"
+                                                            name="r14_no1_of_sub_branches"
+                                                            th:value="${report.r14_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r14_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E14"><input type="number" id="E14_input"
+                                                            name="r14_no1_of_agencies"
+                                                            th:value="${report.r14_no1_of_agencies != null ? #numbers.formatDecimal(report.r14_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A15">6</td>
+                                                    <td id="B15">North East
+                                                        <input type="hidden" name="r15_bran_sub_bran_district"
+                                                            value="North East">
+                                                    </td>
+                                                    <td id="C15"><input type="number" id="C15_input"
+                                                            name="r15_no1_of_branches"
+                                                            th:value="${report.r15_no1_of_branches != null ? #numbers.formatDecimal(report.r15_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D15"><input type="number" id="D15_input"
+                                                            name="r15_no1_of_sub_branches"
+                                                            th:value="${report.r15_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r15_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E15"><input type="number" id="E15_input"
+                                                            name="r15_no1_of_agencies"
+                                                            th:value="${report.r15_no1_of_agencies != null ? #numbers.formatDecimal(report.r15_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A16">7</td>
+                                                    <td id="B16">North West
+                                                        <input type="hidden" name="r16_bran_sub_bran_district"
+                                                            value="North West">
+                                                    </td>
+                                                    <td id="C16"><input type="number" id="C16_input"
+                                                            name="r16_no1_of_branches"
+                                                            th:value="${report.r16_no1_of_branches != null ? #numbers.formatDecimal(report.r16_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D16"><input type="number" id="D16_input"
+                                                            name="r16_no1_of_sub_branches"
+                                                            th:value="${report.r16_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r16_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E16"><input type="number" id="E16_input"
+                                                            name="r16_no1_of_agencies"
+                                                            th:value="${report.r16_no1_of_agencies != null ? #numbers.formatDecimal(report.r16_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A17">8</td>
+                                                    <td id="B17">South East
+                                                        <input type="hidden" name="r17_bran_sub_bran_district"
+                                                            value="South East">
+                                                    </td>
+                                                    <td id="C17"><input type="number" id="C17_input"
+                                                            name="r17_no1_of_branches"
+                                                            th:value="${report.r17_no1_of_branches != null ? #numbers.formatDecimal(report.r17_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D17"><input type="number" id="D17_input"
+                                                            name="r17_no1_of_sub_branches"
+                                                            th:value="${report.r17_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r17_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E17"><input type="number" id="E17_input"
+                                                            name="r17_no1_of_agencies"
+                                                            th:value="${report.r17_no1_of_agencies != null ? #numbers.formatDecimal(report.r17_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A18">9</td>
+                                                    <td id="B18">Southern
+                                                        <input type="hidden" name="r18_bran_sub_bran_district"
+                                                            value="Southern">
+                                                    </td>
+                                                    <td id="C18"><input type="number" id="C18_input"
+                                                            name="r18_no1_of_branches"
+                                                            th:value="${report.r18_no1_of_branches != null ? #numbers.formatDecimal(report.r18_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D18"><input type="number" id="D18_input"
+                                                            name="r18_no1_of_sub_branches"
+                                                            th:value="${report.r18_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r18_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E18"><input type="number" id="E18_input"
+                                                            name="r18_no1_of_agencies"
+                                                            th:value="${report.r18_no1_of_agencies != null ? #numbers.formatDecimal(report.r18_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A19">10</td>
+                                                    <td id="B19">Chobe
+                                                        <input type="hidden" name="r19_bran_sub_bran_district"
+                                                            value="Chobe">
+                                                    </td>
+                                                    <td id="C19"><input type="number" id="C19_input"
+                                                            name="r19_no1_of_branches"
+                                                            th:value="${report.r19_no1_of_branches != null ? #numbers.formatDecimal(report.r19_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D19"><input type="number" id="D19_input"
+                                                            name="r19_no1_of_sub_branches"
+                                                            th:value="${report.r19_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r19_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E19"><input type="number" id="E19_input"
+                                                            name="r19_no1_of_agencies"
+                                                            th:value="${report.r19_no1_of_agencies != null ? #numbers.formatDecimal(report.r19_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="total-row">
+                                                    <td id="A20">11</td>
+                                                    <td id="B20">Total
+                                                        <input type="hidden" name="r20_bran_sub_bran_district"
+                                                            value="Total">
+                                                    </td>
+                                                    <td id="C20" class="green-fill">
+                                                        - <input type="hidden" name="r20_no1_of_branches"
+                                                            th:value="${report.r20_no1_of_branches != null ? #numbers.formatDecimal(report.r20_no1_of_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="D20" class="green-fill">
+                                                        - <input type="hidden" name="r20_no1_of_sub_branches"
+                                                            th:value="${report.r20_no1_of_sub_branches != null ? #numbers.formatDecimal(report.r20_no1_of_sub_branches,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                    <td id="E20" class="green-fill">
+                                                        - <input type="hidden" name="r20_no1_of_agencies"
+                                                            th:value="${report.r20_no1_of_agencies != null ? #numbers.formatDecimal(report.r20_no1_of_agencies,1,'COMMA',2,'POINT') : 0}">
+                                                    </td>
+                                                </tr>
+                                              
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <tbody th:each="report: ${reportsummary1}">
+                                                <tr>
+                                                    <th id="A23" colspan="5">(13B) ATMs and Mini-ATMs</th>
+                                                </tr>
+                                                <tr>
+                                                    <td id="A24"></td>
+                                                    <th id="B24">District</th>
+                                                    <th id="C24">No. of ATMs</th>
+                                                    <th id="D24">No. of Mini-ATMs</th>
+                                                    <th id="E24">Encashment Points</th>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A25">1</td>
+                                                    <td id="B25">Central</td>
+                                                    <td id="C25"><input type="number" id="C25_input"
+                                                            name="r25_no_of_atms"
+                                                            th:value="${report.r25_no_of_atms != null ? #numbers.formatDecimal(report.r25_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D25"><input type="number" id="D25_input"
+                                                            name="r25_no_of_mini_atms"
+                                                            th:value="${report.r25_no_of_mini_atms != null ? #numbers.formatDecimal(report.r25_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E25"><input type="number" id="E25_input"
+                                                            name="r25_encashment_points"
+                                                            th:value="${report.r25_encashment_points != null ? #numbers.formatDecimal(report.r25_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A26">2</td>
+                                                    <td id="B26">Ghanzi</td>
+                                                    <td id="C26"><input type="number" id="C26_input"
+                                                            name="r26_no_of_atms"
+                                                            th:value="${report.r26_no_of_atms != null ? #numbers.formatDecimal(report.r26_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D26"><input type="number" id="D26_input"
+                                                            name="r26_no_of_mini_atms"
+                                                            th:value="${report.r26_no_of_mini_atms != null ? #numbers.formatDecimal(report.r26_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E26"><input type="number" id="E26_input"
+                                                            name="r26_encashment_points"
+                                                            th:value="${report.r26_encashment_points != null ? #numbers.formatDecimal(report.r26_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A27">3</td>
+                                                    <td id="B27">Kgalagadi</td>
+                                                    <td id="C27"><input type="number" id="C27_input"
+                                                            name="r27_no_of_atms"
+                                                            th:value="${report.r27_no_of_atms != null ? #numbers.formatDecimal(report.r27_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D27"><input type="number" id="D27_input"
+                                                            name="r27_no_of_mini_atms"
+                                                            th:value="${report.r27_no_of_mini_atms != null ? #numbers.formatDecimal(report.r27_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E27"><input type="number" id="E27_input"
+                                                            name="r27_encashment_points"
+                                                            th:value="${report.r27_encashment_points != null ? #numbers.formatDecimal(report.r27_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A28">4</td>
+                                                    <td id="B28">Kgatleng</td>
+                                                    <td id="C28"><input type="number" id="C28_input"
+                                                            name="r28_no_of_atms"
+                                                            th:value="${report.r28_no_of_atms != null ? #numbers.formatDecimal(report.r28_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D28"><input type="number" id="D28_input"
+                                                            name="r28_no_of_mini_atms"
+                                                            th:value="${report.r28_no_of_mini_atms != null ? #numbers.formatDecimal(report.r28_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E28"><input type="number" id="E28_input"
+                                                            name="r28_encashment_points"
+                                                            th:value="${report.r28_encashment_points != null ? #numbers.formatDecimal(report.r28_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A29">5</td>
+                                                    <td id="B29">Kweneng</td>
+                                                    <td id="C29"><input type="number" id="C29_input"
+                                                            name="r29_no_of_atms"
+                                                            th:value="${report.r29_no_of_atms != null ? #numbers.formatDecimal(report.r29_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D29"><input type="number" id="D29_input"
+                                                            name="r29_no_of_mini_atms"
+                                                            th:value="${report.r29_no_of_mini_atms != null ? #numbers.formatDecimal(report.r29_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E29"><input type="number" id="E29_input"
+                                                            name="r29_encashment_points"
+                                                            th:value="${report.r29_encashment_points != null ? #numbers.formatDecimal(report.r29_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A30">6</td>
+                                                    <td id="B30">North East</td>
+                                                    <td id="C30"><input type="number" id="C30_input"
+                                                            name="r30_no_of_atms"
+                                                            th:value="${report.r30_no_of_atms != null ? #numbers.formatDecimal(report.r30_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D30"><input type="number" id="D30_input"
+                                                            name="r30_no_of_mini_atms"
+                                                            th:value="${report.r30_no_of_mini_atms != null ? #numbers.formatDecimal(report.r30_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E30"><input type="number" id="E30_input"
+                                                            name="r30_encashment_points"
+                                                            th:value="${report.r30_encashment_points != null ? #numbers.formatDecimal(report.r30_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A31">7</td>
+                                                    <td id="B31">North West</td>
+                                                    <td id="C31"><input type="number" id="C31_input"
+                                                            name="r31_no_of_atms"
+                                                            th:value="${report.r31_no_of_atms != null ? #numbers.formatDecimal(report.r31_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D31"><input type="number" id="D31_input"
+                                                            name="r31_no_of_mini_atms"
+                                                            th:value="${report.r31_no_of_mini_atms != null ? #numbers.formatDecimal(report.r31_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E31"><input type="number" id="E31_input"
+                                                            name="r31_encashment_points"
+                                                            th:value="${report.r31_encashment_points != null ? #numbers.formatDecimal(report.r31_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A32">8</td>
+                                                    <td id="B32">South East</td>
+                                                    <td id="C32"><input type="number" id="C32_input"
+                                                            name="r32_no_of_atms"
+                                                            th:value="${report.r32_no_of_atms != null ? #numbers.formatDecimal(report.r32_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D32"><input type="number" id="D32_input"
+                                                            name="r32_no_of_mini_atms"
+                                                            th:value="${report.r32_no_of_mini_atms != null ? #numbers.formatDecimal(report.r32_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E32"><input type="number" id="E32_input"
+                                                            name="r32_encashment_points"
+                                                            th:value="${report.r32_encashment_points != null ? #numbers.formatDecimal(report.r32_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A33">9</td>
+                                                    <td id="B33">Southern</td>
+                                                    <td id="C33"><input type="number" id="C33_input"
+                                                            name="r33_no_of_atms"
+                                                            th:value="${report.r33_no_of_atms != null ? #numbers.formatDecimal(report.r33_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D33"><input type="number" id="D33_input"
+                                                            name="r33_no_of_mini_atms"
+                                                            th:value="${report.r33_no_of_mini_atms != null ? #numbers.formatDecimal(report.r33_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E33"><input type="number" id="E33_input"
+                                                            name="r33_encashment_points"
+                                                            th:value="${report.r33_encashment_points != null ? #numbers.formatDecimal(report.r33_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A34">10</td>
+                                                    <td id="B34">Chobe</td>
+                                                    <td id="C34"><input type="number" id="C34_input"
+                                                            name="r34_no_of_atms"
+                                                            th:value="${report.r34_no_of_atms != null ? #numbers.formatDecimal(report.r34_no_of_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="D34"><input type="number" id="D34_input"
+                                                            name="r34_no_of_mini_atms"
+                                                            th:value="${report.r34_no_of_mini_atms != null ? #numbers.formatDecimal(report.r34_no_of_mini_atms,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                    <td id="E34"><input type="number" id="E34_input"
+                                                            name="r34_encashment_points"
+                                                            th:value="${report.r34_encashment_points != null ? #numbers.formatDecimal(report.r34_encashment_points,1,'COMMA',2,'POINT') : '0'}" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="total-row">
+                                                    <td id="A35">11</td>
+                                                    <td id="B35">Total</td>
+                                                    <td id="C35" class="green-fill">-</td>
+                                                    <td id="D35" class="green-fill">-</td>
+                                                    <td id="E35" class="green-fill">-</td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <tbody th:each="report: ${reportsummary2}">
+                                                <tr>
+                                                    <th id="A38" colspan="6">(13C) Debit Cards</th>
+                                                </tr>
+                                                   
+                                                <tr>
+                                                    <td id="A54"></td>
+                                                    <th id="B54">District</th>
+                                                    <th id="C54">Opening No. of</th>
+                                                    <th id="D54">No. of cards issued</th>
+                                                    <th id="E54">No. cards of closed</th>
+                                                    <th id="F54">Closing Balance of</th>
+                                                </tr>
+                                                <tr>
+                                                    <td id="A40">1</td>
+                                                    <td id="B40">Central</td>
+                                                    <td id="C40">
+                                                        <input type="number" id="C40_input"
+                                                            th:value="${report.r40_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r40_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r40_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D40">
+                                                        <input type="number" id="D40_input"
+                                                            th:value="${report.r40_no_of_cards_issued != null ? #numbers.formatDecimal(report.r40_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r40_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E40">
+                                                        <input type="number" id="E40_input"
+                                                            th:value="${report.r40_no_cards_of_closed != null ? #numbers.formatDecimal(report.r40_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r40_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F40" class="green-fill">
+                                                        <input type="number" id="F40_input"
+                                                            th:value="${report.r40_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r40_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r40_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A41">2</td>
+                                                    <td id="B41">Ghanzi</td>
+                                                    <td id="C41">
+                                                        <input type="number" id="C41_input"
+                                                            th:value="${report.r41_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r41_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r41_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D41">
+                                                        <input type="number" id="D41_input"
+                                                            th:value="${report.r41_no_of_cards_issued != null ? #numbers.formatDecimal(report.r41_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r41_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E41">
+                                                        <input type="number" id="E41_input"
+                                                            th:value="${report.r41_no_cards_of_closed != null ? #numbers.formatDecimal(report.r41_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r41_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F41" class="green-fill">
+                                                        <input type="number" id="F41_input"
+                                                            th:value="${report.r41_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r41_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r41_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A42">3</td>
+                                                    <td id="B42">Kgalagadi</td>
+                                                    <td id="C42">
+                                                        <input type="number" id="C42_input"
+                                                            th:value="${report.r42_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r42_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r42_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D42">
+                                                        <input type="number" id="D42_input"
+                                                            th:value="${report.r42_no_of_cards_issued != null ? #numbers.formatDecimal(report.r42_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r42_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E42">
+                                                        <input type="number" id="E42_input"
+                                                            th:value="${report.r42_no_cards_of_closed != null ? #numbers.formatDecimal(report.r42_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r42_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F42" class="green-fill">
+                                                        <input type="number" id="F42_input"
+                                                            th:value="${report.r42_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r42_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r42_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A43">4</td>
+                                                    <td id="B43">Kgatleng</td>
+                                                    <td id="C43">
+                                                        <input type="number" id="C43_input"
+                                                            th:value="${report.r43_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r43_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r43_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D43">
+                                                        <input type="number" id="D43_input"
+                                                            th:value="${report.r43_no_of_cards_issued != null ? #numbers.formatDecimal(report.r43_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r43_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E43">
+                                                        <input type="number" id="E43_input"
+                                                            th:value="${report.r43_no_cards_of_closed != null ? #numbers.formatDecimal(report.r43_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r43_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F43" class="green-fill">
+                                                        <input type="number" id="F43_input"
+                                                            th:value="${report.r43_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r43_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r43_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A44">5</td>
+                                                    <td id="B44">Kweneng</td>
+                                                    <td id="C44">
+                                                        <input type="number" id="C44_input"
+                                                            th:value="${report.r44_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r44_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r44_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D44">
+                                                        <input type="number" id="D44_input"
+                                                            th:value="${report.r44_no_of_cards_issued != null ? #numbers.formatDecimal(report.r44_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r44_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E44">
+                                                        <input type="number" id="E44_input"
+                                                            th:value="${report.r44_no_cards_of_closed != null ? #numbers.formatDecimal(report.r44_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r44_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F44" class="green-fill">
+                                                        <input type="number" id="F44_input"
+                                                            th:value="${report.r44_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r44_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r44_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A45">6</td>
+                                                    <td id="B45">North East</td>
+                                                    <td id="C45">
+                                                        <input type="number" id="C45_input"
+                                                            th:value="${report.r45_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r45_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r45_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D45">
+                                                        <input type="number" id="D45_input"
+                                                            th:value="${report.r45_no_of_cards_issued != null ? #numbers.formatDecimal(report.r45_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r45_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E45">
+                                                        <input type="number" id="E45_input"
+                                                            th:value="${report.r45_no_cards_of_closed != null ? #numbers.formatDecimal(report.r45_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r45_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F45" class="green-fill">
+                                                        <input type="number" id="F45_input"
+                                                            th:value="${report.r45_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r45_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r45_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A46">7</td>
+                                                    <td id="B46">North West</td>
+                                                    <td id="C46">
+                                                        <input type="number" id="C46_input"
+                                                            th:value="${report.r46_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r46_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r46_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D46">
+                                                        <input type="number" id="D46_input"
+                                                            th:value="${report.r46_no_of_cards_issued != null ? #numbers.formatDecimal(report.r46_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r46_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E46">
+                                                        <input type="number" id="E46_input"
+                                                            th:value="${report.r46_no_cards_of_closed != null ? #numbers.formatDecimal(report.r46_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r46_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F46" class="green-fill">
+                                                        <input type="number" id="F46_input"
+                                                            th:value="${report.r46_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r46_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r46_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A47">8</td>
+                                                    <td id="B47">South East</td>
+                                                    <td id="C47">
+                                                        <input type="number" id="C47_input"
+                                                            th:value="${report.r47_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r47_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r47_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D47">
+                                                        <input type="number" id="D47_input"
+                                                            th:value="${report.r47_no_of_cards_issued != null ? #numbers.formatDecimal(report.r47_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r47_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E47">
+                                                        <input type="number" id="E47_input"
+                                                            th:value="${report.r47_no_cards_of_closed != null ? #numbers.formatDecimal(report.r47_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r47_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F47" class="green-fill">
+                                                        <input type="number" id="F47_input"
+                                                            th:value="${report.r47_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r47_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r47_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A48">9</td>
+                                                    <td id="B48">Southern</td>
+                                                    <td id="C48">
+                                                        <input type="number" id="C48_input"
+                                                            th:value="${report.r48_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r48_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r48_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D48">
+                                                        <input type="number" id="D48_input"
+                                                            th:value="${report.r48_no_of_cards_issued != null ? #numbers.formatDecimal(report.r48_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r48_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E48">
+                                                        <input type="number" id="E48_input"
+                                                            th:value="${report.r48_no_cards_of_closed != null ? #numbers.formatDecimal(report.r48_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r48_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F48" class="green-fill">
+                                                        <input type="number" id="F48_input"
+                                                            th:value="${report.r48_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r48_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r48_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A49">10</td>
+                                                    <td id="B49">Chobe</td>
+                                                    <td id="C49">
+                                                        <input type="number" id="C49_input"
+                                                            th:value="${report.r49_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r49_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r49_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D49">
+                                                        <input type="number" id="D49_input"
+                                                            th:value="${report.r49_no_of_cards_issued != null ? #numbers.formatDecimal(report.r49_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r49_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E49">
+                                                        <input type="number" id="E49_input"
+                                                            th:value="${report.r49_no_cards_of_closed != null ? #numbers.formatDecimal(report.r49_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r49_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F49" class="green-fill">
+                                                        <input type="number" id="F49_input"
+                                                            th:value="${report.r49_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r49_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r49_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="total-row">
+                                                    <td id="A50">11</td>
+                                                    <td id="B50">Total</td>
+                                                    <td id="C50" class="green-fill">-</td>
+                                                    <td id="D50" class="green-fill">-</td>
+                                                    <td id="E50" class="green-fill">-</td>
+                                                    <td id="F50" class="green-fill">-</td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                            <table>
+                                            <tbody th:each="report: ${reportsummary3}">
+                                                <tr>
+                                                    <th id="A53" colspan="6">(13D) Credit Cards</th>
+                                                </tr>
+                                                <tr>
+                                                    <td id="A54"></td>
+                                                    <th id="B54">District</th>
+                                                    <th id="C54">Opening No. of</th>
+                                                    <th id="D54">No. of cards issued</th>
+                                                    <th id="E54">No. cards of closed</th>
+                                                    <th id="F54">Closing Balance of</th>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A55">1</td>
+                                                    <td id="B55">Central</td>
+                                                    <td id="C55">
+                                                        <input type="number" id="C55_input"
+                                                            th:value="${report.r55_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r55_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r55_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D55">
+                                                        <input type="number" id="D55_input"
+                                                            th:value="${report.r55_no_of_cards_issued != null ? #numbers.formatDecimal(report.r55_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r55_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E55">
+                                                        <input type="number" id="E55_input"
+                                                            th:value="${report.r55_no_cards_of_closed != null ? #numbers.formatDecimal(report.r55_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r55_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F55" class="green-fill">
+                                                        <input type="number" id="F55_input"
+                                                            th:value="${report.r55_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r55_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r55_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A56">2</td>
+                                                    <td id="B56">Ghanzi</td>
+                                                    <td id="C56">
+                                                        <input type="number" id="C56_input"
+                                                            th:value="${report.r56_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r56_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r56_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D56">
+                                                        <input type="number" id="D56_input"
+                                                            th:value="${report.r56_no_of_cards_issued != null ? #numbers.formatDecimal(report.r56_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r56_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E56">
+                                                        <input type="number" id="E56_input"
+                                                            th:value="${report.r56_no_cards_of_closed != null ? #numbers.formatDecimal(report.r56_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r56_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F56" class="green-fill">
+                                                        <input type="number" id="F56_input"
+                                                            th:value="${report.r56_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r56_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r56_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A57">3</td>
+                                                    <td id="B57">Kgalagadi</td>
+                                                    <td id="C57">
+                                                        <input type="number" id="C57_input"
+                                                            th:value="${report.r57_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r57_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r57_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D57">
+                                                        <input type="number" id="D57_input"
+                                                            th:value="${report.r57_no_of_cards_issued != null ? #numbers.formatDecimal(report.r57_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r57_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E57">
+                                                        <input type="number" id="E57_input"
+                                                            th:value="${report.r57_no_cards_of_closed != null ? #numbers.formatDecimal(report.r57_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r57_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F57" class="green-fill">
+                                                        <input type="number" id="F57_input"
+                                                            th:value="${report.r57_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r57_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r57_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A58">4</td>
+                                                    <td id="B58">Kgatleng</td>
+                                                    <td id="C58">
+                                                        <input type="number" id="C58_input"
+                                                            th:value="${report.r58_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r58_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r58_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D58">
+                                                        <input type="number" id="D58_input"
+                                                            th:value="${report.r58_no_of_cards_issued != null ? #numbers.formatDecimal(report.r58_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r58_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E58">
+                                                        <input type="number" id="E58_input"
+                                                            th:value="${report.r58_no_cards_of_closed != null ? #numbers.formatDecimal(report.r58_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r58_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F58" class="green-fill">
+                                                        <input type="number" id="F58_input"
+                                                            th:value="${report.r58_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r58_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r58_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A59">5</td>
+                                                    <td id="B59">Kweneng</td>
+                                                    <td id="C59">
+                                                        <input type="number" id="C59_input"
+                                                            th:value="${report.r59_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r59_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r59_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D59">
+                                                        <input type="number" id="D59_input"
+                                                            th:value="${report.r59_no_of_cards_issued != null ? #numbers.formatDecimal(report.r59_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r59_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E59">
+                                                        <input type="number" id="E59_input"
+                                                            th:value="${report.r59_no_cards_of_closed != null ? #numbers.formatDecimal(report.r59_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r59_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F59" class="green-fill">
+                                                        <input type="number" id="F59_input"
+                                                            th:value="${report.r59_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r59_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r59_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A60">6</td>
+                                                    <td id="B60">North East</td>
+                                                    <td id="C60">
+                                                        <input type="number" id="C60_input"
+                                                            th:value="${report.r60_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r60_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r60_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D60">
+                                                        <input type="number" id="D60_input"
+                                                            th:value="${report.r60_no_of_cards_issued != null ? #numbers.formatDecimal(report.r60_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r60_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E60">
+                                                        <input type="number" id="E60_input"
+                                                            th:value="${report.r60_no_cards_of_closed != null ? #numbers.formatDecimal(report.r60_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r60_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F60" class="green-fill">
+                                                        <input type="number" id="F60_input"
+                                                            th:value="${report.r60_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r60_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r60_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A61">7</td>
+                                                    <td id="B61">North West</td>
+                                                    <td id="C61">
+                                                        <input type="number" id="C61_input"
+                                                            th:value="${report.r61_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r61_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r61_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D61">
+                                                        <input type="number" id="D61_input"
+                                                            th:value="${report.r61_no_of_cards_issued != null ? #numbers.formatDecimal(report.r61_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r61_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E61">
+                                                        <input type="number" id="E61_input"
+                                                            th:value="${report.r61_no_cards_of_closed != null ? #numbers.formatDecimal(report.r61_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r61_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F61" class="green-fill">
+                                                        <input type="number" id="F61_input"
+                                                            th:value="${report.r61_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r61_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r61_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A62">8</td>
+                                                    <td id="B62">South East</td>
+                                                    <td id="C62">
+                                                        <input type="number" id="C62_input"
+                                                            th:value="${report.r62_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r62_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r62_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D62">
+                                                        <input type="number" id="D62_input"
+                                                            th:value="${report.r62_no_of_cards_issued != null ? #numbers.formatDecimal(report.r62_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r62_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E62">
+                                                        <input type="number" id="E62_input"
+                                                            th:value="${report.r62_no_cards_of_closed != null ? #numbers.formatDecimal(report.r62_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r62_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F62" class="green-fill">
+                                                        <input type="number" id="F62_input"
+                                                            th:value="${report.r62_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r62_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r62_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A63">9</td>
+                                                    <td id="B63">Southern</td>
+                                                    <td id="C63">
+                                                        <input type="number" id="C63_input"
+                                                            th:value="${report.r63_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r63_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r63_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D63">
+                                                        <input type="number" id="D63_input"
+                                                            th:value="${report.r63_no_of_cards_issued != null ? #numbers.formatDecimal(report.r63_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r63_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E63">
+                                                        <input type="number" id="E63_input"
+                                                            th:value="${report.r63_no_cards_of_closed != null ? #numbers.formatDecimal(report.r63_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r63_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F63" class="green-fill">
+                                                        <input type="number" id="F63_input"
+                                                            th:value="${report.r63_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r63_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r63_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td id="A64">10</td>
+                                                    <td id="B64">Chobe</td>
+                                                    <td id="C64">
+                                                        <input type="number" id="C64_input"
+                                                            th:value="${report.r64_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r64_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r64_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D64">
+                                                        <input type="number" id="D64_input"
+                                                            th:value="${report.r64_no_of_cards_issued != null ? #numbers.formatDecimal(report.r64_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r64_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E64">
+                                                        <input type="number" id="E64_input"
+                                                            th:value="${report.r64_no_cards_of_closed != null ? #numbers.formatDecimal(report.r64_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r64_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F64" class="green-fill">
+                                                        <input type="number" id="F64_input"
+                                                            th:value="${report.r64_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r64_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r64_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="total-row">
+                                                    <td id="A65">11</td>
+                                                    <td id="B65">Total</td>
+                                                    <td id="C65" class="green-fill">
+                                                        <input type="number" id="C65_input" readonly
+                                                            th:value="${report.r65_opeing_no_of_cards != null ? #numbers.formatDecimal(report.r65_opeing_no_of_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r65_opeing_no_of_cards" />
+                                                    </td>
+                                                    <td id="D65" class="green-fill">
+                                                        <input type="number" id="D65_input" readonly
+                                                            th:value="${report.r65_no_of_cards_issued != null ? #numbers.formatDecimal(report.r65_no_of_cards_issued,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r65_no_of_cards_issued" />
+                                                    </td>
+                                                    <td id="E65" class="green-fill">
+                                                        <input type="number" id="E65_input" readonly
+                                                            th:value="${report.r65_no_cards_of_closed != null ? #numbers.formatDecimal(report.r65_no_cards_of_closed,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r65_no_cards_of_closed" />
+                                                    </td>
+                                                    <td id="F65" class="green-fill">
+                                                        <input type="number" id="F65_input" readonly
+                                                            th:value="${report.r65_closing_bal_of_active_cards != null ? #numbers.formatDecimal(report.r65_closing_bal_of_active_cards,1,'COMMA',2,'POINT') : '0'}"
+                                                            name="r65_closing_bal_of_active_cards" />
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </body>
+
+                                    </html>
+
+
+
+                                </div>
+                                <div style="text-align: center; margin-top: 10px;">
+
+                                    <button id="submitButton" type="button" class="custom-tab-btn Show_input"
+                                        form="fileupload" th:attr="data-todate=${asondate}" onclick="fileuploads(this);"
+                                        style="display: none;">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cellresult Modal -->
+    <div class="modal fade" id="cellresultModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Custom header -->
+                <div class="menu-title-header"
+                    style="background-color:#6c7a91; padding: 8px; border-radius:5px 5px 0 0;">
+                    <div class="modal-title" id="cellresultModalLabel" style="text-align: center; color: white;">
+                        Do you want to open the report?
+                    </div>
+                </div>
+
+                <div class="modal-body" style="text-align: center; font-size: 1.1rem;">
+                    <button type="button" class="custom-tab-btn cancel-btn" data-bs-dismiss="modal"
+                        style="margin-right:10px; border:2px solid #6c7a91; background:white; color:black; border-radius:20px; padding:5px 15px;">
+                        Cancel
+                    </button>
+                    <button type="button" class="custom-tab-btn yes-btn"
+                        style="background:#6c7a91; color:white; border:none; border-radius:20px; padding:5px 20px;">
+                        Yes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="loader" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="background: transparent;">
+                <div class="modal-body" style="text-align: center">
+                    <div>
+                        <img th:src=@{/images/loader.gif} id="bfirelogo"
+                            style="width: 153px; height: auto; margin-left: 18px; background-color: transparent; border-color: transparent;"
+                            alt="Bornfire">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Custom Alert/Result Modal (Matches your existing style) -->
+    <div class="modal fade" id="resultModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Your custom styled header -->
+                <div class="menu-title-header">
+                    <div class="modal-title" id="resultModalLabel" style="text-align: center; color: white;">
+                        <!-- Title will be set by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-body" style="text-align: center; font-size: 1.1rem;">
+                    <p id="resultModalBody"></p>
+                    <!-- Your custom styled button -->
+                    <button type="button" class="custom-tab-btn" onclick="closemodel()"
+                        data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<style>
+    #BRFdet td {
+        border: 1px solid #ccc;
+        padding: 8px;
+    }
+
+    #BRFdet {
+        border-collapse: collapse;
+        width: 100%;
+    }
+</style>
+
+<style>
+    /* Your existing CSS - this is the correct approach */
+    .scrollable-table-container {
+        /* This is the key: it creates the scroll context */
+        max-height: 800px;
+        /* Or a suitable height like 80vh for responsive design */
+        overflow-y: auto;
+        border: 1px solid #ccc;
+    }
+
+    /* Your existing sticky header CSS, targeting the tr elements within the thead */
+    .scrollable-table-container thead tr:nth-child(1) {
+        position: sticky;
+        top: 0;
+        background-color: #b3b6b9;
+        z-index: 5;
+    }
+
+    .scrollable-table-container thead tr:nth-child(2) {
+        position: sticky;
+        top: 36px;
+        /* adjust based on row height */
+        background-color: #b3b6b9;
+        z-index: 4;
+    }
+
+    .scrollable-table-container thead tr:nth-child(3) {
+        position: sticky;
+        top: 72px;
+        /* Adjust based on row height */
+        background-color: #b3b6b9;
+        z-index: 3;
+    }
+
+    .scrollable-table-container thead tr:nth-child(4) {
+        position: sticky;
+        top: 100px;
+        /* Adjust based on row height */
+        background-color: #b3b6b9;
+        z-index: 2;
+    }
+
+    .scrollable-table-container thead tr:nth-child(5) {
+        position: sticky;
+        top: 135px;
+        /* Adjust based on row height */
+        background-color: #b3b6b9;
+        z-index: 1;
+    }
+</style>
+<style>
+    .inner {
+        max-height: 600px;
+        /* Adjust height as needed */
+        overflow: auto;
+        border: 1px solid #dee2e6;
+    }
+
+    /* Sticky thead */
+    #reports thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f8f9fa;
+        /* Match Bootstrap thead-light */
+        z-index: 2;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        text-align: right !important;
+        float: right !important;
+        width: auto;
+        margin-top: 10px;
+    }
+
+    /* Ensure info text (e.g., "Showing 1 to X") stays on the left */
+    div.dataTables_wrapper div.dataTables_info {
+        float: left !important;
+        margin-top: 10px;
+    }
+
+    .pagination {
+        margin: 0;
+    }
+
+    .page-item.active .page-link {
+        background-color: #386276;
+        border-color: #386276;
+    }
+
+    .page-link {
+        color: #386276;
+    }
+
+    .page-link:hover {
+        color: #2a4a5c;
+    }
+
+    .form-select {
+        display: inline-block;
+        width: auto;
+    }
+</style>
+
+</html>
