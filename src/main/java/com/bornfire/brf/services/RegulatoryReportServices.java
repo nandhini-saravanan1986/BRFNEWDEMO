@@ -146,6 +146,52 @@ public class RegulatoryReportServices {
 	BRRS_Q_BRANCHNET_ReportService BRRS_Q_BRANCHNET_reportservice;
 	
 	
+	
+	
+	//MY 
+	
+	@Autowired
+	BRRS_M_LIQ_ReportService brrs_m_liq_reportservice;
+	
+	@Autowired
+	BRRS_M_CA4_ReportService  brrs_m_ca4_reportservice;
+	
+	@Autowired
+	BRRS_M_SCI_E_ReportService brrs_m_sci_e_reportservice;
+	
+	@Autowired
+	BRRS_M_SRWA_12A_ReportService brrs_m_srwa_12a_reportservice;
+	
+	@Autowired
+	BRRS_M_EPR_ReportService  brrs_m_epr_reportservice;
+	
+	@Autowired
+	BRRS_M_GMIRT_ReportService brrs_m_gmirt_reportservice;
+	
+	
+	@Autowired
+	BRRS_M_I_S_CA_ReportService brrs_m_i_s_ca_reportservice;
+	
+	@Autowired
+	BRRS_Q_RLFA2_ReportService brrs_q_rlfa2_reportservice;
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
 
@@ -338,6 +384,79 @@ public class RegulatoryReportServices {
             case "Q_BRANCHNET":
 			repsummary = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
             break;
+            
+            
+            
+          //MY 	
+			
+ 		   case "M_LIQ":
+ 				
+ 				repsummary = brrs_m_liq_reportservice.getM_LIQView(reportId, fromdate, todate, currency, dtltype,
+ 						pageable, type, version);
+ 				break;
+ 			
+ 				
+ 			case "M_CA4":
+ 				
+ 				
+ 				repsummary = brrs_m_ca4_reportservice.getBRRS_M_CA4View(reportId, fromdate, todate, currency, dtltype,
+ 						pageable, type, version);
+ 				break;
+ 				
+ 			case "M_SCI_E":
+ 				
+ 				repsummary = brrs_m_sci_e_reportservice.getM_SCI_EView(reportId, fromdate, todate, currency, dtltype,
+ 						pageable, type, version);
+ 				break;
+ 				
+ 			case "M_SRWA_12A":
+ 				
+ 				
+ 				repsummary = brrs_m_srwa_12a_reportservice.getM_SRWA_12AView(reportId, fromdate, todate, currency, dtltype,
+ 						pageable, type, version);
+ 				break;
+ 				
+ 			case "M_EPR":
+ 				
+ 				repsummary = brrs_m_epr_reportservice.getM_EPRView(reportId, fromdate, todate, currency, dtltype,
+ 						pageable, type, version);
+ 				break;
+ 				
+ 	        case "M_GMIRT":
+ 				
+ 				repsummary = brrs_m_gmirt_reportservice.getM_GMIRTView(reportId, fromdate, todate, currency, dtltype,
+ 						pageable, type, version);
+ 				break;
+
+ 				
+ 				
+ 	          case "M_I_S_CA":
+ 				
+ 				repsummary = brrs_m_i_s_ca_reportservice.getM_I_S_CAView(reportId, fromdate, todate, currency, dtltype,
+ 						pageable, type, version);
+ 				break;
+ 				
+ 	          case "Q_RLFA2":
+ 	  			
+ 	  			repsummary = brrs_q_rlfa2_reportservice.getQ_RLFA2View(reportId, fromdate, todate, currency, dtltype,
+ 	  					pageable, type, version);
+ 	  			break;	 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
 
 		}
@@ -528,6 +647,60 @@ public class RegulatoryReportServices {
             repdetail = BRRS_M_DEP3_reportservice.getM_DEP3currentDtl(reportId, fromdate, todate, currency,dtltype, pageable, Filter, type, version);
 	        break;	
 		
+	        
+	        
+	      
+	        
+	        
+	        
+	      //MY
+			
+	       case "M_LIQ":
+				repdetail = brrs_m_liq_reportservice.getM_LIQcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+						pageable, Filter, type, version);
+				break;
+				
+			case "M_CA4":
+				repdetail = brrs_m_ca4_reportservice. getBRRS_M_CA4currentDtl(reportId, fromdate, todate, currency, dtltype,
+						pageable, Filter, type, version);
+				break;
+			
+				
+			case "M_SCI_E":
+				
+				
+				repdetail = brrs_m_sci_e_reportservice.getM_SCI_EcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+						pageable, Filter, type, version);
+				break;
+				
+			case "M_SRWA_12A":
+				
+				
+				repdetail = brrs_m_srwa_12a_reportservice.getM_SRWA_12AcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+						pageable, Filter, type, version);
+				break;
+				
+			case "M_EPR":
+				
+				repdetail = brrs_m_epr_reportservice. getM_EPRcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+						pageable, Filter, type, version);
+				break;
+				
+	        case "M_GMIRT":
+				
+				repdetail = brrs_m_gmirt_reportservice. getM_GMIRTcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+						pageable, Filter, type, version);
+				break;
+				
+	          case "M_I_S_CA":
+				
+				repdetail = brrs_m_i_s_ca_reportservice. getM_I_S_CAcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+						pageable, Filter, type, version);
+
+				break;
+	        
+	        
+	        
 
 		}
 
@@ -864,6 +1037,111 @@ public class RegulatoryReportServices {
 						e.printStackTrace();
 					}
 					break;
+					
+					
+					
+					
+					//MY
+					
+				case "M_LIQ":
+					try {
+						
+						
+						repfile = brrs_m_liq_reportservice.getM_LIQExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+
+				
+
+				case "M_CA4":
+					try {
+						repfile = brrs_m_ca4_reportservice.getBRRS_M_CA4Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case "M_SCI_E":
+					try {
+						
+						
+						repfile = brrs_m_sci_e_reportservice.getM_SCI_EExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+				
+					
+				case "M_SRWA_12A":
+					try {
+						
+						repfile = brrs_m_srwa_12a_reportservice.getM_SRWA_12AExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+				
+				case "M_EPR":
+					try {
+						
+						repfile = brrs_m_epr_reportservice.getM_EPRExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case "M_GMIRT":
+					try {
+						
+						repfile = brrs_m_gmirt_reportservice.getM_GMIRTExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case "M_I_S_CA":
+					try {
+						
+						repfile = brrs_m_i_s_ca_reportservice.getM_I_S_CAExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+					
+					
+				case "Q_RLFA2":
+					try {
+						
+						repfile = brrs_q_rlfa2_reportservice.getQ_RLFA2Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+	
+					
+					
+					
+					
+					
+					
 
 		}
 
@@ -1198,7 +1476,98 @@ public class RegulatoryReportServices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			break;	
+			break;
+			
+			
+			
+			//MY
+			
+			
+				case "M_LIQ":
+					try {
+						archivalData = brrs_m_liq_reportservice.getM_LIQArchival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				
+				case "M_SCI_E":
+					try {
+						archivalData = brrs_m_sci_e_reportservice.getM_SCI_EArchival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case "M_CA4":
+					try {
+						archivalData = brrs_m_ca4_reportservice.getM_CA4Archival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+					
+				case "M_EPR":
+					try {
+						archivalData = brrs_m_epr_reportservice.getM_EPRArchival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+					
+				case "M_SRWA_12A":
+					try {
+						archivalData = brrs_m_srwa_12a_reportservice.getM_SRWA_12AArchival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+					
+				case "M_GMIRT":
+					try {
+						archivalData = brrs_m_gmirt_reportservice.getM_GMIRTArchival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+					
+				case "M_I_S_CA":
+					try {
+						archivalData = brrs_m_i_s_ca_reportservice.getM_I_S_CAArchival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+					
+				case "Q_RLFA2":
+					try {
+						archivalData = brrs_q_rlfa2_reportservice.getQ_RLFA2Archival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+			
+			
+			
+			
+			
+			
+			
+			
 
 		}
 		return archivalData;
@@ -1315,6 +1684,68 @@ public class RegulatoryReportServices {
 		else if ("M_DEP3Detail".equals(filename)) {
             fileData = BRRS_M_DEP3_reportservice.BRRS_M_DEP3DetailExcel( filename, fromdate, todate, currency, dtltype, type, version);
         }
+		
+		
+		
+		
+		
+		
+		//MY
+		
+		else if ("M_LIQ".equals(filename)) {
+			fileData = brrs_m_liq_reportservice.getM_LIQDetailExcel(filename, fromdate, todate, currency,
+					dtltype, type, version);
+		
+		}
+		
+		else if ("M_CA4".equals(filename)) {
+	        fileData = brrs_m_ca4_reportservice.getBRRS_M_CA4DetailExcel(filename, fromdate, todate, currency,
+					dtltype, type, version);
+	    }
+		
+		else if ("M_SCI_E".equals(filename)) {
+	        
+	        
+	        fileData = brrs_m_sci_e_reportservice.getM_SCI_EDetailExcel(filename, fromdate, todate, currency,
+					dtltype, type, version);
+	    }
+		
+		else if ("M_SRWA_12A".equals(filename)) {
+	       
+	        
+	        fileData = brrs_m_srwa_12a_reportservice.getM_SRWA_12ADetailExcel(filename, fromdate, todate, currency,
+					dtltype, type, version);
+	        
+	        
+	    }
+		
+		else if ("M_EPR_Detail".equals(filename)) {
+			fileData = brrs_m_epr_reportservice.getM_EPRDetailExcel(filename, fromdate, todate, currency,
+					dtltype, type, version);
+	    }
+		
+		
+       else if ("M_GMIRT_Detail".equals(filename)) {
+	       
+	        fileData = brrs_m_gmirt_reportservice.getM_GMIRTDetailExcel(filename, fromdate, todate, currency,
+					dtltype, type, version);   
+	    }
+
+       else if ("M_I_S_CA_Detail".equals(filename)) {
+	       
+	        fileData = brrs_m_i_s_ca_reportservice.getM_I_S_CADetailExcel(filename, fromdate, todate, currency,
+					dtltype, type, version);   
+	    } 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 
 
