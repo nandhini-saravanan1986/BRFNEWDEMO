@@ -342,13 +342,16 @@ public class BRRS_M_FXR_ReportService {
 	public byte[] getM_FXRExcel(String filename, String reportId, String fromdate, String todate, String currency,
 									 String dtltype, String type, String version) throws Exception {
 		logger.info("Service: Starting Excel generation process in memory.");
-		logger.info("DownloadFile: reportId={}, filename={}", reportId, filename);
+		logger.info("DownloadFile: reportId={}, filename={}", reportId, filename, type, version);
 
 		// ARCHIVAL check
-		if ("ARCHIVAL".equalsIgnoreCase(type) && version != null && !version.trim().isEmpty()) {
-			logger.info("Service: Generating ARCHIVAL report for version {}", version);
-			return getExcelM_FXRARCHIVAL(filename, reportId, fromdate, todate, currency, dtltype, type, version);
+		if ("ARCHIVAL".equals(type) && version != null) {
+			byte[] ARCHIVALreport = getExcelM_FXRARCHIVAL(filename, reportId, fromdate, 
+					todate, currency, dtltype, type,
+					version);
+			return ARCHIVALreport;
 		}
+
 
 		// Fetch data
 
@@ -425,12 +428,15 @@ public class BRRS_M_FXR_ReportService {
 			    for (int i = 0; i < dataList1.size(); i++) {
 			        M_FXR_Summary_Entity1 record1 = dataList1.get(i);
 			        System.out.println("rownumber=" + (startRow + i));
-			        
+					
 				       
-			        Row row;
+			       Row row;
 			        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
 			        CellStyle originalStyle;
 
+			     
+			        
+			        
 			        // ===== Row 11 / Col B =====
 					row = sheet.getRow(10);
 					cell1 = row.getCell(1);
@@ -1077,7 +1083,7 @@ public class BRRS_M_FXR_ReportService {
 		   for (int i = 0; i < dataList2.size(); i++) {
 		        M_FXR_Summary_Entity2 record2 = dataList2.get(i);
 			        System.out.println("rownumber=" + (startRow + i));
-			        
+					
 			        
 			        Row row;
 			        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
@@ -1136,6 +1142,8 @@ public class BRRS_M_FXR_ReportService {
 		        System.out.println("rownumber=" + (startRow + i));
 		        
 		        
+		        
+		        
 		        Row row;
 		        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
 		        CellStyle originalStyle;
@@ -1174,17 +1182,17 @@ public class BRRS_M_FXR_ReportService {
 	}
 
 	public List<Object> getM_FXRArchival() {
-		List<Object> M_FXRArchivallist1 = new ArrayList<>();
-		List<Object> M_FXRArchivallist2 = new ArrayList<>();
-		List<Object> M_FXRArchivallist3 = new ArrayList<>();
+		List<Object> M_FXRArchivallist = new ArrayList<>();
+//		List<Object> M_FXRArchivallist2 = new ArrayList<>();
+//		List<Object> M_FXRArchivallist3 = new ArrayList<>();
 		try {
-			M_FXRArchivallist1 = BRRS_M_FXR_Archival_Summary_Repo1.getM_FXRarchival();
-			M_FXRArchivallist2 = BRRS_M_FXR_Archival_Summary_Repo2.getM_FXRarchival();
-			M_FXRArchivallist3 = BRRS_M_FXR_Archival_Summary_Repo3.getM_FXRarchival();
+			M_FXRArchivallist = BRRS_M_FXR_Archival_Summary_Repo1.getM_FXRarchival();
+			M_FXRArchivallist = BRRS_M_FXR_Archival_Summary_Repo2.getM_FXRarchival();
+			M_FXRArchivallist = BRRS_M_FXR_Archival_Summary_Repo3.getM_FXRarchival();
 			
-			System.out.println("countser" + M_FXRArchivallist1.size());
-			System.out.println("countser" + M_FXRArchivallist2.size());
-			System.out.println("countser" + M_FXRArchivallist3.size());
+			System.out.println("countser" + M_FXRArchivallist.size());
+//			System.out.println("countser" + M_FXRArchivallist.size());
+//			System.out.println("countser" + M_FXRArchivallist.size());
 		} catch (Exception e) {
 			// Log the exception
 			System.err.println("Error fetching M_FXR Archival data: " + e.getMessage());
@@ -1193,22 +1201,25 @@ public class BRRS_M_FXR_ReportService {
 			// Optionally, you can rethrow it or return empty list
 			// throw new RuntimeException("Failed to fetch data", e);
 		}
-		return M_FXRArchivallist1;
+		return M_FXRArchivallist;
 	}
 
-	public byte[] getExcelM_FXRARCHIVAL(String filename, String reportId, String fromdate, String todate,
+
+	public byte[] getExcelM_FXRARCHIVAL(String filename, String reportId, String fromdate,
+			String todate,
 			String currency, String dtltype, String type, String version) throws Exception {
 		logger.info("Service: Starting Excel generation process in memory.");
-		if (type.equals("ARCHIVAL") & version != null) {
-
+		if ("ARCHIVAL".equals(type) && version != null) {
 		}
-		List<M_FXR_Archival_Summary_Entity1> dataList1 = BRRS_M_FXR_Archival_Summary_Repo1
-				.getdatabydateListarchival(dateformat.parse(todate), version);
-		List<M_FXR_Archival_Summary_Entity2> dataList2 = BRRS_M_FXR_Archival_Summary_Repo2
-				.getdatabydateListarchival(dateformat.parse(todate), version);
-		List<M_FXR_Archival_Summary_Entity3> dataList3 = BRRS_M_FXR_Archival_Summary_Repo3
-				.getdatabydateListarchival(dateformat.parse(todate), version);
+			List<M_FXR_Archival_Summary_Entity1> dataList1 = BRRS_M_FXR_Archival_Summary_Repo1
+					.getdatabydateListarchival(dateformat.parse(todate), version);
+			List<M_FXR_Archival_Summary_Entity2> dataList2 = BRRS_M_FXR_Archival_Summary_Repo2
+					.getdatabydateListarchival(dateformat.parse(todate), version);
+			List<M_FXR_Archival_Summary_Entity3> dataList3 = BRRS_M_FXR_Archival_Summary_Repo3
+					.getdatabydateListarchival(dateformat.parse(todate), version);
 
+			
+		
 		if (dataList1.isEmpty() || dataList2.isEmpty() || dataList3.isEmpty()) {
 			logger.warn("Service: No data found for M_FXR report. Returning empty result.");
 			return new byte[0];
@@ -1272,9 +1283,11 @@ public class BRRS_M_FXR_ReportService {
 			    for (int i = 0; i < dataList1.size(); i++) {
 			        M_FXR_Archival_Summary_Entity1 record1 = dataList1.get(i);
 			        System.out.println("rownumber=" + (startRow + i));
+					
 			        
-				       
+			        
 			        Row row;
+
 			        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
 			        CellStyle originalStyle;
 
@@ -1924,7 +1937,7 @@ public class BRRS_M_FXR_ReportService {
 		   for (int i = 0; i < dataList2.size(); i++) {
 		        M_FXR_Archival_Summary_Entity2 record2 = dataList2.get(i);
 			        System.out.println("rownumber=" + (startRow + i));
-			        
+					
 			        
 			        Row row;
 			        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
@@ -1982,7 +1995,6 @@ public class BRRS_M_FXR_ReportService {
 		        M_FXR_Archival_Summary_Entity3 record3 = dataList3.get(i);
 		        System.out.println("rownumber=" + (startRow + i));
 		        
-		        
 		        Row row;
 		        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
 		        CellStyle originalStyle;
@@ -2011,18 +2023,16 @@ public class BRRS_M_FXR_ReportService {
 			} else {
 				
 			}
-
+		
 			// Write the final workbook content to the in-memory stream.
 			workbook.write(out);
 
 			logger.info("Service: Excel data successfully written to memory buffer ({} bytes).", out.size());
 
 			return out.toByteArray();
-		}
+}}}
 
 
-	}
-}
+	
 	
 
-	    

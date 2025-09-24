@@ -528,10 +528,10 @@ function cancelModify() {
 
 	    // Put the totals into R17
 	    $("#r17_net_long_position").val(
-	        totalLong.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        totalLong.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r17_net_short_position").val(
-	        totalShort.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        totalShort.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 
@@ -558,7 +558,7 @@ function cancelModify() {
 
 	    // Put the total into r21_total_gross_long_short
 	    $("#r21_total_gross_long_short").val(
-	        total.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        total.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 
@@ -584,7 +584,7 @@ function cancelModify() {
 
 	    // Put the diffrence into r21_net_position
 	    $("#r21_net_position").val(
-	        difference.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        difference.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 
@@ -609,7 +609,7 @@ function cancelModify() {
 
 	    // Put the total into r22_total_gross_long_short
 	    $("#r22_total_gross_long_short").val(
-	        total.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        total.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 
@@ -635,7 +635,7 @@ function cancelModify() {
 
 	    // Put the diffrence into r22_net_position
 	    $("#r22_net_position").val(
-	        difference.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        difference.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 
@@ -660,7 +660,7 @@ function cancelModify() {
 
 	    // Put the total into r23_net_position
 	    $("#r23_net_position").val(
-	        total.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        total.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 
@@ -686,7 +686,7 @@ function cancelModify() {
 
 	    // Set the value in R29 greater_net_long_or_short
 	    $("#r29_greater_net_long_or_short").val(
-	        greaterVal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        greaterVal.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 	$(document).ready(function () {
@@ -711,7 +711,7 @@ function cancelModify() {
 
 	    // Set the value in r29_abs_value_net_gold_posi 
 	    $("#r29_abs_value_net_gold_posi").val(
-	        answer.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        answer.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 	$(document).ready(function () {
@@ -736,7 +736,7 @@ function cancelModify() {
 
 	    // Put the result into r29_capital_charge
 	    $("#r29_capital_charge").val(
-	        result.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	        result.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	}
 
@@ -774,7 +774,7 @@ function cancelModify() {
         function formatAsPercent() {
             let val = parseFloat($r29Input.val().replace(/,/g, "").replace("%", "")) || 0;
             $r29Input.val(
-                val.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " %"
+                val.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + " %"
             );
         }
 
@@ -1098,7 +1098,7 @@ function fileuploads(btn) {
     <td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_net_spot_position != null ? #numbers.formatDecimal(report.r11_net_spot_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_net_spot_position != null ? #numbers.formatDecimal(report.r11_net_spot_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_net_spot_position"
            name="r11_net_spot_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1107,7 +1107,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_net_forward_position != null ? #numbers.formatDecimal(report.r11_net_forward_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_net_forward_position != null ? #numbers.formatDecimal(report.r11_net_forward_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_net_forward_position"
            name="r11_net_forward_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1116,7 +1116,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_guarantees != null ? #numbers.formatDecimal(report.r11_guarantees, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_guarantees != null ? #numbers.formatDecimal(report.r11_guarantees, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_guarantees"
            name="r11_guarantees"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1125,7 +1125,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r11_net_future_inc_or_exp, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r11_net_future_inc_or_exp, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_net_future_inc_or_exp"
            name="r11_net_future_inc_or_exp"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1134,7 +1134,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r11_net_delta_wei_fx_opt_posi, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r11_net_delta_wei_fx_opt_posi, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_net_delta_wei_fx_opt_posi"
            name="r11_net_delta_wei_fx_opt_posi"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1143,7 +1143,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_other_items != null ? #numbers.formatDecimal(report.r11_other_items, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_other_items != null ? #numbers.formatDecimal(report.r11_other_items, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_other_items"
            name="r11_other_items"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1152,7 +1152,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_net_long_position != null ? #numbers.formatDecimal(report.r11_net_long_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_net_long_position != null ? #numbers.formatDecimal(report.r11_net_long_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_net_long_position"
            name="r11_net_long_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1161,7 +1161,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_or != null ? #numbers.formatDecimal(report.r11_or, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_or != null ? #numbers.formatDecimal(report.r11_or, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_or"
            name="r11_or"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1170,7 +1170,7 @@ function fileuploads(btn) {
 	<td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r11_net_short_position != null ? #numbers.formatDecimal(report.r11_net_short_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r11_net_short_position != null ? #numbers.formatDecimal(report.r11_net_short_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r11_net_short_position"
            name="r11_net_short_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1193,7 +1193,7 @@ function fileuploads(btn) {
     <td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_net_spot_position != null ? #numbers.formatDecimal(report.r12_net_spot_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_net_spot_position != null ? #numbers.formatDecimal(report.r12_net_spot_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_net_spot_position"
            name="r12_net_spot_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1202,7 +1202,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_net_forward_position != null ? #numbers.formatDecimal(report.r12_net_forward_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_net_forward_position != null ? #numbers.formatDecimal(report.r12_net_forward_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_net_forward_position"
            name="r12_net_forward_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1211,7 +1211,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_guarantees != null ? #numbers.formatDecimal(report.r12_guarantees, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_guarantees != null ? #numbers.formatDecimal(report.r12_guarantees, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_guarantees"
            name="r12_guarantees"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1220,7 +1220,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r12_net_future_inc_or_exp, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r12_net_future_inc_or_exp, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_net_future_inc_or_exp"
            name="r12_net_future_inc_or_exp"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1229,7 +1229,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r12_net_delta_wei_fx_opt_posi, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r12_net_delta_wei_fx_opt_posi, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_net_delta_wei_fx_opt_posi"
            name="r12_net_delta_wei_fx_opt_posi"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1238,7 +1238,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_other_items != null ? #numbers.formatDecimal(report.r12_other_items, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_other_items != null ? #numbers.formatDecimal(report.r12_other_items, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_other_items"
            name="r12_other_items"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1247,7 +1247,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_net_long_position != null ? #numbers.formatDecimal(report.r12_net_long_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_net_long_position != null ? #numbers.formatDecimal(report.r12_net_long_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_net_long_position"
            name="r12_net_long_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1256,7 +1256,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_or != null ? #numbers.formatDecimal(report.r12_or, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_or != null ? #numbers.formatDecimal(report.r12_or, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_or"
            name="r12_or"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1265,7 +1265,7 @@ function fileuploads(btn) {
 	<td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r12_net_short_position != null ? #numbers.formatDecimal(report.r12_net_short_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r12_net_short_position != null ? #numbers.formatDecimal(report.r12_net_short_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r12_net_short_position"
            name="r12_net_short_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1288,7 +1288,7 @@ function fileuploads(btn) {
     <td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_net_spot_position != null ? #numbers.formatDecimal(report.r13_net_spot_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_net_spot_position != null ? #numbers.formatDecimal(report.r13_net_spot_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_net_spot_position"
            name="r13_net_spot_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1297,7 +1297,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_net_forward_position != null ? #numbers.formatDecimal(report.r13_net_forward_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_net_forward_position != null ? #numbers.formatDecimal(report.r13_net_forward_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_net_forward_position"
            name="r13_net_forward_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1306,7 +1306,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_guarantees != null ? #numbers.formatDecimal(report.r13_guarantees, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_guarantees != null ? #numbers.formatDecimal(report.r13_guarantees, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_guarantees"
            name="r13_guarantees"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1315,7 +1315,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r13_net_future_inc_or_exp, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r13_net_future_inc_or_exp, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_net_future_inc_or_exp"
            name="r13_net_future_inc_or_exp"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1324,7 +1324,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r13_net_delta_wei_fx_opt_posi, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r13_net_delta_wei_fx_opt_posi, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_net_delta_wei_fx_opt_posi"
            name="r13_net_delta_wei_fx_opt_posi"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1333,7 +1333,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_other_items != null ? #numbers.formatDecimal(report.r13_other_items, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_other_items != null ? #numbers.formatDecimal(report.r13_other_items, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_other_items"
            name="r13_other_items"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1342,7 +1342,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_net_long_position != null ? #numbers.formatDecimal(report.r13_net_long_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_net_long_position != null ? #numbers.formatDecimal(report.r13_net_long_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_net_long_position"
            name="r13_net_long_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1351,7 +1351,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_or != null ? #numbers.formatDecimal(report.r13_or, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_or != null ? #numbers.formatDecimal(report.r13_or, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_or"
            name="r13_or"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1360,7 +1360,7 @@ function fileuploads(btn) {
 	<td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r13_net_short_position != null ? #numbers.formatDecimal(report.r13_net_short_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r13_net_short_position != null ? #numbers.formatDecimal(report.r13_net_short_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r13_net_short_position"
            name="r13_net_short_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1383,7 +1383,7 @@ function fileuploads(btn) {
     <td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_net_spot_position != null ? #numbers.formatDecimal(report.r14_net_spot_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_net_spot_position != null ? #numbers.formatDecimal(report.r14_net_spot_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_net_spot_position"
            name="r14_net_spot_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1392,7 +1392,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_net_forward_position != null ? #numbers.formatDecimal(report.r14_net_forward_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_net_forward_position != null ? #numbers.formatDecimal(report.r14_net_forward_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_net_forward_position"
            name="r14_net_forward_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1401,7 +1401,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_guarantees != null ? #numbers.formatDecimal(report.r14_guarantees, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_guarantees != null ? #numbers.formatDecimal(report.r14_guarantees, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_guarantees"
            name="r14_guarantees"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1410,7 +1410,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r14_net_future_inc_or_exp, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r14_net_future_inc_or_exp, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_net_future_inc_or_exp"
            name="r14_net_future_inc_or_exp"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1419,7 +1419,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r14_net_delta_wei_fx_opt_posi, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r14_net_delta_wei_fx_opt_posi, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_net_delta_wei_fx_opt_posi"
            name="r14_net_delta_wei_fx_opt_posi"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1428,7 +1428,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_other_items != null ? #numbers.formatDecimal(report.r14_other_items, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_other_items != null ? #numbers.formatDecimal(report.r14_other_items, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_other_items"
            name="r14_other_items"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1437,7 +1437,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_net_long_position != null ? #numbers.formatDecimal(report.r14_net_long_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_net_long_position != null ? #numbers.formatDecimal(report.r14_net_long_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_net_long_position"
            name="r14_net_long_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1446,7 +1446,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_or != null ? #numbers.formatDecimal(report.r14_or, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_or != null ? #numbers.formatDecimal(report.r14_or, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_or"
            name="r14_or"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1455,7 +1455,7 @@ function fileuploads(btn) {
 	<td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r14_net_short_position != null ? #numbers.formatDecimal(report.r14_net_short_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r14_net_short_position != null ? #numbers.formatDecimal(report.r14_net_short_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r14_net_short_position"
            name="r14_net_short_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1478,7 +1478,7 @@ function fileuploads(btn) {
     <td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_net_spot_position != null ? #numbers.formatDecimal(report.r15_net_spot_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_net_spot_position != null ? #numbers.formatDecimal(report.r15_net_spot_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_net_spot_position"
            name="r15_net_spot_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1487,7 +1487,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_net_forward_position != null ? #numbers.formatDecimal(report.r15_net_forward_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_net_forward_position != null ? #numbers.formatDecimal(report.r15_net_forward_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_net_forward_position"
            name="r15_net_forward_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1496,7 +1496,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_guarantees != null ? #numbers.formatDecimal(report.r15_guarantees, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_guarantees != null ? #numbers.formatDecimal(report.r15_guarantees, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_guarantees"
            name="r15_guarantees"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1505,7 +1505,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r15_net_future_inc_or_exp, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r15_net_future_inc_or_exp, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_net_future_inc_or_exp"
            name="r15_net_future_inc_or_exp"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1514,7 +1514,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r15_net_delta_wei_fx_opt_posi, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r15_net_delta_wei_fx_opt_posi, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_net_delta_wei_fx_opt_posi"
            name="r15_net_delta_wei_fx_opt_posi"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1523,7 +1523,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_other_items != null ? #numbers.formatDecimal(report.r15_other_items, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_other_items != null ? #numbers.formatDecimal(report.r15_other_items, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_other_items"
            name="r15_other_items"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1532,7 +1532,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_net_long_position != null ? #numbers.formatDecimal(report.r15_net_long_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_net_long_position != null ? #numbers.formatDecimal(report.r15_net_long_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_net_long_position"
            name="r15_net_long_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1541,7 +1541,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_or != null ? #numbers.formatDecimal(report.r15_or, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_or != null ? #numbers.formatDecimal(report.r15_or, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_or"
            name="r15_or"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1550,7 +1550,7 @@ function fileuploads(btn) {
 	<td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r15_net_short_position != null ? #numbers.formatDecimal(report.r15_net_short_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r15_net_short_position != null ? #numbers.formatDecimal(report.r15_net_short_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r15_net_short_position"
            name="r15_net_short_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1573,7 +1573,7 @@ function fileuploads(btn) {
     <td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_net_spot_position != null ? #numbers.formatDecimal(report.r16_net_spot_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_net_spot_position != null ? #numbers.formatDecimal(report.r16_net_spot_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_net_spot_position"
            name="r16_net_spot_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1582,7 +1582,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_net_forward_position != null ? #numbers.formatDecimal(report.r16_net_forward_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_net_forward_position != null ? #numbers.formatDecimal(report.r16_net_forward_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_net_forward_position"
            name="r16_net_forward_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1591,7 +1591,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_guarantees != null ? #numbers.formatDecimal(report.r16_guarantees, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_guarantees != null ? #numbers.formatDecimal(report.r16_guarantees, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_guarantees"
            name="r16_guarantees"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1600,7 +1600,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r16_net_future_inc_or_exp, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_net_future_inc_or_exp != null ? #numbers.formatDecimal(report.r16_net_future_inc_or_exp, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_net_future_inc_or_exp"
            name="r16_net_future_inc_or_exp"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1609,7 +1609,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r16_net_delta_wei_fx_opt_posi, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_net_delta_wei_fx_opt_posi != null ? #numbers.formatDecimal(report.r16_net_delta_wei_fx_opt_posi, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_net_delta_wei_fx_opt_posi"
            name="r16_net_delta_wei_fx_opt_posi"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1618,7 +1618,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_other_items != null ? #numbers.formatDecimal(report.r16_other_items, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_other_items != null ? #numbers.formatDecimal(report.r16_other_items, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_other_items"
            name="r16_other_items"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1627,7 +1627,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_net_long_position != null ? #numbers.formatDecimal(report.r16_net_long_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_net_long_position != null ? #numbers.formatDecimal(report.r16_net_long_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_net_long_position"
            name="r16_net_long_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1636,7 +1636,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_or != null ? #numbers.formatDecimal(report.r16_or, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_or != null ? #numbers.formatDecimal(report.r16_or, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_or"
            name="r16_or"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1645,7 +1645,7 @@ function fileuploads(btn) {
 	<td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
-           th:value="${report.r16_net_short_position != null ? #numbers.formatDecimal(report.r16_net_short_position, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+           th:value="${report.r16_net_short_position != null ? #numbers.formatDecimal(report.r16_net_short_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r16_net_short_position"
            name="r16_net_short_position"
            style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1660,6 +1660,7 @@ function fileuploads(btn) {
 	<td id="ROW17" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
     <input class="display-input Show_input"
            type="text"
+           th:value="${report.r17_net_long_position != null ? #numbers.formatDecimal(report.r17_net_long_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r17_net_long_position"
            name="r17_net_long_position"
            style=" background-color: #92D050; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1669,6 +1670,7 @@ function fileuploads(btn) {
 	<td id="ROW17" style="padding-left: 20px; font-weight: bold; background-color: #92D050;">
     <input class="display-input Show_input"
            type="text"
+           th:value="${report.r17_net_short_position != null ? #numbers.formatDecimal(report.r17_net_short_position, 0, 'NONE', 0, 'POINT') : '0.00'}"
            id="r17_net_short_position"
            name="r17_net_short_position"
            style=" background-color: #92D050; width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1711,7 +1713,7 @@ function fileuploads(btn) {
             <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
-                     th:value="${report.r21_long != null ? #numbers.formatDecimal(report.r21_long, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+                     th:value="${report.r21_long != null ? #numbers.formatDecimal(report.r21_long, 0, 'NONE', 0, 'POINT') : '0.00'}"
                      id="r21_long"
                      name="r21_long"
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1720,7 +1722,7 @@ function fileuploads(btn) {
             <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
-                     th:value="${report.r21_short != null ? #numbers.formatDecimal(report.r21_short, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+                     th:value="${report.r21_short != null ? #numbers.formatDecimal(report.r21_short, 0, 'NONE', 0, 'POINT') : '0.00'}"
                      id="r21_short"
                      name="r21_short"
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1749,7 +1751,7 @@ function fileuploads(btn) {
             <td id="ROW22" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
-                     th:value="${report.r22_long != null ? #numbers.formatDecimal(report.r22_long, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+                     th:value="${report.r22_long != null ? #numbers.formatDecimal(report.r22_long, 0, 'NONE', 0, 'POINT') : '0.00'}"
                      id="r22_long"
                      name="r22_long"
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1758,7 +1760,7 @@ function fileuploads(btn) {
             <td id="ROW22" style="padding-left: 20px; font-weight: bold;">
               <input class="display-input Show_input"
                      type="text"
-                     th:value="${report.r22_short != null ? #numbers.formatDecimal(report.r22_short, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+                     th:value="${report.r22_short != null ? #numbers.formatDecimal(report.r22_short, 0, 'NONE', 0, 'POINT') : '0.00'}"
                      id="r22_short"
                      name="r22_short"
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
@@ -1847,7 +1849,7 @@ function fileuploads(btn) {
            <td id="ROW29" style="padding-left: 20px; font-weight: bold; background-color: grey; text-align: center; position: relative;">
   <input class="display-input Show_input"
          type="text"
-         th:value="${report.r29_capital_require != null ? #numbers.formatDecimal(report.r29_capital_require, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+         th:value="${report.r29_capital_require != null ? #numbers.formatDecimal(report.r29_capital_require, 0, 'NONE', 0, 'POINT') : '0.00'}"
          id="r29_capital_require"
          name="r29_capital_require"
          style="background-color: grey; width: 200px; height: 28px; border-color: transparent; text-align: right; padding-right: 20px; display: inline-block;"
