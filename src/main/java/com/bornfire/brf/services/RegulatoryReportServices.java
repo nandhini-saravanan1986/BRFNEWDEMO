@@ -698,15 +698,7 @@ public class RegulatoryReportServices {
 					e.printStackTrace();
 				}
 				break;
-			case "M_SIR":
-				try {
-					repfile = M_SIR_ReportService.getM_SIRExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
-				
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
+		
 
 		
 		case "M_IS":
@@ -988,6 +980,16 @@ public class RegulatoryReportServices {
 					e.printStackTrace();
 				}
 				break;
+				
+				case "M_SIR":
+					try {
+						repfile = M_SIR_ReportService.getM_SIRExcel(filename, reportId, fromdate, todate, currency, dtltype, type,
+								version);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
 
 
 
