@@ -356,6 +356,8 @@ PURPOSE		: BRRSREPORT
 			var secid = button.getAttribute('data-secid');
 			var dtltype = button.getAttribute('data-dtltype');
 			var filename = button.getAttribute('data-filename');
+			var type = button.getAttribute('data-type');
+			var version = button.getAttribute('data-version');
 			$('#loader').modal('show');
 			$.ajax({
 				url: './downloadExcel?reportid=' + reportid +
@@ -365,7 +367,9 @@ PURPOSE		: BRRSREPORT
 					'&currency=' + currency +
 					'&subreportid=' + subreportid +
 					'&secid=' + secid +
-					'&filename=' + filename,
+					'&filename=' + filename +
+					'&type=' + type +
+					'&version=' + version,
 				type: 'GET',
 				xhrFields: {
 					responseType: 'blob'
@@ -527,12 +531,8 @@ function cancelModify() {
 	    }
 
 	    // Put the totals into R17
-	    $("#r17_net_long_position").val(
-	        totalLong.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
-	    $("#r17_net_short_position").val(
-	        totalShort.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r17_net_long_position").val(totalLong);
+	    $("#r17_net_short_position").val(totalShort);
 	}
 
 	$(document).ready(function() {
@@ -557,9 +557,7 @@ function cancelModify() {
 	    let total = longVal + shortVal;
 
 	    // Put the total into r21_total_gross_long_short
-	    $("#r21_total_gross_long_short").val(
-	        total.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r21_total_gross_long_short").val(total);
 	}
 
 	$(document).ready(function () {
@@ -583,9 +581,7 @@ function cancelModify() {
 	    let difference = longVal - shortVal;
 
 	    // Put the diffrence into r21_net_position
-	    $("#r21_net_position").val(
-	        difference.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r21_net_position").val(difference);
 	}
 
 	$(document).ready(function () {
@@ -608,9 +604,7 @@ function cancelModify() {
 	    let total = longVal + shortVal;
 
 	    // Put the total into r22_total_gross_long_short
-	    $("#r22_total_gross_long_short").val(
-	        total.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r22_total_gross_long_short").val(total);
 	}
 
 	$(document).ready(function () {
@@ -634,9 +628,7 @@ function cancelModify() {
 	    let difference = longVal - shortVal;
 
 	    // Put the diffrence into r22_net_position
-	    $("#r22_net_position").val(
-	        difference.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r22_net_position").val(difference);
 	}
 
 	$(document).ready(function () {
@@ -685,9 +677,7 @@ function cancelModify() {
 	    let greaterVal = Math.max(r17Long, r17Short);
 
 	    // Set the value in R29 greater_net_long_or_short
-	    $("#r29_greater_net_long_or_short").val(
-	        greaterVal.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r29_greater_net_long_or_short").val(greaterVal);
 	}
 	$(document).ready(function () {
 	    // Calculate once on load
@@ -710,9 +700,7 @@ function cancelModify() {
 	    let answer = r23result;
 
 	    // Set the value in r29_abs_value_net_gold_posi 
-	    $("#r29_abs_value_net_gold_posi").val(
-	        answer.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r29_abs_value_net_gold_posi").val(answer);
 	}
 	$(document).ready(function () {
 	    // Calculate once on load
@@ -735,9 +723,7 @@ function cancelModify() {
 	    let result = (firstVal + secondVal) * (thirdVal/100);
 
 	    // Put the result into r29_capital_charge
-	    $("#r29_capital_charge").val(
-	        result.toLocaleString( { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
+	    $("#r29_capital_charge").val(result);
 	}
 
 	$(document).ready(function () {
@@ -1018,6 +1004,7 @@ function fileuploads(btn) {
 					    			 data-version=${version}" onclick="downloadfile(this);">
 							<i class="fa fa-download"></i>
 						</button>
+						
 						
 						
 
