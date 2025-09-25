@@ -11158,13 +11158,15 @@ return mv;
 					numberStyle.setFont(font);
 					// --- End of Style Definitions ---
 					
-					if (!dataList1.isEmpty()) {
-						populateEntity1Data(sheet, dataList1.get(0), textStyle, numberStyle);
-					}
+					/*
+					 * if (!dataList1.isEmpty()) { populateEntity1Data(sheet, dataList1.get(0),
+					 * textStyle, numberStyle); }
+					 */
 
-					if (!dataList2.isEmpty()) {
-						populateEntity2Data(sheet, dataList2.get(0), textStyle, numberStyle);
-					}
+					/*
+					 * if (!dataList2.isEmpty()) { populateEntity2Data(sheet, dataList2.get(0),
+					 * textStyle, numberStyle); }
+					 */
 
 
 					workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();

@@ -82,8 +82,10 @@ import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity1;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity2;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity3;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity4;
+import com.bornfire.brf.entities.Q_RLFA2_Summary_Entity;
 import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
 import com.bornfire.brf.services.BRRS_Q_BRANCHNET_ReportService;
+import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
 
 import com.bornfire.brf.services.M_SIR_ReportService;
@@ -605,6 +607,39 @@ public class CBUAE_BRF_ReportsController {
 		     return ResponseEntity.ok("All Reports Updated Successfully");
 		     } 
 		     catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+		 
+		 
+		 
+		 
+		 @Autowired
+		 private BRRS_Q_RLFA2_ReportService q_rlfa2_reportService;
+		 
+		 @RequestMapping(value = "/Q_RLFA2update", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> updateReport(
+		     @RequestParam(required = false) 
+		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		     @ModelAttribute Q_RLFA2_Summary_Entity request
+		    ) {
+
+		     try {
+		         System.out.println("came to single controller");
+		         
+		         // ✅ set the asondate into entity
+		         request.setReport_date(asondate);
+		         
+		         
+		      // call services
+		         q_rlfa2_reportService.updateReport(request);
+		         
+		         
+		         return ResponseEntity.ok("All Reports Updated Successfully");
+		     } catch (Exception e) {
 		         e.printStackTrace();
 		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 		                              .body("Update Failed: " + e.getMessage());
