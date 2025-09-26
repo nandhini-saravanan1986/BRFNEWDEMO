@@ -51,6 +51,8 @@ import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
+import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
+import com.bornfire.brf.entities.M_CA7_Summary_Entity;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity1;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity2;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity3;
@@ -88,6 +90,10 @@ import com.bornfire.brf.entities.M_SIR_Summary_Entity;
 import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
 
 
+
+import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
+import com.bornfire.brf.entities.M_CA7_Summary_Entity;
+import com.bornfire.brf.services.M_CA7_ReportService;
 
 @Controller
 @ConfigurationProperties("default")
@@ -690,6 +696,7 @@ public class CBUAE_BRF_ReportsController {
 		     }
 		 }
 		 
+
 		 @RequestMapping(value = "/QSTAFF3", method = { RequestMethod.GET, RequestMethod.POST })
 		 @ResponseBody
 		 public ResponseEntity<String> updateReport3(
@@ -708,6 +715,43 @@ public class CBUAE_BRF_ReportsController {
 		         QSTAFF_service.updateReport3(request);
 		         return ResponseEntity.ok("Updated Successfully");
 		     } catch (Exception e) {
+
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+
+
+		 @Autowired
+		 M_CA7_ReportService M_CA7_ReportService;
+		 @RequestMapping(value = "/MCA7updateAll", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> updateAllReports(
+		         @RequestParam(required = false)
+		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+		         @RequestParam(required = false) String type,
+		         @ModelAttribute M_CA7_Summary_Entity request1
+
+		 ) {
+		     try {
+		         System.out.println("Came to single controller");
+		         System.out.println(type);
+		         // set date into all 4 entities
+		         request1.setReport_date(asondate);
+		         
+		     if(type.equals("ARCHIVAL")) {
+		    	 M_CA7_Archival_Summary_Entity Archivalrequest1 = new M_CA7_Archival_Summary_Entity();
+		         BeanUtils.copyProperties(request1,Archivalrequest1);	
+		     }
+		     else {
+		    	 M_CA7_ReportService.updateReport(request1);
+		     }
+		     return ResponseEntity.ok("All Reports Updated Successfully");
+		     } 
+		     catch (Exception e) {
+
 		         e.printStackTrace();
 		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 		                              .body("Update Failed: " + e.getMessage());
@@ -717,7 +761,6 @@ public class CBUAE_BRF_ReportsController {
 
 
 
-		
 		 
 	}
 				

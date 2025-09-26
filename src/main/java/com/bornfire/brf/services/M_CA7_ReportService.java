@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +26,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -42,6 +44,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bornfire.brf.entities.M_CA7_Summary_Repo;
+import com.bornfire.brf.entities.M_SIR_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Detail_Repo;
 import com.bornfire.brf.entities.M_CA7_Detail_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
@@ -197,6 +200,66 @@ System.out.println("Entered service method M_CA7......................");
 	    return mv;
 	}
 
+	public void updateReport(M_CA7_Summary_Entity Entity) {
+		System.out.println("Report Date: " + Entity.getReport_date());
+		M_CA7_Summary_Entity existing=M_CA7_Summary_Repo.findById(Entity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + Entity.getReport_date()));
+
+try {
+    String[] fields = { "pre_ifrs_pro", "post_ifrs9_pro", "trans_amt"}; // 👈 only the suffix
+
+    String prefix = "R12_";
+
+    for (String field : fields) {
+        String getterName = "get" + prefix + field;
+        String setterName = "set" + prefix + field;
+
+        try {
+            Method getter = M_CA7_Summary_Entity.class.getMethod(getterName);
+            Method setter = M_CA7_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+            Object newValue = getter.invoke(Entity);
+            setter.invoke(existing, newValue);
+
+        } catch (NoSuchMethodException e) {
+            // Skip missing fields
+            continue;
+        }
+    }
+    for (int i = 19; i <= 22; i++) {
+        String prefix1 = "R" + i + "_";
+        String[] fields1 = { "amt_add_year" + (i - 18) };  
+        // R19 -> amt_add_year1, R20 -> amt_add_year2, etc.
+
+        for (String field : fields1) {
+            String getterName = "get" + prefix1 + field;
+            String setterName = "set" + prefix1 + field;
+
+            try {
+                Method getter = M_CA7_Summary_Entity.class.getMethod(getterName);
+                Method setter = M_CA7_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+                Object newValue = getter.invoke(Entity);
+                setter.invoke(existing, newValue);
+
+            } catch (NoSuchMethodException e) {
+                continue;
+            }
+        }
+    }
+
+} catch (Exception e) {
+    throw new RuntimeException("Error while updating R35 fields", e);
+}
+
+
+		// 3️⃣ Save updated entity
+		M_CA7_Summary_Repo.save(existing);
+	}
+
+	
+	
 	public byte[] getM_CA_7DetailExcel(String filename, String fromdate, String todate,String currency, String dtltype,
 			String type,String version) {
 	    System.out.println("entered detailexcel........");
@@ -377,19 +440,26 @@ System.out.println("Entered service method M_CA7......................");
 			textStyle.setBorderTop(BorderStyle.THIN);
 			textStyle.setBorderLeft(BorderStyle.THIN);
 			textStyle.setBorderRight(BorderStyle.THIN);
-			
+
 			// Create the font
 			Font font = workbook.createFont();
-			font.setFontHeightInPoints((short)8); // size 8
-			font.setFontName("Arial");    
-
+			font.setFontHeightInPoints((short) 8); // size 8
+			font.setFontName("Arial");
+			
 			CellStyle numberStyle = workbook.createCellStyle();
-			//numberStyle.setDataFormat(createHelper.createDataFormat().getFormat("0.000"));
+			// numberStyle.setDataFormat(createHelper.createDataFormat().getFormat("0.000"));
 			numberStyle.setBorderBottom(BorderStyle.THIN);
 			numberStyle.setBorderTop(BorderStyle.THIN);
 			numberStyle.setBorderLeft(BorderStyle.THIN);
 			numberStyle.setBorderRight(BorderStyle.THIN);
 			numberStyle.setFont(font);
+			numberStyle.setAlignment(HorizontalAlignment.CENTER);
+			numberStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+			CellStyle percentStyle = workbook.createCellStyle();
+			percentStyle.cloneStyleFrom(numberStyle);
+			percentStyle.setDataFormat(workbook.createDataFormat().getFormat("0.00%"));
+			percentStyle.setAlignment(HorizontalAlignment.RIGHT);
 			// --- End of Style Definitions ---
 
 			int startRow = 11;
@@ -405,20 +475,20 @@ System.out.println("Entered service method M_CA7......................");
 
 					//row12
 					// Column b 
-					Cell cell1 = row.createCell(1);
+					Cell cell1 = row.getCell(1);
 					if (record.getR12_pre_ifrs_pro() != null) {
 						cell1.setCellValue(record.getR12_pre_ifrs_pro().doubleValue());
-						cell1.setCellStyle(numberStyle);
+						
 					} else {
 						cell1.setCellValue("");
 						cell1.setCellStyle(textStyle);
 					}
 					//row12
 					// Column c
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 					if (record.getR12_post_ifrs9_pro() != null) {
 						cell1.setCellValue(record.getR12_post_ifrs9_pro().doubleValue());
-						cell1.setCellStyle(numberStyle);
+						
 					} else {
 						cell1.setCellValue("");
 						cell1.setCellStyle(textStyle);
@@ -426,10 +496,10 @@ System.out.println("Entered service method M_CA7......................");
 					//row12
 					// Column d
 					
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 					if (record.getR12_trans_amt() != null) {
 						cell1.setCellValue(record.getR12_trans_amt().doubleValue());
-						cell1.setCellStyle(numberStyle);
+						
 					} else {
 						cell1.setCellValue("");
 						cell1.setCellStyle(textStyle);
@@ -437,10 +507,10 @@ System.out.println("Entered service method M_CA7......................");
 					//row19
 					// Column c
 						row=sheet.getRow(18);
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 						if (record.getR19_cap_year1()!= null) {
 							cell1.setCellValue(record.getR19_cap_year1().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -448,10 +518,10 @@ System.out.println("Entered service method M_CA7......................");
 
 						//row19
 						// Column d
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 						if (record.getR19_amt_add_year1() != null) {
 							cell1.setCellValue(record.getR19_amt_add_year1().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -460,20 +530,21 @@ System.out.println("Entered service method M_CA7......................");
 						//row20
 						// Column c
 						row=sheet.getRow(19);
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 					 	if (record.getR20_cap_year2()!= null) {
 							cell1.setCellValue(record.getR20_cap_year2().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
 					 	//row20
 						// Column d		
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 						if (record.getR20_amt_add_year2() != null) {
 							cell1.setCellValue(record.getR20_amt_add_year2().doubleValue());
-							cell1.setCellStyle(numberStyle);
+						
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -481,20 +552,21 @@ System.out.println("Entered service method M_CA7......................");
 						//row21
 						// Column c
 						row=sheet.getRow(20);
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 						if (record.getR21_cap_year3()!= null) {
 							cell1.setCellValue(record.getR21_cap_year3().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
 						//row21
 						// Column d	
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 						if (record.getR21_amt_add_year3() != null) {
 							cell1.setCellValue(record.getR21_amt_add_year3().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							
 						} else {
 						cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -503,20 +575,21 @@ System.out.println("Entered service method M_CA7......................");
 						// Column c
 
 						row=sheet.getRow(21);
-						cell1 = row.createCell(2);
+						cell1 = row.getCell(2);
 						if (record.getR22_cap_year4()!= null) {
 							cell1.setCellValue(record.getR22_cap_year4().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
 						//row22
 						// Column d										
-					cell1 = row.createCell(3);
+					cell1 = row.getCell(3);
 						if (record.getR22_amt_add_year4() != null) {
 							cell1.setCellValue(record.getR22_amt_add_year4().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);

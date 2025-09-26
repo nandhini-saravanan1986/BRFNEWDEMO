@@ -2,7 +2,7 @@
 
 <!-- 
 CREATED BY	: SANTHIYA S 
-CREATED ON	: 16.08.2025
+
 PURPOSE		: BRFREPORT
 -->
 
@@ -180,6 +180,7 @@ td {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	
 }
 </style>
 
@@ -291,6 +292,8 @@ label.error {
 .white-text span {
 	color: white !important;
 }
+
+
 .table-cell tbody td:hover {
         background-color: #f0f0f0; /* Hover color for cell */
         cursor: pointer;           /* Optional: pointer cursor */
@@ -300,6 +303,8 @@ label.error {
 	.table-bordered th {
 	     border: 1px solid #000 !important;
 	}
+</style>
+
 </style>
 
 
@@ -333,44 +338,15 @@ $(window).on('beforeunload', function() {
 		window.history.back();
 	}
 	
-	//to fetch summary from the database - called from the summary button
 	function showdetails() {
-    
-    var Callurl;
-    	$('#loader').modal('show');
-        Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype},type=${type},version=${version})}]]*/ 
-        location.href = Callurl;
-        	console.log(Callurl);
-   /*  $.ajax({
-        type: 'get',
-        url: Callurl,
-        beforeSend: function () {
-            $('#loader').modal('show'); // 🔄 Show loader
-        },
-        success: function (data) {
-            $('.content').html(data);
-            //$("#detailsbtn").addClass("active");
-            //tablepagination();
-        },
-        complete: function () {
-            $('#loader').modal('hide'); 
-        },
-        error: function () {
-        	  $('#loader').modal('hide');
-            alert("Something went wrongss. Please try again.");
-          
-        }
-    }); */
-}
+			 alert("Details page not available for Manual Report");
+		}
 	
 	function showsummary() {
-		$('#loader').modal('show');
-			var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
-									loader.show();
-			var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type},version=${version}, asondate=${asondate})}]]*/
-										location.href = Callurl;
-
-
+		var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
+							loader.show();
+							var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type},version=${version}, asondate=${asondate})}]]*/
+								location.href = Callurl;
 	}
     </script>
 
@@ -413,9 +389,11 @@ function downloadfile(button) {
 	var dtltype = button.getAttribute('data-dtltype');
 	var filename = button.getAttribute('data-filename');
 	var type = button.getAttribute('data-type');
-		var version = button.getAttribute('data-version');
+			var version = button.getAttribute('data-version');
 
-	$('#loader').modal('show');
+			var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
+				loader.show();
+
 
 	$.ajax({
 		url: './downloadExcel?reportid=' + reportid +
@@ -480,112 +458,7 @@ function showResultModal(title, message) {
 }
 
 </script>
-<!--
-<script>
 
-function downloadDetailfile(button) {
-    const filename = button.getAttribute('data-filename');
-    const fromdate = button.getAttribute('data-fromdate');
-    const todate = button.getAttribute('data-todate');
-
-    $('#loader').modal('show');
-
-    const baseUrl = '/BCDRS/Reports/'; 
-    const downloadUrl = baseUrl + 'downloadDetailExcel' +
-        '?filename=' + encodeURIComponent(filename) +
-        '&fromdate=' + encodeURIComponent(fromdate) +
-        '&todate=' + encodeURIComponent(todate);
-
-    $.ajax({
-        url: downloadUrl,
-        type: 'GET',
-        xhrFields: {
-            responseType: 'blob'
-        },
-        success: function (data) {
-            $('#loader').modal('hide');
-
-            if (data && data.size > 100) {
-                const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = filename + '.xls';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                window.URL.revokeObjectURL(url);
-
-                showResultModal('Success', filename + ' downloaded successfully.');
-            } else {
-                showResultModal('Information', 'No data was available to create a download or file was empty.');
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            $('#loader').modal('hide');
-            console.error('Download error:', textStatus, errorThrown, jqXHR);
-
-            let errorMessage = 'An error occurred while downloading the file. Please try again.';
-            if (jqXHR.response) {
-                 const reader = new FileReader();
-                 reader.onload = function() {
-                     errorMessage = reader.result;
-                     showResultModal('Error', errorMessage);
-                 };
-                 reader.onerror = function() {
-                    showResultModal('Error', 'An unknown error occurred during download.');
-                 };
-                 reader.readAsText(jqXHR.response);
-                 return;
-            }
-            showResultModal('Error', errorMessage);
-        }
-    });
-}
-
-
-
-</script>  -->
-
-
-<script th:inline="javascript">
-function showdetailsbyRowAndColumn(a) { 
-    var rowId = a.getAttribute('RowId');
-    var columnId = a.getAttribute('ColumnId');
-    var cellValue = a.textContent || a.innerText;
-
-    if (cellValue !== '0') {
-        // Set dynamic message in modal (instead of confirm)
-        document.getElementById("cellresultModalLabel").innerText = 
-            "Do you want to open details for Row: " + rowId + " and Column: " + columnId + "?";
-
-        // Show custom Bootstrap modal
-        $('#cellresultModal').modal('show');
-
-        // Handle Yes button
-        document.querySelector('.yes-btn').onclick = function() {
-            $('#cellresultModal').modal('hide');
-
-            // Show loader
-            const loader = bootstrap.Modal.getOrCreateInstance(document.getElementById('loader'), {
-                backdrop: 'static',
-                keyboard: false
-            });
-            $('#loader').modal('show');
-
-            // Build dynamic URL
-            var Callurl = /*[[@{'/Reports/' + ${reportid} + '/Details'(asondate=${asondate}, fromdate=${fromdate}, todate=${todate}, currency=${currency}, dtltype=${dtltype},type=${type},version=${version})}]]*/ "";
-            Callurl += "&filter=" + encodeURIComponent(rowId + "," + columnId);
-
-            location.href = Callurl;
-        };
-    } else {
-        // Use your custom alert modal instead of window.alert
-        showResultModal("Alert", "No Records available for this selected cell.");
-    }
-}
-</script>
 <script>
 
 	function startReport(button){
@@ -701,7 +574,169 @@ function showdetailsbyRowAndColumn(a) {
 
 </script>
 
-</head>
+
+<script th:inline="javascript">
+function showdetailsbyRowAndColumn(a) { 
+    var rowId = a.getAttribute('Row_Id');
+    var columnId = a.getAttribute('Column_Id');
+    var cellValue = a.textContent || a.innerText;
+
+    if (cellValue !== '0') {
+        // Set dynamic message in modal (instead of confirm)
+        document.getElementById("cellresultModalLabel").innerText = 
+            "Do you want to open details for Row: " + rowId + " and Column: " + columnId + "?";
+
+        // Show custom Bootstrap modal
+        $('#cellresultModal').modal('show');
+
+        // Handle Yes button
+        document.querySelector('.yes-btn').onclick = function() {
+            $('#cellresultModal').modal('hide');
+
+            // Show loader
+            const loader = bootstrap.Modal.getOrCreateInstance(document.getElementById('loader'), {
+                backdrop: 'static',
+                keyboard: false
+            });
+            $('#loader').modal('show');
+
+            // Build dynamic URL
+            var Callurl = /*[[@{'/Reports/' + ${reportid} + '/Details'(asondate=${asondate}, fromdate=${fromdate}, todate=${todate}, currency=${currency}, dtltype=${dtltype},type=${type},version=${version})}]]*/ "";
+            Callurl += "&filter=" + encodeURIComponent(rowId + "," + columnId);
+
+            location.href = Callurl;
+        };
+    } else {
+        // Use your custom alert modal instead of window.alert
+        showResultModal("Alert", "No Records available for this selected cell.");
+    }
+}
+</script>
+<script>
+	function showmodify(btn) {
+	    $(".show_input").removeAttr("readonly").removeAttr("disabled");
+
+	 
+							
+	    // Toggle buttons
+	    $("#submitButton, #btnBack_edit").show();
+	    $("#btnBack").hide();
+	    $("#cancelRecord").show();
+	    $(btn).hide(); // hide only the clicked Modify button
+	}
+
+	function cancelModify() {
+	    if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
+	        // Reloads the page → resets everything
+	        location.reload();
+
+	
+	        $("#submitButton, #btnBack_edit").hide();
+	        $("#btnBack").show();
+	        $("#cancelRecord").hide();
+	        $("#addRecord").show();
+	    }
+	}
+
+</script>
+<script>
+// Row 12 calculation (Transition Amount)
+function calculate12Totals() {
+    let pre  = Number($("#r12_pre_ifrs_pro").val()) || 0;
+    let post = Number($("#r12_post_ifrs9_pro").val()) || 0;
+
+    let trans = post - pre;  // subtraction
+
+    $("#r12_trans_amt").val(trans);
+
+	calculateCET1AddBack(trans);
+}
+function calculateCET1AddBack(trans) {
+    // Percentages
+    let caps = [0.75, 0.50, 0.25, 0.0];
+
+   
+	$("#r19_amt_add_year1").val(Math.round(trans * caps[0]));
+	   $("#r20_amt_add_year2").val(Math.round(trans * caps[1]));
+	   $("#r21_amt_add_year3").val(Math.round(trans * caps[2]));
+	   $("#r22_amt_add_year4").val(Math.round(trans * caps[3]));
+}
+
+$(document).ready(function () {
+   
+    calculate12Totals();
+	
+    
+    $("#r12_pre_ifrs_pro, #r12_post_ifrs9_pro").on("input", calculate12Totals);
+	
+	
+    });
+
+</script>
+
+
+<script>
+	function closemodel(){
+		$("#resultModel").modal("hide");
+		$('#loader').modal('hide');
+		setTimeout(function () {
+	        location.reload();
+	    }, 300);		
+	}
+	
+	function fileuploads(btn){
+		const asondate = btn.getAttribute("data-todate");
+		const type = btn.getAttribute("data-type");
+		
+		$('#loader').modal('show');
+		
+		
+		
+		$("#fileupload input[type='text']").each(function () {
+			        $(this).val($(this).val().replace(/,/g, ''));
+		});		
+		if (!$("#fileupload").valid()) {
+		        $('#loader').modal('hide');
+		        return;
+		}
+		const formData = new FormData();
+		formData.append("asondate", asondate);
+		formData.append("type",type);
+		
+		$('#fileupload').find(':input').each(function () {
+			        const name = $(this).attr('name');
+			        if (name) {
+			            formData.append(name, $(this).val());
+			        }
+		});
+		$.ajax({
+		        url: './MCA7updateAll',
+		        type: 'POST',
+		        data: formData,
+		        processData: false,
+		        contentType: false,
+		        dataType: 'text',
+		        success: function () {
+		            $("#resultModalLabel").text("Success");
+		            $("#resultModalBody").text("All reports updated successfully.");
+		            $("#resultModal").modal("show");
+		        },
+		        error: function (jqXHR) {
+		            console.error("Error response:", jqXHR.responseText);
+		            $("#resultModalLabel").text("Error");
+		            $("#resultModalBody").text("Update failed. Check console for details.");
+		            $("#resultModal").modal("show");
+		        },
+		        complete: function () {
+		            $('#loader').modal('hide');
+		        }
+		    });
+		}
+	
+</script>
+
+</script>
+
 
 
 
@@ -741,7 +776,22 @@ function showdetailsbyRowAndColumn(a) {
         <input type="hidden" id="selectedTab" th:value="${displaymode}">
         <button type="button" class="custom-tab-btn" id="custom-tab-btnSummary" onclick="showsummary();" th:if="${displaymode == 'Details'}">Summary</button>
         <button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();" th:if="${displaymode == 'summary'}">Details</button>
-        <button type="button" class="custom-tab-btn" id="custom-tab-btnAdd" th:if="${displaymode == 'summary'}"
+		<!-- Modify button -->
+						<button type="button" class="custom-tab-btn"
+						        onclick="showmodify(this);"
+						        title="Click to EDIT Records"
+								th:if="${type != 'ARCHIVAL'}"
+								       th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
+						        id="addRecord">Modify</button>
+
+						<!-- Cancel button (hidden initially) -->
+						<button type="button" class="custom-tab-btn"
+						        title="Cancel editing"
+						        id="cancelRecord"
+						        onclick="cancelModify();"
+						        style="display: none;">Cancel</button>
+		
+		  <button type="button" class="custom-tab-btn" id="custom-tab-btnAdd" th:if="${displaymode == 'summary'}"
             th:attr="data-reportid=${reportid}, 
                      data-asondate=${asondate}, 
                      data-fromdate=${fromdate}, 
@@ -774,6 +824,7 @@ function showdetailsbyRowAndColumn(a) {
 			<div th:if="${displaymode == 'summary'}">
 			<div class="row" >
 				<div class="col-sm-12">
+				<form action="#" method="POST" id="fileupload">
 					<div class="table-wrapper table-responsive scrollable-table-container" style="border-right: 1px solid #dee2e6; ">
 						<table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports">
 							<thead>
@@ -791,60 +842,203 @@ function showdetailsbyRowAndColumn(a) {
 												  
 							                  </thead>
 
-							                  <tbody th:each="report : ${reportsummary}" style="font-family: Arial;">
-							                      <!-- Section 1 Values -->
-							                      <tr>
-							                          <td th:text="${report.r12_pre_ifrs_pro}" style="text-align: right;"
-							                              th:attr="RowId='R12', ColumnId='C1'" onclick="showdetailsbyRowAndColumn(this)"></td>
-							                          <td th:text="${report.r12_post_ifrs9_pro}" style="text-align: right;"
-							                              th:attr="RowId='R12', ColumnId='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-							                          <td th:text="${report.r12_trans_amt}" style="text-align: right;"></td>
-							                      </tr>
+              <tbody th:each="report : ${reportsummary}" style="font-family: Arial;">
+                  <!-- Section 1 Values -->
+                  <tr>
+					<td id="ROW12" style="padding-left: 20px; font-weight: bold;">
+					    <input class="display-input show_input"
+					           type="text"
+					           th:value="${#strings.defaultString(report.r12_pre_ifrs_pro, 'N/A')}"
+					           id="r12_pre_ifrs_pro"
+					           name="r12_pre_ifrs_pro"
+					           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+					                  border-color: transparent; text-align: right;"
+					           readonly />
+					  </td>
+                      
+					  <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
+				    <input class="display-input show_input"
+				           type="text"
+				           th:value="${#strings.defaultString(report.r12_post_ifrs9_pro, 'N/A')}"
+				           id="r12_post_ifrs9_pro"
+				           name="r12_post_ifrs9_pro"
+				           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+				                  border-color: transparent; text-align: right;"
+				           readonly /></td>
+				   <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
+				   			    <input class="display-input show_input"
+				   			           type="text"
+				   			           th:value="${#strings.defaultString(report.r12_trans_amt, 'N/A')}"
+				   			           id="r12_trans_amt"
+				   			           name="r12_trans_amt"
+				   			           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+				   			                  border-color: transparent; text-align: right;"
+				   			           readonly /></td>
+                      
+                  </tr>
 
-												  <tr>
-												      <td colspan="4" style="border: 1px solid black;">&nbsp;</td>
-												  </tr>
+				  <tr>
+				      <td colspan="4" style="border: 1px solid black;">&nbsp;</td>
+				  </tr>
 
-							                      <!-- Section 2 Heading -->
-							                      <tr>
-							                          <td>2</td>
-							                          <th colspan="3" class="text-left">Transitional Amount Added Back to Common Equity Tier 1 Capital During the Transition Period</th>
-							                      </tr>
+                  <!-- Section 2 Heading -->
+                  <tr>
+                      <td>2</td>
+                      <th colspan="3" class="text-left">Transitional Amount Added Back to Common Equity Tier 1 Capital During the Transition Period</th>
+                  </tr>
 
-							                      <tr>
-							                          <th>Financial Year*</th>
-							                          <th style="text-align: center;">Cap (%)</th>
-							                          <th style="text-align: center;">Amount added back to CET1 P'000</th>
-							                      </tr>
+                  <tr>
+                      <th>Financial Year*</th>
+                      <th style="text-align: center;">Cap (%)</th>
+                      <th style="text-align: center;">Amount added back to CET1 P'000</th>
+                  </tr>
 
-							                      <!-- Section 2 Rows -->
-							                      <tr>
-							                          <td th:text="${report.r19_product}"></td>
-							                          <td th:text="${report.r19_cap_year1}+'%'" align="center"
-							                              th:attr="RowId='R19', ColumnId='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-							                          <td th:text="${report.r19_amt_add_year1}" style="background-color: #92D050; text-align: right;"></td>
-							                      </tr>
-							                      <tr>
-							                          <td th:text="${report.r20_product}"></td>
-							                          <td th:text="${report.r20_cap_year2}+'%' " align="center"
-							                              th:attr="RowId='R20', ColumnId='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-							                          <td th:text="${report.r20_amt_add_year2}" style="background-color: #92D050;  text-align: right;"></td>
-							                      </tr>
-							                      <tr>
-							                          <td th:text="${report.r21_product}"></td>
-							                          <td th:text="${report.r21_cap_year3}+'%'" align="center"
-							                              th:attr="RowId='R21', ColumnId='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-							                          <td th:text="${report.r21_amt_add_year3}" style="background-color: #92D050;  text-align: right;"></td>
-							                      </tr>
-							                      <tr>
-							                          <td th:text="${report.r22_product}"></td>
-							                          <td th:text="${report.r22_cap_year4}+'%'" align="center"
-							                              th:attr="RowId='R22', ColumnId='C2'" onclick="showdetailsbyRowAndColumn(this)"></td>
-							                          <td th:text="${report.r22_amt_add_year4}" style="background-color: #92D050; text-align: right;"></td>
-							                      </tr>
-							                  </tbody>
+                  <!-- Section 2 Rows -->
+                  <tr>
+							 <td id="ROW19" style="padding-left: 20px; font-weight: bold;">
+					 			 <input class="display-input show_input"
+					          	 type="text"
+					         	  th:value="${#strings.defaultString(report.r19_product, 'N/A')}"
+					         	  id="r19_product"
+					         	  name="r19_product"
+					        	   style="background-color:#FFFFFF; width: 200px; height: 28px; 
+					                  border-color: transparent; text-align:left;"
+					           readonly />
+							  </td>
+          
+			 <td id="ROW19" style="padding-left: 20px; font-weight: bold;">
+	   			    <input class="display-input show_input"
+	   			           type="text"
+	   			           th:value="${#strings.defaultString(report.r19_cap_year1, 'N/A')}"
+	   			           id="r19_cap_year1"
+	   			           name="r19_cap_year1"
+	   			           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+	   			                  border-color: transparent; text-align: center;"
+	   			           readonly /></td> 
+			 <td id="ROW19" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+    			    <input class="display-input show_input"
+    			           type="text"
+    			           th:value="${#strings.defaultString(report.r19_amt_add_year1, 'N/A')}"
+    			           id="r19_amt_add_year1"
+    			           name="r19_amt_add_year1"
+    			           style="background-color:#92D050; width: 100%; height: 28px; 
+    			                  border-color: transparent; text-align: center;"
+    			           readonly /></td>
+                     
+                  </tr>
+                  <tr>
+								<td id="ROW20" style="padding-left: 20px; font-weight: bold;">
+								  <input class="display-input show_input"
+								           type="text"
+								           th:value="${#strings.defaultString(report.r20_product, 'N/A')}"
+								           id="r20_product"
+								           name="r20_product"
+								           style="background-color:#FFFFFF; width: 200px; height: 28px; 
+								                  border-color: transparent; text-align:left;"
+								           readonly />
+								  </td>  
+								  
+
+								  <td id="ROW20" style="padding-left: 20px; font-weight: bold;">
+								  	    <input class="display-input show_input"
+								  	           type="text"
+								  	           th:value="${#strings.defaultString(report.r20_cap_year2, 'N/A')}"
+								  	           id="r20_cap_year2"
+								  	           name="r20_cap_year2"
+								  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+								  	                  border-color: transparent; text-align: center;"
+								  	           readonly /> </td> 
+								  <td id="ROW20" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+								      <input class="display-input show_input"
+								             type="text"
+								             th:value="${#strings.defaultString(report.r20_amt_add_year2, 'N/A')}"
+								             id="r20_amt_add_year2"
+								             name="r20_amt_add_year2"
+								             style="background-color:#92D050; width: 100%; height: 28px; 
+								                    border-color: transparent; text-align: center;"
+								             readonly /></td>
+                  </tr>
+                  <tr>
+					
+					<td id="ROW21" style="padding-left: 20px; font-weight: bold;">
+												  <input class="display-input show_input"
+												           type="text"
+												           th:value="${#strings.defaultString(report.r21_product, 'N/A')}"
+												           id="r21_product"
+												           name="r21_product"
+												           style="background-color:#FFFFFF; width: 200px; height: 28px; 
+												                  border-color: transparent; text-align:left;"
+												           readonly />
+												  </td>  
+												  
+
+												  <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
+												  	    <input class="display-input show_input"
+												  	           type="text"
+												  	           th:value="${#strings.defaultString(report.r21_cap_year3, 'N/A')}"
+												  	           id="r21_cap_year3"
+												  	           name="r21_cap_year3"
+												  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+												  	                  border-color: transparent; text-align: center;"
+												  	           readonly /> </td>
+												  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+												      <input class="display-input show_input"
+												             type="text"
+												             th:value="${#strings.defaultString(report.r21_amt_add_year3, 'N/A')}"
+												             id="r21_amt_add_year3"
+												             name="r21_amt_add_year3"
+												             style="background-color:#92D050; width: 100%; height: 28px; 
+												                    border-color: transparent; text-align: center;"
+												             readonly /></td>
+
+                  </tr>
+                  <tr>
+					<td id="ROW22" style="padding-left: 20px; font-weight: bold;">
+																  <input class="display-input show_input"
+																           type="text"
+																           th:value="${#strings.defaultString(report.r22_product, 'N/A')}"
+																           id="r22_product"
+																           name="r22_product"
+																           style="background-color:#FFFFFF; width: 200px; height: 28px; 
+																                  border-color: transparent; text-align:left;"
+																           readonly />
+																  </td>  
+																  
+
+																  <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
+																  	    <input class="display-input show_input"
+																  	           type="text"
+																  	           th:value="${#strings.defaultString(report.r22_cap_year4, 'N/A')}"
+																  	           id="r22_cap_year4"
+																  	           name="r22_cap_year4"
+																  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+																  	                  border-color: transparent; text-align: center;"
+																  	           readonly />  </td>
+																  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+																      <input class="display-input show_input"
+																             type="text"
+																             th:value="${#strings.defaultString(report.r22_amt_add_year4, 'N/A')}"
+																             id="r22_amt_add_year4"
+																             name="r22_amt_add_year4"
+																             style="background-color:#92D050; width: 100%; height: 28px; 
+																                    border-color: transparent; text-align: center;"
+																             readonly /></td>
+                   
+                  </tr>
+              </tbody>
 						</table>
-
+</form>
+<div style="text-align: center; margin-top: 10px;">
+												
+    <button id="submitButton" 
+            type="button"
+            class="custom-tab-btn Show_input" 
+            form="fileupload"
+            th:attr="data-todate=${asondate},data-type=${type}" 
+            onclick="fileuploads(this);" 
+            style="display: none;">
+        Submit
+    </button>
 							</div>
 
 
