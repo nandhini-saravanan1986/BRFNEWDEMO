@@ -140,8 +140,12 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_DEP3_ReportService BRRS_M_DEP3_reportservice;
 
+
 	@Autowired
 	BRRS_Q_BRANCHNET_ReportService BRRS_Q_BRANCHNET_reportservice;
+
+	@Autowired
+	BRRS_Q_STAFF_Report_Service BRRS_Q_STAFF_report_service;
 	
 	//h
 	@Autowired
@@ -398,6 +402,10 @@ public class RegulatoryReportServices {
             case "Q_BRANCHNET":
 			repsummary = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
             break;
+
+			case "Q_STAFF":
+			repsummary = BRRS_Q_STAFF_report_service. getQ_STAFFView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
+			break;
             
             
             
@@ -1078,6 +1086,8 @@ public class RegulatoryReportServices {
 				}
 				break;
 
+
+				
 				
 				case "M_FAS":
 				try {
@@ -1088,6 +1098,28 @@ public class RegulatoryReportServices {
 					e.printStackTrace();
 				}
 				break;
+
+
+				case "Q_BRANCHNET":
+				try {
+					repfile = BRRS_Q_BRANCHNET_reportservice.BRRS_Q_BRANCHNETExcel(filename, reportId, fromdate, todate, currency,version,type,
+							dtltype);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+
+
+				case "Q_STAFF":
+			try {
+				repfile = BRRS_Q_STAFF_report_service.BRRS_Q_STAFFExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+
 				
 				case "M_SIR":
 					try {
@@ -1620,6 +1652,23 @@ public class RegulatoryReportServices {
 			break;
 			
 			
+			case "Q_BRANCHNET":
+			try {
+				archivalData = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;	
+
+			case "Q_STAFF":
+			try {
+				archivalData = BRRS_Q_STAFF_report_service.getQ_STAFFArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 			
 			//MY
 			

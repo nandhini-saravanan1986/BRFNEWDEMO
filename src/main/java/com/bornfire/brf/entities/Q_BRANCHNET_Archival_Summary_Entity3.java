@@ -10,76 +10,76 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_Q_BRANCHNET_SUMMARYTABLE3")
+@Table(name = "BRRS_Q_BRANCHNET_ARCHIVAL_SUMMARYTABLE3")
 public class Q_BRANCHNET_Archival_Summary_Entity3 {
     
 private String	r40_debit_district;
-private BigDecimal	r40_opeing_no_of_cards;
+private BigDecimal	r40_opening_no_of_cards;
 private BigDecimal	r40_no_of_cards_issued;
 private BigDecimal	r40_no_cards_of_closed;
 private BigDecimal	r40_closing_bal_of_active_cards;
  
 private String	r41_debit_district;
-private BigDecimal	r41_opeing_no_of_cards;
+private BigDecimal	r41_opening_no_of_cards;
 private BigDecimal	r41_no_of_cards_issued;
 private BigDecimal	r41_no_cards_of_closed;
 private BigDecimal	r41_closing_bal_of_active_cards;
  
 private String	r42_debit_district;
-private BigDecimal	r42_opeing_no_of_cards;
+private BigDecimal	r42_opening_no_of_cards;
 private BigDecimal	r42_no_of_cards_issued;
 private BigDecimal	r42_no_cards_of_closed;
 private BigDecimal	r42_closing_bal_of_active_cards;
  
 private String	r43_debit_district;
-private BigDecimal	r43_opeing_no_of_cards;
+private BigDecimal	r43_opening_no_of_cards;
 private BigDecimal	r43_no_of_cards_issued;
 private BigDecimal	r43_no_cards_of_closed;
 private BigDecimal	r43_closing_bal_of_active_cards;
  
  
 private String	r44_debit_district;
-private BigDecimal	r44_opeing_no_of_cards;
+private BigDecimal	r44_opening_no_of_cards;
 private BigDecimal	r44_no_of_cards_issued;
 private BigDecimal	r44_no_cards_of_closed;
 private BigDecimal	r44_closing_bal_of_active_cards;
  
  
 private String	r45_debit_district;
-private BigDecimal	r45_opeing_no_of_cards;
+private BigDecimal	r45_opening_no_of_cards;
 private BigDecimal	r45_no_of_cards_issued;
 private BigDecimal	r45_no_cards_of_closed;
 private BigDecimal	r45_closing_bal_of_active_cards;
  
  
 private String	r46_debit_district;
-private BigDecimal	r46_opeing_no_of_cards;
+private BigDecimal	r46_opening_no_of_cards;
 private BigDecimal	r46_no_of_cards_issued;
 private BigDecimal	r46_no_cards_of_closed;
 private BigDecimal	r46_closing_bal_of_active_cards;
  
  
 private String	r47_debit_district;
-private BigDecimal	r47_opeing_no_of_cards;
+private BigDecimal	r47_opening_no_of_cards;
 private BigDecimal	r47_no_of_cards_issued;
 private BigDecimal	r47_no_cards_of_closed;
 private BigDecimal	r47_closing_bal_of_active_cards;
   
 private String	r48_debit_district;
-private BigDecimal	r48_opeing_no_of_cards;
+private BigDecimal	r48_opening_no_of_cards;
 private BigDecimal	r48_no_of_cards_issued;
 private BigDecimal	r48_no_cards_of_closed;
 private BigDecimal	r48_closing_bal_of_active_cards;
  
  
 private String	r49_debit_district;
-private BigDecimal	r49_opeing_no_of_cards;
+private BigDecimal	r49_opening_no_of_cards;
 private BigDecimal	r49_no_of_cards_issued;
 private BigDecimal	r49_no_cards_of_closed;
 private BigDecimal	r49_closing_bal_of_active_cards;
  
 private String	r50_debit_district;
-private BigDecimal	r50_opeing_no_of_cards;
+private BigDecimal	r50_opening_no_of_cards;
 private BigDecimal	r50_no_of_cards_issued;
 private BigDecimal	r50_no_cards_of_closed;
 private BigDecimal	r50_closing_bal_of_active_cards;
@@ -103,11 +103,11 @@ public String getR40_debit_district() {
 public void setR40_debit_district(String r40_debit_district) {
     this.r40_debit_district = r40_debit_district;
 }
-public BigDecimal getR40_opeing_no_of_cards() {
-    return r40_opeing_no_of_cards;
+public BigDecimal getR40_opening_no_of_cards() {
+    return r40_opening_no_of_cards;
 }
-public void setR40_opeing_no_of_cards(BigDecimal r40_opeing_no_of_cards) {
-    this.r40_opeing_no_of_cards = r40_opeing_no_of_cards;
+public void setR40_opening_no_of_cards(BigDecimal r40_opening_no_of_cards) {
+    this.r40_opening_no_of_cards = r40_opening_no_of_cards;
 }
 public BigDecimal getR40_no_of_cards_issued() {
     return r40_no_of_cards_issued;
@@ -133,11 +133,11 @@ public String getR41_debit_district() {
 public void setR41_debit_district(String r41_debit_district) {
     this.r41_debit_district = r41_debit_district;
 }
-public BigDecimal getR41_opeing_no_of_cards() {
-    return r41_opeing_no_of_cards;
+public BigDecimal getR41_opening_no_of_cards() {
+    return r41_opening_no_of_cards;
 }
-public void setR41_opeing_no_of_cards(BigDecimal r41_opeing_no_of_cards) {
-    this.r41_opeing_no_of_cards = r41_opeing_no_of_cards;
+public void setR41_opening_no_of_cards(BigDecimal r41_opening_no_of_cards) {
+    this.r41_opening_no_of_cards = r41_opening_no_of_cards;
 }
 public BigDecimal getR41_no_of_cards_issued() {
     return r41_no_of_cards_issued;
@@ -163,11 +163,11 @@ public String getR42_debit_district() {
 public void setR42_debit_district(String r42_debit_district) {
     this.r42_debit_district = r42_debit_district;
 }
-public BigDecimal getR42_opeing_no_of_cards() {
-    return r42_opeing_no_of_cards;
+public BigDecimal getR42_opening_no_of_cards() {
+    return r42_opening_no_of_cards;
 }
-public void setR42_opeing_no_of_cards(BigDecimal r42_opeing_no_of_cards) {
-    this.r42_opeing_no_of_cards = r42_opeing_no_of_cards;
+public void setR42_opening_no_of_cards(BigDecimal r42_opening_no_of_cards) {
+    this.r42_opening_no_of_cards = r42_opening_no_of_cards;
 }
 public BigDecimal getR42_no_of_cards_issued() {
     return r42_no_of_cards_issued;
@@ -193,11 +193,11 @@ public String getR43_debit_district() {
 public void setR43_debit_district(String r43_debit_district) {
     this.r43_debit_district = r43_debit_district;
 }
-public BigDecimal getR43_opeing_no_of_cards() {
-    return r43_opeing_no_of_cards;
+public BigDecimal getR43_opening_no_of_cards() {
+    return r43_opening_no_of_cards;
 }
-public void setR43_opeing_no_of_cards(BigDecimal r43_opeing_no_of_cards) {
-    this.r43_opeing_no_of_cards = r43_opeing_no_of_cards;
+public void setR43_opening_no_of_cards(BigDecimal r43_opening_no_of_cards) {
+    this.r43_opening_no_of_cards = r43_opening_no_of_cards;
 }
 public BigDecimal getR43_no_of_cards_issued() {
     return r43_no_of_cards_issued;
@@ -223,11 +223,11 @@ public String getR44_debit_district() {
 public void setR44_debit_district(String r44_debit_district) {
     this.r44_debit_district = r44_debit_district;
 }
-public BigDecimal getR44_opeing_no_of_cards() {
-    return r44_opeing_no_of_cards;
+public BigDecimal getR44_opening_no_of_cards() {
+    return r44_opening_no_of_cards;
 }
-public void setR44_opeing_no_of_cards(BigDecimal r44_opeing_no_of_cards) {
-    this.r44_opeing_no_of_cards = r44_opeing_no_of_cards;
+public void setR44_opening_no_of_cards(BigDecimal r44_opening_no_of_cards) {
+    this.r44_opening_no_of_cards = r44_opening_no_of_cards;
 }
 public BigDecimal getR44_no_of_cards_issued() {
     return r44_no_of_cards_issued;
@@ -253,11 +253,11 @@ public String getR45_debit_district() {
 public void setR45_debit_district(String r45_debit_district) {
     this.r45_debit_district = r45_debit_district;
 }
-public BigDecimal getR45_opeing_no_of_cards() {
-    return r45_opeing_no_of_cards;
+public BigDecimal getR45_opening_no_of_cards() {
+    return r45_opening_no_of_cards;
 }
-public void setR45_opeing_no_of_cards(BigDecimal r45_opeing_no_of_cards) {
-    this.r45_opeing_no_of_cards = r45_opeing_no_of_cards;
+public void setR45_opening_no_of_cards(BigDecimal r45_opening_no_of_cards) {
+    this.r45_opening_no_of_cards = r45_opening_no_of_cards;
 }
 public BigDecimal getR45_no_of_cards_issued() {
     return r45_no_of_cards_issued;
@@ -283,11 +283,11 @@ public String getR46_debit_district() {
 public void setR46_debit_district(String r46_debit_district) {
     this.r46_debit_district = r46_debit_district;
 }
-public BigDecimal getR46_opeing_no_of_cards() {
-    return r46_opeing_no_of_cards;
+public BigDecimal getR46_opening_no_of_cards() {
+    return r46_opening_no_of_cards;
 }
-public void setR46_opeing_no_of_cards(BigDecimal r46_opeing_no_of_cards) {
-    this.r46_opeing_no_of_cards = r46_opeing_no_of_cards;
+public void setR46_opening_no_of_cards(BigDecimal r46_opening_no_of_cards) {
+    this.r46_opening_no_of_cards = r46_opening_no_of_cards;
 }
 public BigDecimal getR46_no_of_cards_issued() {
     return r46_no_of_cards_issued;
@@ -313,11 +313,11 @@ public String getR47_debit_district() {
 public void setR47_debit_district(String r47_debit_district) {
     this.r47_debit_district = r47_debit_district;
 }
-public BigDecimal getR47_opeing_no_of_cards() {
-    return r47_opeing_no_of_cards;
+public BigDecimal getR47_opening_no_of_cards() {
+    return r47_opening_no_of_cards;
 }
-public void setR47_opeing_no_of_cards(BigDecimal r47_opeing_no_of_cards) {
-    this.r47_opeing_no_of_cards = r47_opeing_no_of_cards;
+public void setR47_opening_no_of_cards(BigDecimal r47_opening_no_of_cards) {
+    this.r47_opening_no_of_cards = r47_opening_no_of_cards;
 }
 public BigDecimal getR47_no_of_cards_issued() {
     return r47_no_of_cards_issued;
@@ -343,11 +343,11 @@ public String getR48_debit_district() {
 public void setR48_debit_district(String r48_debit_district) {
     this.r48_debit_district = r48_debit_district;
 }
-public BigDecimal getR48_opeing_no_of_cards() {
-    return r48_opeing_no_of_cards;
+public BigDecimal getR48_opening_no_of_cards() {
+    return r48_opening_no_of_cards;
 }
-public void setR48_opeing_no_of_cards(BigDecimal r48_opeing_no_of_cards) {
-    this.r48_opeing_no_of_cards = r48_opeing_no_of_cards;
+public void setR48_opening_no_of_cards(BigDecimal r48_opening_no_of_cards) {
+    this.r48_opening_no_of_cards = r48_opening_no_of_cards;
 }
 public BigDecimal getR48_no_of_cards_issued() {
     return r48_no_of_cards_issued;
@@ -373,11 +373,11 @@ public String getR49_debit_district() {
 public void setR49_debit_district(String r49_debit_district) {
     this.r49_debit_district = r49_debit_district;
 }
-public BigDecimal getR49_opeing_no_of_cards() {
-    return r49_opeing_no_of_cards;
+public BigDecimal getR49_opening_no_of_cards() {
+    return r49_opening_no_of_cards;
 }
-public void setR49_opeing_no_of_cards(BigDecimal r49_opeing_no_of_cards) {
-    this.r49_opeing_no_of_cards = r49_opeing_no_of_cards;
+public void setR49_opening_no_of_cards(BigDecimal r49_opening_no_of_cards) {
+    this.r49_opening_no_of_cards = r49_opening_no_of_cards;
 }
 public BigDecimal getR49_no_of_cards_issued() {
     return r49_no_of_cards_issued;
@@ -403,11 +403,11 @@ public String getR50_debit_district() {
 public void setR50_debit_district(String r50_debit_district) {
     this.r50_debit_district = r50_debit_district;
 }
-public BigDecimal getR50_opeing_no_of_cards() {
-    return r50_opeing_no_of_cards;
+public BigDecimal getR50_opening_no_of_cards() {
+    return r50_opening_no_of_cards;
 }
-public void setR50_opeing_no_of_cards(BigDecimal r50_opeing_no_of_cards) {
-    this.r50_opeing_no_of_cards = r50_opeing_no_of_cards;
+public void setR50_opening_no_of_cards(BigDecimal r50_opening_no_of_cards) {
+    this.r50_opening_no_of_cards = r50_opening_no_of_cards;
 }
 public BigDecimal getR50_no_of_cards_issued() {
     return r50_no_of_cards_issued;

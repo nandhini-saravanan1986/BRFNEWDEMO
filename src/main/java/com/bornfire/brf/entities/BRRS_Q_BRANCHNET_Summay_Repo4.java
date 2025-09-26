@@ -11,10 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BRRS_Q_BRANCHNET_Summay_Repo4 extends JpaRepository<Q_BRANCHNET_Summary_Entity4, Date> {
 
-@Query(value = "select * from BRRS_Q_BRANCHNET_SUMMARYTABLE4 where report_date = :rpt_code", nativeQuery = true)
+	@Query(value = "select * from BRRS_Q_BRANCHNET_SUMMARYTABLE4 where report_date = :rpt_code", nativeQuery = true)
 List<Q_BRANCHNET_Summary_Entity4> getdatabydateList(@Param("rpt_code") Date rpt_code);
 
-	
 }
 
 
