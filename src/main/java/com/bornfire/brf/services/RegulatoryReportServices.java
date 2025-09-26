@@ -694,10 +694,11 @@ public class RegulatoryReportServices {
 						pageable, Filter, type, version);
 				break;
 				
-			case "M_CA4":
-				repdetail = brrs_m_ca4_reportservice. getBRRS_M_CA4currentDtl(reportId, fromdate, todate, currency, dtltype,
-						pageable, Filter, type, version);
-				break;
+			/*
+			 * case "M_CA4": repdetail = brrs_m_ca4_reportservice.
+			 * getBRRS_M_CA4currentDtl(reportId, fromdate, todate, currency, dtltype,
+			 * pageable, Filter, type, version); break;
+			 */
 			
 				
 			case "M_SCI_E":
@@ -1902,10 +1903,11 @@ public class RegulatoryReportServices {
 		
 		}
 		
-		else if ("M_CA4".equals(filename)) {
-	        fileData = brrs_m_ca4_reportservice.getBRRS_M_CA4DetailExcel(filename, fromdate, todate, currency,
-					dtltype, type, version);
-	    }
+		/*
+		 * else if ("M_CA4".equals(filename)) { fileData =
+		 * brrs_m_ca4_reportservice.getBRRS_M_CA4DetailExcel(filename, fromdate, todate,
+		 * currency, dtltype, type, version); }
+		 */
 		
 		else if ("M_SCI_E".equals(filename)) {
 	        
