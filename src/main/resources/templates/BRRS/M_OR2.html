@@ -1,0 +1,3065 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<!-- 
+CREATED BY	: RISHINATH A
+CREATED ON	: 29.08.25
+PURPOSE		: BRFREPORT
+-->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+	<link rel="stylesheet" th:href="@{/css/CustomButton.css}" />
+	<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon" />
+
+	<!-- JavaScript -->
+	<!-- jQuery core (required first) -->
+
+
+	<!-- ✅ Your manually placed jQuery validation
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	 <script th:src="/jquery/jquery.validate.min.js"></script>
+	 -->
+
+	<!-- jQuery (required first) -->
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+
+	<!-- ✅ jQuery Validation -->
+	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+	<!-- Bootstrap + Others -->
+	<script th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+	<script th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+	<script th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+
+	<style>
+		.btns {
+			float: right;
+			margin: 5px;
+		}
+
+		.col-sm-5 {
+			padding-bottom: 15px;
+		}
+
+		.list-body {
+			padding: 0px;
+		}
+
+		.error {
+			color: red;
+			padding-left: 10px;
+		}
+
+		.formline {
+			padding-bottom: 15px;
+		}
+
+		.btn-primary {
+			background-color: #E77400;
+			border-color: #0c0c0c;
+		}
+
+		.btn-primary:not (:disabled):not (.disabled).active,
+		.btn-primary:not (:disabled):not (.disabled):active,
+		.show>.btn-primary.dropdown-toggle {
+			color: #fff;
+			background-color: #cc000000;
+			border-color: #161617;
+		}
+
+		#finusertb {
+			width: 460px;
+		}
+
+		.dataTables_wrapper .dataTables_paginate .paginate_button {
+			padding: 0px;
+		}
+	</style> 
+
+
+
+
+	<style>
+		div span {
+			font-weight: bold;
+			color: white !important;
+		}
+
+		.card {
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+		}
+
+		.card-header h5 {
+			font-size: 22px;
+			color: #fff;
+			font-weight: 600;
+		}
+
+		.nav-tabs .nav-link {
+			font-weight: 500;
+			border: 1px solid #dee2e6;
+			border-bottom: none;
+			border-radius: 4px 4px 0 0;
+			background-color: #f1f1f1;
+			margin-right: 5px;
+		}
+
+		.nav-tabs .nav-link.active {
+			background-color: #ffffff;
+			border-color: #dee2e6 #dee2e6 #ffffff;
+		}
+
+		.table-responsive {
+			border: 1px solid #dee2e6;
+			border-radius: 4px;
+		}
+
+		.table-hover tbody tr:hover {
+			background-color: #f3f6f9;
+		}
+
+		.table-cell tbody td:hover {
+			background-color: #f0f0f0;
+			/* Hover color for cell */
+			cursor: pointer;
+			/* Optional: pointer cursor */
+		}
+
+		.table-bordered td,
+		.table-bordered th {
+			border: 1px solid #000 !important;
+		}
+
+		thead th {
+			position: sticky;
+			top: 0;
+			background-color: #e9ecf0;
+			z-index: 1;
+		}
+
+		.table td {
+			background-color: #FFFFFF;
+		}
+
+		.card-footer {
+			padding: 10px;
+			border-top: 1px solid #ccc;
+		}
+
+		.btn-xs {
+			padding: 4px 12px;
+			font-size: 14px;
+			border-radius: 4px;
+		}
+
+		#BRFvalidation th,
+		#usertable td {
+			vertical-align: middle;
+			text-align: left;
+			font-size: 16px;
+			font-family: Arial;
+		}
+
+		.fa-edit:hover {
+			color: #28a745;
+			transform: scale(1.1);
+		}
+
+		td {
+			border: 1px solid rgb(0, 164, 166);
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	</style>
+
+
+	<style>
+		.form-group {
+			position: relative;
+			margin-bottom: 1.5rem;
+		}
+
+		.form-control {
+			width: 100%;
+			border: 2px solid #ccc;
+			border-radius: 8px;
+			font-size: 1rem;
+			outline: none;
+			background: transparent;
+			transition: border-color 0.3s ease, padding-top 0.3s ease;
+		}
+
+		.error {
+			color: red;
+			padding-top: 15px;
+		}
+
+		.form-control:focus {
+			border-color: #007bff;
+		}
+
+		.form-legend {
+			position: absolute;
+			top: 50%;
+			left: 15px;
+			transform: translateY(-50%);
+			font-size: 1rem;
+			color: #aaa;
+			background: white;
+			padding: 0 5px;
+			pointer-events: none;
+			transition: 0.3s ease;
+		}
+
+		/* When input or select is focused or has a value, move the label up */
+		.form-control:focus~.form-legend,
+		.form-control:not (:placeholder-shown)~.form-legend {
+			top: -8px;
+			font-size: 1rem;
+			color: #007bff;
+		}
+
+		/* Hover effect when the input/select is focused */
+		.form-control:focus:hover~.form-legend {
+			color: #0056b3;
+			/* Darker shade of blue on hover */
+		}
+
+		/* Ensure the label returns to the normal color after focus or hover is removed */
+		.form-control:not (:focus)~.form-legend {
+			color: #aaa;
+			/* Normal label color */
+		}
+	</style>
+
+	<style>
+		/* Red border for invalid inputs */
+		input.error,
+		select.error {
+			border: 2px solid red !important;
+		}
+
+		/* Error message style */
+		label.error {
+			color: red;
+			font-size: 0.85em;
+			margin-top: 5px;
+			display: block;
+		}
+
+		.underline {
+			text-decoration: underline;
+			color: #08a6f1;
+			cursor: pointer;
+		}
+
+		.left-arrow-circle {
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+			background-color: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 10px;
+			transition: background-color 0.3s, transform 0.2s;
+		}
+
+		.left-arrow-circle i {
+			color: rgb(107, 122, 143);
+		}
+
+		.left-arrow-circle:hover {
+			background-color: rgb(107, 122, 143);
+			cursor: pointer;
+			transform: scale(1.05);
+			border: 2px solid white;
+		}
+
+		.left-arrow-circle:hover i {
+			color: white;
+		}
+
+		.white-text span {
+			color: white !important;
+		}
+	</style>
+
+
+	<script th:inline="javascript">
+
+		$(document).ready(function () {
+			// hide loader on normal load
+			$('#loader').modal('hide');
+		});
+
+		$(window).on('pageshow', function () {
+			// hide loader on back/forward nav
+			$('#loader').modal('hide');
+		});
+
+		$(window).on('beforeunload', function () {
+			// hide loader on leaving page
+			$('#loader').modal('hide');
+		});
+
+
+
+		function home() {
+			$("#loader").modal("toggle");
+			location.href = 'Dashboard'
+		}
+
+		function back() {
+			$("#loader").modal("toggle");
+
+			window.history.back();
+		}
+
+		//to fetch summary from the database - called from the summary button
+		function showdetails() {
+
+			var Callurl;
+			$('#loader').modal('show');
+			Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype})}]]*/
+				location.href = Callurl;
+			console.log(Callurl);
+			/*  $.ajax({
+				 type: 'get',
+				 url: Callurl,
+				 beforeSend: function () {
+					 $('#loader').modal('show'); // 🔄 Show loader
+				 },
+				 success: function (data) {
+					 $('.content').html(data);
+					 //$("#detailsbtn").addClass("active");
+					 //tablepagination();
+				 },
+				 complete: function () {
+					 $('#loader').modal('hide'); 
+				 },
+				 error: function () {
+					   $('#loader').modal('hide');
+					 alert("Something went wrongss. Please try again.");
+				   
+				 }
+			 }); */
+		}
+
+		function showsummary() {
+			$('#loader').modal('show');
+			var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type}, asondate=${asondate})}]]*/
+				location.href = Callurl;
+
+		}
+	</script>
+
+	<script>
+
+		function activateTab(tabName) {
+			// Remove 'active' from all buttons
+			document.querySelectorAll('.custom-tab-btn').forEach(btn => {
+				btn.classList.remove('active');
+			});
+
+			// Add 'active' to selected button
+			if (tabName === 'summary') {
+				document.getElementById('custom-tab-btnSummary').classList.add('active');
+			} else if (tabName === 'Details') {
+				document.getElementById('custom-tab-btnDetails').classList.add('active');
+			}
+		}
+
+		window.onload = function () {
+			/* setTimeout(function() {
+				var selectedTab = document.getElementById("selectedTab").value;
+				alert(selectedTab);
+				activateTab(selectedTab);
+			}, 10000); */ // 10,000 milliseconds = 10 seconds
+
+			var selectedTab = document.getElementById("selectedTab").value;
+			activateTab(selectedTab);
+		};
+
+
+
+		function downloadfile(button) {
+			var reportid = button.getAttribute('data-reportid');
+			var asondate = button.getAttribute('data-asondate');
+			var fromdate = button.getAttribute('data-fromdate');
+			var todate = button.getAttribute('data-todate');
+			var currency = button.getAttribute('data-currency');
+			var subreportid = button.getAttribute('data-subreportid');
+			var secid = button.getAttribute('data-secid');
+			var dtltype = button.getAttribute('data-dtltype');
+			var filename = button.getAttribute('data-filename');
+
+			$('#loader').modal('show');
+
+			$.ajax({
+				url: './downloadExcel?reportid=' + reportid +
+					'&fromdate=' + fromdate +
+					'&asondate=' + asondate +
+					'&todate=' + todate +
+					'&currency=' + currency +
+					'&subreportid=' + subreportid +
+					'&secid=' + secid +
+					'&filename=' + filename,
+				type: 'GET',
+				xhrFields: {
+					responseType: 'blob'
+				},
+				success: function (data) {
+					$('#loader').modal('hide');
+
+					if (data && data.size > 100) {
+						const blob = new Blob([data], {type: 'application/vnd.ms-excel'});
+						const url = window.URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.style.display = 'none';
+						a.href = url;
+						a.download = filename;
+						document.body.appendChild(a);
+						a.click();
+						window.URL.revokeObjectURL(url);
+						document.body.removeChild(a);
+
+						showResultModal('BRRS', 'The file has been downloaded successfully.');
+					} else {
+						showResultModal('Information', 'No data was available to create a download.');
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					$('#loader').modal('hide');
+					console.error("Download failed:", textStatus, errorThrown);
+					showResultModal('Error', 'An error occurred while downloading the file. Please try again.');
+				}
+			});
+		}
+
+		function editRecord() {
+			showResultModal('Alert', 'Development in progress');
+
+		}
+		function closemodel() {
+			$('#alert').modal('hide');
+			$('#resultModal').modal('hide');
+
+		}
+
+		function showResultModal(title, message) {
+			// Set the text for the modal elements
+			$('#resultModalLabel').text(title);
+			$('#resultModalBody').text(message);
+
+			// Show the modal
+			$('#resultModal').modal('show');
+		}
+
+	</script>
+	<script>
+	function startReport(button){
+			const alertMsg = document.getElementById("alertMessage");
+			const filename = button.getAttribute('data-filename');
+			const fromdate = button.getAttribute('data-fromdate');
+			const todate = button.getAttribute('data-todate');
+			const currency = button.getAttribute('data-currency');
+			const dtltype = button.getAttribute('data-dtltype');
+			const type = button.getAttribute('data-type');
+			const version = button.getAttribute('data-version');
+			const sessionfilename = sessionStorage.getItem("filename");
+			
+			if(sessionfilename==filename){
+				alertMsg.innerHTML ='Download request already Processing...';
+	       	 	showAlert();
+				return;
+			}
+			
+			alertMsg.innerHTML ='Download request Processing...';
+	   	 	showAlert();
+
+			const baseUrl = '/BCDRS/Reports/startreport';
+			const downloadUrl = baseUrl +
+				'?filename=' + encodeURIComponent(filename) +
+				'&fromdate=' + encodeURIComponent(fromdate) +
+				'&todate=' + encodeURIComponent(todate) +
+				'&currency=' + encodeURIComponent(currency) +
+				'&dtltype=' + encodeURIComponent(dtltype) +
+				'&type=' + encodeURIComponent(type) +
+				'&version=' + encodeURIComponent(version);
+		    fetch(downloadUrl)  // ✅ no invalid characters now
+		        .then(res => res.text())
+		        .then(jobId => {
+
+		        	alertMsg.innerHTML ='Download request received...'+jobId;
+		       	 	showAlert();
+		            sessionStorage.setItem("jobId", jobId);
+		            sessionStorage.setItem("filename", filename);
+		            checkReport(jobId);
+		        });
+		}
+
+		function checkReport(jobId) {
+			const alertMsg = document.getElementById("alertMessage");
+		    fetch('/BCDRS/Reports/checkreport?jobId=' + encodeURIComponent(jobId))
+		        .then(res => res.text())
+		        .then(status => {
+		            if (status === "READY") {
+		            	alertMsg.innerHTML ='Report is ready! Downloading…';
+		           	 	showAlert();
+		                const filename = sessionStorage.getItem("filename");
+		                downloadDetailfile(jobId,filename)
+		                sessionStorage.removeItem("jobId");
+		                sessionStorage.removeItem("filename");                
+		                
+		            } else if(status ==="PROCESSING") {
+		                alertMsg.innerHTML ='Download Is Processing…';
+		            	showAlert();
+		                setTimeout(() => checkReport(jobId), 5000);
+		            }
+		            else if(status ==="ERROR") {
+		                alertMsg.innerHTML ='No data was available to create a download.';
+		            	showAlert();
+		            	sessionStorage.removeItem("jobId");
+		                sessionStorage.removeItem("filename");  
+		            }
+		        });
+		}
+
+
+
+		function downloadDetailfile(jobId,filename) {
+			
+			//$('#loader').modal('show');
+			
+			$.ajax({
+				url: '/BCDRS/Reports/downloaddetailExcel?jobId='+ jobId +
+					'&filename=' + filename,
+				type: 'GET',
+				xhrFields: {
+					responseType: 'blob'
+				},
+				success: function (data) {
+					$('#loader').modal('hide');
+
+					if (data && data.size > 100) {
+						const blob = new Blob([data], {type: 'application/vnd.ms-excel'});
+						const url = window.URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.style.display = 'none';
+						a.href = url;
+						a.download = filename;
+						document.body.appendChild(a);
+						a.click();
+						window.URL.revokeObjectURL(url);
+						document.body.removeChild(a);
+
+						showResultModal('Success', filename + ' downloaded successfully.');
+					} else {
+						showResultModal('Information', 'No data was available to create a download.');
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					$('#loader').modal('hide');
+					console.error("Download failed:", textStatus, errorThrown);
+					showResultModal('Error', 'An error occurred while downloading the file. Please try again.');
+				}
+			});
+		}
+	</script>
+	<script th:inline="javascript">
+						function showdetailsbyRowAndColumn(a) {
+							var rowId = a.getAttribute('RowId');
+							var columnId = a.getAttribute('ColumnId');
+							var cellValue = a.textContent || a.innerText;
+
+							if (cellValue !== '0') {
+								// Set dynamic message
+								document.getElementById("cellresultModalLabel").innerText = 
+								    "Do you want to open details for Row: " + rowId + " and Column: " + columnId + "?";
+
+								// Show custom modal
+								$('#cellresultModal').modal('show');
+
+								// Handle Yes button
+								document.querySelector('.yes-btn').onclick = function() {
+									$('#cellresultModal').modal('hide');
+									var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
+														loader.show();
+
+									var Callurl = /*[[@{'/Reports/' + ${reportid} + '/Details'(asondate=${asondate}, fromdate=${fromdate}, todate=${todate}, currency=${currency}, dtltype=${dtltype},type=${type},version=${version})}]]*/ "";
+									Callurl += "&filter=" + encodeURIComponent(rowId + "," + columnId);
+
+									location.href = Callurl;
+								};
+							} else {
+								showResultModal("Alert", "No Records available for this selected cell.");
+							}
+						}
+					</script>
+
+
+
+</head>
+
+
+
+<title>BRF</title>
+
+<body>
+	<div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+		<div class="row">
+
+			<div th:insert="HeaderMenu :: header"></div>
+
+			<div class="card">
+				<div class="card-header"
+					style="background-color: rgb(107, 122, 143); display: flex; align-items: center; justify-content: space-between;">
+					<div style="display: flex; align-items: center;" onclick="back();">
+						<!-- ⬅️ Left circular arrow -->
+						<div class="left-arrow-circle">
+							<i class="fa fa-arrow-left"></i>
+						</div>
+
+						<!-- Title -->
+						<h5
+							style="font-family: arial; font-size: 20px; padding-top: 10px; font-weight: bold; color: white;">
+							(14) MONTHLY SCHEDLE: M-OR2: STANDARDISED APPROACH</h5>
+					</div>
+
+					<div class="custom-tab-btn-group nav-buttons"
+						style="display: flex; color: white; align-items: center;">
+						<!-- 📅 Date -->
+						<span class="white-text"
+							style="color: white !important; font-size: 16px; margin-right: 20px;">Report
+							Date: <span th:text="${asondate}">2025-07-04</span>
+						</span>
+
+						<!-- Buttons -->
+						<input type="hidden" id="selectedTab" th:value="${displaymode}">
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnSummary" onclick="showsummary();"
+							th:if="${displaymode == 'Details'}">Summary</button>
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();"
+							th:if="${displaymode == 'summary'}">Details</button>
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+							th:if="${displaymode == 'summary'}" th:attr="data-reportid=${reportid}, 
+                     data-asondate=${asondate}, 
+                     data-fromdate=${fromdate}, 
+                     data-todate=${todate}, 
+                     data-currency=${currency},  
+                     data-dtltype=${dtltype}, 
+                     data-filename='M_OR2.xls',
+                     data-type=${type},
+                     data-version=${version}" onclick="downloadfile(this);">
+							<i class="fa fa-download"></i>
+						</button>
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+							th:if="${displaymode == 'Details'}" onclick="startReport(this);" th:attr="
+		    data-fromdate=${fromdate},
+		    data-todate=${todate},
+		    data-filename='M_OR2Detail'
+		  "> 
+							<i class="fa fa-download"></i>
+						</button>
+					</div>
+				</div>
+
+				<div th:if="${displaymode == 'summary'}">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="table-wrapper table-responsive scrollable-table-container"
+								style="border-right: 1px solid #dee2e6; ">
+								<table
+									class="sticky-header-table table table-bordered table-cell table-sm table-condensed"
+									id="reports">
+									<thead class="thead-light">
+
+										<!-- Row 1 -->
+										<tr>
+											<th style="background-color: white; width: 50px;"></th>
+											<th colspan="2" style="background-color: #b3b6b9; text-align: center;"></th>
+											<th colspan="8"
+												style="background-color: white; color: black; text-align: center;">Gross
+												Income</th>
+											<th colspan="2" style="background-color: #b3b6b9; text-align: center;"></th>
+										</tr>
+
+										<!--Row 2-->
+										<tr>
+											<th style="width: 50px; background-color: white; font-weight: bold;"></th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Year</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Business Line/Month</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Corporate Finance</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Trading and Sales</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Retail Banking</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Commercial Banking</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Payments and Settlemements</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Agency Services</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Asset Managemet</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Retail Brokerage</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Operational Risk Capital Charge</th>
+											<th
+												style="text-align: center; background-color: white; font-weight: bold; color: black;">
+												Risk Weight Factor</th>
+										</tr>
+										<br>
+										<br>
+
+
+									</thead>
+
+
+
+									<tbody th:each="report: ${reportsummary}" style="font-family: Arial;">
+										<tr>
+											<td style="text-align: center; background-color: white;" rowspan="12">1</td> 
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_product}" rowspan="12">
+											</td>
+											<td style="font-weight: normal;"
+												th:text="${report.r12_business_line_month}">
+											</td> 
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_corporate_finance}"
+												th:attr="RowId='R12', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)"></td> 
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_trading_and_sales}"
+												th:attr="RowId='R12', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)"></td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_retail_banking}"
+												th:attr="RowId='R12', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_commercial_banking}"
+												th:attr="RowId='R12', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_payments_and_settlements}"
+												th:attr="RowId='R12', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_agency_services}"
+												th:attr="RowId='R12', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_asset_management}"
+												th:attr="RowId='R12', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r12_retail_brokerage}"
+												th:attr="RowId='R12', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+											<td rowspan="15" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+											<td rowspan="52" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+										</tr>
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r13_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_corporate_finance}"
+												th:attr="RowId='R13', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_trading_and_sales}"
+												th:attr="RowId='R13', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_retail_banking}"
+												th:attr="RowId='R13', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_commercial_banking}"
+												th:attr="RowId='R13', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_payments_and_settlements}"
+												th:attr="RowId='R13', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_agency_services}"
+												th:attr="RowId='R13', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_asset_management}"
+												th:attr="RowId='R13', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r13_retail_brokerage}"
+												th:attr="RowId='R13', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r14_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_corporate_finance}"
+												th:attr="RowId='R14', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_trading_and_sales}"
+												th:attr="RowId='R14', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_retail_banking}"
+												th:attr="RowId='R14', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_commercial_banking}"
+												th:attr="RowId='R14', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_payments_and_settlements}"
+												th:attr="RowId='R14', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_agency_services}"
+												th:attr="RowId='R14', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_asset_management}"
+												th:attr="RowId='R14', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r14_retail_brokerage}"
+												th:attr="RowId='R14', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r15_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_corporate_finance}"
+												th:attr="RowId='R15', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_trading_and_sales}"
+												th:attr="RowId='R15', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_retail_banking}"
+												th:attr="RowId='R15', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_commercial_banking}"
+												th:attr="RowId='R15', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_payments_and_settlements}"
+												th:attr="RowId='R15', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_agency_services}"
+												th:attr="RowId='R15', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_asset_management}"
+												th:attr="RowId='R15', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r15_retail_brokerage}"
+												th:attr="RowId='R15', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r16_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_corporate_finance}"
+												th:attr="RowId='R16', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_trading_and_sales}"
+												th:attr="RowId='R16', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_retail_banking}"
+												th:attr="RowId='R16', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_commercial_banking}"
+												th:attr="RowId='R16', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_payments_and_settlements}"
+												th:attr="RowId='R16', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_agency_services}"
+												th:attr="RowId='R16', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_asset_management}"
+												th:attr="RowId='R16', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r16_retail_brokerage}"
+												th:attr="RowId='R16', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r17_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_corporate_finance}"
+												th:attr="RowId='R17', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_trading_and_sales}"
+												th:attr="RowId='R17', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_retail_banking}"
+												th:attr="RowId='R17', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_commercial_banking}"
+												th:attr="RowId='R17', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_payments_and_settlements}"
+												th:attr="RowId='R17', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_agency_services}"
+												th:attr="RowId='R17', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_asset_management}"
+												th:attr="RowId='R17', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r17_retail_brokerage}"
+												th:attr="RowId='R17', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r18_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_corporate_finance}"
+												th:attr="RowId='R18', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_trading_and_sales}"
+												th:attr="RowId='R18', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_retail_banking}"
+												th:attr="RowId='R18', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_commercial_banking}"
+												th:attr="RowId='R18', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_payments_and_settlements}"
+												th:attr="RowId='R18', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_agency_services}"
+												th:attr="RowId='R18', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_asset_management}"
+												th:attr="RowId='R18', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r18_retail_brokerage}"
+												th:attr="RowId='R18', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r19_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_corporate_finance}"
+												th:attr="RowId='R19', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_trading_and_sales}"
+												th:attr="RowId='R19', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_retail_banking}"
+												th:attr="RowId='R19', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_commercial_banking}"
+												th:attr="RowId='R19', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_payments_and_settlements}"
+												th:attr="RowId='R19', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_agency_services}"
+												th:attr="RowId='R19', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_asset_management}"
+												th:attr="RowId='R19', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r19_retail_brokerage}"
+												th:attr="RowId='R19', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r20_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_corporate_finance}"
+												th:attr="RowId='R20', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_trading_and_sales}"
+												th:attr="RowId='R20', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_retail_banking}"
+												th:attr="RowId='R20', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_commercial_banking}"
+												th:attr="RowId='R20', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_payments_and_settlements}"
+												th:attr="RowId='R20', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_agency_services}"
+												th:attr="RowId='R20', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_asset_management}"
+												th:attr="RowId='R20', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r20_retail_brokerage}"
+												th:attr="RowId='R20', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r21_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_corporate_finance}"
+												th:attr="RowId='R21', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_trading_and_sales}"
+												th:attr="RowId='R21', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_retail_banking}"
+												th:attr="RowId='R21', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_commercial_banking}"
+												th:attr="RowId='R21', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_payments_and_settlements}"
+												th:attr="RowId='R21', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_agency_services}"
+												th:attr="RowId='R21', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_asset_management}"
+												th:attr="RowId='R21', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r21_retail_brokerage}"
+												th:attr="RowId='R21', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r22_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_corporate_finance}"
+												th:attr="RowId='R22', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_trading_and_sales}"
+												th:attr="RowId='R22', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_retail_banking}"
+												th:attr="RowId='R22', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_commercial_banking}"
+												th:attr="RowId='R22', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_payments_and_settlements}"
+												th:attr="RowId='R22', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_agency_services}"
+												th:attr="RowId='R22', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_asset_management}"
+												th:attr="RowId='R22', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r22_retail_brokerage}"
+												th:attr="RowId='R22', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r23_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_corporate_finance}"
+												th:attr="RowId='R23', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_trading_and_sales}"
+												th:attr="RowId='R23', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_retail_banking}"
+												th:attr="RowId='R23', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_commercial_banking}"
+												th:attr="RowId='R23', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_payments_and_settlements}"
+												th:attr="RowId='R23', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_agency_services}"
+												th:attr="RowId='R23', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_asset_management}"
+												th:attr="RowId='R23', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r23_retail_brokerage}"
+												th:attr="RowId='R23', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">2</td>
+											<td style="font-weight: normal;" th:text="${report.r24_product}"
+												colspan="2">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r24_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">3</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_product}" colspan="2"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r25_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">4</td>
+											<td style="font-weight: normal;" th:text="${report.r26_product}"
+												colspan="2">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r26_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">5</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r27_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r27_operational_risk_cap_charge}"></td>
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;" rowspan="12">6</td>
+											<td style="font-weight: normal; text-align: center;"
+												th:text="${report.r28_product}" rowspan="12">
+											</td>
+											<td style="font-weight: normal;"
+												th:text="${report.r28_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_corporate_finance}"
+												th:attr="RowId='R28', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_trading_and_sales}"
+												th:attr="RowId='R28', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_retail_banking}"
+												th:attr="RowId='R28', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_commercial_banking}"
+												th:attr="RowId='R28', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_payments_and_settlements}"
+												th:attr="RowId='R28', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_agency_services}"
+												th:attr="RowId='R28', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_asset_management}"
+												th:attr="RowId='R28', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r28_retail_brokerage}"
+												th:attr="RowId='R28', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+											<td rowspan="15" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r29_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_corporate_finance}"
+												th:attr="RowId='R29', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_trading_and_sales}"
+												th:attr="RowId='R29', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_retail_banking}"
+												th:attr="RowId='R29', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_commercial_banking}"
+												th:attr="RowId='R29', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_payments_and_settlements}"
+												th:attr="RowId='R29', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_agency_services}"
+												th:attr="RowId='R29', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_asset_management}"
+												th:attr="RowId='R29', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r29_retail_brokerage}"
+												th:attr="RowId='R29', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r30_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_corporate_finance}"
+												th:attr="RowId='R30', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_trading_and_sales}"
+												th:attr="RowId='R30', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_retail_banking}"
+												th:attr="RowId='R30', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_commercial_banking}"
+												th:attr="RowId='R30', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_payments_and_settlements}"
+												th:attr="RowId='R30', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_agency_services}"
+												th:attr="RowId='R30', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_asset_management}"
+												th:attr="RowId='R30', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r30_retail_brokerage}"
+												th:attr="RowId='R30', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r31_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_corporate_finance}"
+												th:attr="RowId='R31', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_trading_and_sales}"
+												th:attr="RowId='R31', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_retail_banking}"
+												th:attr="RowId='R31', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_commercial_banking}"
+												th:attr="RowId='R31', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_payments_and_settlements}"
+												th:attr="RowId='R31', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_agency_services}"
+												th:attr="RowId='R31', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_asset_management}"
+												th:attr="RowId='R31', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r31_retail_brokerage}"
+												th:attr="RowId='R31', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r32_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_corporate_finance}"
+												th:attr="RowId='R32', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_trading_and_sales}"
+												th:attr="RowId='R32', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_retail_banking}"
+												th:attr="RowId='R32', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_commercial_banking}"
+												th:attr="RowId='R32', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_payments_and_settlements}"
+												th:attr="RowId='R32', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_agency_services}"
+												th:attr="RowId='R32', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_asset_management}"
+												th:attr="RowId='R32', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r32_retail_brokerage}"
+												th:attr="RowId='R32', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r33_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_corporate_finance}"
+												th:attr="RowId='R33', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_trading_and_sales}"
+												th:attr="RowId='R33', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_retail_banking}"
+												th:attr="RowId='R33', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_commercial_banking}"
+												th:attr="RowId='R33', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_payments_and_settlements}"
+												th:attr="RowId='R33', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_agency_services}"
+												th:attr="RowId='R33', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_asset_management}"
+												th:attr="RowId='R33', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r33_retail_brokerage}"
+												th:attr="RowId='R33', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r34_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_corporate_finance}"
+												th:attr="RowId='R34', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_trading_and_sales}"
+												th:attr="RowId='R34', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_retail_banking}"
+												th:attr="RowId='R34', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_commercial_banking}"
+												th:attr="RowId='R34', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_payments_and_settlements}"
+												th:attr="RowId='R34', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_agency_services}"
+												th:attr="RowId='R34', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_asset_management}"
+												th:attr="RowId='R34', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r34_retail_brokerage}"
+												th:attr="RowId='R34', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r35_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_corporate_finance}"
+												th:attr="RowId='R35', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_trading_and_sales}"
+												th:attr="RowId='R35', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_retail_banking}"
+												th:attr="RowId='R35', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_commercial_banking}"
+												th:attr="RowId='R35', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_payments_and_settlements}"
+												th:attr="RowId='R35', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_agency_services}"
+												th:attr="RowId='R35', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_asset_management}"
+												th:attr="RowId='R35', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r35_retail_brokerage}"
+												th:attr="RowId='R35', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r36_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_corporate_finance}"
+												th:attr="RowId='R36', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_trading_and_sales}"
+												th:attr="RowId='R36', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_retail_banking}"
+												th:attr="RowId='R36', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_commercial_banking}"
+												th:attr="RowId='R36', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_payments_and_settlements}"
+												th:attr="RowId='R36', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_agency_services}"
+												th:attr="RowId='R36', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_asset_management}"
+												th:attr="RowId='R36', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r36_retail_brokerage}"
+												th:attr="RowId='R36', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r37_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_corporate_finance}"
+												th:attr="RowId='R37', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_trading_and_sales}"
+												th:attr="RowId='R37', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_retail_banking}"
+												th:attr="RowId='R37', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_commercial_banking}"
+												th:attr="RowId='R37', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_payments_and_settlements}"
+												th:attr="RowId='R37', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_agency_services}"
+												th:attr="RowId='R37', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_asset_management}"
+												th:attr="RowId='R37', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r37_retail_brokerage}"
+												th:attr="RowId='R37', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r38_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_corporate_finance}"
+												th:attr="RowId='R38', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_trading_and_sales}"
+												th:attr="RowId='R38', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_retail_banking}"
+												th:attr="RowId='R38', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_commercial_banking}"
+												th:attr="RowId='R38', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_payments_and_settlements}"
+												th:attr="RowId='R38', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_agency_services}"
+												th:attr="RowId='R38', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_asset_management}"
+												th:attr="RowId='R38', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r38_retail_brokerage}"
+												th:attr="RowId='R38', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r39_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_corporate_finance}"
+												th:attr="RowId='R39', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_trading_and_sales}"
+												th:attr="RowId='R39', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_retail_banking}"
+												th:attr="RowId='R39', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_commercial_banking}"
+												th:attr="RowId='R39', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_payments_and_settlements}"
+												th:attr="RowId='R39', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_agency_services}"
+												th:attr="RowId='R39', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_asset_management}"
+												th:attr="RowId='R39', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r39_retail_brokerage}"
+												th:attr="RowId='R39', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">7</td>
+											<td style="font-weight: normal;" th:text="${report.r40_product}"
+												colspan="2">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r40_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">8</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_product}" colspan="2"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r41_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">9</td>
+											<td style="font-weight: normal;" th:text="${report.r42_product}"
+												colspan="2">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r42_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">10</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r43_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r43_operational_risk_cap_charge}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;" rowspan="12">11
+											</td>
+											<td style="font-weight: normal; text-align: center;"
+												th:text="${report.r44_product}" rowspan="12">
+											</td>
+											<td style="font-weight: normal;"
+												th:text="${report.r44_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_corporate_finance}"
+												th:attr="RowId='R44', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_trading_and_sales}"
+												th:attr="RowId='R44', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_retail_banking}"
+												th:attr="RowId='R44', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_commercial_banking}"
+												th:attr="RowId='R44', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_payments_and_settlements}"
+												th:attr="RowId='R44', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_agency_services}"
+												th:attr="RowId='R44', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_asset_management}"
+												th:attr="RowId='R44', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r44_retail_brokerage}"
+												th:attr="RowId='R44', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td rowspan="15" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r45_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_corporate_finance}"
+												th:attr="RowId='R45', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_trading_and_sales}"
+												th:attr="RowId='R45', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_retail_banking}"
+												th:attr="RowId='R45', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_commercial_banking}"
+												th:attr="RowId='R45', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_payments_and_settlements}"
+												th:attr="RowId='R45', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_agency_services}"
+												th:attr="RowId='R45', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_asset_management}"
+												th:attr="RowId='R45', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r45_retail_brokerage}"
+												th:attr="RowId='R45', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r46_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_corporate_finance}"
+												th:attr="RowId='R46', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_trading_and_sales}"
+												th:attr="RowId='R46', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_retail_banking}"
+												th:attr="RowId='R46', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_commercial_banking}"
+												th:attr="RowId='R46', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_payments_and_settlements}"
+												th:attr="RowId='R46', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_agency_services}"
+												th:attr="RowId='R46', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_asset_management}"
+												th:attr="RowId='R46', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r46_retail_brokerage}"
+												th:attr="RowId='R46', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r47_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_corporate_finance}"
+												th:attr="RowId='R47', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_trading_and_sales}"
+												th:attr="RowId='R47', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_retail_banking}"
+												th:attr="RowId='R47', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_commercial_banking}"
+												th:attr="RowId='R47', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_payments_and_settlements}"
+												th:attr="RowId='R47', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_agency_services}"
+												th:attr="RowId='R47', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_asset_management}"
+												th:attr="RowId='R47', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r47_retail_brokerage}"
+												th:attr="RowId='R47', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r48_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_corporate_finance}"
+												th:attr="RowId='R48', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_trading_and_sales}"
+												th:attr="RowId='R48', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_retail_banking}"
+												th:attr="RowId='R48', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_commercial_banking}"
+												th:attr="RowId='R48', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_payments_and_settlements}"
+												th:attr="RowId='R48', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_agency_services}"
+												th:attr="RowId='R48', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_asset_management}"
+												th:attr="RowId='R48', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r48_retail_brokerage}"
+												th:attr="RowId='R48', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r49_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_corporate_finance}"
+												th:attr="RowId='R49', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_trading_and_sales}"
+												th:attr="RowId='R49', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_retail_banking}"
+												th:attr="RowId='R49', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_commercial_banking}"
+												th:attr="RowId='R49', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_payments_and_settlements}"
+												th:attr="RowId='R49', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_agency_services}"
+												th:attr="RowId='R49', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_asset_management}"
+												th:attr="RowId='R49', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r49_retail_brokerage}"
+												th:attr="RowId='R49', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r50_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_corporate_finance}"
+												th:attr="RowId='R50', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_trading_and_sales}"
+												th:attr="RowId='R50', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_retail_banking}"
+												th:attr="RowId='R50', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_commercial_banking}"
+												th:attr="RowId='R50', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_payments_and_settlements}"
+												th:attr="RowId='R50', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_agency_services}"
+												th:attr="RowId='R50', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_asset_management}"
+												th:attr="RowId='R50', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r50_retail_brokerage}"
+												th:attr="RowId='R50', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r51_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_corporate_finance}"
+												th:attr="RowId='R51', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_trading_and_sales}"
+												th:attr="RowId='R51', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_retail_banking}"
+												th:attr="RowId='R51', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_commercial_banking}"
+												th:attr="RowId='R51', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_payments_and_settlements}"
+												th:attr="RowId='R51', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_agency_services}"
+												th:attr="RowId='R51', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_asset_management}"
+												th:attr="RowId='R51', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r51_retail_brokerage}"
+												th:attr="RowId='R51', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r52_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_corporate_finance}"
+												th:attr="RowId='R52', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_trading_and_sales}"
+												th:attr="RowId='R52', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_retail_banking}"
+												th:attr="RowId='R52', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_commercial_banking}"
+												th:attr="RowId='R52', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_payments_and_settlements}"
+												th:attr="RowId='R52', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_agency_services}"
+												th:attr="RowId='R52', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_asset_management}"
+												th:attr="RowId='R52', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r52_retail_brokerage}"
+												th:attr="RowId='R52', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r53_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_corporate_finance}"
+												th:attr="RowId='R53', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_trading_and_sales}"
+												th:attr="RowId='R53', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_retail_banking}"
+												th:attr="RowId='R53', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_commercial_banking}"
+												th:attr="RowId='R53', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_payments_and_settlements}"
+												th:attr="RowId='R53', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_agency_services}"
+												th:attr="RowId='R53', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_asset_management}"
+												th:attr="RowId='R53', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r53_retail_brokerage}"
+												th:attr="RowId='R53', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r54_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_corporate_finance}"
+												th:attr="RowId='R54', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_trading_and_sales}"
+												th:attr="RowId='R54', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_retail_banking}"
+												th:attr="RowId='R54', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_commercial_banking}"
+												th:attr="RowId='R54', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_payments_and_settlements}"
+												th:attr="RowId='R54', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_agency_services}"
+												th:attr="RowId='R54', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_asset_management}"
+												th:attr="RowId='R54', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r54_retail_brokerage}"
+												th:attr="RowId='R54', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="font-weight: normal;"
+												th:text="${report.r55_business_line_month}">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_corporate_finance}"
+												th:attr="RowId='R55', ColumnId='C3'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_trading_and_sales}"
+												th:attr="RowId='R55', ColumnId='C4'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_retail_banking}"
+												th:attr="RowId='R55', ColumnId='C5'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_commercial_banking}"
+												th:attr="RowId='R55', ColumnId='C6'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_payments_and_settlements}"
+												th:attr="RowId='R55', ColumnId='C7'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_agency_services}"
+												th:attr="RowId='R55', ColumnId='C8'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_asset_management}"
+												th:attr="RowId='R55', ColumnId='C9'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+											<td style="text-align: center; font-weight: normal;"
+												th:text="${report.r55_retail_brokerage}"
+												th:attr="RowId='R55', ColumnId='C10'"
+												onclick="showdetailsbyRowAndColumn(this)">
+											</td>
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">12</td>
+											<td style="font-weight: normal;" th:text="${report.r56_product}"
+												colspan="2">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r56_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">13</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_product}" colspan="2"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r57_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">14</td>
+											<td style="font-weight: normal;" th:text="${report.r58_product}"
+												colspan="2">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_corporate_finance}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_trading_and_sales}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_retail_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_commercial_banking}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_payments_and_settlements}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_agency_services}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_asset_management}"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r58_retail_brokerage}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">15</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r59_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;"></td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r59_operational_risk_cap_charge}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">16</td>
+											<td colspan="11" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">17</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r61_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r61_operational_risk_cap_charge}"></td>
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">18</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r62_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: white;"
+												th:text="${report.r62_operational_risk_cap_charge}"></td>
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">19</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r63_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r63_operational_risk_cap_charge}"></td>
+
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">20</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r64_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+											<td colspan="1" style="background-color: black; text-align: center;">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r64_risk_weight_factor}"></td>
+										</tr>
+
+										<tr>
+											<td style="text-align: center; background-color: white;">21</td>
+											<td style="font-weight: normal; background-color: #d3d3d3;"
+												th:text="${report.r65_product}" colspan="2"></td>
+											<td colspan="8" style="background-color: #b3b6b9; text-align: center;">
+											</td>
+											<td colspan="1" style="background-color: black; text-align: center;">
+											</td>
+											<td style="text-align: center; font-weight: normal; background-color: green;"
+												th:text="${report.r65_risk_weight_factor}"></td>
+										</tr>
+
+
+
+
+
+
+
+
+
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div th:if="${displaymode == 'Details'}">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="table-responsive scrollable-table-container"
+								style="border-right: 1px solid #dee2e6;">
+								<table
+									class="sticky-header-table table table-bordered table-hover table-sm table-condensed">
+									<thead class="thead-light">
+										<tr>
+											<th></th>
+											<th>CUST ID</th>
+											<th>ACCT NO</th>
+											<th>ACCT NAME</th>
+											<th style="text-align: right;">ACCT BALANCE</th>
+											<th>ROWID</th>
+											<th>COLUMNID</th>
+											<th>REPORT_DATE</th>
+										</tr>
+
+									</thead>
+
+									<tbody th:each="report: ${reportdetails}" style="font-family: Arial;">
+										<tr>
+
+											<td>
+												<a data-toggle="tooltip" class="editrec"
+													title="Click to Edit this Record">
+													<i class="fas fa-edit" onclick="editRecord(this)"></i>
+												</a>
+											</td>
+											<td th:text="${report.cust_id}"></td>
+											<td th:text="${report.acct_number}"></td>
+											<td th:text="${report.acct_name}"></td>
+											<td th:text="${report.exposure_amount}" style="text-align: right;"></td>
+											<td th:text="${report.row_id}"></td>
+											<td th:text="${report.column_id}"></td>
+											<td th:text="${#dates.format(report.report_date, 'dd-MM-yyyy')}"></td>
+										</tr>
+
+
+									</tbody>
+
+
+
+								</table> 
+
+								<div style="margin-top:20px; text-align:center;" th:if="${pagination=='YES'}">
+
+
+
+									<a th:if="${currentPage > 0}" th:href="@{'/Reports/' + ${reportid} + '/Details'(
+																																	    asondate=${asondate},                             
+																																	    fromdate=${fromdate},
+																																	    todate=${todate},
+																																	    currency=${currency},
+																																	    dtltype=${dtltype},
+																																	    type=${type},
+																																	    version=${version},
+																																	    page=${currentPage - 100},
+																																	    size=100
+																																	)}">
+										Previous
+									</a>
+
+
+									<span>Page [[${currentPage / 100 + 1}]] of [[${totalPages}]]</span>
+
+
+									<a th:if="${currentPage < (totalPages - 1) * 100}" th:href="@{'/Reports/' + ${reportid} + '/Details'(
+																																	    asondate=${asondate},
+																																	    fromdate=${fromdate},
+																																	    todate=${todate},
+																																	    currency=${currency},
+																																	    dtltype=${dtltype},
+																																	    type=${type},
+																																	    version=${version},
+																																	    page=${currentPage + 100},
+																																	    size=100
+																																	)}">
+										Next
+									</a>
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+
+
+	</div>
+
+
+
+	<div class="modal fade" id="loader" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content" style="background: transparent;">
+				<div class="modal-body" style="text-align: center">
+					<div>
+						<img th:src=@{/images/loader.gif} id="bfirelogo"
+							style="width: 153px; height: auto; margin-left: 18px; background-color: transparent; border-color: transparent;"
+							alt="Bornfire">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Custom Alert/Result Modal (Matches your existing style) -->
+	<div class="modal fade" id="resultModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<!-- Your custom styled header -->
+				<div class="menu-title-header">
+					<div class="modal-title" id="resultModalLabel" style="text-align: center; color: white;">
+						<!-- Title will be set by JavaScript -->
+					</div>
+				</div>
+				<div class="modal-body" style="text-align: center; font-size: 1.1rem;">
+					<p id="resultModalBody"></p>
+					<!-- Your custom styled button -->
+					<button type="button" class="custom-tab-btn" onclick="closemodel()" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Custom Cellresult Modal -->
+	<div class="modal fade" id="cellresultModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+
+				<!-- Custom header -->
+				<div class="menu-title-header"
+					style="background-color:#6c7a91; padding: 8px; border-radius:5px 5px 0 0;">
+					<div class="modal-title" id="cellresultModalLabel" style="text-align: center; color: white;">
+						Do you want to open the report?
+					</div>
+				</div>
+
+				<div class="modal-body" style="text-align: center; font-size: 1.1rem;">
+					<button type="button" class="custom-tab-btn cancel-btn" data-bs-dismiss="modal"
+						style="margin-right:10px; border:2px solid #6c7a91; background:white; color:black; border-radius:20px; padding:5px 15px;">
+						Cancel
+					</button>
+					<button type="button" class="custom-tab-btn yes-btn"
+						style="background:#6c7a91; color:white; border:none; border-radius:20px; padding:5px 20px;">
+						Yes
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+<!-- <script>
+															  $(document).ready(function () {
+															    $('#BRFvalidation').DataTable({
+															      "paging": true,
+															      "info": false,       // turn off "Showing x of y"
+															      "searching": false,  // turn off search
+															      "ordering": false,   // turn off ordering
+															      "lengthChange": false // hide "Show x entries"
+															    });
+															  });
+															</script> -->
+
+
+
+<style>
+	/* Your existing CSS - this is the correct approach */
+	.scrollable-table-container {
+		/* This is the key: it creates the scroll context */
+		max-height: 620px;
+		/* Or a suitable height like 80vh for responsive design */
+		overflow-y: auto;
+		border: 1px solid #ccc;
+	}
+
+	/* Your existing sticky header CSS, targeting the tr elements within the thead */
+	.scrollable-table-container thead tr:nth-child(1) {
+		position: sticky;
+		top: 0;
+		background-color: #b3b6b9;
+		z-index: 5;
+	}
+
+	.scrollable-table-container thead tr:nth-child(2) {
+		position: sticky;
+		top: 36px;
+		/* adjust based on row height */
+		background-color: #b3b6b9;
+		z-index: 4;
+	}
+
+	.scrollable-table-container thead tr:nth-child(3) {
+		position: sticky;
+		top: 72px;
+		/* Adjust based on row height */
+		background-color: #b3b6b9;
+		z-index: 3;
+	}
+
+	.scrollable-table-container thead tr:nth-child(4) {
+		position: sticky;
+		top: 100px;
+		/* Adjust based on row height */
+		background-color: #b3b6b9;
+		z-index: 2;
+	}
+
+	.scrollable-table-container thead tr:nth-child(5) {
+		position: sticky;
+		top: 135px;
+		/* Adjust based on row height */
+		background-color: #b3b6b9;
+		z-index: 1;
+	}
+</style>
+
+
+<style>
+	.inner {
+		max-height: 600px;
+		/* Adjust height as needed */
+		overflow: auto;
+		border: 1px solid #dee2e6;
+	}
+
+	/* Sticky thead */
+	#reports thead th {
+		position: sticky;
+		top: 0;
+		background-color: #f8f9fa;
+		/* Match Bootstrap thead-light */
+		z-index: 2;
+	}
+
+	div.dataTables_wrapper div.dataTables_paginate {
+		text-align: right !important;
+		float: right !important;
+		width: auto;
+		margin-top: 10px;
+	}
+
+	/* Ensure info text (e.g., "Showing 1 to X") stays on the left */
+	div.dataTables_wrapper div.dataTables_info {
+		float: left !important;
+		margin-top: 10px;
+	}
+
+	.pagination {
+		margin: 0;
+	}
+
+	.page-item.active .page-link {
+		background-color: #386276;
+		border-color: #386276;
+	}
+
+	.page-link {
+		color: #386276;
+	}
+
+	.page-link:hover {
+		color: #2a4a5c;
+	}
+
+	.form-select {
+		display: inline-block;
+		width: auto;
+	}
+	
+	
+</style>
+
+</html>
+

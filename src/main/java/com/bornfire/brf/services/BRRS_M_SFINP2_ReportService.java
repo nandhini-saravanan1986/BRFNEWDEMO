@@ -78,7 +78,7 @@ public class BRRS_M_SFINP2_ReportService {
 	BRRS_M_SFINP2_Archival_Detail_Repo M_SFINP2_Archival_Detail_Repo;
 
 	@Autowired
-	BRRS_M_SFINP2_Archival_Summary_Repo M_SFINP2_Archival_Summary_Repo;
+	BRRS_M_SFINP2_Archival_Summary_Repo M_SFINP2_Archival_Summary_Repo; 
 
 	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
 
@@ -3046,3 +3046,5 @@ public class BRRS_M_SFINP2_ReportService {
 	}
 
 }
+
+

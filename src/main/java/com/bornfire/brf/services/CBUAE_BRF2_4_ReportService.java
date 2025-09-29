@@ -68,7 +68,7 @@ private static final Logger logger = LoggerFactory.getLogger(CBUAE_BRF2_4_Report
 	CBUAE_BRF2_4_SUMMARY_Repo BRF2_4_Summary_Repo;
 	
 	
-	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
+	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy"); 
 	public ModelAndView getBRF2_4View(String reportId, String fromdate, String todate, String currency, String dtltype,
 			Pageable pageable) {
 
@@ -507,9 +507,6 @@ private static final Logger logger = LoggerFactory.getLogger(CBUAE_BRF2_4_Report
 						cell15.setCellValue("");
 						cell15.setCellStyle(textStyle);
 					}
-					
-					
-					
 					
 					//row14
 					row = sheet.getRow(13);

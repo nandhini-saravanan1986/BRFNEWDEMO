@@ -11095,12 +11095,12 @@ return mv;
 				if (type.equals("ARCHIVAL") & version != null) {
 
 				}
-				List<M_CA5_Archival_Summary_Entity1> dataList = M_CA5_Archival_Summary_Repo1
+				List<M_CA5_Archival_Summary_Entity1> dataList1 = M_CA5_Archival_Summary_Repo1
 						.getdatabydateListarchival(dateformat.parse(todate), version);
-				List<M_CA5_Archival_Summary_Entity2> dataList1 = M_CA5_Archival_Summary_Repo2
+				List<M_CA5_Archival_Summary_Entity2> dataList2 = M_CA5_Archival_Summary_Repo2
 						.getdatabydateListarchival(dateformat.parse(todate), version);
 
-				if (dataList.isEmpty()) {
+				if (dataList1.isEmpty()) {
 					logger.warn("Service: No data found for M_IS report. Returning empty result.");
 					return new byte[0];
 				}
