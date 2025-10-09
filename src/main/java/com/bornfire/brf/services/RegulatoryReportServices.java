@@ -192,6 +192,12 @@ public class RegulatoryReportServices {
 	
 	@Autowired
 	BRRS_Q_RLFA2_ReportService brrs_q_rlfa2_reportservice;
+	
+	@Autowired
+	BRRS_M_SRWA_12E_ReportService BRRS_M_SRWA_12E_ReportService;
+	
+	@Autowired
+	BRRS_M_CR_ReportService BRRS_M_CR_ReportService;
 
 
 	
@@ -482,6 +488,18 @@ public class RegulatoryReportServices {
 			
 			repsummary = brrs_m_fxr_reportservice.getM_FXRView(reportId, fromdate, todate, currency, dtltype,
 					pageable, type, version);
+			break;
+			
+		case "M_CR":
+			repsummary = BRRS_M_CR_ReportService.getM_CRView(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+
+			break;
+				
+		case "M_SRWA_12E":
+			repsummary = BRRS_M_SRWA_12E_ReportService.getM_SRWA_12EView(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+
 			break;
             
 		}
@@ -1270,7 +1288,28 @@ public class RegulatoryReportServices {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				break;				
+				break;		
+				
+		case "M_CR":
+			try {
+				repfile = BRRS_M_CR_ReportService.BRRS_M_CRExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "M_SRWA_12E":
+			try {
+				repfile = BRRS_M_SRWA_12E_ReportService.BRRS_M_SRWA_12EExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+
 
 	
 					
@@ -1800,7 +1839,25 @@ public class RegulatoryReportServices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			break;		
+			break;
+			
+		case "M_CR":
+			try {
+				archivalData = BRRS_M_CR_ReportService.getM_CRArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "M_SRWA_12E":
+			try {
+				archivalData = BRRS_M_SRWA_12E_ReportService.getM_SRWA_12EArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 
 		}
 		return archivalData;

@@ -51,6 +51,7 @@ import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
+import com.bornfire.brf.entities.BRRS_M_SRWA_12E_LTV_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity1;
@@ -96,6 +97,8 @@ import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
 import com.bornfire.brf.services.M_CA7_ReportService;
+import com.bornfire.brf.entities.BRRS_M_CR_Summary_Entity;
+import com.bornfire.brf.entities.BRRS_M_SRWA_12E_LTV_Summary_Entity;
 
 @Controller
 @ConfigurationProperties("default")
@@ -786,6 +789,62 @@ public class CBUAE_BRF_ReportsController {
 		                              .body("Update Failed: " + e.getMessage());
 		     }
 		 }
+		 
+		 
+		 @Autowired
+			private com.bornfire.brf.services.BRRS_M_CR_ReportService BRRS_M_CR_ReportService;
+
+			@RequestMapping(value = "/updateCRAll", method = { RequestMethod.GET, RequestMethod.POST })
+			@ResponseBody
+			public ResponseEntity<String> updateAllCRReports(
+					@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+					@ModelAttribute BRRS_M_CR_Summary_Entity request1) {
+				try {
+					System.out.println("Came to single controller");
+
+					// set date into all 4 entities
+					request1.setReport_date(asondate);
+
+					// call services
+					BRRS_M_CR_ReportService.updateReport(request1);
+					return ResponseEntity.ok("All Reports Updated Successfully");
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Update Failed: " + e.getMessage());
+				}
+			}
+			
+			
+			
+			
+			@Autowired
+			private com.bornfire.brf.services.BRRS_M_SRWA_12E_ReportService BRRS_M_SRWA_12E_ReportService;
+
+			@RequestMapping(value = "/updateSRWA12EAll", method = { RequestMethod.GET, RequestMethod.POST })
+			@ResponseBody
+			public ResponseEntity<String> updateAllSRWA12EReports(
+					@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			@ModelAttribute BRRS_M_SRWA_12E_LTV_Summary_Entity request1) {
+				try {
+					System.out.println("Came to single controller");
+
+					// set date into all 4 entities
+					request1.setReport_date(asondate);
+
+					// call services
+					BRRS_M_SRWA_12E_ReportService.updateReport(request1);
+
+				 
+					return ResponseEntity.ok("SRWA 12E Reports Updated Successfully");
+				} catch (Exception e) {
+					e.printStackTrace();
+					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Update Failed: " + e.getMessage());
+				}
+			}
+
+		
+
 
 
 
