@@ -70,6 +70,7 @@ import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
 import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
+import com.bornfire.brf.services.BRRS_M_SRWA_12H_ReportService;
 import com.bornfire.brf.services.BRRS_M_UNCONS_INVEST_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
@@ -87,6 +88,7 @@ import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
 import com.bornfire.brf.services.RegulatoryReportServices;
 import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.entities.M_SIR_Summary_Entity;
+import com.bornfire.brf.entities.M_SRWA_12H_Summary_Entity;
 import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
 
 
@@ -722,6 +724,33 @@ public class CBUAE_BRF_ReportsController {
 		     }
 		 }
 
+
+		 	 @Autowired
+		 private BRRS_M_SRWA_12H_ReportService M_SRWA_12Hservice;
+		 
+		 @RequestMapping(value = "/UpdateM_SRWA_12H", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> updateReport(
+		     @RequestParam(required = false) 
+		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		     @ModelAttribute M_SRWA_12H_Summary_Entity request,
+		     HttpServletRequest req) {
+
+		     try {
+		         System.out.println("came to First controller");
+		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		        
+		         // ✅ set the asondate into entity
+		         request.setREPORT_DATE(asondate);
+
+		         M_SRWA_12Hservice.updateReport(request);
+		         return ResponseEntity.ok("Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
 
 		 @Autowired
 		 M_CA7_ReportService M_CA7_ReportService;
