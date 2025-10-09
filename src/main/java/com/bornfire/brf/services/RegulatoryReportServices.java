@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bornfire.brf.entities.Q_ATF_ARCHIVAL_SUMMARY_REPO;
+
 @Component
 @Service
 @Transactional
@@ -63,7 +65,6 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_SRWA_12F_ReportService BRRS_M_SRWA_12F_reportservice;
 
-	
 
 	@Autowired
 	BRRS_M_MRC_ReportService BRRS_M_MRC_reportservice;
@@ -114,6 +115,9 @@ public class RegulatoryReportServices {
 	BRRS_Q_SMME_DEP_ReportService BRRS_Q_SMME_DEP_ReportService;
 	
 	@Autowired
+	BRRS_Q_SMME_REPORT_SERVICE_1 brrsQSmmeReportService1;
+	
+	@Autowired
 	BRRS_M_SECA_ReportService BRRS_M_SECA_ReportService;
 	
 	@Autowired
@@ -150,6 +154,9 @@ public class RegulatoryReportServices {
 	//h
 	@Autowired
 	BRRS_M_SRWA_12B_ReportService brrs_m_srwa_12b_reportservice;
+	
+	@Autowired
+	Q_ATS_ReportService q_ats_service_report;
 	
 	@Autowired
 	BRRS_M_SP_ReportService brrs_m_sp_reportservice;
@@ -501,6 +508,14 @@ public class RegulatoryReportServices {
 					pageable, type, version);
 
 			break;
+			
+		case "Q_SMME_1":
+	            repsummary = brrsQSmmeReportService1.getBRF2_7View(reportId, fromdate, todate, currency, dtltype, pageable,type,version);
+        	    break;	
+		    
+		case "Q_ATF":
+	            repsummary = q_ats_service_report.getQ_ATSView(reportId, fromdate, todate, currency, dtltype, pageable,type,version);
+        	    break;    	
             
 		}
 		return repsummary;
@@ -769,7 +784,17 @@ public class RegulatoryReportServices {
 		case "M_PLL":
 			repdetail = brrs_m_pll_reportservice.getM_PLLcurrentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type,version);
-			break;				        
+			break;	
+			
+	       case "Q_SMME_1":
+	            repdetail = brrsQSmmeReportService1.getBRF1_1currentDtl(reportId, fromdate, todate, currency, dtltype,
+	                pageable, Filter,asondate,Filter,type,version);
+	            break;
+            
+	        case "Q_ATF":
+	            repdetail = q_ats_service_report.getQ_ATS_currentDtl(reportId, fromdate, todate, currency, dtltype,
+	                pageable, Filter,asondate,type,version);
+	            break;								        
 	        
 
 		}
@@ -1309,6 +1334,25 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "Q_SMME_1":
+	            try {
+	                repfile = brrsQSmmeReportService1.getQ_SMME_1_Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+	            } catch (Exception e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+	            break;
+
+		case "Q_ATF":
+	            try {
+	            	System.out.println("---------- Q_ATF");
+	                repfile = q_ats_service_report.getQ_SMME_1_Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+	            } catch (Exception e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+	            break;	
 
 
 	
@@ -1858,6 +1902,24 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
+			
+		case "Q_SMME_1":
+			try {
+				archivalData = brrsQSmmeReportService1.getQ_MMW_Archival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
+		case "Q_ATF":
+			try {
+				archivalData = q_ats_service_report.getQ_ATF_SUMM_Archival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;		
 
 		}
 		return archivalData;
@@ -2042,7 +2104,15 @@ public class RegulatoryReportServices {
 	       
 	        fileData = brrs_m_i_s_ca_reportservice.getM_I_S_CADetailExcel(filename, fromdate, todate, currency,
 					dtltype, type, version);   
-	    } 
+	    } else if("Q_SMME_Detail_1".equals(filename)) {
+            fileData = brrsQSmmeReportService1.BRRS_Q_SMME_DetailExcel(filename, fromdate, todate,currency,
+					dtltype, type, version);
+
+		} else if("Q_ATF_DETAIL".equals(filename)) {
+            fileData = q_ats_service_report.BRRS_Q_ATS_DetailExcel(filename, fromdate, todate,currency,
+					dtltype, type, version);
+
+		}
 		
 
 
