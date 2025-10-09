@@ -63,8 +63,7 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_SRWA_12F_ReportService BRRS_M_SRWA_12F_reportservice;
 
-	@Autowired
-	BRRS_M_SRWA_12H_ReportService BRRS_M_SRWA_12H_reportservice;
+	
 
 	@Autowired
 	BRRS_M_MRC_ReportService BRRS_M_MRC_reportservice;
@@ -89,8 +88,6 @@ public class RegulatoryReportServices {
 
 	@Autowired
 	M_LA5_ReportService M_LA5_ReportService;
-	
-
 	
 	@Autowired
 	BRRS_M_AIDP_ReportService M_AIDP_ReportService;
@@ -147,6 +144,9 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_Q_STAFF_Report_Service BRRS_Q_STAFF_report_service;
 	
+
+	@Autowired
+	BRRS_M_SRWA_12H_ReportService BRRS_M_SRWA_12H_reportservice;
 	//h
 	@Autowired
 	BRRS_M_SRWA_12B_ReportService brrs_m_srwa_12b_reportservice;
@@ -194,20 +194,6 @@ public class RegulatoryReportServices {
 	BRRS_Q_RLFA2_ReportService brrs_q_rlfa2_reportservice;
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 
@@ -288,10 +274,7 @@ public class RegulatoryReportServices {
 					pageable);
 			break;
 
-		case "M_SRWA_12H":
-			repsummary = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HView(reportId, fromdate, todate, currency, dtltype,
-					pageable);
-			break;
+		
 
 		case "M_MRC":
 			repsummary = BRRS_M_MRC_reportservice.getM_MRCView(reportId, fromdate, todate, currency, dtltype, pageable);
@@ -379,8 +362,6 @@ public class RegulatoryReportServices {
 		case "M_UNCONS_INVEST":
 			repsummary = BRRS_M_UNCONS_INVEST_ReportService.getM_UNCONS_INVESTView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
-		
-			
 
 				
 		case "Q_SMME":
@@ -407,7 +388,9 @@ public class RegulatoryReportServices {
 			repsummary = BRRS_Q_STAFF_report_service. getQ_STAFFView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
 			break;
             
-            
+            case "M_SRWA_12H":
+			repsummary = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HView(reportId, fromdate, todate, currency, dtltype, pageable, type, version);
+			break;
             
           //MY 	
 			
@@ -581,10 +564,7 @@ public class RegulatoryReportServices {
 					dtltype, pageable, Filter);
 			break;
 
-		case "M_SRWA_12H":
-			repdetail = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HcurrentDtl(reportId, fromdate, todate, currency,
-					dtltype, pageable, Filter);
-			break;
+		
 
 		case "M_MRC":
 			repdetail = BRRS_M_MRC_reportservice.getM_MRCcurrentDtl(reportId, fromdate, todate, currency, dtltype,
@@ -688,7 +668,10 @@ public class RegulatoryReportServices {
 		case "M_DEP3":
             repdetail = BRRS_M_DEP3_reportservice.getM_DEP3currentDtl(reportId, fromdate, todate, currency,dtltype, pageable, Filter, type, version);
 	        break;	
-		
+		// case "M_SRWA_12H":
+		// 	repdetail = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HcurrentDtl(reportId, fromdate, todate, currency,
+		// 			dtltype, pageable, Filter);
+		// 	break;
 	        
 	        
 	      
@@ -892,15 +875,7 @@ public class RegulatoryReportServices {
 			}
 			break;
 
-		case "M_SRWA_12H":
-			try {
-				repfile = BRRS_M_SRWA_12H_reportservice.BRRS_M_SRWA_12HExcel(filename, reportId, fromdate, todate,
-						currency, dtltype);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
+		
 
 		case "M_MRC":
 			try {
@@ -1055,8 +1030,7 @@ public class RegulatoryReportServices {
 		
 			case "Q_SMME":
 				try {
-					repfile = BRRS_Q_SMME_reportservice.getQ_SMMEExcel(filename, reportId, fromdate, todate, currency,version,type,
-							dtltype);
+					repfile = BRRS_Q_SMME_reportservice.getQ_SMMEExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1111,7 +1085,7 @@ public class RegulatoryReportServices {
 				break;
 
 
-				case "Q_STAFF":
+			case "Q_STAFF":
 			try {
 				repfile = BRRS_Q_STAFF_report_service.BRRS_Q_STAFFExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
 			} catch (Exception e) {
@@ -1120,7 +1094,20 @@ public class RegulatoryReportServices {
 			}
 			break;
 
+
+			case "M_SRWA_12H":
+			try {
+				repfile = BRRS_M_SRWA_12H_reportservice.BRRS_M_SRWA_12HExcel(filename, reportId, fromdate, todate, currency,dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 				
+
+
+
+
 				case "M_SIR":
 					try {
 						repfile = M_SIR_ReportService.getM_SIRExcel(filename, reportId, fromdate, todate, currency, dtltype, type,
@@ -1323,10 +1310,10 @@ public class RegulatoryReportServices {
 
 		}
 
-		else if ("M_SRWA_12HDetail".equals(filename)) {
-			return BRRS_M_SRWA_12H_reportservice.BRRS_M_SRWA_12HDetailExcel(filename, fromdate, todate);
+		// else if ("M_SRWA_12HDetail".equals(filename)) {
+		// 	return BRRS_M_SRWA_12H_reportservice.BRRS_M_SRWA_12HDetailExcel(filename, fromdate, todate);
 
-		}
+		// }
 
 		else if ("M_MRCDetail".equals(filename)) {
 			return BRRS_M_MRC_reportservice.BRRS_M_MRCDetailExcel(filename, fromdate, todate);
@@ -1669,6 +1656,14 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
+
+			case "M_SRWA_12H":
+            try {
+                archivalData = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            break;
 			
 			//MY
 			
@@ -1833,8 +1828,8 @@ public class RegulatoryReportServices {
 		} else if ("M_SRWA_12FDetail".equals(filename)) {
 			fileData = BRRS_M_SRWA_12F_reportservice.BRRS_M_SRWA_12FDetailExcel(filename, fromdate, todate);
 
-		} else if ("M_SRWA_12HDetail".equals(filename)) {
-			fileData = BRRS_M_SRWA_12H_reportservice.BRRS_M_SRWA_12HDetailExcel(filename, fromdate, todate);
+		// } else if ("M_SRWA_12HDetail".equals(filename)) {
+		// 	fileData = BRRS_M_SRWA_12H_reportservice.BRRS_M_SRWA_12HDetailExcel(filename, fromdate, todate);
 
 		} else if ("M_MRCDetail".equals(filename)) {
 			fileData = BRRS_M_MRC_reportservice.BRRS_M_MRCDetailExcel(filename, fromdate, todate);
@@ -1992,16 +1987,6 @@ public class RegulatoryReportServices {
 					dtltype, type, version);   
 	    } 
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 
 
 		if (fileData == null) {

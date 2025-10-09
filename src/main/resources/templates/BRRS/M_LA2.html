@@ -489,10 +489,7 @@ PURPOSE		: BRRSREPORT
               window.URL.revokeObjectURL(url);
               document.body.removeChild(a);
 
-              showResultModal(
-                "BRRS",
-                "The file has been downloaded successfully."
-              );
+              showResultModal('BRRS', filename + ' downloaded successfully.');
             } else {
               showResultModal(
                 "Information",

@@ -120,6 +120,7 @@ public class BRRS_Q_SMME_ReportService<BBRS_Q_SMME_Detail_Repo> {
 		System.out.println("scv" + mv.getViewName());
 		return mv;
 	}
+
 public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
                                              String fromdate,
                                              String todate,
@@ -161,7 +162,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
                                 .GetDataByRowIdAndColumnId(rowId, columnId, parsedDate, version);
             } else {
                 resultList = Q_SMME_Archival_Detail_Repo
-								.getdatabydateList(todate, version);
+                                .getdatabydateList(todate, version);
             }
 
             mv.addObject("reportdetails", resultList);
@@ -174,8 +175,6 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
             if (rowId != null && columnId != null) {
                 resultList = q_SMME_Detail_Repo
                                 .GetDataByRowIdAndColumnId(rowId, columnId, parsedDate);
-
-								
             } else {
                 resultList = q_SMME_Detail_Repo.getdatabydateList(parsedDate);
                 totalPages = q_SMME_Detail_Repo.getdatacount(parsedDate);
@@ -185,7 +184,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
             mv.addObject("reportdetails", resultList);
             mv.addObject("reportmaster12", resultList);
 			
-            System.out.println("CURRENT COUNT: " + (resultList != null ? resultList.size() : 0));
+            System.out.println("CURRENT Details COUNT: " + (resultList != null ? resultList.size() : 0));
         }
 
     } catch (ParseException e) {

@@ -2975,11 +2975,6 @@ if (record3.getR64_no_cards_of_closed() != null) {
 			return out.toByteArray();
 		}
 	}
-	
-
-
-
-
 
 }
 	

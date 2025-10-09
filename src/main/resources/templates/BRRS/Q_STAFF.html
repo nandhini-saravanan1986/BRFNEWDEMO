@@ -285,7 +285,11 @@ PURPOSE		: BWRBRREPORT
 			border: 1px solid #000 !important;
 		}
 
-
+.display-input:focus {
+    outline: none;
+    border: 2px solid #92D050;
+    background-color: #92D050;
+}
 		
 	</style>
 	<script th:inline="javascript">
@@ -418,28 +422,26 @@ PURPOSE		: BWRBRREPORT
 		}
 	</script>
 	
-	
-		
-	
-	
-	
-	
-	
 	<script>
-	// Show Modify (enable inputs & dropdowns)
 function showmodify(btn) {
-    $(".Show_input").removeAttr("readonly").removeAttr("disabled");
+    // List of IDs that should ALWAYS remain readonly
+    var readonlyIds = ["R15_LOCAL","R15_EXPARIATES","R9_TOTAL",
+	"R10_TOTAL","R11_TOTAL","R12_TOTAL","R13_TOTAL","R14_TOTAL","R15_TOTAL",
+	"R28_LOCAL","R28_EXPARIATES","R21_TOTAL",
+	"R22_TOTAL","R23_TOTAL","R24_TOTAL","R25_TOTAL","R26_TOTAL","R27_TOTAL",,"R28_TOTAL",
+	"R38_ORIGINAL_AMT","R38_BALANCE_OUTSTANDING","R38_NO_OF_ACS"];
 
-  
-    
+    // Make all .Show_input editable except the ones in readonlyIds
+    $(".Show_input").each(function () {
+        if (!readonlyIds.includes(this.id)) {
+            $(this).removeAttr("readonly").removeAttr("disabled");
+        }
+    });
+
     // Toggle buttons
     $("#submitButton").show();
-    
-    // Show Cancel button only when Modify is clicked
     $("#cancelRecord").show();
-    
-    // Optionally hide the clicked Modify button
-    $(btn).hide();
+    $(btn).hide(); // hide the clicked Modify button
 }
 
 //Cancel / Reset function

@@ -82,6 +82,24 @@ public class Q_SMME_Detail_Entity {
     @Column(name = "DEL_FLG")
     private char delFlg;
 
+   @Column(name = "SEGMENT")
+    private String segment;
+
+    @Column(name = "CONSTITUTION_CODE")
+    private String constitutionCode;
+
+    @Column(name = "SMME")
+    private String smme;
+
+    @Column(name = "COLUMN_ID_1")
+    private String columnId1;
+
+    @Column(name = "REPORT_NAME_1")
+    private String reportName1;
+
+    @Column(name = "INTEREST_JULY_2025", precision = 24, scale = 2)
+    private BigDecimal interestJuly2025;
+
     public String getCustId() {
         return custId;
     }
@@ -250,9 +268,58 @@ public class Q_SMME_Detail_Entity {
         this.delFlg = delFlg;
     }
 
+    public String getSegment() {
+        return segment;
+    }
+
+    public void setSegment(String segment) {
+        this.segment = segment;
+    }
+
+    public String getConstitutionCode() {
+        return constitutionCode;
+    }
+
+    public void setConstitutionCode(String constitutionCode) {
+        this.constitutionCode = constitutionCode;
+    }
+
+    public String getSmme() {
+        return smme;
+    }
+
+    public void setSmme(String smme) {
+        this.smme = smme;
+    }
+
+    public String getColumnId1() {
+        return columnId1;
+    }
+
+    public void setColumnId1(String columnId1) {
+        this.columnId1 = columnId1;
+    }
+
+    public String getReportName1() {
+        return reportName1;
+    }
+
+    public void setReportName1(String reportName1) {
+        this.reportName1 = reportName1;
+    }
+
+    public BigDecimal getInterestJuly2025() {
+        return interestJuly2025;
+    }
+
+    public void setInterestJuly2025(BigDecimal interestJuly2025) {
+        this.interestJuly2025 = interestJuly2025;
+    }
+
     public Q_SMME_Detail_Entity() {
         super();
-        // TODO Auto-generated constructor stub
     }
+
+ 
 
 }
