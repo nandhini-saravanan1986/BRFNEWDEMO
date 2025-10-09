@@ -1,6 +1,7 @@
 package com.bornfire.brf.entities;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,90 +17,115 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class M_LIQ_Archival_Detail_Entity {
 	
 	
+	
+
 	@Id
-    @Column(name = "CUST_ID", length = 100)
-    private String custId;
+	@Column(name = "ID", length = 50)
+	private String id;
 
-    @Column(name = "ACCT_NUMBER", length = 100)
-    private String acctNumber;
+	@Column(name = "ACCT_NAME", length = 100)
+	private String acctName;
 
-    @Column(name = "ACCT_NAME", length = 100)
-    private String acctName;
+	@Column(name = "DATA_TYPE", length = 100)
+	private String dataType;
 
-    @Column(name = "DATA_TYPE", length = 100)
-    private String dataType;
-    
-    @Column(name = "ROW_ID", length = 100)
-    private String rowId;
-    
-    @Column(name = "COLUMN_ID", length = 100)
-    private String columnId;
+	@Column(name = "ROW_ID", length = 100)
+	private String rowId;
 
-    @Column(name = "REPORT_REMARKS", length = 100)
-    private String reportRemarks;
+	@Column(name = "COLUMN_ID", length = 100)
+	private String columnId;
 
-    @Column(name = "MODIFICATION_REMARKS", length = 100)
-    private String modificationRemarks;
+	@Column(name = "REPORT_REMARKS", length = 100)
+	private String reportRemarks;
 
-    @Column(name = "DATA_ENTRY_VERSION", length = 100)
-    private String dataEntryVersion;
+	@Column(name = "MODIFICATION_REMARKS", length = 100)
+	private String modificationRemarks;
 
-    @Column(name = "ACCT_BALANCE_IN_PULA", precision = 24, scale = 3)
-    private BigDecimal acctBalanceInPula;
-    
-    @Column(name = "REPORT_DATE")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date reportDate;
+	@Column(name = "DATA_ENTRY_VERSION", length = 100)
+	private String dataEntryVersion;
 
-    @Column(name = "REPORT_NAME", length = 100)
-    private String reportName;
+	@Column(name = "ACCT_BALANCE_IN_PULA", precision = 24, scale = 2)
+	private BigDecimal acctBalanceInPula;
 
-    @Column(name = "CREATE_USER", length = 50)
-    private String createUser;
+	@Column(name = "REPORT_DATE")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date reportDate;
 
-    @Column(name = "CREATE_TIME")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date createTime;
+	@Column(name = "REPORT_NAME", length = 100)
+	private String reportName;
 
-    @Column(name = "MODIFY_USER", length = 50)
-    private String modifyUser;
+	@Column(name = "CREATE_USER", length = 50)
+	private String createUser;
 
-    @Column(name = "MODIFY_TIME")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date modifyTime;
+	@Column(name = "CREATE_TIME")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date createTime;
 
-    @Column(name = "VERIFY_USER", length = 50)
-    private String verifyUser;
+	@Column(name = "MODIFY_USER", length = 50)
+	private String modifyUser;
 
-    @Column(name = "VERIFY_TIME")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date verifyTime;
+	@Column(name = "MODIFY_TIME")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date modifyTime;
 
-    @Column(name = "ENTITY_FLG", length = 1)
-    private String entityFlg;
+	@Column(name = "VERIFY_USER", length = 50)
+	private String verifyUser;
 
-    @Column(name = "MODIFY_FLG", length = 1)
-    private String modifyFlg;
+	@Column(name = "VERIFY_TIME")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date verifyTime;
 
-    @Column(name = "DEL_FLG", length = 1)
-    private String delFlg;
-    
-    
+	@Column(name = "ENTITY_FLG", length = 1)
+	private String entityFlg;
 
-	public String getCustId() {
-		return custId;
+	@Column(name = "MODIFY_FLG", length = 1)
+	private String modifyFlg;
+
+	@Column(name = "DEL_FLG", length = 1)
+	private String delFlg;
+
+	@Column(name = "REPORT_NAME_1", length = 500)
+	private String reportName1;
+
+	@Column(name = "GL_CODE", length = 50)
+	private String glCode;
+
+	@Column(name = "GL_SUB_CODE", length = 50)
+	private String glSubCode;
+
+	@Column(name = "HEAD_ACC_NO", length = 50)
+	private String headAccNo;
+
+	@Column(name = "DESCRIPTION", length = 200)
+	private String description;
+
+	@Column(name = "CURRENCY", length = 10)
+	private String currency;
+
+	@Column(name = "DEBIT_BALANCE", precision = 18, scale = 2)
+	private BigDecimal debitBalance;
+
+	@Column(name = "CREDIT_BALANCE", precision = 18, scale = 2)
+	private BigDecimal creditBalance;
+
+	@Column(name = "DEBIT_EQUIVALENT", precision = 18, scale = 2)
+	private BigDecimal debitEquivalent;
+
+	@Column(name = "CREDIT_EQUIVALENT", precision = 18, scale = 2)
+	private BigDecimal creditEquivalent;
+
+	@Column(name = "ENTRY_USER", length = 50)
+	private String entryUser;
+
+	@Column(name = "ENTRY_DATE")
+	private Timestamp entryDate;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setCustId(String custId) {
-		this.custId = custId;
-	}
-
-	public String getAcctNumber() {
-		return acctNumber;
-	}
-
-	public void setAcctNumber(String acctNumber) {
-		this.acctNumber = acctNumber;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getAcctName() {
@@ -254,11 +280,106 @@ public class M_LIQ_Archival_Detail_Entity {
 		this.delFlg = delFlg;
 	}
 
+	public String getReportName1() {
+		return reportName1;
+	}
+
+	public void setReportName1(String reportName1) {
+		this.reportName1 = reportName1;
+	}
+
+	public String getGlCode() {
+		return glCode;
+	}
+
+	public void setGlCode(String glCode) {
+		this.glCode = glCode;
+	}
+
+	public String getGlSubCode() {
+		return glSubCode;
+	}
+
+	public void setGlSubCode(String glSubCode) {
+		this.glSubCode = glSubCode;
+	}
+
+	public String getHeadAccNo() {
+		return headAccNo;
+	}
+
+	public void setHeadAccNo(String headAccNo) {
+		this.headAccNo = headAccNo;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public BigDecimal getDebitBalance() {
+		return debitBalance;
+	}
+
+	public void setDebitBalance(BigDecimal debitBalance) {
+		this.debitBalance = debitBalance;
+	}
+
+	public BigDecimal getCreditBalance() {
+		return creditBalance;
+	}
+
+	public void setCreditBalance(BigDecimal creditBalance) {
+		this.creditBalance = creditBalance;
+	}
+
+	public BigDecimal getDebitEquivalent() {
+		return debitEquivalent;
+	}
+
+	public void setDebitEquivalent(BigDecimal debitEquivalent) {
+		this.debitEquivalent = debitEquivalent;
+	}
+
+	public BigDecimal getCreditEquivalent() {
+		return creditEquivalent;
+	}
+
+	public void setCreditEquivalent(BigDecimal creditEquivalent) {
+		this.creditEquivalent = creditEquivalent;
+	}
+
+	public String getEntryUser() {
+		return entryUser;
+	}
+
+	public void setEntryUser(String entryUser) {
+		this.entryUser = entryUser;
+	}
+
+	public Timestamp getEntryDate() {
+		return entryDate;
+	}
+
+	public void setEntryDate(Timestamp entryDate) {
+		this.entryDate = entryDate;
+	}
+
 	public M_LIQ_Archival_Detail_Entity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
     
 
 	

@@ -123,7 +123,10 @@ public class BRRS_Q_RLFA2_ReportService {
 	  
 	  // T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
 	  mv.setViewName("BRRS/Q_RLFA2"); mv.addObject("displaymode", "summary");
-	  System.out.println("scv" + mv.getViewName()); return mv;
+	  System.out.println("scv" + mv.getViewName()); 
+	  
+	  
+	  return mv;
 	  
 	  }
 	 

@@ -40,8 +40,8 @@ public class M_LIQ_Summary_Entity {
 	private String	r15_product;
 	private BigDecimal	r15_total;
 	
-	private String	r16_product;
-	private BigDecimal	r16_total;
+	
+	
 	
 	private String	r17_product;
 	private BigDecimal	r17_total;
@@ -49,20 +49,17 @@ public class M_LIQ_Summary_Entity {
 	private String	r18_product;
 	private BigDecimal	r18_total;
 	
-	private String	r19_product;
-	private BigDecimal	r19_total;
 	
-	private String	r20_product;
-	private BigDecimal	r20_total;
+	
 	
 	private String	r21_product;
 	private BigDecimal	r21_total;
 	
-	private String	r22_product;
-	private BigDecimal	r22_total;
 	
-	private String	r23_product;
-	private BigDecimal	r23_total;
+	
+	
+	
+	
 	
 	private String	r24_product;
 	private BigDecimal	r24_total;
@@ -70,8 +67,7 @@ public class M_LIQ_Summary_Entity {
 	private String	r25_product;
 	private BigDecimal	r25_total;
 	
-	private String	r26_product;
-	private BigDecimal	r26_total;
+	
 	
 	private String	r27_product;
 	private BigDecimal	r27_total;
@@ -104,9 +100,6 @@ public class M_LIQ_Summary_Entity {
 	private String	entity_flg;
 	private String	modify_flg;
 	private String	 del_flg;
-	
-	
-
 	public String getR10_product() {
 		return r10_product;
 	}
@@ -179,18 +172,6 @@ public class M_LIQ_Summary_Entity {
 	public void setR15_total(BigDecimal r15_total) {
 		this.r15_total = r15_total;
 	}
-	public String getR16_product() {
-		return r16_product;
-	}
-	public void setR16_product(String r16_product) {
-		this.r16_product = r16_product;
-	}
-	public BigDecimal getR16_total() {
-		return r16_total;
-	}
-	public void setR16_total(BigDecimal r16_total) {
-		this.r16_total = r16_total;
-	}
 	public String getR17_product() {
 		return r17_product;
 	}
@@ -215,30 +196,6 @@ public class M_LIQ_Summary_Entity {
 	public void setR18_total(BigDecimal r18_total) {
 		this.r18_total = r18_total;
 	}
-	public String getR19_product() {
-		return r19_product;
-	}
-	public void setR19_product(String r19_product) {
-		this.r19_product = r19_product;
-	}
-	public BigDecimal getR19_total() {
-		return r19_total;
-	}
-	public void setR19_total(BigDecimal r19_total) {
-		this.r19_total = r19_total;
-	}
-	public String getR20_product() {
-		return r20_product;
-	}
-	public void setR20_product(String r20_product) {
-		this.r20_product = r20_product;
-	}
-	public BigDecimal getR20_total() {
-		return r20_total;
-	}
-	public void setR20_total(BigDecimal r20_total) {
-		this.r20_total = r20_total;
-	}
 	public String getR21_product() {
 		return r21_product;
 	}
@@ -250,30 +207,6 @@ public class M_LIQ_Summary_Entity {
 	}
 	public void setR21_total(BigDecimal r21_total) {
 		this.r21_total = r21_total;
-	}
-	public String getR22_product() {
-		return r22_product;
-	}
-	public void setR22_product(String r22_product) {
-		this.r22_product = r22_product;
-	}
-	public BigDecimal getR22_total() {
-		return r22_total;
-	}
-	public void setR22_total(BigDecimal r22_total) {
-		this.r22_total = r22_total;
-	}
-	public String getR23_product() {
-		return r23_product;
-	}
-	public void setR23_product(String r23_product) {
-		this.r23_product = r23_product;
-	}
-	public BigDecimal getR23_total() {
-		return r23_total;
-	}
-	public void setR23_total(BigDecimal r23_total) {
-		this.r23_total = r23_total;
 	}
 	public String getR24_product() {
 		return r24_product;
@@ -298,18 +231,6 @@ public class M_LIQ_Summary_Entity {
 	}
 	public void setR25_total(BigDecimal r25_total) {
 		this.r25_total = r25_total;
-	}
-	public String getR26_product() {
-		return r26_product;
-	}
-	public void setR26_product(String r26_product) {
-		this.r26_product = r26_product;
-	}
-	public BigDecimal getR26_total() {
-		return r26_total;
-	}
-	public void setR26_total(BigDecimal r26_total) {
-		this.r26_total = r26_total;
 	}
 	public String getR27_product() {
 		return r27_product;
@@ -435,7 +356,14 @@ public class M_LIQ_Summary_Entity {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	
+	
+	
 
+	
 
     
 

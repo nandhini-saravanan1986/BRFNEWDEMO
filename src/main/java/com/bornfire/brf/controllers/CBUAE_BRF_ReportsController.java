@@ -1,34 +1,25 @@
 package com.bornfire.brf.controllers;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -37,23 +28,30 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
+import com.bornfire.brf.entities.BRRS_M_CR_Summary_Entity;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12E_LTV_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
+import com.bornfire.brf.entities.M_LIQ_Manual_Summary_Entity;
+import com.bornfire.brf.entities.M_LIQ_Summary_Entity;
+import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
+import com.bornfire.brf.entities.M_SIR_Summary_Entity;
+import com.bornfire.brf.entities.M_SRWA_12H_Summary_Entity;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity1;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity2;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity3;
@@ -66,39 +64,21 @@ import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity1;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity2;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity3;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity4;
-import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
-import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
-import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
-import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
-import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
-import com.bornfire.brf.services.BRRS_M_SRWA_12H_ReportService;
-import com.bornfire.brf.services.BRRS_M_UNCONS_INVEST_ReportService;
-import com.bornfire.brf.services.RegulatoryReportServices;
-import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
-import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
-import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
-import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
 import com.bornfire.brf.entities.Q_RLFA2_Summary_Entity;
 import com.bornfire.brf.entities.Q_STAFF_Summary_Entity1;
 import com.bornfire.brf.entities.Q_STAFF_Summary_Entity2;
 import com.bornfire.brf.entities.Q_STAFF_Summary_Entity3;
 import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
+import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
+import com.bornfire.brf.services.BRRS_M_LIQ_ReportService;
+import com.bornfire.brf.services.BRRS_M_SRWA_12H_ReportService;
+import com.bornfire.brf.services.BRRS_M_UNCONS_INVEST_ReportService;
 import com.bornfire.brf.services.BRRS_Q_BRANCHNET_ReportService;
 import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
 import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
-import com.bornfire.brf.services.RegulatoryReportServices;
-import com.bornfire.brf.services.M_SIR_ReportService;
-import com.bornfire.brf.entities.M_SIR_Summary_Entity;
-import com.bornfire.brf.entities.M_SRWA_12H_Summary_Entity;
-import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
-
-
-
-import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
-import com.bornfire.brf.entities.M_CA7_Summary_Entity;
 import com.bornfire.brf.services.M_CA7_ReportService;
-import com.bornfire.brf.entities.BRRS_M_CR_Summary_Entity;
-import com.bornfire.brf.entities.BRRS_M_SRWA_12E_LTV_Summary_Entity;
+import com.bornfire.brf.services.M_SIR_ReportService;
+import com.bornfire.brf.services.RegulatoryReportServices;
 
 @Controller
 @ConfigurationProperties("default")
@@ -844,7 +824,42 @@ public class CBUAE_BRF_ReportsController {
 			}
 
 		
+			 @Autowired
+			 BRRS_M_LIQ_ReportService brrs_m_liq_reportservice;
+			
 
+			 @RequestMapping(value = "/M_LIQupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+			 @ResponseBody
+			 public ResponseEntity<String> updateAllReports(
+			         @RequestParam(required = false)
+			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+			         @ModelAttribute M_LIQ_Summary_Entity request1,
+			         @ModelAttribute M_LIQ_Manual_Summary_Entity request2
+			       
+			 ) {
+			     try {
+			         System.out.println("Came to single controller");
+
+			         // set date into all 3 entities
+			         request1.setReport_date(asondate);
+			         request2.setReport_date(asondate);
+			        
+			     
+
+			         // call services
+			         brrs_m_liq_reportservice.updateReport(request1);
+			         brrs_m_liq_reportservice.updateReport1(request2);
+			        
+
+
+			         return ResponseEntity.ok("All Reports Updated Successfully");
+			     } catch (Exception e) {
+			         e.printStackTrace();
+			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                              .body("Update Failed: " + e.getMessage());
+			     }
+			 }
 
 
 

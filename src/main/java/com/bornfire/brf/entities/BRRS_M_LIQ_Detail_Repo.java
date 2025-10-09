@@ -10,22 +10,32 @@ public interface BRRS_M_LIQ_Detail_Repo extends JpaRepository<M_LIQ_Detail_Entit
 	
 	
 	
-	// Fetch all records for a given date
-	   @Query(value = "select * from BRRS_M_LIQ_DETAILTABLE where REPORT_DATE = ?1", nativeQuery = true)
-	   List<M_LIQ_Detail_Entity> getdatabydateList(Date reportdate);
-	   
-	   
-	   // ✅ Pagination fixed → use OFFSET and LIMIT correctly
-	   @Query(value = "select * from BRRS_M_LIQ_DETAILTABLE where REPORT_DATE = ?1 offset ?2 rows fetch next ?3 rows only", nativeQuery = true)
-	   List<M_LIQ_Detail_Entity> getdatabydateList(Date reportdate, int offset, int limit);
-	   
-	   
-	   // Count rows by date
-	   @Query(value = "select count(*) from BRRS_M_LIQ_DETAILTABLE where REPORT_DATE = ?1", nativeQuery = true)
-	   int getdatacount(Date reportdate);
-	   
+	  // Fetch all records for a given date
+	  
+	  @Query(value = "select * from BRRS_M_LIQ_DETAILTABLE where REPORT_DATE = ?1",
+	  nativeQuery = true) List<M_LIQ_Detail_Entity> getdatabydateList(Date
+	  reportdate);
+	  
+	  
+	  // ✅ Pagination fixed → use OFFSET and LIMIT correctly
+	  
+	  @Query(value =
+	  "select * from BRRS_M_LIQ_DETAILTABLE where REPORT_DATE = ?1 offset ?2 rows fetch next ?3 rows only"
+	  , nativeQuery = true) List<M_LIQ_Detail_Entity> getdatabydateList(Date
+	  reportdate, int offset, int limit);
+	  
+	  
+	  // Count rows by date
+	  
+	  @Query(value =
+	  "select count(*) from BRRS_M_LIQ_DETAILTABLE where REPORT_DATE = ?1",
+	  nativeQuery = true) int getdatacount(Date reportdate);
+	  
+	  
+	  @Query(value =
+	  "select * from BRRS_M_LIQ_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2 AND REPORT_DATE=?3"
+	  , nativeQuery = true) List<M_LIQ_Detail_Entity>
+	  GetDataByRowIdAndColumnId(String rowId,String ColumnId,Date reportdate);
 	 
-		@Query(value = "select * from BRRS_M_LIQ_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2 AND REPORT_DATE=?3", nativeQuery = true)
-		List<M_LIQ_Detail_Entity> GetDataByRowIdAndColumnId(String rowId,String ColumnId,Date reportdate);
 
 }
