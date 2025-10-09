@@ -15,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-@Table(name = "BRRS_M_LIQ_SUMMARYTABLE")
+@Table(name = "BRRS_M_LIQ_MANUAL_SUMMARYTABLE")
 
 
 public class M_LIQ_Manual_Summary_Entity {

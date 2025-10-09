@@ -834,7 +834,7 @@ public class CBUAE_BRF_ReportsController {
 			         @RequestParam(required = false)
 			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
 
-			         @ModelAttribute M_LIQ_Summary_Entity request1,
+			        
 			         @ModelAttribute M_LIQ_Manual_Summary_Entity request2
 			       
 			 ) {
@@ -842,13 +842,13 @@ public class CBUAE_BRF_ReportsController {
 			         System.out.println("Came to single controller");
 
 			         // set date into all 3 entities
-			         request1.setReport_date(asondate);
+			         
 			         request2.setReport_date(asondate);
 			        
 			     
 
 			         // call services
-			         brrs_m_liq_reportservice.updateReport(request1);
+						/* brrs_m_liq_reportservice.updateReport(request1); */
 			         brrs_m_liq_reportservice.updateReport1(request2);
 			        
 

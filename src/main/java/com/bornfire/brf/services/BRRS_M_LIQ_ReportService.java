@@ -1178,65 +1178,7 @@ public class BRRS_M_LIQ_ReportService {
 	
 
 	  
-	  public void updateReport(M_LIQ_Summary_Entity updatedEntity) {
-		    System.out.println("Came to services");
-		    System.out.println("Report Date: " + updatedEntity.getReport_date());
-
-		    M_LIQ_Summary_Entity existing = brrs_m_liq_Summary_Repo.findById(updatedEntity.getReport_date())
-		            .orElseThrow(() -> new RuntimeException(
-		                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
-
-		    try {
-		        // 🔹 Skip list for unwanted rows
-		    	Set<Integer> skipRows = new HashSet<>();
-		        skipRows.add(16);
-		        skipRows.add(19);
-		        skipRows.add(20);
-		        skipRows.add(22);
-		        skipRows.add(23);
-		        skipRows.add(26);
-		        skipRows.add(28);
-		        skipRows.add(29);
-		        skipRows.add(33);
-
-		        // 🔹 Loop only from R10 to R35
-		        for (int i = 10; i <= 35; i++) {
-		            if (skipRows.contains(i)) {
-		                continue; // skip unwanted rows
-		            }
-
-		            String prefix = "R" + i + "_";
-		            String[] fields = { "product", "total" };
-
-		            for (String field : fields) {
-		                String getterName = "get" + prefix + field; // e.g., getR10_product
-		                String setterName = "set" + prefix + field; // e.g., setR10_product
-
-		                try {
-		                    Method getter = M_LIQ_Summary_Entity.class.getMethod(getterName);
-		                    Method setter = M_LIQ_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
-
-		                    Object newValue = getter.invoke(updatedEntity);
-		                    setter.invoke(existing, newValue);
-
-		                } catch (NoSuchMethodException e) {
-		                    // If a getter/setter is missing, just skip
-		                    continue;
-		                }
-		            }
-		        }
-
-		       
-
-		    } catch (Exception e) {
-		        throw new RuntimeException("Error while updating report fields", e);
-		    }
-
-		    // 3️⃣ Save updated entity
-		    brrs_m_liq_Summary_Repo.save(existing);
-		}
-
-	
+	 
 	
 	
 	

@@ -611,7 +611,7 @@ function downloadfile(button) {
 				window.URL.revokeObjectURL(url);
 				document.body.removeChild(a);
 
-				showResultModal('BRRS', 'The file has been downloaded successfully.');
+				showResultModal('BRRS', filename + ' downloaded successfully.');
 			} else {
 				showResultModal('Information', 'No data was available to create a download.');
 			}
@@ -839,7 +839,6 @@ function cancelModify() {
 	    });
 	});
 
-
 	function calculateR27Totals() {
 	    // Helper function to get numeric value from input or text
 	    function getValue(id) {
@@ -851,10 +850,10 @@ function cancelModify() {
 	    let R24 = getValue("r24_total");
 
 	    // Avoid division by zero
-	    let R27 = R24 !== 0 ? R10 / R24 : 0;
+	    let R27 = R24 !== 0 ? (R10 / R24) * 100 : 0;
 
-	    // Update R27 display (with 2 decimal places)
-	    $("#r27_total").text(R27.toLocaleString('en-IN', ));
+	    // Update R27 display (with 2 decimal places + % sign)
+	    $("#r27_total").text(R27.toFixed(2) + "%");
 	}
 
 	$(document).ready(function() {
@@ -1189,7 +1188,7 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'(ii) Repurchase Agreements'"
 													id="r16_product" name="r16_product"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 600px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW16"
@@ -1254,7 +1253,7 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'d. Treasury Bills equal to or less than 6 months	'"
 													id="r19_product" name="r19_product"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 600px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW19"
@@ -1277,7 +1276,7 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'e. Government Bonds - (with maturity less than one year)	'"
 													id="r20_product" name="r20_product"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 600px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW20"
@@ -1312,7 +1311,7 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'g. Other government obligations (with maturity less than one year)'"
 													id="r22_product" name="r22_product"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 600px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW22"
@@ -1386,7 +1385,7 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'b. Other liabilities and debt due in one year or less*'"
 													id="r26_product" name="r26_product"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 600px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW26"
@@ -1425,9 +1424,10 @@ function cancelModify() {
 									
 									
 								</table>
+								</div>
 </form>
 								
-							</div>
+							
 
 
 						</div>
