@@ -7,19 +7,22 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -28,8 +31,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,18 +46,6 @@ import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
-import com.bornfire.brf.entities.BRRS_M_CR_Summary_Entity;
-import com.bornfire.brf.entities.BRRS_M_SRWA_12E_LTV_Summary_Entity;
-import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
-import com.bornfire.brf.entities.M_CA7_Summary_Entity;
-import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
-import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
-import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
-import com.bornfire.brf.entities.M_LIQ_Manual_Summary_Entity;
-import com.bornfire.brf.entities.M_LIQ_Summary_Entity;
-import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
-import com.bornfire.brf.entities.M_SIR_Summary_Entity;
-import com.bornfire.brf.entities.M_SRWA_12H_Summary_Entity;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity1;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity2;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity3;
@@ -60,811 +54,767 @@ import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity1;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity2;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity3;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity4;
+
+import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
+import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
+import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
+import com.bornfire.brf.services.BRRS_M_UNCONS_INVEST_ReportService;
+
+import com.bornfire.brf.services.RegulatoryReportServices;
+
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity2;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
+import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity1;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity2;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity3;
 import com.bornfire.brf.entities.Q_BRANCHNET_Summary_Entity4;
 import com.bornfire.brf.entities.Q_RLFA2_Summary_Entity;
-import com.bornfire.brf.entities.Q_STAFF_Summary_Entity1;
-import com.bornfire.brf.entities.Q_STAFF_Summary_Entity2;
-import com.bornfire.brf.entities.Q_STAFF_Summary_Entity3;
 import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
-import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
-import com.bornfire.brf.services.BRRS_M_LIQ_ReportService;
-import com.bornfire.brf.services.BRRS_M_SRWA_12H_ReportService;
-import com.bornfire.brf.services.BRRS_M_UNCONS_INVEST_ReportService;
 import com.bornfire.brf.services.BRRS_Q_BRANCHNET_ReportService;
 import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
-import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
-import com.bornfire.brf.services.M_CA7_ReportService;
-import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
+
+import com.bornfire.brf.services.M_SIR_ReportService;
+import com.bornfire.brf.entities.M_SIR_Summary_Entity;
+import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
+
+import com.bornfire.brf.entities.BRRS_M_SEC_Summary_Entity1;
+import com.bornfire.brf.entities.BRRS_M_SEC_Summary_Entity2;
+import com.bornfire.brf.entities.BRRS_M_SEC_Summary_Entity3;
+import com.bornfire.brf.entities.BRRS_M_SEC_Summary_Entity4;
+import com.bornfire.brf.entities.BRRS_M_SEC_ARCHIVALSUMMARY_Entity1;
+import com.bornfire.brf.entities.BRRS_M_SEC_ARCHIVALSUMMARY_Entity2;
+import com.bornfire.brf.entities.BRRS_M_SEC_ARCHIVALSUMMARY_Entity3;
+import com.bornfire.brf.entities.BRRS_M_SEC_ARCHIVALSUMMARY_Entity4;
+import com.bornfire.brf.services.BRRS_M_SEC_ReportService;
+import com.bornfire.brf.entities.BRRS_M_TBS_Summary_Entity;
+import com.bornfire.brf.entities.BRRS_M_TBS_ARCHIVALSUMMARY_Entity;
+import com.bornfire.brf.services.BRRS_M_TBS_ReportService;
 
 @Controller
 @ConfigurationProperties("default")
 @RequestMapping(value = "Reports")
 public class CBUAE_BRF_ReportsController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(CBUAE_BRF_ReportsController.class);
-		@Autowired
-		RegulatoryReportServices regreportServices;
-	
-		private String pagesize;
-	
-		public String getPagesize() {
-			return pagesize;
-		}
-	
-		public void setPagesize(String pagesize) {
-			this.pagesize = pagesize;
-		}
-		DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-	
-		// To show the required report at the first stage
-		@RequestMapping(value = "{reportid}", method = { RequestMethod.GET, RequestMethod.POST })
-		public ModelAndView reportView(@PathVariable("reportid") String reportid,
-				@RequestParam(value = "function", required = false) String function,
-				@RequestParam("asondate") String asondate, @RequestParam(required = false) String fromdate,
-				@RequestParam("todate") String todate, @RequestParam(value = "currency", required = false) String currency,
-				@RequestParam(value = "subreportid", required = false) String subreportid,
-				@RequestParam(value = "secid", required = false) String secid,
-				@RequestParam(value = "dtltype", required = false) String dtltype,
-				@RequestParam(value = "type", required = false) String type,
-				@RequestParam(value = "version", required = false) String version,
-				@RequestParam(value = "page", required = false) Optional<Integer> page,
-				@RequestParam(value = "size", required = false) Optional<Integer> size,
-				@RequestParam(value = "reportingTime", required = false) String reportingTime, Model md,
-				HttpServletRequest req, BigDecimal srl_no) {
+	@Autowired
+	RegulatoryReportServices regreportServices;
 
-			String userid = (String) req.getSession().getAttribute("USERID");
-			String roleid = (String) req.getSession().getAttribute("ROLEID");
-			String accesscode = (String) req.getSession().getAttribute("ACCESSCODE");
-			
+	private String pagesize;
 
-			
-			
-
-			int currentPage = page.orElse(0);
-			int pageSize = size.orElse(Integer.parseInt(pagesize));
-			System.out.println("date"+fromdate);
-			// Assigning required Modal Attributes
-			md.addAttribute("UserId", userid);
-			md.addAttribute("RoleId", roleid);
-			md.addAttribute("UserCol", accesscode);
-			md.addAttribute("reportid", reportid);
-			md.addAttribute("asondate", asondate);
-			md.addAttribute("fromdate", fromdate);
-			md.addAttribute("todate", todate);
-			md.addAttribute("currency", currency);
-			md.addAttribute("dtltype", dtltype);
-			md.addAttribute("type", type);
-			md.addAttribute("version", version);
-			md.addAttribute("reportingTime", reportingTime);
-			//md.addAttribute("reportTitle", reportServices.getReportName(reportid));
-			
-			try {
-				asondate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(asondate));
-				fromdate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(fromdate));
-				todate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(todate));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		
-			ModelAndView mv = new ModelAndView();
-
-			mv = regreportServices.getReportView(reportid, asondate, fromdate, todate, currency, dtltype, subreportid,
-					secid, reportingTime, PageRequest.of(currentPage, pageSize), srl_no, userid,type,version);
-
-			return mv;
-
-		}
-		
-		@RequestMapping(value = "{reportid}/Details", method = RequestMethod.GET)
-		public ModelAndView reportDetail(@PathVariable("reportid") String reportid,
-				@RequestParam(value = "instancecode", required = false) String instancecode,
-				@RequestParam(value = "filter", required = false) String filter, @RequestParam("asondate") String asondate,
-				@RequestParam("fromdate") String fromdate, @RequestParam("todate") String todate,
-				@RequestParam("currency") String currency, @RequestParam(value = "type", required = false) String type,
-				@RequestParam(value = "version", required = false) String version,
-				@RequestParam(value = "subreportid", required = false) String subreportid,
-				@RequestParam(value = "secid", required = false) String secid,
-				@RequestParam(value = "dtltype", required = false) String dtltype,
-				@RequestParam(defaultValue = "0") int page,
-	            @RequestParam(defaultValue = "100") int size,
-				@RequestParam(value = "reportingTime", required = false) String reportingTime, Model md) {
-
-			md.addAttribute("reportid", reportid);
-			md.addAttribute("asondate", asondate);
-			md.addAttribute("fromdate", fromdate);
-			md.addAttribute("todate", todate);
-			md.addAttribute("filter", filter);
-			md.addAttribute("currency", currency);
-			md.addAttribute("dtltype", dtltype);
-			md.addAttribute("reportingTime", reportingTime);
-			md.addAttribute("type", type);
-			md.addAttribute("version", version);
-			// md.addAttribute("instancecode", Integer.parseInt(instancecode));
-			// md.addAttribute("reportTitle", reportServices.getReportName(reportid));
-			md.addAttribute("displaymode", "detail");
-
-
-			try {
-				asondate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(asondate));
-				fromdate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(fromdate));
-				todate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(todate));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-
-			// logger.info("Getting ModelandView :" + reportid);
-			ModelAndView mv = regreportServices.getReportDetails(reportid, instancecode, asondate, fromdate, todate,
-					currency, reportingTime, dtltype, subreportid, secid, PageRequest.of(page, size), filter,
-					type, version);
-
-			return mv;
-		}
-		
-		@RequestMapping(value = "downloadExcel", method = { RequestMethod.GET, RequestMethod.POST })
-		@ResponseBody
-		public ResponseEntity<ByteArrayResource> BRFDownload(HttpServletResponse response,
-		        @RequestParam("reportid") String reportid,
-		        @RequestParam("asondate") String asondate,
-		        @RequestParam("fromdate") String fromdate,
-		        @RequestParam("todate") String todate,
-		        @RequestParam("currency") String currency,
-		        @RequestParam(value = "subreportid", required = false) String subreportid,
-		        @RequestParam(value = "secid", required = false) String secid,
-		        @RequestParam(value = "dtltype", required = false) String dtltype,
-		        @RequestParam(value = "reportingTime", required = false) String reportingTime,
-		        @RequestParam(value = "type", required = false) String type,
-		        @RequestParam(value = "version", required = false) String version,
-		        @RequestParam(value = "filename", required = false) String filename,
-		        @RequestParam(value = "instancecode", required = false) String instancecode,
-		        @RequestParam(value = "filter", required = false) String filter)
-		        throws SQLException, FileNotFoundException {
-		    
-		    response.setContentType("application/octet-stream");
-		    try {
-				asondate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(asondate));
-				fromdate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(fromdate));
-				todate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(todate));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		    try {
-		        byte[] excelData = regreportServices.getDownloadFile(reportid, filename, asondate, fromdate, todate, currency,
-		                subreportid, secid, dtltype, reportingTime, instancecode, filter,type,version);
-
-		        if (excelData.length == 0) {
-		            logger.warn("Controller: Service returned no data. Responding with 204 No Content.");
-		            return ResponseEntity.noContent().build();
-		        }
-
-		        ByteArrayResource resource = new ByteArrayResource(excelData);
-
-		        HttpHeaders headers = new HttpHeaders();
-		        filename = filename + ".xls";
-		        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
-
-		        logger.info("Controller: Sending file '{}' to client ({} bytes).", filename, excelData.length);
-		        return ResponseEntity.ok()
-		                .headers(headers)
-		                .contentLength(excelData.length)
-		                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-		                .body(resource);
-
-		    } catch (Exception e) {
-		        logger.error("Controller ERROR: A critical error occurred during file generation.", e);
-		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		    }
-		}
-
-		@RequestMapping(value = "downloaddetailExcel", method = { RequestMethod.GET, RequestMethod.POST })
-		@ResponseBody
-		public ResponseEntity<ByteArrayResource> detailDownload(HttpServletResponse response,
-				@RequestParam("jobId") String jobId,
-				@RequestParam("filename") String filename
-				)
-				throws SQLException, FileNotFoundException {
-
-			response.setContentType("application/octet-stream");
-
-			
-			try {
-				byte[] excelData=null;
-				
-					excelData = regreportServices.getReport(jobId);;
-				
-				if (excelData == null || excelData.length == 0) {
-					logger.warn("Controller: Service returned no data. Responding with 204 No Content.");
-					return ResponseEntity.noContent().build();
-				}
-
-				ByteArrayResource resource = new ByteArrayResource(excelData);
-
-				HttpHeaders headers = new HttpHeaders();
-				filename = filename + ".xls";
-				headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
-
-				logger.info("Controller: Sending file '{}' to client ({} bytes).", filename, excelData.length);
-				return ResponseEntity.ok().headers(headers).contentLength(excelData.length)
-						.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(resource);
-
-			} catch (Exception e) {
-				logger.error("Controller ERROR: A critical error occurred during file generation.", e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-			}
-		}
-		
-		@RequestMapping(value = "/startreport", method = { RequestMethod.GET, RequestMethod.POST })
-	    @ResponseBody  // forces raw text instead of HTML view
-	    public String startReport(@RequestParam String filename,
-	    						@RequestParam("fromdate") String fromdate,
-	    						@RequestParam("todate") String todate,
-	                            @RequestParam String currency,
-	                            @RequestParam("dtltype") String dtltype,
-	                            @RequestParam("type") String type, 
-	                            @RequestParam(value = "version", required = false) String version) 	
-	   {
-	        String jobId = UUID.randomUUID().toString();
-			regreportServices.generateReportAsync(jobId, filename, fromdate, todate, dtltype, type, currency, version);
-	        //RT_SLSServices.generateReportAsync(jobId, filename, reportdate, currency,version);
-	        return jobId;
-	    }
-		
-		 @RequestMapping(value = "/checkreport", method = { RequestMethod.GET, RequestMethod.POST })
-		    @ResponseBody  // forces raw text instead of HTML view
-		    public ResponseEntity<String> checkReport(@RequestParam String jobId) {
-		        byte[] report = regreportServices.getReport(jobId);
-		        //System.out.println("Report generation completed for: " + jobId);
-		        if (report == null) {
-		            return ResponseEntity.ok("PROCESSING");
-		        }
-		        
-		        String content = new String(report, StandardCharsets.UTF_8);
-		        if ("Nodata".equals(content)) {
-		            return ResponseEntity.ok("ERROR");
-		        }
-		        return ResponseEntity.ok("READY");
-		    }
-		 
-		 @Autowired
-		 private BRRS_M_AIDP_ReportService AIDPreportService;
-		 
-		 
-		 @RequestMapping(value = "/AIDPupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateAllReports(
-		         @RequestParam(required = false)
-		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-
-		         @ModelAttribute BRRS_M_AIDP_Summary_Entity1 request1,
-		         @ModelAttribute BRRS_M_AIDP_Summary_Entity2 request2,
-		         @ModelAttribute BRRS_M_AIDP_Summary_Entity3 request3,
-		         @ModelAttribute BRRS_M_AIDP_Summary_Entity4 request4
-		 ) {
-		     try {
-		         System.out.println("Came to single controller");
-
-		         // set date into all 4 entities
-		         request1.setREPORT_DATE(asondate);
-		         request2.setREPORT_DATE(asondate);
-		         request3.setREPORT_DATE(asondate);
-		         request4.setREPORT_DATE(asondate);
-
-		         // call services
-		         AIDPreportService.updateReport(request1);
-		         AIDPreportService.updateReport2(request2);
-		         AIDPreportService.updateReport3(request3);
-		         AIDPreportService.updateReport4(request4);
-
-		         return ResponseEntity.ok("All Reports Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }	 
-		 
-		 
-		 @Autowired
-		 private BRRS_M_FXR_ReportService brrs_m_fxr_reportservice;
-		 
-
-		 @RequestMapping(value = "/FXRupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateAllReports(
-		         @RequestParam(required = false)
-		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-
-		         @ModelAttribute M_FXR_Summary_Entity1 request1,
-		         @ModelAttribute M_FXR_Summary_Entity2 request2,
-		         @ModelAttribute M_FXR_Summary_Entity3 request3
-		 ) {
-		     try {
-		         System.out.println("Came to single controller");
-
-		         // set date into all 3 entities
-		         request1.setReport_date(asondate);
-		         request2.setReport_date(asondate);
-		         request3.setReport_date(asondate);
-		     
-
-		         // call services
-		         brrs_m_fxr_reportservice.updateReport1(request1);
-		         brrs_m_fxr_reportservice.updateReport2(request2);
-		         brrs_m_fxr_reportservice.updateReport3(request3);
-
-		         return ResponseEntity.ok("All Reports Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }	 
-
-		 
-		 @Autowired
-		 private BRRS_M_UNCONS_INVEST_ReportService UNCreportService;
-		 
-		 @RequestMapping(value = "/UNCupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateUNCAllReports(
-		         @RequestParam(required = false)
-		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		         
-		         @RequestParam(required = false) String type,
-		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity1 request1,
-		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity2 request2,
-		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity3 request3,
-		         @ModelAttribute M_UNCONS_INVEST_Summary_Entity4 request4
-		 ) {
-		     try {
-		         System.out.println("Came to single controller");
-		         System.out.println(type);
-
-		         // set date into all 4 entities
-		         request1.setREPORT_DATE(asondate);
-		         request2.setREPORT_DATE(asondate);
-		         request3.setREPORT_DATE(asondate);
-		         request4.setREPORT_DATE(asondate);
-
-		         if(type.equals("ARCHIVAL")) {
-		        	 M_UNCONS_INVEST_Archival_Summary_Entity1 Archivalrequest1 = new M_UNCONS_INVEST_Archival_Summary_Entity1();
-		        	 M_UNCONS_INVEST_Archival_Summary_Entity2 Archivalrequest2 = new M_UNCONS_INVEST_Archival_Summary_Entity2();
-		        	 M_UNCONS_INVEST_Archival_Summary_Entity3 Archivalrequest3 = new M_UNCONS_INVEST_Archival_Summary_Entity3();
-		        	 M_UNCONS_INVEST_Archival_Summary_Entity4 Archivalrequest4 = new M_UNCONS_INVEST_Archival_Summary_Entity4();
-		        	 BeanUtils.copyProperties(request1,Archivalrequest1);
-		        	 BeanUtils.copyProperties(request2,Archivalrequest2);
-		        	 BeanUtils.copyProperties(request3,Archivalrequest3);
-		        	 BeanUtils.copyProperties(request4,Archivalrequest4);
-		        	 UNCreportService.updateArchivalReport(Archivalrequest1);
-		        	 UNCreportService.updateArchivalReport2(Archivalrequest2);
-		        	 UNCreportService.updateArchivalReport3(Archivalrequest3);
-		        	 UNCreportService.updateArchivalReport4(Archivalrequest4);
-		         }
-		         else {
-		        	// call services
-			         UNCreportService.updateReport(request1);
-			         UNCreportService.updateReport2(request2);
-			         UNCreportService.updateReport3(request3);
-			         UNCreportService.updateReport4(request4);
-		        	 
-		         }
-		         
-
-		         return ResponseEntity.ok("All Reports Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-
-
-		 @Autowired
-		 M_SIR_ReportService M_SIR_ReportService;
-		 @RequestMapping(value = "/MSIRupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateAllReports(
-		         @RequestParam(required = false)
-		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-
-		         @RequestParam(required = false) String type,
-		         @ModelAttribute M_SIR_Summary_Entity request1
-
-		 ) {
-		     try {
-		         System.out.println("Came to single controller");
-		         System.out.println(type);
-		         // set date into all 4 entities
-		         request1.setReport_date(asondate);
-		         
-		     if(type.equals("ARCHIVAL")) {
-		         M_SIR_Archival_Summary_Entity Archivalrequest1 = new M_SIR_Archival_Summary_Entity();
-		         BeanUtils.copyProperties(request1,Archivalrequest1);	
-		     }
-		     else {
-		         M_SIR_ReportService.updateReport(request1);
-		     }
-		     return ResponseEntity.ok("All Reports Updated Successfully");
-		     } 
-		     catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-		 
-		 
-		 
-		 
-		 @Autowired
-		 private BRRS_Q_RLFA2_ReportService q_rlfa2_reportService;
-		 
-		 @RequestMapping(value = "/Q_RLFA2update", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateReport(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_RLFA2_Summary_Entity request
-		    ) {
-
-		     try {
-		         System.out.println("came to single controller");
-		         
-		         // ✅ set the asondate into entity
-		         request.setReport_date(asondate);
-		         
-		         
-		      // call services
-		         q_rlfa2_reportService.updateReport(request);
-		         
-		         
-		         return ResponseEntity.ok("All Reports Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-
-		 
-@Autowired
-		 private BRRS_Q_BRANCHNET_ReportService Q_BRANCHNETservice;
-		 
-		 @RequestMapping(value = "/QBRANCHNET1", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> QBranchnetUpdate1(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_BRANCHNET_Summary_Entity1 request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to First controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         Q_BRANCHNETservice.QBranchnetUpdate1(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-
-		 @RequestMapping(value = "/QBRANCHNET2", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> QBranchnetUpdate2(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_BRANCHNET_Summary_Entity2 request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to Second controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         Q_BRANCHNETservice.QBranchnetUpdate2(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-		 
-		 @RequestMapping(value = "/QBRANCHNET3", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> QBranchnetUpdate3(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_BRANCHNET_Summary_Entity3 request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to Third controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		       
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         Q_BRANCHNETservice.QBranchnetUpdate3(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-		 
-		 @RequestMapping(value = "/QBRANCHNET4", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> QBranchnetUpdate4(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_BRANCHNET_Summary_Entity4 request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to Fourth controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		         
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         Q_BRANCHNETservice.QBranchnetUpdate4(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-
-
-		@Autowired
-		 private BRRS_Q_STAFF_Report_Service QSTAFF_service;
-		 
-		 @RequestMapping(value = "/QSTAFF1", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateReport(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_STAFF_Summary_Entity1 request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to First controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         QSTAFF_service.updateReport(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-
-		 @RequestMapping(value = "/QSTAFF2", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateReport2(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_STAFF_Summary_Entity2 request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to Second controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         QSTAFF_service.updateReport2(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-		 
-
-		 @RequestMapping(value = "/QSTAFF3", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateReport3(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute Q_STAFF_Summary_Entity3 request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to Third controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		       
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         QSTAFF_service.updateReport3(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-
-
-		 	 @Autowired
-		 private BRRS_M_SRWA_12H_ReportService M_SRWA_12Hservice;
-		 
-		 @RequestMapping(value = "/UpdateM_SRWA_12H", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateReport(
-		     @RequestParam(required = false) 
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute M_SRWA_12H_Summary_Entity request,
-		     HttpServletRequest req) {
-
-		     try {
-		         System.out.println("came to First controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-
-		         M_SRWA_12Hservice.updateReport(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-
-		 @Autowired
-		 M_CA7_ReportService M_CA7_ReportService;
-		 @RequestMapping(value = "/MCA7updateAll", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateAllReports(
-		         @RequestParam(required = false)
-		         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-
-		         @RequestParam(required = false) String type,
-		         @ModelAttribute M_CA7_Summary_Entity request1
-
-		 ) {
-		     try {
-		         System.out.println("Came to single controller");
-		         System.out.println(type);
-		         // set date into all 4 entities
-		         request1.setReport_date(asondate);
-		         
-		     if(type.equals("ARCHIVAL")) {
-		    	 M_CA7_Archival_Summary_Entity Archivalrequest1 = new M_CA7_Archival_Summary_Entity();
-		         BeanUtils.copyProperties(request1,Archivalrequest1);	
-		     }
-		     else {
-		    	 M_CA7_ReportService.updateReport(request1);
-		     }
-		     return ResponseEntity.ok("All Reports Updated Successfully");
-		     } 
-		     catch (Exception e) {
-
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
-		 
-		 
-		 @Autowired
-			private com.bornfire.brf.services.BRRS_M_CR_ReportService BRRS_M_CR_ReportService;
-
-			@RequestMapping(value = "/updateCRAll", method = { RequestMethod.GET, RequestMethod.POST })
-			@ResponseBody
-			public ResponseEntity<String> updateAllCRReports(
-					@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-
-					@ModelAttribute BRRS_M_CR_Summary_Entity request1) {
-				try {
-					System.out.println("Came to single controller");
-
-					// set date into all 4 entities
-					request1.setReport_date(asondate);
-
-					// call services
-					BRRS_M_CR_ReportService.updateReport(request1);
-					return ResponseEntity.ok("All Reports Updated Successfully");
-				} catch (Exception e) {
-					e.printStackTrace();
-					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Update Failed: " + e.getMessage());
-				}
-			}
-			
-			
-			
-			
-			@Autowired
-			private com.bornfire.brf.services.BRRS_M_SRWA_12E_ReportService BRRS_M_SRWA_12E_ReportService;
-
-			@RequestMapping(value = "/updateSRWA12EAll", method = { RequestMethod.GET, RequestMethod.POST })
-			@ResponseBody
-			public ResponseEntity<String> updateAllSRWA12EReports(
-					@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-			@ModelAttribute BRRS_M_SRWA_12E_LTV_Summary_Entity request1) {
-				try {
-					System.out.println("Came to single controller");
-
-					// set date into all 4 entities
-					request1.setReport_date(asondate);
-
-					// call services
-					BRRS_M_SRWA_12E_ReportService.updateReport(request1);
-
-				 
-					return ResponseEntity.ok("SRWA 12E Reports Updated Successfully");
-				} catch (Exception e) {
-					e.printStackTrace();
-					return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Update Failed: " + e.getMessage());
-				}
-			}
-
-		
-			 @Autowired
-			 BRRS_M_LIQ_ReportService brrs_m_liq_reportservice;
-			
-
-			 @RequestMapping(value = "/M_LIQupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
-			 @ResponseBody
-			 public ResponseEntity<String> updateAllReports(
-			         @RequestParam(required = false)
-			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-
-			        
-			         @ModelAttribute M_LIQ_Manual_Summary_Entity request2
-			       
-			 ) {
-			     try {
-			         System.out.println("Came to single controller");
-
-			         // set date into all 3 entities
-			         
-			         request2.setReport_date(asondate);
-			        
-			     
-
-			         // call services
-						/* brrs_m_liq_reportservice.updateReport(request1); */
-			         brrs_m_liq_reportservice.updateReport1(request2);
-			        
-
-
-			         return ResponseEntity.ok("All Reports Updated Successfully");
-			     } catch (Exception e) {
-			         e.printStackTrace();
-			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-			                              .body("Update Failed: " + e.getMessage());
-			     }
-			 }
-
-
-
-
-		 
+	public String getPagesize() {
+		return pagesize;
 	}
-				
 
+	public void setPagesize(String pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+
+	// To show the required report at the first stage
+	@RequestMapping(value = "{reportid}", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView reportView(@PathVariable("reportid") String reportid,
+			@RequestParam(value = "function", required = false) String function,
+			@RequestParam("asondate") String asondate, @RequestParam(required = false) String fromdate,
+			@RequestParam("todate") String todate, @RequestParam(value = "currency", required = false) String currency,
+			@RequestParam(value = "subreportid", required = false) String subreportid,
+			@RequestParam(value = "secid", required = false) String secid,
+			@RequestParam(value = "dtltype", required = false) String dtltype,
+			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "version", required = false) String version,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size,
+			@RequestParam(value = "reportingTime", required = false) String reportingTime, Model md,
+			HttpServletRequest req, BigDecimal srl_no) {
+
+		String userid = (String) req.getSession().getAttribute("USERID");
+		String roleid = (String) req.getSession().getAttribute("ROLEID");
+		String accesscode = (String) req.getSession().getAttribute("ACCESSCODE");
+
+		int currentPage = page.orElse(0);
+		int pageSize = size.orElse(Integer.parseInt(pagesize));
+		System.out.println("date" + fromdate);
+		// Assigning required Modal Attributes
+		md.addAttribute("UserId", userid);
+		md.addAttribute("RoleId", roleid);
+		md.addAttribute("UserCol", accesscode);
+		md.addAttribute("reportid", reportid);
+		md.addAttribute("asondate", asondate);
+		md.addAttribute("fromdate", fromdate);
+		md.addAttribute("todate", todate);
+		md.addAttribute("currency", currency);
+		md.addAttribute("dtltype", dtltype);
+		md.addAttribute("type", type);
+		md.addAttribute("version", version);
+		md.addAttribute("reportingTime", reportingTime);
+		// md.addAttribute("reportTitle", reportServices.getReportName(reportid));
+
+		try {
+			asondate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(asondate));
+			fromdate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(fromdate));
+			todate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(todate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		ModelAndView mv = new ModelAndView();
+
+		mv = regreportServices.getReportView(reportid, asondate, fromdate, todate, currency, dtltype, subreportid,
+				secid, reportingTime, PageRequest.of(currentPage, pageSize), srl_no, userid, type, version);
+
+		return mv;
+
+	}
+
+	@RequestMapping(value = "{reportid}/Details", method = RequestMethod.GET)
+	public ModelAndView reportDetail(@PathVariable("reportid") String reportid,
+			@RequestParam(value = "instancecode", required = false) String instancecode,
+			@RequestParam(value = "filter", required = false) String filter, @RequestParam("asondate") String asondate,
+			@RequestParam("fromdate") String fromdate, @RequestParam("todate") String todate,
+			@RequestParam("currency") String currency, @RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "version", required = false) String version,
+			@RequestParam(value = "subreportid", required = false) String subreportid,
+			@RequestParam(value = "secid", required = false) String secid,
+			@RequestParam(value = "dtltype", required = false) String dtltype,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "100") int size,
+			@RequestParam(value = "reportingTime", required = false) String reportingTime, Model md) {
+
+		md.addAttribute("reportid", reportid);
+		md.addAttribute("asondate", asondate);
+		md.addAttribute("fromdate", fromdate);
+		md.addAttribute("todate", todate);
+		md.addAttribute("filter", filter);
+		md.addAttribute("currency", currency);
+		md.addAttribute("dtltype", dtltype);
+		md.addAttribute("reportingTime", reportingTime);
+		md.addAttribute("type", type);
+		md.addAttribute("version", version);
+		// md.addAttribute("instancecode", Integer.parseInt(instancecode));
+		// md.addAttribute("reportTitle", reportServices.getReportName(reportid));
+		md.addAttribute("displaymode", "detail");
+
+		try {
+			asondate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(asondate));
+			fromdate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(fromdate));
+			todate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(todate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		// logger.info("Getting ModelandView :" + reportid);
+		ModelAndView mv = regreportServices.getReportDetails(reportid, instancecode, asondate, fromdate, todate,
+				currency, reportingTime, dtltype, subreportid, secid, PageRequest.of(page, size), filter,
+				type, version);
+
+		return mv;
+	}
+
+	@RequestMapping(value = "downloadExcel", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> BRFDownload(HttpServletResponse response,
+			@RequestParam("reportid") String reportid,
+			@RequestParam("asondate") String asondate,
+			@RequestParam("fromdate") String fromdate,
+			@RequestParam("todate") String todate,
+			@RequestParam("currency") String currency,
+			@RequestParam(value = "subreportid", required = false) String subreportid,
+			@RequestParam(value = "secid", required = false) String secid,
+			@RequestParam(value = "dtltype", required = false) String dtltype,
+			@RequestParam(value = "reportingTime", required = false) String reportingTime,
+			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "version", required = false) String version,
+			@RequestParam(value = "filename", required = false) String filename,
+			@RequestParam(value = "instancecode", required = false) String instancecode,
+			@RequestParam(value = "filter", required = false) String filter)
+			throws SQLException, FileNotFoundException {
+
+		response.setContentType("application/octet-stream");
+		try {
+			asondate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(asondate));
+			fromdate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(fromdate));
+			todate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy").parse(todate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		try {
+			byte[] excelData = regreportServices.getDownloadFile(reportid, filename, asondate, fromdate, todate,
+					currency,
+					subreportid, secid, dtltype, reportingTime, instancecode, filter, type, version);
+
+			if (excelData.length == 0) {
+				logger.warn("Controller: Service returned no data. Responding with 204 No Content.");
+				return ResponseEntity.noContent().build();
+			}
+
+			ByteArrayResource resource = new ByteArrayResource(excelData);
+
+			HttpHeaders headers = new HttpHeaders();
+			filename = filename + ".xls";
+			headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
+
+			logger.info("Controller: Sending file '{}' to client ({} bytes).", filename, excelData.length);
+			return ResponseEntity.ok()
+					.headers(headers)
+					.contentLength(excelData.length)
+					.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+					.body(resource);
+
+		} catch (Exception e) {
+			logger.error("Controller ERROR: A critical error occurred during file generation.", e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
+	@RequestMapping(value = "downloaddetailExcel", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> detailDownload(HttpServletResponse response,
+			@RequestParam("jobId") String jobId,
+			@RequestParam("filename") String filename)
+			throws SQLException, FileNotFoundException {
+
+		response.setContentType("application/octet-stream");
+
+		try {
+			byte[] excelData = null;
+
+			excelData = regreportServices.getReport(jobId);
+			;
+
+			if (excelData == null || excelData.length == 0) {
+				logger.warn("Controller: Service returned no data. Responding with 204 No Content.");
+				return ResponseEntity.noContent().build();
+			}
+
+			ByteArrayResource resource = new ByteArrayResource(excelData);
+
+			HttpHeaders headers = new HttpHeaders();
+			filename = filename + ".xls";
+			headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
+
+			logger.info("Controller: Sending file '{}' to client ({} bytes).", filename, excelData.length);
+			return ResponseEntity.ok().headers(headers).contentLength(excelData.length)
+					.contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(resource);
+
+		} catch (Exception e) {
+			logger.error("Controller ERROR: A critical error occurred during file generation.", e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
+	@RequestMapping(value = "/startreport", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody // forces raw text instead of HTML view
+	public String startReport(@RequestParam String filename,
+			@RequestParam("fromdate") String fromdate,
+			@RequestParam("todate") String todate,
+			@RequestParam String currency,
+			@RequestParam("dtltype") String dtltype,
+			@RequestParam("type") String type,
+			@RequestParam(value = "version", required = false) String version) {
+		String jobId = UUID.randomUUID().toString();
+		regreportServices.generateReportAsync(jobId, filename, fromdate, todate, dtltype, type, currency, version);
+		// RT_SLSServices.generateReportAsync(jobId, filename, reportdate,
+		// currency,version);
+		return jobId;
+	}
+
+	@RequestMapping(value = "/checkreport", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody // forces raw text instead of HTML view
+	public ResponseEntity<String> checkReport(@RequestParam String jobId) {
+		byte[] report = regreportServices.getReport(jobId);
+		// System.out.println("Report generation completed for: " + jobId);
+		if (report == null) {
+			return ResponseEntity.ok("PROCESSING");
+		}
+
+		String content = new String(report, StandardCharsets.UTF_8);
+		if ("Nodata".equals(content)) {
+			return ResponseEntity.ok("ERROR");
+		}
+		return ResponseEntity.ok("READY");
+	}
+
+	@Autowired
+	private BRRS_M_AIDP_ReportService AIDPreportService;
+
+	@RequestMapping(value = "/AIDPupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> updateAllReports(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+			@ModelAttribute BRRS_M_AIDP_Summary_Entity1 request1,
+			@ModelAttribute BRRS_M_AIDP_Summary_Entity2 request2,
+			@ModelAttribute BRRS_M_AIDP_Summary_Entity3 request3,
+			@ModelAttribute BRRS_M_AIDP_Summary_Entity4 request4) {
+		try {
+			System.out.println("Came to single controller");
+
+			// set date into all 4 entities
+			request1.setREPORT_DATE(asondate);
+			request2.setREPORT_DATE(asondate);
+			request3.setREPORT_DATE(asondate);
+			request4.setREPORT_DATE(asondate);
+
+			// call services
+			AIDPreportService.updateReport(request1);
+			AIDPreportService.updateReport2(request2);
+			AIDPreportService.updateReport3(request3);
+			AIDPreportService.updateReport4(request4);
+
+			return ResponseEntity.ok("All Reports Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@Autowired
+	private BRRS_M_SEC_ReportService secReportService;
+
+	@RequestMapping(value = "/SECupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> updateSECAllReports(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+			@RequestParam(required = false) String type,
+			@ModelAttribute BRRS_M_SEC_Summary_Entity1 request1,
+			@ModelAttribute BRRS_M_SEC_Summary_Entity2 request2,
+			@ModelAttribute BRRS_M_SEC_Summary_Entity3 request3,
+			@ModelAttribute BRRS_M_SEC_Summary_Entity4 request4) {
+		try {
+			System.out.println("Came to single controller");
+			System.out.println(type);
+
+			// set date into all 4 entities
+			request1.setREPORT_DATE(asondate);
+			request2.setREPORT_DATE(asondate);
+			request3.setREPORT_DATE(asondate);
+			request4.setREPORT_DATE(asondate);
+
+			if ("ARCHIVAL".equalsIgnoreCase(type)) { 
+				BRRS_M_SEC_ARCHIVALSUMMARY_Entity1 Archivalrequest1 = new BRRS_M_SEC_ARCHIVALSUMMARY_Entity1();
+				BRRS_M_SEC_ARCHIVALSUMMARY_Entity2 Archivalrequest2 = new BRRS_M_SEC_ARCHIVALSUMMARY_Entity2();
+				BRRS_M_SEC_ARCHIVALSUMMARY_Entity3 Archivalrequest3 = new BRRS_M_SEC_ARCHIVALSUMMARY_Entity3();
+				BRRS_M_SEC_ARCHIVALSUMMARY_Entity4 Archivalrequest4 = new BRRS_M_SEC_ARCHIVALSUMMARY_Entity4();
+				BeanUtils.copyProperties(request1, Archivalrequest1);
+				BeanUtils.copyProperties(request2, Archivalrequest2);
+				BeanUtils.copyProperties(request3, Archivalrequest3);
+				BeanUtils.copyProperties(request4, Archivalrequest4);
+				secReportService.updateArchivalReport(Archivalrequest1);
+				secReportService.updateArchivalReport2(Archivalrequest2);
+				secReportService.updateArchivalReport3(Archivalrequest3);
+				secReportService.updateArchivalReport4(Archivalrequest4);
+			} else {
+				// call services
+				secReportService.updateReport(request1);
+				secReportService.updateReport2(request2);
+				secReportService.updateReport3(request3);
+				secReportService.updateReport4(request4);
+
+			}
+
+			return ResponseEntity.ok("All Reports Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+
+	// @Autowired
+	// private BRRS_M_SEC_ReportService secReportService;
+
+	// // ================== UPDATE ALL SUMMARY TABLES ==================
+	// @PostMapping("/SECupdateAll")
+	// public ResponseEntity<String> updateAllReports(
+	// @RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date
+	// asondate,
+	// @ModelAttribute BRRS_M_SEC_Summary_Entity1 request1,
+	// @ModelAttribute BRRS_M_SEC_Summary_Entity2 request2,
+	// @ModelAttribute BRRS_M_SEC_Summary_Entity3 request3,
+	// @ModelAttribute BRRS_M_SEC_Summary_Entity4 request4) {
+	// try {
+	// System.out.println("Came to SEC updateAll controller");
+
+	// // set date into all 4 entities
+	// request1.setREPORT_DATE(asondate);
+	// request2.setREPORT_DATE(asondate);
+	// request3.setREPORT_DATE(asondate);
+	// request4.setREPORT_DATE(asondate);
+
+	// // call the service methods
+	// secReportService.updateReport(request1);
+	// secReportService.updateReport2(request2);
+	// secReportService.updateReport3(request3);
+	// secReportService.updateReport4(request4);
+
+	// return ResponseEntity.ok("All SEC Reports Updated Successfully");
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	// .body("Update Failed: " + e.getMessage());
+	// }
+	// }
+
+	// ================== DOWNLOAD EXCEL ==================
+	// @GetMapping("/downloadSECExcel")
+	// public ResponseEntity<byte[]> downloadSECExcel(
+	// @RequestParam String filename,
+	// @RequestParam String reportId,
+	// @RequestParam String fromdate,
+	// @RequestParam String todate,
+	// @RequestParam String currency,
+	// @RequestParam String dtltype) {
+	// try {
+	// // call the service method (null for type & version if not needed)
+	// byte[] excelData = secReportService.getBRRS_M_SECExcel(
+	// filename,
+	// reportId,
+	// fromdate,
+	// todate,
+	// currency,
+	// dtltype,
+	// null,
+	// null);
+
+	// HttpHeaders headers = new HttpHeaders();
+	// headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	// headers.setContentDispositionFormData("attachment", filename);
+
+	// return new ResponseEntity<>(excelData, headers, HttpStatus.OK);
+
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	// }
+	// }
+	// }
+
+	// ================== DOWNLOAD EXCEL ==================
+	@GetMapping("/downloadSECExcel")
+	public ResponseEntity<byte[]> downloadSECExcel(
+			@RequestParam String filename,
+			@RequestParam String reportId,
+			@RequestParam String fromdate,
+			@RequestParam String todate,
+			@RequestParam String currency,
+			@RequestParam String dtltype) {
+		try {
+			// Debug logs
+			System.out.println("===== Download SEC Excel Called =====");
+			System.out.println("Filename: " + filename);
+			System.out.println("Report ID: " + reportId);
+			System.out.println("From Date: " + fromdate);
+			System.out.println("To Date: " + todate);
+			System.out.println("Currency: " + currency);
+			System.out.println("Detail Type: " + dtltype);
+
+			// Call the service method (null for type & version if not needed)
+			byte[] excelData = secReportService.getBRRS_M_SECExcel(
+					filename,
+					reportId,
+					fromdate,
+					todate,
+					currency,
+					dtltype,
+					null, // type
+					null // version
+			);
+
+			if (excelData == null || excelData.length == 0) {
+				System.out.println("Warning: Excel data is empty!");
+			} else {
+				System.out.println("Excel data size: " + excelData.length + " bytes");
+			}
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.setContentDispositionFormData("attachment", filename);
+
+			return new ResponseEntity<>(excelData, headers, HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error while generating Excel: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
+	@Autowired
+	private BRRS_M_TBS_ReportService BRRS_M_TBS_ReportService;
+
+	@RequestMapping(value = "/TBSupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> updateTBSAllReports(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			@RequestParam(required = false) String type,
+			@ModelAttribute BRRS_M_TBS_Summary_Entity request1) { // ← removed extra brace
+
+		try {
+			System.out.println("Came to single controller");
+			System.out.println(type);
+
+			request1.setREPORT_DATE(asondate);
+
+			if ("ARCHIVAL".equals(type)) {
+				BRRS_M_TBS_ARCHIVALSUMMARY_Entity archivalRequest = new BRRS_M_TBS_ARCHIVALSUMMARY_Entity();
+				BeanUtils.copyProperties(request1, archivalRequest);
+				BRRS_M_TBS_ReportService.updateArchivalReport(archivalRequest);
+			} else {
+				BRRS_M_TBS_ReportService.updateReport(request1);
+			}
+
+			return ResponseEntity.ok("All Reports Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@Autowired
+	private BRRS_M_FXR_ReportService brrs_m_fxr_reportservice;
+
+	@RequestMapping(value = "/FXRupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> updateAllReports(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+			@ModelAttribute M_FXR_Summary_Entity1 request1,
+			@ModelAttribute M_FXR_Summary_Entity2 request2,
+			@ModelAttribute M_FXR_Summary_Entity3 request3) {
+		try {
+			System.out.println("Came to single controller");
+
+			// set date into all 3 entities
+			request1.setReport_date(asondate);
+			request2.setReport_date(asondate);
+			request3.setReport_date(asondate);
+
+			// call services
+			brrs_m_fxr_reportservice.updateReport1(request1);
+			brrs_m_fxr_reportservice.updateReport2(request2);
+			brrs_m_fxr_reportservice.updateReport3(request3);
+
+			return ResponseEntity.ok("All Reports Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@Autowired
+	private BRRS_M_UNCONS_INVEST_ReportService UNCreportService;
+
+	@RequestMapping(value = "/UNCupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> updateUNCAllReports(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+			@RequestParam(required = false) String type,
+			@ModelAttribute M_UNCONS_INVEST_Summary_Entity1 request1,
+			@ModelAttribute M_UNCONS_INVEST_Summary_Entity2 request2,
+			@ModelAttribute M_UNCONS_INVEST_Summary_Entity3 request3,
+			@ModelAttribute M_UNCONS_INVEST_Summary_Entity4 request4) {
+		try {
+			System.out.println("Came to single controller");
+			System.out.println(type);
+
+			// set date into all 4 entities
+			request1.setREPORT_DATE(asondate);
+			request2.setREPORT_DATE(asondate);
+			request3.setREPORT_DATE(asondate);
+			request4.setREPORT_DATE(asondate);
+
+			if (type.equals("ARCHIVAL")) {
+				M_UNCONS_INVEST_Archival_Summary_Entity1 Archivalrequest1 = new M_UNCONS_INVEST_Archival_Summary_Entity1();
+				M_UNCONS_INVEST_Archival_Summary_Entity2 Archivalrequest2 = new M_UNCONS_INVEST_Archival_Summary_Entity2();
+				M_UNCONS_INVEST_Archival_Summary_Entity3 Archivalrequest3 = new M_UNCONS_INVEST_Archival_Summary_Entity3();
+				M_UNCONS_INVEST_Archival_Summary_Entity4 Archivalrequest4 = new M_UNCONS_INVEST_Archival_Summary_Entity4();
+				BeanUtils.copyProperties(request1, Archivalrequest1);
+				BeanUtils.copyProperties(request2, Archivalrequest2);
+				BeanUtils.copyProperties(request3, Archivalrequest3);
+				BeanUtils.copyProperties(request4, Archivalrequest4);
+				UNCreportService.updateArchivalReport(Archivalrequest1);
+				UNCreportService.updateArchivalReport2(Archivalrequest2);
+				UNCreportService.updateArchivalReport3(Archivalrequest3);
+				UNCreportService.updateArchivalReport4(Archivalrequest4);
+			} else {
+				// call services
+				UNCreportService.updateReport(request1);
+				UNCreportService.updateReport2(request2);
+				UNCreportService.updateReport3(request3);
+				UNCreportService.updateReport4(request4);
+
+			}
+
+			return ResponseEntity.ok("All Reports Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@Autowired
+	private BRRS_Q_BRANCHNET_ReportService Q_BRANCHNETservice;
+
+	@RequestMapping(value = "/QBRANCHNET1", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> QBranchnetUpdate1(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			@ModelAttribute Q_BRANCHNET_Summary_Entity1 request,
+			HttpServletRequest req) {
+
+		try {
+			System.out.println("came to First controller");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+			// ✅ set the asondate into entity
+			request.setREPORT_DATE(asondate);
+
+			Q_BRANCHNETservice.QBranchnetUpdate1(request);
+			return ResponseEntity.ok("Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/QBRANCHNET2", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> QBranchnetUpdate2(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			@ModelAttribute Q_BRANCHNET_Summary_Entity2 request,
+			HttpServletRequest req) {
+
+		try {
+			System.out.println("came to Second controller");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+			// ✅ set the asondate into entity
+			request.setREPORT_DATE(asondate);
+
+			Q_BRANCHNETservice.QBranchnetUpdate2(request);
+			return ResponseEntity.ok("Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/QBRANCHNET3", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> QBranchnetUpdate3(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			@ModelAttribute Q_BRANCHNET_Summary_Entity3 request,
+			HttpServletRequest req) {
+
+		try {
+			System.out.println("came to Third controller");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+			// ✅ set the asondate into entity
+			request.setREPORT_DATE(asondate);
+
+			Q_BRANCHNETservice.QBranchnetUpdate3(request);
+			return ResponseEntity.ok("Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/QBRANCHNET4", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> QBranchnetUpdate4(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			@ModelAttribute Q_BRANCHNET_Summary_Entity4 request,
+			HttpServletRequest req) {
+
+		try {
+			System.out.println("came to Fourth controller");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+			// ✅ set the asondate into entity
+			request.setREPORT_DATE(asondate);
+
+			Q_BRANCHNETservice.QBranchnetUpdate4(request);
+			return ResponseEntity.ok("Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@Autowired
+	M_SIR_ReportService M_SIR_ReportService;
+
+	@RequestMapping(value = "/MSIRupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> updateAllReports(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+			@RequestParam(required = false) String type,
+			@ModelAttribute M_SIR_Summary_Entity request1
+
+	) {
+		try {
+			System.out.println("Came to single controller");
+			System.out.println(type);
+			// set date into all 4 entities
+			request1.setReport_date(asondate);
+
+			if (type.equals("ARCHIVAL")) {
+				M_SIR_Archival_Summary_Entity Archivalrequest1 = new M_SIR_Archival_Summary_Entity();
+				BeanUtils.copyProperties(request1, Archivalrequest1);
+			} else {
+				M_SIR_ReportService.updateReport(request1);
+			}
+			return ResponseEntity.ok("All Reports Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+	@Autowired
+	private BRRS_Q_RLFA2_ReportService q_rlfa2_reportService;
+
+	@RequestMapping(value = "/Q_RLFA2update", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public ResponseEntity<String> updateReport(
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			@ModelAttribute Q_RLFA2_Summary_Entity request) {
+
+		try {
+			System.out.println("came to single controller");
+
+			// ✅ set the asondate into entity
+			request.setReport_date(asondate);
+
+			// call services
+			q_rlfa2_reportService.updateReport(request);
+
+			return ResponseEntity.ok("All Reports Updated Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Update Failed: " + e.getMessage());
+		}
+	}
+
+}

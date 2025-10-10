@@ -206,7 +206,15 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_CR_ReportService BRRS_M_CR_ReportService;
 
-
+	@Autowired
+	BRRS_M_SEC_ReportService BRRS_M_SEC_Reportservice;
+	
+	@Autowired
+	BRRS_M_TBS_ReportService BRRS_M_TBS_Reportservice;
+	
+	
+	
+	
 	
 	
 
@@ -516,6 +524,16 @@ public class RegulatoryReportServices {
 		case "Q_ATF":
 	            repsummary = q_ats_service_report.getQ_ATSView(reportId, fromdate, todate, currency, dtltype, pageable,type,version);
         	    break;    	
+		case "M_SEC":
+			repsummary = BRRS_M_SEC_Reportservice.getM_SECView(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+			break;
+			
+		case "M_TBS":
+			repsummary = BRRS_M_TBS_Reportservice.getM_TBSView(reportId, fromdate, todate, currency, dtltype,
+					pageable, type, version);
+			break;
+
             
 		}
 		return repsummary;
@@ -794,9 +812,13 @@ public class RegulatoryReportServices {
 	        case "Q_ATF":
 	            repdetail = q_ats_service_report.getQ_ATS_currentDtl(reportId, fromdate, todate, currency, dtltype,
 	                pageable, Filter,asondate,type,version);
-	            break;								        
-	        
-
+	            break;								        				        	
+			
+		// case "M_SEC":
+		// 	repdetail = BRRS_M_SEC_Reportservice.getM_SECcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+		// 			pageable, Filter,type,version);
+		// 	break;
+			
 		}
 
 		return repdetail;
@@ -1353,26 +1375,23 @@ public class RegulatoryReportServices {
 	                e.printStackTrace();
 	            }
 	            break;	
-
-
-	
-					
-					
-					
-					
-
+				
+		case "M_SEC":
+			try {
+				repfile = BRRS_M_SEC_Reportservice.getBRRS_M_SECExcel(filename, reportId, fromdate, todate, currency, dtltype, type, version);
+		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 		}
+		break;	
 
-
-		
-		
+		}	
 
 		return repfile;
 	}
 
 
 
-	
 
 	public byte[] getDownloadDetailFile(String filename, String fromdate, String todate, String currency,
 			String dtltype,String type, String version ) {
@@ -1888,6 +1907,15 @@ public class RegulatoryReportServices {
 		case "M_CR":
 			try {
 				archivalData = BRRS_M_CR_ReportService.getM_CRArchival();
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;	
+			
+		case "M_SEC":
+			try {
+				archivalData = BRRS_M_SEC_Reportservice.getM_SECArchival();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
