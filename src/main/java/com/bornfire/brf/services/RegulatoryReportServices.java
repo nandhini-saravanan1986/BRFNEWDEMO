@@ -209,8 +209,7 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_SEC_ReportService BRRS_M_SEC_Reportservice;
 	
-	@Autowired
-	BRRS_M_TBS_ReportService BRRS_M_TBS_Reportservice;
+	
 	
 	
 	
@@ -529,10 +528,7 @@ public class RegulatoryReportServices {
 					pageable, type, version);
 			break;
 			
-		case "M_TBS":
-			repsummary = BRRS_M_TBS_Reportservice.getM_TBSView(reportId, fromdate, todate, currency, dtltype,
-					pageable, type, version);
-			break;
+		
 
             
 		}
