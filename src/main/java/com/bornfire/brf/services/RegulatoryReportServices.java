@@ -2152,21 +2152,5 @@ public class RegulatoryReportServices {
 		// System.out.println("Report generation completed for: " + jobId);
 		return jobStorage.get(jobId);
 	} 
-	public List<Object> getResub(String rptcode) {
-
-		List<Object> resubmissionData = new ArrayList<>();
-		switch (rptcode) {
-		case "M_SECL":
-			try {
-				resubmissionData = brrs_m_secl_reportservice.getM_SECLResub();
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-			break;
-
-
-		}
-		return resubmissionData ;
-	}
+	
 }
