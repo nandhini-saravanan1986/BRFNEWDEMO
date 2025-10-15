@@ -737,12 +737,7 @@ PURPOSE		: BRRSREPORT
               <!-- 📅 Date -->
               <span
                 class="white-text"
-                style="
-                  color: white !important;
-                  font-size: 16px;
-                  margin-right: 20px;
-                "
-                >Report Date: <span th:text="${asondate}">2025-07-04</span>
+                style="color: white !important; font-size: 16px; margin-right: 20px;">Report Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-07-04</span>
               </span>
 
               <!-- Buttons -->
