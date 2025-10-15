@@ -207,14 +207,12 @@ public class RegulatoryReportServices {
 	BRRS_M_CR_ReportService BRRS_M_CR_ReportService;
 
 	@Autowired
+
 	BRRS_M_SEC_ReportService BRRS_M_SEC_Reportservice;
 	
 	
-	
-	
-	
-	
-	
+	@Autowired
+	BRRS_M_SECL_ReportService brrs_m_secl_reportservice;
 	
 
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
@@ -523,14 +521,10 @@ public class RegulatoryReportServices {
 		case "Q_ATF":
 	            repsummary = q_ats_service_report.getQ_ATSView(reportId, fromdate, todate, currency, dtltype, pageable,type,version);
         	    break;    	
-		case "M_SEC":
-			repsummary = BRRS_M_SEC_Reportservice.getM_SECView(reportId, fromdate, todate, currency, dtltype,
-					pageable, type, version);
-			break;
-			
-		
 
-            
+		case "M_SECL":
+			repsummary = brrs_m_secl_reportservice.getM_SECLView(reportId, fromdate, todate, currency, dtltype, pageable,type, version);
+			break;
 		}
 		return repsummary;
 	}
@@ -808,13 +802,9 @@ public class RegulatoryReportServices {
 	        case "Q_ATF":
 	            repdetail = q_ats_service_report.getQ_ATS_currentDtl(reportId, fromdate, todate, currency, dtltype,
 	                pageable, Filter,asondate,type,version);
-	            break;								        				        	
-			
-		// case "M_SEC":
-		// 	repdetail = BRRS_M_SEC_Reportservice.getM_SECcurrentDtl(reportId, fromdate, todate, currency, dtltype,
-		// 			pageable, Filter,type,version);
-		// 	break;
-			
+	            break;								        
+	        
+
 		}
 
 		return repdetail;
@@ -1371,23 +1361,33 @@ public class RegulatoryReportServices {
 	                e.printStackTrace();
 	            }
 	            break;	
-				
-		case "M_SEC":
+
+
+		case "M_SECL":
 			try {
-				repfile = BRRS_M_SEC_Reportservice.getBRRS_M_SECExcel(filename, reportId, fromdate, todate, currency, dtltype, type, version);
-		} catch (Exception e) {
+				repfile = brrs_m_secl_reportservice.getM_SECLExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-		}
-		break;	
+			}
+			break;
+					
+					
+					
+					
 
-		}	
+		}
+
+
+		
+		
 
 		return repfile;
 	}
 
 
 
+	
 
 	public byte[] getDownloadDetailFile(String filename, String fromdate, String todate, String currency,
 			String dtltype,String type, String version ) {
@@ -1903,15 +1903,6 @@ public class RegulatoryReportServices {
 		case "M_CR":
 			try {
 				archivalData = BRRS_M_CR_ReportService.getM_CRArchival();
-				} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;	
-			
-		case "M_SEC":
-			try {
-				archivalData = BRRS_M_SEC_Reportservice.getM_SECArchival();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1944,7 +1935,14 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;		
-
+		case "M_SECL":
+			try {
+				archivalData = brrs_m_secl_reportservice.getM_SECLArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 		}
 		return archivalData;
 	}
@@ -2154,5 +2152,21 @@ public class RegulatoryReportServices {
 		// System.out.println("Report generation completed for: " + jobId);
 		return jobStorage.get(jobId);
 	} 
+	public List<Object> getResub(String rptcode) {
 
+		List<Object> resubmissionData = new ArrayList<>();
+		switch (rptcode) {
+		case "M_SECL":
+			try {
+				resubmissionData = brrs_m_secl_reportservice.getM_SECLResub();
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			break;
+
+
+		}
+		return resubmissionData ;
+	}
 }
