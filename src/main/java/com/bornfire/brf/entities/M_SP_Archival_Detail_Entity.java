@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class M_SP_Archival_Detail_Entity {
 	
+
 	@Id
     @Column(name = "CUST_ID", length = 100)
     private String custId;
@@ -82,9 +83,42 @@ public class M_SP_Archival_Detail_Entity {
 
     @Column(name = "DEL_FLG", length = 1)
     private String delFlg;
+    
+    @Column(name = "SEGMENT", length = 100)
+    private String segment;
+
+    @Column(name = "REPORT_NAME_1", length = 500)
+    private String reportName1;
+
+    @Column(name = "PROVISION", precision = 38, scale = 2)
+    private BigDecimal provision;
 
     
     
+	public String getSegment() {
+		return segment;
+	}
+
+	public void setSegment(String segment) {
+		this.segment = segment;
+	}
+
+	public String getReportName1() {
+		return reportName1;
+	}
+
+	public void setReportName1(String reportName1) {
+		this.reportName1 = reportName1;
+	}
+
+	public BigDecimal getProvision() {
+		return provision;
+	}
+
+	public void setProvision(BigDecimal provision) {
+		this.provision = provision;
+	}
+
 	public String getCustId() {
 		return custId;
 	}

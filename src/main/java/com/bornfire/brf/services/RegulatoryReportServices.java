@@ -779,10 +779,10 @@ public class RegulatoryReportServices {
 					pageable, Filter,type,version);
 			break;
 			
-		case "M_SRWA_12B":
-				repdetail = brrs_m_srwa_12b_reportservice.getM_SRWA_12BcurrentDtl(reportId, fromdate, todate, currency, dtltype,
-						pageable, Filter,type,version);
-				break;
+//		case "M_SRWA_12B":
+//				repdetail = brrs_m_srwa_12b_reportservice.getM_SRWA_12BcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+//						pageable, Filter,type,version);
+//				break;
 			
 		case "M_SP":
 			repdetail = brrs_m_sp_reportservice.getM_SPcurrentDtl(reportId, fromdate, todate, currency, dtltype,
@@ -1295,6 +1295,7 @@ public class RegulatoryReportServices {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				break;
 			
 		case "M_SP":
 			try {
@@ -1505,9 +1506,9 @@ public class RegulatoryReportServices {
 
 		}
 		
-		else if ("M_SRWA_12BDetail".equals(filename)) {
-			return brrs_m_srwa_12b_reportservice.getM_SRWA_12BDetailExcel(filename, fromdate, todate,currency, dtltype, type, version);
-			}
+//		else if ("M_SRWA_12BDetail".equals(filename)) {
+//			return brrs_m_srwa_12b_reportservice.getM_SRWA_12BDetailExcel(filename, fromdate, todate,currency, dtltype, type, version);
+//			}
 		
 		else if ("M_SPDetail".equals(filename)) {
 			return brrs_m_sp_reportservice.getM_SPDetailExcel(filename, fromdate, todate,currency, dtltype, type, version);
@@ -2064,9 +2065,9 @@ public class RegulatoryReportServices {
 		else if("M_SFINP1Detail".equals(filename)) {
 	    	fileData = brrs_m_sfinp1_reportservice.getM_SFINP1DetailExcel(filename, fromdate, todate, currency, dtltype, type, version);
 		}
-		else if("M_SRWA_12BDetail".equals(filename)) {
-	    	fileData = brrs_m_srwa_12b_reportservice.getM_SRWA_12BDetailExcel(filename, fromdate, todate, currency, dtltype, type, version);
-		}
+//		else if("M_SRWA_12BDetail".equals(filename)) {
+//	    	fileData = brrs_m_srwa_12b_reportservice.getM_SRWA_12BDetailExcel(filename, fromdate, todate, currency, dtltype, type, version);
+//		}
 		else if("M_CA2Detail".equals(filename)) {
 	    	fileData = brrs_m_ca2_reportservice.getM_CA2DetailExcel(filename, fromdate, todate,currency, dtltype,
 					type, version);
@@ -2152,5 +2153,26 @@ public class RegulatoryReportServices {
 		// System.out.println("Report generation completed for: " + jobId);
 		return jobStorage.get(jobId);
 	} 
-	
+
+
+//	
+//	public List<Object> getM_FXRResub(String rptcode) {
+//
+//		List<Object> resubmissionData = new ArrayList<>();
+//		switch (rptcode) {
+//		case "M_FXR":
+//			try {
+//				resubmissionData = brrs_m_fxr_reportservice.getM_FXRResub();
+//			} catch (Exception e) {
+//				
+//				e.printStackTrace();
+//			}
+//			break;
+//
+//
+//		}
+//		return resubmissionData ;
+//	}
+//
+//	
 }

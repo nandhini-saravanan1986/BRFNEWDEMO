@@ -42,12 +42,19 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+
+
 import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
 import com.bornfire.brf.entities.M_FXR_Archival_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Archival_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Archival_Summary_Entity3;
+import com.bornfire.brf.entities.M_FXR_Resub_Summary_Entity1;
+import com.bornfire.brf.entities.M_FXR_Resub_Summary_Entity2;
+import com.bornfire.brf.entities.M_FXR_Resub_Summary_Entity3;
 //import com.bornfire.brf.entities.M_FXR_Summary_Entity4;
 import com.bornfire.brf.entities.BRRS_M_FXR_Summary_Repo1;
 import com.bornfire.brf.entities.BRRS_M_FXR_Summary_Repo2;
@@ -55,9 +62,10 @@ import com.bornfire.brf.entities.BRRS_M_FXR_Summary_Repo3;
 import com.bornfire.brf.entities.BRRS_M_FXR_Archival_Summary_Repo1;
 import com.bornfire.brf.entities.BRRS_M_FXR_Archival_Summary_Repo2;
 import com.bornfire.brf.entities.BRRS_M_FXR_Archival_Summary_Repo3;
+import com.bornfire.brf.entities.BRRS_M_FXR_Resub_Summary_Repo1;
+import com.bornfire.brf.entities.BRRS_M_FXR_Resub_Summary_Repo2;
+import com.bornfire.brf.entities.BRRS_M_FXR_Resub_Summary_Repo3;
 //import com.bornfire.brf.entities.BRRS_M_FXR_Summary_Repo4;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
 
 
 @Component
@@ -93,6 +101,16 @@ public class BRRS_M_FXR_ReportService {
 	@Autowired
 	BRRS_M_FXR_Archival_Summary_Repo3	BRRS_M_FXR_Archival_Summary_Repo3;
 	
+	@Autowired
+	BRRS_M_FXR_Resub_Summary_Repo1	BRRS_M_FXR_Resub_Summary_Repo1;
+	
+	@Autowired
+	BRRS_M_FXR_Resub_Summary_Repo2	BRRS_M_FXR_Resub_Summary_Repo2;
+	
+	@Autowired
+	BRRS_M_FXR_Resub_Summary_Repo3	BRRS_M_FXR_Resub_Summary_Repo3;
+	
+	
 //	@Autowired
 //	BRRS_M_FXR_Summary_Repo4	BRRS_M_FXR_Summary_Repo4;
 
@@ -127,7 +145,32 @@ public class BRRS_M_FXR_ReportService {
 			mv.addObject("reportsummary1", T1Master);
 			mv.addObject("reportsummary2", T2Master);
 			mv.addObject("reportsummary3", T3Master);
-		} else {
+		} 
+		
+		
+		else if ("RESUB".equalsIgnoreCase(type) && version != null) {
+            List<M_FXR_Resub_Summary_Entity1> T1Master = new ArrayList<M_FXR_Resub_Summary_Entity1>();
+            List<M_FXR_Resub_Summary_Entity2> T2Master = new ArrayList<M_FXR_Resub_Summary_Entity2>();
+            List<M_FXR_Resub_Summary_Entity3> T3Master = new ArrayList<M_FXR_Resub_Summary_Entity3>();
+            try {
+				Date d1 = dateformat.parse(todate);
+            T1Master = BRRS_M_FXR_Resub_Summary_Repo1.getdatabydateListResub(dateformat.parse(todate), version);
+             
+            T2Master = BRRS_M_FXR_Resub_Summary_Repo2.getdatabydateListResub(dateformat.parse(todate), version);
+            
+            T3Master = BRRS_M_FXR_Resub_Summary_Repo3.getdatabydateListResub(dateformat.parse(todate), version);
+            
+            } catch (ParseException e) {
+				e.printStackTrace();
+			}
+                
+                mv.addObject("reportsummary1", T1Master);
+                mv.addObject("reportsummary2", T2Master);
+                mv.addObject("reportsummary3", T3Master);
+		}
+		
+		
+		else {
 			List<M_FXR_Summary_Entity1> T1Master = new ArrayList<M_FXR_Summary_Entity1>();
 			List<M_FXR_Summary_Entity2> T2Master = new ArrayList<M_FXR_Summary_Entity2>();
 			List<M_FXR_Summary_Entity3> T3Master = new ArrayList<M_FXR_Summary_Entity3>();
@@ -329,7 +372,23 @@ public class BRRS_M_FXR_ReportService {
 	                    continue;
 	                }
 	            }
-	    
+
+	            String getterName = "getR30_capital_require";
+	            String setterName = "setR30_capital_require";
+
+	            try {
+	                Method getter = M_FXR_Summary_Entity3.class.getMethod(getterName);
+	                Method setter = M_FXR_Summary_Entity3.class.getMethod(setterName, getter.getReturnType());
+
+	                Object newValue = getter.invoke(updatedEntity);
+	                setter.invoke(existing, newValue);
+
+	            } catch (NoSuchMethodException e) {
+	                // Skip if not present
+	                //continue;
+	            }
+
+	            
 	    }catch (Exception e) {
 	        throw new RuntimeException("Error while updating report fields", e);
 	    }
@@ -337,6 +396,202 @@ public class BRRS_M_FXR_ReportService {
 	    // 3️⃣ Save updated entity
 	    BRRS_M_FXR_Summary_Repo3.save(existing);
 }
+
+	
+//	public List<Object> getM_FXRResub() {
+//	    List<Object> M_FXRResub = new ArrayList<>();
+//	    try {
+//	        List<Object> list1 = BRRS_M_FXR_Resub_Summary_Repo1.getM_FXRResub();
+//	        List<Object> list2 = BRRS_M_FXR_Resub_Summary_Repo2.getM_FXRResub();
+//	        List<Object> list3 = BRRS_M_FXR_Resub_Summary_Repo3.getM_FXRResub();
+//
+//	        M_FXRResub.addAll(list1);
+//	        M_FXRResub.addAll(list2);
+//	        M_FXRResub.addAll(list3);
+//
+//	        System.out.println("Total combined size: " + M_FXRResub.size());
+//	    } catch (Exception e) {
+//	        System.err.println("Error fetching M_FXR Resub data: " + e.getMessage());
+//	        e.printStackTrace();
+//	    }
+//	    return M_FXRResub;
+//	}
+//	
+//	public void updateReportResub1(M_FXR_Resub_Summary_Entity1 updatedEntity) {
+//	    System.out.println("Came to services1");
+//	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+//
+//	    M_FXR_Resub_Summary_Entity1 existing = BRRS_M_FXR_Resub_Summary_Repo1.findById(updatedEntity.getReport_date())
+//	            .orElseThrow(() -> new RuntimeException(
+//	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+//
+//	    try {
+//	        // 1️⃣ Loop from R11 to R16 and copy fields
+//	        for (int i = 11; i <= 16; i++) {
+//	            String prefix = "R" + i + "_";
+//
+//	            String[] fields = { "currency", "net_spot_position", "net_forward_position", "guarantees",
+//	                                "net_future_inc_or_exp", "net_delta_wei_fx_opt_posi", "other_items",
+//	                                "net_long_position", "or", "net_short_position" };
+//
+//	            for (String field : fields) {
+//	                String getterName = "get" + prefix + field;
+//	                String setterName = "set" + prefix + field;
+//
+//	                try {
+//	                    Method getter = M_FXR_Resub_Summary_Entity1.class.getMethod(getterName);
+//	                    Method setter = M_FXR_Resub_Summary_Entity1.class.getMethod(setterName, getter.getReturnType());
+//
+//	                    Object newValue = getter.invoke(updatedEntity);
+//	                    setter.invoke(existing, newValue);
+//
+//	                } catch (NoSuchMethodException e) {
+//	                    // Skip missing fields
+//	                    continue;
+//	                }
+//	            }
+//	        }
+//
+//	        // 2️⃣ Handle R17 totals
+//	        String[] totalFields = { "net_long_position", "net_short_position" };
+//	        for (String field : totalFields) {
+//	            String getterName = "getR17_" + field;
+//	            String setterName = "setR17_" + field;
+//
+//	            try {
+//	                Method getter = M_FXR_Resub_Summary_Entity1.class.getMethod(getterName);
+//	                Method setter = M_FXR_Resub_Summary_Entity1.class.getMethod(setterName, getter.getReturnType());
+//
+//	                Object newValue = getter.invoke(updatedEntity);
+//	                setter.invoke(existing, newValue);
+//
+//	            } catch (NoSuchMethodException e) {
+//	                // Skip if not present
+//	                continue;
+//	            }
+//	        }
+//
+//	    } catch (Exception e) {
+//	        throw new RuntimeException("Error while updating report fields", e);
+//	    }
+//
+//	    // 3️⃣ Save updated entity
+//	    BRRS_M_FXR_Resub_Summary_Repo1.save(existing);
+//	}
+//
+//	public void updateReportResub2(M_FXR_Resub_Summary_Entity2 updatedEntity) {
+//	    System.out.println("Came to services2");
+//	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+//
+//	    M_FXR_Resub_Summary_Entity2 existing = BRRS_M_FXR_Resub_Summary_Repo2.findById(updatedEntity.getReport_date())
+//	            .orElseThrow(() -> new RuntimeException(
+//	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+//
+//	    try {
+//	        // 1️⃣ Loop from R11 to R50 and copy fields
+//	        for (int i = 21; i <= 22; i++) {
+//	            String prefix = "R" + i + "_";
+//
+//	            String[] fields = { "long", "short" };
+//
+//	            for (String field : fields) {
+//	                String getterName = "get" + prefix + field;
+//	                String setterName = "set" + prefix + field;
+//
+//	                try {
+//	                    Method getter = M_FXR_Resub_Summary_Entity2.class.getMethod(getterName);
+//	                    Method setter = M_FXR_Resub_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+//
+//	                    Object newValue = getter.invoke(updatedEntity);
+//	                    setter.invoke(existing, newValue);
+//
+//	                } catch (NoSuchMethodException e) {
+//	                    // Skip missing fields
+//	                    continue;
+//	                }
+//	            }
+//	            String[] formulaFields = { "total_gross_long_short", "net_position" };
+//	            for (String field : formulaFields) {
+//	                String getterName = "get" + prefix + field;
+//	                String setterName = "set" + prefix + field;
+//
+//	                try {
+//	                    Method getter = M_FXR_Resub_Summary_Entity2.class.getMethod(getterName);
+//	                    Method setter = M_FXR_Resub_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+//
+//	                    Object newValue = getter.invoke(updatedEntity);
+//	                    setter.invoke(existing, newValue);
+//
+//	                } catch (NoSuchMethodException e) {
+//	                    continue;
+//	                }
+//	            }
+//	        }
+//
+//	        // 2️⃣ Handle R23 totals
+//	            String getterName = "getR23_net_position";
+//	            String setterName = "setR23_net_position";
+//
+//	            try {
+//	                Method getter = M_FXR_Resub_Summary_Entity2.class.getMethod(getterName);
+//	                Method setter = M_FXR_Resub_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+//
+//	                Object newValue = getter.invoke(updatedEntity);
+//	                setter.invoke(existing, newValue);
+//
+//	            } catch (NoSuchMethodException e) {
+//	                // Skip if not present
+//	                //continue;
+//	            }
+//	        
+//
+//	    } catch (Exception e) {
+//	        throw new RuntimeException("Error while updating report fields", e);
+//	    }
+//
+//	    // 3️⃣ Save updated entity
+//	    BRRS_M_FXR_Resub_Summary_Repo2.save(existing);
+//	}
+//
+//	public void updateReportResub3(M_FXR_Resub_Summary_Entity3 updatedEntity) {
+//	    System.out.println("Came to services3");
+//	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+//
+//	    M_FXR_Resub_Summary_Entity3 existing = BRRS_M_FXR_Resub_Summary_Repo3.findById(updatedEntity.getReport_date())
+//	            .orElseThrow(() -> new RuntimeException(
+//	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+//
+//
+//	    try {
+//
+//	            String[] fields = {"greater_net_long_or_short", "abs_value_net_gold_posi", "capital_require", "capital_charge"};
+//
+//	            for (String field : fields) {
+//	                String getterName = "getR29_" + field;
+//	                String setterName = "setR29_" + field;
+//
+//	                try {
+//	                    Method getter = M_FXR_Resub_Summary_Entity3.class.getMethod(getterName);
+//	                    Method setter = M_FXR_Resub_Summary_Entity3.class.getMethod(setterName, getter.getReturnType());
+//
+//	                    Object newValue = getter.invoke(updatedEntity);
+//	                    setter.invoke(existing, newValue);
+//
+//	                } catch (NoSuchMethodException e) {
+//	                    // Skip missing fields
+//	                    continue;
+//	                }
+//	            }
+//	    
+//	    }catch (Exception e) {
+//	        throw new RuntimeException("Error while updating report fields", e);
+//	    }
+//
+//	    // 3️⃣ Save updated entity
+//	    BRRS_M_FXR_Resub_Summary_Repo3.save(existing);
+//}
+//
+
 
 
 	public byte[] getM_FXRExcel(String filename, String reportId, String fromdate, String todate, String currency,
@@ -1132,7 +1387,7 @@ public class BRRS_M_FXR_ReportService {
 			        cell7.setCellValue(record2.getR22_short().doubleValue());
 			        else cell7.setCellValue("");
 			        cell7.setCellStyle(originalStyle);
-			   
+			        
 			        
 		   }
 		   
@@ -1148,23 +1403,22 @@ public class BRRS_M_FXR_ReportService {
 		        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
 		        CellStyle originalStyle;
 
-		     // ===== R29 / Col I =====
-		        row = sheet.getRow(28);
+		     // ===== R30 / Col I =====
+		        row = sheet.getRow(29);
 		        cell8 = row.getCell(8);
 		        if (cell8 == null) cell8 = row.createCell(8);
 		        originalStyle = cell8.getCellStyle();
 
-		        if (record3.getR29_capital_require() != null) {
-		            // Divide by 100 because Excel percentage formatting expects a fraction
-		            double value = record3.getR29_capital_require().doubleValue() / 100.0;
-		            cell8.setCellValue(value);
-		        } else {
+		        if (record3.getR30_capital_require() != null)
+		        	cell8.setCellValue(record3.getR30_capital_require().doubleValue());
+		        else {
 		            cell8.setCellValue("");
 		        }
 
 		        // Keep the same style (make sure your template cell is formatted as Percentage)
 		        cell8.setCellStyle(originalStyle);
 		    
+		        
 		        
 		   }
 				workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
@@ -1999,22 +2253,21 @@ public class BRRS_M_FXR_ReportService {
 		        Cell cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10;
 		        CellStyle originalStyle;
 
-		     // ===== R29 / Col I =====
-		        row = sheet.getRow(28);
+		     // ===== R30 / Col I =====
+		        row = sheet.getRow(29);
 		        cell8 = row.getCell(8);
 		        if (cell8 == null) cell8 = row.createCell(8);
 		        originalStyle = cell8.getCellStyle();
 
-		        if (record3.getR29_capital_require() != null) {
-		            // Divide by 100 because Excel percentage formatting expects a fraction
-		            double value = record3.getR29_capital_require().doubleValue() / 100.0;
-		            cell8.setCellValue(value);
-		        } else {
+		        if (record3.getR30_capital_require() != null)
+		        	cell8.setCellValue(record3.getR30_capital_require().doubleValue());
+		        else {
 		            cell8.setCellValue("");
 		        }
 
 		        // Keep the same style (make sure your template cell is formatted as Percentage)
 		        cell8.setCellStyle(originalStyle);
+		    
 
 		    
 		        

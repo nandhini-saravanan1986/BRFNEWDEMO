@@ -13,16 +13,15 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_M_FXR_SUMMARYTABLE3")
+@Table(name = "BRRS_M_FXR_RESUB_SUMMARYTABLE3")
 
-public class M_FXR_Summary_Entity3{	
+public class M_FXR_Resub_Summary_Entity3{	
 	
 	
 	private BigDecimal r29_greater_net_long_or_short;
 	private BigDecimal r29_abs_value_net_gold_posi;
 	private BigDecimal r29_capital_require;
 	private BigDecimal r29_capital_charge;
-	private BigDecimal r30_capital_require;
 
 	
 	
@@ -122,14 +121,6 @@ public class M_FXR_Summary_Entity3{
 		this.del_flg = del_flg;
 	}
 
-	public BigDecimal getR30_capital_require() {
-		return r30_capital_require;
-	}
-
-	public void setR30_capital_require(BigDecimal r30_capital_require) {
-		this.r30_capital_require = r30_capital_require;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Id
@@ -142,7 +133,7 @@ public class M_FXR_Summary_Entity3{
 	private String modify_flg;
 	private String del_flg;
 	
-	public M_FXR_Summary_Entity3() {
+	public M_FXR_Resub_Summary_Entity3() {
 	super();
 	// TODO Auto-generated constructor stub
 }

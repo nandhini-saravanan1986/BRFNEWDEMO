@@ -22,7 +22,7 @@ public class M_FXR_Archival_Summary_Entity3{
 	private BigDecimal r29_abs_value_net_gold_posi;
 	private BigDecimal r29_capital_require;
 	private BigDecimal r29_capital_charge;
-
+	private BigDecimal r30_capital_require;
 	
 	
 	public BigDecimal getR29_greater_net_long_or_short() {
@@ -119,6 +119,14 @@ public class M_FXR_Archival_Summary_Entity3{
 
 	public void setDel_flg(String del_flg) {
 		this.del_flg = del_flg;
+	}
+
+	public BigDecimal getR30_capital_require() {
+		return r30_capital_require;
+	}
+
+	public void setR30_capital_require(BigDecimal r30_capital_require) {
+		this.r30_capital_require = r30_capital_require;
 	}
 
 	@Temporal(TemporalType.DATE)
