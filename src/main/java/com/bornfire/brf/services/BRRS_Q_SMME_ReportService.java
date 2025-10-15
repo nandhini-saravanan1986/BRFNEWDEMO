@@ -143,23 +143,23 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
             parsedDate = dateformat.parse(todate); // make sure dateformat = SimpleDateFormat("dd-MM-yyyy")
         }
 
-        String rowId = null;
-        String columnId = null;
+        String reportLabel = null;
+        String reportAddlCriteria1 = null;
 
         if (filter != null && filter.contains(",")) {
             String[] parts = filter.split(",");
             if (parts.length >= 2) {
-                rowId = parts[0].trim();
-                columnId = parts[1].trim();
+                reportLabel = parts[0].trim();
+                reportAddlCriteria1 = parts[1].trim();
             }
         }
 
         if ("ARCHIVAL".equalsIgnoreCase(type) && version != null) {
             List<Q_SMME_Archival_Detail_Entity> resultList;
 
-            if (rowId != null && columnId != null) {
+            if (reportLabel != null && reportAddlCriteria1 != null) {
                 resultList = Q_SMME_Archival_Detail_Repo
-                                .GetDataByRowIdAndColumnId(rowId, columnId, parsedDate, version);
+                                .GetDataByRowIdAndColumnId(reportLabel, reportAddlCriteria1, parsedDate, version);
             } else {
                 resultList = Q_SMME_Archival_Detail_Repo
                                 .getdatabydateList(todate, version);
@@ -172,9 +172,9 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
         } else {
             List<Q_SMME_Detail_Entity> resultList;
 
-            if (rowId != null && columnId != null) {
+            if (reportLabel != null && reportAddlCriteria1 != null) {
                 resultList = q_SMME_Detail_Repo
-                                .GetDataByRowIdAndColumnId(rowId, columnId, parsedDate);
+                                .GetDataByRowIdAndColumnId(reportLabel, reportAddlCriteria1, parsedDate);
             } else {
                 resultList = q_SMME_Detail_Repo.getdatabydateList(parsedDate);
                 totalPages = q_SMME_Detail_Repo.getdatacount(parsedDate);
@@ -895,8 +895,8 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
 						balanceCell.setCellValue(0.000);
 					}
 					balanceCell.setCellStyle(balanceStyle);
-					row.createCell(4).setCellValue(item.getRowId());
-					row.createCell(5).setCellValue(item.getColumnId());
+					row.createCell(4).setCellValue(item.getReportLabel());
+					row.createCell(5).setCellValue(item.getReportAddlCriteria1());
 					row.createCell(6)
 							.setCellValue(item.getReportDate() != null
 									? new SimpleDateFormat("dd/MM/yyyy").format(item.getReportDate())

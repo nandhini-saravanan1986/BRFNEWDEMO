@@ -17,8 +17,8 @@ public interface BRRS_Q_SMME_Detail_Repo extends JpaRepository<Q_SMME_Detail_Ent
    @Query(value = "select count(*) from BRRS_Q_SMME_DETAILTABLE where REPORT_DATE = ?1", nativeQuery = true)
    int getdatacount(Date reportdate);
  
-	@Query(value = "select * from BRRS_Q_SMME_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2 AND REPORT_DATE=?3", nativeQuery = true)
-	List<Q_SMME_Detail_Entity> GetDataByRowIdAndColumnId(String rowId,String ColumnId,Date reportdate);
+	@Query(value = "select * from BRRS_Q_SMME_DETAILTABLE where REPORT_LABEL =?1 and REPORT_ADDL_CRITERIA_1=?2 AND REPORT_DATE=?3", nativeQuery = true)
+	List<Q_SMME_Detail_Entity> GetDataByRowIdAndColumnId(String reportLabel,String reportAddlCriteria1,Date reportdate);
 }
 
 

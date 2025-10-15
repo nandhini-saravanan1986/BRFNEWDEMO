@@ -12,7 +12,7 @@ public interface BRRS_Q_SMME_Archival_Detail_Repo extends JpaRepository<Q_SMME_A
 	@Query(value = "select * from BRRS_Q_SMME_ARCHIVALTABLE_DETAIL where REPORT_DATE=?1 AND DATA_ENTRY_VERSION=?2", nativeQuery = true)
 	List<Q_SMME_Archival_Detail_Entity> getdatabydateList(String todate,String DATA_ENTRY_VERSION);
 	
-	@Query(value = "select * from BRRS_Q_SMME_ARCHIVALTABLE_DETAIL where ROW_ID =?1 and COLUMN_ID=?2 AND to_date(?3,'dd-MM-yyyy') AND DATA_ENTRY_VERSION=?4", nativeQuery = true)
-	List<Q_SMME_Archival_Detail_Entity> GetDataByRowIdAndColumnId(String rowId,String ColumnId,Date reportdate,String DATA_ENTRY_VERSION);
+	@Query(value = "select * from BRRS_Q_SMME_ARCHIVALTABLE_DETAIL where REPORT_LABEL =?1 and REPORT_ADDL_CRITERIA_1=?2 AND to_date(?3,'dd-MM-yyyy') AND DATA_ENTRY_VERSION=?4", nativeQuery = true)
+	List<Q_SMME_Archival_Detail_Entity> GetDataByRowIdAndColumnId(String reportLabel,String reportAddlCriteria1,Date reportdate,String DATA_ENTRY_VERSION);
 
 }

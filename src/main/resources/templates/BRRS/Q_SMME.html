@@ -646,17 +646,17 @@ PURPOSE		: BRRSREPORT
 
     <script th:inline="javascript">
       function showdetailsbyRowAndColumn(a) {
-        var rowId = a.getAttribute("RowId");
-        var columnId = a.getAttribute("ColumnId");
+        var reportLabel = a.getAttribute("reportLabel");
+        var reportAddlCriteria1 = a.getAttribute("reportAddlCriteria1");
         var cellValue = a.textContent || a.innerText;
 
         if (cellValue !== "0") {
           // Set dynamic message in modal (instead of confirm)
           document.getElementById("cellresultModalLabel").innerText =
             "Do you want to open details for Row: " +
-            rowId +
+            reportLabel +
             " and Column: " +
-            columnId +
+            reportAddlCriteria1 +
             "?";
 
           // Show custom Bootstrap modal
@@ -679,7 +679,7 @@ PURPOSE		: BRRSREPORT
             // Build dynamic URL
             var Callurl =
               /*[[@{'/Reports/' + ${reportid} + '/Details'(asondate=${asondate}, fromdate=${fromdate}, todate=${todate}, currency=${currency}, dtltype=${dtltype},type=${type},version=${version})}]]*/ "";
-            Callurl += "&filter=" + encodeURIComponent(rowId + "," + columnId);
+            Callurl += "&filter=" + encodeURIComponent(reportLabel + "," + reportAddlCriteria1);
 
             location.href = Callurl;
           };
@@ -819,18 +819,18 @@ PURPOSE		: BRRSREPORT
               <div class="col-sm-12">
                 <div
                   class="table-wrapper table-responsive scrollable-table-container "
-                  style="border-right: 1px solid #dee2e6;"
+                  style="border-right: 4px solid black;"
                 >
                   <table class="table table-bordered table-hover table-sm" >
                     <thead class="thead-light">
-                      <tr style="background-color: #b3b6b9">
-                        <th rowspan="2" style="width: 40%">
+                      <tr style="background-color:  #D8D8D8">
+                        <th rowspan="2" style="width: 40%;background-color: #D8D8D8">
                           CATEGORY ANALYSIS OF INTEREST INCOME
                         </th>
-                        <th colspan="2" style="text-align:center">CARRYING AMOUNT (VALUE)</th>
+                        <th colspan="2" style="text-align:center;background-color:  #D8D8D8">CARRYING AMOUNT (VALUE)</th>
  </tr>
-                        <th style="text-align: center">Resident</th>
-                        <th style="text-align: center">Non-resident</th>
+                        <th style="text-align: right;background-color: #D8D8D8">Resident</th>
+                        <th style="text-align: right;background-color: #D8D8D8">Non-resident</th>
                       </tr>
                     </thead>
 
@@ -838,264 +838,467 @@ PURPOSE		: BRRSREPORT
                       style="font-family: Arial"
                       th:each="reportsummary: ${reportsummary}"
                     >
-                      <tr>
-                        <td th:text="${reportsummary.r15_caoin}"></td>
-                        <td th:text="${reportsummary.r15_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"></td>
-                        <td
-                          th:text="${reportsummary.r15_non_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"
+                     <tr>
+                     <td th:text="${reportsummary.r15_caoin}"></td>
+                      <td 
+                            th:text="${reportsummary.r15_res_carry_amt != null  ? #numbers.formatDecimal(reportsummary.r15_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
+                            th:attr="reportLabel='R15', reportAddlCriteria1='C2'"
                         ></td>
-                      </tr>
-                      <tr>
-                        <td th:text="${reportsummary.R16_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R16_res_carry_amt}"style="text-align: right"th:attr="RowId='R16', ColumnId='C2'"
+<td
+h:text="${reportsummary.r15_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.r15_non_res_carry_amt, 1, 'COMMA', 0, 'POINT')  : '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
+                            th:attr="reportLabel='R15', reportAddlCriteria1='C3'"
+></td>
+ </tr>
+                    <tr>
+  <td th:text="${reportsummary.R16_caoin}" style="padding-left: 50px"></td>
+
+  <td th:text="${reportsummary.R16_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R16_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R16', reportAddlCriteria1='C2'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+
+  <td th:text="${reportsummary.r16_non_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.r16_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R16', reportAddlCriteria1='C3'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+</tr>
+
+                     <tr>
+  <td th:text="${reportsummary.R17_caoin}" style="padding-left: 50px"></td>
+
+  <td th:text="${reportsummary.R17_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R17_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R17', reportAddlCriteria1='C2'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+
+  <td th:text="${reportsummary.r17_non_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.r17_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R17', reportAddlCriteria1='C3'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+</tr>
+
+<tr>
+  <td th:text="${reportsummary.R18_caoin}" style="padding-left: 50px"></td>
+
+  <td th:text="${reportsummary.R18_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R18_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R18', reportAddlCriteria1='C2'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+
+  <td th:text="${reportsummary.R18_non_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R18_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R18', reportAddlCriteria1='C3'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+</tr>
+
+<tr>
+  <td th:text="${reportsummary.R19_caoin}" style="padding-left: 50px"></td>
+
+  <td th:text="${reportsummary.R19_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R19_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R19', reportAddlCriteria1='C2'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+
+  <td th:text="${reportsummary.R19_non_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R19_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R19', reportAddlCriteria1='C3'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+</tr>
+
+                     <tr>
+  <td th:text="${reportsummary.R20_caoin}" style="padding-left: 50px"></td>
+
+  <td th:text="${reportsummary.R20_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R20_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R20', reportAddlCriteria1='C2'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+
+  <td th:text="${reportsummary.R20_non_res_carry_amt != null 
+                ? #numbers.formatDecimal(reportsummary.R20_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+                : '0'}"
+      style="text-align: right"
+      th:attr="reportLabel='R20', reportAddlCriteria1='C3'"
+      onclick="showdetailsbyRowAndColumn(this)">
+  </td>
+</tr>
+
+                    <tr>
+                        <td th:text="${reportsummary.R21_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R21_res_carry_amt != null ? #numbers.formatDecimal(reportsummary.R21_res_carry_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R21', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.r16_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R16', ColumnId='C2'"
+                          th:text="${reportsummary.R21_non_res_carry_amt != null ? #numbers.formatDecimal(reportsummary.R21_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R21', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R17_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R17_res_carry_amt}"style="text-align: right"th:attr="RowId='R17', ColumnId='C2'"
+                        <td th:text="${reportsummary.R22_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R22_res_carry_amt != null ? #numbers.formatDecimal(reportsummary.R22_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R22', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.r17_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R17', ColumnId='C2'"
+                          th:text="${reportsummary.R22_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R22_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R22', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R18_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R18_res_carry_amt}"style="text-align: right"th:attr="RowId='R18', ColumnId='C2'"
+                        <td th:text="${reportsummary.R23_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R23_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R23_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R23', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R18_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R18', ColumnId='C2'"
+                          th:text="${reportsummary.R23_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R23_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R23', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R19_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R19_res_carry_amt}"style="text-align: right"th:attr="RowId='R19', ColumnId='C2'"
+                        <td th:text="${reportsummary.R24_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R24_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R24_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R24', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R19_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R19', ColumnId='C2'"
+                          th:text="${reportsummary.R24_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R24_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R24', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R20_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R20_res_carry_amt}"style="text-align: right"th:attr="RowId='R20', ColumnId='C2'"
+                        <td th:text="${reportsummary.R25_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R25_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R25_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R25', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R20_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R20', ColumnId='C2'"
+                          th:text="${reportsummary.R25_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R25_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R25', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R21_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R21_res_carry_amt}"style="text-align: right"th:attr="RowId='R21', ColumnId='C2'"
+                        <td th:text="${reportsummary.R26_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R26_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R26_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R26', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R21_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R21', ColumnId='C2'"
+                          th:text="${reportsummary.R26_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R26_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R26', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R22_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R22_res_carry_amt}"style="text-align: right"th:attr="RowId='R22', ColumnId='C2'"
+                        <td th:text="${reportsummary.R27_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R27_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R27_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R27', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R22_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R22', ColumnId='C2'"
+                          th:text="${reportsummary.R27_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R27_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R27', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R23_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R23_res_carry_amt}"style="text-align: right"th:attr="RowId='R23', ColumnId='C2'"
+                        <td th:text="${reportsummary.R28_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R28_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R28_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R28', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R23_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R23', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"
-                        ></td>
-                      </tr>
-                      <tr>
-                        <td th:text="${reportsummary.R24_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R24_res_carry_amt}"style="text-align: right"th:attr="RowId='R24', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-                        <td
-                          th:text="${reportsummary.R24_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R24', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"
-                        ></td>
-                      </tr>
-                      <tr>
-                        <td th:text="${reportsummary.R25_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R25_res_carry_amt}"style="text-align: right"th:attr="RowId='R25', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-                        <td
-                          th:text="${reportsummary.R25_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R25', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"
-                        ></td>
-                      </tr>
-                      <tr>
-                        <td th:text="${reportsummary.R26_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R26_res_carry_amt}"style="text-align: right"th:attr="RowId='R26', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-                        <td
-                          th:text="${reportsummary.R26_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R26', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"
-                        ></td>
-                      </tr>
-                      <tr>
-                        <td th:text="${reportsummary.R27_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R27_res_carry_amt}"style="text-align: right"th:attr="RowId='R27', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-                        <td
-                          th:text="${reportsummary.R27_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R27', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"
-                        ></td>
-                      </tr>
-                      <tr>
-                        <td th:text="${reportsummary.R28_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R28_res_carry_amt}"style="text-align: right"th:attr="RowId='R28', ColumnId='C2'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-                        <td
-                          th:text="${reportsummary.R28_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R28', ColumnId='C2'"
+                          th:text="${reportsummary.R28_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R28_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R28', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
                         <td th:text="${reportsummary.R29_caoin}"></td>
-                        <td th:text="${reportsummary.R29_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"></td>
+                        <td th:text="${reportsummary.R29_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R29_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"></td>
                         <td
-                          th:text="${reportsummary.R29_non_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"
+                          th:text="${reportsummary.R29_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R29_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R30_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R30_res_carry_amt}"style="text-align: right"th:attr="RowId='R30', ColumnId='C2'"
+                        <td th:text="${reportsummary.R30_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R30_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R30_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R30', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R30_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R30', ColumnId='C2'"
+                          th:text="${reportsummary.R30_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R30_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R30', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R31_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R31_res_carry_amt}"style="text-align: right"th:attr="RowId='R31', ColumnId='C2'"
+                        <td th:text="${reportsummary.R31_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R31_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R31_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R31', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R31_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R31', ColumnId='C2'"
+                          th:text="${reportsummary.R31_non_res_carry_amt != null 
+                            ? #numbers.formatDecimal(reportsummary.R31_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R31', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R32_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R32_res_carry_amt}"style="text-align: right"th:attr="RowId='R32', ColumnId='C2'"
+                        <td th:text="${reportsummary.R32_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R32_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R32_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R32', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R32_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R32', ColumnId='C2'"
+                          th:text="${reportsummary.R32_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R32_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R32', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R33_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R33_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"></td>
+                        <td th:text="${reportsummary.R33_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R33_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R33_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"></td>
                         <td
-                          th:text="${reportsummary.R33_non_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"
+                          th:text="${reportsummary.R33_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R33_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R34_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R34_res_carry_amt}"style="text-align: right"th:attr="RowId='R34', ColumnId='C2'"
+                        <td th:text="${reportsummary.R34_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R34_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R34_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R34', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R34_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R34', ColumnId='C2'"
+                          th:text="${reportsummary.R34_non_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R34_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R34', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R35_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R35_res_carry_amt}"style="text-align: right"th:attr="RowId='R35', ColumnId='C2'"
+                        <td th:text="${reportsummary.R35_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R35_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R35_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R35', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R35_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R35', ColumnId='C2'"
+                          th:text="${reportsummary.R35_non_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R35_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R35', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R36_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R36_res_carry_amt}"style="text-align: right"th:attr="RowId='R36', ColumnId='C2'"
+                        <td th:text="${reportsummary.R36_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R36_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R36_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R36', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R36_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R36', ColumnId='C2'"
+                          th:text="${reportsummary.R36_non_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R36_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R36', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R37_caoin}"style="padding-left: 50px"></td>
-                        <td th:text="${reportsummary.R37_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"></td>
+                        <td th:text="${reportsummary.R37_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R37_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R37_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"></td>
                         <td
-                          th:text="${reportsummary.R37_non_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"
+                          th:text="${reportsummary.R37_non_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R37_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R38_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R38_res_carry_amt}"style="text-align: right"th:attr="RowId='R38', ColumnId='C2'"
+                        <td th:text="${reportsummary.R38_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R38_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R38_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R38', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R38_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R38', ColumnId='C2'"
+                          th:text="${reportsummary.R38_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R38_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R38', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R39_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R39_res_carry_amt}"style="text-align: right"th:attr="RowId='R39', ColumnId='C2'"
+                        <td th:text="${reportsummary.R39_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R39_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R39_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R39', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R39_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R39', ColumnId='C2'"
+                          th:text="${reportsummary.R39_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R39_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R39', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R40_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R40_res_carry_amt}"style="text-align: right"th:attr="RowId='R40', ColumnId='C2'"
+                        <td th:text="${reportsummary.R40_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R40_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R40_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R40', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R40_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R40', ColumnId='C2'"
+                          th:text="${reportsummary.R40_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R40_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R40', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R41_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R41_res_carry_amt}"style="text-align: right"th:attr="RowId='R41', ColumnId='C2'"
+                        <td th:text="${reportsummary.R41_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R41_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R41_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R41', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R41_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R41', ColumnId='C2'"
+                          th:text="${reportsummary.R41_non_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R41_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R41', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R42_caoin}"style="padding-left: 80px"></td>
-                        <td th:text="${reportsummary.R42_res_carry_amt}"style="text-align: right"th:attr="RowId='R42', ColumnId='C2'"
+                        <td th:text="${reportsummary.R42_caoin}" style="padding-left: 80px"></td>
+                        <td th:text="${reportsummary.R42_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R42_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right" th:attr="reportLabel='R42', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R42_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R42', ColumnId='C2'"
+                          th:text="${reportsummary.R42_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R42_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R42', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
-                        <td th:text="${reportsummary.R43_caoin}"></td>
-                        <td th:text="${reportsummary.R43_res_carry_amt}"style="text-align: right" th:attr="RowId='R43', ColumnId='C2'"
+                        <td th:text="${reportsummary.R43_caoin}" style="padding-left: 50px"></td>
+                        <td th:text="${reportsummary.R43_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R43_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R43', reportAddlCriteria1='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
                         <td
-                          th:text="${reportsummary.R43_non_res_carry_amt}"style="text-align: right"th:attr="RowId='R43', ColumnId='C2'"
+                          th:text="${reportsummary.R43_non_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R43_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+ : '0'}"
+                            style="text-align: right" th:attr="reportLabel='R43', reportAddlCriteria1='C3'"
 												onclick="showdetailsbyRowAndColumn(this)"
                         ></td>
                       </tr>
                       <tr>
                         <td th:text="${reportsummary.R44_caoin}"></td>
-                        <td th:text="${reportsummary.R44_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"></td>
+                        <td th:text="${reportsummary.R44_res_carry_amt != null 
+ ? #numbers.formatDecimal(reportsummary.R44_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"></td>
                         <td
-                          th:text="${reportsummary.R44_non_res_carry_amt}"style="text-align: right;background-color: 	#7cae30ff;"
+                          th:text="${reportsummary.R44_non_res_carry_amt != null 
+? #numbers.formatDecimal(reportsummary.R44_non_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
+: '0'}"
+                            style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
                         ></td>
                       </tr>
                     </tbody>
@@ -1111,45 +1314,44 @@ PURPOSE		: BRRSREPORT
                   class="table-responsive scrollable-table-container"
                   style="border-right: 1px solid #dee2e6"
                 >
-                  <table
+    <table
                     class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
                     id="reportss"
                   >
                     <thead class="thead-light">
                       <tr>
-                        <th></th> 
-                        <th>INTEREST JULY 2025</th>
-                        <th>SEGMENT</th>
-                        <th>CONSTITUTIONCODE</th>
-                        <th>SMME</th>
-                        <th>ROW ID</th>
-                        <th>COLUMN ID</th>
-                        <th>COLUMN ID 1</th>
-                        <th>REPORT NAME 1</th>
-                        <th>REPORT DATE</th>
+                        <th></th>
+                        <th>CUST ID</th>
+                        <th>ACCT NO</th>
+                        <th>ACCT NAME</th>
+                        <th style="text-align: right">ACCT BALANCE</th>
+                        <th style="text-align: left">reportLabel</th>
+                        <th>reportAddlCriteria1</th>
+                        <th>REPORT_DATE</th>
                       </tr>
                       
                     </thead>
 
-<tbody th:each="report: ${reportdetails}" style="font-family: Arial;">
+<!-- <tbody th:each="report: ${reportdetails}" style="font-family: Arial;">
   <tr>
     <td>
       <a data-toggle="tooltip" class="editrec" title="Click to Edit this Record">
         <i class="fas fa-edit" onclick="editRecord(this)"></i>
       </a>
     </td>
-    
-    <!-- <td th:text="${report.interestJuly2025 != null ? #numbers.formatDecimal(report.interestJuly2025, 1, 3, 'POINT') : '0.000'}"></td>
-    <td th:text="${report.segment}"></td>
-    <td th:text="${report.constitutionCode}"></td>
-    <td th:text="${report.smme}"></td>
-    <td th:text="${report.rowId}"></td>
-    <td th:text="${report.columnId}"></td>
-    <td th:text="${report.columnId1}"></td>
-    <td th:text="${report.reportName1}"></td>
-    <td th:text="${#dates.format(report.reportDate, 'dd-MM-yyyy')}"></td> -->
+    <td th:text="${report.custId}"></td>
+    <td th:text="${report.acctNumber}"></td>
+    <td th:text="${report.acctName}"></td>
+
+  
+    <td style="text-align: right;"
+        th:text="${#numbers.formatDecimal(report.acctBalanceInpula, 1, 3, 'POINT')}"></td>
+
+    <td th:text="${report.reportLabel}"></td>
+    <td th:text="${report.reportAddlCriteria1}"></td>
+    <td th:text="${#dates.format(report.reportDate, 'dd-MM-yyyy')}"></td>
   </tr>
-</tbody>
+</tbody> -->
 
 
                   </table>
