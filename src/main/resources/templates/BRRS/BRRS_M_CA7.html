@@ -338,10 +338,10 @@ $(window).on('beforeunload', function() {
 		window.history.back();
 	}
 	
-	function showdetails() {
-			 alert("Details page not available for Manual Report");
-		}
-	
+
+		function showdetails() {
+					 showResultModal('BRRS',' Details page not available for Manual Report');
+				}
 	function showsummary() {
 		var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
 							loader.show();
@@ -614,17 +614,28 @@ function showdetailsbyRowAndColumn(a) {
 </script>
 <script>
 	function showmodify(btn) {
-	    $(".show_input").removeAttr("readonly").removeAttr("disabled");
+    // List of inputs that must remain readonly
+    var readonlyIds = [
+        "r12_trans_amt",
+        "r19_amt_add_year1",
+        "r20_amt_add_year2",
+        "r21_amt_add_year3",
+        "r22_amt_add_year4"
+    ];
 
-	 
-							
-	    // Toggle buttons
-	    $("#submitButton, #btnBack_edit").show();
-	    $("#btnBack").hide();
-	    $("#cancelRecord").show();
-	    $(btn).hide(); // hide only the clicked Modify button
-	}
+	$(".show_input").each(function () {
+	    if (!readonlyIds.includes(this.id)) {
+	        $(this).removeAttr("readonly").removeAttr("disabled").css({"background-color": "#d3d3d3"});
 
+	    }
+	});
+
+
+    // Toggle buttons
+    $("#submitButton").show();
+    $("#cancelRecord").show();
+    $(btn).hide(); // hide the clicked Modify button
+}
 	function cancelModify() {
 	    if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
 	        // Reloads the page → resets everything
@@ -638,41 +649,46 @@ function showdetailsbyRowAndColumn(a) {
 	    }
 	}
 
-</script>
-<script>
-// Row 12 calculation (Transition Amount)
+</script><script>
+// ✅ Format number with commas
+function formatNumber(num) {
+    if (isNaN(num)) return "";
+    return num.toLocaleString('en-US'); // e.g., 12345 => 12,345
+}
+
+// ✅ Parse number safely (remove commas first)
+function parseNumber(val) {
+    return parseFloat(val.replace(/,/g, "")) || 0;
+}
+
+// ✅ Calculate transitional amount
 function calculate12Totals() {
-    let pre  = Number($("#r12_pre_ifrs_pro").val()) || 0;
-    let post = Number($("#r12_post_ifrs9_pro").val()) || 0;
+    let pre  = parseNumber($("#r12_pre_ifrs_pro").val());
+    let post = parseNumber($("#r12_post_ifrs9_pro").val());
+    let trans = post - pre;
 
-    let trans = post - pre;  // subtraction
+    // Show transitional amount with commas
+    $("#r12_trans_amt").val(formatNumber(trans));
 
-    $("#r12_trans_amt").val(trans);
-
-	calculateCET1AddBack(trans);
+    // CET1 add back calculations
+    calculateCET1AddBack(trans);
 }
+
+// ✅ CET1 Add Back Calculation
 function calculateCET1AddBack(trans) {
-    // Percentages
-    let caps = [0.75, 0.50, 0.25, 0.0];
-
-   
-	$("#r19_amt_add_year1").val(Math.round(trans * caps[0]));
-	   $("#r20_amt_add_year2").val(Math.round(trans * caps[1]));
-	   $("#r21_amt_add_year3").val(Math.round(trans * caps[2]));
-	   $("#r22_amt_add_year4").val(Math.round(trans * caps[3]));
+    $("#r19_amt_add_year1").val(formatNumber(Math.round(trans * 0.75)));
+    $("#r20_amt_add_year2").val(formatNumber(Math.round(trans * 0.50)));
+    $("#r21_amt_add_year3").val(formatNumber(Math.round(trans * 0.25)));
+    $("#r22_amt_add_year4").val(formatNumber(Math.round(trans * 0.0)));
 }
 
-$(document).ready(function () {
-   
+// ✅ Run on page load and attach input event
+$(document).ready(function() {
     calculate12Totals();
-	
-    
     $("#r12_pre_ifrs_pro, #r12_post_ifrs9_pro").on("input", calculate12Totals);
-	
-	
-    });
-
+});
 </script>
+
 
 
 <script>
@@ -835,9 +851,9 @@ $(document).ready(function () {
 							                      </tr>
 												  
 							                      <tr>
-							                          <th style="text-align: center;">PRE-IFRS PROVISIONS <br>(Closing balance of IAS39 Provisions)</th>
-							                          <th style="text-align: center;">POST-IFRS 9 PROVISION <br>(Day 1 of IFRS 9 Provisions)</th>
-							                          <th style="text-align: center;">TRANSITIONAL ADJUSTMENT AMOUNT <br>(New Provisions) P'000 <br>(3) = (2) - (1)</th>
+							                          <th style="text-align: center;background-color: #D8D8D8;">PRE-IFRS PROVISIONS <br>(Closing balance of IAS39 Provisions)</th>
+							                          <th style="text-align: center;background-color: #D8D8D8;">POST-IFRS 9 PROVISION <br>(Day 1 of IFRS 9 Provisions)</th>
+							                          <th style="text-align: center;background-color: #D8D8D8;">TRANSITIONAL ADJUSTMENT AMOUNT <br>(New Provisions) P'000 <br>(3) = (2) - (1)</th>
 							                      </tr>
 												  
 							                  </thead>
@@ -848,7 +864,7 @@ $(document).ready(function () {
 					<td id="ROW12" style="padding-left: 20px; font-weight: bold;">
 					    <input class="display-input show_input"
 					           type="text"
-					           th:value="${#strings.defaultString(report.r12_pre_ifrs_pro, 'N/A')}"
+					           th:value="${#numbers.formatDecimal(report.r12_pre_ifrs_pro, 1, 'COMMA', 0, 'POINT')}"
 					           id="r12_pre_ifrs_pro"
 					           name="r12_pre_ifrs_pro"
 					           style="background-color:#FFFFFF; width: 100%; height: 28px; 
@@ -859,19 +875,19 @@ $(document).ready(function () {
 					  <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
 				    <input class="display-input show_input"
 				           type="text"
-				           th:value="${#strings.defaultString(report.r12_post_ifrs9_pro, 'N/A')}"
+						   th:value="${#numbers.formatDecimal(report.r12_post_ifrs9_pro, 1, 'COMMA', 0, 'POINT')}"
 				           id="r12_post_ifrs9_pro"
 				           name="r12_post_ifrs9_pro"
 				           style="background-color:#FFFFFF; width: 100%; height: 28px; 
 				                  border-color: transparent; text-align: right;"
 				           readonly /></td>
-				   <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
+				   <td id="ROW12" style="padding-left: 20px; font-weight: bold;background-color:rgb(107, 122, 143)">
 				   			    <input class="display-input show_input"
 				   			           type="text"
-				   			           th:value="${#strings.defaultString(report.r12_trans_amt, 'N/A')}"
+									   th:value="${#numbers.formatDecimal(report.r12_trans_amt, 1, 'COMMA', 0, 'POINT')}"
 				   			           id="r12_trans_amt"
 				   			           name="r12_trans_amt"
-				   			           style="background-color:#FFFFFF; width: 100%; height: 28px; 
+				   			           style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px;
 				   			                  border-color: transparent; text-align: right;"
 				   			           readonly /></td>
                       
@@ -889,8 +905,8 @@ $(document).ready(function () {
 
                   <tr>
                       <th>Financial Year*</th>
-                      <th style="text-align: center;">Cap (%)</th>
-                      <th style="text-align: center;">Amount added back to CET1 P'000</th>
+                      <th style="text-align: center;background-color: #D8D8D8;">Cap (%)</th>
+                      <th style="text-align: center;background-color: #D8D8D8;">Amount added back to CET1 P'000</th>
                   </tr>
 
                   <!-- Section 2 Rows -->
@@ -909,19 +925,19 @@ $(document).ready(function () {
 			 <td id="ROW19" style="padding-left: 20px; font-weight: bold;">
 	   			    <input class="display-input show_input"
 	   			           type="text"
-	   			           th:value="${#strings.defaultString(report.r19_cap_year1, 'N/A')}"
+						   th:value="${#numbers.formatDecimal(report.r19_cap_year1, 1, 'COMMA', 0, 'POINT')}"
 	   			           id="r19_cap_year1"
 	   			           name="r19_cap_year1"
 	   			           style="background-color:#FFFFFF; width: 100%; height: 28px; 
 	   			                  border-color: transparent; text-align: center;"
 	   			           readonly /></td> 
-			 <td id="ROW19" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+			 <td id="ROW19" style="padding-left: 20px; font-weight: bold;background-color: rgb(107, 122, 143);color: white;">
     			    <input class="display-input show_input"
     			           type="text"
-    			           th:value="${#strings.defaultString(report.r19_amt_add_year1, 'N/A')}"
+						   th:value="${#numbers.formatDecimal(report.r19_amt_add_year1, 1, 'COMMA', 0, 'POINT')}"
     			           id="r19_amt_add_year1"
     			           name="r19_amt_add_year1"
-    			           style="background-color:#92D050; width: 100%; height: 28px; 
+    			           style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px; 
     			                  border-color: transparent; text-align: center;"
     			           readonly /></td>
                      
@@ -942,19 +958,19 @@ $(document).ready(function () {
 								  <td id="ROW20" style="padding-left: 20px; font-weight: bold;">
 								  	    <input class="display-input show_input"
 								  	           type="text"
-								  	           th:value="${#strings.defaultString(report.r20_cap_year2, 'N/A')}"
+											   th:value="${#numbers.formatDecimal(report.r20_cap_year2, 1, 'COMMA', 0, 'POINT')}"
 								  	           id="r20_cap_year2"
 								  	           name="r20_cap_year2"
 								  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
 								  	                  border-color: transparent; text-align: center;"
 								  	           readonly /> </td> 
-								  <td id="ROW20" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+								  <td id="ROW20" style="padding-left: 20px; font-weight: bold;background-color: rgb(107, 122, 143);color: white;">
 								      <input class="display-input show_input"
 								             type="text"
-								             th:value="${#strings.defaultString(report.r20_amt_add_year2, 'N/A')}"
+											 th:value="${#numbers.formatDecimal(report.r20_amt_add_year2, 1, 'COMMA', 0, 'POINT')}"
 								             id="r20_amt_add_year2"
 								             name="r20_amt_add_year2"
-								             style="background-color:#92D050; width: 100%; height: 28px; 
+								             style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px; 
 								                    border-color: transparent; text-align: center;"
 								             readonly /></td>
                   </tr>
@@ -975,19 +991,19 @@ $(document).ready(function () {
 												  <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
 												  	    <input class="display-input show_input"
 												  	           type="text"
-												  	           th:value="${#strings.defaultString(report.r21_cap_year3, 'N/A')}"
+															   th:value="${#numbers.formatDecimal(report.r21_cap_year3, 1, 'COMMA', 0, 'POINT')}"
 												  	           id="r21_cap_year3"
 												  	           name="r21_cap_year3"
 												  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
 												  	                  border-color: transparent; text-align: center;"
 												  	           readonly /> </td>
-												  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+												  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:rgb(107, 122, 143)">
 												      <input class="display-input show_input"
 												             type="text"
-												             th:value="${#strings.defaultString(report.r21_amt_add_year3, 'N/A')}"
+															 th:value="${#numbers.formatDecimal(report.r21_amt_add_year3, 1, 'COMMA', 0, 'POINT')}"
 												             id="r21_amt_add_year3"
 												             name="r21_amt_add_year3"
-												             style="background-color:#92D050; width: 100%; height: 28px; 
+												             style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px;
 												                    border-color: transparent; text-align: center;"
 												             readonly /></td>
 
@@ -1008,19 +1024,20 @@ $(document).ready(function () {
 																  <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
 																  	    <input class="display-input show_input"
 																  	           type="text"
-																  	           th:value="${#strings.defaultString(report.r22_cap_year4, 'N/A')}"
+																			   th:value="${#numbers.formatDecimal(report.r22_cap_year4, 1, 'COMMA', 0, 'POINT')}"
 																  	           id="r22_cap_year4"
 																  	           name="r22_cap_year4"
 																  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
 																  	                  border-color: transparent; text-align: center;"
 																  	           readonly />  </td>
-																  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:#92D050;">
+																  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:rgb(107, 122, 143)">
 																      <input class="display-input show_input"
 																             type="text"
-																             th:value="${#strings.defaultString(report.r22_amt_add_year4, 'N/A')}"
+																			 th:value="${#numbers.formatDecimal(report.r22_amt_add_year4, 1, 'COMMA', 0, 'POINT')}"
+																			   
 																             id="r22_amt_add_year4"
 																             name="r22_amt_add_year4"
-																             style="background-color:#92D050; width: 100%; height: 28px; 
+																             style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px;
 																                    border-color: transparent; text-align: center;"
 																             readonly /></td>
                    

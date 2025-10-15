@@ -25,11 +25,6 @@ public class M_CA7_Archival_Detail_Entity {
     @Column(name = "DATA_TYPE")
     private String data_type;
 
-    @Column(name = "ROW_ID")
-    private String row_id;
-
-    @Column(name = "COLUMN_ID")
-    private String column_id;
 
     @Column(name = "REPORT_REMARKS")
     private String report_remarks;
@@ -80,6 +75,22 @@ public class M_CA7_Archival_Detail_Entity {
     @Column(name = "DEL_FLG")
     private String del_flg;
 
+    @Column(name = "REPORT_LABEL")
+    private String reportLabel;
+
+
+    @Column(name = "REPORT_ADDL_CRITERIA_1")
+    private String reportAddlCriteria1;
+
+    @Column(name = "REPORT_ADDL_CRITERIA_2")
+    private String reportAddlCriteria2;
+
+    @Column(name = "REPORT_ADDL_CRITERIA_3")
+    private String reportAddlCriteria3;
+
+    @Column(name = "SANCTION_LIMIT")
+    private BigDecimal sanctionLimit;
+
 	public String getCust_id() {
 		return cust_id;
 	}
@@ -110,22 +121,6 @@ public class M_CA7_Archival_Detail_Entity {
 
 	public void setData_type(String data_type) {
 		this.data_type = data_type;
-	}
-
-	public String getRow_id() {
-		return row_id;
-	}
-
-	public void setRow_id(String row_id) {
-		this.row_id = row_id;
-	}
-
-	public String getColumn_id() {
-		return column_id;
-	}
-
-	public void setColumn_id(String column_id) {
-		this.column_id = column_id;
 	}
 
 	public String getReport_remarks() {
@@ -248,33 +243,44 @@ public class M_CA7_Archival_Detail_Entity {
 		this.del_flg = del_flg;
 	}
 
-	public M_CA7_Archival_Detail_Entity(String cust_id, String acct_number, String acct_name, String data_type,
-			String row_id, String column_id, String report_remarks, String modification_remarks,
-			String data_entry_version, BigDecimal acct_balance_in_pula, Date report_date, String report_name,
-			String create_user, Date create_time, String modify_user, Date modify_time, String verify_user,
-			Date verify_time, String entity_flg, String modify_flg, String del_flg) {
-		super();
-		this.cust_id = cust_id;
-		this.acct_number = acct_number;
-		this.acct_name = acct_name;
-		this.data_type = data_type;
-		this.row_id = row_id;
-		this.column_id = column_id;
-		this.report_remarks = report_remarks;
-		this.modification_remarks = modification_remarks;
-		this.data_entry_version = data_entry_version;
-		this.acct_balance_in_pula = acct_balance_in_pula;
-		this.report_date = report_date;
-		this.report_name = report_name;
-		this.create_user = create_user;
-		this.create_time = create_time;
-		this.modify_user = modify_user;
-		this.modify_time = modify_time;
-		this.verify_user = verify_user;
-		this.verify_time = verify_time;
-		this.entity_flg = entity_flg;
-		this.modify_flg = modify_flg;
-		this.del_flg = del_flg;
+	public String getReportLabel() {
+		return reportLabel;
+	}
+
+	public void setReportLabel(String reportLabel) {
+		this.reportLabel = reportLabel;
+	}
+
+	public String getReportAddlCriteria1() {
+		return reportAddlCriteria1;
+	}
+
+	public void setReportAddlCriteria1(String reportAddlCriteria1) {
+		this.reportAddlCriteria1 = reportAddlCriteria1;
+	}
+
+	public String getReportAddlCriteria2() {
+		return reportAddlCriteria2;
+	}
+
+	public void setReportAddlCriteria2(String reportAddlCriteria2) {
+		this.reportAddlCriteria2 = reportAddlCriteria2;
+	}
+
+	public String getReportAddlCriteria3() {
+		return reportAddlCriteria3;
+	}
+
+	public void setReportAddlCriteria3(String reportAddlCriteria3) {
+		this.reportAddlCriteria3 = reportAddlCriteria3;
+	}
+
+	public BigDecimal getSanctionLimit() {
+		return sanctionLimit;
+	}
+
+	public void setSanctionLimit(BigDecimal sanctionLimit) {
+		this.sanctionLimit = sanctionLimit;
 	}
 
 	public M_CA7_Archival_Detail_Entity() {

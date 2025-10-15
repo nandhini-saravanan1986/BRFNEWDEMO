@@ -350,8 +350,8 @@ try {
 	                }
 	                balanceCell.setCellStyle(balanceStyle);
 
-	                row.createCell(4).setCellValue(item.getRow_id());
-	                row.createCell(5).setCellValue(item.getColumn_id());
+	                row.createCell(4).setCellValue(item.getReportLabel());
+	                row.createCell(5).setCellValue(item.getReportAddlCriteria1());
 	                row.createCell(6).setCellValue(
 	                    item.getReport_date() != null ?
 	                    new SimpleDateFormat("dd-MM-yyyy").format(item.getReport_date()) : ""
@@ -700,8 +700,8 @@ public byte[] getDetailExcelARCHIVAL(String filename, String fromdate, String to
 					}
 					balanceCell.setCellStyle(balanceStyle);
 
-					row.createCell(4).setCellValue(item.getRow_id());
-					row.createCell(5).setCellValue(item.getColumn_id());
+					row.createCell(4).setCellValue(item.getReportLabel());
+					row.createCell(5).setCellValue(item.getReportAddlCriteria1());
 					row.createCell(6)
 							.setCellValue(item.getReport_date() != null
 									? new SimpleDateFormat("dd-MM-yyyy").format(item.getReport_date())
