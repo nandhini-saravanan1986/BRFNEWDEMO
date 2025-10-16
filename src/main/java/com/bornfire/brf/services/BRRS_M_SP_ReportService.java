@@ -1554,8 +1554,8 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_SP_ReportSer
 	                }
 	                balanceCell.setCellStyle(balanceStyle);
 
-	                row.createCell(4).setCellValue(item.getRowId());
-	                row.createCell(5).setCellValue(item.getColumnId());
+	                row.createCell(4).setCellValue(item.getReportLabel());
+	                row.createCell(5).setCellValue(item.getReportAddlCriteria1());
 	                row.createCell(6).setCellValue(
 	                    item.getReportDate() != null ?
 	                    new SimpleDateFormat("dd-MM-yyyy").format(item.getReportDate()) : ""
@@ -2925,8 +2925,8 @@ public byte[] getDetailExcelARCHIVAL(String filename, String fromdate, String to
 	                }
 	                balanceCell.setCellStyle(balanceStyle);
 
-	                row.createCell(4).setCellValue(item.getRowId());
-	                row.createCell(5).setCellValue(item.getColumnId());
+	                row.createCell(4).setCellValue(item.getReportLabel());
+	                row.createCell(5).setCellValue(item.getReportAddlCriteria1());
 	                row.createCell(6).setCellValue(
 	                    item.getReportDate() != null ?
 	                    new SimpleDateFormat("dd-MM-yyyy").format(item.getReportDate()) : ""

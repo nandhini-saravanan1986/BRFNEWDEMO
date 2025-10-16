@@ -28,11 +28,27 @@ public class M_SP_Detail_Entity {
     @Column(name = "DATA_TYPE", length = 100)
     private String dataType;
     
-    @Column(name = "ROW_ID", length = 100)
-    private String rowId;
+//    @Column(name = "ROW_ID", length = 100)
+//    private String rowId;
+//    
+//    @Column(name = "COLUMN_ID", length = 100)
+//    private String columnId;
     
-    @Column(name = "COLUMN_ID", length = 100)
-    private String columnId;
+    @Column(name = "REPORT_LABEL")
+    private String reportLabel;
+
+    @Column(name = "REPORT_ADDL_CRITERIA_1")
+    private String reportAddlCriteria1;
+
+    @Column(name = "REPORT_ADDL_CRITERIA_2")
+    private String reportAddlCriteria2;
+
+    @Column(name = "REPORT_ADDL_CRITERIA_3")
+    private String reportAddlCriteria3;
+
+    @Column(name = "SANCTION_LIMIT", precision = 24, scale = 2)
+    private BigDecimal sanctionLimit;
+    
 
     @Column(name = "REPORT_REMARKS", length = 100)
     private String reportRemarks;
@@ -43,7 +59,7 @@ public class M_SP_Detail_Entity {
     @Column(name = "DATA_ENTRY_VERSION", length = 100)
     private String dataEntryVersion;
 
-    @Column(name = "ACCT_BALANCE_IN_PULA", precision = 24, scale = 3)
+    @Column(name = "ACCT_BALANCE_IN_PULA", precision = 24, scale = 2)
     private BigDecimal acctBalanceInPula;
     
     @Column(name = "REPORT_DATE")
@@ -86,8 +102,8 @@ public class M_SP_Detail_Entity {
     @Column(name = "SEGMENT", length = 100)
     private String segment;
 
-    @Column(name = "REPORT_NAME_1", length = 500)
-    private String reportName1;
+//    @Column(name = "REPORT_NAME_1", length = 500)
+//    private String reportName1;
 
     @Column(name = "PROVISION", precision = 38, scale = 2)
     private BigDecimal provision;
@@ -102,13 +118,13 @@ public class M_SP_Detail_Entity {
 		this.segment = segment;
 	}
 
-	public String getReportName1() {
-		return reportName1;
-	}
-
-	public void setReportName1(String reportName1) {
-		this.reportName1 = reportName1;
-	}
+//	public String getReportName1() {
+//		return reportName1;
+//	}
+//
+//	public void setReportName1(String reportName1) {
+//		this.reportName1 = reportName1;
+//	}
 
 	public BigDecimal getProvision() {
 		return provision;
@@ -120,6 +136,14 @@ public class M_SP_Detail_Entity {
 
 	public String getCustId() {
 		return custId;
+	}
+
+	public BigDecimal getSanctionLimit() {
+		return sanctionLimit;
+	}
+
+	public void setSanctionLimit(BigDecimal sanctionLimit) {
+		this.sanctionLimit = sanctionLimit;
 	}
 
 	public void setCustId(String custId) {
@@ -149,22 +173,22 @@ public class M_SP_Detail_Entity {
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
 	}
-
-	public String getRowId() {
-		return rowId;
-	}
-
-	public void setRowId(String rowId) {
-		this.rowId = rowId;
-	}
-
-	public String getColumnId() {
-		return columnId;
-	}
-
-	public void setColumnId(String columnId) {
-		this.columnId = columnId;
-	}
+//
+//	public String getRowId() {
+//		return rowId;
+//	}
+//
+//	public void setRowId(String rowId) {
+//		this.rowId = rowId;
+//	}
+//
+//	public String getColumnId() {
+//		return columnId;
+//	}
+//
+//	public void setColumnId(String columnId) {
+//		this.columnId = columnId;
+//	}
 
 	public String getReportRemarks() {
 		return reportRemarks;
@@ -289,6 +313,38 @@ public class M_SP_Detail_Entity {
 	
 	
 	
+	public String getReportLabel() {
+		return reportLabel;
+	}
+
+	public void setReportLabel(String reportLabel) {
+		this.reportLabel = reportLabel;
+	}
+
+	public String getReportAddlCriteria1() {
+		return reportAddlCriteria1;
+	}
+
+	public void setReportAddlCriteria1(String reportAddlCriteria1) {
+		this.reportAddlCriteria1 = reportAddlCriteria1;
+	}
+
+	public String getReportAddlCriteria2() {
+		return reportAddlCriteria2;
+	}
+
+	public void setReportAddlCriteria2(String reportAddlCriteria2) {
+		this.reportAddlCriteria2 = reportAddlCriteria2;
+	}
+
+	public String getReportAddlCriteria3() {
+		return reportAddlCriteria3;
+	}
+
+	public void setReportAddlCriteria3(String reportAddlCriteria3) {
+		this.reportAddlCriteria3 = reportAddlCriteria3;
+	}
+
 	public M_SP_Detail_Entity() {
 		super();
 		// TODO Auto-generated constructor stub
