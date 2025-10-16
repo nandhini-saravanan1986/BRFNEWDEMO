@@ -441,8 +441,10 @@ PURPOSE		: BWRBRREPORT
     // ✅ Change background color for R9–R37 range fields
     for (let i = 9; i <= 14; i++) {
         let fields = [
+			"_STAFF_COMPLEMENT",
             "_LOCAL",
             "_EXPARIATES",
+			
             // "_ORIGINAL_AMT",
             // "_BALANCE_OUTSTANDING",
             // "_NO_OF_ACS"
@@ -457,6 +459,7 @@ PURPOSE		: BWRBRREPORT
     }
 	  for (let i = 21; i <= 27; i++) {
         let fields = [
+			"_SENIOR_MANAGEMENT_COMPENSATION",
             "_LOCAL",
             "_EXPARIATES",
             // "_ORIGINAL_AMT",
@@ -475,6 +478,7 @@ PURPOSE		: BWRBRREPORT
         let fields = [
             // "_LOCAL",
             // "_EXPARIATES",
+			"_STAFF_LOANS",
             "_ORIGINAL_AMT",
             "_BALANCE_OUTSTANDING",
             "_NO_OF_ACS"
@@ -655,7 +659,7 @@ function fileuploads(btn) {
     )
     .done(() => {
         $("#resultModalLabel").text("Success");
-        $("#resultModalBody").text("All reports updated successfully.");
+        $("#resultModalBody").text("Updated successfully.");
         $("#resultModal").modal("show");
     })
     .fail((jqXHR) => {
@@ -761,11 +765,11 @@ function fileuploads(btn) {
 									<thead class="thead-light">
 									
 					
-										<tr style="background-color: #b3b6b9;">
-										    <th style="text-align: left; vertical-align:center;width: 500px;border: 1px solid black; ">(8A) STAFF COMPLEMENT  </th>
-										    <th style="text-align: center; vertical-align:center;">Local</th>
-										    <th style="text-align: center; vertical-align:center; ">Expatriates</th>
-										    <th style="text-align: center;vertical-align:center;">Total</th>    
+										<tr style="background-color: #D8D8D8;">
+										    <th style="text-align: left; vertical-align:center;width: 500px;border: 1px solid black;background-color: #D8D8D8; ">(8A) STAFF COMPLEMENT  </th>
+										    <th style="text-align: center; vertical-align:center;background-color: #D8D8D8;">Local</th>
+										    <th style="text-align: center; vertical-align:center;background-color: #D8D8D8; ">Expatriates</th>
+										    <th style="text-align: center;vertical-align:center;background-color: #D8D8D8;">Total</th>    
 										</tr>
                                     </thead>
 									<tbody id="entity1" th:each="report: ${reportsummary}" style="font-family: Arial;">
@@ -1011,14 +1015,14 @@ function fileuploads(btn) {
 									class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
 									id="reports">
 									<thead class="thead-light">
-									    <tr style="background-color: #b3b6b9;">
+									    <tr style="background-color: #D8D8D8;">
 											
-										    <th style="text-align: left;width: 500px;">
+										    <th style="text-align: left;width: 500px;background-color: #D8D8D8;">
 										        (8B) SENIOR MANAGEMENT COMPENSATION
 										    </th>
-										    <th style="text-align: center; vertical-align:center; ">Local</th>
-										    <th style="text-align: center; vertical-align:center;">Expatriates</th>
-										    <th style="text-align: center; vertical-align:center; ">Total</th>
+										    <th style="text-align: center; vertical-align:center;background-color: #D8D8D8; ">Local</th>
+										    <th style="text-align: center; vertical-align:center;background-color: #D8D8D8;">Expatriates</th>
+										    <th style="text-align: center; vertical-align:center;background-color: #D8D8D8; ">Total</th>
 										</tr>
 									</thead>
 									<tbody id="entity2" th:each="report: ${reportsummary2}" style="font-family: Arial;">
@@ -1293,12 +1297,12 @@ function fileuploads(btn) {
 									class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
 									id="reports">
 									<thead class="thead-light">
-										<tr style="background-color: white;">
-											<th style="text-align: left; width: 300px;">(8C) STAFF LOANS</th>
-											<th style="text-align: center; width: 200px;">Original Amount</th>
-											<th style="text-align: center; width: 200px;">Balance Outstanding</th>
-											<th style="text-align: center; width: 200px;">No. of A/Cs</th>
-											<th style="text-align: center; width: 200px;">Interest Rate</th>
+										<tr style="background-color: #D8D8D8;">
+											<th style="text-align: left; width: 300px;background-color: #D8D8D8;">(8C) STAFF LOANS</th>
+											<th style="text-align: center; width: 200px;background-color: #D8D8D8;">Original Amount</th>
+											<th style="text-align: center; width: 200px;background-color: #D8D8D8;">Balance Outstanding</th>
+											<th style="text-align: center; width: 200px;background-color: #D8D8D8;">No. of A/Cs</th>
+											<th style="text-align: center; width: 200px;background-color: #D8D8D8;">Interest Rate</th>
 										</tr>
 									</thead>
 	
