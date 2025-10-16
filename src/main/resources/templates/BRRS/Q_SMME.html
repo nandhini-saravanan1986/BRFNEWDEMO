@@ -836,17 +836,13 @@ PURPOSE		: BRRSREPORT
                      <tr>
                      <td th:text="${reportsummary.r15_caoin}"></td>
                       <td 
-                            th:text="${reportsummary.r15_res_carry_amt != null  ? #numbers.formatDecimal(reportsummary.r15_res_carry_amt, 1, 'COMMA', 0, 'POINT') 
-: '0'}"
+                            th:text="${reportsummary.r15_res_carry_amt != null  ? #numbers.formatDecimal(reportsummary.r15_res_carry_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
                             style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
                             th:attr="reportLabel='R15', reportAddlCriteria1='C2'"
                         ></td>
-<td
-h:text="${reportsummary.r15_non_res_carry_amt != null 
-? #numbers.formatDecimal(reportsummary.r15_non_res_carry_amt, 1, 'COMMA', 0, 'POINT')  : '0'}"
+                      <td th:text="${reportsummary.r15_non_res_carry_amt != null ? #numbers.formatDecimal(reportsummary.r15_non_res_carry_amt, 1, 'COMMA', 0, 'POINT')  : '0'}"
                             style="text-align: right;background-color: rgb(107, 122, 143);color: white;"
-                            th:attr="reportLabel='R15', reportAddlCriteria1='C3'"
-></td>
+                            th:attr="reportLabel='R15', reportAddlCriteria1='C3'"></td>
  </tr>
                     <tr>
   <td th:text="${reportsummary.R16_caoin}" style="padding-left: 50px"></td>
@@ -1489,7 +1485,7 @@ h:text="${reportsummary.r15_non_res_carry_amt != null
 /* Your existing CSS - this is the correct approach */
 .scrollable-table-container {
 	/* This is the key: it creates the scroll context */
-	max-height: 820px;
+	max-height: 750px;
 	/* Or a suitable height like 80vh for responsive design */
 	overflow-y: auto;
 	border: 1px solid #ccc;

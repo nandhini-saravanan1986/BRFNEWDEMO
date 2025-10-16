@@ -1,9 +1,8 @@
-
 package com.bornfire.brf.services;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -41,20 +39,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Detail_Repo;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Summary_Repo1;
-import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Summary_Repo2;
-import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Summary_Repo3;
+import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Manual_Summary_Repo2;
+import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Manual_Summary_Repo3;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Detail_Repo;
+import com.bornfire.brf.entities.BRRS_M_DEP3_Manual_Summary_Repo1;
+import com.bornfire.brf.entities.BRRS_M_DEP3_Manual_Summary_Repo2;
+import com.bornfire.brf.entities.BRRS_M_DEP3_Manual_Summary_Repo3;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Summary_Repo1;
-import com.bornfire.brf.entities.BRRS_M_DEP3_Summary_Repo2;
-import com.bornfire.brf.entities.BRRS_M_DEP3_Summary_Repo3;
 import com.bornfire.brf.entities.M_DEP3_Archival_Detail_Entity;
 import com.bornfire.brf.entities.M_DEP3_Archival_Summary_Entity1;
-import com.bornfire.brf.entities.M_DEP3_Archival_Summary_Entity2;
-import com.bornfire.brf.entities.M_DEP3_Archival_Summary_Entity3;
+import com.bornfire.brf.entities.M_DEP3_Archival_Manual_Summary_Entity2;
+import com.bornfire.brf.entities.M_DEP3_Archival_Manual_Summary_Entity3;
 import com.bornfire.brf.entities.M_DEP3_Detail_Entity;
+import com.bornfire.brf.entities.M_DEP3_Manual_Summary_Entity1;
 import com.bornfire.brf.entities.M_DEP3_Summary_Entity1;
-import com.bornfire.brf.entities.M_DEP3_Summary_Entity2;
-import com.bornfire.brf.entities.M_DEP3_Summary_Entity3;
+import com.bornfire.brf.entities.M_DEP3_Manual_Summary_Entity2;
+import com.bornfire.brf.entities.M_DEP3_Manual_Summary_Entity3;
 
 @Component
 @Service
@@ -74,10 +74,11 @@ public class BRRS_M_DEP3_ReportService {
 	BRRS_M_DEP3_Summary_Repo1 M_DEP3_Summary_Repo1;
 
 	@Autowired
-	BRRS_M_DEP3_Summary_Repo2 M_DEP3_Summary_Repo2;
+	BRRS_M_DEP3_Manual_Summary_Repo2 M_DEP3_Manual_Summary_Repo2;
+    
 
 	@Autowired
-	BRRS_M_DEP3_Summary_Repo3 M_DEP3_Summary_Repo3;
+	BRRS_M_DEP3_Manual_Summary_Repo3 M_DEP3_Manual_Summary_Repo3;
 
 	@Autowired
 	BRRS_M_DEP3_Archival_Detail_Repo M_DEP3_Archival_Detail_Repo;
@@ -86,10 +87,14 @@ public class BRRS_M_DEP3_ReportService {
 	BRRS_M_DEP3_Archival_Summary_Repo1 M_DEP3_Archival_Summary_Repo1;
 
 	@Autowired
-	BRRS_M_DEP3_Archival_Summary_Repo2 M_DEP3_Archival_Summary_Repo2;
+	BRRS_M_DEP3_Archival_Manual_Summary_Repo2 m_DEP3_Archival_Manual_Summary_Repo2;
 
 	@Autowired
-	BRRS_M_DEP3_Archival_Summary_Repo3 M_DEP3_Archival_Summary_Repo3;
+	BRRS_M_DEP3_Archival_Manual_Summary_Repo3 m_DEP3_Archival_Manual_Summary_Repo3;
+
+
+    @Autowired
+    BRRS_M_DEP3_Manual_Summary_Repo1 M_DEP3_Manual_Summary_Repo1;
 
 	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
 
@@ -103,17 +108,15 @@ public class BRRS_M_DEP3_ReportService {
 
 		if (type.equals("ARCHIVAL") & version != null) {
 			List<M_DEP3_Archival_Summary_Entity1> T1Master = new ArrayList<M_DEP3_Archival_Summary_Entity1>();
-			List<M_DEP3_Archival_Summary_Entity2> T1Master1 = new ArrayList<M_DEP3_Archival_Summary_Entity2>();
-			List<M_DEP3_Archival_Summary_Entity3> T1Master2 = new ArrayList<M_DEP3_Archival_Summary_Entity3>();
+			List<M_DEP3_Archival_Manual_Summary_Entity2> T1Master1 = new ArrayList<M_DEP3_Archival_Manual_Summary_Entity2>();
+			List<M_DEP3_Archival_Manual_Summary_Entity3> T1Master2 = new ArrayList<M_DEP3_Archival_Manual_Summary_Entity3>();
+            // List<M_DEP3_Archival_Manual_Summary_Entity1> T1Master3 = new ArrayList<M_DEP3_Archival_Manual_Summary_Entity1>();
 			try {
 				Date d1 = dateformat.parse(todate);
-
-				// T1Master = hs.createQuery("from BRF1_REPORT_ENTITY a where a.report_date = ?1
-				// ", BRF1_REPORT_ENTITY.class)
-				// .setParameter(1, df.parse(todate)).getResultList();
 				T1Master = M_DEP3_Archival_Summary_Repo1.getdatabydateListarchival(todate, version);
-				T1Master1 = M_DEP3_Archival_Summary_Repo2.getdatabydateListarchival(todate, version);
-				T1Master2 = M_DEP3_Archival_Summary_Repo3.getdatabydateListarchival(todate, version);
+				T1Master1 = m_DEP3_Archival_Manual_Summary_Repo2.getdatabydateListarchival(todate, version);
+				T1Master2 = m_DEP3_Archival_Manual_Summary_Repo3.getdatabydateListarchival(todate, version);
+                // T1Master3 = m_DEP3_Archival_Manual_Summary_Repo1.getdatabydateListarchival(todate, version);
 
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -122,19 +125,19 @@ public class BRRS_M_DEP3_ReportService {
 			mv.addObject("reportsummary", T1Master);
 			mv.addObject("reportsummary1", T1Master1);
             mv.addObject("reportsummary2", T1Master2);
+            // mv.addObject("reportsummary3", T1Master3);
 		} else {
 			List<M_DEP3_Summary_Entity1> T1Master = new ArrayList<M_DEP3_Summary_Entity1>();
-			List<M_DEP3_Summary_Entity2> T1Master1 = new ArrayList<M_DEP3_Summary_Entity2>();
-			List<M_DEP3_Summary_Entity3> T1Master2 = new ArrayList<M_DEP3_Summary_Entity3>();
+			List<M_DEP3_Manual_Summary_Entity2> T1Master1 = new ArrayList<M_DEP3_Manual_Summary_Entity2>();
+			List<M_DEP3_Manual_Summary_Entity3> T1Master2 = new ArrayList<M_DEP3_Manual_Summary_Entity3>();
+            List<M_DEP3_Manual_Summary_Entity1> T1Master3 = new ArrayList<M_DEP3_Manual_Summary_Entity1>();
 			try {
 				Date d1 = dateformat.parse(todate);
 
-				// T1Master = hs.createQuery("from BRF1_REPORT_ENTITY a where a.report_date = ?1
-				// ", BRF1_REPORT_ENTITY.class)
-				// .setParameter(1, df.parse(todate)).getResultList();
 				T1Master = M_DEP3_Summary_Repo1.getdatabydateList(dateformat.parse(todate));
-				T1Master1 = M_DEP3_Summary_Repo2.getdatabydateList(dateformat.parse(todate));
-				T1Master2 = M_DEP3_Summary_Repo3.getdatabydateList(dateformat.parse(todate));
+				T1Master1 = M_DEP3_Manual_Summary_Repo2.getdatabydateList(dateformat.parse(todate));
+				T1Master2 = M_DEP3_Manual_Summary_Repo3.getdatabydateList(dateformat.parse(todate));
+                T1Master3 = M_DEP3_Manual_Summary_Repo1.getdatabydateList(dateformat.parse(todate));
 
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -142,6 +145,7 @@ public class BRRS_M_DEP3_ReportService {
 			mv.addObject("reportsummary", T1Master);
 			mv.addObject("reportsummary1", T1Master1);
             mv.addObject("reportsummary2", T1Master2);
+            mv.addObject("reportsummary3", T1Master3);
 		}
 
 		// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
@@ -150,6 +154,96 @@ public class BRRS_M_DEP3_ReportService {
 		System.out.println("scv" + mv.getViewName());
 		return mv;
 	}
+
+
+    
+	public void updateReport2(M_DEP3_Manual_Summary_Entity2  updatedEntity) {
+	    System.out.println("Came to services 2");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_DEP3_Manual_Summary_Entity2  existing = M_DEP3_Manual_Summary_Repo2.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R11 to R50 and copy fields
+	        for (int i = 28; i <= 34; i++) {
+	            String prefix = "R" + i + "_";
+
+	            String[] fields = {"pur_of_frn_cuu_acc","import","investment", "other" };
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field;
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_DEP3_Manual_Summary_Entity2 .class.getMethod(getterName);
+	                    Method setter = M_DEP3_Manual_Summary_Entity2 .class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }  
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+	    
+	    // 3️⃣ Save updated entity
+	    M_DEP3_Manual_Summary_Repo2.save(existing);
+	}
+
+    public void updateReport3(M_DEP3_Manual_Summary_Entity3  updatedEntity) {
+	    System.out.println("Came to services 2");
+	    System.out.println("Report Date: " + updatedEntity.getREPORT_DATE());
+
+	    M_DEP3_Manual_Summary_Entity3  existing = M_DEP3_Manual_Summary_Repo3.findById(updatedEntity.getREPORT_DATE())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getREPORT_DATE()));
+
+	    try {
+	       
+	        for (int i = 28; i <= 34; i++) {
+	            String prefix = "R" + i + "_";
+
+	            String[] fields = { "holder_of_frn_curr_acc","residents","non_residents"};
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field;//getR28_holder_of_frn_curr_acc
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_DEP3_Manual_Summary_Entity3 .class.getMethod(getterName);
+	                    Method setter = M_DEP3_Manual_Summary_Entity3 .class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	        
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+	    
+	    // 3️⃣ Save updated entity
+	    M_DEP3_Manual_Summary_Repo3.save(existing);
+	}
+		 
+
+
+
 
 	public ModelAndView getM_DEP3currentDtl(String reportId, String fromdate, String todate, String currency,
 			String dtltype, Pageable pageable, String filter, String type, String version) {
@@ -350,8 +444,8 @@ public class BRRS_M_DEP3_ReportService {
 
 		// Fetch data
 		List<M_DEP3_Summary_Entity1> dataList = M_DEP3_Summary_Repo1.getdatabydateList(dateformat.parse(todate));
-		List<M_DEP3_Summary_Entity2> dataList1 = M_DEP3_Summary_Repo2.getdatabydateList(dateformat.parse(todate));
-		List<M_DEP3_Summary_Entity3> dataList2 = M_DEP3_Summary_Repo3.getdatabydateList(dateformat.parse(todate));
+		List<M_DEP3_Manual_Summary_Entity2> dataList1 = M_DEP3_Manual_Summary_Repo2.getdatabydateList(dateformat.parse(todate));
+		List<M_DEP3_Manual_Summary_Entity3> dataList2 = M_DEP3_Manual_Summary_Repo3.getdatabydateList(dateformat.parse(todate));
 
 		if (dataList.isEmpty()) {
 			logger.warn("Service: No data found for BRRS report. Returning empty result.");
@@ -415,43 +509,43 @@ public class BRRS_M_DEP3_ReportService {
 				for (int i = 0; i < dataList.size(); i++) {
 
 					M_DEP3_Summary_Entity1 record = dataList.get(i);
-					M_DEP3_Summary_Entity2 record2 = dataList1.get(i);
-					M_DEP3_Summary_Entity3 record3 = dataList2.get(i);
+					M_DEP3_Manual_Summary_Entity2 record2 = dataList1.get(i);
+					M_DEP3_Manual_Summary_Entity3 record3 = dataList2.get(i);
 					System.out.println("rownumber=" + startRow + i);
 					Row row = sheet.getRow(startRow + i);
 					if (row == null) {
 						row = sheet.createRow(startRow + i);
 					}
-					// R11 Col B
+// 					// R11 Col B
             
-Cell R11cell1 = row.createCell(1);
-if (record.getR11_ex_rate_buy() != null) {
-    R11cell1.setCellValue(record.getR11_ex_rate_buy().doubleValue());
-    R11cell1.setCellStyle(numberStyle);
-} else {
-    R11cell1.setCellValue("");
-    R11cell1.setCellStyle(textStyle);
-}
+// Cell R11cell1 = row.createCell(1);
+// if (record.getR11_ex_rate_buy() != null) {
+//     R11cell1.setCellValue(record.getR11_ex_rate_buy().doubleValue());
+//     R11cell1.setCellStyle(numberStyle);
+// } else {
+//     R11cell1.setCellValue("");
+//     R11cell1.setCellStyle(textStyle);
+// }
 
-// R11 Col C
-Cell R11cell2 = row.createCell(2);
-if (record.getR11_ex_rate_mid() != null) {
-    R11cell2.setCellValue(record.getR11_ex_rate_mid().doubleValue());
-    R11cell2.setCellStyle(numberStyle);
-} else {
-    R11cell2.setCellValue("");
-    R11cell2.setCellStyle(textStyle);
-}
+// // R11 Col C
+// Cell R11cell2 = row.createCell(2);
+// if (record.getR11_ex_rate_mid() != null) {
+//     R11cell2.setCellValue(record.getR11_ex_rate_mid().doubleValue());
+//     R11cell2.setCellStyle(numberStyle);
+// } else {
+//     R11cell2.setCellValue("");
+//     R11cell2.setCellStyle(textStyle);
+// }
 
-// R11 Col D
-Cell R11cell3 = row.createCell(3);
-if (record.getR11_ex_rate_sell() != null) {
-    R11cell3.setCellValue(record.getR11_ex_rate_sell().doubleValue());
-    R11cell3.setCellStyle(numberStyle);
-} else {
-    R11cell3.setCellValue("");
-    R11cell3.setCellStyle(textStyle);
-}
+// // R11 Col D
+// Cell R11cell3 = row.createCell(3);
+// if (record.getR11_ex_rate_sell() != null) {
+//     R11cell3.setCellValue(record.getR11_ex_rate_sell().doubleValue());
+//     R11cell3.setCellStyle(numberStyle);
+// } else {
+//     R11cell3.setCellValue("");
+//     R11cell3.setCellStyle(textStyle);
+// }
 
 // R11 Col E
 Cell R11cell4 = row.createCell(4);
@@ -460,7 +554,7 @@ if (record.getR11_current()!= null) {
     R11cell4.setCellStyle(numberStyle);
 } else {
     R11cell4.setCellValue("");
-    R11cell1.setCellStyle(textStyle);
+    R11cell4.setCellStyle(textStyle);
 }
 
 // R11 Col F
@@ -484,26 +578,26 @@ if (record.getR11_savings() != null) {
 	
 }
 
-// R11 Col H
-Cell R11cell7 = row.createCell(7);
-if (record.getR11_notice_0to31()!= null) {
-    R11cell7.setCellValue(record.getR11_notice_0to31().doubleValue());
-    R11cell7.setCellStyle(numberStyle);
-} else {
-    R11cell7.setCellValue("");
-    R11cell7.setCellStyle(textStyle);
+// // R11 Col H
+// Cell R11cell7 = row.createCell(7);
+// if (record.getR11_notice_0to31()!= null) {
+//     R11cell7.setCellValue(record.getR11_notice_0to31().doubleValue());
+//     R11cell7.setCellStyle(numberStyle);
+// } else {
+//     R11cell7.setCellValue("");
+//     R11cell7.setCellStyle(textStyle);
 	
-}
+// }
 
-// R11 Col I
-Cell R11cell8= row.createCell(8);
-if (record.getR11_notice_32to88() != null) {
-    R11cell8.setCellValue(record.getR11_notice_32to88().doubleValue());
-    R11cell8.setCellStyle(numberStyle);
-} else {
-    R11cell8.setCellValue("");
-    R11cell8.setCellStyle(textStyle);
-}
+// // R11 Col I
+// Cell R11cell8= row.createCell(8);
+// if (record.getR11_notice_32to88() != null) {
+//     R11cell8.setCellValue(record.getR11_notice_32to88().doubleValue());
+//     R11cell8.setCellStyle(numberStyle);
+// } else {
+//     R11cell8.setCellValue("");
+//     R11cell8.setCellStyle(textStyle);
+// }
 
 // R11 Col J
 Cell R11cell9 = row.createCell(9);
@@ -576,16 +670,16 @@ if (record.getR11_fix_depo_over24()!= null) {
 }
 
 
-// R11 Col Q
-Cell R11cell16 = row.createCell(16);
-if (record.getR11_cer_of_depo()!= null) {
-    R11cell16.setCellValue(record.getR11_cer_of_depo().doubleValue());
-    R11cell16.setCellStyle(numberStyle);
-} else {
-    R11cell16.setCellValue("");
-    R11cell16.setCellStyle(textStyle);
+// // R11 Col Q
+// Cell R11cell16 = row.createCell(16);
+// if (record.getR11_cer_of_depo()!= null) {
+//     R11cell16.setCellValue(record.getR11_cer_of_depo().doubleValue());
+//     R11cell16.setCellStyle(numberStyle);
+// } else {
+//     R11cell16.setCellValue("");
+//     R11cell16.setCellStyle(textStyle);
  
-}
+// }
 
 // R11 Col S
 Cell R11cell18 = row.createCell(18);
@@ -609,34 +703,34 @@ if (record.getR11_avg_pula_equivalent ()!= null) {
 }
 row = sheet.getRow(11);
 // R12 Col B
-Cell R12cell1 = row.createCell(1);
-if (record.getR12_ex_rate_buy ()!= null) {
-    R12cell1.setCellValue(record.getR12_ex_rate_buy().doubleValue());
-    R12cell1.setCellStyle(numberStyle);
-} else {
-    R12cell1.setCellValue("");
-    R12cell1.setCellStyle(textStyle);
-}
+// Cell R12cell1 = row.createCell(1);
+// if (record.getR12_ex_rate_buy ()!= null) {
+//     R12cell1.setCellValue(record.getR12_ex_rate_buy().doubleValue());
+//     R12cell1.setCellStyle(numberStyle);
+// } else {
+//     R12cell1.setCellValue("");
+//     R12cell1.setCellStyle(textStyle);
+// }
 
-// R12 Col C
-Cell R12cell2 = row.createCell(2);
-if (record.getR12_ex_rate_mid() != null) {
-    R12cell2.setCellValue(record.getR12_ex_rate_mid().doubleValue());
-    R12cell2.setCellStyle(numberStyle);
-} else {
-    R12cell2.setCellValue("");
-    R12cell2.setCellStyle(textStyle);
-}
+// // R12 Col C
+// Cell R12cell2 = row.createCell(2);
+// if (record.getR12_ex_rate_mid() != null) {
+//     R12cell2.setCellValue(record.getR12_ex_rate_mid().doubleValue());
+//     R12cell2.setCellStyle(numberStyle);
+// } else {
+//     R12cell2.setCellValue("");
+//     R12cell2.setCellStyle(textStyle);
+// }
 
-// R12 Col D
-Cell R12cell3 = row.createCell(3);
-if (record.getR12_ex_rate_sell() != null) {
-    R12cell3.setCellValue(record.getR12_ex_rate_sell().doubleValue());
-    R12cell3.setCellStyle(numberStyle);
-} else {
-    R12cell3.setCellValue("");
-    R12cell3.setCellStyle(textStyle);
-}
+// // R12 Col D
+// Cell R12cell3 = row.createCell(3);
+// if (record.getR12_ex_rate_sell() != null) {
+//     R12cell3.setCellValue(record.getR12_ex_rate_sell().doubleValue());
+//     R12cell3.setCellStyle(numberStyle);
+// } else {
+//     R12cell3.setCellValue("");
+//     R12cell3.setCellStyle(textStyle);
+// }
 
 // R12 Col E
 Cell R12cell4 = row.createCell(4);
@@ -645,7 +739,7 @@ if (record.getR12_current() != null) {
     R12cell4.setCellStyle(numberStyle);
 } else {
     R12cell4.setCellValue("");
-    R12cell1.setCellStyle(textStyle);
+    R12cell4.setCellStyle(textStyle);
 }
 
 // R12 Col F
@@ -669,26 +763,26 @@ if (record.getR12_savings() != null) {
 	
 }
 
-// R12 Col H
-Cell R12cell7 = row.createCell(7);
-if (record.getR12_notice_0to31()!= null) {
-    R12cell7.setCellValue(record.getR12_notice_0to31().doubleValue());
-    R12cell7.setCellStyle(numberStyle);
-} else {
-    R12cell7.setCellValue("");
-    R12cell7.setCellStyle(textStyle);
+// // R12 Col H
+// Cell R12cell7 = row.createCell(7);
+// if (record.getR12_notice_0to31()!= null) {
+//     R12cell7.setCellValue(record.getR12_notice_0to31().doubleValue());
+//     R12cell7.setCellStyle(numberStyle);
+// } else {
+//     R12cell7.setCellValue("");
+//     R12cell7.setCellStyle(textStyle);
 	
-}
+// }
 
-// R12 Col I
-Cell R12cell8= row.createCell(8);
-if (record.getR12_notice_32to88() != null) {
-    R12cell8.setCellValue(record.getR12_notice_32to88().doubleValue());
-    R12cell8.setCellStyle(numberStyle);
-} else {
-    R12cell8.setCellValue("");
-    R12cell8.setCellStyle(textStyle);
-}
+// // R12 Col I
+// Cell R12cell8= row.createCell(8);
+// if (record.getR12_notice_32to88() != null) {
+//     R12cell8.setCellValue(record.getR12_notice_32to88().doubleValue());
+//     R12cell8.setCellStyle(numberStyle);
+// } else {
+//     R12cell8.setCellValue("");
+//     R12cell8.setCellStyle(textStyle);
+// }
 
 // R12 Col J
 Cell R12cell9 = row.createCell(9);
@@ -762,14 +856,14 @@ if (record.getR12_fix_depo_over24() != null) {
 
 
 // R12 Col Q
-Cell R12cell16 = row.createCell(16);
-if (record.getR12_cer_of_depo() != null) {
-    R12cell16.setCellValue(record.getR12_cer_of_depo().doubleValue());
-    R12cell16.setCellStyle(numberStyle);
-} else {
-    R12cell16.setCellValue("");
-    R12cell16.setCellStyle(textStyle);
-}
+// Cell R12cell16 = row.createCell(16);
+// if (record.getR12_cer_of_depo() != null) {
+//     R12cell16.setCellValue(record.getR12_cer_of_depo().doubleValue());
+//     R12cell16.setCellStyle(numberStyle);
+// } else {
+//     R12cell16.setCellValue("");
+//     R12cell16.setCellStyle(textStyle);
+// }
 
 // R12 Col S
 Cell R12cell18 = row.createCell(18);
@@ -793,35 +887,35 @@ if (record.getR12_avg_pula_equivalent() != null) {
 }
 
 // R13 Col B
-row = sheet.getRow(12);
-Cell R13cell1 = row.createCell(1);
-if (record.getR13_ex_rate_buy() != null) {
-    R13cell1.setCellValue(record.getR13_ex_rate_buy().doubleValue());
-    R13cell1.setCellStyle(numberStyle);
-} else {
-    R13cell1.setCellValue("");
-    R13cell1.setCellStyle(textStyle);
-}
+// row = sheet.getRow(12);
+// Cell R13cell1 = row.createCell(1);
+// if (record.getR13_ex_rate_buy() != null) {
+//     R13cell1.setCellValue(record.getR13_ex_rate_buy().doubleValue());
+//     R13cell1.setCellStyle(numberStyle);
+// } else {
+//     R13cell1.setCellValue("");
+//     R13cell1.setCellStyle(textStyle);
+// }
 
-// R13 Col C
-Cell R13cell2 = row.createCell(2);
-if (record.getR13_ex_rate_mid() != null) {
-    R13cell2.setCellValue(record.getR13_ex_rate_mid().doubleValue());
-    R13cell2.setCellStyle(numberStyle);
-} else {
-    R13cell2.setCellValue("");
-    R13cell2.setCellStyle(textStyle);
-}
+// // R13 Col C
+// Cell R13cell2 = row.createCell(2);
+// if (record.getR13_ex_rate_mid() != null) {
+//     R13cell2.setCellValue(record.getR13_ex_rate_mid().doubleValue());
+//     R13cell2.setCellStyle(numberStyle);
+// } else {
+//     R13cell2.setCellValue("");
+//     R13cell2.setCellStyle(textStyle);
+// }
 
-// R13 Col D
-Cell R13cell3 = row.createCell(3);
-if (record.getR13_ex_rate_sell() != null) {
-    R13cell3.setCellValue(record.getR13_ex_rate_sell().doubleValue());
-    R13cell3.setCellStyle(numberStyle);
-} else {
-    R13cell3.setCellValue("");
-    R13cell3.setCellStyle(textStyle);
-}
+// // R13 Col D
+// Cell R13cell3 = row.createCell(3);
+// if (record.getR13_ex_rate_sell() != null) {
+//     R13cell3.setCellValue(record.getR13_ex_rate_sell().doubleValue());
+//     R13cell3.setCellStyle(numberStyle);
+// } else {
+//     R13cell3.setCellValue("");
+//     R13cell3.setCellStyle(textStyle);
+// }
 
 // R13 Col E
 Cell R13cell4 = row.createCell(4);
@@ -830,7 +924,7 @@ if (record.getR13_current() != null) {
     R13cell4.setCellStyle(numberStyle);
 } else {
     R13cell4.setCellValue("");
-    R13cell1.setCellStyle(textStyle);
+    R13cell4.setCellStyle(textStyle);
 }
 
 // R13 Col F
@@ -855,35 +949,35 @@ if (record.getR13_savings() != null) {
 }
 
 // R13 Col H
-Cell R13cell7 = row.createCell(7);
-if (record.getR13_notice_0to31()!= null) {
-    R13cell7.setCellValue(record.getR13_notice_0to31().doubleValue());
-    R13cell7.setCellStyle(numberStyle);
-} else {
-    R13cell7.setCellValue("");
-    R13cell7.setCellStyle(textStyle);
+// Cell R13cell7 = row.createCell(7);
+// if (record.getR13_notice_0to31()!= null) {
+//     R13cell7.setCellValue(record.getR13_notice_0to31().doubleValue());
+//     R13cell7.setCellStyle(numberStyle);
+// } else {
+//     R13cell7.setCellValue("");
+//     R13cell7.setCellStyle(textStyle);
 	
-}
+// }
 
-// R13 Col I
-Cell R13cell8= row.createCell(8);
-if (record.getR13_notice_32to88() != null) {
-    R13cell8.setCellValue(record.getR13_notice_32to88().doubleValue());
-    R13cell8.setCellStyle(numberStyle);
-} else {
-    R13cell8.setCellValue("");
-    R13cell8.setCellStyle(textStyle);
-}
+// // R13 Col I
+// Cell R13cell8= row.createCell(8);
+// if (record.getR13_notice_32to88() != null) {
+//     R13cell8.setCellValue(record.getR13_notice_32to88().doubleValue());
+//     R13cell8.setCellStyle(numberStyle);
+// } else {
+//     R13cell8.setCellValue("");
+//     R13cell8.setCellStyle(textStyle);
+// }
 
-// R13 Col J
-Cell R13cell9 = row.createCell(9);
-if (record.getR13_fix_depo_91_day_depo() != null) {
-    R13cell9.setCellValue(record.getR13_fix_depo_91_day_depo().doubleValue());
-    R13cell9.setCellStyle(numberStyle);
-} else {
-    R13cell9.setCellValue("");
-    R13cell9.setCellStyle(textStyle);
-}
+// // R13 Col J
+// Cell R13cell9 = row.createCell(9);
+// if (record.getR13_fix_depo_91_day_depo() != null) {
+//     R13cell9.setCellValue(record.getR13_fix_depo_91_day_depo().doubleValue());
+//     R13cell9.setCellStyle(numberStyle);
+// } else {
+//     R13cell9.setCellValue("");
+//     R13cell9.setCellStyle(textStyle);
+// }
 
 // R13 Col K
 Cell R13cell10 = row.createCell(10);
@@ -946,15 +1040,15 @@ if (record.getR13_fix_depo_over24() != null) {
 }
 
 
-// R13 Col Q
-Cell R13cell16 = row.createCell(16);
-if (record.getR13_cer_of_depo() != null) {
-    R13cell16.setCellValue(record.getR13_cer_of_depo().doubleValue());
-    R13cell16.setCellStyle(numberStyle);
-} else {
-    R13cell16.setCellValue("");
-    R13cell16.setCellStyle(textStyle);
-}
+// // R13 Col Q
+// Cell R13cell16 = row.createCell(16);
+// if (record.getR13_cer_of_depo() != null) {
+//     R13cell16.setCellValue(record.getR13_cer_of_depo().doubleValue());
+//     R13cell16.setCellStyle(numberStyle);
+// } else {
+//     R13cell16.setCellValue("");
+//     R13cell16.setCellStyle(textStyle);
+// }
 
 // R13 Col S
 Cell R13cell18 = row.createCell(18);
@@ -978,35 +1072,35 @@ if (record.getR13_avg_pula_equivalent() != null) {
 }
 
 // R14 Col B
-row = sheet.getRow(13);
-Cell R14cell1 = row.createCell(1);
-if (record.getR14_ex_rate_buy() != null) {
-    R14cell1.setCellValue(record.getR14_ex_rate_buy().doubleValue());
-    R14cell1.setCellStyle(numberStyle);
-} else {
-    R14cell1.setCellValue("");
-    R14cell1.setCellStyle(textStyle);
-}
+// row = sheet.getRow(13);
+// Cell R14cell1 = row.createCell(1);
+// if (record.getR14_ex_rate_buy() != null) {
+//     R14cell1.setCellValue(record.getR14_ex_rate_buy().doubleValue());
+//     R14cell1.setCellStyle(numberStyle);
+// } else {
+//     R14cell1.setCellValue("");
+//     R14cell1.setCellStyle(textStyle);
+// }
 
-// R14 Col C
-Cell R14cell2 = row.createCell(2);
-if (record.getR14_ex_rate_mid() != null) {
-    R14cell2.setCellValue(record.getR14_ex_rate_mid().doubleValue());
-    R14cell2.setCellStyle(numberStyle);
-} else {
-    R14cell2.setCellValue("");
-    R14cell2.setCellStyle(textStyle);
-}
+// // R14 Col C
+// Cell R14cell2 = row.createCell(2);
+// if (record.getR14_ex_rate_mid() != null) {
+//     R14cell2.setCellValue(record.getR14_ex_rate_mid().doubleValue());
+//     R14cell2.setCellStyle(numberStyle);
+// } else {
+//     R14cell2.setCellValue("");
+//     R14cell2.setCellStyle(textStyle);
+// }
 
-// R14 Col D
-Cell R14cell3 = row.createCell(3);
-if (record.getR14_ex_rate_sell() != null) {
-    R14cell3.setCellValue(record.getR14_ex_rate_sell().doubleValue());
-    R14cell3.setCellStyle(numberStyle);
-} else {
-    R14cell3.setCellValue("");
-    R14cell3.setCellStyle(textStyle);
-}
+// // R14 Col D
+// Cell R14cell3 = row.createCell(3);
+// if (record.getR14_ex_rate_sell() != null) {
+//     R14cell3.setCellValue(record.getR14_ex_rate_sell().doubleValue());
+//     R14cell3.setCellStyle(numberStyle);
+// } else {
+//     R14cell3.setCellValue("");
+//     R14cell3.setCellStyle(textStyle);
+// }
 
 // R14 Col E
 Cell R14cell4 = row.createCell(4);
@@ -1015,7 +1109,7 @@ if (record.getR14_current() != null) {
     R14cell4.setCellStyle(numberStyle);
 } else {
     R14cell4.setCellValue("");
-    R14cell1.setCellStyle(textStyle);
+    R14cell4.setCellStyle(textStyle);
 }
 
 // R14 Col F
@@ -1039,26 +1133,26 @@ if (record.getR14_savings() != null) {
 	
 }
 
-// R14 Col H
-Cell R14cell7 = row.createCell(7);
-if (record.getR14_notice_0to31()!= null) {
-    R14cell7.setCellValue(record.getR14_notice_0to31().doubleValue());
-    R14cell7.setCellStyle(numberStyle);
-} else {
-    R14cell7.setCellValue("");
-    R14cell7.setCellStyle(textStyle);
+// // R14 Col H
+// Cell R14cell7 = row.createCell(7);
+// if (record.getR14_notice_0to31()!= null) {
+//     R14cell7.setCellValue(record.getR14_notice_0to31().doubleValue());
+//     R14cell7.setCellStyle(numberStyle);
+// } else {
+//     R14cell7.setCellValue("");
+//     R14cell7.setCellStyle(textStyle);
 	
-}
+// }
 
-// R14 Col I
-Cell R14cell8= row.createCell(8);
-if (record.getR14_notice_32to88() != null) {
-    R14cell8.setCellValue(record.getR14_notice_32to88().doubleValue());
-    R14cell8.setCellStyle(numberStyle);
-} else {
-    R14cell8.setCellValue("");
-    R14cell8.setCellStyle(textStyle);
-}
+// // R14 Col I
+// Cell R14cell8= row.createCell(8);
+// if (record.getR14_notice_32to88() != null) {
+//     R14cell8.setCellValue(record.getR14_notice_32to88().doubleValue());
+//     R14cell8.setCellStyle(numberStyle);
+// } else {
+//     R14cell8.setCellValue("");
+//     R14cell8.setCellStyle(textStyle);
+// }
 
 // R14 Col J
 Cell R14cell9 = row.createCell(9);
@@ -1132,14 +1226,14 @@ if (record.getR14_fix_depo_over24() != null) {
 
 
 // R14 Col Q
-Cell R14cell16 = row.createCell(16);
-if (record.getR14_cer_of_depo() != null) {
-    R14cell16.setCellValue(record.getR14_cer_of_depo().doubleValue());
-    R14cell16.setCellStyle(numberStyle);
-} else {
-    R14cell16.setCellValue("");
-    R14cell16.setCellStyle(textStyle);
-}
+// Cell R14cell16 = row.createCell(16);
+// if (record.getR14_cer_of_depo() != null) {
+//     R14cell16.setCellValue(record.getR14_cer_of_depo().doubleValue());
+//     R14cell16.setCellStyle(numberStyle);
+// } else {
+//     R14cell16.setCellValue("");
+//     R14cell16.setCellStyle(textStyle);
+// }
 
 // R14 Col S
 Cell R14cell18 = row.createCell(18);
@@ -1162,36 +1256,36 @@ if (record.getR14_avg_pula_equivalent() != null) {
     R14cell19.setCellStyle(textStyle);
 }
 
-// R15 Col B
-row = sheet.getRow(14);
-Cell R15cell1 = row.createCell(1);
-if (record.getR15_ex_rate_buy() != null) {
-    R15cell1.setCellValue(record.getR15_ex_rate_buy().doubleValue());
-    R15cell1.setCellStyle(numberStyle);
-} else {
-    R15cell1.setCellValue("");
-    R15cell1.setCellStyle(textStyle);
-}
+// // R15 Col B
+// row = sheet.getRow(14);
+// Cell R15cell1 = row.createCell(1);
+// if (record.getR15_ex_rate_buy() != null) {
+//     R15cell1.setCellValue(record.getR15_ex_rate_buy().doubleValue());
+//     R15cell1.setCellStyle(numberStyle);
+// } else {
+//     R15cell1.setCellValue("");
+//     R15cell1.setCellStyle(textStyle);
+// }
 
-// R15 Col C
-Cell R15cell2 = row.createCell(2);
-if (record.getR15_ex_rate_mid() != null) {
-    R15cell2.setCellValue(record.getR15_ex_rate_mid().doubleValue());
-    R15cell2.setCellStyle(numberStyle);
-} else {
-    R15cell2.setCellValue("");
-    R15cell2.setCellStyle(textStyle);
-}
+// // R15 Col C
+// Cell R15cell2 = row.createCell(2);
+// if (record.getR15_ex_rate_mid() != null) {
+//     R15cell2.setCellValue(record.getR15_ex_rate_mid().doubleValue());
+//     R15cell2.setCellStyle(numberStyle);
+// } else {
+//     R15cell2.setCellValue("");
+//     R15cell2.setCellStyle(textStyle);
+// }
 
-// R15 Col D
-Cell R15cell3 = row.createCell(3);
-if (record.getR15_ex_rate_sell() != null) {
-    R15cell3.setCellValue(record.getR15_ex_rate_sell().doubleValue());
-    R15cell3.setCellStyle(numberStyle);
-} else {
-    R15cell3.setCellValue("");
-    R15cell3.setCellStyle(textStyle);
-}
+// // R15 Col D
+// Cell R15cell3 = row.createCell(3);
+// if (record.getR15_ex_rate_sell() != null) {
+//     R15cell3.setCellValue(record.getR15_ex_rate_sell().doubleValue());
+//     R15cell3.setCellStyle(numberStyle);
+// } else {
+//     R15cell3.setCellValue("");
+//     R15cell3.setCellStyle(textStyle);
+// }
 
 // R15 Col E
 Cell R15cell4 = row.createCell(4);
@@ -1200,7 +1294,7 @@ if (record.getR15_current() != null) {
     R15cell4.setCellStyle(numberStyle);
 } else {
     R15cell4.setCellValue("");
-    R15cell1.setCellStyle(textStyle);
+    R15cell4.setCellStyle(textStyle);
 }
 
 // R15 Col F
@@ -1225,25 +1319,25 @@ if (record.getR15_savings() != null) {
 }
 
 // R15 Col H
-Cell R15cell7 = row.createCell(7);
-if (record.getR15_notice_0to31()!= null) {
-    R15cell7.setCellValue(record.getR15_notice_0to31().doubleValue());
-    R15cell7.setCellStyle(numberStyle);
-} else {
-    R15cell7.setCellValue("");
-    R15cell7.setCellStyle(textStyle);
+// Cell R15cell7 = row.createCell(7);
+// if (record.getR15_notice_0to31()!= null) {
+//     R15cell7.setCellValue(record.getR15_notice_0to31().doubleValue());
+//     R15cell7.setCellStyle(numberStyle);
+// } else {
+//     R15cell7.setCellValue("");
+//     R15cell7.setCellStyle(textStyle);
 	
-}
+// }
 
-// R15 Col I
-Cell R15cell8= row.createCell(8);
-if (record.getR15_notice_32to88() != null) {
-    R15cell8.setCellValue(record.getR15_notice_32to88().doubleValue());
-    R15cell8.setCellStyle(numberStyle);
-} else {
-    R15cell8.setCellValue("");
-    R15cell8.setCellStyle(textStyle);
-}
+// // R15 Col I
+// Cell R15cell8= row.createCell(8);
+// if (record.getR15_notice_32to88() != null) {
+//     R15cell8.setCellValue(record.getR15_notice_32to88().doubleValue());
+//     R15cell8.setCellStyle(numberStyle);
+// } else {
+//     R15cell8.setCellValue("");
+//     R15cell8.setCellStyle(textStyle);
+// }
 
 // R15 Col J
 Cell R15cell9 = row.createCell(9);
@@ -1316,15 +1410,15 @@ if (record.getR15_fix_depo_over24() != null) {
 }
 
 
-// R15 Col Q
-Cell R15cell16 = row.createCell(16);
-if (record.getR15_cer_of_depo() != null) {
-    R15cell16.setCellValue(record.getR15_cer_of_depo().doubleValue());
-    R15cell16.setCellStyle(numberStyle);
-} else {
-    R15cell16.setCellValue("");
-    R15cell16.setCellStyle(textStyle);
-}
+// // R15 Col Q
+// Cell R15cell16 = row.createCell(16);
+// if (record.getR15_cer_of_depo() != null) {
+//     R15cell16.setCellValue(record.getR15_cer_of_depo().doubleValue());
+//     R15cell16.setCellStyle(numberStyle);
+// } else {
+//     R15cell16.setCellValue("");
+//     R15cell16.setCellStyle(textStyle);
+// }
 
 // R15 Col S
 Cell R15cell18 = row.createCell(18);
@@ -1348,35 +1442,35 @@ if (record.getR15_avg_pula_equivalent() != null) {
 }
 
 // R16 Col B
-row = sheet.getRow(15);
-Cell R16cell1 = row.createCell(1);
-if (record.getR16_ex_rate_buy() != null) {
-    R16cell1.setCellValue(record.getR16_ex_rate_buy().doubleValue());
-    R16cell1.setCellStyle(numberStyle);
-} else {
-    R16cell1.setCellValue("");
-    R16cell1.setCellStyle(textStyle);
-}
+// row = sheet.getRow(15);
+// Cell R16cell1 = row.createCell(1);
+// if (record.getR16_ex_rate_buy() != null) {
+//     R16cell1.setCellValue(record.getR16_ex_rate_buy().doubleValue());
+//     R16cell1.setCellStyle(numberStyle);
+// } else {
+//     R16cell1.setCellValue("");
+//     R16cell1.setCellStyle(textStyle);
+// }
 
-// R16 Col C
-Cell R16cell2 = row.createCell(2);
-if (record.getR16_ex_rate_mid() != null) {
-    R16cell2.setCellValue(record.getR16_ex_rate_mid().doubleValue());
-    R16cell2.setCellStyle(numberStyle);
-} else {
-    R16cell2.setCellValue("");
-    R16cell2.setCellStyle(textStyle);
-}
+// // R16 Col C
+// Cell R16cell2 = row.createCell(2);
+// if (record.getR16_ex_rate_mid() != null) {
+//     R16cell2.setCellValue(record.getR16_ex_rate_mid().doubleValue());
+//     R16cell2.setCellStyle(numberStyle);
+// } else {
+//     R16cell2.setCellValue("");
+//     R16cell2.setCellStyle(textStyle);
+// }
 
-// R16 Col D
-Cell R16cell3 = row.createCell(3);
-if (record.getR16_ex_rate_sell() != null) {
-    R16cell3.setCellValue(record.getR16_ex_rate_sell().doubleValue());
-    R16cell3.setCellStyle(numberStyle);
-} else {
-    R16cell3.setCellValue("");
-    R16cell3.setCellStyle(textStyle);
-}
+// // R16 Col D
+// Cell R16cell3 = row.createCell(3);
+// if (record.getR16_ex_rate_sell() != null) {
+//     R16cell3.setCellValue(record.getR16_ex_rate_sell().doubleValue());
+//     R16cell3.setCellStyle(numberStyle);
+// } else {
+//     R16cell3.setCellValue("");
+//     R16cell3.setCellStyle(textStyle);
+// }
 
 // R16 Col E
 Cell R16cell4 = row.createCell(4);
@@ -1385,7 +1479,7 @@ if (record.getR16_current() != null) {
     R16cell4.setCellStyle(numberStyle);
 } else {
     R16cell4.setCellValue("");
-    R16cell1.setCellStyle(textStyle);
+    R16cell4.setCellStyle(textStyle);
 }
 
 // R16 Col F
@@ -1410,25 +1504,25 @@ if (record.getR16_savings() != null) {
 }
 
 // R16 Col H
-Cell R16cell7 = row.createCell(7);
-if (record.getR16_notice_0to31()!= null) {
-    R16cell7.setCellValue(record.getR16_notice_0to31().doubleValue());
-    R16cell7.setCellStyle(numberStyle);
-} else {
-    R16cell7.setCellValue("");
-    R16cell7.setCellStyle(textStyle);
+// Cell R16cell7 = row.createCell(7);
+// if (record.getR16_notice_0to31()!= null) {
+//     R16cell7.setCellValue(record.getR16_notice_0to31().doubleValue());
+//     R16cell7.setCellStyle(numberStyle);
+// } else {
+//     R16cell7.setCellValue("");
+//     R16cell7.setCellStyle(textStyle);
 	
-}
+// }
 
-// R16 Col I
-Cell R16cell8= row.createCell(8);
-if (record.getR16_notice_32to88() != null) {
-    R16cell8.setCellValue(record.getR16_notice_32to88().doubleValue());
-    R16cell8.setCellStyle(numberStyle);
-} else {
-    R16cell8.setCellValue("");
-    R16cell8.setCellStyle(textStyle);
-}
+// // R16 Col I
+// Cell R16cell8= row.createCell(8);
+// if (record.getR16_notice_32to88() != null) {
+//     R16cell8.setCellValue(record.getR16_notice_32to88().doubleValue());
+//     R16cell8.setCellStyle(numberStyle);
+// } else {
+//     R16cell8.setCellValue("");
+//     R16cell8.setCellStyle(textStyle);
+// }
 
 // R16 Col J
 Cell R16cell9 = row.createCell(9);
@@ -1502,14 +1596,14 @@ if (record.getR16_fix_depo_over24() != null) {
 }
 
 // R16 Col Q
-Cell R16cell16 = row.createCell(16);
-if (record.getR16_cer_of_depo() != null) {
-    R16cell16.setCellValue(record.getR16_cer_of_depo().doubleValue());
-    R16cell16.setCellStyle(numberStyle);
-} else {
-    R16cell16.setCellValue("");
-    R16cell16.setCellStyle(textStyle);
-}
+// Cell R16cell16 = row.createCell(16);
+// if (record.getR16_cer_of_depo() != null) {
+//     R16cell16.setCellValue(record.getR16_cer_of_depo().doubleValue());
+//     R16cell16.setCellStyle(numberStyle);
+// } else {
+//     R16cell16.setCellValue("");
+//     R16cell16.setCellStyle(textStyle);
+// }
 
 // R16 Col S
 Cell R16cell18 = row.createCell(18);
@@ -1535,64 +1629,64 @@ if (record.getR16_avg_pula_equivalent() != null) {
 // R17 Col B
 row = sheet.getRow(16);
 Cell R17cell1 = row.createCell(1);
-if (record.getR17_ex_rate_buy() != null) {
-    R17cell1.setCellValue(record.getR17_ex_rate_buy().doubleValue());
-    R17cell1.setCellStyle(numberStyle);
-} else {
-    R17cell1.setCellValue("");
-    R17cell1.setCellStyle(textStyle);
-}
+// if (record.getR17_ex_rate_buy() != null) {
+//     R17cell1.setCellValue(record.getR17_ex_rate_buy().doubleValue());
+//     R17cell1.setCellStyle(numberStyle);
+// } else {
+//     R17cell1.setCellValue("");
+//     R17cell1.setCellStyle(textStyle);
+// }
 
-// R17 Col C
-Cell R17cell2 = row.createCell(2);
-if (record.getR17_ex_rate_mid() != null) {
-    R17cell2.setCellValue(record.getR17_ex_rate_mid().doubleValue());
-    R17cell2.setCellStyle(numberStyle);
-} else {
-    R17cell2.setCellValue("");
-    R17cell2.setCellStyle(textStyle);
-}
+// // R17 Col C
+// Cell R17cell2 = row.createCell(2);
+// if (record.getR17_ex_rate_mid() != null) {
+//     R17cell2.setCellValue(record.getR17_ex_rate_mid().doubleValue());
+//     R17cell2.setCellStyle(numberStyle);
+// } else {
+//     R17cell2.setCellValue("");
+//     R17cell2.setCellStyle(textStyle);
+// }
 
-// R17 Col D
-Cell R17cell3 = row.createCell(3);
-if (record.getR17_ex_rate_sell() != null) {
-    R17cell3.setCellValue(record.getR17_ex_rate_sell().doubleValue());
-    R17cell3.setCellStyle(numberStyle);
-} else {
-    R17cell3.setCellValue("");
-    R17cell3.setCellStyle(textStyle);
-}
+// // R17 Col D
+// Cell R17cell3 = row.createCell(3);
+// if (record.getR17_ex_rate_sell() != null) {
+//     R17cell3.setCellValue(record.getR17_ex_rate_sell().doubleValue());
+//     R17cell3.setCellStyle(numberStyle);
+// } else {
+//     R17cell3.setCellValue("");
+//     R17cell3.setCellStyle(textStyle);
+// }
 
 // R18 Col B
 row = sheet.getRow(17);
-Cell R18cell1 = row.createCell(1);
-if (record.getR18_ex_rate_buy() != null) {
-    R18cell1.setCellValue(record.getR18_ex_rate_buy().doubleValue());
-    R18cell1.setCellStyle(numberStyle);
-} else {
-    R18cell1.setCellValue("");
-    R18cell1.setCellStyle(textStyle);
-}
+// Cell R18cell1 = row.createCell(1);
+// if (record.getR18_ex_rate_buy() != null) {
+//     R18cell1.setCellValue(record.getR18_ex_rate_buy().doubleValue());
+//     R18cell1.setCellStyle(numberStyle);
+// } else {
+//     R18cell1.setCellValue("");
+//     R18cell1.setCellStyle(textStyle);
+// }
 
-// R18 Col C
-Cell R18cell2 = row.createCell(2);
-if (record.getR18_ex_rate_mid() != null) {
-    R18cell2.setCellValue(record.getR18_ex_rate_mid().doubleValue());
-    R18cell2.setCellStyle(numberStyle);
-} else {
-    R18cell2.setCellValue("");
-    R18cell2.setCellStyle(textStyle);
-}
+// // R18 Col C
+// Cell R18cell2 = row.createCell(2);
+// if (record.getR18_ex_rate_mid() != null) {
+//     R18cell2.setCellValue(record.getR18_ex_rate_mid().doubleValue());
+//     R18cell2.setCellStyle(numberStyle);
+// } else {
+//     R18cell2.setCellValue("");
+//     R18cell2.setCellStyle(textStyle);
+// }
 
-// R18 Col D
-Cell R18cell3 = row.createCell(3);
-if (record.getR18_ex_rate_sell() != null) {
-    R18cell3.setCellValue(record.getR18_ex_rate_sell().doubleValue());
-    R18cell3.setCellStyle(numberStyle);
-} else {
-    R18cell3.setCellValue("");
-    R18cell3.setCellStyle(textStyle);
-}
+// // R18 Col D
+// Cell R18cell3 = row.createCell(3);
+// if (record.getR18_ex_rate_sell() != null) {
+//     R18cell3.setCellValue(record.getR18_ex_rate_sell().doubleValue());
+//     R18cell3.setCellStyle(numberStyle);
+// } else {
+//     R18cell3.setCellValue("");
+//     R18cell3.setCellStyle(textStyle);
+// }
 
 // R18 Col E
 Cell R18cell4 = row.createCell(4);
@@ -1601,7 +1695,7 @@ if (record.getR18_current() != null) {
     R18cell4.setCellStyle(numberStyle);
 } else {
     R18cell4.setCellValue("");
-    R18cell1.setCellStyle(textStyle);
+    R18cell4.setCellStyle(textStyle);
 }
 
 // R18 Col F
@@ -1626,25 +1720,25 @@ if (record.getR18_savings() != null) {
 }
 
 // R18 Col H
-Cell R18cell7 = row.createCell(7);
-if (record.getR18_notice_0to31()!= null) {
-    R18cell7.setCellValue(record.getR18_notice_0to31().doubleValue());
-    R18cell7.setCellStyle(numberStyle);
-} else {
-    R18cell7.setCellValue("");
-    R18cell7.setCellStyle(textStyle);
+// Cell R18cell7 = row.createCell(7);
+// if (record.getR18_notice_0to31()!= null) {
+//     R18cell7.setCellValue(record.getR18_notice_0to31().doubleValue());
+//     R18cell7.setCellStyle(numberStyle);
+// } else {
+//     R18cell7.setCellValue("");
+//     R18cell7.setCellStyle(textStyle);
 	
-}
+// }
 
-// R18 Col I
-Cell R18cell8= row.createCell(8);
-if (record.getR18_notice_32to88() != null) {
-    R18cell8.setCellValue(record.getR18_notice_32to88().doubleValue());
-    R18cell8.setCellStyle(numberStyle);
-} else {
-    R18cell8.setCellValue("");
-    R18cell8.setCellStyle(textStyle);
-}
+// // R18 Col I
+// Cell R18cell8= row.createCell(8);
+// if (record.getR18_notice_32to88() != null) {
+//     R18cell8.setCellValue(record.getR18_notice_32to88().doubleValue());
+//     R18cell8.setCellStyle(numberStyle);
+// } else {
+//     R18cell8.setCellValue("");
+//     R18cell8.setCellStyle(textStyle);
+// }
 
 // R18 Col J
 Cell R18cell9 = row.createCell(9);
@@ -1718,14 +1812,14 @@ if (record.getR18_fix_depo_over24() != null) {
 
 
 // R18 Col Q
-Cell R18cell16 = row.createCell(16);
-if (record.getR18_cer_of_depo() != null) {
-    R18cell16.setCellValue(record.getR18_cer_of_depo().doubleValue());
-    R18cell16.setCellStyle(numberStyle);
-} else {
-    R18cell16.setCellValue("");
-    R18cell16.setCellStyle(textStyle);
-}
+// Cell R18cell16 = row.createCell(16);
+// if (record.getR18_cer_of_depo() != null) {
+//     R18cell16.setCellValue(record.getR18_cer_of_depo().doubleValue());
+//     R18cell16.setCellStyle(numberStyle);
+// } else {
+//     R18cell16.setCellValue("");
+//     R18cell16.setCellStyle(textStyle);
+// }
 // R18 Col R
 Cell R18cell17 = row.createCell(17);
 if (record.getR18_total() != null) {
@@ -2185,8 +2279,8 @@ if (record3.getR33_non_residents () != null) {
 		List<Object> M_DEP3Archivallist2 = new ArrayList<>();
 		try {
 			M_DEP3Archivallist = M_DEP3_Archival_Summary_Repo1.getM_DEP3archival();
-			M_DEP3Archivallist1 = M_DEP3_Archival_Summary_Repo2.getM_DEP3archival();
-			M_DEP3Archivallist2 = M_DEP3_Archival_Summary_Repo3.getM_DEP3archival();
+			M_DEP3Archivallist1 = m_DEP3_Archival_Manual_Summary_Repo2.getM_DEP3archival();
+			M_DEP3Archivallist2 = m_DEP3_Archival_Manual_Summary_Repo3.getM_DEP3archival();
 			System.out.println("countser" + M_DEP3Archivallist.size());
 			System.out.println("countser" + M_DEP3Archivallist1.size());
 			System.out.println("countser" + M_DEP3Archivallist2.size());
@@ -2207,9 +2301,9 @@ if (record3.getR33_non_residents () != null) {
 		}
 		List<M_DEP3_Archival_Summary_Entity1> dataList = M_DEP3_Archival_Summary_Repo1
 				.getdatabydateListarchival(todate, version);
-		List<M_DEP3_Archival_Summary_Entity2> dataList1 = M_DEP3_Archival_Summary_Repo2
+		List<M_DEP3_Archival_Manual_Summary_Entity2> dataList1 = m_DEP3_Archival_Manual_Summary_Repo2
 				.getdatabydateListarchival(todate, version);
-		List<M_DEP3_Archival_Summary_Entity3> dataList2 = M_DEP3_Archival_Summary_Repo3
+		List<M_DEP3_Archival_Manual_Summary_Entity3> dataList2 = m_DEP3_Archival_Manual_Summary_Repo3
 				.getdatabydateListarchival(todate, version);		
 
 		if (dataList.isEmpty()) {
@@ -2275,8 +2369,8 @@ if (record3.getR33_non_residents () != null) {
 				for (int i = 0; i < dataList.size(); i++) {
 
 					M_DEP3_Archival_Summary_Entity1 record = dataList.get(i);
-					M_DEP3_Archival_Summary_Entity2 record2 = dataList1.get(i);
-					M_DEP3_Archival_Summary_Entity3 record3 = dataList2.get(i);
+					M_DEP3_Archival_Manual_Summary_Entity2 record2 = dataList1.get(i);
+					M_DEP3_Archival_Manual_Summary_Entity3 record3 = dataList2.get(i);
 					System.out.println("rownumber=" + startRow + i);
 					Row row = sheet.getRow(startRow + i);
 					if (row == null) {
@@ -3914,5 +4008,10 @@ if (record3.getR33_non_residents () != null) {
 		}
 	
 
-			}}
+			}
+        
+
+		
+        
+        }
 		

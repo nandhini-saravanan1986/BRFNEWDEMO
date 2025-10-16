@@ -10,8 +10,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_M_DEP3_ARCHIVALTABLE_SUMMARY3")
-public class M_DEP3_Archival_Summary_Entity3 {
+@Table(name = "BRRS_M_DEP3_ARCHIVALTABLE_MANUAL_SUMMARY3")
+public class M_DEP3_Archival_Manual_Summary_Entity3 {
 
 private String	r28_holder_of_frn_curr_acc;
 private BigDecimal	r28_residents;
@@ -287,7 +287,7 @@ public void setDel_flg(String del_flg) {
     this.del_flg = del_flg;
 }
 
-public M_DEP3_Archival_Summary_Entity3() {
+public M_DEP3_Archival_Manual_Summary_Entity3() {
     super();
 }
 

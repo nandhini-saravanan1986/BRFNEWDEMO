@@ -853,6 +853,16 @@ if (record2.getR37_INTEREST_RATE() != null) {
     R37cell4.setCellValue("");
     R37cell4.setCellStyle(textStyle);
 }
+row = sheet.getRow(37); 
+// R37 Col E
+Cell R38cell4 = row.createCell(4);
+if (record2.getR38_INTEREST_RATE() != null) {
+    R38cell4.setCellValue(record2.getR38_INTEREST_RATE().doubleValue());
+    R38cell4.setCellStyle(numberStyle);
+} else {
+    R38cell4.setCellValue("");
+    R38cell4.setCellStyle(textStyle);
+}
 
 				}
 				workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
@@ -1424,8 +1434,16 @@ if (record2.getR37_INTEREST_RATE() != null) {
     R37cell4.setCellValue("");
     R37cell4.setCellStyle(textStyle);
 }
-
-
+row = sheet.getRow(37); 
+// R37 Col E
+Cell R38cell4 = row.createCell(4);
+if (record2.getR38_INTEREST_RATE() != null) {
+    R38cell4.setCellValue(record2.getR38_INTEREST_RATE().doubleValue());
+    R38cell4.setCellStyle(numberStyle);
+} else {
+    R38cell4.setCellValue("");
+    R38cell4.setCellStyle(textStyle);
+}
 				}
 				workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
 			} else {

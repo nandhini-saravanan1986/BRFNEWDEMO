@@ -12,8 +12,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_M_DEP3_SUMMARYTABLE2")
-public class M_DEP3_Summary_Entity2 {
+@Table(name = "BRRS_M_DEP3_MANUAL_SUMMARYTABLE2")
+public class M_DEP3_Manual_Summary_Entity2 {
 
 
 private String	r28_pur_of_frn_cuu_acc;
@@ -280,7 +280,7 @@ public void setDel_flg(String del_flg) {
     this.del_flg = del_flg;
 }
 
-public M_DEP3_Summary_Entity2() {
+public M_DEP3_Manual_Summary_Entity2() {
     super();
 }
 
