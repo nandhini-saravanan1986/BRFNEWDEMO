@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class M_FXR_Summary_Entity1{	
 	
 	
-	private String r11_currency;
+//	private String r11_currency;
 	private BigDecimal r11_net_spot_position;
 	private BigDecimal r11_net_forward_position;
 	private BigDecimal r11_guarantees;
@@ -28,7 +28,7 @@ public class M_FXR_Summary_Entity1{
 	private BigDecimal r11_net_long_position;
 	private BigDecimal r11_or;
 	private BigDecimal r11_net_short_position;
-	private String r12_currency;
+//	private String r12_currency;
 	private BigDecimal r12_net_spot_position;
 	private BigDecimal r12_net_forward_position;
 	private BigDecimal r12_guarantees;
@@ -38,7 +38,7 @@ public class M_FXR_Summary_Entity1{
 	private BigDecimal r12_net_long_position;
 	private BigDecimal r12_or;
 	private BigDecimal r12_net_short_position;
-	private String r13_currency;
+//	private String r13_currency;
 	private BigDecimal r13_net_spot_position;
 	private BigDecimal r13_net_forward_position;
 	private BigDecimal r13_guarantees;
@@ -48,7 +48,7 @@ public class M_FXR_Summary_Entity1{
 	private BigDecimal r13_net_long_position;
 	private BigDecimal r13_or;
 	private BigDecimal r13_net_short_position;
-	private String r14_currency;
+//	private String r14_currency;
 	private BigDecimal r14_net_spot_position;
 	private BigDecimal r14_net_forward_position;
 	private BigDecimal r14_guarantees;
@@ -58,7 +58,7 @@ public class M_FXR_Summary_Entity1{
 	private BigDecimal r14_net_long_position;
 	private BigDecimal r14_or;
 	private BigDecimal r14_net_short_position;
-	private String r15_currency;
+//	private String r15_currency;
 	private BigDecimal r15_net_spot_position;
 	private BigDecimal r15_net_forward_position;
 	private BigDecimal r15_guarantees;
@@ -68,7 +68,7 @@ public class M_FXR_Summary_Entity1{
 	private BigDecimal r15_net_long_position;
 	private BigDecimal r15_or;
 	private BigDecimal r15_net_short_position;
-	private String r16_currency;
+//	private String r16_currency;
 	private BigDecimal r16_net_spot_position;
 	private BigDecimal r16_net_forward_position;
 	private BigDecimal r16_guarantees;
@@ -97,17 +97,17 @@ public class M_FXR_Summary_Entity1{
 	private String del_flg;
 
 	
-	
-	public String getR11_currency() {
-		return r11_currency;
-	}
-
-
-
-	public void setR11_currency(String r11_currency) {
-		this.r11_currency = r11_currency;
-	}
-
+//	
+//	public String getR11_currency() {
+//		return r11_currency;
+//	}
+//
+//
+//
+//	public void setR11_currency(String r11_currency) {
+//		this.r11_currency = r11_currency;
+//	}
+//
 
 
 	public BigDecimal getR11_net_spot_position() {
@@ -218,15 +218,15 @@ public class M_FXR_Summary_Entity1{
 
 
 
-	public String getR12_currency() {
-		return r12_currency;
-	}
-
-
-
-	public void setR12_currency(String r12_currency) {
-		this.r12_currency = r12_currency;
-	}
+//	public String getR12_currency() {
+//		return r12_currency;
+//	}
+//
+//
+//
+//	public void setR12_currency(String r12_currency) {
+//		this.r12_currency = r12_currency;
+//	}
 
 
 
@@ -338,16 +338,16 @@ public class M_FXR_Summary_Entity1{
 
 
 
-	public String getR13_currency() {
-		return r13_currency;
-	}
-
-
-
-	public void setR13_currency(String r13_currency) {
-		this.r13_currency = r13_currency;
-	}
-
+//	public String getR13_currency() {
+//		return r13_currency;
+//	}
+//
+//
+//
+//	public void setR13_currency(String r13_currency) {
+//		this.r13_currency = r13_currency;
+//	}
+//
 
 
 	public BigDecimal getR13_net_spot_position() {
@@ -457,17 +457,17 @@ public class M_FXR_Summary_Entity1{
 	}
 
 
-
-	public String getR14_currency() {
-		return r14_currency;
-	}
-
-
-
-	public void setR14_currency(String r14_currency) {
-		this.r14_currency = r14_currency;
-	}
-
+//
+//	public String getR14_currency() {
+//		return r14_currency;
+//	}
+//
+//
+//
+//	public void setR14_currency(String r14_currency) {
+//		this.r14_currency = r14_currency;
+//	}
+//
 
 
 	public BigDecimal getR14_net_spot_position() {
@@ -577,17 +577,17 @@ public class M_FXR_Summary_Entity1{
 	}
 
 
-
-	public String getR15_currency() {
-		return r15_currency;
-	}
-
-
-
-	public void setR15_currency(String r15_currency) {
-		this.r15_currency = r15_currency;
-	}
-
+//
+//	public String getR15_currency() {
+//		return r15_currency;
+//	}
+//
+//
+//
+//	public void setR15_currency(String r15_currency) {
+//		this.r15_currency = r15_currency;
+//	}
+//
 
 
 	public BigDecimal getR15_net_spot_position() {
@@ -696,17 +696,17 @@ public class M_FXR_Summary_Entity1{
 		this.r15_net_short_position = r15_net_short_position;
 	}
 
-
-
-	public String getR16_currency() {
-		return r16_currency;
-	}
-
-
-
-	public void setR16_currency(String r16_currency) {
-		this.r16_currency = r16_currency;
-	}
+//
+//
+//	public String getR16_currency() {
+//		return r16_currency;
+//	}
+//
+//
+//
+//	public void setR16_currency(String r16_currency) {
+//		this.r16_currency = r16_currency;
+//	}
 
 
 

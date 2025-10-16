@@ -220,7 +220,7 @@ public class BRRS_M_FXR_ReportService {
 	        for (int i = 11; i <= 16; i++) {
 	            String prefix = "R" + i + "_";
 
-	            String[] fields = { "currency", "net_spot_position", "net_forward_position", "guarantees",
+	            String[] fields = { "net_spot_position", "net_forward_position", "guarantees",
 	                                "net_future_inc_or_exp", "net_delta_wei_fx_opt_posi", "other_items",
 	                                "net_long_position", "or", "net_short_position" };
 
@@ -354,7 +354,7 @@ public class BRRS_M_FXR_ReportService {
 
 	    try {
 
-	            String[] fields = {"greater_net_long_or_short", "abs_value_net_gold_posi", "capital_require", "capital_charge"};
+	            String[] fields = {"greater_net_long_or_short", "abs_value_net_gold_posi", "capital_charge"};
 
 	            for (String field : fields) {
 	                String getterName = "getR29_" + field;
@@ -694,14 +694,14 @@ public class BRRS_M_FXR_ReportService {
 			        
 			        // ===== Row 11 / Col B =====
 					row = sheet.getRow(10);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR11_currency() != null)
-					cell1.setCellValue(record1.getR11_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR11_currency() != null)
+//					cell1.setCellValue(record1.getR11_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 
 					// ===== R11 / Col C =====
@@ -799,14 +799,14 @@ public class BRRS_M_FXR_ReportService {
 
 			        // ===== R12 / Col B =====
 					row = sheet.getRow(11);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR12_currency() != null)
-					cell1.setCellValue(record1.getR12_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR12_currency() != null)
+//					cell1.setCellValue(record1.getR12_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 
 			        
@@ -906,14 +906,14 @@ public class BRRS_M_FXR_ReportService {
 			        
 			        // ===== R13 / Col B =====
 					row = sheet.getRow(12);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR13_currency() != null)
-					cell1.setCellValue(record1.getR13_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR13_currency() != null)
+//					cell1.setCellValue(record1.getR13_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			        
 
@@ -1014,14 +1014,14 @@ public class BRRS_M_FXR_ReportService {
 			        
 			        // ===== R14 / Col B =====
 					row = sheet.getRow(13);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR14_currency() != null)
-					cell1.setCellValue(record1.getR14_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR14_currency() != null)
+//					cell1.setCellValue(record1.getR14_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			        
 
@@ -1122,14 +1122,14 @@ public class BRRS_M_FXR_ReportService {
 			        
 			        // ===== R15 / Col B =====
 					row = sheet.getRow(14);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR15_currency() != null)
-					cell1.setCellValue(record1.getR15_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR15_currency() != null)
+//					cell1.setCellValue(record1.getR15_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			        
 			        
@@ -1229,14 +1229,14 @@ public class BRRS_M_FXR_ReportService {
 
 			        // ===== R16 / Col B =====
 					row = sheet.getRow(15);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR16_currency() != null)
-					cell1.setCellValue(record1.getR16_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR16_currency() != null)
+//					cell1.setCellValue(record1.getR16_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			       
 
@@ -1547,14 +1547,14 @@ public class BRRS_M_FXR_ReportService {
 
 			        // ===== Row 11 / Col B =====
 					row = sheet.getRow(10);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR11_currency() != null)
-					cell1.setCellValue(record1.getR11_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR11_currency() != null)
+//					cell1.setCellValue(record1.getR11_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 
 					// ===== R11 / Col C =====
@@ -1652,14 +1652,14 @@ public class BRRS_M_FXR_ReportService {
 
 			        // ===== R12 / Col B =====
 					row = sheet.getRow(11);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR12_currency() != null)
-					cell1.setCellValue(record1.getR12_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR12_currency() != null)
+//					cell1.setCellValue(record1.getR12_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 
 			        
@@ -1759,14 +1759,14 @@ public class BRRS_M_FXR_ReportService {
 			        
 			        // ===== R13 / Col B =====
 					row = sheet.getRow(12);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR13_currency() != null)
-					cell1.setCellValue(record1.getR13_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR13_currency() != null)
+//					cell1.setCellValue(record1.getR13_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			        
 
@@ -1867,14 +1867,14 @@ public class BRRS_M_FXR_ReportService {
 			        
 			        // ===== R14 / Col B =====
 					row = sheet.getRow(13);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR14_currency() != null)
-					cell1.setCellValue(record1.getR14_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR14_currency() != null)
+//					cell1.setCellValue(record1.getR14_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			        
 
@@ -1975,14 +1975,14 @@ public class BRRS_M_FXR_ReportService {
 			        
 			        // ===== R15 / Col B =====
 					row = sheet.getRow(14);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR15_currency() != null)
-					cell1.setCellValue(record1.getR15_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR15_currency() != null)
+//					cell1.setCellValue(record1.getR15_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			        
 			        
@@ -2082,14 +2082,14 @@ public class BRRS_M_FXR_ReportService {
 
 			        // ===== R16 / Col B =====
 					row = sheet.getRow(15);
-					cell1 = row.getCell(1);
-					if (cell1 == null) cell1 = row.createCell(1);
-					originalStyle = cell1.getCellStyle();
-			// ✅ Handle String value 
-					if (record1.getR16_currency() != null)
-					cell1.setCellValue(record1.getR16_currency()); // String directly 
-					else cell1.setCellValue(""); 
-					cell1.setCellStyle(originalStyle);
+//					cell1 = row.getCell(1);
+//					if (cell1 == null) cell1 = row.createCell(1);
+//					originalStyle = cell1.getCellStyle();
+//			// ✅ Handle String value 
+//					if (record1.getR16_currency() != null)
+//					cell1.setCellValue(record1.getR16_currency()); // String directly 
+//					else cell1.setCellValue(""); 
+//					cell1.setCellStyle(originalStyle);
 
 			       
 

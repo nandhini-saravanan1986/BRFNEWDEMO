@@ -20,7 +20,7 @@ public class M_FXR_Summary_Entity3{
 	
 	private BigDecimal r29_greater_net_long_or_short;
 	private BigDecimal r29_abs_value_net_gold_posi;
-	private BigDecimal r29_capital_require;
+	//private BigDecimal r29_capital_require;
 	private BigDecimal r29_capital_charge;
 	private BigDecimal r30_capital_require;
 
@@ -42,13 +42,13 @@ public class M_FXR_Summary_Entity3{
 		this.r29_abs_value_net_gold_posi = r29_abs_value_net_gold_posi;
 	}
 
-	public BigDecimal getR29_capital_require() {
-		return r29_capital_require;
-	}
-
-	public void setR29_capital_require(BigDecimal r29_capital_require) {
-		this.r29_capital_require = r29_capital_require;
-	}
+//	public BigDecimal getR29_capital_require() {
+//		return r29_capital_require;
+//	}
+//
+//	public void setR29_capital_require(BigDecimal r29_capital_require) {
+//		this.r29_capital_require = r29_capital_require;
+//	}
 
 	public BigDecimal getR29_capital_charge() {
 		return r29_capital_charge;

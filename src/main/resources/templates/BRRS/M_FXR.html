@@ -431,12 +431,14 @@ PURPOSE		: BRRSREPORT
 	// Show Modify (enable inputs & dropdowns)
 function showmodify(btn) {
     // Make all inputs editable
-    $(".Show_input").removeAttr("readonly").removeAttr("disabled");
+    //$(".Show_input").removeAttr("readonly").removeAttr("disabled");
+    $(".Show_input").not(".nonEditable").removeAttr("readonly").removeAttr("disabled");
+
 
     // Highlight editable fields for rows 10 to 16
     for (let i = 10; i <= 16; i++) {  
         let fields = [
-            "currency", "net_spot_position", "net_forward_position", "guarantees",
+             "net_spot_position", "net_forward_position", "guarantees",
             "net_future_inc_or_exp", "net_delta_wei_fx_opt_posi", "other_items",
             "net_long_position", "or", "net_short_position"
         ];
@@ -729,7 +731,7 @@ function cancelModify() {
 	    calculateR29Result();
 
 	 // Recalculate whenever #r17_net_long_position or #r17_net_short_position changes
-	    $("#r21_long, #r21_short, #r22_long, #r22_short, #r29_capital_require").on("input", function () {
+	    $("#r21_long, #r21_short, #r22_long, #r22_short").on("input", function () {
 	    	calculateR29Result();
 	    });
 	    // Recalculate whenever R11–R16 values change
@@ -987,7 +989,7 @@ function fileuploads(btn) {
 
     // --- Entity 1 fields (R10-R17) ---
     for (let i = 10; i <= 17; i++) {
-        ["currency", "net_spot_position", "net_forward_position", "guarantees",
+        ["net_spot_position", "net_forward_position", "guarantees",
         "net_future_inc_or_exp", "net_delta_wei_fx_opt_posi", "other_items",
         "net_long_position", "or", "net_short_position"].forEach(field => {
             const input = $("#r" + i + "_" + field);
@@ -1186,7 +1188,7 @@ function fileuploads(btn) {
 		<tbody id="entity1" th:each="report: ${reportsummary1}" style="font-family: Arial;">
 <tr>
 	<td id="ROW11"></td>
-	<td id="ROW11" >
+	<!-- <td id="ROW11" >
         <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.r11_currency, 'N/A')}"
@@ -1194,7 +1196,9 @@ function fileuploads(btn) {
                name="r11_currency"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
                readonly />
-    </td>
+    </td> -->
+    
+    <td>Euro</td>
     <td id="ROW11" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
@@ -1259,7 +1263,7 @@ function fileuploads(btn) {
            readonly />
 	</td>
 	<td id="ROW11" style="padding-left: 20px;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
            th:value="${report.r11_or != null ? #numbers.formatDecimal(report.r11_or, 1, 'COMMA', 0, 'POINT') : '0'}"
            id="r11_or"
@@ -1281,7 +1285,7 @@ function fileuploads(btn) {
 </tr>
 <tr>
 	<td id="ROW12"></td>
-	<td id="ROW12" >
+	<!-- <td id="ROW12" >
         <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.r12_currency, 'N/A')}"
@@ -1289,7 +1293,8 @@ function fileuploads(btn) {
                name="r12_currency"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
                readonly />
-    </td>
+    </td> -->
+    <td>Pound Sterling</td>
     <td id="ROW12" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
@@ -1354,7 +1359,7 @@ function fileuploads(btn) {
            readonly />
 	</td>
 	<td id="ROW12" style="padding-left: 20px;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
            th:value="${report.r12_or != null ? #numbers.formatDecimal(report.r12_or, 1, 'COMMA', 0, 'POINT') : '0'}"
            id="r12_or"
@@ -1376,7 +1381,7 @@ function fileuploads(btn) {
 </tr>
 <tr>
 	<td id="ROW13"></td>
-	<td id="ROW13" >
+	<!-- <td id="ROW13" >
         <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.r13_currency, 'N/A')}"
@@ -1384,7 +1389,8 @@ function fileuploads(btn) {
                name="r13_currency"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
                readonly />
-    </td>
+    </td> -->
+    <td>Indian Rupee</td>
     <td id="ROW13" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
@@ -1449,7 +1455,7 @@ function fileuploads(btn) {
            readonly />
 	</td>
 	<td id="ROW13" style="padding-left: 20px;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
            th:value="${report.r13_or != null ? #numbers.formatDecimal(report.r13_or, 1, 'COMMA', 0, 'POINT') : '0'}"
            id="r13_or"
@@ -1471,7 +1477,7 @@ function fileuploads(btn) {
 </tr>
 <tr>
 	<td id="ROW14"></td>
-	<td id="ROW14" >
+	<!-- <td id="ROW14" >
         <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.r14_currency, 'N/A')}"
@@ -1479,7 +1485,8 @@ function fileuploads(btn) {
                name="r14_currency"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
                readonly />
-    </td>
+    </td> -->
+    <td>South African Rand</td>
     <td id="ROW14" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
@@ -1544,7 +1551,7 @@ function fileuploads(btn) {
            readonly />
 	</td>
 	<td id="ROW14" style="padding-left: 20px;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
            th:value="${report.r14_or != null ? #numbers.formatDecimal(report.r14_or, 1, 'COMMA', 0, 'POINT') : '0'}"
            id="r14_or"
@@ -1566,7 +1573,7 @@ function fileuploads(btn) {
 </tr>
 <tr>
 	<td id="ROW15"></td>
-	<td id="ROW15" >
+	<!-- <td id="ROW15" >
         <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.r15_currency, 'N/A')}"
@@ -1574,7 +1581,8 @@ function fileuploads(btn) {
                name="r15_currency"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
                readonly />
-    </td>
+    </td> -->
+    <td>US Dollar</td>
     <td id="ROW15" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
@@ -1639,7 +1647,7 @@ function fileuploads(btn) {
            readonly />
 	</td>
 	<td id="ROW15" style="padding-left: 20px;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
            th:value="${report.r15_or != null ? #numbers.formatDecimal(report.r15_or, 1, 'COMMA', 0, 'POINT') : '0'}"
            id="r15_or"
@@ -1661,7 +1669,7 @@ function fileuploads(btn) {
 </tr>
 <tr>
 	<td id="ROW16"></td>
-	<td id="ROW16" >
+	<!-- <td id="ROW16" >
         <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.r16_currency, 'N/A')}"
@@ -1669,7 +1677,8 @@ function fileuploads(btn) {
                name="r16_currency"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
                readonly />
-    </td>
+    </td> -->
+    <td>Other Exotic Currencies</td>
     <td id="ROW16" style="padding-left: 20px;">
     <input class="display-input Show_input"
            type="text"
@@ -1734,7 +1743,7 @@ function fileuploads(btn) {
            readonly />
 	</td>
 	<td id="ROW16" style="padding-left: 20px;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
            th:value="${report.r16_or != null ? #numbers.formatDecimal(report.r16_or, 1, 'COMMA', 0, 'POINT') : '0'}"
            id="r16_or"
@@ -1759,7 +1768,7 @@ function fileuploads(btn) {
 <td id="ROW17" style="font-weight: bold; text-align: left; border: none;">Total Position</td>
    <!-- th:value="${report.r17_net_long_position != null ? #numbers.formatDecimal(report.r17_net_long_position, 0, 'COMMA', 0, 'POINT') : '0'}" -->
 <td id="ROW17" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
         
            id="r17_net_long_position"
@@ -1772,7 +1781,7 @@ function fileuploads(btn) {
 	<td id="ROW17" style="background-color: #D9D9D9;"></td>
 	<!-- th:value="${report.r17_net_short_position != null ? #numbers.formatDecimal(report.r17_net_short_position, 1, 'COMMA', 0, 'POINT') : '0'}" -->
 	<td id="ROW17" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-    <input class="display-input Show_input"
+    <input class="display-input Show_input nonEditable"
            type="text"
            
            id="r17_net_short_position"
@@ -1807,7 +1816,7 @@ function fileuploads(btn) {
           <tr>
             <th style="vertical-align: middle; text-align:left; color:black;">Long</th>
             <th style="vertical-align: middle; text-align:left; color:black;">Short</th>
-            <th style="vertical-align: middle; text-align:left; color:black;">Total Gross Long & Short Position</th>
+            <th style="vertical-align: middle; text-align:left; color:black;">Total Gross Long &<br> Short Position</th>
             <th style="vertical-align: middle; text-align:left; color:black;">Net Position</th>
             <th ></th>
           </tr>
@@ -1833,7 +1842,7 @@ function fileuploads(btn) {
                      readonly />
             </td>
             <td id="ROW21" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r21_total_gross_long_short"
                      name="r21_total_gross_long_short"
@@ -1841,7 +1850,7 @@ function fileuploads(btn) {
                      readonly />
             </td>
             <td id="ROW21" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r21_net_position"
                      name="r21_net_position"
@@ -1871,7 +1880,7 @@ function fileuploads(btn) {
                      readonly />
             </td>
             <td id="ROW22" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r22_total_gross_long_short"
                      name="r22_total_gross_long_short"
@@ -1879,7 +1888,7 @@ function fileuploads(btn) {
                      readonly />
             </td>
             <td id="ROW22" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r22_net_position"
                      name="r22_net_position"
@@ -1891,7 +1900,7 @@ function fileuploads(btn) {
           <tr>
           <td colspan="3"></td>
           	<td id="ROW23" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r23_net_position"
                      name="r23_net_position"
@@ -1918,10 +1927,10 @@ function fileuploads(btn) {
         <thead class="thead-light">
           <tr>
           	<th></th>
-            <th style="text-align:left; color:black;">Greater of the Absolute <br>Value of Net Long<br> Position (J) or Net Short <br>Position (K)</th>
-            <th style="text-align:left; color:black;">Absolute <br>Value Net<br> Gold Position (L)</th>
-            <th style="text-align:left; color:black;">Capital Requirement</th>
-            <th style="text-align:left; color:black;">Capital Charge</th>
+            <th style="vertical-align: middle; text-align:left; color:black;">Greater of the Absolute <br>Value of Net Long<br> Position (J) or Net Short <br>Position (K)</th>
+            <th style="vertical-align: middle; text-align:left; color:black;">Absolute <br>Value Net<br> Gold Position (L)</th>
+            <th style="vertical-align: middle; text-align:left; color:black;">Capital Requirement</th>
+            <th style="vertical-align: middle; text-align:left; color:black;">Capital Charge</th>
           </tr>
           <tr>
           	<th></th>
@@ -1935,7 +1944,7 @@ function fileuploads(btn) {
             <tr>
           	<td id="ROW29" style="font-weight:bold; text-align:left;">General risk</td>
             <td style="padding-left: 20px; text-align:right;background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r29_greater_net_long_or_short"
                      name="r29_greater_net_long_or_short"
@@ -1943,7 +1952,7 @@ function fileuploads(btn) {
                      readonly />
             </td>
             <td id="ROW29" style="padding-left: 20px; text-align:right;background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r29_abs_value_net_gold_posi"
                      name="r29_abs_value_net_gold_posi"
@@ -1963,13 +1972,20 @@ function fileuploads(btn) {
 
 
             <td id="ROW29" style="padding-left: 20px; font-weight: bold; background-color: rgb(107, 122, 143); color: white;">
-              <input class="display-input Show_input"
+              <input class="display-input Show_input nonEditable"
                      type="text"
                      id="r29_capital_charge"
                      name="r29_capital_charge"
                      style="background-color: rgb(107, 122, 143); color: white; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
             </td>
+    <!-- <td id="r29_capital_charge"
+    name="r29_capital_charge"
+    th:text="${report.r29_capital_charge}"
+    style=" text-align: right; background-color: rgb(107, 122, 143); color: white;">
+</td> -->
+
+
           </tr>
           <tr>            
           <td colspan = 3></td>
@@ -1981,7 +1997,10 @@ function fileuploads(btn) {
                      name="r30_capital_require"
                      style="width: 200px; height: 28px; border-color: transparent; text-align: right;"
                      readonly />
-            </td></tr>
+            </td>
+          
+            
+            </tr>
         </tbody>
       </table>
     </td>
