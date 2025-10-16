@@ -616,11 +616,11 @@ function showdetailsbyRowAndColumn(a) {
 	function showmodify(btn) {
     // List of inputs that must remain readonly
     var readonlyIds = [
-        "r12_trans_amt",
-        "r19_amt_add_year1",
-        "r20_amt_add_year2",
-        "r21_amt_add_year3",
-        "r22_amt_add_year4"
+        "r12_trans_amt","r19_product","r20_product","r21_product","r22_product",
+       "r19_amt_add_year1",
+	   "r20_amt_add_year2",
+	   "r21_amt_add_year3",
+	   "r22_amt_add_year4"
     ];
 
 	$(".show_input").each(function () {
@@ -783,9 +783,7 @@ $(document).ready(function() {
 					<div class="custom-tab-btn-group nav-buttons"
 						style="display: flex; color: white; align-items: center;">
 						<!-- 📅 Date -->
-						<span class="white-text"
-							style="color: white !important; font-size: 16px; margin-right: 20px;">Report
-							Date: <span th:text="${asondate}">2025-07-04</span>
+						<span class="white-text" style="color: white !important; font-size: 16px; margin-right: 20px;">Report Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-09-18</span>
 						</span>
 
 						<!-- Buttons -->
@@ -845,9 +843,9 @@ $(document).ready(function() {
 						<table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports">
 							<thead>
 							                      <!-- Section 1 Heading -->
-							                      <tr>
-							                          <td>1</td>
-							                          <th colspan="3" class="text-left">TRANSITIONAL ADJUSTMENT AMOUNTS</th>
+							                      <tr style="border-bottom: 2px solid black;">
+							                          <td style="text-align: center;background-color: #D8D8D8;">1</td>
+							                          <th style="text-align: center;background-color: #D8D8D8;"colspan="3" class="text-left">TRANSITIONAL ADJUSTMENT AMOUNTS</th>
 							                      </tr>
 												  
 							                      <tr>
@@ -899,12 +897,12 @@ $(document).ready(function() {
 
                   <!-- Section 2 Heading -->
                   <tr>
-                      <td>2</td>
-                      <th colspan="3" class="text-left">Transitional Amount Added Back to Common Equity Tier 1 Capital During the Transition Period</th>
+                      <td style="text-align: center;background-color: #D8D8D8;">2</td>
+                      <th style="text-align: center;background-color: #D8D8D8;"colspan="3" class="text-left">Transitional Amount Added Back to Common Equity Tier 1 Capital During the Transition Period</th>
                   </tr>
 
                   <tr>
-                      <th>Financial Year*</th>
+                      <th style="text-align: center;background-color: #D8D8D8;">Financial Year*</th>
                       <th style="text-align: center;background-color: #D8D8D8;">Cap (%)</th>
                       <th style="text-align: center;background-color: #D8D8D8;">Amount added back to CET1 P'000</th>
                   </tr>
@@ -918,19 +916,16 @@ $(document).ready(function() {
 					         	  id="r19_product"
 					         	  name="r19_product"
 					        	   style="background-color:#FFFFFF; width: 200px; height: 28px; 
-					                  border-color: transparent; text-align:left;"
+					                  border-color: transparent; text-align:right;"
 					           readonly />
+							   
 							  </td>
-          
-			 <td id="ROW19" style="padding-left: 20px; font-weight: bold;">
-	   			    <input class="display-input show_input"
-	   			           type="text"
-						   th:value="${#numbers.formatDecimal(report.r19_cap_year1, 1, 'COMMA', 0, 'POINT')}"
-	   			           id="r19_cap_year1"
-	   			           name="r19_cap_year1"
-	   			           style="background-color:#FFFFFF; width: 100%; height: 28px; 
-	   			                  border-color: transparent; text-align: center;"
-	   			           readonly /></td> 
+							  <td id="ROW19" style="padding-left: 20px;text-align: center;"
+					  				th:text="${report.r19_cap_year1}+'%'"
+					  				></td>
+
+							  
+
 			 <td id="ROW19" style="padding-left: 20px; font-weight: bold;background-color: rgb(107, 122, 143);color: white;">
     			    <input class="display-input show_input"
     			           type="text"
@@ -938,7 +933,7 @@ $(document).ready(function() {
     			           id="r19_amt_add_year1"
     			           name="r19_amt_add_year1"
     			           style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px; 
-    			                  border-color: transparent; text-align: center;"
+    			                  border-color: transparent; text-align: right;"
     			           readonly /></td>
                      
                   </tr>
@@ -950,20 +945,14 @@ $(document).ready(function() {
 								           id="r20_product"
 								           name="r20_product"
 								           style="background-color:#FFFFFF; width: 200px; height: 28px; 
-								                  border-color: transparent; text-align:left;"
+								                  border-color: transparent; text-align:right;"
 								           readonly />
 								  </td>  
 								  
-
-								  <td id="ROW20" style="padding-left: 20px; font-weight: bold;">
-								  	    <input class="display-input show_input"
-								  	           type="text"
-											   th:value="${#numbers.formatDecimal(report.r20_cap_year2, 1, 'COMMA', 0, 'POINT')}"
-								  	           id="r20_cap_year2"
-								  	           name="r20_cap_year2"
-								  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
-								  	                  border-color: transparent; text-align: center;"
-								  	           readonly /> </td> 
+								  <td id="ROW20" style="padding-left: 20px; text-align: center;"
+								  											  				th:text="${report.r20_cap_year2}+'%'"
+								  											  				></td>
+											  
 								  <td id="ROW20" style="padding-left: 20px; font-weight: bold;background-color: rgb(107, 122, 143);color: white;">
 								      <input class="display-input show_input"
 								             type="text"
@@ -971,7 +960,7 @@ $(document).ready(function() {
 								             id="r20_amt_add_year2"
 								             name="r20_amt_add_year2"
 								             style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px; 
-								                    border-color: transparent; text-align: center;"
+								                    border-color: transparent; text-align: right;"
 								             readonly /></td>
                   </tr>
                   <tr>
@@ -983,20 +972,16 @@ $(document).ready(function() {
 												           id="r21_product"
 												           name="r21_product"
 												           style="background-color:#FFFFFF; width: 200px; height: 28px; 
-												                  border-color: transparent; text-align:left;"
+												                  border-color: transparent; text-align:right;"
 												           readonly />
 												  </td>  
 												  
 
-												  <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
-												  	    <input class="display-input show_input"
-												  	           type="text"
-															   th:value="${#numbers.formatDecimal(report.r21_cap_year3, 1, 'COMMA', 0, 'POINT')}"
-												  	           id="r21_cap_year3"
-												  	           name="r21_cap_year3"
-												  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
-												  	                  border-color: transparent; text-align: center;"
-												  	           readonly /> </td>
+												  <td id="ROW21" style="padding-left: 20px; text-align: center;"
+												  				th:text="${report.r21_cap_year3}+'%'"
+												  				></td>
+
+									   
 												  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:rgb(107, 122, 143)">
 												      <input class="display-input show_input"
 												             type="text"
@@ -1004,7 +989,7 @@ $(document).ready(function() {
 												             id="r21_amt_add_year3"
 												             name="r21_amt_add_year3"
 												             style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px;
-												                    border-color: transparent; text-align: center;"
+												                    border-color: transparent; text-align: right;"
 												             readonly /></td>
 
                   </tr>
@@ -1016,21 +1001,16 @@ $(document).ready(function() {
 																           id="r22_product"
 																           name="r22_product"
 																           style="background-color:#FFFFFF; width: 200px; height: 28px; 
-																                  border-color: transparent; text-align:left;"
+																                  border-color: transparent; text-align:right;"
 																           readonly />
 																  </td>  
-																  
+						  <td id="ROW22" style="padding-left: 20px; text-align: center;"
+						  				th:text="${report.r22_cap_year4}"
+						  				></td>
 
-																  <td id="ROW21" style="padding-left: 20px; font-weight: bold;">
-																  	    <input class="display-input show_input"
-																  	           type="text"
-																			   th:value="${#numbers.formatDecimal(report.r22_cap_year4, 1, 'COMMA', 0, 'POINT')}"
-																  	           id="r22_cap_year4"
-																  	           name="r22_cap_year4"
-																  	           style="background-color:#FFFFFF; width: 100%; height: 28px; 
-																  	                  border-color: transparent; text-align: center;"
-																  	           readonly />  </td>
-																  <td id="ROW21" style="padding-left: 20px; font-weight: bold;background-color:rgb(107, 122, 143)">
+						
+								  															   														   						  </td>
+																  <td id="ROW22" style="padding-left: 20px; font-weight: bold;background-color:rgb(107, 122, 143)">
 																      <input class="display-input show_input"
 																             type="text"
 																			 th:value="${#numbers.formatDecimal(report.r22_amt_add_year4, 1, 'COMMA', 0, 'POINT')}"
@@ -1038,7 +1018,7 @@ $(document).ready(function() {
 																             id="r22_amt_add_year4"
 																             name="r22_amt_add_year4"
 																             style="background-color:rgb(107, 122, 143); color: white; width: 100%; height: 28px;
-																                    border-color: transparent; text-align: center;"
+																                    border-color: transparent; text-align: right;"
 																             readonly /></td>
                    
                   </tr>
