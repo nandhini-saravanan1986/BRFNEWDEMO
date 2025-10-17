@@ -450,7 +450,7 @@ function downloadfile(button) {
 				window.URL.revokeObjectURL(url);
 				document.body.removeChild(a);
 
-				showResultModal('Success', 'The file has been downloaded successfully.');
+				showResultModal('BRRS', 'M_SP downloaded successfully.');
 			} else {
 				showResultModal('Information', 'No data was available to create a download.');
 			}
@@ -581,7 +581,7 @@ function showResultModal(title, message) {
 						window.URL.revokeObjectURL(url);
 						document.body.removeChild(a);
 
-						showResultModal('Success', filename + ' downloaded successfully.');
+						showResultModal('BRRS', filename + ' downloaded successfully.');
 					} else {
 						showResultModal('Information', 'No data was available to create a download.');
 					}
@@ -1213,7 +1213,7 @@ $(document).ready(function() {
   $(".numfield").each(function() {
     let val = $(this).text().trim();
     if (val && !isNaN(val)) {
-      $(this).text(parseFloat(val).toLocaleString('en-IN', {
+      $(this).text(parseFloat(val).toLocaleString('en-US', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0
       }));

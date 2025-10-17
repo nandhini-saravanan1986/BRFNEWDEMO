@@ -289,7 +289,7 @@ for (int i = 15; i <= 50; i++) {
     // Special case for row 34
     if (i == 34) {
         fields = new String[] {
-            "_tot_exp_aft_net"
+            "tot_exp_aft_net"
         };
     } else {
         fields = new String[] {
