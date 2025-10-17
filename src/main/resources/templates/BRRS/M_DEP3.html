@@ -744,8 +744,8 @@ function fileuploads(btn) {
 
     $.when(...deferreds)
         .done(() => {
-            $("#resultModalLabel").text("Success");
-            $("#resultModalBody").text("All reports updated successfully.");
+            $("#resultModalLabel").text("BRRS");
+            $("#resultModalBody").text("Updated successfully.");
             $("#resultModal").modal("show");
         })
         .fail((jqXHR) => {

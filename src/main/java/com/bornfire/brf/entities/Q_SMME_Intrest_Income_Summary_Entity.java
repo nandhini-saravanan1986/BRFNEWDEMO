@@ -12,8 +12,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_Q_SMME_SUMMARYTABLE")
-public class Q_SMME_Summary_Entity {
+@Table(name = "BRRS_Q_SMME_INTREST_INCOME_SUMMARYTABLE")
+public class Q_SMME_Intrest_Income_Summary_Entity {
 
 private String r15_caoin;
 private BigDecimal r15_res_carry_amt;
@@ -123,7 +123,7 @@ private String del_flg;
 	
 
 
-	public Q_SMME_Summary_Entity() {
+	public Q_SMME_Intrest_Income_Summary_Entity() {
 
 		super();
 }

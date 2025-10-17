@@ -38,34 +38,34 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bornfire.brf.entities.BRRS_Q_SMME_Archival_Detail_Repo;
+import com.bornfire.brf.entities.BRRS_Q_SMME_Intrest_Income_Archival_Detail_Repo;
 import com.bornfire.brf.entities.BRRS_Q_SMME_Archival_Summary_Repo;
-import com.bornfire.brf.entities.BRRS_Q_SMME_Detail_Repo;
-import com.bornfire.brf.entities.Q_SMME_Archival_Detail_Entity;
-import com.bornfire.brf.entities.Q_SMME_Archival_Summary_Entity;
-import com.bornfire.brf.entities.Q_SMME_Detail_Entity;
-import com.bornfire.brf.entities.Q_SMME_Summary_Entity;
-import com.bornfire.brf.entities.BRRS_Q_SMME_Summary_Repo;
+import com.bornfire.brf.entities.BRRS_Q_SMME_Intrest_Income_Detail_Repo;
+import com.bornfire.brf.entities.Q_SMME_Intrest_Income_Archival_Detail_Entity;
+import com.bornfire.brf.entities.Q_SMME_Intrest_Income_Archival_Summary_Entity;
+import com.bornfire.brf.entities.Q_SMME_Intrest_Income_Detail_Entity;
+import com.bornfire.brf.entities.Q_SMME_Intrest_Income_Summary_Entity;
+import com.bornfire.brf.entities.BRRS_Q_SMME_Intrest_Income_Summary_Repo;
 import com.bornfire.brf.entities.M_LA2_Detail_Entity;
 
 @Component
 @Service
 
-public class BRRS_Q_SMME_ReportService<BBRS_Q_SMME_Detail_Repo> {
-	private static final Logger logger = LoggerFactory.getLogger(BRRS_Q_SMME_ReportService.class);
+public class BRRS_Q_SMME_Intrest_Income_ReportService<BBRS_Q_SMME_Detail_Repo> {
+	private static final Logger logger = LoggerFactory.getLogger(BRRS_Q_SMME_Intrest_Income_ReportService.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
 	@Autowired
 	private Environment env;
 	@Autowired
-	BRRS_Q_SMME_Detail_Repo q_SMME_Detail_Repo;
+	BRRS_Q_SMME_Intrest_Income_Detail_Repo q_SMME_Detail_Repo;
 	@Autowired
-	BRRS_Q_SMME_Summary_Repo q_SMME_Summary_Repo;
+	BRRS_Q_SMME_Intrest_Income_Summary_Repo q_SMME_Summary_Repo;
 
 	
 	@Autowired
-	BRRS_Q_SMME_Archival_Detail_Repo Q_SMME_Archival_Detail_Repo;
+	BRRS_Q_SMME_Intrest_Income_Archival_Detail_Repo Q_SMME_Archival_Detail_Repo;
 
 	@Autowired
 	BRRS_Q_SMME_Archival_Summary_Repo Q_SMME_Archival_Summary_Repo;
@@ -86,7 +86,7 @@ public class BRRS_Q_SMME_ReportService<BBRS_Q_SMME_Detail_Repo> {
 
 		if (type.equals("ARCHIVAL") & version != null) {
 			System.out.println(type);
-			List<Q_SMME_Archival_Summary_Entity> T1Master = new ArrayList<Q_SMME_Archival_Summary_Entity>();
+			List<Q_SMME_Intrest_Income_Archival_Summary_Entity> T1Master = new ArrayList<Q_SMME_Intrest_Income_Archival_Summary_Entity>();
 			System.out.println(version);
 			try {
 				Date d1 = dateformat.parse(todate);
@@ -102,7 +102,7 @@ public class BRRS_Q_SMME_ReportService<BBRS_Q_SMME_Detail_Repo> {
 
 			mv.addObject("reportsummary", T1Master);
 		} else {
-			List<Q_SMME_Summary_Entity> T1Master = new ArrayList<Q_SMME_Summary_Entity>();
+			List<Q_SMME_Intrest_Income_Summary_Entity> T1Master = new ArrayList<Q_SMME_Intrest_Income_Summary_Entity>();
 			try {
 				Date d1 = dateformat.parse(todate);
 
@@ -155,7 +155,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
         }
 
         if ("ARCHIVAL".equalsIgnoreCase(type) && version != null) {
-            List<Q_SMME_Archival_Detail_Entity> resultList;
+            List<Q_SMME_Intrest_Income_Archival_Detail_Entity> resultList;
 
             if (reportLabel != null && reportAddlCriteria1 != null) {
                 resultList = Q_SMME_Archival_Detail_Repo
@@ -170,7 +170,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
             System.out.println("ARCHIVAL COUNT: " + (resultList != null ? resultList.size() : 0));
 
         } else {
-            List<Q_SMME_Detail_Entity> resultList;
+            List<Q_SMME_Intrest_Income_Detail_Entity> resultList;
 
             if (reportLabel != null && reportAddlCriteria1 != null) {
                 resultList = q_SMME_Detail_Repo
@@ -220,7 +220,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
 		}
 
 		// Fetch data
-		List<Q_SMME_Summary_Entity> dataList = q_SMME_Summary_Repo.getdatabydateList(dateformat.parse(todate));
+		List<Q_SMME_Intrest_Income_Summary_Entity> dataList = q_SMME_Summary_Repo.getdatabydateList(dateformat.parse(todate));
 
 		if (dataList.isEmpty()) {
 			logger.warn("Service: No data found for Q_SMME report. Returning empty result.");
@@ -282,7 +282,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
 
 			if (!dataList.isEmpty()) {
 				for (int i = 0; i < dataList.size(); i++) {
-					Q_SMME_Summary_Entity record = dataList.get(i);
+					Q_SMME_Intrest_Income_Summary_Entity record = dataList.get(i);
 					System.out.println("rownumber=" + startRow + i);
 					Row row = sheet.getRow(startRow + i);
 					if (row == null) {
@@ -878,11 +878,11 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
 			}
 			// Get data
 			Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
-			List<Q_SMME_Detail_Entity> reportData = q_SMME_Detail_Repo.getdatabydateList(parsedToDate);
+			List<Q_SMME_Intrest_Income_Detail_Entity> reportData = q_SMME_Detail_Repo.getdatabydateList(parsedToDate);
 			
 			if (reportData != null && !reportData.isEmpty()) {
 				int rowIndex = 1;
-				for (Q_SMME_Detail_Entity item : reportData) {
+				for (Q_SMME_Intrest_Income_Detail_Entity item : reportData) {
 					XSSFRow row = sheet.createRow(rowIndex++);
 					row.createCell(0).setCellValue(item.getCustId());
 					row.createCell(1).setCellValue(item.getAcctNumber());
@@ -946,7 +946,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
 		if (type.equals("ARCHIVAL") & version != null) {
 
 		}
-		List<Q_SMME_Archival_Summary_Entity> dataList = Q_SMME_Archival_Summary_Repo
+		List<Q_SMME_Intrest_Income_Archival_Summary_Entity> dataList = Q_SMME_Archival_Summary_Repo
 				.getdatabydateListarchival(todate, version);
 
 		if (dataList.isEmpty()) {
@@ -1014,7 +1014,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
 
 			if (!dataList.isEmpty()) {
 				for (int i = 0; i < dataList.size(); i++) {
-					Q_SMME_Archival_Summary_Entity record = dataList.get(i);
+					Q_SMME_Intrest_Income_Archival_Summary_Entity record = dataList.get(i);
 					System.out.println("rownumber=" + startRow + i);
 					Row row = sheet.getRow(startRow + i);
 					if (row == null) {
@@ -1612,14 +1612,14 @@ public byte[] getDetailExcelARCHIVAL(String filename,
 
         // --- Fetch data from DB ---
        // Date parsedToDate = new SimpleDateFormat("dd-MM-yyyy").parse(todate); // ✅ match with controller
-        List<Q_SMME_Archival_Detail_Entity> reportData =
+        List<Q_SMME_Intrest_Income_Archival_Detail_Entity> reportData =
                 Q_SMME_Archival_Detail_Repo.getdatabydateList(todate, version);
 
         logger.info("Fetched {} rows from DB for ARCHIVAL", reportData != null ? reportData.size() : 0);
 
         if (reportData != null && !reportData.isEmpty()) {
             int rowIndex = 1;
-            for (Q_SMME_Archival_Detail_Entity item : reportData) {
+            for (Q_SMME_Intrest_Income_Archival_Detail_Entity item : reportData) {
                 XSSFRow row = sheet.createRow(rowIndex++);
 
                 row.createCell(0).setCellValue(item.getCustId());

@@ -425,12 +425,16 @@ PURPOSE		: BWRBRREPORT
 	<script>function showmodify(btn) {
     // ✅ List of IDs that should ALWAYS remain readonly
     var readonlyIds = [
+		"R9_STAFF_COMPLEMENT", "R10_STAFF_COMPLEMENT", "R11_STAFF_COMPLEMENT", "R12_STAFF_COMPLEMENT", "R13_STAFF_COMPLEMENT", "R15_STAFF_COMPLEMENT", 
+        "R21_SENIOR_MANAGEMENT_COMPENSATION", "R22_SENIOR_MANAGEMENT_COMPENSATION", "R23_SENIOR_MANAGEMENT_COMPENSATION", "R24_STR21_SENIOR_MANAGEMENT_COMPENSATIONAFF_COMPLEMENT", "R25_SENIOR_MANAGEMENT_COMPENSATION", "R26_SENIOR_MANAGEMENT_COMPENSATION", "R27_SENIOR_MANAGEMENT_COMPENSATION", "R28_SENIOR_MANAGEMENT_COMPENSATION", 
+		"R33_STAFF_LOANS", "R34_STAFF_LOANS", "R35_STAFF_LOANS", "R36_STAFF_LOANS", "R37_STAFF_LOANS", "R38_STAFF_LOANS",
         "R15_LOCAL", "R15_EXPARIATES", "R9_TOTAL", "R10_TOTAL", "R11_TOTAL", "R12_TOTAL",
         "R13_TOTAL", "R14_TOTAL", "R15_TOTAL", "R28_LOCAL", "R28_EXPARIATES", "R21_TOTAL",
         "R22_TOTAL", "R23_TOTAL", "R24_TOTAL", "R25_TOTAL", "R26_TOTAL", "R27_TOTAL", "R28_TOTAL",
         "R38_ORIGINAL_AMT", "R38_BALANCE_OUTSTANDING", "R38_NO_OF_ACS"
     ];
-
+//"R33_INTEREST_RATE", "R34_INTEREST_RATE", "RR35_INTEREST_RATE35_STAFF_LOANS", "R36_INTEREST_RATE", "R37_INTEREST_RATE", "R38_INTEREST_RATE",
+		
     // ✅ Make all .Show_input editable except the ones in readonlyIds
     $(".Show_input").each(function () {
         if (!readonlyIds.includes(this.id)) {
@@ -441,13 +445,9 @@ PURPOSE		: BWRBRREPORT
     // ✅ Change background color for R9–R37 range fields
     for (let i = 9; i <= 14; i++) {
         let fields = [
-			"_STAFF_COMPLEMENT",
-            "_LOCAL",
-            "_EXPARIATES",
 			
-            // "_ORIGINAL_AMT",
-            // "_BALANCE_OUTSTANDING",
-            // "_NO_OF_ACS"
+            "_LOCAL",
+            "_EXPARIATES"
         ];
 
         fields.forEach(field => {
@@ -459,12 +459,9 @@ PURPOSE		: BWRBRREPORT
     }
 	  for (let i = 21; i <= 27; i++) {
         let fields = [
-			"_SENIOR_MANAGEMENT_COMPENSATION",
+			
             "_LOCAL",
-            "_EXPARIATES",
-            // "_ORIGINAL_AMT",
-            // "_BALANCE_OUTSTANDING",
-            // "_NO_OF_ACS"
+            "_EXPARIATES"
         ];
 
         fields.forEach(field => {
@@ -478,11 +475,25 @@ PURPOSE		: BWRBRREPORT
         let fields = [
             // "_LOCAL",
             // "_EXPARIATES",
-			"_STAFF_LOANS",
+		
             "_ORIGINAL_AMT",
             "_BALANCE_OUTSTANDING",
             "_NO_OF_ACS"
         ];
+		
+
+        fields.forEach(field => {
+            let selector = `#R${i}${field}`;
+            if ($(selector).length) {
+                $(selector).css("background-color", "#d3d3d3");
+            }
+        });
+
+		  for (let i = 33; i <= 38; i++) {
+        let fields = [
+          "_INTEREST_RATE"
+        ];
+		
 
         fields.forEach(field => {
             let selector = `#R${i}${field}`;
@@ -497,7 +508,7 @@ PURPOSE		: BWRBRREPORT
     $("#cancelRecord").show();
     $(btn).hide(); // hide the clicked Modify button
 }
-
+	}
 //Cancel / Reset function
 function cancelModify() {
     if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
@@ -532,16 +543,16 @@ function calculateR15Totals() {
         let e = parseFloat($("#R" + i + "_EXPARIATES").val().replace(/,/g, "")) || 0;
 
         let rowTotal = l + e;
-        $("#R" + i + "_TOTAL").val(rowTotal.toLocaleString('en-IN'));
+        $("#R" + i + "_TOTAL").val(rowTotal.toLocaleString('en-US'));
 
         localTotal += l;
         expatriatesTotal += e;
         grandTotal += rowTotal;
     }
 
-    $("#R15_LOCAL").val(localTotal.toLocaleString('en-IN'));
-    $("#R15_EXPARIATES").val(expatriatesTotal.toLocaleString('en-IN'));
-    $("#R15_TOTAL").val(grandTotal.toLocaleString('en-IN'));
+    $("#R15_LOCAL").val(localTotal.toLocaleString('en-US'));
+    $("#R15_EXPARIATES").val(expatriatesTotal.toLocaleString('en-US'));
+    $("#R15_TOTAL").val(grandTotal.toLocaleString('en-US'));
 }
 
 // ---- R28 TOTAL (R21–R27) ----
@@ -553,16 +564,16 @@ function calculateR28Totals() {
         let e = parseFloat($("#R" + i + "_EXPARIATES").val().replace(/,/g, "")) || 0;
 
         let rowTotal = l + e;
-        $("#R" + i + "_TOTAL").val(rowTotal.toLocaleString('en-IN'));
+        $("#R" + i + "_TOTAL").val(rowTotal.toLocaleString('en-US'));
 
         localTotal += l;
         expatriatesTotal += e;
         grandTotal += rowTotal;
     }
 
-    $("#R28_LOCAL").val(localTotal.toLocaleString('en-IN'));
-    $("#R28_EXPARIATES").val(expatriatesTotal.toLocaleString('en-IN'));
-    $("#R28_TOTAL").val(grandTotal.toLocaleString('en-IN'));
+    $("#R28_LOCAL").val(localTotal.toLocaleString('en-US'));
+    $("#R28_EXPARIATES").val(expatriatesTotal.toLocaleString('en-US'));
+    $("#R28_TOTAL").val(grandTotal.toLocaleString('en-US'));
 }
 
 // ---- R38 TOTAL (R33–R37) ----
@@ -579,9 +590,9 @@ function calculateR38Totals() {
         noOfAc           += nOAc;
     }
 
-    $("#R38_ORIGINAL_AMT").val(originalAmt.toLocaleString('en-IN'));
-    $("#R38_BALANCE_OUTSTANDING").val(balanceOutstanding.toLocaleString('en-IN'));
-    $("#R38_NO_OF_ACS").val(noOfAc.toLocaleString('en-IN'));
+    $("#R38_ORIGINAL_AMT").val(originalAmt.toLocaleString('en-US'));
+    $("#R38_BALANCE_OUTSTANDING").val(balanceOutstanding.toLocaleString('en-US'));
+    $("#R38_NO_OF_ACS").val(noOfAc.toLocaleString('en-US'));
 }
 
 $(document).ready(function() {
@@ -658,7 +669,7 @@ function fileuploads(btn) {
         $.ajax({ url: './QSTAFF3', type: 'POST', data: formData3, processData: false, contentType: false })
     )
     .done(() => {
-        $("#resultModalLabel").text("Success");
+        $("#resultModalLabel").text("BRRS");
         $("#resultModalBody").text("Updated successfully.");
         $("#resultModal").modal("show");
     })
@@ -1294,281 +1305,265 @@ function fileuploads(btn) {
 									</tbody>	
 								</table>
 								<table 
-									class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
-									id="reports">
-									<thead class="thead-light">
-										<tr style="background-color: #D8D8D8;">
-											<th style="text-align: left; width: 300px;background-color: #D8D8D8;">(8C) STAFF LOANS</th>
-											<th style="text-align: right; width: 200px;background-color: #D8D8D8;">Original Amount</th>
-											<th style="text-align: right; width: 200px;background-color: #D8D8D8;">Balance Outstanding</th>
-											<th style="text-align: right; width: 200px;background-color: #D8D8D8;">No. of A/Cs</th>
-											<th style="text-align: right; width: 200px;background-color: #D8D8D8;">Interest Rate</th>
-										</tr>
-									</thead>
-	
-	                            <tbody id="entity3" th:each="report: ${reportsummary3}" style="font-family: Arial;">
-									                                        <tr>
-										<td id="ROW33" style="font-weight: bold;"><input
-										class="display-input Show_input " type="text"
-										th:value="'Mortgage'"
-										id="R33_STAFF_LOANS" name="R33_STAFF_LOANS"
-										style="background-color: #FFFFFF; width: 850px; height: 33px; border-color: transparent; text-align: left; padding-left: 20px;"
-										readonly /></td>
-	                                    <td id="ROW33" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-                                        type="text"
-                                        th:value="${report.R33_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R33_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
-                                        id="R33_ORIGINAL_AMT"
-                                        name="R33_ORIGINAL_AMT"
-                                        style="background-color: #FFFFFF; width: 250px; height: 33px; border-color: transparent; text-align: right;"
-                                        readonly /></td>
-	                                    <td id="ROW33" style="font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R33_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R33_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R33_BALANCE_OUTSTANDING"
-	                                    name="R33_BALANCE_OUTSTANDING"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 33px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        
-										 <td id="ROW33" style="font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R33_NO_OF_ACS != null ? #numbers.formatDecimal(report.R33_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R33_NO_OF_ACS"
-	                                    name="R33_NO_OF_ACS"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 33px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-										<td id="ROW33" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R33_INTEREST_RATE != null ? #numbers.formatDecimal(report.R33_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
-	                                    id="R33_INTEREST_RATE"
-	                                    name="R33_INTEREST_RATE"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 33px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        </tr>
+	class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
+	id="reports"
+	style="width: 800px; table-layout: fixed; border-collapse: collapse;">
 
-										                                        <tr>
-										<td id="ROW34" style="font-weight: bold;"><input
-										class="display-input Show_input " type="text"
-										th:value="'Car'"
-										id="R34_STAFF_LOANS" name="R34_STAFF_LOANS"
-										style="background-color: #FFFFFF; width: 850px; height: 34px; border-color: transparent; text-align: left; padding-left: 20px;"
-										readonly /></td>
-	                                    <td id="ROW34" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-                                        type="text"
-                                        th:value="${report.R34_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R34_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
-                                        id="R34_ORIGINAL_AMT"
-                                        name="R34_ORIGINAL_AMT"
-                                        style="background-color: #FFFFFF; width: 250px; height: 34px; border-color: transparent; text-align: right;"
-                                        readonly /></td>
-	                                    <td id="ROW34" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R34_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R34_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R34_BALANCE_OUTSTANDING"
-	                                    name="R34_BALANCE_OUTSTANDING"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 34px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        
-										 <td id="ROW34" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R34_NO_OF_ACS != null ? #numbers.formatDecimal(report.R34_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R34_NO_OF_ACS"
-	                                    name="R34_NO_OF_ACS"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 34px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-										<td id="ROW34" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R34_INTEREST_RATE != null ? #numbers.formatDecimal(report.R34_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
-	                                    id="R34_INTEREST_RATE"
-	                                    name="R34_INTEREST_RATE"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 34px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        </tr>
-										                                        <tr>
-										<td id="ROW35" style="font-weight: bold;"><input
-										class="display-input Show_input " type="text"
-										th:value="'Personal (Secured)'"
-										id="R35_STAFF_LOANS" name="R35_STAFF_LOANS"
-										style="background-color: #FFFFFF; width: 850px; height: 35px; border-color: transparent; text-align: left; padding-left: 20px;"
-										readonly /></td>
-	                                    <td id="ROW35" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-                                        type="text"
-                                        th:value="${report.R35_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R35_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
-                                        id="R35_ORIGINAL_AMT"
-                                        name="R35_ORIGINAL_AMT"
-                                        style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"
-                                        readonly /></td>
-	                                    <td id="ROW35" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R35_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R35_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R35_BALANCE_OUTSTANDING"
-	                                    name="R35_BALANCE_OUTSTANDING"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        
-										 <td id="ROW35" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R35_NO_OF_ACS != null ? #numbers.formatDecimal(report.R35_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R35_NO_OF_ACS"
-	                                    name="R35_NO_OF_ACS"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-										<td id="ROW35" style="font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R35_INTEREST_RATE != null ? #numbers.formatDecimal(report.R35_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
-	                                    id="R35_INTEREST_RATE"
-	                                    name="R35_INTEREST_RATE"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        </tr>
-										                                        <tr>
-										<td id="ROW36" style="font-weight: bold;"><input
-										class="display-input Show_input " type="text"
-										th:value="'Other Advances (Secured)'"
-										id="R36_STAFF_LOANS" name="R36_STAFF_LOANS"
-										style="background-color: #FFFFFF; width: 850px; height: 35px; border-color: transparent; text-align: left; padding-left: 20px;"
-										readonly /></td>
-	                                    <td id="ROW36" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-                                        type="text"
-                                        th:value="${report.R36_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R36_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
-                                        id="R36_ORIGINAL_AMT"
-                                        name="R36_ORIGINAL_AMT"
-                                        style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"
-                                        readonly /></td>
-	                                    <td id="ROW36" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R36_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R36_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R36_BALANCE_OUTSTANDING"
-	                                    name="R36_BALANCE_OUTSTANDING"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        
-										 <td id="ROW36" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R36_NO_OF_ACS != null ? #numbers.formatDecimal(report.R36_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R36_NO_OF_ACS"
-	                                    name="R36_NO_OF_ACS"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-										<td id="ROW36" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R36_INTEREST_RATE != null ? #numbers.formatDecimal(report.R36_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
-	                                    id="R36_INTEREST_RATE"
-	                                    name="R36_INTEREST_RATE"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        </tr>
-										                                        <tr>
-										<td id="ROW37" style="font-weight: bold;"><input
-										class="display-input Show_input " type="text"
-										th:value="'Unsecured Staff Loans'"
-										id="R37_STAFF_LOANS" name="R37_STAFF_LOANS"
-										style="background-color: #FFFFFF; width: 850px; height: 35px; border-color: transparent; text-align: left; padding-left: 20px;"
-										readonly /></td>
-	                                    <td id="ROW37" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-                                        type="text"
-                                        th:value="${report.R37_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R37_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
-                                        id="R37_ORIGINAL_AMT"
-                                        name="R37_ORIGINAL_AMT"
-                                        style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"
-                                        readonly /></td>
-	                                    <td id="ROW37" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R37_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R37_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R37_BALANCE_OUTSTANDING"
-	                                    name="R37_BALANCE_OUTSTANDING"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        
-										 <td id="ROW37" style="font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R37_NO_OF_ACS != null ? #numbers.formatDecimal(report.R37_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R37_NO_OF_ACS"
-	                                    name="R37_NO_OF_ACS"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-										<td id="ROW37" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R37_INTEREST_RATE != null ? #numbers.formatDecimal(report.R37_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
-	                                    id="R37_INTEREST_RATE"
-	                                    name="R37_INTEREST_RATE"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        </tr>
-										                                        <tr>
-										<td id="ROW38" style="font-weight: bold;"><input
-										class="display-input Show_input " type="text"
-										th:value="'Total'"
-										id="R38_STAFF_LOANS" name="R38_STAFF_LOANS"
-										style="background-color: #FFFFFF; width: 850px; height: 35px; border-color: transparent; text-align: left; padding-left: 20px;"
-										readonly /></td>
-	                                    <td id="ROW38" style=" font-weight: bold;background-color: rgb(107, 122, 143);">
-	                                    <input class="display-input Show_input"
-                                        type="text"
-                                        th:value="${report.R38_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R38_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
-                                        id="R38_ORIGINAL_AMT"
-                                        name="R38_ORIGINAL_AMT"
-                                        style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"
-                                        readonly /></td>
-	                                    <td id="ROW38" style=" font-weight: bold;background-color: rgb(107, 122, 143);">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R38_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R38_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R38_BALANCE_OUTSTANDING"
-	                                    name="R38_BALANCE_OUTSTANDING"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
-	                                    </td>
-                                        
-										 <td id="ROW38" style="font-weight: bold;background-color: rgb(107, 122, 143);">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R38_NO_OF_ACS != null ? #numbers.formatDecimal(report.R38_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R38_NO_OF_ACS"
-	                                    name="R38_NO_OF_ACS"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
-	                                    </td>
-										<td id="ROW38" style=" font-weight: bold;">
-	                                    <input class="display-input Show_input"
-	                                    type="text"
-	                                    th:value="${report.R38_INTEREST_RATE != null ? #numbers.formatDecimal(report.R38_INTEREST_RATE, 1, 'COMMA', 0, 'POINT') : '0'}"
-	                                    id="R38_INTEREST_RATE"
-	                                    name="R38_INTEREST_RATE"
-	                                    style="background-color: #FFFFFF; width: 250px; height: 35px; border-color: transparent; text-align: right;"readonly />
-	                                    </td>
-                                        </tr>
-								</tbody>
-							</table>
-</div>
-	<div style="text-align: center; margin-top: 10px;">
+	<thead class="thead-light">
+		<tr style="background-color: #D8D8D8;">
+			<th style="text-align: left; width: 810px;">(8C) STAFF LOANS</th>
+			<th style="text-align: right; width: 270px;">Original Amount</th>
+			<th style="text-align: right; width: 270px;">Balance Outstanding</th>
+			<th style="text-align: right; width: 270px;">No. of A/Cs</th>
+			<th style="text-align: right; width: 270px;">Interest Rate</th>
+		</tr>
+	</thead>
+
+	<tbody id="entity3" th:each="report: ${reportsummary3}" style="font-family: Arial;">
+
+		<!-- R33 -->
+		<tr>
+			<td id="ROW33" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="'Mortgage'"
+					id="R33_STAFF_LOANS" name="R33_STAFF_LOANS"
+					style="background-color: #FFFFFF; width: 100%; height: 33px; border: none; text-align: left; padding-left: 20px;"
+					readonly />
+			</td>
+			<td id="ROW33" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R33_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R33_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
+					id="R33_ORIGINAL_AMT" name="R33_ORIGINAL_AMT"
+					style="background-color: #FFFFFF; width: 100%; height: 33px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW33" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R33_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R33_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R33_BALANCE_OUTSTANDING" name="R33_BALANCE_OUTSTANDING"
+					style="background-color: #FFFFFF; width: 100%; height: 33px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW33" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R33_NO_OF_ACS != null ? #numbers.formatDecimal(report.R33_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R33_NO_OF_ACS" name="R33_NO_OF_ACS"
+					style="background-color: #FFFFFF; width: 100%; height: 33px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW33" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R33_INTEREST_RATE != null ? #numbers.formatDecimal(report.R33_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+					id="R33_INTEREST_RATE" name="R33_INTEREST_RATE"
+					style="background-color: #FFFFFF; width: 100%; height: 33px; border: none; text-align: right;"
+					readonly />
+			</td>
+		</tr>
+
+		<!-- R34 -->
+		<tr>
+			<td id="ROW34" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="'Car'"
+					id="R34_STAFF_LOANS" name="R34_STAFF_LOANS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: left; padding-left: 20px;"
+					readonly />
+			</td>
+			<td id="ROW34" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R34_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R34_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
+					id="R34_ORIGINAL_AMT" name="R34_ORIGINAL_AMT"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW34" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R34_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R34_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R34_BALANCE_OUTSTANDING" name="R34_BALANCE_OUTSTANDING"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW34" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R34_NO_OF_ACS != null ? #numbers.formatDecimal(report.R34_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R34_NO_OF_ACS" name="R34_NO_OF_ACS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW34" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R34_INTEREST_RATE != null ? #numbers.formatDecimal(report.R34_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+					id="R34_INTEREST_RATE" name="R34_INTEREST_RATE"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+		</tr>
+
+			<!-- R35 -->
+		<tr>
+			<td id="ROW35" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="'Education'"
+					id="R35_STAFF_LOANS" name="R35_STAFF_LOANS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: left; padding-left: 20px;"
+					readonly />
+			</td>
+			<td id="ROW35" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R35_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R35_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
+					id="R35_ORIGINAL_AMT" name="R35_ORIGINAL_AMT"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW35" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R35_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R35_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R35_BALANCE_OUTSTANDING" name="R35_BALANCE_OUTSTANDING"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW35" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R35_NO_OF_ACS != null ? #numbers.formatDecimal(report.R35_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R35_NO_OF_ACS" name="R35_NO_OF_ACS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW35" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R35_INTEREST_RATE != null ? #numbers.formatDecimal(report.R35_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+					id="R35_INTEREST_RATE" name="R35_INTEREST_RATE"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+		</tr>
+
+		<!-- R36 -->
+		<tr>
+			<td id="ROW36" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="'Furniture'"
+					id="R36_STAFF_LOANS" name="R36_STAFF_LOANS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: left; padding-left: 20px;"
+					readonly />
+			</td>
+			<td id="ROW36" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R36_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R36_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
+					id="R36_ORIGINAL_AMT" name="R36_ORIGINAL_AMT"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW36" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R36_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R36_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R36_BALANCE_OUTSTANDING" name="R36_BALANCE_OUTSTANDING"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW36" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R36_NO_OF_ACS != null ? #numbers.formatDecimal(report.R36_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R36_NO_OF_ACS" name="R36_NO_OF_ACS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW36" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R36_INTEREST_RATE != null ? #numbers.formatDecimal(report.R36_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+					id="R36_INTEREST_RATE" name="R36_INTEREST_RATE"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+		</tr>
+
+		<!-- R37 -->
+		<tr>
+			<td id="ROW37" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="'Others'"
+					id="R37_STAFF_LOANS" name="R37_STAFF_LOANS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: left; padding-left: 20px;"
+					readonly />
+			</td>
+			<td id="ROW37" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R37_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R37_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
+					id="R37_ORIGINAL_AMT" name="R37_ORIGINAL_AMT"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW37" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R37_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R37_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R37_BALANCE_OUTSTANDING" name="R37_BALANCE_OUTSTANDING"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW37" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R37_NO_OF_ACS != null ? #numbers.formatDecimal(report.R37_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R37_NO_OF_ACS" name="R37_NO_OF_ACS"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+			<td id="ROW37" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R37_INTEREST_RATE != null ? #numbers.formatDecimal(report.R37_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+					id="R37_INTEREST_RATE" name="R37_INTEREST_RATE"
+					style="background-color: #FFFFFF; width: 100%; height: 34px; border: none; text-align: right;"
+					readonly />
+			</td>
+		</tr>
+
+		<tr>
+			<td id="ROW38" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="'Total'"
+					id="R38_STAFF_LOANS" name="R38_STAFF_LOANS"
+					style="background-color: #FFFFFF; width: 100%; height: 35px; border: none; text-align: left; padding-left: 20px;"
+					readonly />
+			</td>
+			<td id="ROW38" style="font-weight: bold; background-color: rgb(107,122,143);">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R38_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R38_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
+					id="R38_ORIGINAL_AMT" name="R38_ORIGINAL_AMT"
+					style="width: 100%; height: 35px; border: none; text-align: right; background-color: rgb(107,122,143); color: white;"
+					readonly />
+			</td>
+			<td id="ROW38" style="font-weight: bold; background-color: rgb(107,122,143);">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R38_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R38_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R38_BALANCE_OUTSTANDING" name="R38_BALANCE_OUTSTANDING"
+					style="width: 100%; height: 35px; border: none; text-align: right; background-color: rgb(107,122,143); color: white;"
+					readonly />
+			</td>
+			<td id="ROW38" style="font-weight: bold; background-color: rgb(107,122,143);">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R38_NO_OF_ACS != null ? #numbers.formatDecimal(report.R38_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
+					id="R38_NO_OF_ACS" name="R38_NO_OF_ACS"
+					style="width: 100%; height: 35px; border: none; text-align: right; background-color: rgb(107,122,143); color: white;"
+					readonly />
+			</td>
+			<td id="ROW38" style="font-weight: bold;">
+				<input class="display-input Show_input" type="text"
+					th:value="${report.R38_INTEREST_RATE != null ? #numbers.formatDecimal(report.R38_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+					id="R38_INTEREST_RATE" name="R38_INTEREST_RATE"
+					style="background-color: #FFFFFF; width: 100%; height: 35px; border: none; text-align: right;"
+					readonly />
+			</td>
+		</tr>
+
+	</tbody>
+</table>
+
+                        </div>
+	                    <div style="text-align: center; margin-top: 10px;">
 								
-    <button id="submitButton" 
-            type="button"
-            class="custom-tab-btn Show_input" 
-            form="fileupload"
-            th:attr="data-todate=${asondate},data-type=${type}" 
-            onclick="fileuploads(this);" 
-            style="display: none;">
-        Submit
-    </button>
-</div>
+                        <button id="submitButton"  type="button"class="custom-tab-btn Show_input"  form="fileupload"
+                        th:attr="data-todate=${asondate},data-type=${type}"  onclick="fileuploads(this);"  style="display: none;">
+                        Submit  </button>
+                        </div>
 							</form>
 						</div>
 					</div>

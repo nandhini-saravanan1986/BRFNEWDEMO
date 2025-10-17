@@ -130,7 +130,7 @@ public class RegulatoryReportServices {
 	BRRS_M_UNCONS_INVEST_ReportService BRRS_M_UNCONS_INVEST_ReportService;
 		
 	@Autowired
-	BRRS_Q_SMME_ReportService BRRS_Q_SMME_reportservice;
+	BRRS_Q_SMME_Intrest_Income_ReportService BRRS_Q_SMME_reportservice;
 
 	@Autowired
 	BRRS_M_FAS_ReportService BRRS_M_FAS_reportservice;
