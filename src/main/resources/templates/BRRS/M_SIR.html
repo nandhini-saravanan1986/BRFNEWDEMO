@@ -339,8 +339,8 @@ $(window).on('beforeunload', function() {
 	}
 	
 	function showdetails() {
-			 alert("Details page not available for Manual Report");
-		}
+						 showResultModal('BRRS',' Details page not available for Manual Report');
+					}
 	
 	function showsummary() {
 		var loader = new bootstrap.Modal(document.getElementById('loader'), {backdrop: 'static',keyboard: false});
@@ -424,11 +424,15 @@ function downloadfile(button) {
 				a.click();
 				window.URL.revokeObjectURL(url);
 				document.body.removeChild(a);
-
-				showResultModal('Success', 'The file has been downloaded successfully.');
-			} else {
-				showResultModal('Information', 'No data was available to create a download.');
-			}
+				// ✅ BRRS style popup
+				              $("#resultModalLabel").text("BRRS");
+				              $("#resultModalBody").text(filename + " downloaded successfully.");
+				              $("#resultModal").modal("show");
+				          } else {
+				              $("#resultModalLabel").text("BRRS");
+				              $("#resultModalBody").text("No data was available to create a download.");
+				              $("#resultModal").modal("show");
+				          }
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			$('#loader').modal('hide');
@@ -559,9 +563,9 @@ function showResultModal(title, message) {
 						document.body.removeChild(a);
 
 						showResultModal('Success', filename + ' downloaded successfully.');
-					} else {
-						showResultModal('Information', 'No data was available to create a download.');
-					}
+											} else {
+												showResultModal('Information', 'No data was available to create a download.');
+											}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					$('#loader').modal('hide');
@@ -611,584 +615,203 @@ function showdetailsbyRowAndColumn(a) {
         showResultModal("Alert", "No Records available for this selected cell.");
     }
 }
-</script>
-<script>
-	function showmodify(btn) {
-	$(".show_input").removeAttr("readonly").removeAttr("disabled");
-	
-	for(let i = 13; i <=17; i++){
-		$("#r" + i + "_amt_6m").hide();
-		$("#r" + i + "_risk_6m").hide();
-		$("#r" + i + "_capital_6m").hide();
-		$("#r" + i + "amt_6to24m").hide();
-		$("#r" + i + "risk_6to24m").hide();
-		$("#r" + i + "capital_6to24m").hide();
-		$("#r" + i + "amt_gt24m").hide();
-		$("#r" + i + "risk_gt24m").hide();
-		$("#r" + i + "capital_gt24m").hide();
-		
-		$("#r" + i + "_amt_6m").show();
-		$("#r" + i + "_risk_6m").show();
-		$("#r" + i + "_capital_6m").show();
-		$("#r" + i + "amt_6to24m").show();
-		$("#r" + i + "risk_6to24m").show();
-		$("#r" + i + "capital_6to24m").show();
-		$("#r" + i + "amt_gt24m").show();
-		$("#r" + i + "risk_gt24m").show();
-		$("#r" + i + "capital_gt24m").show();
-		}
-		
-		
-	for(let i=19;i<=23;i++){
-		$("#r" + i + "_amt_6m").hide();
-		$("#r" + i + "_risk_6m").hide();
-		$("#r" + i + "_capital_6m").hide();
-		$("#r" + i + "amt_6to24m").hide();
-		$("#r" + i + "risk_6to24m").hide();
-		$("#r" + i + "capital_6to24m").hide();
-		$("#r" + i + "amt_gt24m").hide();
-		$("#r" + i + "risk_gt24m").hide();
-		$("#r" + i + "capital_gt24m").hide();
-		
-		$("#r" + i + "_amt_6m").show();
-		$("#r" + i + "_risk_6m").show();
-		$("#r" + i + "_capital_6m").show();
-		$("#r" + i + "amt_6to24m").show();
-		$("#r" + i + "risk_6to24m").show();
-		$("#r" + i + "capital_6to24m").show();
-		$("#r" + i + "amt_gt24m").show();
-		$("#r" + i + "risk_gt24m").show();
-		$("#r" + i + "capital_gt24m").show();
-	}
-	
-	for(let i=24;i<=26;i++){
-			$("#r" + i + "_amt_6m").hide();
-			$("#r" + i + "_risk_6m").hide();
-			$("#r" + i + "_capital_6m").hide();
-			$("#r" + i + "amt_6to24m").hide();
-			$("#r" + i + "risk_6to24m").hide();
-			$("#r" + i + "capital_6to24m").hide();
-			$("#r" + i + "amt_gt24m").hide();
-			$("#r" + i + "risk_gt24m").hide();
-			$("#r" + i + "capital_gt24m").hide();
-			
-			$("#r" + i + "_amt_6m").show();
-			$("#r" + i + "_risk_6m").show();
-			$("#r" + i + "_capital_6m").show();
-			$("#r" + i + "amt_6to24m").show();
-			$("#r" + i + "risk_6to24m").show();
-			$("#r" + i + "capital_6to24m").show();
-			$("#r" + i + "amt_gt24m").show();
-			$("#r" + i + "risk_gt24m").show();
-			$("#r" + i + "capital_gt24m").show();
-		}
-		
-		for(let i=28;i<=32;i++){
-					$("#r" + i + "_amt_6m").hide();
-					$("#r" + i + "_risk_6m").hide();
-					$("#r" + i + "_capital_6m").hide();
-					$("#r" + i + "amt_6to24m").hide();
-					$("#r" + i + "risk_6to24m").hide();
-					$("#r" + i + "capital_6to24m").hide();
-					$("#r" + i + "amt_gt24m").hide();
-					$("#r" + i + "risk_gt24m").hide();
-					$("#r" + i + "capital_gt24m").hide();
-					
-					$("#r" + i + "_amt_6m").show();
-					$("#r" + i + "_risk_6m").show();
-					$("#r" + i + "_capital_6m").show();
-					$("#r" + i + "amt_6to24m").show();
-					$("#r" + i + "risk_6to24m").show();
-					$("#r" + i + "capital_6to24m").show();
-					$("#r" + i + "amt_gt24m").show();
-					$("#r" + i + "risk_gt24m").show();
-					$("#r" + i + "capital_gt24m").show();
-				}
-		
-				
-				const rows33 = [12, 18, 24, 25, 26, 27];
-				  rows33.forEach(i => {
-				      $("#r" + i + "_capital_6m, #r" + i + "_capital_6to24m, #r" + i + "_capital_gt24m")
-				          .off("input")  
-				          .on("input", function () {
-				              calculate33Totals();
-				          });
-				  });
-				  
-				  
-				  $("#r33_capital_6m, #r33_capital_6to24m, #r33_capital_gt24m")
-				      .off("input")
-				      .on("input", calculateFinalTotal);
-		// Toggle buttons
-		$("#submitButton, #btnBack_edit").show();
-		$("#btnBack").hide();
+</script><script>
+// ========================
+// ✅ List of fields that should always remain readonly
+// ========================
+const readonlyIds = [
+"r12_product","r12_amt_6m","r12_amt_6to24m","r12_amt_gt24m",
+"r12_capital_6m","r12_capital_6to24m","r12_capital_gt24m","r13_product","r13_capital_6m","r13_capital_6to24m","r13_capital_gt24m",
+    "r13_risk_6m","r13_risk_6to24m","r13_risk_gt24m","r14_product","r14_capital_6m","r14_capital_6to24m","r14_capital_gt24m",
+    "r14_risk_6m","r14_risk_6to24m","r14_risk_gt24m","r15_product","r15_capital_6m","r15_capital_6to24m","r15_capital_gt24m",
+    "r15_risk_6m","r15_risk_6to24m","r15_risk_gt24m","r16_product","r16_capital_6m","r16_capital_6to24m","r16_capital_gt24m",
+    "r16_risk_6m","r16_risk_6to24m","r16_risk_gt24m","r17_product","r18_amt_6m","r18_amt_6to24m","r18_amt_gt24m","r17_capital_6m","r17_capital_6to24m","r17_capital_gt24m",
+    "r17_risk_6m","r17_risk_6to24m","r17_risk_gt24m","r18_product","r18_capital_6m","r18_capital_6to24m","r18_capital_gt24m",
+    "r18_capital_6m","r18_capital_6to24m","r18_capital_gt24m","r19_product","r19_capital_6m","r19_capital_6to24m","r19_capital_gt24m",
+    "r19_risk_6m","r19_risk_6to24m","r19_risk_gt24m","r20_product","r20_capital_6m","r20_capital_6to24m","r20_capital_gt24m",
+    "r20_risk_6m","r20_risk_6to24m","r20_risk_gt24m","r21_product","r21_capital_6m","r21_capital_6to24m","r21_capital_gt24m",
+    "r21_risk_6m","r21_risk_6to24m","r21_risk_gt24m","r22_product","r22_capital_6m","r22_capital_6to24m","r22_capital_gt24m",
+    "r22_risk_6m","r22_risk_6to24m","r22_risk_gt24m","r23_product","r23_capital_6m","r23_capital_6to24m","r23_capital_gt24m",
+    "r23_risk_6m","r23_risk_6to24m","r23_risk_gt24m","r24_product","r24_capital_6m","r24_capital_6to24m","r24_capital_gt24m",
+    "r24_risk_6m","r24_risk_6to24m","r24_risk_gt24m","r25_product","r25_capital_6m","r25_capital_6to24m","r25_capital_gt24m",
+    "r25_risk_6m","r25_risk_6to24m","r25_risk_gt24m","r26_product","r26_capital_6m","r26_capital_6to24m","r26_capital_gt24m",
+    "r26_risk_6m","r26_risk_6to24m","r26_risk_gt24m","r27_product","r27_amt_6m","r27_amt_6to24m","r27_amt_gt24m","r27_capital_6m","r27_capital_6to24m","r27_capital_gt24m",
+    "r27_capital_6m","r27_capital_6to24m","r27_capital_gt24m","r28_product","r28_capital_6m","r28_capital_6to24m","r28_capital_gt24m",
+    "r28_risk_6m","r28_risk_6to24m","r28_risk_gt24m","r29_product","r29_capital_6m","r29_capital_6to24m","r29_capital_gt24m",
+    "r29_risk_6m","r29_risk_6to24m","r29_risk_gt24m","r30_product","r30_capital_6m","r30_capital_6to24m","r30_capital_gt24m",
+    "r30_risk_6m","r30_risk_6to24m","r30_risk_gt24m","r31_product","r31_capital_6m","r31_capital_6to24m","r31_capital_gt24m",
+    "r31_risk_6m","r31_risk_6to24m","r31_risk_gt24m","r32_product","r32_capital_6m","r32_capital_6to24m","r32_capital_gt24m",
+    "r32_risk_6m","r32_risk_6to24m","r32_risk_gt24m","r33_product","r33_capital_6m","r33_capital_6to24m","r33_capital_gt24m",
+    "r33_capital_6m","r33_capital_6to24m","r33_capital_gt24m",
+    "r35_tot_spec_risk_ch"
+];
 
-		// Show Cancel button only when Modify is clicked
-		$("#cancelRecord").show();
+// ========================
+// ✅ Modify / Cancel logic
+// ========================
+function showmodify(btn){
+    $(".show_input").each(function () {
+        if (!readonlyIds.includes(this.id)) {
+            $(this).removeAttr("readonly").removeAttr("disabled").css({"background-color": "#d3d3d3"});
+        }
+    });
 
-		// Optionally hide the clicked Modify button
-		$(btn).hide();
-	}	
-	
-
-	//Cancel / Reset function
-	function cancelModify() {
+	// Toggle buttons
+	  $("#submitButton").show();
+	  $("#cancelRecord").show();
+	  $(btn).hide(); // hide the clicked Modify buttonton
+}
+function cancelModify() {
 	    if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
-	        // ✅ Only when user clicks YES
+	        // Reloads the page → resets everything
 	        location.reload();
-	        
-	        $(".Show_input").attr("readonly", true).attr("disabled", true);
 
-	    
-		 	for(let i = 13; i <=17; i++){
-				
-
-				$("#r" + i + "_amt_6m").show();
-				$("#r" + i + "_risk_6m").show();
-				$("#r" + i + "_capital_6m").show();
-				$("#r" + i + "amt_6to24m").show();
-				$("#r" + i + "risk_6to24m").show();
-				$("#r" + i + "capital_6to24m").show();
-				$("#r" + i + "amt_gt24m").show();
-				$("#r" + i + "risk_gt24m").show();
-				$("#r" + i + "capital_gt24m").show();
-				
-				$("#r" + i + "_amt_6m").hide();
-				$("#r" + i + "_risk_6m").hide();
-				$("#r" + i + "_capital_6m").hide();
-				$("#r" + i + "amt_6to24m").hide();
-				$("#r" + i + "risk_6to24m").hide();
-				$("#r" + i + "capital_6to24m").hide();
-				$("#r" + i + "amt_gt24m").hide();
-				$("#r" + i + "risk_gt24m").hide();
-				$("#r" + i + "capital_gt24m").hide();
-					
-					
-			}
-			for(let i = 19; i <=23; i++){
-
-				$("#r" + i + "_amt_6m").show();
-				$("#r" + i + "_risk_6m").show();
-				$("#r" + i + "_capital_6m").show();
-				$("#r" + i + "amt_6to24m").show();
-				$("#r" + i + "risk_6to24m").show();
-				$("#r" + i + "capital_6to24m").show();
-				$("#r" + i + "amt_gt24m").show();
-				$("#r" + i + "risk_gt24m").show();
-				$("#r" + i + "capital_gt24m").show();
-				
-				$("#r" + i + "_amt_6m").hide();
-				$("#r" + i + "_risk_6m").hide();
-				$("#r" + i + "_capital_6m").hide();
-				$("#r" + i + "amt_6to24m").hide();
-				$("#r" + i + "risk_6to24m").hide();
-				$("#r" + i + "capital_6to24m").hide();
-				$("#r" + i + "amt_gt24m").hide();
-				$("#r" + i + "risk_gt24m").hide();
-				$("#r" + i + "capital_gt24m").hide();
-					
-			}
-			
-			
-
-			for(let i=28;i<=32;i++){
-						$("#r" + i + "_amt_6m").hide();
-						$("#r" + i + "_risk_6m").hide();
-						$("#r" + i + "_capital_6m").hide();
-						$("#r" + i + "amt_6to24m").hide();
-						$("#r" + i + "risk_6to24m").hide();
-						$("#r" + i + "capital_6to24m").hide();
-						$("#r" + i + "amt_gt24m").hide();
-						$("#r" + i + "risk_gt24m").hide();
-						$("#r" + i + "capital_gt24m").hide();
-						
-						$("#r" + i + "_amt_6m").show();
-						$("#r" + i + "_risk_6m").show();
-						$("#r" + i + "_capital_6m").show();
-						$("#r" + i + "amt_6to24m").show();
-						$("#r" + i + "risk_6to24m").show();
-						$("#r" + i + "capital_6to24m").show();
-						$("#r" + i + "amt_gt24m").show();
-						$("#r" + i + "risk_gt24m").show();
-						$("#r" + i + "capital_gt24m").show();
-					}
-		
-					
-					const rows33 = [12, 18, 24, 25, 26, 27];
-					  rows33.forEach(i => {
-					      $("#r" + i + "_capital_6m, #r" + i + "_capital_6to24m, #r" + i + "_capital_gt24m")
-					          .off("input")   
-					          .on("input", function () {
-					              calculate33Totals();
-					          });
-					  });
-					  
-					  $("#r33_capital_6m, #r33_capital_6to24m, #r33_capital_gt24m")
-					      .off("input")
-					      .on("input", calculateFinalTotal);
+	
 	        $("#submitButton, #btnBack_edit").hide();
 	        $("#btnBack").show();
-
-	        // Hide Cancel button again
 	        $("#cancelRecord").hide();
-
-	        // Show all Modify buttons
 	        $("#addRecord").show();
 	    }
-	    // ❌ If user clicks CANCEL, nothing happens
 	}
 
 
 </script>
 
 <script>
-function calculateR12Totals(){
-    let tot_amt6m = 0, tot_risk6m = 0, tot_capital6m = 0;
-    let tot_amt6m24m = 0, tot_risk6m24 = 0, tot_capital6m24m = 0;
-    let tot_amtgt24m = 0, tot_riskgt24m = 0, tot_capitalgt24m = 0;
-
-    for(let i = 13; i <= 17; i++){
-        let amt6m       = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
-        let risk6m      = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
-        
-        let amt6m24m    = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
-        let risk6m24    = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
-        
-        let amtgt24m    = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
-        let riskgt24m   = parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
-       
-		
-		let capital6m = amt6m * risk6m;
-		let capital6m24m = amt6m24m * risk6m24;
-		let capitalgt24m = amtgt24m * riskgt24m;
-		
-		$("#r" + i + "_capital_6m").val(capital6m);
-		$("#r" + i + "_capital_6to24m").val(capital6m24m);
-		$("#r" + i + "_capital_gt24m").val(capitalgt24m);
-		
-        tot_amt6m       +=  amt6m;
-        tot_risk6m      += risk6m;
-        tot_capital6m   += capital6m;
-
-        tot_amt6m24m    += amt6m24m;
-        tot_risk6m24    += risk6m24;
-        tot_capital6m24m+= capital6m24m;
-
-        tot_amtgt24m    += amtgt24m;
-        tot_riskgt24m   += riskgt24m;
-        tot_capitalgt24m+= capitalgt24m;
-    }
-
-    //calculation for 12 = sum(13:17)
-    $("#r12_amt_6m").val(tot_amt6m);
-    $("#r12_risk_6m").val(tot_risk6m);
-    $("#r12_capital_6m").val(tot_capital6m);
-
-    $("#r12_amt_6to24m").val(tot_amt6m24m);
-    $("#r12_risk_6to24m").val(tot_risk6m24);
-    $("#r12_capital_6to24m").val(tot_capital6m24m);
-
-    $("#r12_amt_gt24m").val(tot_amtgt24m);
-    $("#r12_risk_gt24m").val(tot_riskgt24m);
-    $("#r12_capital_gt24m").val(tot_capitalgt24m);
-	
-	calculate33Totals();
-}
-
-$(document).ready(function() {
+// ========================
+// ✅ Fixed risk percentages
+// ========================
+const fixedRisk = {
+    	 13: { "6m": 0.0025, "6to24m": 0.01, "gt24m": 0.016 },
+  		 14: { "6m": 0.01,   "6to24m": 0.016,  "gt24m": 0.03},
+    	 15: { "6m": 0.08,   "6to24m": 0.08,   "gt24m": 0.08 },
+        16: { "6m": 0.12,   "6to24m": 0.12,   "gt24m": 0.12 },
+        17: { "6m": 0.08,   "6to24m": 0.08,   "gt24m": 0.08 },
     
-    calculateR12Totals();
-
-    for (let i = 13; i <= 17; i++) {
-        $(
-          "#r" + i + "_amt_6m, " +
-          "#r" + i + "_risk_6m, " +
-          "#r" + i + "_capital_6m, " +
-          "#r" + i + "_amt_6to24m, " +
-          "#r" + i + "_risk_6to24m, " +
-          "#r" + i + "_capital_6to24m, " +
-          "#r" + i + "_amt_gt24m, " +
-          "#r" + i + "_risk_gt24m, " +
-          "#r" + i + "_capital_gt24m"
-        ).on("input", function () {
-            calculateR12Totals();
-        });
-    }
-});
-</script>
-<script>
-function calculateR18Totals(){
-	let tot1_amt6m = 0, tot1_risk6m = 0, tot1_capital6m = 0;
-    let tot1_amt6m24m = 0, tot1_risk6m24 = 0, tot1_capital6m24m = 0;
-    let tot1_amtgt24m = 0, tot1_riskgt24m = 0, tot1_capitalgt24m = 0;
-	
-	for(let i = 19; i <= 23; i++){
-	        let t1amt6m       = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
-	        let t1risk6m      = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
-	        
-	        let t1amt6m24m    = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
-	        let t1risk6m24    = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
-	        
-	        let t1amtgt24m    = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
-	        let t1riskgt24m   = parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
-	       
-			
-			let t1capital6m = t1amt6m * t1risk6m;
-			let t1capital6m24m = t1amt6m24m * t1risk6m24;
-			let t1capitalgt24m = t1amtgt24m * t1riskgt24m;
-			
-			$("#r" + i + "_capital_6m").val(t1capital6m);
-			$("#r" + i + "_capital_6to24m").val(t1capital6m24m);
-			$("#r" + i + "_capital_gt24m").val(t1capitalgt24m);
-			
-	        tot1_amt6m       += t1amt6m;
-	        tot1_risk6m      += t1risk6m;
-	        tot1_capital6m   += t1capital6m;
-
-	        tot1_amt6m24m    += t1amt6m24m;
-	        tot1_risk6m24    += t1risk6m24;
-	        tot1_capital6m24m+= t1capital6m24m;
-
-	        tot1_amtgt24m    += t1amtgt24m;
-	        tot1_riskgt24m   += t1riskgt24m;
-	        tot1_capitalgt24m+= t1capitalgt24m;
-
-			 }
-
-			    //calculation for 18 = sum(19:23)
-			    $("#r18_amt_6m").val(tot1_amt6m);
-			    $("#r18_risk_6m").val(tot1_risk6m);
-			    $("#r18_capital_6m").val(tot1_capital6m);
-
-			    $("#r18_amt_6to24m").val(tot1_amt6m24m);
-			    $("#r18_risk_6to24m").val(tot1_risk6m24);
-			    $("#r18_capital_6to24m").val(tot1_capital6m24m);
-
-			    $("#r18_amt_gt24m").val(tot1_amtgt24m);
-			    $("#r18_risk_gt24m").val(tot1_riskgt24m);
-			    $("#r18_capital_gt24m").val(tot1_capitalgt24m);
-				
-				calculate33Totals();
-			}
-
-			$(document).ready(function() {
-			    
-			    calculateR18Totals();
-
-			    for (let i = 19; i <= 23; i++) {
-			        $(
-			          "#r" + i + "_amt_6m, " +
-			          "#r" + i + "_risk_6m, " +
-			          "#r" + i + "_capital_6m, " +
-			          "#r" + i + "_amt_6to24m, " +
-			          "#r" + i + "_risk_6to24m, " +
-			          "#r" + i + "_capital_6to24m, " +
-			          "#r" + i + "_amt_gt24m, " +
-			          "#r" + i + "_risk_gt24m, " +
-			          "#r" + i + "_capital_gt24m"
-			        ).on("input", function () {
-			            calculateR18Totals();
-			        });
-			    }
-			});
-	
-
-</script>
-
-<script>
-function calculate24_25_26Totals(){
-    for (let i = 24; i <= 26; i++) {
-        let t2amt6m    = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
-        let t2risk6m   = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
-
-        let t2amt6m24m = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
-        let t2risk6m24 = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
-
-        let t2amtgt24m = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
-        let t2riskgt24m= parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
-
-        // calculate per-row capital = amount + risk
-        let t2capital6m    = t2amt6m * t2risk6m;
-        let t2capital6m24m = t2amt6m24m * t2risk6m24;
-        let t2capitalgt24m = t2amtgt24m * t2riskgt24m;
-
-        // write back into inputs
-        $("#r" + i + "_capital_6m").val(t2capital6m);
-        $("#r" + i + "_capital_6to24m").val(t2capital6m24m);
-        $("#r" + i + "_capital_gt24m").val(t2capitalgt24m);
+		19:  { "6m": 0.0025, "6to24m": 0.01,   "gt24m": 0.016 },	
+	    20:  { "6m": 0.01,   "6to24m": 0.016,  "gt24m": 0.03  },
+	    21: { "6m": 0.08,   "6to24m": 0.08,   "gt24m": 0.08  },
+	    22: { "6m": 0.12,   "6to24m": 0.12,   "gt24m": 0.12  },
+	    23: { "6m": 0.08,   "6to24m": 0.08,   "gt24m": 0.08  },
+	    24: { "6m": 0.016,  "6to24m": 0.016,  "gt24m": 0.016 },
+	    25: { "6m": 0.016,  "6to24m": 0.016,  "gt24m": 0.016 },
+	    26: { "6m": 0.00,   "6to24m": 0.00,   "gt24m": 0.00  },
 		
-		calculate33Totals();
+		28: { "6m": 0.00,   "6to24m": 0.00,   "gt24m": 0.00  },
+		29: { "6m": 0.0025, "6to24m": 0.01,   "gt24m": 0.016 },
+		30: { "6m": 0.08,   "6to24m": 0.08,   "gt24m": 0.08  },
+		31: { "6m": 0.12,   "6to24m": 0.12,   "gt24m": 0.12  },
+		32: { "6m": 0.08,   "6to24m": 0.08,   "gt24m": 0.08  },
+};
+
+// ========================
+// ✅ Format and parse numbers
+// ========================
+function formatNumber(num) {
+    if (isNaN(num)) return "";
+    return Math.round(num).toLocaleString('en-IN'); // ✅ 1,11,115 format
+}
+
+function parseNumber(val) {
+    return parseFloat(val.toString().replace(/,/g, "")) || 0;
+}
+
+// ========================
+// ✅ Calculate capital for a row range
+// ========================
+function calculateCapitalForRange(start, end, totalRowId=null) {
+    let tot6m = 0, tot6to24=0, totgt24=0;
+
+    for (let i = start; i <= end; i++) {
+        let amt6m = parseNumber($("#r"+i+"_amt_6m").val());
+        let amt6to24m = parseNumber($("#r"+i+"_amt_6to24m").val());
+        let amtgt24m = parseNumber($("#r"+i+"_amt_gt24m").val());
+
+        let risk6m = fixedRisk[i]? fixedRisk[i]["6m"]:0;
+        let risk6to24 = fixedRisk[i]? fixedRisk[i]["6to24m"]:0;
+        let riskgt24 = fixedRisk[i]? fixedRisk[i]["gt24m"]:0;
+
+        let capital6m = amt6m*risk6m;
+        let capital6to24m = amt6to24m*risk6to24;
+        let capitalgt24m = amtgt24m*riskgt24;
+
+        $("#r"+i+"_capital_6m").val(formatNumber(capital6m));
+        $("#r"+i+"_capital_6to24m").val(formatNumber(capital6to24m));
+        $("#r"+i+"_capital_gt24m").val(formatNumber(capitalgt24m));
+
+        $("#r"+i+"_risk_6m").val((risk6m*100).toFixed(2)+"%");
+        $("#r"+i+"_risk_6to24m").val((risk6to24*100).toFixed(2)+"%");
+        $("#r"+i+"_risk_gt24m").val((riskgt24*100).toFixed(2)+"%");
+
+        tot6m += capital6m;
+        tot6to24 += capital6to24m;
+        totgt24 += capitalgt24m;
+    }
+
+    if(totalRowId){
+        $("#"+totalRowId+"_capital_6m").val(formatNumber(tot6m));
+        $("#"+totalRowId+"_capital_6to24m").val(formatNumber(tot6to24));
+        $("#"+totalRowId+"_capital_gt24m").val(formatNumber(totgt24));
     }
 }
 
-$(document).ready(function() {
-    // initial calculation
-    calculate24_25_26Totals();
+// ========================
+// ✅ Calculate r33 totals
+// ========================
+function calculateTotal33() {
+    function val(id){ return parseNumber($("#"+id).val()); }
+    let tot6m = val("r12_capital_6m")+val("r18_capital_6m")+val("r24_capital_6m")+val("r25_capital_6m")+val("r26_capital_6m")+val("r27_capital_6m");
+    let tot6to24 = val("r12_capital_6to24m")+val("r18_capital_6to24m")+val("r24_capital_6to24m")+val("r25_capital_6to24m")+val("r26_capital_6to24m")+val("r27_capital_6to24m");
+    let totgt24 = val("r12_capital_gt24m")+val("r18_capital_gt24m")+val("r24_capital_gt24m")+val("r25_capital_gt24m")+val("r26_capital_gt24m")+val("r27_capital_gt24m");
 
-    // re-calc whenever amount/risk changes
-    for (let i = 24; i <= 26; i++) {
-        $(
-          "#r" + i + "_amt_6m, " +
-          "#r" + i + "_risk_6m, " +
-          "#r" + i + "_amt_6to24m, " +
-          "#r" + i + "_risk_6to24m, " +
-          "#r" + i + "_amt_gt24m, " +
-          "#r" + i + "_risk_gt24m"
-        ).on("input", function () {
-            calculate24_25_26Totals();
-        });
-    }
-});
-</script>
-
-<script>
-function calculateR27Totals(){
-	let tot4_amt6m = 0, tot4_risk6m = 0, tot4_capital6m = 0;
-    let tot4_amt6m24m = 0, tot4_risk6m24 = 0, tot4_capital6m24m = 0;
-    let tot4_amtgt24m = 0, tot4_riskgt24m = 0, tot4_capitalgt24m = 0;
-	
-	for(let i = 28; i <= 32; i++){
-	        let t4amt6m       = parseFloat($("#r" + i + "_amt_6m").val().replace(/,/g,"")) || 0;
-	        let t4risk6m      = parseFloat($("#r" + i + "_risk_6m").val().replace(/,/g,"")) || 0;
-	        
-	        let t4amt6m24m    = parseFloat($("#r" + i + "_amt_6to24m").val().replace(/,/g,"")) || 0;
-	        let t4risk6m24    = parseFloat($("#r" + i + "_risk_6to24m").val().replace(/,/g,"")) || 0;
-	        
-	        let t4amtgt24m    = parseFloat($("#r" + i + "_amt_gt24m").val().replace(/,/g,"")) || 0;
-	        let t4riskgt24m   = parseFloat($("#r" + i + "_risk_gt24m").val().replace(/,/g,"")) || 0;
-	       
-			
-			let t4capital6m = t4amt6m * t4risk6m;
-			let t4capital6m24m = t4amt6m24m * t4risk6m24;
-			let t4capitalgt24m = t4amtgt24m * t4riskgt24m;
-			
-			$("#r" + i + "_capital_6m").val(t4capital6m);
-			$("#r" + i + "_capital_6to24m").val(t4capital6m24m);
-			$("#r" + i + "_capital_gt24m").val(t4capitalgt24m);
-			
-	        tot4_amt6m       += t4amt6m;
-	        tot4_risk6m      += t4risk6m;
-	        tot4_capital6m   += t4capital6m;
-
-	        tot4_amt6m24m    += t4amt6m24m;
-	        tot4_risk6m24    += t4risk6m24;
-	        tot4_capital6m24m+= t4capital6m24m;
-
-	        tot4_amtgt24m    += t4amtgt24m;
-	        tot4_riskgt24m   += t4riskgt24m;
-	        tot4_capitalgt24m+= t4capitalgt24m;
-
-			 }
-
-			    //calculation for 18 = sum(19:23)
-			    $("#r27_amt_6m").val(tot4_amt6m);
-			    $("#r27_risk_6m").val(tot4_risk6m);
-			    $("#r27_capital_6m").val(tot4_capital6m);
-
-			    $("#r27_amt_6to24m").val(tot4_amt6m24m);
-			    $("#r27_risk_6to24m").val(tot4_risk6m24);
-			    $("#r27_capital_6to24m").val(tot4_capital6m24m);
-
-			    $("#r27_amt_gt24m").val(tot4_amtgt24m);
-			    $("#r27_risk_gt24m").val(tot4_riskgt24m);
-			    $("#r27_capital_gt24m").val(tot4_capitalgt24m);
-				
-				calculate33Totals();
-			}
-
-			$(document).ready(function() {
-			    
-			    calculateR27Totals();
-
-			    for (let i = 28; i <= 32; i++) {
-			        $(
-			          "#r" + i + "_amt_6m, " +
-			          "#r" + i + "_risk_6m, " +
-			          "#r" + i + "_capital_6m, " +
-			          "#r" + i + "_amt_6to24m, " +
-			          "#r" + i + "_risk_6to24m, " +
-			          "#r" + i + "_capital_6to24m, " +
-			          "#r" + i + "_amt_gt24m, " +
-			          "#r" + i + "_risk_gt24m, " +
-			          "#r" + i + "_capital_gt24m"
-			        ).on("input", function () {
-			            calculateR27Totals();
-			        });
-			    }
-			});
-	
-
-</script>
-<script>
-
-function calculate33Totals() {
-    function val(id) {
-        return Number($("#" + id).val()) || 0;  
-    }
-
-    // 12, 18, 24, 25, 26, 27
-    let t33_capital6m = val("r12_capital_6m") + val("r18_capital_6m") + val("r24_capital_6m") +
-                        val("r25_capital_6m") + val("r26_capital_6m") + val("r27_capital_6m");
-
-    let t33_capital6to24 = val("r12_capital_6to24m") + val("r18_capital_6to24m") + val("r24_capital_6to24m") +
-                           val("r25_capital_6to24m") + val("r26_capital_6to24m") + val("r27_capital_6to24m");
-
-    let t33_capitalgt24 = val("r12_capital_gt24m") + val("r18_capital_gt24m") + val("r24_capital_gt24m") +
-                          val("r25_capital_gt24m") + val("r26_capital_gt24m") + val("r27_capital_gt24m");
-
-    // r33
-    $("#r33_capital_6m").val(t33_capital6m);
-    $("#r33_capital_6to24m").val(t33_capital6to24);
-    $("#r33_capital_gt24m").val(t33_capitalgt24);
-	
-	calculateFinalTotal();
-	
-	
-	
+    $("#r33_capital_6m").val(formatNumber(tot6m));
+    $("#r33_capital_6to24m").val(formatNumber(tot6to24));
+    $("#r33_capital_gt24m").val(formatNumber(totgt24));
 }
+
+// ========================
+// ✅ Calculate final total r35
+// ========================
 function calculateFinalTotal() {
-    function val(id) {
-        return Number($("#" + id).val()) || 0;
+    let tot = parseNumber($("#r33_capital_6m").val())+
+              parseNumber($("#r33_capital_6to24m").val())+
+              parseNumber($("#r33_capital_gt24m").val());
+    $("#r35_tot_spec_risk_ch").val(formatNumber(tot));
+}
+
+// ========================
+// ✅ Calculate all ranges
+// ========================
+function calculateAll(){
+    calculateCapitalForRange(13,17,"r12");
+    calculateCapitalForRange(19,23,"r18");
+    calculateCapitalForRange(24,26,null);
+    calculateCapitalForRange(28,32,"r27");
+    calculateTotal33();
+    calculateFinalTotal();
+}
+
+// ====
+
+// ========================
+// ✅ Initialize on page load
+// ========================
+$(document).ready(function(){
+    // Make risk fields readonly
+    for(let i=13;i<=32;i++){
+        $("#r"+i+"_risk_6m, #r"+i+"_risk_6to24m, #r"+i+"_risk_gt24m").attr("readonly","readonly");
     }
 
-    
-    let totalA = val("r33_capital_6m");       
-    let totalB = val("r33_capital_6to24m");   
-    let totalC = val("r33_capital_gt24m");    
+    calculateAll();
 
-    let grandTotal = totalA + totalB + totalC;
-
-    
-    $("#r35_tot_spec_risk_ch").val(grandTotal);
-	
-	
-}
-$(document).ready(function () {
-   
-    calculate33Totals();
-
-    
-	const rows = [12, 18, 24, 25, 26, 27];
-	const fields = ["_capital_6m", "_capital_6to24m", "_capital_gt24m"];
-
-	for (let r = 0; r < rows.length; r++) {
-	    for (let f = 0; f < fields.length; f++) {
-	        $("#r" + rows[r] + fields[f]).on("input", function () {
-	            calculate33Totals();
-	        });
-	    }
-	}
-	$("#r33_capital_6m, #r33_capital_6to24m, #r33_capital_gt24m")
-	    .off("input")//it was going to remove the old changed data in that cell
-	    .on("input", function () {
-	        calculateFinalTotal();
-	    });
-	
+    // Attach listeners to all amount fields
+    const amtFields = ["_amt_6m","_amt_6to24m","_amt_gt24m"];
+    for(let i=13;i<=32;i++){
+        amtFields.forEach(f=>{
+            $("#r"+i+f).on("input", calculateAll);
+        });
+    }
 });
-
-
-
-
 </script>
 <script>
 	function closemodel(){
@@ -1206,16 +829,11 @@ $(document).ready(function () {
 		$('#loader').modal('show');
 		
 		
-		calculateR12Totals();
-		calculateR18Totals();
-		calculate24_25_26Totals();
-		calculateR27Totals();
-		calculate33Totals();
-		calculateFinalTotal();
-		
+		calculateAll();
 		$("#fileupload input[type='text']").each(function () {
-			        $(this).val($(this).val().replace(/,/g, ''));
-		});		
+		    $(this).val($(this).val().replace(/,/g, '').replace('%',''));
+		});
+
 		if (!$("#fileupload").valid()) {
 		        $('#loader').modal('hide');
 		        return;
@@ -1239,7 +857,7 @@ $(document).ready(function () {
 		        dataType: 'text',
 		        success: function () {
 		            $("#resultModalLabel").text("Success");
-		            $("#resultModalBody").text("All reports updated successfully.");
+		            $("#resultModalBody").text("Updated Successfully.");
 		            $("#resultModal").modal("show");
 		        },
 		        error: function (jqXHR) {
@@ -1295,8 +913,7 @@ $(document).ready(function () {
 						<!-- Buttons -->
         <input type="hidden" id="selectedTab" th:value="${displaymode}">
         <button type="button" class="custom-tab-btn" id="custom-tab-btnSummary" onclick="showsummary();" th:if="${displaymode == 'Details'}">Summary</button>
-		<button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();"
-									th:if="${displaymode == 'summary'}">Details</button>
+		<button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();" th:if="${displaymode == 'summary'}">Details</button>
 		<!-- Modify button -->
 				<button type="button" class="custom-tab-btn"
 				        onclick="showmodify(this);"
@@ -1353,38 +970,38 @@ $(document).ready(function () {
 						    <table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports">
 							<theadclass="thead-light">
 								<tr>
-													       <th rowspan="4" class="line-col" style="vertical-align: bottom; text-align: left; padding-left: 20px;">line</th>													       
-													       <th colspan="9"style=" text-align: center;">Remaining Maturities</th>
+													       <th rowspan="4" class="line-col" style="vertical-align: bottom; text-align: left; padding-left: 20px;background-color: #D8D8D8;">line</th>													       
+													       <th colspan="9"style=" text-align: center;background-color: #D8D8D8;">Remaining Maturities</th>
 													     </tr>
 													     <tr>
-													       <th colspan="3"  style="text-align: center;">&le; 6 months</th>
-													       <th colspan="3" style="text-align: center;">&gt; 6 months – 24 months</th>
-													       <th colspan="3" style="text-align: center;">&gt; 24 months</th>
+													       <th colspan="3"  style="text-align: center;background-color: #D8D8D8;">&le; 6 months</th>
+													       <th colspan="3" style="text-align: center;background-color: #D8D8D8;">&gt; 6 months – 24 months</th>
+													       <th colspan="3" style="text-align: center;background-color: #D8D8D8;">&gt; 24 months</th>
 													     </tr>
 														<tr>
-														 	<th></th>
-														 	<th style="text-align: center;">Risk</th>
-														 	<th style="text-align: center;">Capital</th>
-														 	<th></th>
-														 	<th style="text-align: center;">Risk</th>
-														 	<th style="text-align: center;">Capital</th>
-														 	<th></th>
-														 	<th style="text-align: center;">Risk</th>
-														 	<th style="text-align: center;">Capital</th>
+														 	<th style="text-align: center;background-color: #D8D8D8;"></th>
+														 	<th style="text-align: center;background-color: #D8D8D8;">Risk</th>
+														 	<th style="text-align: center;background-color: #D8D8D8;">Capital</th>
+														 	<th style="text-align: center;background-color: #D8D8D8;"></th>
+														 	<th style="text-align: center;background-color: #D8D8D8;">Risk</th>
+														 	<th style="text-align: center;background-color: #D8D8D8;">Capital</th>
+														 	<th style="text-align: center;background-color: #D8D8D8;"></th>
+														 	<th style="text-align: center;background-color: #D8D8D8;">Risk</th>
+														 	<th style="text-align: center;background-color: #D8D8D8;">Capital</th>
 														 </tr>
 													     <tr>
-													       <th style="text-align: center;">Amount</th>
-													       <th style="text-align: center;">Charge</th>
-													       <th style="text-align: center;">Charge</th>
-													       <th style="text-align: center;">Amount</th>
-													       <th style="text-align: center;">Charge</th>
-													       <th style="text-align: center;">Charge</th>
-													       <th style="text-align: center;">Amount</th>
-													       <th style="text-align: center;">Charge</th>
-													       <th style="text-align: center;">Charge</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Amount</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Charge</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Charge</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Amount</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Charge</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Charge</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Amount</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Charge</th>
+													       <th style="text-align: center;background-color: #D8D8D8;">Charge</th>
 												   		</tr>
 												  
-						    </theadclass="thead-light">
+						    </thead>
 
 							                  	
 												
@@ -1403,93 +1020,75 @@ $(document).ready(function () {
 	           readonly />
 	  </td>
 
-	  <td style="background-color:#92D050;">
+	  <td style="background-color:rgb(107, 122, 143)">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r12_amt_6m != null ? #numbers.formatDecimal(report.r12_amt_6m,1,'COMMA',0,'POINT'):'0'}"
+	           th:value="${report.r12_amt_6m != null ? #numbers.formatDecimal(report.r12_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r12_amt_6m"
 	           name="r12_amt_6m"
-	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
 	 
 	 <td style="background-color:rgb(192, 192, 192);">
-	      <input class="display-input show_input"
-	             type="text"
-	             th:value="${report.r12_risk_6m != null ? #numbers.formatDecimal(report.r12_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
-	             id="r12_risk_6m"
-	             name="r12_risk_6m"
-	             style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-	             readonly />
 	    </td>
-	 <td style="background-color:#92D050;">
+		
+	 <td style="background-color:rgb(107, 122, 143)">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r12_capital_6m != null ? #numbers.formatDecimal(report.r12_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r12_capital_6m != null ? #numbers.formatDecimal(report.r12_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r12_capital_6m"
 	           name="r12_capital_6m"
-	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 	  
-	 <td style="background-color:#92D050;">
+	 <td style="background-color:rgb(107, 122, 143)">
 	      <input class="display-input show_input"
 	             type="text"
-	             th:value="${report.r12_amt_6to24m != null ? #numbers.formatDecimal(report.r12_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             th:value="${report.r12_amt_6to24m != null ? #numbers.formatDecimal(report.r12_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	             id="r12_amt_6to24m"
 	             name="r12_amt_6to24m"
-	             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	             style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	             readonly />
 	    </td>
 		
+
 		<td style="background-color:rgb(192, 192, 192);">
-		    <input class="display-input show_input"
-		           type="text"
-		           th:value="${report.r12_risk_6to24m != null ? #numbers.formatDecimal(report.r12_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
-		           id="r12_risk_6to24m"
-		           name="r12_risk_6to24m"
-		           style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-		           readonly />
-		  </td>
+		   </td>
 		  
-		  <td style="background-color:#92D050;">
+		  <td style="background-color:rgb(107, 122, 143);">
 		      <input class="display-input show_input"
 		             type="text"
-		             th:value="${report.r12_capital_6to24m != null ? #numbers.formatDecimal(report.r12_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		             th:value="${report.r12_capital_6to24m != null ? #numbers.formatDecimal(report.r12_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 		             id="r12_capital_6to24m"
 		             name="r12_capital_6to24m"
-		             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		             style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 		             readonly />
 		    </td>
 
-			<td style="background-color:#92D050;">
+			<td style="background-color:rgb(107, 122, 143);">
 			    <input class="display-input show_input"
 			           type="text"
-			           th:value="${report.r12_amt_gt24m != null ? #numbers.formatDecimal(report.r12_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			           th:value="${report.r12_amt_gt24m != null ? #numbers.formatDecimal(report.r12_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			           id="r12_amt_gt24m"
 			           name="r12_amt_gt24m"
-			           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			           readonly />
 			  </td>
 
-			<td style="background-color:rgb(192, 192, 192);">
-			    <input class="display-input show_input"
-			           type="text"
-			           th:value="${report.r12_risk_gt24m != null ? #numbers.formatDecimal(report.r12_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
-			           id="r12_risk_gt24m"
-			           name="r12_risk_gt24m"
-			           style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-			           readonly />
-			  </td>
+
+			  <td style="background-color:rgb(192, 192, 192);">
+			     </td>
 			  
-			  <td style="background-color:#92D050;">
+			  <td style="background-color:rgb(107, 122, 143);">
 			      <input class="display-input show_input"
 			             type="text"
-			             th:value="${report.r12_capital_gt24m != null ? #numbers.formatDecimal(report.r12_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			             th:value="${report.r12_capital_gt24m != null ? #numbers.formatDecimal(report.r12_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			             id="r12_capital_gt24m"
 			             name="r12_capital_gt24m"
-			             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			             style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			             readonly />
 			    </td>
 				
@@ -1513,90 +1112,90 @@ $(document).ready(function () {
 	  <td>
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r13_amt_6m != null ? #numbers.formatDecimal(report.r13_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r13_amt_6m != null ? #numbers.formatDecimal(report.r13_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r13_amt_6m"
 	           name="r13_amt_6m"
 	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:rgb(128, 128, 128);">
+	  <td style="background-color:rgb(255, 255, 255);">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r13_risk_6m != null ?  #numbers.formatDecimal(report.r13_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r13_risk_6m != null ?  #numbers.formatDecimal(report.r13_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r13_risk_6m"
 	           name="r13_risk_6m"
-	           style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:#92D050;">
+	  <td style="background-color:rgb(107, 122, 143);">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r13_capital_6m != null ? #numbers.formatDecimal(report.r13_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r13_capital_6m != null ? #numbers.formatDecimal(report.r13_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r13_capital_6m"
 	           name="r13_capital_6m"
-	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 	  
 	  <td>
 	      <input class="display-input show_input"
 	             type="text"
-	             th:value="${report.r13_amt_6to24m != null ? #numbers.formatDecimal(report.r13_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             th:value="${report.r13_amt_6to24m != null ? #numbers.formatDecimal(report.r13_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	             id="r13_amt_6to24m"
 	             name="r13_amt_6to24m"
 	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	             readonly />
 	    </td>
 	    
-	    <td style="background-color:rgb(128, 128, 128);">
+	    <td style="background-color:rgb(255, 255, 255);">
 	        <input class="display-input show_input"
 	               type="text"
-	               th:value="${report.r13_risk_6to24m != null ? #numbers.formatDecimal(report.r13_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               th:value="${report.r13_risk_6to24m != null ? #numbers.formatDecimal(report.r13_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	               id="r13_risk_6to24m"
 	               name="r13_risk_6to24m"
-	               style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	               style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	               readonly />
 	      </td>
 	      
-	      <td style="background-color:#92D050;">
+	      <td style="background-color:rgb(107, 122, 143);">
 	          <input class="display-input show_input"
 	                 type="text"
-	                 th:value="${report.r13_capital_6to24m != null ? #numbers.formatDecimal(report.r13_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 th:value="${report.r13_capital_6to24m != null ? #numbers.formatDecimal(report.r13_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	                 id="r13_capital_6to24m"
 	                 name="r13_capital_6to24m"
-	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                 readonly />
 	        </td>
 
 	        <td>
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r13_amt_gt24m != null ? #numbers.formatDecimal(report.r13_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r13_amt_gt24m != null ? #numbers.formatDecimal(report.r13_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r13_amt_gt24m"
 	                   name="r13_amt_gt24m"
 	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 
-	        <td style="background-color:rgb(128, 128, 128)">
+	        <td style="background-color:rgb(255, 255, 255)">
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r13_risk_gt24m != null ? #numbers.formatDecimal(report.r13_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r13_risk_gt24m != null ? #numbers.formatDecimal(report.r13_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r13_risk_gt24m"
 	                   name="r13_risk_gt24m"
-	                   style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 	          
-	          <td style="background-color:#92D050;">
+	          <td style="background-color:rgb(107, 122, 143);">
 	              <input class="display-input show_input"
 	                     type="text"
-	                     th:value="${report.r13_capital_gt24m != null ? #numbers.formatDecimal(report.r13_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     th:value="${report.r13_capital_gt24m != null ? #numbers.formatDecimal(report.r13_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                     id="r13_capital_gt24m"
 	                     name="r13_capital_gt24m"
-	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                     readonly />
 	            </td>
 
@@ -1617,90 +1216,90 @@ $(document).ready(function () {
 	  <td>
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r14_amt_6m != null ? #numbers.formatDecimal(report.r14_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r14_amt_6m != null ? #numbers.formatDecimal(report.r14_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r14_amt_6m"
 	           name="r14_amt_6m"
 	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:rgb(128, 128, 128)">
+	  <td style="background-color:rgb(255, 255, 255)">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r14_risk_6m != null ?  #numbers.formatDecimal(report.r14_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r14_risk_6m != null ?  #numbers.formatDecimal(report.r14_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r14_risk_6m"
 	           name="r14_risk_6m"
-	           style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:#92D050;">
+	  <td style="background-color:rgb(107, 122, 143);">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r14_capital_6m != null ? #numbers.formatDecimal(report.r14_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r14_capital_6m != null ? #numbers.formatDecimal(report.r14_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r14_capital_6m"
 	           name="r14_capital_6m"
-	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 	  
 	  <td>
 	      <input class="display-input show_input"
 	             type="text"
-	             th:value="${report.r14_amt_6to24m != null ? #numbers.formatDecimal(report.r14_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             th:value="${report.r14_amt_6to24m != null ? #numbers.formatDecimal(report.r14_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	             id="r14_amt_6to24m"
 	             name="r14_amt_6to24m"
 	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	             readonly />
 	    </td>
 	    
-	    <td style="background-color:rgb(128, 128, 128)">
+	    <td style="background-color:rgb(255, 255, 255)">
 	        <input class="display-input show_input"
 	               type="text"
-	               th:value="${report.r14_risk_6to24m != null ? #numbers.formatDecimal(report.r14_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               th:value="${report.r14_risk_6to24m != null ? #numbers.formatDecimal(report.r14_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	               id="r14_risk_6to24m"
 	               name="r14_risk_6to24m"
-	               style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	               style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	               readonly />
 	      </td>
 	      
-	      <td style="background-color:#92D050;">
+	      <td style="background-color:rgb(107, 122, 143);">
 	          <input class="display-input show_input"
 	                 type="text"
-	                 th:value="${report.r14_capital_6to24m != null ? #numbers.formatDecimal(report.r14_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 th:value="${report.r14_capital_6to24m != null ? #numbers.formatDecimal(report.r14_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	                 id="r14_capital_6to24m"
 	                 name="r14_capital_6to24m"
-	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                 readonly />
 	        </td>
 
 	        <td>
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r14_amt_gt24m != null ? #numbers.formatDecimal(report.r14_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r14_amt_gt24m != null ? #numbers.formatDecimal(report.r14_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r14_amt_gt24m"
 	                   name="r14_amt_gt24m"
 	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 
-	        <td style="background-color:rgb(128, 128, 128)">
+	        <td style="background-color:rgb(255, 255, 255)">
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r14_risk_gt24m != null ? #numbers.formatDecimal(report.r14_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r14_risk_gt24m != null ? #numbers.formatDecimal(report.r14_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r14_risk_gt24m"
 	                   name="r14_risk_gt24m"
-	                   style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 	          
-	          <td style="background-color:#92D050;">
+	          <td style="background-color:rgb(107, 122, 143);">
 	              <input class="display-input show_input"
 	                     type="text"
-	                     th:value="${report.r14_capital_gt24m != null ? #numbers.formatDecimal(report.r14_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     th:value="${report.r14_capital_gt24m != null ? #numbers.formatDecimal(report.r14_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                     id="r14_capital_gt24m"
 	                     name="r14_capital_gt24m"
-	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                     readonly />
 	            </td>
 
@@ -1721,90 +1320,90 @@ $(document).ready(function () {
 	  <td>
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r15_amt_6m != null ? #numbers.formatDecimal(report.r15_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r15_amt_6m != null ? #numbers.formatDecimal(report.r15_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r15_amt_6m"
 	           name="r15_amt_6m"
 	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:rgb(128, 128, 128)">
+	  <td style="background-color:rgb(255, 255, 255)">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r15_risk_6m != null ?  #numbers.formatDecimal(report.r15_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r15_risk_6m != null ?  #numbers.formatDecimal(report.r15_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r15_risk_6m"
 	           name="r15_risk_6m"
-	           style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:#92D050;">
+	  <td style="background-color:rgb(107, 122, 143);">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r15_capital_6m != null ? #numbers.formatDecimal(report.r15_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r15_capital_6m != null ? #numbers.formatDecimal(report.r15_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r15_capital_6m"
 	           name="r15_capital_6m"
-	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 	  
 	  <td>
 	      <input class="display-input show_input"
 	             type="text"
-	             th:value="${report.r15_amt_6to24m != null ? #numbers.formatDecimal(report.r15_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             th:value="${report.r15_amt_6to24m != null ? #numbers.formatDecimal(report.r15_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	             id="r15_amt_6to24m"
 	             name="r15_amt_6to24m"
 	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	             readonly />
 	    </td>
 	    
-	    <td style="background-color:rgb(128, 128, 128)">
+	    <td style="background-color:rgb(255, 255, 255)">
 	        <input class="display-input show_input"
 	               type="text"
-	               th:value="${report.r15_risk_6to24m != null ? #numbers.formatDecimal(report.r15_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               th:value="${report.r15_risk_6to24m != null ? #numbers.formatDecimal(report.r15_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	               id="r15_risk_6to24m"
 	               name="r15_risk_6to24m"
-	               style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	               style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	               readonly />
 	      </td>
 	      
-	      <td style="background-color:#92D050;">
+	      <td style="background-color:rgb(107, 122, 143);">
 	          <input class="display-input show_input"
 	                 type="text"
-	                 th:value="${report.r15_capital_6to24m != null ? #numbers.formatDecimal(report.r15_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 th:value="${report.r15_capital_6to24m != null ? #numbers.formatDecimal(report.r15_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	                 id="r15_capital_6to24m"
 	                 name="r15_capital_6to24m"
-	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                 readonly />
 	        </td>
 
 	        <td>
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r15_amt_gt24m != null ? #numbers.formatDecimal(report.r15_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r15_amt_gt24m != null ? #numbers.formatDecimal(report.r15_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r15_amt_gt24m"
 	                   name="r15_amt_gt24m"
 	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 
-	        <td style="background-color:rgb(128, 128, 128)">
+	        <td style="background-color:rgb(255, 255, 255)">
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r15_risk_gt24m != null ? #numbers.formatDecimal(report.r15_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r15_risk_gt24m != null ? #numbers.formatDecimal(report.r15_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r15_risk_gt24m"
 	                   name="r15_risk_gt24m"
-	                   style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 	          
-	          <td style="background-color:#92D050;">
+	          <td style="background-color:rgb(107, 122, 143);">
 	              <input class="display-input show_input"
 	                     type="text"
-	                     th:value="${report.r15_capital_gt24m != null ? #numbers.formatDecimal(report.r15_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     th:value="${report.r15_capital_gt24m != null ? #numbers.formatDecimal(report.r15_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                     id="r15_capital_gt24m"
 	                     name="r15_capital_gt24m"
-	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                     readonly />
 	            </td>
 
@@ -1825,90 +1424,90 @@ $(document).ready(function () {
 	  <td>
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r16_amt_6m != null ? #numbers.formatDecimal(report.r16_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r16_amt_6m != null ? #numbers.formatDecimal(report.r16_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r16_amt_6m"
 	           name="r16_amt_6m"
 	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:rgb(128, 128, 128)">
+	  <td style="background-color:rgb(255, 255, 255)">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r16_risk_6m != null ?#numbers.formatDecimal(report.r16_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r16_risk_6m != null ?#numbers.formatDecimal(report.r16_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r16_risk_6m"
 	           name="r16_risk_6m"
-	           style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	  <td style="background-color:#92D050;">
+	  <td style="background-color:rgb(107, 122, 143);">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r16_capital_6m != null ? #numbers.formatDecimal(report.r16_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r16_capital_6m != null ? #numbers.formatDecimal(report.r16_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r16_capital_6m"
 	           name="r16_capital_6m"
-	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 	  
 	  <td>
 	      <input class="display-input show_input"
 	             type="text"
-	             th:value="${report.r16_amt_6to24m != null ? #numbers.formatDecimal(report.r16_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             th:value="${report.r16_amt_6to24m != null ? #numbers.formatDecimal(report.r16_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	             id="r16_amt_6to24m"
 	             name="r16_amt_6to24m"
 	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	             readonly />
 	    </td>
 	    
-	    <td style="background-color:rgb(128, 128, 128)">
+	    <td style="background-color:rgb(255, 255, 255)">
 	        <input class="display-input show_input"
 	               type="text"
-	               th:value="${report.r16_risk_6to24m != null ? #numbers.formatDecimal(report.r16_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               th:value="${report.r16_risk_6to24m != null ? #numbers.formatDecimal(report.r16_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	               id="r16_risk_6to24m"
 	               name="r16_risk_6to24m"
-	               style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	               style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	               readonly />
 	      </td>
 	      
-	      <td style="background-color:#92D050;">
+	      <td style="background-color:rgb(107, 122, 143);">
 	          <input class="display-input show_input"
 	                 type="text"
-	                 th:value="${report.r16_capital_6to24m != null ? #numbers.formatDecimal(report.r16_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 th:value="${report.r16_capital_6to24m != null ? #numbers.formatDecimal(report.r16_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	                 id="r16_capital_6to24m"
 	                 name="r16_capital_6to24m"
-	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                 readonly />
 	        </td>
 
 	        <td>
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r16_amt_gt24m != null ? #numbers.formatDecimal(report.r16_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r16_amt_gt24m != null ? #numbers.formatDecimal(report.r16_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r16_amt_gt24m"
 	                   name="r16_amt_gt24m"
 	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 
-	       <td style="background-color:rgb(128, 128, 128)">
+	       <td style="background-color:rgb(255, 255, 255)">
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r16_risk_gt24m != null ? #numbers.formatDecimal(report.r16_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r16_risk_gt24m != null ? #numbers.formatDecimal(report.r16_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r16_risk_gt24m"
 	                   name="r16_risk_gt24m"
-	                   style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 	          
-	          <td style="background-color:#92D050;">
+	          <td style="background-color:rgb(107, 122, 143);">
 	              <input class="display-input show_input"
 	                     type="text"
-	                     th:value="${report.r16_capital_gt24m != null ? #numbers.formatDecimal(report.r16_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     th:value="${report.r16_capital_gt24m != null ? #numbers.formatDecimal(report.r16_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                     id="r16_capital_gt24m"
 	                     name="r16_capital_gt24m"
-	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                     readonly />
 	            </td>
 
@@ -1929,90 +1528,90 @@ $(document).ready(function () {
 	  <td>
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r17_amt_6m != null ? #numbers.formatDecimal(report.r17_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r17_amt_6m != null ? #numbers.formatDecimal(report.r17_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r17_amt_6m"
 	           name="r17_amt_6m"
 	           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	   <td style="background-color:rgb(128, 128, 128)">
+	   <td style="background-color:rgb(255, 255, 255)">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r17_risk_6m != null ?  #numbers.formatDecimal(report.r17_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r17_risk_6m != null ?  #numbers.formatDecimal(report.r17_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r17_risk_6m"
 	           name="r17_risk_6m"
-	           style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 
-	 <td style="background-color:#92D050;">
+	 <td style="background-color:rgb(107, 122, 143);">
 	    <input class="display-input show_input"
 	           type="text"
-	           th:value="${report.r17_capital_6m != null ? #numbers.formatDecimal(report.r17_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+	           th:value="${report.r17_capital_6m != null ? #numbers.formatDecimal(report.r17_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 	           id="r17_capital_6m"
 	           name="r17_capital_6m"
-	           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	           readonly />
 	  </td>
 	  
 	  <td>
 	      <input class="display-input show_input"
 	             type="text"
-	             th:value="${report.r17_amt_6to24m != null ? #numbers.formatDecimal(report.r17_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	             th:value="${report.r17_amt_6to24m != null ? #numbers.formatDecimal(report.r17_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	             id="r17_amt_6to24m"
 	             name="r17_amt_6to24m"
 	             style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	             readonly />
 	    </td>
 	    
-	    <td style="background-color:rgb(128, 128, 128)">
+	    <td style="background-color:rgb(255, 255, 255)">
 			      <input class="display-input show_input"
 	               type="text"
-	               th:value="${report.r17_risk_6to24m != null ? #numbers.formatDecimal(report.r17_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	               th:value="${report.r17_risk_6to24m != null ? #numbers.formatDecimal(report.r17_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	               id="r17_risk_6to24m"
 	               name="r17_risk_6to24m"
-	               style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	               style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	               readonly />
 	      </td>
 	      
-	     <td style="background-color:#92D050;">
+	     <td style="background-color:rgb(107, 122, 143);">
 	          <input class="display-input show_input"
 	                 type="text"
-	                 th:value="${report.r17_capital_6to24m != null ? #numbers.formatDecimal(report.r17_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                 th:value="${report.r17_capital_6to24m != null ? #numbers.formatDecimal(report.r17_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 	                 id="r17_capital_6to24m"
 	                 name="r17_capital_6to24m"
-	                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                 readonly />
 	        </td>
 
 	        <td>
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r17_amt_gt24m != null ? #numbers.formatDecimal(report.r17_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r17_amt_gt24m != null ? #numbers.formatDecimal(report.r17_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r17_amt_gt24m"
 	                   name="r17_amt_gt24m"
 	                   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 
-	       <td style="background-color:rgb(128, 128, 128)">
+	       <td style="background-color:rgb(255, 255, 255)">
 	            <input class="display-input show_input"
 	                   type="text"
-	                   th:value="${report.r17_risk_gt24m != null ? #numbers.formatDecimal(report.r17_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                   th:value="${report.r17_risk_gt24m != null ? #numbers.formatDecimal(report.r17_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                   id="r17_risk_gt24m"
 	                   name="r17_risk_gt24m"
-	                   style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+	                   style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                   readonly />
 	          </td>
 	          
-	          <td style="background-color:#92D050;">
+	          <td style="background-color:rgb(107, 122, 143);">
 	              <input class="display-input show_input"
 	                     type="text"
-	                     th:value="${report.r17_capital_gt24m != null ? #numbers.formatDecimal(report.r17_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+	                     th:value="${report.r17_capital_gt24m != null ? #numbers.formatDecimal(report.r17_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 	                     id="r17_capital_gt24m"
 	                     name="r17_capital_gt24m"
-	                     style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+	                     style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 	                     readonly />
 	            </td>
 
@@ -2030,93 +1629,74 @@ $(document).ready(function () {
 		         readonly />
 		</td>
 
-		<td style="background-color:#92D050;">
+		<td style="background-color:rgb(107, 122, 143);">
 		  <input class="display-input show_input"
 		         type="text"
-		         th:value="${report.r18_amt_6m != null ? #numbers.formatDecimal(report.r18_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+		         th:value="${report.r18_amt_6m != null ? #numbers.formatDecimal(report.r18_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 		         id="r18_amt_6m"
 		         name="r18_amt_6m"
-		         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 		         readonly />
 		</td>
+
 
 		<td style="background-color:rgb(192, 192, 192);">
-		  <input class="display-input show_input"
-		         type="text"
-		         th:value="${report.r18_risk_6m != null ?  #numbers.formatDecimal(report.r18_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
-		         id="r18_risk_6m"
-		         name="r18_risk_6m"
-		         style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-		         readonly />
-		</td>
+		   </td>
 
-		<td style="background-color:#92D050;">
+		<td style="background-color:rgb(107, 122, 143);">
 		  <input class="display-input show_input"
 		         type="text"
-		         th:value="${report.r18_capital_6m != null ? #numbers.formatDecimal(report.r18_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+		         th:value="${report.r18_capital_6m != null ? #numbers.formatDecimal(report.r18_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 		         id="r18_capital_6m"
 		         name="r18_capital_6m"
-		         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 		         readonly />
 		</td>
 
-		<td style="background-color:#92D050;">
+		<td style="background-color:rgb(107, 122, 143);">
 		    <input class="display-input show_input"
 		           type="text"
-		           th:value="${report.r18_amt_6to24m != null ? #numbers.formatDecimal(report.r18_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		           th:value="${report.r18_amt_6to24m != null ? #numbers.formatDecimal(report.r18_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 		           id="r18_amt_6to24m"
 		           name="r18_amt_6to24m"
-		           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 		           readonly />
 		  </td>
 		  
+
 		  <td style="background-color:rgb(192, 192, 192);">
-		      <input class="display-input show_input"
-		             type="text"
-		             th:value="${report.r18_risk_6to24m != null ? #numbers.formatDecimal(report.r18_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
-		             id="r18_risk_6to24m"
-		             name="r18_risk_6to24m"
-		             style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-		             readonly />
-		    </td>
-		    
-		    <td style="background-color:#92D050;">
+		     </td>
+		    <td style="background-color:rgb(107, 122, 143);">
 		        <input class="display-input show_input"
 		               type="text"
-		               th:value="${report.r18_capital_6to24m != null ? #numbers.formatDecimal(report.r18_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+		               th:value="${report.r18_capital_6to24m != null ? #numbers.formatDecimal(report.r18_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 		               id="r18_capital_6to24m"
 		               name="r18_capital_6to24m"
-		               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 		               readonly />
 		      </td>
 
-		      <td style="background-color:#92D050;">
+		      <td style="background-color:rgb(107, 122, 143);">
 		          <input class="display-input show_input"
 		                 type="text"
-		                 th:value="${report.r18_amt_gt24m != null ? #numbers.formatDecimal(report.r18_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+		                 th:value="${report.r18_amt_gt24m != null ? #numbers.formatDecimal(report.r18_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 		                 id="r18_amt_gt24m"
 		                 name="r18_amt_gt24m"
-		                 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		                 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 		                 readonly />
 		        </td>
 
-		      <td style="background-color:rgb(192, 192, 192);">
-		          <input class="display-input show_input"
-		                 type="text"
-		                 th:value="${report.r18_risk_gt24m != null ? #numbers.formatDecimal(report.r18_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
-		                 id="r18_risk_gt24m"
-		                 name="r18_risk_gt24m"
-		                 style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-		                 readonly />
-		        </td>
+
+				<td style="background-color:rgb(192, 192, 192);">
+				   </td>
 		        
-				<td style="background-color:#92D050;">
+				<td style="background-color:rgb(107, 122, 143);">
 		            <input class="display-input show_input"
 		                   type="text"
-		                   th:value="${report.r18_capital_gt24m != null ? #numbers.formatDecimal(report.r18_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+		                   th:value="${report.r18_capital_gt24m != null ? #numbers.formatDecimal(report.r18_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 		                   id="r18_capital_gt24m"
 		                   name="r18_capital_gt24m"
-		                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+		                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 		                   readonly />
 		          </td>
 
@@ -2139,90 +1719,90 @@ $(document).ready(function () {
 			<td>
 			  <input class="display-input show_input"
 			         type="text"
-			         th:value="${report.r19_amt_6m != null ? #numbers.formatDecimal(report.r19_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         th:value="${report.r19_amt_6m != null ? #numbers.formatDecimal(report.r19_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 			         id="r19_amt_6m"
 			         name="r19_amt_6m"
 			         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 			         readonly />
 			</td>
 
-			 <td style="background-color:rgb(128, 128, 128)">
+			 <td style="background-color:rgb(255, 255, 255)">
 			  <input class="display-input show_input"
 			         type="text"
-			         th:value="${report.r19_risk_6m != null ?  #numbers.formatDecimal(report.r19_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         th:value="${report.r19_risk_6m != null ?  #numbers.formatDecimal(report.r19_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 			         id="r19_risk_6m"
 			         name="r19_risk_6m"
-			         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+			         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 			         readonly />
 			</td>
 
-			<td style="background-color:#92D050;">
+			<td style="background-color:rgb(107, 122, 143);">
 			  <input class="display-input show_input"
 			         type="text"
-			         th:value="${report.r19_capital_6m != null ? #numbers.formatDecimal(report.r19_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         th:value="${report.r19_capital_6m != null ? #numbers.formatDecimal(report.r19_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 			         id="r19_capital_6m"
 			         name="r19_capital_6m"
-			         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			         readonly />
 			</td>
 
 			<td>
 			    <input class="display-input show_input"
 			           type="text"
-			           th:value="${report.r19_amt_6to24m != null ? #numbers.formatDecimal(report.r19_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			           th:value="${report.r19_amt_6to24m != null ? #numbers.formatDecimal(report.r19_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 			           id="r19_amt_6to24m"
 			           name="r19_amt_6to24m"
 			           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 			           readonly />
 			  </td>
 			  
-			   <td style="background-color:rgb(128, 128, 128)">
+			   <td style="background-color:rgb(255, 255, 255)">
 			      <input class="display-input show_input"
 			             type="text"
-			             th:value="${report.r19_risk_6to24m != null ? #numbers.formatDecimal(report.r19_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			             th:value="${report.r19_risk_6to24m != null ? #numbers.formatDecimal(report.r19_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 			             id="r19_risk_6to24m"
 			             name="r19_risk_6to24m"
-			             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+			             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 			             readonly />
 			    </td>
 			    
-			    <td style="background-color:#92D050;">
+			    <td style="background-color:rgb(107, 122, 143);">
 			        <input class="display-input show_input"
 			               type="text"
-			               th:value="${report.r19_capital_6to24m != null ? #numbers.formatDecimal(report.r19_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			               th:value="${report.r19_capital_6to24m != null ? #numbers.formatDecimal(report.r19_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 			               id="r19_capital_6to24m"
 			               name="r19_capital_6to24m"
-			               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			               readonly />
 			      </td>
 
 			      <td>
 			          <input class="display-input show_input"
 			                 type="text"
-			                 th:value="${report.r19_amt_gt24m != null ? #numbers.formatDecimal(report.r19_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 th:value="${report.r19_amt_gt24m != null ? #numbers.formatDecimal(report.r19_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			                 id="r19_amt_gt24m"
 			                 name="r19_amt_gt24m"
 			                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 			                 readonly />
 			        </td>
 
-			      <td style="background-color:rgb(128, 128, 128)">
+			      <td style="background-color:rgb(255, 255, 255)">
 			          <input class="display-input show_input"
 			                 type="text"
-			                 th:value="${report.r19_risk_gt24m != null ? #numbers.formatDecimal(report.r19_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 th:value="${report.r19_risk_gt24m != null ? #numbers.formatDecimal(report.r19_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			                 id="r19_risk_gt24m"
 			                 name="r19_risk_gt24m"
-			                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+			                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 			                 readonly />
 			        </td>
 			        
-			        <td style="background-color:#92D050;">
+			        <td style="background-color:rgb(107, 122, 143);">
 			            <input class="display-input show_input"
 			                   type="text"
-			                   th:value="${report.r19_capital_gt24m != null ? #numbers.formatDecimal(report.r19_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                   th:value="${report.r19_capital_gt24m != null ? #numbers.formatDecimal(report.r19_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			                   id="r19_capital_gt24m"
 			                   name="r19_capital_gt24m"
-			                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			                   readonly />
 			          </td>
 
@@ -2246,90 +1826,90 @@ $(document).ready(function () {
 				<td>
 				  <input class="display-input show_input"
 				         type="text"
-				         th:value="${report.r20_amt_6m != null ? #numbers.formatDecimal(report.r20_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         th:value="${report.r20_amt_6m != null ? #numbers.formatDecimal(report.r20_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 				         id="r20_amt_6m"
 				         name="r20_amt_6m"
 				         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 				         readonly />
 				</td>
 
-				 <td style="background-color:rgb(128, 128, 128)">
+				 <td style="background-color:rgb(255, 255, 255)">
 				  <input class="display-input show_input"
 				         type="text"
-				         th:value="${report.r20_risk_6m != null ?  #numbers.formatDecimal(report.r20_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         th:value="${report.r20_risk_6m != null ?  #numbers.formatDecimal(report.r20_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 				         id="r20_risk_6m"
 				         name="r20_risk_6m"
-				         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+				         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 				         readonly />
 				</td>
 
-				<td style="background-color:#92D050;">
+				<td style="background-color:rgb(107, 122, 143);">
 				  <input class="display-input show_input"
 				         type="text"
-				         th:value="${report.r20_capital_6m != null ? #numbers.formatDecimal(report.r20_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         th:value="${report.r20_capital_6m != null ? #numbers.formatDecimal(report.r20_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 				         id="r20_capital_6m"
 				         name="r20_capital_6m"
-				         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 				         readonly />
 				</td>
 
 				<td>
 				    <input class="display-input show_input"
 				           type="text"
-				           th:value="${report.r20_amt_6to24m != null ? #numbers.formatDecimal(report.r20_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				           th:value="${report.r20_amt_6to24m != null ? #numbers.formatDecimal(report.r20_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 				           id="r20_amt_6to24m"
 				           name="r20_amt_6to24m"
 				           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 				           readonly />
 				  </td>
 				  
-				   <td style="background-color:rgb(128, 128, 128)">
+				   <td style="background-color:rgb(255, 255, 255)">
 				      <input class="display-input show_input"
 				             type="text"
-				             th:value="${report.r20_risk_6to24m != null ? #numbers.formatDecimal(report.r20_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				             th:value="${report.r20_risk_6to24m != null ? #numbers.formatDecimal(report.r20_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 				             id="r20_risk_6to24m"
 				             name="r20_risk_6to24m"
-				             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+				             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 				             readonly />
 				    </td>
 				    
-				   <td style="background-color:#92D050;">
+				   <td style="background-color:rgb(107, 122, 143);">
 				        <input class="display-input show_input"
 				               type="text"
-				               th:value="${report.r20_capital_6to24m != null ? #numbers.formatDecimal(report.r20_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				               th:value="${report.r20_capital_6to24m != null ? #numbers.formatDecimal(report.r20_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 				               id="r20_capital_6to24m"
 				               name="r20_capital_6to24m"
-				               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 				               readonly />
 				      </td>
 
 				      <td>
 				          <input class="display-input show_input"
 				                 type="text"
-				                 th:value="${report.r20_amt_gt24m != null ? #numbers.formatDecimal(report.r20_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 th:value="${report.r20_amt_gt24m != null ? #numbers.formatDecimal(report.r20_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 				                 id="r20_amt_gt24m"
 				                 name="r20_amt_gt24m"
 				                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 				                 readonly />
 				        </td>
 
-				       <td style="background-color:rgb(128, 128, 128)">
+				       <td style="background-color:rgb(255, 255, 255)">
 				          <input class="display-input show_input"
 				                 type="text"
-				                 th:value="${report.r20_risk_gt24m != null ? #numbers.formatDecimal(report.r20_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 th:value="${report.r20_risk_gt24m != null ? #numbers.formatDecimal(report.r20_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 				                 id="r20_risk_gt24m"
 				                 name="r20_risk_gt24m"
-				                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+				                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 				                 readonly />
 				        </td>
 				        
-				        <td style="background-color:#92D050;">
+				        <td style="background-color:rgb(107, 122, 143);">
 				            <input class="display-input show_input"
 				                   type="text"
-				                   th:value="${report.r20_capital_gt24m != null ? #numbers.formatDecimal(report.r20_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                   th:value="${report.r20_capital_gt24m != null ? #numbers.formatDecimal(report.r20_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 				                   id="r20_capital_gt24m"
 				                   name="r20_capital_gt24m"
-				                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 				                   readonly />
 				          </td>
 
@@ -2352,90 +1932,90 @@ $(document).ready(function () {
 					<td>
 					  <input class="display-input show_input"
 					         type="text"
-					         th:value="${report.r21_amt_6m != null ? #numbers.formatDecimal(report.r21_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					         th:value="${report.r21_amt_6m != null ? #numbers.formatDecimal(report.r21_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 					         id="r21_amt_6m"
 					         name="r21_amt_6m"
 					         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					         readonly />
 					</td>
 
-				 <td style="background-color:rgb(128, 128, 128)">
+				 <td style="background-color:rgb(255, 255, 255)">
 					  <input class="display-input show_input"
 					         type="text"
-					         th:value="${report.r21_risk_6m != null ?  #numbers.formatDecimal(report.r21_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					         th:value="${report.r21_risk_6m != null ?  #numbers.formatDecimal(report.r21_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 					         id="r21_risk_6m"
 					         name="r21_risk_6m"
-					         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+					         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 					         readonly />
 					</td>
 
-					<td style="background-color:#92D050;">
+					<td style="background-color:rgb(107, 122, 143);">
 					  <input class="display-input show_input"
 					         type="text"
-					         th:value="${report.r21_capital_6m != null ? #numbers.formatDecimal(report.r21_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					         th:value="${report.r21_capital_6m != null ? #numbers.formatDecimal(report.r21_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 					         id="r21_capital_6m"
 					         name="r21_capital_6m"
-					         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 					         readonly />
 					</td>
 
 					<td>
 					    <input class="display-input show_input"
 					           type="text"
-					           th:value="${report.r21_amt_6to24m != null ? #numbers.formatDecimal(report.r21_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					           th:value="${report.r21_amt_6to24m != null ? #numbers.formatDecimal(report.r21_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 					           id="r21_amt_6to24m"
 					           name="r21_amt_6to24m"
 					           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					           readonly />
 					  </td>
 					  
-					 <td style="background-color:rgb(128, 128, 128)">
+					 <td style="background-color:rgb(255, 255, 255)">
 					      <input class="display-input show_input"
 					             type="text"
-					             th:value="${report.r21_risk_6to24m != null ? #numbers.formatDecimal(report.r21_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					             th:value="${report.r21_risk_6to24m != null ? #numbers.formatDecimal(report.r21_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 					             id="r21_risk_6to24m"
 					             name="r21_risk_6to24m"
-					             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+					             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 					             readonly />
 					    </td>
 					    
-					    <td style="background-color:#92D050;">
+					    <td style="background-color:rgb(107, 122, 143);">
 					        <input class="display-input show_input"
 					               type="text"
-					               th:value="${report.r21_capital_6to24m != null ? #numbers.formatDecimal(report.r21_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					               th:value="${report.r21_capital_6to24m != null ? #numbers.formatDecimal(report.r21_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 					               id="r21_capital_6to24m"
 					               name="r21_capital_6to24m"
-					               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 					               readonly />
 					      </td>
 
 					      <td>
 					          <input class="display-input show_input"
 					                 type="text"
-					                 th:value="${report.r21_amt_gt24m != null ? #numbers.formatDecimal(report.r21_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+					                 th:value="${report.r21_amt_gt24m != null ? #numbers.formatDecimal(report.r21_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 					                 id="r21_amt_gt24m"
 					                 name="r21_amt_gt24m"
 					                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					                 readonly />
 					        </td>
 
-					     <td style="background-color:rgb(128, 128, 128)">
+					     <td style="background-color:rgb(255, 255, 255)">
 					          <input class="display-input show_input"
 					                 type="text"
-					                 th:value="${report.r21_risk_gt24m != null ? #numbers.formatDecimal(report.r21_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+					                 th:value="${report.r21_risk_gt24m != null ? #numbers.formatDecimal(report.r21_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 					                 id="r21_risk_gt24m"
 					                 name="r21_risk_gt24m"
-					                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+					                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 					                 readonly />
 					        </td>
 					        
-					       <td style="background-color:#92D050;">
+					       <td style="background-color:rgb(107, 122, 143);">
 					            <input class="display-input show_input"
 					                   type="text"
-					                   th:value="${report.r21_capital_gt24m != null ? #numbers.formatDecimal(report.r21_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+					                   th:value="${report.r21_capital_gt24m != null ? #numbers.formatDecimal(report.r21_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 					                   id="r21_capital_gt24m"
 					                   name="r21_capital_gt24m"
-					                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 					                   readonly />
 					          </td>
 
@@ -2458,90 +2038,90 @@ $(document).ready(function () {
 						<td>
 						  <input class="display-input show_input"
 						         type="text"
-						         th:value="${report.r22_amt_6m != null ? #numbers.formatDecimal(report.r22_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+						         th:value="${report.r22_amt_6m != null ? #numbers.formatDecimal(report.r22_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 						         id="r22_amt_6m"
 						         name="r22_amt_6m"
 						         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 						         readonly />
 						</td>
 
-						 <td style="background-color:rgb(128, 128, 128)">
+						 <td style="background-color:rgb(255, 255, 255)">
 						  <input class="display-input show_input"
 						         type="text"
-						         th:value="${report.r22_risk_6m != null ?  #numbers.formatDecimal(report.r22_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+						         th:value="${report.r22_risk_6m != null ?  #numbers.formatDecimal(report.r22_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 						         id="r22_risk_6m"
 						         name="r22_risk_6m"
-						         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+						         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 						         readonly />
 						</td>
 
-						<td style="background-color:#92D050;">
+						<td style="background-color:rgb(107, 122, 143);">
 						  <input class="display-input show_input"
 						         type="text"
-						         th:value="${report.r22_capital_6m != null ? #numbers.formatDecimal(report.r22_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+						         th:value="${report.r22_capital_6m != null ? #numbers.formatDecimal(report.r22_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 						         id="r22_capital_6m"
 						         name="r22_capital_6m"
-						         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 						         readonly />
 						</td>
 
 						<td>
 						    <input class="display-input show_input"
 						           type="text"
-						           th:value="${report.r22_amt_6to24m != null ? #numbers.formatDecimal(report.r22_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						           th:value="${report.r22_amt_6to24m != null ? #numbers.formatDecimal(report.r22_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						           id="r22_amt_6to24m"
 						           name="r22_amt_6to24m"
 						           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 						           readonly />
 						  </td>
 						  
-						  <td style="background-color:rgb(128, 128, 128)">
+						  <td style="background-color:rgb(255, 255, 255)">
 						      <input class="display-input show_input"
 						             type="text"
-						             th:value="${report.r22_risk_6to24m != null ? #numbers.formatDecimal(report.r22_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						             th:value="${report.r22_risk_6to24m != null ? #numbers.formatDecimal(report.r22_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						             id="r22_risk_6to24m"
 						             name="r22_risk_6to24m"
-						             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+						             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 						             readonly />
 						    </td>
 						    
-						    <td style="background-color:#92D050;">
+						    <td style="background-color:rgb(107, 122, 143);">
 						        <input class="display-input show_input"
 						               type="text"
-						               th:value="${report.r22_capital_6to24m != null ? #numbers.formatDecimal(report.r22_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						               th:value="${report.r22_capital_6to24m != null ? #numbers.formatDecimal(report.r22_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						               id="r22_capital_6to24m"
 						               name="r22_capital_6to24m"
-						               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 						               readonly />
 						      </td>
 
 						      <td>
 						          <input class="display-input show_input"
 						                 type="text"
-						                 th:value="${report.r22_amt_gt24m != null ? #numbers.formatDecimal(report.r22_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+						                 th:value="${report.r22_amt_gt24m != null ? #numbers.formatDecimal(report.r22_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 						                 id="r22_amt_gt24m"
 						                 name="r22_amt_gt24m"
 						                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 						                 readonly />
 						        </td>
 
-						      <td style="background-color:rgb(128, 128, 128)">
+						      <td style="background-color:rgb(255, 255, 255)">
 						          <input class="display-input show_input"
 						                 type="text"
-						                 th:value="${report.r22_risk_gt24m != null ? #numbers.formatDecimal(report.r22_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+						                 th:value="${report.r22_risk_gt24m != null ? #numbers.formatDecimal(report.r22_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 						                 id="r22_risk_gt24m"
 						                 name="r22_risk_gt24m"
-						                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+						                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 						                 readonly />
 						        </td>
 						        
-						        <td style="background-color:#92D050;">
+						        <td style="background-color:rgb(107, 122, 143);">
 						            <input class="display-input show_input"
 						                   type="text"
-						                   th:value="${report.r22_capital_gt24m != null ? #numbers.formatDecimal(report.r22_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+						                   th:value="${report.r22_capital_gt24m != null ? #numbers.formatDecimal(report.r22_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 						                   id="r22_capital_gt24m"
 						                   name="r22_capital_gt24m"
-						                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 						                   readonly />
 						          </td>
 
@@ -2564,90 +2144,90 @@ $(document).ready(function () {
 							<td>
 							  <input class="display-input show_input"
 							         type="text"
-							         th:value="${report.r23_amt_6m != null ? #numbers.formatDecimal(report.r23_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+							         th:value="${report.r23_amt_6m != null ? #numbers.formatDecimal(report.r23_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 							         id="r23_amt_6m"
 							         name="r23_amt_6m"
 							         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 							         readonly />
 							</td>
 
-							 <td style="background-color:rgb(128, 128, 128)">
+							 <td style="background-color:rgb(255, 255, 255)">
 							  <input class="display-input show_input"
 							         type="text"
-							         th:value="${report.r23_risk_6m != null ?  #numbers.formatDecimal(report.r23_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+							         th:value="${report.r23_risk_6m != null ?  #numbers.formatDecimal(report.r23_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 							         id="r23_risk_6m"
 							         name="r23_risk_6m"
-							         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+							         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 							         readonly />
 							</td>
 
-							<td style="background-color:#92D050;">
+							<td style="background-color:rgb(107, 122, 143);">
 							  <input class="display-input show_input"
 							         type="text"
-							         th:value="${report.r23_capital_6m != null ? #numbers.formatDecimal(report.r23_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+							         th:value="${report.r23_capital_6m != null ? #numbers.formatDecimal(report.r23_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 							         id="r23_capital_6m"
 							         name="r23_capital_6m"
-							         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 							         readonly />
 							</td>
 
 							<td>
 							    <input class="display-input show_input"
 							           type="text"
-							           th:value="${report.r23_amt_6to24m != null ? #numbers.formatDecimal(report.r23_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+							           th:value="${report.r23_amt_6to24m != null ? #numbers.formatDecimal(report.r23_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 							           id="r23_amt_6to24m"
 							           name="r23_amt_6to24m"
 							           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 							           readonly />
 							  </td>
 							  
-							   <td style="background-color:rgb(128, 128, 128)">
+							   <td style="background-color:rgb(255, 255, 255)">
 							      <input class="display-input show_input"
 							             type="text"
-							             th:value="${report.r23_risk_6to24m != null ? #numbers.formatDecimal(report.r23_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+							             th:value="${report.r23_risk_6to24m != null ? #numbers.formatDecimal(report.r23_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 							             id="r23_risk_6to24m"
 							             name="r23_risk_6to24m"
-							             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+							             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 							             readonly />
 							    </td>
 							    
-							    <td style="background-color:#92D050;">
+							    <td style="background-color:rgb(107, 122, 143);">
 							        <input class="display-input show_input"
 							               type="text"
-							               th:value="${report.r23_capital_6to24m != null ? #numbers.formatDecimal(report.r23_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+							               th:value="${report.r23_capital_6to24m != null ? #numbers.formatDecimal(report.r23_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 							               id="r23_capital_6to24m"
 							               name="r23_capital_6to24m"
-							               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 							               readonly />
 							      </td>
 
 							      <td>
 							          <input class="display-input show_input"
 							                 type="text"
-							                 th:value="${report.r23_amt_gt24m != null ? #numbers.formatDecimal(report.r23_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							                 th:value="${report.r23_amt_gt24m != null ? #numbers.formatDecimal(report.r23_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							                 id="r23_amt_gt24m"
 							                 name="r23_amt_gt24m"
 							                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 							                 readonly />
 							        </td>
 
-							      <td style="background-color:rgb(128, 128, 128)">
+							      <td style="background-color:rgb(255, 255, 255)">
 							          <input class="display-input show_input"
 							                 type="text"
-							                 th:value="${report.r23_risk_gt24m != null ? #numbers.formatDecimal(report.r23_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							                 th:value="${report.r23_risk_gt24m != null ? #numbers.formatDecimal(report.r23_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							                 id="r23_risk_gt24m"
 							                 name="r23_risk_gt24m"
-							                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+							                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 							                 readonly />
 							        </td>
 							        
-							        <td style="background-color:#92D050;">
+							        <td style="background-color:rgb(107, 122, 143);">
 							            <input class="display-input show_input"
 							                   type="text"
-							                   th:value="${report.r23_capital_gt24m != null ? #numbers.formatDecimal(report.r23_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							                   th:value="${report.r23_capital_gt24m != null ? #numbers.formatDecimal(report.r23_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							                   id="r23_capital_gt24m"
 							                   name="r23_capital_gt24m"
-							                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 							                   readonly />
 							          </td>
 
@@ -2670,90 +2250,90 @@ $(document).ready(function () {
 								<td>
 								  <input class="display-input show_input"
 								         type="text"
-								         th:value="${report.r24_amt_6m != null ? #numbers.formatDecimal(report.r24_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+								         th:value="${report.r24_amt_6m != null ? #numbers.formatDecimal(report.r24_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 								         id="r24_amt_6m"
 								         name="r24_amt_6m"
 								         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 								         readonly />
 								</td>
 
-								 <td style="background-color:rgb(128, 128, 128)">
+								 <td style="background-color:rgb(255, 255, 255)">
 								  <input class="display-input show_input"
 								         type="text"
-								         th:value="${report.r24_risk_6m != null ?  #numbers.formatDecimal(report.r24_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+								         th:value="${report.r24_risk_6m != null ?  #numbers.formatDecimal(report.r24_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 								         id="r24_risk_6m"
 								         name="r24_risk_6m"
-								         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+								         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 								         readonly />
 								</td>
 
-								<td style="background-color:#92D050;">
+								<td style="background-color:rgb(107, 122, 143);">
 								  <input class="display-input show_input"
 								         type="text"
-								         th:value="${report.r24_capital_6m != null ? #numbers.formatDecimal(report.r24_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+								         th:value="${report.r24_capital_6m != null ? #numbers.formatDecimal(report.r24_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 								         id="r24_capital_6m"
 								         name="r24_capital_6m"
-								         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+								         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 								         readonly />
 								</td>
 
 								<td>
 								    <input class="display-input show_input"
 								           type="text"
-								           th:value="${report.r24_amt_6to24m != null ? #numbers.formatDecimal(report.r24_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+								           th:value="${report.r24_amt_6to24m != null ? #numbers.formatDecimal(report.r24_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 								           id="r24_amt_6to24m"
 								           name="r24_amt_6to24m"
 								           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 								           readonly />
 								  </td>
 								  
-								   <td style="background-color:rgb(128, 128, 128)">
+								   <td style="background-color:rgb(255, 255, 255)">
 								      <input class="display-input show_input"
 								             type="text"
-								             th:value="${report.r24_risk_6to24m != null ? #numbers.formatDecimal(report.r24_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+								             th:value="${report.r24_risk_6to24m != null ? #numbers.formatDecimal(report.r24_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 								             id="r24_risk_6to24m"
 								             name="r24_risk_6to24m"
-								             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+								             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 								             readonly />
 								    </td>
 								    
-								    <td style="background-color:#92D050;">
+								    <td style="background-color:rgb(107, 122, 143);">
 								        <input class="display-input show_input"
 								               type="text"
-								               th:value="${report.r24_capital_6to24m != null ? #numbers.formatDecimal(report.r24_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+								               th:value="${report.r24_capital_6to24m != null ? #numbers.formatDecimal(report.r24_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 								               id="r24_capital_6to24m"
 								               name="r24_capital_6to24m"
-								               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+								               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 								               readonly />
 								      </td>
 
 								      <td>
 								          <input class="display-input show_input"
 								                 type="text"
-								                 th:value="${report.r24_amt_gt24m != null ? #numbers.formatDecimal(report.r24_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+								                 th:value="${report.r24_amt_gt24m != null ? #numbers.formatDecimal(report.r24_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 								                 id="r24_amt_gt24m"
 								                 name="r24_amt_gt24m"
 								                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 								                 readonly />
 								        </td>
 
-								     <td style="background-color:rgb(128, 128, 128)">
+								     <td style="background-color:rgb(255, 255, 255)">
 								          <input class="display-input show_input"
 								                 type="text"
-								                 th:value="${report.r24_risk_gt24m != null ? #numbers.formatDecimal(report.r24_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+								                 th:value="${report.r24_risk_gt24m != null ? #numbers.formatDecimal(report.r24_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 								                 id="r24_risk_gt24m"
 								                 name="r24_risk_gt24m"
-								                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+								                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 								                 readonly />
 								        </td>
 								        
-								       <td style="background-color:#92D050;">
+								       <td style="background-color:rgb(107, 122, 143);">
 								            <input class="display-input show_input"
 								                   type="text"
-								                   th:value="${report.r24_capital_gt24m != null ? #numbers.formatDecimal(report.r24_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+								                   th:value="${report.r24_capital_gt24m != null ? #numbers.formatDecimal(report.r24_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 								                   id="r24_capital_gt24m"
 								                   name="r24_capital_gt24m"
-								                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+								                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 								                   readonly />
 								          </td>
 
@@ -2776,90 +2356,90 @@ $(document).ready(function () {
 									<td>
 									  <input class="display-input show_input"
 									         type="text"
-									         th:value="${report.r25_amt_6m != null ? #numbers.formatDecimal(report.r25_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									         th:value="${report.r25_amt_6m != null ? #numbers.formatDecimal(report.r25_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 									         id="r25_amt_6m"
 									         name="r25_amt_6m"
 									         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 									         readonly />
 									</td>
 
-									<td style="background-color:rgb(128, 128, 128)">
+									<td style="background-color:rgb(255, 255, 255)">
 									  <input class="display-input show_input"
 									         type="text"
-									         th:value="${report.r25_risk_6m != null ?  #numbers.formatDecimal(report.r25_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									         th:value="${report.r25_risk_6m != null ?  #numbers.formatDecimal(report.r25_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 									         id="r25_risk_6m"
 									         name="r25_risk_6m"
-									         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+									         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 									         readonly />
 									</td>
 
-									<td style="background-color:#92D050;">
+									<td style="background-color:rgb(107, 122, 143);">
 									  <input class="display-input show_input"
 									         type="text"
-									         th:value="${report.r25_capital_6m != null ? #numbers.formatDecimal(report.r25_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									         th:value="${report.r25_capital_6m != null ? #numbers.formatDecimal(report.r25_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 									         id="r25_capital_6m"
 									         name="r25_capital_6m"
-									         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 									         readonly />
 									</td>
 
 									<td>
 									    <input class="display-input show_input"
 									           type="text"
-									           th:value="${report.r25_amt_6to24m != null ? #numbers.formatDecimal(report.r25_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									           th:value="${report.r25_amt_6to24m != null ? #numbers.formatDecimal(report.r25_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 									           id="r25_amt_6to24m"
 									           name="r25_amt_6to24m"
 									           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 									           readonly />
 									  </td>
 									  
-									 	<td style="background-color:rgb(128, 128, 128)">
+									 	<td style="background-color:rgb(255, 255, 255)">
 									      <input class="display-input show_input"
 									             type="text"
-									             th:value="${report.r25_risk_6to24m != null ? #numbers.formatDecimal(report.r25_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									             th:value="${report.r25_risk_6to24m != null ? #numbers.formatDecimal(report.r25_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 									             id="r25_risk_6to24m"
 									             name="r25_risk_6to24m"
-									             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+									             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 									             readonly />
 									    </td>
 									    
-									   <td style="background-color:#92D050;">
+									   <td style="background-color:rgb(107, 122, 143);">
 									        <input class="display-input show_input"
 									               type="text"
-									               th:value="${report.r25_capital_6to24m != null ? #numbers.formatDecimal(report.r25_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									               th:value="${report.r25_capital_6to24m != null ? #numbers.formatDecimal(report.r25_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 									               id="r25_capital_6to24m"
 									               name="r25_capital_6to24m"
-									               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 									               readonly />
 									      </td>
 
 									      <td>
 									          <input class="display-input show_input"
 									                 type="text"
-									                 th:value="${report.r25_amt_gt24m != null ? #numbers.formatDecimal(report.r25_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+									                 th:value="${report.r25_amt_gt24m != null ? #numbers.formatDecimal(report.r25_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 									                 id="r25_amt_gt24m"
 									                 name="r25_amt_gt24m"
 									                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 									                 readonly />
 									        </td>
 
-									    	<td style="background-color:rgb(128, 128, 128)">
+									    	<td style="background-color:rgb(255, 255, 255)">
 									          <input class="display-input show_input"
 									                 type="text"
-									                 th:value="${report.r25_risk_gt24m != null ? #numbers.formatDecimal(report.r25_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+									                 th:value="${report.r25_risk_gt24m != null ? #numbers.formatDecimal(report.r25_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 									                 id="r25_risk_gt24m"
 									                 name="r25_risk_gt24m"
-									                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+									                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 									                 readonly />
 									        </td>
 									        
-									        <td style="background-color:#92D050;">
+									        <td style="background-color:rgb(107, 122, 143);">
 									            <input class="display-input show_input"
 									                   type="text"
-									                   th:value="${report.r25_capital_gt24m != null ? #numbers.formatDecimal(report.r25_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+									                   th:value="${report.r25_capital_gt24m != null ? #numbers.formatDecimal(report.r25_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 									                   id="r25_capital_gt24m"
 									                   name="r25_capital_gt24m"
-									                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 									                   readonly />
 									          </td>
 
@@ -2882,90 +2462,90 @@ $(document).ready(function () {
 										<td>
 										  <input class="display-input show_input"
 										         type="text"
-										         th:value="${report.r26_amt_6m != null ? #numbers.formatDecimal(report.r26_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+										         th:value="${report.r26_amt_6m != null ? #numbers.formatDecimal(report.r26_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 										         id="r26_amt_6m"
 										         name="r26_amt_6m"
 										         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 										         readonly />
 										</td>
 
-											<td style="background-color:rgb(128, 128, 128)">
+											<td style="background-color:rgb(255, 255, 255)">
 										  <input class="display-input show_input"
 										         type="text"
-										         th:value="${report.r26_risk_6m != null ?  #numbers.formatDecimal(report.r26_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+										         th:value="${report.r26_risk_6m != null ?  #numbers.formatDecimal(report.r26_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 										         id="r26_risk_6m"
 										         name="r26_risk_6m"
-										         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+										         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 										         readonly />
 										</td>
 
-										<td style="background-color:#92D050;">
+										<td style="background-color:rgb(107, 122, 143);">
 										  <input class="display-input show_input"
 										         type="text"
-										         th:value="${report.r26_capital_6m != null ? #numbers.formatDecimal(report.r26_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+										         th:value="${report.r26_capital_6m != null ? #numbers.formatDecimal(report.r26_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 										         id="r26_capital_6m"
 										         name="r26_capital_6m"
-										         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 										         readonly />
 										</td>
 
 										<td>
 										    <input class="display-input show_input"
 										           type="text"
-										           th:value="${report.r26_amt_6to24m != null ? #numbers.formatDecimal(report.r26_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										           th:value="${report.r26_amt_6to24m != null ? #numbers.formatDecimal(report.r26_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 										           id="r26_amt_6to24m"
 										           name="r26_amt_6to24m"
 										           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 										           readonly />
 										  </td>
 										  
-										 	<td style="background-color:rgb(128, 128, 128)">
+										 	<td style="background-color:rgb(255, 255, 255)">
 										      <input class="display-input show_input"
 										             type="text"
-										             th:value="${report.r26_risk_6to24m != null ? #numbers.formatDecimal(report.r26_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										             th:value="${report.r26_risk_6to24m != null ? #numbers.formatDecimal(report.r26_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 										             id="r26_risk_6to24m"
 										             name="r26_risk_6to24m"
-										             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+										             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 										             readonly />
 										    </td>
 										    
-										   <td style="background-color:#92D050;">
+										   <td style="background-color:rgb(107, 122, 143);">
 										        <input class="display-input show_input"
 										               type="text"
-										               th:value="${report.r26_capital_6to24m != null ? #numbers.formatDecimal(report.r26_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										               th:value="${report.r26_capital_6to24m != null ? #numbers.formatDecimal(report.r26_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 										               id="r26_capital_6to24m"
 										               name="r26_capital_6to24m"
-										               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 										               readonly />
 										      </td>
 
 										      <td>
 										          <input class="display-input show_input"
 										                 type="text"
-										                 th:value="${report.r26_amt_gt24m != null ? #numbers.formatDecimal(report.r26_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+										                 th:value="${report.r26_amt_gt24m != null ? #numbers.formatDecimal(report.r26_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 										                 id="r26_amt_gt24m"
 										                 name="r26_amt_gt24m"
 										                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 										                 readonly />
 										        </td>
 
-										      	<td style="background-color:rgb(128, 128, 128)">
+										      	<td style="background-color:rgb(255, 255, 255)">
 										          <input class="display-input show_input"
 										                 type="text"
-										                 th:value="${report.r26_risk_gt24m != null ? #numbers.formatDecimal(report.r26_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+										                 th:value="${report.r26_risk_gt24m != null ? #numbers.formatDecimal(report.r26_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 										                 id="r26_risk_gt24m"
 										                 name="r26_risk_gt24m"
-										                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+										                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 										                 readonly />
 										        </td>
 										        
-										       <td style="background-color:#92D050;">
+										       <td style="background-color:rgb(107, 122, 143);">
 										            <input class="display-input show_input"
 										                   type="text"
-										                   th:value="${report.r26_capital_gt24m != null ? #numbers.formatDecimal(report.r26_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+										                   th:value="${report.r26_capital_gt24m != null ? #numbers.formatDecimal(report.r26_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 										                   id="r26_capital_gt24m"
 										                   name="r26_capital_gt24m"
-										                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 										                   readonly />
 										          </td>
 
@@ -2986,93 +2566,75 @@ $(document).ready(function () {
 									           readonly />
 									  </td>
 
-									 <td style="background-color:#92D050;">
+									 <td style="background-color:rgb(107, 122, 143);">
 									    <input class="display-input show_input"
 									           type="text"
-									           th:value="${report.r27_amt_6m != null ? #numbers.formatDecimal(report.r27_amt_6m,1,'COMMA',0,'POINT'):'0'}"
+									           th:value="${report.r27_amt_6m != null ? #numbers.formatDecimal(report.r27_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 									           id="r27_amt_6m"
 									           name="r27_amt_6m"
-									           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 									           readonly />
 									  </td>
 
 									 
+
 									  <td style="background-color:rgb(192, 192, 192);">
-									      <input class="display-input show_input"
-									             type="text"
-									             th:value="${report.r27_risk_6m != null ? #numbers.formatDecimal(report.r27_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
-									             id="r27_risk_6m"
-									             name="r27_risk_6m"
-									             style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-									             readonly />
-									    </td>
-									  <td style="background-color:#92D050;">
+									     </td>
+									  <td style="background-color:rgb(107, 122, 143);">
 									    <input class="display-input show_input"
 									           type="text"
-									           th:value="${report.r27_capital_6m != null ? #numbers.formatDecimal(report.r27_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+									           th:value="${report.r27_capital_6m != null ? #numbers.formatDecimal(report.r27_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 									           id="r27_capital_6m"
 									           name="r27_capital_6m"
-									           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 									           readonly />
 									  </td>
 									  
-									  <td style="background-color:#92D050;">
+									  <td style="background-color:rgb(107, 122, 143);">
 									      <input class="display-input show_input"
 									             type="text"
-									             th:value="${report.r27_amt_6to24m != null ? #numbers.formatDecimal(report.r27_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+									             th:value="${report.r27_amt_6to24m != null ? #numbers.formatDecimal(report.r27_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 									             id="r27_amt_6to24m"
 									             name="r27_amt_6to24m"
-									             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+									             style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 									             readonly />
 									    </td>
 										
+
 										<td style="background-color:rgb(192, 192, 192);">
-										    <input class="display-input show_input"
-										           type="text"
-										           th:value="${report.r27_risk_6to24m != null ? #numbers.formatDecimal(report.r27_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
-										           id="r27_risk_6to24m"
-										           name="r27_risk_6to24m"
-										           style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-										           readonly />
-										  </td>
+										   </td>
 										  
-										 <td style="background-color:#92D050;">
+										 <td style="background-color:rgb(107, 122, 143);">
 										      <input class="display-input show_input"
 										             type="text"
-										             th:value="${report.r27_capital_6to24m != null ? #numbers.formatDecimal(report.r27_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+										             th:value="${report.r27_capital_6to24m != null ? #numbers.formatDecimal(report.r27_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 										             id="r27_capital_6to24m"
 										             name="r27_capital_6to24m"
-										             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+										             style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 										             readonly />
 										    </td>
 
-											<td style="background-color:#92D050;">
+											<td style="background-color:rgb(107, 122, 143);">
 											    <input class="display-input show_input"
 											           type="text"
-											           th:value="${report.r27_amt_gt24m != null ? #numbers.formatDecimal(report.r27_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+											           th:value="${report.r27_amt_gt24m != null ? #numbers.formatDecimal(report.r27_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 											           id="r27_amt_gt24m"
 											           name="r27_amt_gt24m"
-											           style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+											           style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 											           readonly />
 											  </td>
 
-											<td style="background-color:rgb(192, 192, 192);">
-											    <input class="display-input show_input"
-											           type="text"
-											           th:value="${report.r27_risk_gt24m != null ? #numbers.formatDecimal(report.r27_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
-											           id="r27_risk_gt24m"
-											           name="r27_risk_gt24m"
-											           style="background-color:rgb(192, 192, 192);width:200px;height:28px;border-color:transparent;text-align:right;"
-											           readonly />
-											  </td>
+
+											  <td style="background-color:rgb(192, 192, 192);">
+											     </td>
 											  
-											  <td style="background-color:#92D050;">
+											  <td style="background-color:rgb(107, 122, 143);">
 											      <input class="display-input show_input"
 											             type="text"
-											             th:value="${report.r27_capital_gt24m != null ? #numbers.formatDecimal(report.r27_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+											             th:value="${report.r27_capital_gt24m != null ? #numbers.formatDecimal(report.r27_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 											             id="r27_capital_gt24m"
 											             name="r27_capital_gt24m"
-											             style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+											             style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 											             readonly />
 											    </td>
 												
@@ -3096,90 +2658,90 @@ $(document).ready(function () {
 				<td>
 				  <input class="display-input show_input"
 				         type="text"
-				         th:value="${report.r28_amt_6m != null ? #numbers.formatDecimal(report.r28_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         th:value="${report.r28_amt_6m != null ? #numbers.formatDecimal(report.r28_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 				         id="r28_amt_6m"
 				         name="r28_amt_6m"
 				         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 				         readonly />
 				</td>
 
-					<td style="background-color:rgb(128, 128, 128)">
+					<td style="background-color:rgb(255, 255, 255)">
 				  <input class="display-input show_input"
 				         type="text"
-				         th:value="${report.r28_risk_6m != null ?  #numbers.formatDecimal(report.r28_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         th:value="${report.r28_risk_6m != null ?  #numbers.formatDecimal(report.r28_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 				         id="r28_risk_6m"
 				         name="r28_risk_6m"
-				         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+				         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 				         readonly />
 				</td>
 
-				<td style="background-color:#92D050;">
+				<td style="background-color:rgb(107, 122, 143);">
 				  <input class="display-input show_input"
 				         type="text"
-				         th:value="${report.r28_capital_6m != null ? #numbers.formatDecimal(report.r28_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+				         th:value="${report.r28_capital_6m != null ? #numbers.formatDecimal(report.r28_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 				         id="r28_capital_6m"
 				         name="r28_capital_6m"
-				         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 				         readonly />
 				</td>
 
 				<td>
 				    <input class="display-input show_input"
 				           type="text"
-				           th:value="${report.r28_amt_6to24m != null ? #numbers.formatDecimal(report.r28_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				           th:value="${report.r28_amt_6to24m != null ? #numbers.formatDecimal(report.r28_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 				           id="r28_amt_6to24m"
 				           name="r28_amt_6to24m"
 				           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 				           readonly />
 				  </td>
 				  
-				  	<td style="background-color:rgb(128, 128, 128)">
+				  	<td style="background-color:rgb(255, 255, 255)">
 				      <input class="display-input show_input"
 				             type="text"
-				             th:value="${report.r28_risk_6to24m != null ? #numbers.formatDecimal(report.r28_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				             th:value="${report.r28_risk_6to24m != null ? #numbers.formatDecimal(report.r28_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 				             id="r28_risk_6to24m"
 				             name="r28_risk_6to24m"
-				             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+				             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 				             readonly />
 				    </td>
 				    
-				    <td style="background-color:#92D050;">
+				    <td style="background-color:rgb(107, 122, 143);">
 				        <input class="display-input show_input"
 				               type="text"
-				               th:value="${report.r28_capital_6to24m != null ? #numbers.formatDecimal(report.r28_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+				               th:value="${report.r28_capital_6to24m != null ? #numbers.formatDecimal(report.r28_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 				               id="r28_capital_6to24m"
 				               name="r28_capital_6to24m"
-				               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 				               readonly />
 				      </td>
 
 				      <td>
 				          <input class="display-input show_input"
 				                 type="text"
-				                 th:value="${report.r28_amt_gt24m != null ? #numbers.formatDecimal(report.r28_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 th:value="${report.r28_amt_gt24m != null ? #numbers.formatDecimal(report.r28_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 				                 id="r28_amt_gt24m"
 				                 name="r28_amt_gt24m"
 				                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 				                 readonly />
 				        </td>
 
-				      	<td style="background-color:rgb(128, 128, 128)">
+				      	<td style="background-color:rgb(255, 255, 255)">
 				          <input class="display-input show_input"
 				                 type="text"
-				                 th:value="${report.r28_risk_gt24m != null ? #numbers.formatDecimal(report.r28_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                 th:value="${report.r28_risk_gt24m != null ? #numbers.formatDecimal(report.r28_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 				                 id="r28_risk_gt24m"
 				                 name="r28_risk_gt24m"
-				                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+				                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 				                 readonly />
 				        </td>
 				        
-				        <td style="background-color:#92D050;">
+				        <td style="background-color:rgb(107, 122, 143);">
 				            <input class="display-input show_input"
 				                   type="text"
-				                   th:value="${report.r28_capital_gt24m != null ? #numbers.formatDecimal(report.r28_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+				                   th:value="${report.r28_capital_gt24m != null ? #numbers.formatDecimal(report.r28_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 				                   id="r28_capital_gt24m"
 				                   name="r28_capital_gt24m"
-				                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+				                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 				                   readonly />
 				          </td>
 
@@ -3201,90 +2763,90 @@ $(document).ready(function () {
 			<td>
 			  <input class="display-input show_input"
 			         type="text"
-			         th:value="${report.r29_amt_6m != null ? #numbers.formatDecimal(report.r29_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         th:value="${report.r29_amt_6m != null ? #numbers.formatDecimal(report.r29_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 			         id="r29_amt_6m"
 			         name="r29_amt_6m"
 			         style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 			         readonly />
 			</td>
 
-				<td style="background-color:rgb(128, 128, 128)">
+				<td style="background-color:rgb(255, 255, 255)">
 			  <input class="display-input show_input"
 			         type="text"
-			         th:value="${report.r29_risk_6m != null ?  #numbers.formatDecimal(report.r29_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         th:value="${report.r29_risk_6m != null ?  #numbers.formatDecimal(report.r29_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 			         id="r29_risk_6m"
 			         name="r29_risk_6m"
-			         style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+			         style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 			         readonly />
 			</td>
 
-			<td style="background-color:#92D050;">
+			<td style="background-color:rgb(107, 122, 143);">
 			  <input class="display-input show_input"
 			         type="text"
-			         th:value="${report.r29_capital_6m != null ? #numbers.formatDecimal(report.r29_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+			         th:value="${report.r29_capital_6m != null ? #numbers.formatDecimal(report.r29_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 			         id="r29_capital_6m"
 			         name="r29_capital_6m"
-			         style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			         style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			         readonly />
 			</td>
 
 			<td>
 			    <input class="display-input show_input"
 			           type="text"
-			           th:value="${report.r29_amt_6to24m != null ? #numbers.formatDecimal(report.r29_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			           th:value="${report.r29_amt_6to24m != null ? #numbers.formatDecimal(report.r29_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 			           id="r29_amt_6to24m"
 			           name="r29_amt_6to24m"
 			           style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 			           readonly />
 			  </td>
 			  
-			 	<td style="background-color:rgb(128, 128, 128)">
+			 	<td style="background-color:rgb(255, 255, 255)">
 			      <input class="display-input show_input"
 			             type="text"
-			             th:value="${report.r29_risk_6to24m != null ? #numbers.formatDecimal(report.r29_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			             th:value="${report.r29_risk_6to24m != null ? #numbers.formatDecimal(report.r29_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 			             id="r29_risk_6to24m"
 			             name="r29_risk_6to24m"
-			             style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+			             style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 			             readonly />
 			    </td>
 			    
-			   <td style="background-color:#92D050;">
+			   <td style="background-color:rgb(107, 122, 143);">
 			        <input class="display-input show_input"
 			               type="text"
-			               th:value="${report.r29_capital_6to24m != null ? #numbers.formatDecimal(report.r29_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+			               th:value="${report.r29_capital_6to24m != null ? #numbers.formatDecimal(report.r29_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 			               id="r29_capital_6to24m"
 			               name="r29_capital_6to24m"
-			               style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			               style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			               readonly />
 			      </td>
 
 			      <td>
 			          <input class="display-input show_input"
 			                 type="text"
-			                 th:value="${report.r29_amt_gt24m != null ? #numbers.formatDecimal(report.r29_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 th:value="${report.r29_amt_gt24m != null ? #numbers.formatDecimal(report.r29_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			                 id="r29_amt_gt24m"
 			                 name="r29_amt_gt24m"
 			                 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 			                 readonly />
 			        </td>
 
-			      	<td style="background-color:rgb(128, 128, 128)">
+			      	<td style="background-color:rgb(255, 255, 255)">
 			          <input class="display-input show_input"
 			                 type="text"
-			                 th:value="${report.r29_risk_gt24m != null ? #numbers.formatDecimal(report.r29_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                 th:value="${report.r29_risk_gt24m != null ? #numbers.formatDecimal(report.r29_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			                 id="r29_risk_gt24m"
 			                 name="r29_risk_gt24m"
-			                 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+			                 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 			                 readonly />
 			        </td>
 			        
-			        <td style="background-color:#92D050;">
+			        <td style="background-color:rgb(107, 122, 143);">
 			            <input class="display-input show_input"
 			                   type="text"
-			                   th:value="${report.r29_capital_gt24m != null ? #numbers.formatDecimal(report.r29_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+			                   th:value="${report.r29_capital_gt24m != null ? #numbers.formatDecimal(report.r29_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 			                   id="r29_capital_gt24m"
 			                   name="r29_capital_gt24m"
-			                   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+			                   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			                   readonly />
 			          </td>
 
@@ -3307,90 +2869,90 @@ $(document).ready(function () {
 			<td>
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r30_amt_6m != null ? #numbers.formatDecimal(report.r30_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r30_amt_6m != null ? #numbers.formatDecimal(report.r30_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r30_amt_6m"
 					 name="r30_amt_6m"
 					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
-				<td style="background-color:rgb(128, 128, 128)">
+				<td style="background-color:rgb(255, 255, 255)">
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r30_risk_6m != null ?  #numbers.formatDecimal(report.r30_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r30_risk_6m != null ?  #numbers.formatDecimal(report.r30_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r30_risk_6m"
 					 name="r30_risk_6m"
-					 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+					 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
-			<td style="background-color:#92D050;">
+			<td style="background-color:rgb(107, 122, 143);">
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r30_capital_6m != null ? #numbers.formatDecimal(report.r30_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r30_capital_6m != null ? #numbers.formatDecimal(report.r30_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r30_capital_6m"
 					 name="r30_capital_6m"
-					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
 			<td>
 				<input class="display-input show_input"
 					   type="text"
-					   th:value="${report.r30_amt_6to24m != null ? #numbers.formatDecimal(report.r30_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					   th:value="${report.r30_amt_6to24m != null ? #numbers.formatDecimal(report.r30_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 					   id="r30_amt_6to24m"
 					   name="r30_amt_6to24m"
 					   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					   readonly />
 			  </td>
 			  
-			  	<td style="background-color:rgb(128, 128, 128)">
+			  	<td style="background-color:rgb(255, 255, 255)">
 				  <input class="display-input show_input"
 						 type="text"
-						 th:value="${report.r30_risk_6to24m != null ? #numbers.formatDecimal(report.r30_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						 th:value="${report.r30_risk_6to24m != null ? #numbers.formatDecimal(report.r30_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						 id="r30_risk_6to24m"
 						 name="r30_risk_6to24m"
-						 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+						 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 						 readonly />
 				</td>
 				
-				<td style="background-color:#92D050;">
+				<td style="background-color:rgb(107, 122, 143);">
 					<input class="display-input show_input"
 						   type="text"
-						   th:value="${report.r30_capital_6to24m != null ? #numbers.formatDecimal(report.r30_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   th:value="${report.r30_capital_6to24m != null ? #numbers.formatDecimal(report.r30_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						   id="r30_capital_6to24m"
 						   name="r30_capital_6to24m"
-						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 						   readonly />
 				  </td>
 
 				  <td>
 					  <input class="display-input show_input"
 							 type="text"
-							 th:value="${report.r30_amt_gt24m != null ? #numbers.formatDecimal(report.r30_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 th:value="${report.r30_amt_gt24m != null ? #numbers.formatDecimal(report.r30_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							 id="r30_amt_gt24m"
 							 name="r30_amt_gt24m"
 							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 							 readonly />
 					</td>
 
-				 	<td style="background-color:rgb(128, 128, 128)">
+				 	<td style="background-color:rgb(255, 255, 255)">
 					  <input class="display-input show_input"
 							 type="text"
-							 th:value="${report.r30_risk_gt24m != null ? #numbers.formatDecimal(report.r30_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 th:value="${report.r30_risk_gt24m != null ? #numbers.formatDecimal(report.r30_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							 id="r30_risk_gt24m"
 							 name="r30_risk_gt24m"
-							 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+							 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 							 readonly />
 					</td>
 					
-					<td style="background-color:#92D050;">
+					<td style="background-color:rgb(107, 122, 143);">
 						<input class="display-input show_input"
 							   type="text"
-							   th:value="${report.r30_capital_gt24m != null ? #numbers.formatDecimal(report.r30_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   th:value="${report.r30_capital_gt24m != null ? #numbers.formatDecimal(report.r30_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							   id="r30_capital_gt24m"
 							   name="r30_capital_gt24m"
-							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 							   readonly />
 					  </td>
 
@@ -3413,90 +2975,90 @@ $(document).ready(function () {
 			<td>
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r31_amt_6m != null ? #numbers.formatDecimal(report.r31_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r31_amt_6m != null ? #numbers.formatDecimal(report.r31_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r31_amt_6m"
 					 name="r31_amt_6m"
 					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
-				<td style="background-color:rgb(128, 128, 128)">
+				<td style="background-color:rgb(255, 255, 255)">
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r31_risk_6m != null ?  #numbers.formatDecimal(report.r31_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r31_risk_6m != null ?  #numbers.formatDecimal(report.r31_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r31_risk_6m"
 					 name="r31_risk_6m"
-					 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+					 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
-			<td style="background-color:#92D050;">
+			<td style="background-color:rgb(107, 122, 143);">
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r31_capital_6m != null ? #numbers.formatDecimal(report.r31_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r31_capital_6m != null ? #numbers.formatDecimal(report.r31_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r31_capital_6m"
 					 name="r31_capital_6m"
-					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
 			<td>
 				<input class="display-input show_input"
 					   type="text"
-					   th:value="${report.r31_amt_6to24m != null ? #numbers.formatDecimal(report.r31_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					   th:value="${report.r31_amt_6to24m != null ? #numbers.formatDecimal(report.r31_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 					   id="r31_amt_6to24m"
 					   name="r31_amt_6to24m"
 					   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					   readonly />
 			  </td>
 			  
-			  	<td style="background-color:rgb(128, 128, 128)">
+			  	<td style="background-color:rgb(255, 255, 255)">
 				  <input class="display-input show_input"
 						 type="text"
-						 th:value="${report.r31_risk_6to24m != null ? #numbers.formatDecimal(report.r31_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						 th:value="${report.r31_risk_6to24m != null ? #numbers.formatDecimal(report.r31_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						 id="r31_risk_6to24m"
 						 name="r31_risk_6to24m"
-						 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+						 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 						 readonly />
 				</td>
 				
-				<td style="background-color:#92D050;">
+				<td style="background-color:rgb(107, 122, 143);">
 					<input class="display-input show_input"
 						   type="text"
-						   th:value="${report.r31_capital_6to24m != null ? #numbers.formatDecimal(report.r31_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   th:value="${report.r31_capital_6to24m != null ? #numbers.formatDecimal(report.r31_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						   id="r31_capital_6to24m"
 						   name="r31_capital_6to24m"
-						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 						   readonly />
 				  </td>
 
 				  <td>
 					  <input class="display-input show_input"
 							 type="text"
-							 th:value="${report.r31_amt_gt24m != null ? #numbers.formatDecimal(report.r31_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 th:value="${report.r31_amt_gt24m != null ? #numbers.formatDecimal(report.r31_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							 id="r31_amt_gt24m"
 							 name="r31_amt_gt24m"
 							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 							 readonly />
 					</td>
 
-				 	<td style="background-color:rgb(128, 128, 128)">
+				 	<td style="background-color:rgb(255, 255, 255)">
 					  <input class="display-input show_input"
 							 type="text"
-							 th:value="${report.r31_risk_gt24m != null ? #numbers.formatDecimal(report.r31_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 th:value="${report.r31_risk_gt24m != null ? #numbers.formatDecimal(report.r31_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							 id="r31_risk_gt24m"
 							 name="r31_risk_gt24m"
-							 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+							 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 							 readonly />
 					</td>
 					
-					<td style="background-color:#92D050;">
+					<td style="background-color:rgb(107, 122, 143);">
 						<input class="display-input show_input"
 							   type="text"
-							   th:value="${report.r31_capital_gt24m != null ? #numbers.formatDecimal(report.r31_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   th:value="${report.r31_capital_gt24m != null ? #numbers.formatDecimal(report.r31_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							   id="r31_capital_gt24m"
 							   name="r31_capital_gt24m"
-							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 							   readonly />
 					  </td>
 
@@ -3519,90 +3081,90 @@ $(document).ready(function () {
 			<td>
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r32_amt_6m != null ? #numbers.formatDecimal(report.r32_amt_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r32_amt_6m != null ? #numbers.formatDecimal(report.r32_amt_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r32_amt_6m"
 					 name="r32_amt_6m"
 					 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
-				<td style="background-color:rgb(128, 128, 128)">
+				<td style="background-color:rgb(255, 255, 255)">
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r32_risk_6m != null ?  #numbers.formatDecimal(report.r32_risk_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r32_risk_6m != null ?  #numbers.formatDecimal(report.r32_risk_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r32_risk_6m"
 					 name="r32_risk_6m"
-					 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+					 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
-			<td style="background-color:#92D050;">
+			<td style="background-color:rgb(107, 122, 143);">
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r32_capital_6m != null ? #numbers.formatDecimal(report.r32_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r32_capital_6m != null ? #numbers.formatDecimal(report.r32_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r32_capital_6m"
 					 name="r32_capital_6m"
-					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
 			<td>
 				<input class="display-input show_input"
 					   type="text"
-					   th:value="${report.r32_amt_6to24m != null ? #numbers.formatDecimal(report.r32_amt_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+					   th:value="${report.r32_amt_6to24m != null ? #numbers.formatDecimal(report.r32_amt_6to24m,0,'COMMA',0,'POINT'):'0'}"
 					   id="r32_amt_6to24m"
 					   name="r32_amt_6to24m"
 					   style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 					   readonly />
 			  </td>
 			  
-				<td style="background-color:rgb(128, 128, 128)">
+				<td style="background-color:rgb(255, 255, 255)">
 				  <input class="display-input show_input"
 						 type="text"
-						 th:value="${report.r32_risk_6to24m != null ? #numbers.formatDecimal(report.r32_risk_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						 th:value="${report.r32_risk_6to24m != null ? #numbers.formatDecimal(report.r32_risk_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						 id="r32_risk_6to24m"
 						 name="r32_risk_6to24m"
-						 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+						 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 						 readonly />
 				</td>
 				
-				<td style="background-color:#92D050;">
+				<td style="background-color:rgb(107, 122, 143);">
 					<input class="display-input show_input"
 						   type="text"
-						   th:value="${report.r32_capital_6to24m != null ? #numbers.formatDecimal(report.r32_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   th:value="${report.r32_capital_6to24m != null ? #numbers.formatDecimal(report.r32_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						   id="r32_capital_6to24m"
 						   name="r32_capital_6to24m"
-						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 						   readonly />
 				  </td>
 
 				  <td>
 					  <input class="display-input show_input"
 							 type="text"
-							 th:value="${report.r32_amt_gt24m != null ? #numbers.formatDecimal(report.r32_amt_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 th:value="${report.r32_amt_gt24m != null ? #numbers.formatDecimal(report.r32_amt_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							 id="r32_amt_gt24m"
 							 name="r32_amt_gt24m"
 							 style="background-color:#FFFFFF;width:200px;height:28px;border-color:transparent;text-align:right;"
 							 readonly />
 					</td>
 
-				  	<td style="background-color:rgb(128, 128, 128)">
+				  	<td style="background-color:rgb(255, 255, 255)">
 					  <input class="display-input show_input"
 							 type="text"
-							 th:value="${report.r32_risk_gt24m != null ? #numbers.formatDecimal(report.r32_risk_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							 th:value="${report.r32_risk_gt24m != null ? #numbers.formatDecimal(report.r32_risk_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							 id="r32_risk_gt24m"
 							 name="r32_risk_gt24m"
-							 style="background-color:rgb(128, 128, 128);width:200px;height:28px;border-color:transparent;text-align:right;"
+							 style="background-color:rgb(255, 255, 255);width:200px;height:28px;border-color:transparent;text-align:right;"
 							 readonly />
 					</td>
 					
-					<td style="background-color:#92D050;">
+					<td style="background-color:rgb(107, 122, 143);">
 						<input class="display-input show_input"
 							   type="text"
-							   th:value="${report.r32_capital_gt24m != null ? #numbers.formatDecimal(report.r32_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   th:value="${report.r32_capital_gt24m != null ? #numbers.formatDecimal(report.r32_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							   id="r32_capital_gt24m"
 							   name="r32_capital_gt24m"
-							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 							   readonly />
 					  </td>
 
@@ -3625,13 +3187,13 @@ $(document).ready(function () {
 			<td style="background-color: black;" ></td>
 			<td  style="background-color: black;" ></td>
 
-			<td style="background-color:#92D050;">
+			<td style="background-color:rgb(107, 122, 143);">
 			  <input class="display-input show_input"
 					 type="text"
-					 th:value="${report.r33_capital_6m != null ? #numbers.formatDecimal(report.r33_capital_6m,1,'COMMA',0,'POINT'):'0.00'}"
+					 th:value="${report.r33_capital_6m != null ? #numbers.formatDecimal(report.r33_capital_6m,0,'COMMA',0,'POINT'):'0'}"
 					 id="r33_capital_6m"
 					 name="r33_capital_6m"
-					 style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+					 style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 					 readonly />
 			</td>
 
@@ -3640,26 +3202,26 @@ $(document).ready(function () {
 			  </td>
 			  
 			  <td style="background-color: black;" ></td>	
-				<td style="background-color:#92D050;">
+				<td style="background-color:rgb(107, 122, 143);">
 					<input class="display-input show_input"
 						   type="text"
-						   th:value="${report.r33_capital_6to24m != null ? #numbers.formatDecimal(report.r33_capital_6to24m,1,'COMMA',0,'POINT'):'0.00'}"
+						   th:value="${report.r33_capital_6to24m != null ? #numbers.formatDecimal(report.r33_capital_6to24m,0,'COMMA',0,'POINT'):'0'}"
 						   id="r33_capital_6to24m"
 						   name="r33_capital_6to24m"
-						   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+						   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 						   readonly />
 				  </td>
 
 				 <td style="background-color:rgb(192, 192, 192);">B</td>
 
 					<td style="background-color: black;" ></td>
-					<td style="background-color:#92D050;">
+					<td style="background-color:rgb(107, 122, 143);">
 						<input class="display-input show_input"
 							   type="text"
-							   th:value="${report.r33_capital_gt24m != null ? #numbers.formatDecimal(report.r33_capital_gt24m,1,'COMMA',0,'POINT'):'0.00'}"
+							   th:value="${report.r33_capital_gt24m != null ? #numbers.formatDecimal(report.r33_capital_gt24m,0,'COMMA',0,'POINT'):'0'}"
 							   id="r33_capital_gt24m"
 							   name="r33_capital_gt24m"
-							   style="background-color:#92D050;width:200px;height:28px;border-color:transparent;text-align:right;"
+							   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 							   readonly />
 					  </td>
 
@@ -3669,13 +3231,13 @@ $(document).ready(function () {
 			        <td></td>
 			        <td  style="text-align: right;">Total Specific Risk Charge</td>
 			        <td></td>
-	 <td style="background-color:rgb(255, 255, 0);">
+	 <td style="background-color:rgb(107, 122, 143);">
 			<input class="display-input show_input"
 			   type="text"
-			   th:value="${report.r35_tot_spec_risk_ch != null ? #numbers.formatDecimal(report.r35_tot_spec_risk_ch,1,'COMMA',0,'POINT'):'0.00'}"
+			   th:value="${report.r35_tot_spec_risk_ch != null ? #numbers.formatDecimal(report.r35_tot_spec_risk_ch,0,'COMMA',0,'POINT'):'0'}"
 			   id="r35_tot_spec_risk_ch"
 			   name="r35_tot_spec_risk_ch"
-			   style="background-color:rgb(255, 255, 0);width:200px;height:28px;border-color:transparent;text-align:right;"
+			   style="background-color:rgb(107, 122, 143);width:200px;height:28px;border-color:transparent;text-align:right;"
 			   readonly />
 			</td>
 			        <td style="text-align: left;">D = Sum (A:C)</td>
