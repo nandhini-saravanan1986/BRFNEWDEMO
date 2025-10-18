@@ -73,7 +73,7 @@ import com.bornfire.brf.entities.BRRS_M_FXR_Resub_Summary_Repo3;
 public class BRRS_M_FXR_ReportService {
 
 
-	private static final Logger logger = LoggerFactory.getLogger(BRRS_M_SFINP2_ReportService.class);
+	private static final Logger logger = LoggerFactory.getLogger(BRRS_M_FXR_ReportService.class);
 
 	@Autowired
 	private Environment env;

@@ -332,11 +332,7 @@ public class M_SRWA_12G_Summary_Entity{
 	private BigDecimal r60_exposure_amount;
 	private BigDecimal r60_risk_weight;
 	private BigDecimal r60_risk_weighted_amount;
-	private String r61_security_firm;
-	private BigDecimal r61_credit_rating;
-	private String r61_rating_agency;
 	private BigDecimal r61_exposure_amount;
-	private BigDecimal r61_risk_weight;
 	private BigDecimal r61_risk_weighted_amount;
 
 	
@@ -4654,48 +4650,6 @@ public class M_SRWA_12G_Summary_Entity{
 
 
 
-	public String getR61_security_firm() {
-		return r61_security_firm;
-	}
-
-
-
-
-	public void setR61_security_firm(String r61_security_firm) {
-		this.r61_security_firm = r61_security_firm;
-	}
-
-
-
-
-	public BigDecimal getR61_credit_rating() {
-		return r61_credit_rating;
-	}
-
-
-
-
-	public void setR61_credit_rating(BigDecimal r61_credit_rating) {
-		this.r61_credit_rating = r61_credit_rating;
-	}
-
-
-
-
-	public String getR61_rating_agency() {
-		return r61_rating_agency;
-	}
-
-
-
-
-	public void setR61_rating_agency(String r61_rating_agency) {
-		this.r61_rating_agency = r61_rating_agency;
-	}
-
-
-
-
 	public BigDecimal getR61_exposure_amount() {
 		return r61_exposure_amount;
 	}
@@ -4709,17 +4663,6 @@ public class M_SRWA_12G_Summary_Entity{
 
 
 
-
-	public BigDecimal getR61_risk_weight() {
-		return r61_risk_weight;
-	}
-
-
-
-
-	public void setR61_risk_weight(BigDecimal r61_risk_weight) {
-		this.r61_risk_weight = r61_risk_weight;
-	}
 
 
 

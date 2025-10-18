@@ -345,7 +345,6 @@ for (int i : targetRows) {
         "eliexp_notcov_crm_noncol_exp_crm_subapr",
         "riskweights_rwa_noncol_exp_crm_subapr",
         "rwa_cov_crm_rwa_noncol_exp_crm_subapr",
-        "rw_oricount_rwa_noncol_exp_crm_subapr",
         "rwa_notcov_crm_rwa_noncol_exp_crm_subapr",
         "value",
         "expeli_colexp_crm_comapr",
@@ -500,7 +499,6 @@ for (int i : targetRows) {
         "eliexp_notcov_crm_noncol_exp_crm_subapr",
         "riskweights_rwa_noncol_exp_crm_subapr",
         "rwa_cov_crm_rwa_noncol_exp_crm_subapr",
-        "rw_oricount_rwa_noncol_exp_crm_subapr",
         "rwa_notcov_crm_rwa_noncol_exp_crm_subapr",
         "value",
         "expeli_colexp_crm_comapr",
@@ -654,7 +652,6 @@ for (int i : targetRows) {
         "eliexp_notcov_crm_noncol_exp_crm_subapr",
         "riskweights_rwa_noncol_exp_crm_subapr",
         "rwa_cov_crm_rwa_noncol_exp_crm_subapr",
-        "rw_oricount_rwa_noncol_exp_crm_subapr",
         "rwa_notcov_crm_rwa_noncol_exp_crm_subapr",
         "value",
         "expeli_colexp_crm_comapr",
@@ -10671,14 +10668,14 @@ if (!dataList7.isEmpty()) {
 										cell10.setCellValue("");
 										cell10.setCellStyle(textStyle);}
 
-									//R92
-								    // Column N									       
-										cell12 = row.createCell(13);
-										if (record3.getR92_rw_oricount_rwa_noncol_exp_crm_subapr() != null) {
-										cell12.setCellValue(record3.getR92_rw_oricount_rwa_noncol_exp_crm_subapr().doubleValue());
-										cell12.setCellStyle(numberStyle);} else {
-										cell12.setCellValue("");
-										cell12.setCellStyle(textStyle);}
+//									//R92
+//								    // Column N									       
+//										cell12 = row.createCell(13);
+//										if (record3.getR92_rw_oricount_rwa_noncol_exp_crm_subapr() != null) {
+//										cell12.setCellValue(record3.getR92_rw_oricount_rwa_noncol_exp_crm_subapr().doubleValue());
+//										cell12.setCellStyle(numberStyle);} else {
+//										cell12.setCellValue("");
+//										cell12.setCellStyle(textStyle);}
 
 									//R92
 								    // Column P									       
@@ -10817,14 +10814,14 @@ if (!dataList7.isEmpty()) {
 										cell10.setCellValue("");
 										cell10.setCellStyle(textStyle);}
 
-									//R93
-								    // Column N									       
-										cell12 = row.createCell(13);
-										if (record3.getR93_rw_oricount_rwa_noncol_exp_crm_subapr() != null) {
-										cell12.setCellValue(record3.getR93_rw_oricount_rwa_noncol_exp_crm_subapr().doubleValue());
-										cell12.setCellStyle(numberStyle);} else {
-										cell12.setCellValue("");
-										cell12.setCellStyle(textStyle);}
+//									//R93
+//								    // Column N									       
+//										cell12 = row.createCell(13);
+//										if (record3.getR93_rw_oricount_rwa_noncol_exp_crm_subapr() != null) {
+//										cell12.setCellValue(record3.getR93_rw_oricount_rwa_noncol_exp_crm_subapr().doubleValue());
+//										cell12.setCellStyle(numberStyle);} else {
+//										cell12.setCellValue("");
+//										cell12.setCellStyle(textStyle);}
 
 									//R93
 								    // Column P									       
