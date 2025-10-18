@@ -1438,10 +1438,6 @@ public class RegulatoryReportServices {
 			return M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
-		}else if ("M_SIRDetails".equals(filename)) {
-			return M_SIR_ReportService.getM_SIRDetailExcel(filename, fromdate, todate, currency, dtltype,
-					type, version);
-
 		}else if ("BRRS_M_GALORDetails".equals(filename)) {
 			return M_GALOR_ReportService.BRRS_M_GALORDetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
@@ -1991,10 +1987,6 @@ public class RegulatoryReportServices {
 
 		}else if ("M_CA_7Details".equals(filename)) {
 			fileData = M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
-					type, version);
-
-		}else if ("M_SIRDetails".equals(filename)) {
-			fileData = M_SIR_ReportService.getM_SIRDetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
 		}else if ("BRRS_M_GALORDetails".equals(filename)) {
