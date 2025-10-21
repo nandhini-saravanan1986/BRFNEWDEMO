@@ -38,6 +38,8 @@ import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity3;
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
 import com.bornfire.brf.entities.BRRS_M_CR_Summary_Entity;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12E_LTV_Summary_Entity;
+import com.bornfire.brf.entities.M_CA6_Archival_Summary_Entity2;
+import com.bornfire.brf.entities.M_CA6_Summary_Entity2;
 import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
@@ -91,6 +93,7 @@ import com.bornfire.brf.entities.M_SRWA_12G_Summary_Entity;
 import com.bornfire.brf.services.BRRS_M_SRWA_12G_ReportService;
 
 
+import com.bornfire.brf.services.BRRS_M_CA6_ReportService;
 
 @Controller
 @ConfigurationProperties("default")
@@ -898,7 +901,38 @@ public class CBUAE_BRF_ReportsController {
 			     }
 			 }	 
 
-
+			 @Autowired
+			 BRRS_M_CA6_ReportService BRRS_M_CA6_ReportService;
+			 @RequestMapping(value = "/MCA6updateAll", method = { RequestMethod.GET, RequestMethod.POST })
+			 @ResponseBody
+			 public ResponseEntity<String> updateAllReports(
+			         @RequestParam(required = false)
+			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			         @RequestParam(required = false) String type,
+			         @ModelAttribute M_CA6_Summary_Entity2 request1
+			 ) {
+			     try {
+			         System.out.println("Came to single controller");
+			         System.out.println(type);
+			         // set date into all 4 entities
+			         request1.setREPORT_DATE(asondate);
+			        
+			     if(type.equals("ARCHIVAL")) {
+			    	 M_CA6_Archival_Summary_Entity2 Archivalrequest1 = new M_CA6_Archival_Summary_Entity2();
+			         BeanUtils.copyProperties(request1,Archivalrequest1);	
+			     }
+			     else {
+			    	 BRRS_M_CA6_ReportService.updateReport(request1);
+			     }
+			     return ResponseEntity.ok("Updated Successfully");
+			     }
+			     catch (Exception e) {
+			         e.printStackTrace();
+			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                              .body("Update Failed: " + e.getMessage());
+			     }
+			 }
+			
 			 
 	}
 				
