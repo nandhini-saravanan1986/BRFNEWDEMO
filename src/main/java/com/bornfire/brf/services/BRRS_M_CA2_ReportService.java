@@ -54,9 +54,11 @@ import com.bornfire.brf.entities.BRRS_M_CA2_Archival_Summary_Repo;
 import com.bornfire.brf.entities.M_CA2_Detail_Entity;
 import com.bornfire.brf.entities.BRRS_M_CA2_Detail_Repo;
 import com.bornfire.brf.entities.M_CA2_Summary_Entity;
-import com.bornfire.brf.entities.M_SFINP2_Archival_Detail_Entity;
-import com.bornfire.brf.entities.M_SFINP2_Detail_Entity;
 import com.bornfire.brf.entities.BRRS_M_CA2_Summary_Repo;
+import com.bornfire.brf.entities.M_CA2_Manual_Summary_Entity;
+import com.bornfire.brf.entities.BRRS_M_CA2_Manual_Summary_Repo;
+import com.bornfire.brf.entities.M_CA2_Manual_Archival_Summary_Entity;
+import com.bornfire.brf.entities.BRRS_M_CA2_Manual_Archival_Summary_Repo;
 
 @Component
 @Service
@@ -82,7 +84,14 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_CA2_ReportSe
 
 	@Autowired
 	BRRS_M_CA2_Archival_Summary_Repo BRRS_M_CA2_Archival_Summary_Repo;
-
+	
+	@Autowired
+	BRRS_M_CA2_Manual_Archival_Summary_Repo BRRS_M_CA2_Manual_Archival_Summary_Repo;
+	
+	@Autowired
+	BRRS_M_CA2_Manual_Summary_Repo BRRS_M_CA2_Manual_Summary_Repo;
+	
+	
 	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
 	public ModelAndView getM_CA2View(String reportId, String fromdate, String todate, String currency,
 			String dtltype, Pageable pageable, String type, String version) {
@@ -98,6 +107,7 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_CA2_ReportSe
 		if (type.equals("ARCHIVAL") & version != null) {
 			System.out.println(type);
 			List<M_CA2_Archival_Summary_Entity> T1Master = new ArrayList<M_CA2_Archival_Summary_Entity>();
+			List<M_CA2_Manual_Archival_Summary_Entity> T2Master = new ArrayList<M_CA2_Manual_Archival_Summary_Entity>();
 			System.out.println(version);
 			try {
 				Date d1 = dateformat.parse(todate);
@@ -106,15 +116,19 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_CA2_ReportSe
 				// ", BRF1_REPORT_ENTITY.class)
 				// .setParameter(1, df.parse(todate)).getResultList();
 				T1Master = BRRS_M_CA2_Archival_Summary_Repo.getdatabydateListarchival(dateformat.parse(todate), version);
+				T2Master = BRRS_M_CA2_Manual_Archival_Summary_Repo.getdatabydateListarchival(dateformat.parse(todate), version);
 
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 
 			mv.addObject("reportsummary", T1Master);
+			mv.addObject("reportsummary1", T2Master);
 		} else {		
 
 		List<M_CA2_Summary_Entity> T1Master = new ArrayList<M_CA2_Summary_Entity>();
+		List<M_CA2_Manual_Summary_Entity> T2Master = new ArrayList<M_CA2_Manual_Summary_Entity>();
+		
 		try {
 			Date d1 = dateformat.parse(todate);
 			// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
@@ -122,12 +136,14 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_CA2_ReportSe
 			//T1Master = hs.createQuery("from  BRF1_REPORT_ENTITY a where a.report_date = ?1 ", BRF1_REPORT_ENTITY.class)
 				//	.setParameter(1, df.parse(todate)).getResultList();
 			 T1Master=BRRS_M_CA2_Summary_Repo.getdatabydateList(dateformat.parse(todate));
+			 T2Master=BRRS_M_CA2_Manual_Summary_Repo.getdatabydateList(dateformat.parse(todate));
 			 
 		
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}	
 			mv.addObject("reportsummary", T1Master);
+			mv.addObject("reportsummary1", T2Master);
 		}
 
 		// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
@@ -308,231 +324,231 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_CA2_ReportSe
 			        Cell cell3, cell4;
 			        CellStyle originalStyle;
 
-			        // ===== Row 10 / Col D =====
-			        row = sheet.getRow(9);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR10_amount_2() != null) cell4.setCellValue(record.getR10_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 11 / Col D =====
-			        row = sheet.getRow(10);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR11_amount_2() != null) cell4.setCellValue(record.getR11_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 13 / Col C =====
-			        row = sheet.getRow(12);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR13_amount_1() != null) cell3.setCellValue(record.getR13_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 14 / Col C =====
-			        row = sheet.getRow(13);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR14_amount_1() != null) cell3.setCellValue(record.getR14_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 15 / Col C =====
-			        row = sheet.getRow(14);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR15_amount_1() != null) cell3.setCellValue(record.getR15_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 16 / Col C =====
-			        row = sheet.getRow(15);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR16_amount_1() != null) cell3.setCellValue(record.getR16_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 18 / Col C =====
-			        row = sheet.getRow(17);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR18_amount_1() != null) cell3.setCellValue(record.getR18_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 19 / Col C =====
-			        row = sheet.getRow(18);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR19_amount_1() != null) cell3.setCellValue(record.getR19_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 20 / Col C =====
-			        row = sheet.getRow(19);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR20_amount_1() != null) cell3.setCellValue(record.getR20_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 21 / Col C =====
-			        row = sheet.getRow(20);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR21_amount_1() != null) cell3.setCellValue(record.getR21_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 22 / Col D =====
-			        row = sheet.getRow(21);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR22_amount_2() != null) cell4.setCellValue(record.getR22_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 23 / Col D =====
-			        row = sheet.getRow(22);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR23_amount_2() != null) cell4.setCellValue(record.getR23_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 24 / Col D =====
-			        row = sheet.getRow(23);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR24_amount_2() != null) cell4.setCellValue(record.getR24_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 25 / Col D =====
-			        row = sheet.getRow(24);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR25_amount_2() != null) cell4.setCellValue(record.getR25_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 31 / Col D =====
-			        row = sheet.getRow(30);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR31_amount_2() != null) cell4.setCellValue(record.getR31_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 32 / Col D =====
-			        row = sheet.getRow(31);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR32_amount_2() != null) cell4.setCellValue(record.getR32_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 33 / Col D =====
-			        row = sheet.getRow(32);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR33_amount_2() != null) cell4.setCellValue(record.getR33_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 34 / Col D =====
-			        row = sheet.getRow(33);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR34_amount_2() != null) cell4.setCellValue(record.getR34_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 41 / Col D =====
-			        row = sheet.getRow(40);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR41_amount_2() != null) cell4.setCellValue(record.getR41_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 42 / Col D =====
-			        row = sheet.getRow(41);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR42_amount_2() != null) cell4.setCellValue(record.getR42_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 43 / Col D =====
-			        row = sheet.getRow(42);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR43_amount_2() != null) cell4.setCellValue(record.getR43_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 44 / Col D =====
-			        row = sheet.getRow(43);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR44_amount_2() != null) cell4.setCellValue(record.getR44_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 45 / Col D =====
-			        row = sheet.getRow(44);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR45_amount_2() != null) cell4.setCellValue(record.getR45_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 46 / Col D =====
-			        row = sheet.getRow(45);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR46_amount_2() != null) cell4.setCellValue(record.getR46_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 47 / Col D =====
-			        row = sheet.getRow(46);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR47_amount_2() != null) cell4.setCellValue(record.getR47_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-			    }
+//			        // ===== Row 10 / Col D =====
+//			        row = sheet.getRow(9);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR10_amount_2() != null) cell4.setCellValue(record.getR10_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 11 / Col D =====
+//			        row = sheet.getRow(10);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR11_amount_2() != null) cell4.setCellValue(record.getR11_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 13 / Col C =====
+//			        row = sheet.getRow(12);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR13_amount_1() != null) cell3.setCellValue(record.getR13_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 14 / Col C =====
+//			        row = sheet.getRow(13);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR14_amount_1() != null) cell3.setCellValue(record.getR14_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 15 / Col C =====
+//			        row = sheet.getRow(14);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR15_amount_1() != null) cell3.setCellValue(record.getR15_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 16 / Col C =====
+//			        row = sheet.getRow(15);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR16_amount_1() != null) cell3.setCellValue(record.getR16_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 18 / Col C =====
+//			        row = sheet.getRow(17);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR18_amount_1() != null) cell3.setCellValue(record.getR18_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 19 / Col C =====
+//			        row = sheet.getRow(18);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR19_amount_1() != null) cell3.setCellValue(record.getR19_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 20 / Col C =====
+//			        row = sheet.getRow(19);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR20_amount_1() != null) cell3.setCellValue(record.getR20_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 21 / Col C =====
+//			        row = sheet.getRow(20);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR21_amount_1() != null) cell3.setCellValue(record.getR21_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 22 / Col D =====
+//			        row = sheet.getRow(21);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR22_amount_2() != null) cell4.setCellValue(record.getR22_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 23 / Col D =====
+//			        row = sheet.getRow(22);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR23_amount_2() != null) cell4.setCellValue(record.getR23_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 24 / Col D =====
+//			        row = sheet.getRow(23);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR24_amount_2() != null) cell4.setCellValue(record.getR24_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 25 / Col D =====
+//			        row = sheet.getRow(24);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR25_amount_2() != null) cell4.setCellValue(record.getR25_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 31 / Col D =====
+//			        row = sheet.getRow(30);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR31_amount_2() != null) cell4.setCellValue(record.getR31_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 32 / Col D =====
+//			        row = sheet.getRow(31);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR32_amount_2() != null) cell4.setCellValue(record.getR32_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 33 / Col D =====
+//			        row = sheet.getRow(32);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR33_amount_2() != null) cell4.setCellValue(record.getR33_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 34 / Col D =====
+//			        row = sheet.getRow(33);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR34_amount_2() != null) cell4.setCellValue(record.getR34_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 41 / Col D =====
+//			        row = sheet.getRow(40);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR41_amount_2() != null) cell4.setCellValue(record.getR41_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 42 / Col D =====
+//			        row = sheet.getRow(41);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR42_amount_2() != null) cell4.setCellValue(record.getR42_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 43 / Col D =====
+//			        row = sheet.getRow(42);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR43_amount_2() != null) cell4.setCellValue(record.getR43_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 44 / Col D =====
+//			        row = sheet.getRow(43);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR44_amount_2() != null) cell4.setCellValue(record.getR44_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 45 / Col D =====
+//			        row = sheet.getRow(44);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR45_amount_2() != null) cell4.setCellValue(record.getR45_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 46 / Col D =====
+//			        row = sheet.getRow(45);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR46_amount_2() != null) cell4.setCellValue(record.getR46_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 47 / Col D =====
+//			        row = sheet.getRow(46);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR47_amount_2() != null) cell4.setCellValue(record.getR47_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);	 
+			        }
 
 				workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
 			} else {
@@ -770,232 +786,232 @@ public List<Object> getM_CA2Archival() {
 			        Row row;
 			        Cell cell3, cell4;
 			        CellStyle originalStyle;
-
-			        // ===== Row 10 / Col D =====
-			        row = sheet.getRow(9);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR10_amount_2() != null) cell4.setCellValue(record.getR10_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 11 / Col D =====
-			        row = sheet.getRow(10);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR11_amount_2() != null) cell4.setCellValue(record.getR11_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 13 / Col C =====
-			        row = sheet.getRow(12);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR13_amount_1() != null) cell3.setCellValue(record.getR13_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 14 / Col C =====
-			        row = sheet.getRow(13);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR14_amount_1() != null) cell3.setCellValue(record.getR14_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 15 / Col C =====
-			        row = sheet.getRow(14);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR15_amount_1() != null) cell3.setCellValue(record.getR15_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 16 / Col C =====
-			        row = sheet.getRow(15);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR16_amount_1() != null) cell3.setCellValue(record.getR16_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 18 / Col C =====
-			        row = sheet.getRow(17);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR18_amount_1() != null) cell3.setCellValue(record.getR18_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 19 / Col C =====
-			        row = sheet.getRow(18);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR19_amount_1() != null) cell3.setCellValue(record.getR19_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 20 / Col C =====
-			        row = sheet.getRow(19);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR20_amount_1() != null) cell3.setCellValue(record.getR20_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 21 / Col C =====
-			        row = sheet.getRow(20);
-			        cell3 = row.getCell(2);
-			        if (cell3 == null) cell3 = row.createCell(2);
-			        originalStyle = cell3.getCellStyle();
-			        if (record.getR21_amount_1() != null) cell3.setCellValue(record.getR21_amount_1().doubleValue());
-			        else cell3.setCellValue("");
-			        cell3.setCellStyle(originalStyle);
-
-			        // ===== Row 22 / Col D =====
-			        row = sheet.getRow(21);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR22_amount_2() != null) cell4.setCellValue(record.getR22_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 23 / Col D =====
-			        row = sheet.getRow(22);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR23_amount_2() != null) cell4.setCellValue(record.getR23_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 24 / Col D =====
-			        row = sheet.getRow(23);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR24_amount_2() != null) cell4.setCellValue(record.getR24_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 25 / Col D =====
-			        row = sheet.getRow(24);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR25_amount_2() != null) cell4.setCellValue(record.getR25_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 31 / Col D =====
-			        row = sheet.getRow(30);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR31_amount_2() != null) cell4.setCellValue(record.getR31_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 32 / Col D =====
-			        row = sheet.getRow(31);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR32_amount_2() != null) cell4.setCellValue(record.getR32_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 33 / Col D =====
-			        row = sheet.getRow(32);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR33_amount_2() != null) cell4.setCellValue(record.getR33_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 34 / Col D =====
-			        row = sheet.getRow(33);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR34_amount_2() != null) cell4.setCellValue(record.getR34_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 41 / Col D =====
-			        row = sheet.getRow(40);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR41_amount_2() != null) cell4.setCellValue(record.getR41_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 42 / Col D =====
-			        row = sheet.getRow(41);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR42_amount_2() != null) cell4.setCellValue(record.getR42_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 43 / Col D =====
-			        row = sheet.getRow(42);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR43_amount_2() != null) cell4.setCellValue(record.getR43_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 44 / Col D =====
-			        row = sheet.getRow(43);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR44_amount_2() != null) cell4.setCellValue(record.getR44_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 45 / Col D =====
-			        row = sheet.getRow(44);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR45_amount_2() != null) cell4.setCellValue(record.getR45_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 46 / Col D =====
-			        row = sheet.getRow(45);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR46_amount_2() != null) cell4.setCellValue(record.getR46_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-
-			        // ===== Row 47 / Col D =====
-			        row = sheet.getRow(46);
-			        cell4 = row.getCell(3);
-			        if (cell4 == null) cell4 = row.createCell(3);
-			        originalStyle = cell4.getCellStyle();
-			        if (record.getR47_amount_2() != null) cell4.setCellValue(record.getR47_amount_2().doubleValue());
-			        else cell4.setCellValue("");
-			        cell4.setCellStyle(originalStyle);
-			    }
+//
+//			        // ===== Row 10 / Col D =====
+//			        row = sheet.getRow(9);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR10_amount_2() != null) cell4.setCellValue(record.getR10_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 11 / Col D =====
+//			        row = sheet.getRow(10);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR11_amount_2() != null) cell4.setCellValue(record.getR11_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 13 / Col C =====
+//			        row = sheet.getRow(12);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR13_amount_1() != null) cell3.setCellValue(record.getR13_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 14 / Col C =====
+//			        row = sheet.getRow(13);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR14_amount_1() != null) cell3.setCellValue(record.getR14_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 15 / Col C =====
+//			        row = sheet.getRow(14);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR15_amount_1() != null) cell3.setCellValue(record.getR15_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 16 / Col C =====
+//			        row = sheet.getRow(15);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR16_amount_1() != null) cell3.setCellValue(record.getR16_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 18 / Col C =====
+//			        row = sheet.getRow(17);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR18_amount_1() != null) cell3.setCellValue(record.getR18_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 19 / Col C =====
+//			        row = sheet.getRow(18);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR19_amount_1() != null) cell3.setCellValue(record.getR19_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 20 / Col C =====
+//			        row = sheet.getRow(19);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR20_amount_1() != null) cell3.setCellValue(record.getR20_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 21 / Col C =====
+//			        row = sheet.getRow(20);
+//			        cell3 = row.getCell(2);
+//			        if (cell3 == null) cell3 = row.createCell(2);
+//			        originalStyle = cell3.getCellStyle();
+//			        if (record.getR21_amount_1() != null) cell3.setCellValue(record.getR21_amount_1().doubleValue());
+//			        else cell3.setCellValue("");
+//			        cell3.setCellStyle(originalStyle);
+//
+//			        // ===== Row 22 / Col D =====
+//			        row = sheet.getRow(21);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR22_amount_2() != null) cell4.setCellValue(record.getR22_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 23 / Col D =====
+//			        row = sheet.getRow(22);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR23_amount_2() != null) cell4.setCellValue(record.getR23_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 24 / Col D =====
+//			        row = sheet.getRow(23);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR24_amount_2() != null) cell4.setCellValue(record.getR24_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 25 / Col D =====
+//			        row = sheet.getRow(24);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR25_amount_2() != null) cell4.setCellValue(record.getR25_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 31 / Col D =====
+//			        row = sheet.getRow(30);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR31_amount_2() != null) cell4.setCellValue(record.getR31_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 32 / Col D =====
+//			        row = sheet.getRow(31);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR32_amount_2() != null) cell4.setCellValue(record.getR32_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 33 / Col D =====
+//			        row = sheet.getRow(32);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR33_amount_2() != null) cell4.setCellValue(record.getR33_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 34 / Col D =====
+//			        row = sheet.getRow(33);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR34_amount_2() != null) cell4.setCellValue(record.getR34_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 41 / Col D =====
+//			        row = sheet.getRow(40);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR41_amount_2() != null) cell4.setCellValue(record.getR41_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 42 / Col D =====
+//			        row = sheet.getRow(41);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR42_amount_2() != null) cell4.setCellValue(record.getR42_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 43 / Col D =====
+//			        row = sheet.getRow(42);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR43_amount_2() != null) cell4.setCellValue(record.getR43_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 44 / Col D =====
+//			        row = sheet.getRow(43);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR44_amount_2() != null) cell4.setCellValue(record.getR44_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 45 / Col D =====
+//			        row = sheet.getRow(44);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR45_amount_2() != null) cell4.setCellValue(record.getR45_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 46 / Col D =====
+//			        row = sheet.getRow(45);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR46_amount_2() != null) cell4.setCellValue(record.getR46_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+//
+//			        // ===== Row 47 / Col D =====
+//			        row = sheet.getRow(46);
+//			        cell4 = row.getCell(3);
+//			        if (cell4 == null) cell4 = row.createCell(3);
+//			        originalStyle = cell4.getCellStyle();
+//			        if (record.getR47_amount_2() != null) cell4.setCellValue(record.getR47_amount_2().doubleValue());
+//			        else cell4.setCellValue("");
+//			        cell4.setCellStyle(originalStyle);
+    }
 
 				workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
 			} else {
