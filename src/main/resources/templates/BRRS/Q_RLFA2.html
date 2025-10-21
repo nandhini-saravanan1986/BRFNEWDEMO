@@ -291,7 +291,8 @@ label.error {
 
 
 .green-cell {
-	background-color: #92D050 !important;
+	 background-color: rgb(107, 122, 143) !important;
+    color: white !important;
 }
 
 
@@ -325,7 +326,7 @@ label.error {
 
 		//to fetch summary from the database - called from the summary button
 		function showdetails() {
-			 alert("Details page not available for Manual Report");
+			showResultModal('BRRS',' Details page not available for Manual Report');
 		}
 
 		function showsummary() {
@@ -439,63 +440,65 @@ label.error {
 
 <script>
 	// Show Modify (enable inputs & dropdowns)
-function showmodify(btn) {
-    $(".Show_input").removeAttr("readonly").removeAttr("disabled");
-
-   /*  for (let i = 10; i <= 63; i++) {
+    function showmodify(btn) {   
     	
-        $("#r" + i + "_sche_fore_ass_text").hide();
-        $("#r" + i + "_orig_amt_text").hide();
-        $("#r" + i + "_fore_amt_text").hide();
-        $("#r" + i + "_no_of_acc_text").hide();
-        
+    	// List of IDs that should ALWAYS remain readonly   
+    	
+    	var readonlyIds = ["r10_orig_amt", "r10_fore_amt", "r10_no_of_acc", "r14_orig_amt", "r14_fore_amt","r14_no_of_acc", "r28_orig_amt", "r28_fore_amt", "r28_no_of_acc", "r37_orig_amt", "r37_fore_amt","r37_no_of_acc", "r40_orig_amt", "r40_fore_amt", "r40_no_of_acc", "r43_orig_amt", "r43_fore_amt","r43_no_of_acc", "r48_orig_amt", "r48_fore_amt", "r48_no_of_acc", "r52_orig_amt", "r52_fore_amt","r52_no_of_acc","r56_orig_amt", "r56_fore_amt", "r56_no_of_acc", "r63_orig_amt", "r63_fore_amt","r63_no_of_acc",
+    		
+    		"r10_sche_fore_ass", "r11_sche_fore_ass", "r12_sche_fore_ass", "r13_sche_fore_ass", "r14_sche_fore_ass", "r15_sche_fore_ass", "r16_sche_fore_ass", "r17_sche_fore_ass", "r18_sche_fore_ass", "r19_sche_fore_ass", "r20_sche_fore_ass", "r21_sche_fore_ass", "r22_sche_fore_ass",
 
-        $("#r" + i + "_sche_fore_ass").show();
-        $("#r" + i + "_orig_amt").show();
-        $("#r" + i + "_fore_amt").show();
-        $("#r" + i + "_no_of_acc").show();
-    } */
+    		"r23_sche_fore_ass", "r24_sche_fore_ass", "r25_sche_fore_ass", "r26_sche_fore_ass", "r27_sche_fore_ass", "r28_sche_fore_ass", "r29_sche_fore_ass", "r30_sche_fore_ass", "r31_sche_fore_ass", "r32_sche_fore_ass", "r33_sche_fore_ass", "r34_sche_fore_ass", "r35_sche_fore_ass",
 
-   /*  for (let i = 56; i <= 95; i++) {
-        $("#R" + i + "_TYPE_OF_ACC_TEXT").hide();
-        $("#R" + i + "_PURPOSE_TEXT").hide();
-        $("#R" + i + "_CURRENCY_TEXT").hide();
+    		"r36_sche_fore_ass", "r37_sche_fore_ass", "r38_sche_fore_ass", "r39_sche_fore_ass", "r40_sche_fore_ass", "r41_sche_fore_ass", "r42_sche_fore_ass", "r43_sche_fore_ass", "r44_sche_fore_ass", "r45_sche_fore_ass", "r46_sche_fore_ass", "r47_sche_fore_ass", "r48_sche_fore_ass",
 
-        $("#R" + i + "_TYPE_OF_ACC").show();
-        $("#R" + i + "_PURPOSE").show();
-        $("#R" + i + "_CURRENCY").show();
+    		"r49_sche_fore_ass", "r50_sche_fore_ass", "r51_sche_fore_ass", "r52_sche_fore_ass", "r53_sche_fore_ass", "r54_sche_fore_ass", "r55_sche_fore_ass", "r56_sche_fore_ass", "r57_sche_fore_ass", "r58_sche_fore_ass", "r59_sche_fore_ass", "r60_sche_fore_ass", "r61_sche_fore_ass", "r62_sche_fore_ass", "r63_sche_fore_ass"
+]; 
+    	
+    // Make all .Show_input editable except the ones in readonlyIds 
+    
+    $(".Show_input").each(function () 
+    		
+    		{         if (!readonlyIds.includes(this.id)) {             $(this).removeAttr("readonly").removeAttr("disabled");         }     });
+    
+    
+    
+    
+
+ // Apply gray background for rows 10–63 (skip specific rows)
+    for (let i = 10; i <= 63; i++) {
+        // Skip unwanted rows
+        if ([10, 14, 28, 37, 40, 43, 48, 52, 56, 63].includes(i)) {
+            continue;
+        }
+
+        // Define columns
+        let columns = ["orig_amt", "fore_amt", "no_of_acc"];
+
+        // Apply styles
+        columns.forEach(col => {
+            let selector = `#r${i}_${col}`;
+            if ($(selector).length) {
+                $(selector).css("background-color", "#d3d3d3");
+            }
+        });
     }
     
-    for (let i = 101; i <= 141; i++) {
-        $("#R" + i + "_TYPE_OF_ACC_TEXT").hide();
-        $("#R" + i + "_PURPOSE_TEXT").hide();
-        $("#R" + i + "_CURRENCY_TEXT").hide();
-
-        $("#R" + i + "_TYPE_OF_ACC").show();
-        $("#R" + i + "_PURPOSE").show();
-        $("#R" + i + "_CURRENCY").show();
+    
+    
+    
+    
+    
+    
+    
+    
+    // Toggle buttons 
+    
+    $("#submitButton").show();  
+    $("#cancelRecord").show();   
+    $(btn).hide(); 
+    // hide the clicked Modify button
     }
-    
-    for (let i = 147; i <= 193; i++) {
-        $("#R" + i + "_TYPE_OF_ACC_TEXT").hide();
-        $("#R" + i + "_PURPOSE_TEXT").hide();
-        $("#R" + i + "_CURRENCY_TEXT").hide();
-
-        $("#R" + i + "_TYPE_OF_ACC").show();
-        $("#R" + i + "_PURPOSE").show();
-        $("#R" + i + "_CURRENCY").show();
-    } */
-    
-    // Toggle buttons
-    $("#submitButton, #btnBack_edit").show();
-    $("#btnBack").hide();
-    
-    // Show Cancel button only when Modify is clicked
-    $("#cancelRecord").show();
-    
-    // Optionally hide the clicked Modify button
-    $(btn).hide();
-}
 
 //Cancel / Reset function
 function cancelModify() {
@@ -562,24 +565,24 @@ function cancelModify() {
 	        noAcc   += noAccVal;
 	    }
 
-	   /*  // Set totals with 2 decimal formatting
+	    // Set totals with 2 decimal formatting
 	    $("#r14_orig_amt").val(
-	    		origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r14_fore_amt").val(
-	    		foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r14_no_of_acc").val(
-	    		noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-		); */
+	    		noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+		); 
 	    
 	    
 	    
-	 // Set totals as rounded integers, no commas
+	/*  // Set totals as rounded integers, no commas
 	 
 	    $("#r14_orig_amt").val(Math.round(origAmt));
 	    $("#r14_fore_amt").val(Math.round(foreAmt));
-	    $("#r14_no_of_acc").val(Math.round(noAcc));
+	    $("#r14_no_of_acc").val(Math.round(noAcc)); */
 	}
 
 	// Call on page load
@@ -616,21 +619,21 @@ function cancelModify() {
 	        noAcc   += noAccVal;
 	    }
 
-	    /* // Set totals with 2 decimal formatting
+	     // Set totals with 2 decimal formatting
 	    $("#r28_orig_amt").val(
-	    		origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r28_fore_amt").val(
-	    		foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0})
+	    		foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0})
 	    );
 	    $("#r28_no_of_acc").val(
-	    		noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-		); */
+	    		noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+		); 
 		
-	 // Set totals as rounded integers, no commas
+	 /* // Set totals as rounded integers, no commas
 	    $("#r28_orig_amt").val(Math.round(origAmt));
 	    $("#r28_fore_amt").val(Math.round(foreAmt));
-	    $("#r28_no_of_acc").val(Math.round(noAcc));
+	    $("#r28_no_of_acc").val(Math.round(noAcc)); */
 	}
 
 	// Call on page load
@@ -664,24 +667,23 @@ function cancelModify() {
 	        foreAmt += foreAmtVal;
 	        noAcc   += noAccVal;
 	    }
-/* 
-	    // Set totals with 2 decimal formatting
+    // Set totals with 2 decimal formatting
 	    $("#r37_orig_amt").val(
-	    		origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0})
+	    		origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0})
 	    );
 	    $("#r37_fore_amt").val(
-	    		foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r37_no_of_acc").val(
-	    		noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-		); */
+	    		noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+		); 
 		
 		
-	 // Set totals as rounded integers, no commas
+/* 	 // Set totals as rounded integers, no commas
 	    $("#r37_orig_amt").val(Math.round(origAmt));
 	    $("#r37_fore_amt").val(Math.round(foreAmt));
 	    $("#r37_no_of_acc").val(Math.round(noAcc));
-		
+		 */
 		
 		
 	}
@@ -718,22 +720,22 @@ function cancelModify() {
 	        noAcc   += parseFloat($("#r" + i + "_no_of_acc").val().replace(/,/g, "")) || 0;
 	    });
 
-	   /*  // Set totals with 2 decimal formatting
+	    // Set totals with 2 decimal formatting
 	    $("#r10_orig_amt").val(
-	        origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	        origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r10_fore_amt").val(
-	        foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	        foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r10_no_of_acc").val(
-	        noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    ); */
+	        noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    ); 
 	    
 	    
-	 // Set totals as rounded integers, no commas
+	/*  // Set totals as rounded integers, no commas
 	    $("#r10_orig_amt").val(Math.round(origAmt));
 	    $("#r10_fore_amt").val(Math.round(foreAmt));
-	    $("#r10_no_of_acc").val(Math.round(noAcc));
+	    $("#r10_no_of_acc").val(Math.round(noAcc)); */
 	}
 
 	// Call on page load and attach listeners
@@ -769,22 +771,22 @@ function cancelModify() {
 	        noAcc   += noAccVal;
 	    }
 
-	  /*   // Set totals with 2 decimal formatting
+	    // Set totals with 2 decimal formatting
 	    $("#r43_orig_amt").val(
-	    		origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r43_fore_amt").val(
-	    		foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r43_no_of_acc").val(
-	    		noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-		); */
+	    		noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+		); 
 		
 		
-	 // Set totals as rounded integers, no commas
+	/*  // Set totals as rounded integers, no commas
 	    $("#r43_orig_amt").val(Math.round(origAmt));
 	    $("#r43_fore_amt").val(Math.round(foreAmt));
-	    $("#r43_no_of_acc").val(Math.round(noAcc));
+	    $("#r43_no_of_acc").val(Math.round(noAcc)); */
 		
 		
 	}
@@ -822,24 +824,24 @@ function cancelModify() {
 	        noAcc   += noAccVal;
 	    }
 
-	    /* // Set totals with 2 decimal formatting
+	  // Set totals with 2 decimal formatting
 	    $("#r52_orig_amt").val(
-	        origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	        origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r52_fore_amt").val(
-	        foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	        foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r52_no_of_acc").val(
-	        noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    ); */
+	        noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    ); 
 	    
 	    
 	    
-	 // Set totals as rounded integers, no commas
+	 /* // Set totals as rounded integers, no commas
 	    $("#r52_orig_amt").val(Math.round(origAmt));
 	    $("#r52_fore_amt").val(Math.round(foreAmt));
 	    $("#r52_no_of_acc").val(Math.round(noAcc));
-
+ */
 	}
 
 	// Call on page load and attach listeners
@@ -867,22 +869,22 @@ function cancelModify() {
 	        noAcc   += parseFloat($("#r" + i + "_no_of_acc").val().replace(/,/g, "")) || 0;
 	    }
 
-	    /* // Set totals with 2 decimal formatting
+	     // Set totals withOUT 2 decimal formatting
 	    $("#r56_orig_amt").val(
-	        origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	        origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r56_fore_amt").val(
-	        foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	        foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r56_no_of_acc").val(
-	        noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    ); */
+	        noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    ); 
 	    
 	    
-	 // Set totals as rounded integers, no commas
+	/*  // Set totals as rounded integers, no commas
 	    $("#r56_orig_amt").val(Math.round(origAmt));
 	    $("#r56_fore_amt").val(Math.round(foreAmt));
-	    $("#r56_no_of_acc").val(Math.round(noAcc));
+	    $("#r56_no_of_acc").val(Math.round(noAcc)); */
 
 	    
 	}
@@ -923,22 +925,22 @@ function cancelModify() {
 	       
 	    
 
-	   /*  // Set totals with 2 decimal formatting
+	     // Set totals with 2 decimal formatting
 	    $("#r48_orig_amt").val(
-	    		origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r48_fore_amt").val(
-	    		foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r48_no_of_acc").val(
-	    		noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-		); */
+	    		noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+		); 
 		
 		
-	     // Set totals as rounded integers, no commas
+	    /*  // Set totals as rounded integers, no commas
 	        $("#r48_orig_amt").val(Math.round(origAmt));
 	        $("#r48_fore_amt").val(Math.round(foreAmt));
-	        $("#r48_no_of_acc").val(Math.round(noAcc));
+	        $("#r48_no_of_acc").val(Math.round(noAcc)); */
 
 	}
 
@@ -977,22 +979,22 @@ function cancelModify() {
 	       
 	   
 
-	  /*   // Set totals with 2 decimal formatting
+	    // Set totals with 2 decimal formatting
 	    $("#r40_orig_amt").val(
-	    		origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r40_fore_amt").val(
-	    		foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r40_no_of_acc").val(
-	    		noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-		); */
+	    		noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+		); 
 		
 		
-	     // Set totals as rounded integers, no commas
+	     /* // Set totals as rounded integers, no commas
 	        $("#r40_orig_amt").val(Math.round(origAmt));
 	        $("#r40_fore_amt").val(Math.round(foreAmt));
-	        $("#r40_no_of_acc").val(Math.round(noAcc));
+	        $("#r40_no_of_acc").val(Math.round(noAcc)); */
 
 	}
 
@@ -1031,24 +1033,24 @@ function cancelModify() {
 	       
 	   
 
-	   /*  // Set totals with 2 decimal formatting
+	     // Set totals with 2 decimal formatting
 	    $("#r63_orig_amt").val(
-	    		origAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		origAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r63_fore_amt").val(
-	    		foreAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    		foreAmt.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 	    );
 	    $("#r63_no_of_acc").val(
-	    		noAcc.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-		); */
+	    		noAcc.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+		); 
 		
 		
 		
-	     // Set totals as rounded integers, no commas
+	/*      // Set totals as rounded integers, no commas
 	        $("#r63_orig_amt").val(Math.round(origAmt));
 	        $("#r63_fore_amt").val(Math.round(foreAmt));
 	        $("#r63_no_of_acc").val(Math.round(noAcc));
-
+ */
 	}
 
 	// Call on page load
@@ -1193,7 +1195,7 @@ function cancelModify() {
 	    // 4. Send the data:
 	    // Create an array of jQuery AJAX promises. Each promise represents a single HTTP request.
 	    const deferreds = [
-	        $.ajax({ url: './Q_RLFA2update', type: 'POST', data: formData1, processData: false, contentType: false, dataType: 'text' }),
+	        $.ajax({ url: './Q_RLFA2update', type: 'POST', data: formData1, processData: false, contentType: false, dataType: 'text' })
 	       /*  $.ajax({ url: './AIDPupdate2', type: 'POST', data: formData2, processData: false, contentType: false, dataType: 'text' }),
 	        $.ajax({ url: './AIDPupdate3', type: 'POST', data: formData3, processData: false, contentType: false, dataType: 'text' }),
 	        $.ajax({ url: './AIDPupdate4', type: 'POST', data: formData4, processData: false, contentType: false, dataType: 'text' }) */
@@ -1206,7 +1208,7 @@ function cancelModify() {
 	        .done(function() {
 	            // This code runs if all four updates succeed.
 	            $("#resultModalLabel").text("Success");
-	            $("#resultModalBody").text("All reports updated successfully.");
+	            $("#resultModalBody").text(" Updated Successfully.");
 	            $("#resultModal").modal("show");
 	        })
 	        .fail(function(jqXHR) {
@@ -1252,8 +1254,7 @@ function cancelModify() {
 						style="display: flex; color: white; align-items: center;">
 						<!-- 📅 Date -->
 						<span class="white-text"
-							style="color: white !important; font-size: 16px; margin-right: 20px;">Report
-							Date: <span th:text="${asondate}">2025-07-04</span>
+							style="color: white !important; font-size: 16px; margin-right: 20px;">Report Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-07-04</span>
 						</span>
 						<!-- Buttons -->
 						<input type="hidden" id="selectedTab" th:value="${displaymode}">
@@ -1372,32 +1373,32 @@ function cancelModify() {
 													class="display-input Show_input" type="text"
 													th:value="'1.  Non-financial institutional units (sum of lines (i) to (vii)):'"
 													id="r10_sche_fore_ass" name="r10_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 500px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
 
 
 												<td id="ROW10"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell" ><input
+													style=" font-weight: bold; text-align: right;" class="green-cell" ><input
 													class="display-input Show_input green-cell" type="text"
 													id="r10_orig_amt" name="r10_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;" 
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;" 
 													readonly /></td>
 
 
 												<td id="ROW10"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r10_fore_amt" name="r10_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right; "
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right; "
 													readonly /></td>
 
 
 												<td id="ROW10"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell" ><input
+													style=" font-weight: bold; text-align: right;" class="green-cell" ><input
 													class="display-input Show_input green-cell" type="text"
 													id="r10_no_of_acc" name="r10_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 
@@ -1412,31 +1413,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'(i)    Central Government'"
 													id="r11_sche_fore_ass" name="r11_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width:1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW11"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r11_orig_amt != null ? #numbers.formatDecimal(report.r11_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r11_orig_amt" name="r11_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW11"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r11_fore_amt != null ? #numbers.formatDecimal(report.r11_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r11_fore_amt" name="r11_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW11"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r11_no_of_acc != null ? #numbers.formatDecimal(report.r11_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r11_no_of_acc" name="r11_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1450,31 +1451,31 @@ function cancelModify() {
 													th:value="'(ii)   Local Government'" 
 													id="r12_sche_fore_ass"
 													name="r12_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW12"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r12_orig_amt != null ? #numbers.formatDecimal(report.r12_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r12_orig_amt" name="r12_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW12"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r12_fore_amt != null ? #numbers.formatDecimal(report.r12_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r12_fore_amt" name="r12_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW12"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r12_no_of_acc != null ? #numbers.formatDecimal(report.r12_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r12_no_of_acc" name="r12_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1485,31 +1486,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'(iii)  Public Non-Financial Corporations'"
 													id="r13_sche_fore_ass" name="r13_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW13"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r13_orig_amt != null ? #numbers.formatDecimal(report.r13_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r13_orig_amt" name="r13_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW13"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r13_fore_amt != null ? #numbers.formatDecimal(report.r13_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r13_fore_amt" name="r13_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW13"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r13_no_of_acc != null ? #numbers.formatDecimal(report.r13_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r13_no_of_acc" name="r13_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1520,28 +1521,28 @@ function cancelModify() {
 													class="display-input Show_input  " type="text"
 													th:value="'(iv)  Other Non-Financial Corporations (Private business enterprises) (sum of lines (a) to (j)):'"
 													id="r14_sche_fore_ass" name="r14_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 800px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW14"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r14_orig_amt" name="r14_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW14"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r14_fore_amt" name="r14_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW14"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r14_no_of_acc" name="r14_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1550,31 +1551,31 @@ function cancelModify() {
 													class="display-input Show_input" type="text"
 													value="a) Agriculture, Forestry, Fishing"
 													id="r15_sche_fore_ass" name="r15_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW15"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r15_orig_amt != null ? #numbers.formatDecimal(report.r15_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r15_orig_amt" name="r15_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW15"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r15_fore_amt != null ? #numbers.formatDecimal(report.r15_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r15_fore_amt" name="r15_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW15"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r15_no_of_acc != null ? #numbers.formatDecimal(report.r15_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r15_no_of_acc" name="r15_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1584,31 +1585,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="b) Mining and Quarying" id="r16_sche_fore_ass"
 													name="r16_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW16"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r16_orig_amt != null ? #numbers.formatDecimal(report.r16_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r16_orig_amt" name="r16_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW16"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r16_fore_amt != null ? #numbers.formatDecimal(report.r16_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r16_fore_amt" name="r16_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW16"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r16_no_of_acc != null ? #numbers.formatDecimal(report.r16_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r16_no_of_acc" name="r16_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1618,31 +1619,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													th:value="'c) Manufacturing'" id="r17_sche_fore_ass"
 													name="r17_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW17"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r17_orig_amt != null ? #numbers.formatDecimal(report.r17_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r17_orig_amt" name="r17_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW17"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r17_fore_amt != null ? #numbers.formatDecimal(report.r17_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r17_fore_amt" name="r17_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW17"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r17_no_of_acc != null ? #numbers.formatDecimal(report.r17_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r17_no_of_acc" name="r17_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1652,31 +1653,31 @@ function cancelModify() {
 													class="display-input Show_input" type="text"
 													value="d) Construction" id="r18_sche_fore_ass"
 													name="r18_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW18"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r18_orig_amt != null ? #numbers.formatDecimal(report.r18_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r18_orig_amt" name="r18_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW18"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r18_fore_amt != null ? #numbers.formatDecimal(report.r18_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r18_fore_amt" name="r18_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW18"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r18_no_of_acc != null ? #numbers.formatDecimal(report.r18_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r18_no_of_acc" name="r18_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1686,31 +1687,31 @@ function cancelModify() {
 													class="display-input Show_input" type="text"
 													value="e) Commercial real estate" id="r19_sche_fore_ass"
 													name="r19_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW19"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r19_orig_amt != null ? #numbers.formatDecimal(report.r19_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r19_orig_amt" name="r19_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW19"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r19_fore_amt != null ? #numbers.formatDecimal(report.r19_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r19_fore_amt" name="r19_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW19"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r19_no_of_acc != null ? #numbers.formatDecimal(report.r19_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r19_no_of_acc" name="r19_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1720,31 +1721,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="f) Electricity" id="r20_sche_fore_ass"
 													name="r20_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW20"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r20_orig_amt != null ? #numbers.formatDecimal(report.r20_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r20_orig_amt" name="r20_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW20"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r20_fore_amt != null ? #numbers.formatDecimal(report.r20_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r20_fore_amt" name="r20_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW20"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r20_no_of_acc != null ? #numbers.formatDecimal(report.r20_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r20_no_of_acc" name="r20_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1754,31 +1755,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="g) Water" id="r21_sche_fore_ass"
 													name="r21_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW21"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r21_orig_amt != null ? #numbers.formatDecimal(report.r21_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r21_orig_amt" name="r21_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW21"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r21_fore_amt != null ? #numbers.formatDecimal(report.r21_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r21_fore_amt" name="r21_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW21"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r21_no_of_acc != null ? #numbers.formatDecimal(report.r21_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r21_no_of_acc" name="r21_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1788,31 +1789,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="h) Telecommunication and post"
 													id="r22_sche_fore_ass" name="r22_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW22"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r22_orig_amt != null ? #numbers.formatDecimal(report.r22_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r22_orig_amt" name="r22_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW22"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r22_fore_amt != null ? #numbers.formatDecimal(report.r22_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r22_fore_amt" name="r22_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW22"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r22_no_of_acc != null ? #numbers.formatDecimal(report.r22_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r22_no_of_acc" name="r22_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1822,31 +1823,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="i) Tourism and hotels" id="r23_sche_fore_ass"
 													name="r23_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW23"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r23_orig_amt != null ? #numbers.formatDecimal(report.r23_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r23_orig_amt" name="r23_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW23"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r23_fore_amt != null ? #numbers.formatDecimal(report.r23_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r23_fore_amt" name="r23_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW23"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r23_no_of_acc != null ? #numbers.formatDecimal(report.r23_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r23_no_of_acc" name="r23_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1856,31 +1857,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="j) Transport and storage" id="r24_sche_fore_ass"
 													name="r24_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW24"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r24_orig_amt != null ? #numbers.formatDecimal(report.r24_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r24_orig_amt" name="r24_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW24"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r24_fore_amt != null ? #numbers.formatDecimal(report.r24_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r24_fore_amt" name="r24_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW24"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r24_no_of_acc != null ? #numbers.formatDecimal(report.r24_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r24_no_of_acc" name="r24_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1890,31 +1891,31 @@ function cancelModify() {
 													class="display-input Show_input" type="text"
 													value="k) Trade, restaurants and bars"
 													id="r25_sche_fore_ass" name="r25_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW25"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r25_orig_amt != null ? #numbers.formatDecimal(report.r25_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r25_orig_amt" name="r25_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW25"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r25_fore_amt != null ? #numbers.formatDecimal(report.r25_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r25_fore_amt" name="r25_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW25"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r25_no_of_acc != null ? #numbers.formatDecimal(report.r25_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r25_no_of_acc" name="r25_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1924,31 +1925,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="l) Business services " id="r26_sche_fore_ass"
 													name="r26_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW26"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r26_orig_amt != null ? #numbers.formatDecimal(report.r26_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r26_orig_amt" name="r26_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW26"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r26_fore_amt != null ? #numbers.formatDecimal(report.r26_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r26_fore_amt" name="r26_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW26"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r26_no_of_acc != null ? #numbers.formatDecimal(report.r26_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r26_no_of_acc" name="r26_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1958,31 +1959,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="j) Other community, social and personal services"
 													id="r27_sche_fore_ass" name="r27_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW27"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r27_orig_amt != null ? #numbers.formatDecimal(report.r27_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r27_orig_amt" name="r27_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW27"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r27_fore_amt != null ? #numbers.formatDecimal(report.r27_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r27_fore_amt" name="r27_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW27"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r27_no_of_acc != null ? #numbers.formatDecimal(report.r27_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r27_no_of_acc" name="r27_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -1992,28 +1993,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="(v)  Households (sum of lines (a) to (h)):"
 													id="r28_sche_fore_ass" name="r28_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 400px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW28"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r28_orig_amt" name="r28_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW28"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r28_fore_amt" name="r28_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW28"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r28_no_of_acc" name="r28_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2023,31 +2024,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="a) Residential property (owner occupied)"
 													id="r29_sche_fore_ass" name="r29_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW29"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r29_orig_amt != null ? #numbers.formatDecimal(report.r29_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r29_orig_amt" name="r29_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW29"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r29_fore_amt != null ? #numbers.formatDecimal(report.r29_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r29_fore_amt" name="r29_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW29"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r29_no_of_acc != null ? #numbers.formatDecimal(report.r29_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r29_no_of_acc" name="r29_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2057,31 +2058,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="b) Residential property (rented) "
 													id="r30_sche_fore_ass" name="r30_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW30"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r30_orig_amt != null ? #numbers.formatDecimal(report.r30_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r30_orig_amt" name="r30_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW30"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r30_fore_amt != null ? #numbers.formatDecimal(report.r30_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r30_fore_amt" name="r30_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW30"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r30_no_of_acc != null ? #numbers.formatDecimal(report.r30_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r30_no_of_acc" name="r30_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2091,31 +2092,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="c) Personal loans" id="r31_sche_fore_ass"
 													name="r31_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW31"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r31_orig_amt != null ? #numbers.formatDecimal(report.r31_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r31_orig_amt" name="r31_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW31"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r31_fore_amt != null ? #numbers.formatDecimal(report.r31_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r31_fore_amt" name="r31_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW31"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r31_no_of_acc != null ? #numbers.formatDecimal(report.r31_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r31_no_of_acc" name="r31_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2125,31 +2126,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="d) Motor vehicle" id="r32_sche_fore_ass"
 													name="r32_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW32"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r32_orig_amt != null ? #numbers.formatDecimal(report.r32_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r32_orig_amt" name="r32_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW32"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r32_fore_amt != null ? #numbers.formatDecimal(report.r32_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r32_fore_amt" name="r32_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW32"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r32_no_of_acc != null ? #numbers.formatDecimal(report.r32_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r32_no_of_acc" name="r32_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2159,31 +2160,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="e) Household goods" id="r33_sche_fore_ass"
 													name="r33_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW33"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r33_orig_amt != null ? #numbers.formatDecimal(report.r33_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r33_orig_amt" name="r33_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW33"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r33_fore_amt != null ? #numbers.formatDecimal(report.r33_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r33_fore_amt" name="r33_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW33"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r33_no_of_acc != null ? #numbers.formatDecimal(report.r33_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r33_no_of_acc" name="r33_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2193,31 +2194,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="f) Credit card loans" id="r34_sche_fore_ass"
 													name="r34_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW34"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r34_orig_amt != null ? #numbers.formatDecimal(report.r34_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_orig_amt" name="r34_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW34"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r34_fore_amt != null ? #numbers.formatDecimal(report.r34_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_fore_amt" name="r34_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW34"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r34_no_of_acc != null ? #numbers.formatDecimal(report.r34_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_no_of_acc" name="r34_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2227,31 +2228,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="g) Non-Profit Institutions Serving Households"
 													id="r35_sche_fore_ass" name="r35_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 400px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW35"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r35_orig_amt != null ? #numbers.formatDecimal(report.r35_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r35_orig_amt" name="r35_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW35"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r35_fore_amt != null ? #numbers.formatDecimal(report.r35_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r35_fore_amt" name="r35_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW35"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r35_no_of_acc != null ? #numbers.formatDecimal(report.r35_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r35_no_of_acc" name="r35_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2261,31 +2262,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="h)  Other specify" id="r36_sche_fore_ass"
 													name="r36_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW36"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r36_orig_amt != null ? #numbers.formatDecimal(report.r36_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r36_orig_amt" name="r36_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW36"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r36_fore_amt != null ? #numbers.formatDecimal(report.r36_fore_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_fore_amt" name="r36_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW36"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r36_no_of_acc != null ? #numbers.formatDecimal(report.r36_no_of_acc, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_no_of_acc" name="r36_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2296,28 +2297,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="(vi) Non-Residents (sum of lines (a) and (b)):"
 													id="r37_sche_fore_ass" name="r37_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 400px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW37"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r37_orig_amt" name="r37_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW37"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r37_fore_amt" name="r37_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW37"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r37_no_of_acc" name="r37_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2327,31 +2328,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="a) Other Non-Financial Corporations"
 													id="r38_sche_fore_ass" name="r38_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW38"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r38_orig_amt != null ? #numbers.formatDecimal(report.r38_orig_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r38_orig_amt" name="r38_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW38"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r38_fore_amt != null ? #numbers.formatDecimal(report.r38_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r38_fore_amt" name="r38_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW38"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r38_no_of_acc != null ? #numbers.formatDecimal(report.r38_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r38_no_of_acc" name="r38_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2361,31 +2362,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="b) Households" id="r39_sche_fore_ass"
 													name="r39_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW39"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r39_orig_amt != null ? #numbers.formatDecimal(report.r39_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r39_orig_amt" name="r39_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW39"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r39_fore_amt != null ? #numbers.formatDecimal(report.r39_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r39_fore_amt" name="r39_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW39"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r39_no_of_acc != null ? #numbers.formatDecimal(report.r39_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r39_no_of_acc" name="r39_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2395,28 +2396,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="2.  Financial institutional units (sum of lines (i) to (v)):"
 													id="r40_sche_fore_ass" name="r40_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 420px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
 												<td id="ROW40"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r40_orig_amt" name="r40_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW40"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r40_fore_amt" name="r40_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW40"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r40_no_of_acc" name="r40_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2426,31 +2427,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="(i)    Central Bank" id="r41_sche_fore_ass"
 													name="r41_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW41"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r41_orig_amt != null ? #numbers.formatDecimal(report.r41_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r41_orig_amt" name="r41_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW41"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r41_fore_amt != null ? #numbers.formatDecimal(report.r41_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r41_fore_amt" name="r41_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW41"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r41_no_of_acc != null ? #numbers.formatDecimal(report.r41_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r41_no_of_acc" name="r41_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2460,31 +2461,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="(ii)   Commercial Banks" id="r42_sche_fore_ass"
 													name="r42_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW42"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r42_orig_amt != null ? #numbers.formatDecimal(report.r42_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r42_orig_amt" name="r42_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW42"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r42_fore_amt != null ? #numbers.formatDecimal(report.r42_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r42_fore_amt" name="r42_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW42"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r42_no_of_acc != null ? #numbers.formatDecimal(report.r42_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r42_no_of_acc" name="r42_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2494,28 +2495,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="(iii)  Other Depository Corporations (sum of lines (a) to (d)):"
 													id="r43_sche_fore_ass" name="r43_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 450px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW43"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r43_orig_amt" name="r43_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW43"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r43_fore_amt" name="r43_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW43"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r43_no_of_acc" name="r43_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2525,31 +2526,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="a) Botswana Savings Bank (BSB)"
 													id="r44_sche_fore_ass" name="r44_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW44"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r44_orig_amt != null ? #numbers.formatDecimal(report.r44_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r44_orig_amt" name="r44_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW44"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r44_fore_amt != null ? #numbers.formatDecimal(report.r44_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r44_fore_amt" name="r44_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW44"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r44_no_of_acc != null ? #numbers.formatDecimal(report.r44_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r44_no_of_acc" name="r44_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2559,31 +2560,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="b) Botswana Building Society (BBS)"
 													id="r45_sche_fore_ass" name="r45_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 350px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width:1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW45"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r45_orig_amt != null ? #numbers.formatDecimal(report.r45_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r45_orig_amt" name="r45_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW45"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r45_fore_amt != null ? #numbers.formatDecimal(report.r45_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r45_fore_amt" name="r45_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW45"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r45_no_of_acc != null ? #numbers.formatDecimal(report.r45_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r45_no_of_acc" name="r45_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2593,31 +2594,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="c) Domestic Money Market Unit Trust"
 													id="r46_sche_fore_ass" name="r46_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 350px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW46"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r46_orig_amt != null ? #numbers.formatDecimal(report.r46_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r46_orig_amt" name="r46_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW46"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r46_fore_amt != null ? #numbers.formatDecimal(report.r46_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r46_fore_amt" name="r46_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW46"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r46_no_of_acc != null ? #numbers.formatDecimal(report.r46_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r46_no_of_acc" name="r46_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2627,31 +2628,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="d) Other (specify)*" id="r47_sche_fore_ass"
 													name="r47_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW47"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r47_orig_amt != null ? #numbers.formatDecimal(report.r47_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r47_orig_amt" name="r47_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW47"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r47_fore_amt != null ? #numbers.formatDecimal(report.r47_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r47_fore_amt" name="r47_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW47"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r47_no_of_acc != null ? #numbers.formatDecimal(report.r47_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r47_no_of_acc" name="r47_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2661,28 +2662,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="(iv)  Other Financial Corporations (sum of lines (a) to (e)):"
 													id="r48_sche_fore_ass" name="r48_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 430px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 20px;"
 													readonly /></td>
 
 												<td id="ROW48"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"class="green-cell"><input
+													style="  font-weight: bold; text-align: right;"class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r48_orig_amt" name="r48_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW48"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r48_fore_amt" name="r48_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW48"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r48_no_of_acc" name="r48_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2692,31 +2693,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="a) Insurance Companies" id="r49_sche_fore_ass"
 													name="r49_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW49"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r49_orig_amt != null ? #numbers.formatDecimal(report.r49_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r49_orig_amt" name="r49_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW49"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r49_fore_amt != null ? #numbers.formatDecimal(report.r49_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r49_fore_amt" name="r49_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW49"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r49_no_of_acc != null ? #numbers.formatDecimal(report.r49_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r49_no_of_acc" name="r49_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2726,31 +2727,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="b) Pension Funds" id="r50_sche_fore_ass"
 													name="r50_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW50"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r50_orig_amt != null ? #numbers.formatDecimal(report.r50_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r50_orig_amt" name="r50_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW50"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r50_fore_amt != null ? #numbers.formatDecimal(report.r50_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r50_fore_amt" name="r50_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW50"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r50_no_of_acc != null ? #numbers.formatDecimal(report.r50_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r50_no_of_acc" name="r50_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2762,31 +2763,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="c) SACCOs" id="r51_sche_fore_ass"
 													name="r51_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW51"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r51_orig_amt != null ? #numbers.formatDecimal(report.r51_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r51_orig_amt" name="r51_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW51"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r51_fore_amt != null ? #numbers.formatDecimal(report.r51_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r51_fore_amt" name="r51_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW51"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r51_no_of_acc != null ? #numbers.formatDecimal(report.r51_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r51_no_of_acc" name="r51_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2796,28 +2797,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="d) Other Financial Intermediaries (sum 1 to 3)"
 													id="r52_sche_fore_ass" name="r52_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 400px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW52"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r52_orig_amt" name="r52_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW52"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r52_fore_amt" name="r52_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW52"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r52_no_of_acc" name="r52_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2827,31 +2828,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="1. Finance companies" id="r53_sche_fore_ass"
 													name="r53_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW53"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r53_orig_amt != null ? #numbers.formatDecimal(report.r53_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r53_orig_amt" name="r53_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW53"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r53_fore_amt != null ? #numbers.formatDecimal(report.r53_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r53_fore_amt" name="r53_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW53"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r53_no_of_acc != null ? #numbers.formatDecimal(report.r53_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r53_no_of_acc" name="r53_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2861,31 +2862,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="2. Medical Aid Schemes" id="r54_sche_fore_ass"
 													name="r54_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW54"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r54_orig_amt != null ? #numbers.formatDecimal(report.r54_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r54_orig_amt" name="r54_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW54"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r54_fore_amt != null ? #numbers.formatDecimal(report.r54_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r54_fore_amt" name="r54_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW54"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r54_no_of_acc != null ? #numbers.formatDecimal(report.r54_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r54_no_of_acc" name="r54_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2895,31 +2896,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="3. Public sector financial intermediaries"
 													id="r55_sche_fore_ass" name="r55_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW55"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r55_orig_amt != null ? #numbers.formatDecimal(report.r55_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r55_orig_amt" name="r55_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW55"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r55_fore_amt != null ? #numbers.formatDecimal(report.r55_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r55_fore_amt" name="r55_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW55"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r55_no_of_acc != null ? #numbers.formatDecimal(report.r55_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r55_no_of_acc" name="r55_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2929,28 +2930,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="e) Financial Auxiliaries (sum 1 to 5)"
 													id="r56_sche_fore_ass" name="r56_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 45px;"
 													readonly /></td>
 
 												<td id="ROW56"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r56_orig_amt" name="r56_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW56"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r56_fore_amt" name="r56_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW56"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r56_no_of_acc" name="r56_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2960,31 +2961,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="1.Asset managers" id="r57_sche_fore_ass"
 													name="r57_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW57"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" ><input
+													style="  font-weight: bold; text-align: right;" ><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r57_orig_amt != null ? #numbers.formatDecimal(report.r57_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r57_orig_amt" name="r57_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW57"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r57_fore_amt != null ? #numbers.formatDecimal(report.r57_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r57_fore_amt" name="r57_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW57"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r57_no_of_acc != null ? #numbers.formatDecimal(report.r57_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r57_no_of_acc" name="r57_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -2994,31 +2995,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="2. Insurance brokers" id="r58_sche_fore_ass"
 													name="r58_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW58"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r58_orig_amt != null ? #numbers.formatDecimal(report.r58_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r58_orig_amt" name="r58_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW58"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r58_fore_amt != null ? #numbers.formatDecimal(report.r58_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r58_fore_amt" name="r58_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW58"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r58_no_of_acc != null ? #numbers.formatDecimal(report.r58_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r58_no_of_acc" name="r58_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -3028,31 +3029,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="3. fund administrators" id="r59_sche_fore_ass"
 													name="r59_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW59"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r59_orig_amt != null ? #numbers.formatDecimal(report.r59_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r59_orig_amt" name="r59_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW59"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r59_fore_amt != null ? #numbers.formatDecimal(report.r59_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r59_fore_amt" name="r59_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW59"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r59_no_of_acc != null ? #numbers.formatDecimal(report.r59_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r59_no_of_acc" name="r59_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -3062,31 +3063,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="4. Bureau de change" id="r60_sche_fore_ass"
 													name="r60_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW60"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r60_orig_amt != null ? #numbers.formatDecimal(report.r60_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r60_orig_amt" name="r60_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW60"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r60_fore_amt != null ? #numbers.formatDecimal(report.r60_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r60_fore_amt" name="r60_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW60"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r60_no_of_acc != null ? #numbers.formatDecimal(report.r60_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r60_no_of_acc" name="r60_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -3096,31 +3097,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="5. Other (specify)*" id="r61_sche_fore_ass"
 													name="r61_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW61"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r61_orig_amt != null ? #numbers.formatDecimal(report.r61_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r61_orig_amt" name="r61_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW61"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r61_fore_amt != null ? #numbers.formatDecimal(report.r61_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r61_fore_amt" name="r61_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW61"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r61_no_of_acc != null ? #numbers.formatDecimal(report.r61_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r61_no_of_acc" name="r61_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -3130,31 +3131,31 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="(v)  Non-residents" id="r62_sche_fore_ass"
 													name="r62_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; padding-left: 65px;"
 													readonly /></td>
 
 												<td id="ROW62"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r62_orig_amt != null ? #numbers.formatDecimal(report.r62_orig_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r62_orig_amt" name="r62_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW62"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r62_fore_amt != null ? #numbers.formatDecimal(report.r62_fore_amt, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r62_fore_amt" name="r62_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW62"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style="  font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r62_no_of_acc != null ? #numbers.formatDecimal(report.r62_no_of_acc, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r62_no_of_acc" name="r62_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 
@@ -3164,28 +3165,28 @@ function cancelModify() {
 													class="display-input Show_input " type="text"
 													value="3. TOTAL ( Sum of lines 1 and 2)"
 													id="r63_sche_fore_ass" name="r63_sche_fore_ass"
-													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
+													style="background-color: #FFFFFF; width: 1700px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
 												<td id="ROW63"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"class="green-cell"><input
+													style="  font-weight: bold; text-align: right;"class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r63_orig_amt" name="r63_orig_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW63"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r63_fore_amt" name="r63_fore_amt"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 												<td id="ROW63"
-													style="padding-left: 20px; font-weight: bold; text-align: right;" class="green-cell"><input
+													style=" font-weight: bold; text-align: right;" class="green-cell"><input
 													class="display-input Show_input green-cell" type="text"
 													id="r63_no_of_acc" name="r63_no_of_acc"
-													style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 											</tr>
 

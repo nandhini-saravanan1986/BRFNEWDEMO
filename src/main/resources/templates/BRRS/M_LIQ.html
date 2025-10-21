@@ -497,18 +497,17 @@ $(window).on('beforeunload', function() {
 
 
 
-</script>
 
 <script th:inline="javascript">
 function showdetailsbyRowAndColumn(a) { 
-    var rowId = a.getAttribute('ReportLable');
-    var columnId = a.getAttribute('ReportAddlCriteria_1');
+    var rowId = a.getAttribute('RowId');
+    var columnId = a.getAttribute('ColumnId');
     var cellValue = a.textContent || a.innerText;
 
     if (cellValue !== '0') {
         // Set dynamic message in modal (instead of confirm)
         document.getElementById("cellresultModalLabel").innerText = 
-            "Do you want to open details for ReportLable: " + rowId + " and ReportAddlCriteria_1: " + columnId + "?";
+            "Do you want to open details for Row: " + rowId + " and Column: " + columnId + "?";
 
         // Show custom Bootstrap modal
         $('#cellresultModal').modal('show');
@@ -732,33 +731,36 @@ function cancelModify() {
 
 
 
- function calculateR14Totals() {
-	    // Get numeric values depending on element type
-	    let E15 = parseFloat($("#r15_total").is("input") ? $("#r15_total").val().replace(/,/g, "") : $("#r15_total").text().replace(/,/g, "")) || 0;
-	    let E16 = parseFloat($("#r16_total").val().replace(/,/g, "")) || 0;
-	    let E17 = parseFloat($("#r17_total").is("input") ? $("#r17_total").val().replace(/,/g, "") : $("#r17_total").text().replace(/,/g, "")) || 0;
+function calculateR14Totals() {
+    // Get numeric values depending on element type
+    let E15 = parseFloat($("#r15_total").is("input") ? $("#r15_total").val().replace(/,/g, "") : $("#r15_total").text().replace(/,/g, "")) || 0;
+    let E16 = parseFloat($("#r16_total").val().replace(/,/g, "")) || 0;
+    let E17 = parseFloat($("#r17_total").is("input") ? $("#r17_total").val().replace(/,/g, "") : $("#r17_total").text().replace(/,/g, "")) || 0;
 
-	    // Calculate R14
-	    let R14 = E15 + E16 + E17;
+    // Calculate R14
+    let R14 = E15 + E16 + E17;
 
-	    // Update R14 display
-	    $("#r14_total").text(R14.toLocaleString('en-IN'));
+    // Format numbers with international 1000 separator, no decimals
+    const formatNumber = (num) => num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
-	    // Reformat inputs if needed
-	    if ($("#r15_total").is("input")) $("#r15_total").val(E15.toLocaleString('en-IN'));
-	    if ($("#r16_total").is("input")) $("#r16_total").val(E16.toLocaleString('en-IN'));
-	    if ($("#r17_total").is("input")) $("#r17_total").val(E17.toLocaleString('en-IN'));
-	}
+    // Update R14 display
+    $("#r14_total").text(formatNumber(R14));
 
-	$(document).ready(function() {
-	    calculateR14Totals();
+    // Reformat inputs if needed
+    if ($("#r15_total").is("input")) $("#r15_total").val(formatNumber(E15));
+    if ($("#r16_total").is("input")) $("#r16_total").val(formatNumber(E16));
+    if ($("#r17_total").is("input")) $("#r17_total").val(formatNumber(E17));
+}
 
-	    // Attach input listeners to any editable fields
-	    $("#r15_total, #r16_total, #r17_total").on("input", function() {
-	        calculateR14Totals();
-	        calculateR10Totals();
-	    });
-	});
+$(document).ready(function() {
+    calculateR14Totals();
+
+    // Attach input listeners to any editable fields
+    $("#r15_total, #r16_total, #r17_total").on("input", function() {
+        calculateR14Totals();
+        calculateR10Totals();
+    });
+});
 
 
 
@@ -778,7 +780,7 @@ function cancelModify() {
 	    let R24 = E25 + E26;
 
 	    // Update R24 display with thousands separators (Indian style)
-	    $("#r24_total").text(R24.toLocaleString('en-IN'));
+	    $("#r24_total").text(R24.toLocaleString('en-US'));
 
 	    // Reformat input fields with thousands separators if editable
 	    if ($("#r25_total").is("input")) $("#r25_total").val(E25.toLocaleString('en-IN'));
@@ -810,7 +812,7 @@ function cancelModify() {
 	              getValue("r22_total") + getValue("r23_total");
 
 	    // Update R10 display
-	    $("#r10_total").text(R10.toLocaleString('en-IN'));
+	    $("#r10_total").text(R10.toLocaleString('en-US'));
 
 	    // Reformat all inputs if they are editable
 	    ["r11_total","r14_total","r18_total","r19_total","r20_total","r21_total","r22_total","r23_total"].forEach(id => {
@@ -843,15 +845,20 @@ function cancelModify() {
 	    // Avoid division by zero
 	    let R27 = R24 !== 0 ? (R10 / R24) * 100 : 0;
 
-	    // Update R27 display with thousands separator, no decimals, and % sign
-	    $("#r27_total").text(Math.round(R27).toLocaleString() + "%");
+	    // Format with thousands separator, no decimals, and append %
+	    const formatted = Math.round(R27).toLocaleString("en-US", {
+	        minimumFractionDigits: 0,
+	        maximumFractionDigits: 0
+	    }) + "%";
+
+	    $("#r27_total").text(formatted);
 	}
 
-	$(document).ready(function() {
+	$(document).ready(function () {
 	    calculateR27Totals();
 
 	    // Attach input listeners to R10 and R24 to recalc R27
-	    $("#r10_total, #r24_total").on("input", function() {
+	    $("#r10_total, #r24_total").on("input", function () {
 	        calculateR27Totals();
 	    });
 	});
@@ -976,7 +983,7 @@ function cancelModify() {
 						<h5
 							style="font-family: arial; font-size: 20px; padding-top: 10px; font-weight: bold; color: white;">
 
-							MONTHLY SCHEDULE : M-LIQ: LIQUIDITY <br> (P'000)
+							MONTHLY SCHEDULE : M-LIQ: LIQUIDITY 
 						</h5>
 
 
@@ -1141,7 +1148,7 @@ function cancelModify() {
  <td id="r12_total" style="text-align: right;"
    
     th:text="${report?.r12_total != null ? #numbers.formatDecimal(report.r12_total, 1, 'COMMA', 0, 'POINT') : ''}"
-    th:attr="ReportLable='R12', ReportAddlCriteria_1='C2'"
+    th:attr="RowId='R12',ColumnId='C2'"
     onclick="showdetailsbyRowAndColumn(this)">
 </td>
 
@@ -1211,7 +1218,7 @@ function cancelModify() {
                                             <tr  th:each="report : ${reportsummary1}" >
 
 
-                                        <td id="ROW16" style="font-weight: bold; text-align: left;"><input
+                                        <td id="ROW16" style="font-weight: bold; text-align: left; "><input
 													class="display-input Show_input " type="text"
 													th:value="'(ii) Repurchase Agreements'"
 													id="r16_product" name="r16_product"
@@ -1219,11 +1226,11 @@ function cancelModify() {
 													readonly /></td>
 
 												<td id="ROW16"
-													style=" font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right; "><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r16_total != null ? #numbers.formatDecimal(report.r16_total, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r16_total" name="r16_total"
-													style="background-color: #FFFFFF; width: 370px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 390px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 										</tr>
@@ -1273,8 +1280,7 @@ function cancelModify() {
 
 <td id="r18_total" style="text-align: right;" 
     th:text="${report?.r18_total != null ? #numbers.formatDecimal(report.r18_total, 1, 'COMMA', 0, 'POINT') : ''}"
-    th:attr="RowId='R18', ColumnId='C2'"
-    onclick="showdetailsbyRowAndColumn(this)">
+   >
 </td>
 										</tr>
 
@@ -1297,11 +1303,11 @@ function cancelModify() {
 													readonly /></td>
 
 												<td id="ROW19"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r19_total != null ? #numbers.formatDecimal(report.r19_total, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r19_total" name="r19_total"
-													style="background-color: #FFFFFF; width: 370px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 390px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 										</tr>
@@ -1320,11 +1326,11 @@ function cancelModify() {
 													readonly /></td>
 
 												<td id="ROW20"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r20_total != null ? #numbers.formatDecimal(report.r20_total, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r20_total" name="r20_total"
-													style="background-color: #FFFFFF; width: 370px; height: 28px; border-color: transparent;  text-align: right;"
+													style="background-color: #FFFFFF; width: 390px; height: 28px; border-color: transparent;  text-align: right;"
 													readonly /></td>
 
 										</tr>
@@ -1341,10 +1347,10 @@ function cancelModify() {
 												th:attr="RowId='R21', ColumnId='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td> -->
 												
-												<td id="r21_total" style="text-align: right;" class="green-cell"
+												<td id="r21_total" style="text-align: right;" 
     th:text="${report?.r21_total != null ? #numbers.formatDecimal(report.r21_total, 1, 'COMMA', 0, 'POINT') : ''}"
-    th:attr="RowId='R21', ColumnId='C2'"
-    onclick="showdetailsbyRowAndColumn(this)">
+  th:attr="RowId='R21', ColumnId='C2'"
+    onclick="showdetailsbyRowAndColumn(this)" >
 </td>
 
 
@@ -1361,11 +1367,11 @@ function cancelModify() {
 													readonly /></td>
 
 												<td id="ROW22"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r22_total != null ? #numbers.formatDecimal(report.r22_total, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_total" name="r22_total"
-													style="background-color: #FFFFFF; width: 370px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 390px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 										</tr>
@@ -1382,11 +1388,11 @@ function cancelModify() {
 													readonly /></td>
 
 												<td id="ROW23"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r23_total != null ? #numbers.formatDecimal(report.r23_total, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r23_total" name="r23_total"
-													style="background-color: #FFFFFF; width: 370px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 390px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 										</tr>
@@ -1422,10 +1428,10 @@ function cancelModify() {
 
 
 
-<td id="r25_total" style="text-align: right;" class="green-cell"
+<td id="r25_total" style="text-align: right;" 
     th:text="${report?.r25_total != null ? #numbers.formatDecimal(report.r25_total, 1, 'COMMA', 0, 'POINT') : ''}"
     th:attr="RowId='R25', ColumnId='C2'"
-    onclick="showdetailsbyRowAndColumn(this)">
+    onclick="showdetailsbyRowAndColumn(this)" >
 </td>
 										</tr>
 
@@ -1444,11 +1450,11 @@ function cancelModify() {
 													readonly /></td>
 
 												<td id="ROW26"
-													style="padding-left: 20px; font-weight: bold; text-align: right;"><input
+													style=" font-weight: bold; text-align: right;"><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r26_total != null ? #numbers.formatDecimal(report.r26_total, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r26_total" name="r26_total"
-													style="background-color: #FFFFFF; width: 370px; height: 28px; border-color: transparent; text-align: right;"
+													style="background-color: #FFFFFF; width: 390px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
 										</tr>
@@ -1555,26 +1561,33 @@ function cancelModify() {
 
 										</tr>
 
-										<tr rowspan="2">
+										<tr >
 
 
 
-											<td style="text-align: left;"
-												th:text="${report?.r32_product ?: ''}"></td>
+											<td style="text-align: left;" 
+												>2.5% of (Total average customer deposits (M-SfinP2) less Pula equivalent of total average foreign
+												<br>currency deposits (M-DEP3))</br>
+												</td>
 
 											<!-- <td style="text-align: right;" class="green-cell" 
 												th:text="${report?.r32_total ?: ''}"
 												th:attr="RowId='R32', ColumnId='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
  -->
-<td style="text-align: right;"  class="green-cell"
+<td style="text-align: right; height: 5px;" 
     th:text="${report?.r32_total != null ? #numbers.formatDecimal(report.r32_total, 1, 'COMMA', 0, 'POINT') : ''}"
     th:attr="RowId='R32', ColumnId='C2'"
     onclick="showdetailsbyRowAndColumn(this)">
 </td>
+										
+										
+										
 										</tr>
+										
+										
 
-										<tr>
+										<tr  rowspan="2">
 
 
 
@@ -1594,20 +1607,32 @@ function cancelModify() {
 
 
 										</tr>
+										
+										
+											
+										
+
+										<tr  rowspan="2">
+										
+											</tr>
+										
+										
 
 										<tr  rowspan="2">
 
 
 
 											<td style="text-align: left; " 
-												th:text="${report?.r35_product ?: ''}"></td>
+												>10% of (Total average customer deposits (M-SfinP2) less Pula equivalent of total average foreign 
+												<br>currency deposits (M-DEP3))</br>			
+												</td>
 
 										<!-- 	<td  style="text-align: right;"  class="green-cell" 
 												th:text="${report?.r35_total ?: ''}"
 												th:attr="RowId='R35', ColumnId='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td> -->
 
-<td style="text-align: right;" class="green-cell"
+<td style="text-align: right; " 
     th:text="${report?.r35_total != null ? #numbers.formatDecimal(report.r35_total, 1, 'COMMA', 0, 'POINT') : ''}"
     th:attr="RowId='R35', ColumnId='C2'"
     onclick="showdetailsbyRowAndColumn(this)">
@@ -1616,6 +1641,7 @@ function cancelModify() {
 									
 
 
+										
 										
 
 									</tbody>
@@ -1667,8 +1693,8 @@ function cancelModify() {
 											
 											
 											<th style="text-align:right;">ACCT_BALANCE_IN_PULA</th>
-											<th>REPORT_LABEL</th>
-											<th>REPORT_ADDL_CRITERIA_1</th>
+											<th>REPORT LABLE</th>
+											<th>REPORT ADDL CRITERIA1</th>
 											<th>REPORT_DATE</th>
 										</tr>
 
