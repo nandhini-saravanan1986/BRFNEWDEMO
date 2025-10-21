@@ -671,13 +671,25 @@ function calculate12Totals() {
     calculateCET1AddBack(trans);
 }
 
-// ✅ CET1 Add Back Calculation
-function calculateCET1AddBack(trans) {
-    $("#r19_amt_add_year1").val(formatNumber(Math.round(trans * 0.75)));
-    $("#r20_amt_add_year2").val(formatNumber(Math.round(trans * 0.50)));
-    $("#r21_amt_add_year3").val(formatNumber(Math.round(trans * 0.25)));
-    $("#r22_amt_add_year4").val(formatNumber(Math.round(trans * 0.0)));
-}
+	function calculateCET1AddBack(trans) {
+	    const raw19 = Math.round(trans * 0.75 * 100); // adjust scale to P'000
+	    const raw20 = Math.round(trans * 0.50 * 100);
+	    const raw21 = Math.round(trans * 0.25 * 100);
+	    const raw22 = Math.round(trans * 0.0 * 100);
+
+	    // Display nicely
+	    $("#r19_amt_add_year1").val(formatNumber(raw19));
+	    $("#r20_amt_add_year2").val(formatNumber(raw20));
+	    $("#r21_amt_add_year3").val(formatNumber(raw21));
+	    $("#r22_amt_add_year4").val(formatNumber(raw22));
+
+	    // Keep raw values for backend
+	    $("#r19_amt_add_year1_raw").val(raw19);
+	    $("#r20_amt_add_year2_raw").val(raw20);
+	    $("#r21_amt_add_year3_raw").val(raw21);
+	    $("#r22_amt_add_year4_raw").val(raw22);
+	}
+
 
 $(document).ready(function() {
     calculate12Totals();
@@ -688,62 +700,65 @@ $(document).ready(function() {
 
 
 <script>
-	function closemodel(){
-		$("#resultModel").modal("hide");
-		$('#loader').modal('hide');
-		setTimeout(function () {
-	        location.reload();
-	    }, 300);		
-	}
-	
 	function fileuploads(btn){
-		const asondate = btn.getAttribute("data-todate");
-		const type = btn.getAttribute("data-type");
-		
-		$('#loader').modal('show');
-		
-		
-		
-		$("#fileupload input[type='text']").each(function () {
-			        $(this).val($(this).val().replace(/,/g, ''));
-		});		
-		if (!$("#fileupload").valid()) {
-		        $('#loader').modal('hide');
-		        return;
-		}
-		const formData = new FormData();
-		formData.append("asondate", asondate);
-		formData.append("type",type);
-		
-		$('#fileupload').find(':input').each(function () {
-			        const name = $(this).attr('name');
-			        if (name) {
-			            formData.append(name, $(this).val());
-			        }
-		});
-		$.ajax({
-		        url: './MCA7updateAll',
-		        type: 'POST',
-		        data: formData,
-		        processData: false,
-		        contentType: false,
-		        dataType: 'text',
-		        success: function () {
-		            $("#resultModalLabel").text("Success");
-		            $("#resultModalBody").text("Updated Successfully.");
-		            $("#resultModal").modal("show");
-		        },
-		        error: function (jqXHR) {
-		            console.error("Error response:", jqXHR.responseText);
-		            $("#resultModalLabel").text("Error");
-		            $("#resultModalBody").text("Update failed. Check console for details.");
-		            $("#resultModal").modal("show");
-		        },
-		        complete: function () {
-		            $('#loader').modal('hide');
-		        }
-		    });
-		}
+	    const asondate = btn.getAttribute("data-todate");
+	    const type = btn.getAttribute("data-type");
+
+	    // Recalculate totals
+	    calculate12Totals();
+
+	    $('#loader').modal('show');
+
+	    if (!$("#fileupload").valid()) {
+	        $('#loader').modal('hide');
+	        return;
+	    }
+
+	    const formData = new FormData();
+	    formData.append("asondate", asondate);
+	    formData.append("type", type);
+
+	    // ✅ Send raw numeric values
+	    $('#fileupload').find(':input').each(function () {
+	        const name = $(this).attr('name');
+	        if (!name) return;
+
+	        let value = $(this).val().trim();
+
+	        // Remove commas, percentage signs, etc.
+	        value = value.replace(/,/g, '').replace('%','');
+
+	        formData.append(name, value);
+	    });
+
+	    $.ajax({
+	        url: './MCA7updateAll',
+	        type: 'POST',
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        dataType: 'text',
+	        success: function () {
+	            $("#resultModalLabel").text("Success");
+	            $("#resultModalBody").text("Updated Successfully.");
+	            $("#resultModal").modal("show");
+
+	            setTimeout(function() {
+	                location.reload();
+	            }, 800);
+	        },
+	        error: function (jqXHR) {
+	            console.error("Error response:", jqXHR.responseText);
+	            $("#resultModalLabel").text("Error");
+	            $("#resultModalBody").text("Update failed. Check console for details.");
+	            $("#resultModal").modal("show");
+	        },
+	        complete: function () {
+	            $('#loader').modal('hide');
+	        }
+	    });
+	}
+
 	
 </script>
 
