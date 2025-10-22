@@ -481,7 +481,7 @@ function cancelModify() {
 // ==============================
 function formatNumber(num) {
     if (isNaN(num)) return "";
-    return Number(num).toLocaleString('en-IN');
+    return Number(num).toLocaleString('en-US');
 }
 
 function parseNumber(val) {
@@ -799,10 +799,9 @@ function showdetailsbyRowAndColumn(a) {
 					<div class="custom-tab-btn-group nav-buttons"
 						style="display: flex; color: white; align-items: center;">
 						<!-- 📅 Date -->
-						<span class="white-text"
-							style="color: white !important; font-size: 16px; margin-right: 20px;">Report
-							Date: <span th:text="${asondate}">2025-07-04</span>
-						</span>
+						<!-- 📅 Date -->
+												<span class="white-text" style="color: white !important; font-size: 16px; margin-right: 20px;">Report Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-09-18</span>
+												</span>
 
 						<!-- Buttons -->
 						<input type="hidden" id="selectedTab" th:value="${displaymode}">
@@ -880,16 +879,23 @@ function showdetailsbyRowAndColumn(a) {
 					<form action="#" method="POST" id="fileupload">
 					<div class="table-wrapper table-responsive scrollable-table-container" style="border-right: 1px solid #dee2e6; ">
     					<table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports" >
-							<p style="background-color: #D8D8D8;">Amount of Additional Tier 1 Capital  Instruments outstanding as at January 2015 : P'000	</p>
+							<p style="background-color: #D8D8D8;font-weight: bold; color: black;">Summary of Amount of Additional Tier 1 Capital  Instruments outstanding as at January 2015 : P'000	</p>
 							<thead class="thead-light">
-  									<tr>
-										
-										<th rowspan="3" style="text-align: left; width:33%;padding-left: 20px;background-color: #D8D8D8;">Calendar year</th>
-										<th style="text-align: center;background-color: #D8D8D8;">Cap (%)</th>
-										<th style="text-align: center;background-color: #D8D8D8;"> Cap on amount elligible for phase-out treatment P'000</th>
-										<th style="text-align: center;background-color: #D8D8D8;"> Amount eligible for phase-out treatment P'000</th>
+								<tr>
+								    <th rowspan="3" style="text-align: left; width:33%;  background-color: #D8D8D8; font-weight: bold; color: black;">
+								        Calendar year
+								    </th>
+								    <th style="text-align: center; background-color: #D8D8D8; font-weight: bold; color: black;">
+								        Cap (%)
+								    </th>
+								    <th style="text-align: right; background-color: #D8D8D8; font-weight: bold; color: black;">
+								        Cap on amount eligible for phase-out treatment P'000
+								    </th>
+								    <th style="text-align: right; background-color: #D8D8D8; font-weight: bold; color: black;">
+								        Amount eligible for phase-out treatment P'000
+								    </th>
+								</tr>
 
-									</tr>
 								<!--	</tr>
 									<tr style="background-color: #b3b6b9">
 										<th style="text-align: center; background-color: #b3b6b9"></th>
@@ -907,7 +913,7 @@ function showdetailsbyRowAndColumn(a) {
 
 											<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R12_CALENDAR_YEAR,'yyyy')}"></td>  
 											<td style="text-align: right; text-align: center; "
-												th:text="${report.R12_CAP}+'%'"></td>
+												th:text="${report.R12_CAP}"></td>
 											
 											<td id="ROW12" style="padding-left: 20px; font-weight: bold;">
 											    <input class="display-input show_input"
@@ -937,7 +943,7 @@ function showdetailsbyRowAndColumn(a) {
 
 										<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R13_CALENDAR_YEAR,'yyyy')}"></td>  
 										<td style="text-align: right;text-align: center; "
-											th:text="${report.R13_CAP}+'%'"></td>
+											th:text="${report.R13_CAP}"></td>
 										
 										<td id="ROW13" style="padding-left: 20px; font-weight: bold;">
 										    <input class="display-input show_input"
@@ -967,7 +973,7 @@ function showdetailsbyRowAndColumn(a) {
 										
 											<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R14_CALENDAR_YEAR,'yyyy')}"></td>  
 											<td style="text-align: right; text-align: center; "
-												th:text="${report.R14_CAP}+'%'"></td>
+												th:text="${report.R14_CAP}"></td>
 																		
 											<td id="ROW14" style="padding-left: 20px; font-weight: bold;">
 												    <input class="display-input show_input"
@@ -995,7 +1001,7 @@ function showdetailsbyRowAndColumn(a) {
 											
 											<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R15_CALENDAR_YEAR,'yyyy')}"></td>  
 											<td style="text-align: right; text-align: center;"
-												th:text="${report.R15_CAP}+'%'"></td>
+												th:text="${report.R15_CAP}"></td>
 											
 											<td id="ROW15" style="padding-left: 20px; font-weight: bold;">
 												 <input class="display-input show_input"
@@ -1053,15 +1059,15 @@ function showdetailsbyRowAndColumn(a) {
 										
 									</tbody>
 			              </table>
-						  <p style="padding: 20px;">Amount of  Tier 2  Capital Instruments outstanding as at January 2015 : P'000</p>
+						  <p style="padding: 20px;font-weight: bold; color: black;">Amount of  Tier 2  Capital Instruments outstanding as at January 2015 : P'000</p>
 						  <table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports" >
 						  	<thead class="thead-light">
 						  			<tr style="background-color: #b3b6b9 ">
 						  				
-						  				<th rowspan="3" style="text-align: left; width:33%;padding-left: 20px;background-color: #D8D8D8;">Calendar year</th>
-						  				<th style="text-align: center;background-color: #D8D8D8;">Cap (%)</th>
-						  				<th style="text-align: center;background-color: #D8D8D8;"> Cap on amount elligible for phase-out treatment P'000</th>
-						  				<th style="text-align: center;background-color: #D8D8D8;"> Amount eligible for phase-out treatment P'000</th>
+						  				<th rowspan="3" style="text-align: left; width:33%;background-color: #D8D8D8;  font-weight: bold;color: black;">Calendar year</th>
+						  				<th style="text-align: center;background-color: #D8D8D8; font-weight: bold; color: black;">Cap (%)</th>
+						  				<th style="text-align: right;background-color: #D8D8D8; font-weight: bold; color: black;"> Cap on amount elligible for phase-out treatment P'000</th>
+						  				<th style="text-align: right;background-color: #D8D8D8;  font-weight: bold;color: black;"> Amount eligible for phase-out treatment P'000</th>
 
 						  			</tr>
 						  		<!--	</tr>
@@ -1079,9 +1085,9 @@ function showdetailsbyRowAndColumn(a) {
 
 						  				<tr>
 
-						  					<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R20_CALENDAR_YEAR,'yyyy')}"></td>  
+						  					<td style="padding-left: 20px; text-align: center;font-weight: bold; color: black;" th:text="${#dates.format(report.R20_CALENDAR_YEAR,'yyyy')}"></td>  
 						  					<td style="text-align: right; text-align: center;"
-						  						th:text="${report.R20_CAP}+'%'"></td>
+						  						th:text="${report.R20_CAP}"></td>
 						  					
 												<td id="ROW20" style="padding-left: 20px; font-weight: bold;">
 													 <input class="display-input show_input"
@@ -1108,9 +1114,9 @@ function showdetailsbyRowAndColumn(a) {
 	
 										<tr>
 
-											<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R21_CALENDAR_YEAR,'yyyy')}"></td>  
+											<td style="padding-left: 20px; text-align: center;font-weight: bold; color: black;" th:text="${#dates.format(report.R21_CALENDAR_YEAR,'yyyy')}"></td>  
 											<td style="text-align: right; text-align: center; "
-												th:text="${report.R21_CAP}+'%'"></td>
+												th:text="${report.R21_CAP}"></td>
 											
 												<td id="ROW21" style="padding-left: 20px; font-weight: bold;">
 													 <input class="display-input show_input"
@@ -1136,9 +1142,9 @@ function showdetailsbyRowAndColumn(a) {
 										</tr>
 										<tr>
 
-											<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R22_CALENDAR_YEAR,'yyyy')}"></td>  
+											<td style="padding-left: 20px; text-align: center;font-weight: bold; color: black;" th:text="${#dates.format(report.R22_CALENDAR_YEAR,'yyyy')}"></td>  
 											<td style="text-align: right; text-align: center; "
-												th:text="${report.R22_CAP}+'%'"></td>
+												th:text="${report.R22_CAP}"></td>
 											
 												<td id="ROW22" style="padding-left: 20px; font-weight: bold;">
 													 <input class="display-input show_input"
@@ -1165,9 +1171,9 @@ function showdetailsbyRowAndColumn(a) {
 										
 										<tr>
 
-											<td style="padding-left: 20px; text-align: center;" th:text="${#dates.format(report.R23_CALENDAR_YEAR,'yyyy')}"></td>  
+											<td style="padding-left: 20px; text-align: center;font-weight: bold; color: black;" th:text="${#dates.format(report.R23_CALENDAR_YEAR,'yyyy')}"></td>  
 											<td style="text-align: right; text-align: center;"
-												th:text="${report.R23_CAP}+'%'"></td>
+												th:text="${report.R23_CAP}"></td>
 											
 												<td id="ROW23" style="padding-left: 20px; font-weight: bold;">
 													 <input class="display-input show_input"
@@ -1196,7 +1202,7 @@ function showdetailsbyRowAndColumn(a) {
 										<tr>
 
 										<!--	<td style="padding-left: 20px;" th:text="${#dates.format(report.R24_CALENDAR_YEAR,'yyyy')}"></td>  -->
-											<td style="padding-left: 20px;" >2019 and thereafter</td>
+											<td style="padding-left: 20px;font-weight: bold; color: black;" >2019 and thereafter</td>
 											<td style="text-align: right; text-align: center; "
 												th:text="${report.R24_CAP}"></td>
 											
@@ -1232,16 +1238,16 @@ function showdetailsbyRowAndColumn(a) {
 
 
 						    </table>
-							<p style="padding: 20px;">2 Additional Tier 1 Capital Instruments	</p>
+							<p style="padding: 20px;font-weight: bold; color: black;">2 Additional Tier 1 Capital Instruments	</p>
 							<table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports" >
 								<thead class="thead-light">
 										<tr style="background-color: #b3b6b9 ">
 											
-											<th rowspan="3" style="text-align: left; width:33%;padding-left: 20px;background-color: #D8D8D8;">Name of Instrument/ Programe</th>
-											<th style="text-align: left;background-color: #D8D8D8;">Isssuance Date</th>
-											<th style="text-align: left;background-color: #D8D8D8;"> Contractual Maturity Date</th>
-											<th style="text-align: left;background-color: #D8D8D8;"> Effective Maturity Date, if any</th>
-											<th style="text-align: left;background-color: #D8D8D8;"> Amount (P'000)</th>
+											<th rowspan="3" style="text-align: left; width:33%;background-color: #D8D8D8; font-weight: bold;color: black;">Name of Instrument/ Programe</th>
+											<th style="text-align: left;background-color: #D8D8D8; font-weight: bold;color: black;">Isssuance Date</th>
+											<th style="text-align: left;background-color: #D8D8D8; font-weight: bold;color: black;"> Contractual Maturity Date</th>
+											<th style="text-align: left;background-color: #D8D8D8; font-weight: bold;color: black;"> Effective Maturity Date, if any</th>
+											<th style="text-align: right;background-color: #D8D8D8; font-weight: bold;color: black;"> Amount (P'000)</th>
 										</tr>
 									<!--	</tr>
 										<tr style="background-color: #b3b6b9">
@@ -1647,17 +1653,17 @@ function showdetailsbyRowAndColumn(a) {
 							  </table>
 							  
 
-							<p style="padding: 20px;">3 Tier 2 Capital Instruments</p>
+							<p style="padding: 20px;font-weight: bold; color: black;">3 Tier 2 Capital Instruments</p>
 
 							  <table class="sticky-header-table table table-bordered table-cell table-sm table-condensed" id="reports" >
 							  	<thead class="thead-light">
 							  			<tr style="background-color: #b3b6b9 ">
 							  				
-							  				<th rowspan="3" style="text-align: left; width:33%;padding-left: 20px;background-color: #D8D8D8;">Name of Instrument/ Programe</th>
-							  				<th style="text-align: left;background-color: #D8D8D8;">Isssuance Date</th>
-							  				<th style="text-align: left;background-color: #D8D8D8;"> Contractual Maturity Date</th>
-							  				<th style="text-align: left;background-color: #D8D8D8;"> Effective Maturity Date, if any</th>
-							  				<th style="text-align: left;background-color: #D8D8D8;"> Amount (P'000)</th>
+							  				<th rowspan="3" style="text-align: left; width:33%;background-color: #D8D8D8; font-weight: bold;color: black;">Name of Instrument/ Programe</th>
+							  				<th style="text-align: left;background-color: #D8D8D8; font-weight: bold;color: black;">Isssuance Date</th>
+							  				<th style="text-align: left;background-color: #D8D8D8; font-weight: bold;color: black;"> Contractual Maturity Date</th>
+							  				<th style="text-align: left;background-color: #D8D8D8; font-weight: bold;color: black;"> Effective Maturity Date, if any</th>
+							  				<th style="text-align: right;background-color: #D8D8D8; font-weight: bold;color: black;"> Amount (P'000)</th>
 							  			</tr>
 							  		<!--	</tr>
 							  			<tr style="background-color: #b3b6b9">
@@ -2057,20 +2063,21 @@ function showdetailsbyRowAndColumn(a) {
 							  			</tbody>
 
 
-							    </table>
+							    </table>									
+								<div style="text-align: center; margin-top: 10px;">
+																													
+																	    <button id="submitButton" 
+																	            type="button"
+																	            class="custom-tab-btn Show_input" 
+																	            form="fileupload"
+																	            th:attr="data-todate=${asondate},data-type=${type}" 
+																	            onclick="fileuploads(this);" 
+																	            style="display: none;">
+																	        Submit
+																	    </button>
+															</div>
 									</form>
-									<div style="text-align: center; margin-top: 10px;">
-																					
-									    <button id="submitButton" 
-									            type="button"
-									            class="custom-tab-btn Show_input" 
-									            form="fileupload"
-									            th:attr="data-todate=${asondate},data-type=${type}" 
-									            onclick="fileuploads(this);" 
-									            style="display: none;">
-									        Submit
-									    </button>
-							</div>
+								
 
 
 						</div>
