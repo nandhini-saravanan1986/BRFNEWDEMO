@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface M_CA7_Detail_Repo extends JpaRepository<M_CA7_Detail_Entity, String> {
+public interface BRRS_M_CA7_Detail_Repo extends JpaRepository<M_CA7_Detail_Entity, String> {
 @Query(value = "select * from BRRS_M_CA7_DETAILTABLE where ROW_ID =?1 and COLUMN_ID=?2 AND REPORT_DATE=?3", nativeQuery = true)
 	List<M_CA7_Detail_Entity> GetDataByRowIdAndColumnId(String rowId,String ColumnId,Date reportdate);
 	

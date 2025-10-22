@@ -43,13 +43,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bornfire.brf.entities.M_CA7_Summary_Repo;
+import com.bornfire.brf.entities.BRRS_M_CA7_Summary_Repo;
 import com.bornfire.brf.entities.M_SIR_Summary_Entity;
-import com.bornfire.brf.entities.M_CA7_Detail_Repo;
+import com.bornfire.brf.entities.BRRS_M_CA7_Detail_Repo;
 import com.bornfire.brf.entities.M_CA7_Detail_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
-import com.bornfire.brf.entities.M_CA7_Archival_Summary_Repo;
-import com.bornfire.brf.entities.M_CA7_Archival_Detail_Repo;
+import com.bornfire.brf.entities.BRRS_M_CA7_Archival_Summary_Repo;
+import com.bornfire.brf.entities.BRRS_M_CA7_Archival_Detail_Repo;
 import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Archival_Detail_Entity;
 
@@ -69,15 +69,15 @@ public class M_CA7_ReportService {
 	SessionFactory sessionFactory;
 	
 	@Autowired
-	M_CA7_Summary_Repo M_CA7_Summary_Repo;
+	BRRS_M_CA7_Summary_Repo BRRS_M_CA7_Summary_Repo;
 	@Autowired
-	M_CA7_Detail_Repo M_CA7_Detail_Repo;
+	BRRS_M_CA7_Detail_Repo BRRS_M_CA7_Detail_Repo;
 	
 	@Autowired
-	M_CA7_Archival_Detail_Repo M_CA7_Archival_Detail_Repo;
+	BRRS_M_CA7_Archival_Detail_Repo BRRS_M_CA7_Archival_Detail_Repo;
 
 	@Autowired
-	M_CA7_Archival_Summary_Repo M_CA7_Archival_Summary_Repo;
+	BRRS_M_CA7_Archival_Summary_Repo BRRS_M_CA7_Archival_Summary_Repo;
 
 	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
 	public ModelAndView getM_CA7View(String reportId, String fromdate, String todate, String currency, String dtltype,
@@ -96,7 +96,7 @@ System.out.println("Entered service method M_CA7......................");
 			try {
 				Date d1 = dateformat.parse(todate);
 
-				T1Master = M_CA7_Archival_Summary_Repo.getdatabydateListarchival(dateformat.parse(todate), version);
+				T1Master = BRRS_M_CA7_Archival_Summary_Repo.getdatabydateListarchival(dateformat.parse(todate), version);
 
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -110,7 +110,7 @@ System.out.println("Entered service method M_CA7......................");
 		try {
 			Date d1 = dateformat.parse(todate);
 			
-			 T1Master=M_CA7_Summary_Repo.getdatabydateList(dateformat.parse(todate));
+			 T1Master=BRRS_M_CA7_Summary_Repo.getdatabydateList(dateformat.parse(todate));
 		
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -158,9 +158,9 @@ System.out.println("Entered service method M_CA7......................");
 				// 🔹 Archival branch
 				List<M_CA7_Archival_Detail_Entity> T1Dt1;
 				if (rowId != null && columnId != null) {
-					T1Dt1 = M_CA7_Archival_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate, version);
+					T1Dt1 = BRRS_M_CA7_Archival_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate, version);
 				} else {
-					T1Dt1 = M_CA7_Archival_Detail_Repo.getdatabydateList(parsedDate, version);
+					T1Dt1 = BRRS_M_CA7_Archival_Detail_Repo.getdatabydateList(parsedDate, version);
 				}
 
 				mv.addObject("reportdetails", T1Dt1);
@@ -170,10 +170,10 @@ System.out.println("Entered service method M_CA7......................");
 			} else{
 			List<M_CA7_Detail_Entity> T1Dt1;
 	        if (rowId != null && columnId != null) {
-	            T1Dt1 = M_CA7_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId,parsedDate);
+	            T1Dt1 = BRRS_M_CA7_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId,parsedDate);
 	        } else {
-	        	T1Dt1 = M_CA7_Detail_Repo.getdatabydateList(parsedDate);
-	        	totalPages = M_CA7_Detail_Repo.getdatacount(parsedDate);
+	        	T1Dt1 = BRRS_M_CA7_Detail_Repo.getdatabydateList(parsedDate);
+	        	totalPages = BRRS_M_CA7_Detail_Repo.getdatacount(parsedDate);
 				mv.addObject("pagination", "YES");
 				
 	        }
@@ -202,7 +202,7 @@ System.out.println("Entered service method M_CA7......................");
 
 	public void updateReport(M_CA7_Summary_Entity Entity) {
 		System.out.println("Report Date: " + Entity.getReport_date());
-		M_CA7_Summary_Entity existing=M_CA7_Summary_Repo.findById(Entity.getReport_date())
+		M_CA7_Summary_Entity existing=BRRS_M_CA7_Summary_Repo.findById(Entity.getReport_date())
 	            .orElseThrow(() -> new RuntimeException(
 	                    "Record not found for REPORT_DATE: " + Entity.getReport_date()));
 
@@ -255,7 +255,7 @@ try {
 
 
 		// 3️⃣ Save updated entity
-		M_CA7_Summary_Repo.save(existing);
+		BRRS_M_CA7_Summary_Repo.save(existing);
 	}
 
 	
@@ -330,7 +330,7 @@ try {
 
 	        // Get data
 	        Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
-	        List<M_CA7_Detail_Entity> reportData = M_CA7_Detail_Repo.getdatabydateList(parsedToDate);
+	        List<M_CA7_Detail_Entity> reportData = BRRS_M_CA7_Detail_Repo.getdatabydateList(parsedToDate);
 
 	        if (reportData != null && !reportData.isEmpty()) {
 	            int rowIndex = 1;
@@ -392,7 +392,7 @@ try {
 		}
 
 
-		List<M_CA7_Summary_Entity> dataList =M_CA7_Summary_Repo.getdatabydateList(dateformat.parse(todate)) ;
+		List<M_CA7_Summary_Entity> dataList =BRRS_M_CA7_Summary_Repo.getdatabydateList(dateformat.parse(todate)) ;
 
 		if (dataList.isEmpty()) {
 			logger.warn("Service: No data found for M_CA7 report. Returning empty result.");
@@ -679,7 +679,7 @@ public byte[] getDetailExcelARCHIVAL(String filename, String fromdate, String to
 
 			// Get data
 			Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
-			List<M_CA7_Archival_Detail_Entity> reportData =M_CA7_Archival_Detail_Repo
+			List<M_CA7_Archival_Detail_Entity> reportData =BRRS_M_CA7_Archival_Detail_Repo
 					.getdatabydateList(parsedToDate, version);
 
 			if (reportData != null && !reportData.isEmpty()) {
@@ -734,7 +734,7 @@ public byte[] getDetailExcelARCHIVAL(String filename, String fromdate, String to
 public List<Object> getM_CA7Archival() {
 	List<Object> M_CA7Archivallist = new ArrayList<>();
 	try {
-		M_CA7Archivallist = M_CA7_Archival_Summary_Repo.getM_CA7archival();
+		M_CA7Archivallist = BRRS_M_CA7_Archival_Summary_Repo.getM_CA7archival();
 		System.out.println("countser" + M_CA7Archivallist.size());
 	} catch (Exception e) {
 		// Log the exception
@@ -752,7 +752,7 @@ public List<Object> getM_CA7Archival() {
 		if (type.equals("ARCHIVAL") & version != null) {
 
 		}
-		List<M_CA7_Archival_Summary_Entity> dataList = M_CA7_Archival_Summary_Repo
+		List<M_CA7_Archival_Summary_Entity> dataList = BRRS_M_CA7_Archival_Summary_Repo
 				.getdatabydateListarchival(dateformat.parse(todate), version);
 
 		if (dataList.isEmpty()) {
