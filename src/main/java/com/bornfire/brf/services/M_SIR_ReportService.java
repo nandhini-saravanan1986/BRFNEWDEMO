@@ -217,6 +217,128 @@ public class M_SIR_ReportService {
 	    return mv;
 	}
 
+public byte[] getDetailExcelARCHIVAL(String filename, String fromdate, String todate, String currency,
+										 String dtltype, String type, String version) {
+		try {
+			logger.info("Generating Excel for BRRS_M_SIR ARCHIVAL Details...");
+			System.out.println("came to Detail download service");
+			if (type.equals("ARCHIVAL") & version != null) {
+
+			}
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("M_SIRDetail");
+
+			// Common border style
+			BorderStyle border = BorderStyle.THIN;
+
+			// Header style (left aligned)
+			CellStyle headerStyle = workbook.createCellStyle();
+			Font headerFont = workbook.createFont();
+			headerFont.setBold(true);
+			headerFont.setFontHeightInPoints((short) 10);
+			headerStyle.setFont(headerFont);
+			headerStyle.setAlignment(HorizontalAlignment.LEFT);
+			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			headerStyle.setBorderTop(border);
+			headerStyle.setBorderBottom(border);
+			headerStyle.setBorderLeft(border);
+			headerStyle.setBorderRight(border);
+
+			// Right-aligned header style for ACCT BALANCE
+			CellStyle rightAlignedHeaderStyle = workbook.createCellStyle();
+			rightAlignedHeaderStyle.cloneStyleFrom(headerStyle);
+			rightAlignedHeaderStyle.setAlignment(HorizontalAlignment.RIGHT);
+
+			// Default data style (left aligned)
+			CellStyle dataStyle = workbook.createCellStyle();
+			dataStyle.setAlignment(HorizontalAlignment.LEFT);
+			dataStyle.setBorderTop(border);
+			dataStyle.setBorderBottom(border);
+			dataStyle.setBorderLeft(border);
+			dataStyle.setBorderRight(border);
+
+			// ACCT BALANCE style (right aligned with 3 decimals)
+			CellStyle balanceStyle = workbook.createCellStyle();
+			balanceStyle.setAlignment(HorizontalAlignment.RIGHT);
+			balanceStyle.setDataFormat(workbook.createDataFormat().getFormat("0.000"));
+			balanceStyle.setBorderTop(border);
+			balanceStyle.setBorderBottom(border);
+			balanceStyle.setBorderLeft(border);
+			balanceStyle.setBorderRight(border);
+
+			// Header row
+			String[] headers = { "CUST ID", "ACCT NO", "ACCT NAME", "ACCT BALANCE", "ROWID", "COLUMNID",
+					"REPORT_DATE" };
+
+			XSSFRow headerRow = sheet.createRow(0);
+			for (int i = 0; i < headers.length; i++) {
+				Cell cell = headerRow.createCell(i);
+				cell.setCellValue(headers[i]);
+
+				if (i == 3) { // ACCT BALANCE
+					cell.setCellStyle(rightAlignedHeaderStyle);
+				} else {
+					cell.setCellStyle(headerStyle);
+				}
+
+				sheet.setColumnWidth(i, 5000);
+			}
+
+			// Get data
+			Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
+			List<M_SIR_Archival_Detail_Entity> reportData =M_SIR_Archival_Detail_Repo
+					.getdatabydateList(parsedToDate, version);
+
+			if (reportData != null && !reportData.isEmpty()) {
+				int rowIndex = 1;
+				for (M_SIR_Archival_Detail_Entity item : reportData) {
+					XSSFRow row = sheet.createRow(rowIndex++);
+
+					row.createCell(0).setCellValue(item.getCust_id());
+					row.createCell(1).setCellValue(item.getAcct_number());
+					row.createCell(2).setCellValue(item.getAcct_name());
+
+					// ACCT BALANCE (right aligned, 3 decimal places)
+					Cell balanceCell = row.createCell(3);
+					if (item.getAcct_balance_in_pula() != null) {
+						balanceCell.setCellValue(item.getAcct_balance_in_pula().doubleValue());
+					} else {
+						balanceCell.setCellValue(0.000);
+					}
+					balanceCell.setCellStyle(balanceStyle);
+
+					row.createCell(4).setCellValue(item.getReportLabel());
+					row.createCell(5).setCellValue(item.getReportAddlCriteria1());
+					row.createCell(6)
+							.setCellValue(item.getReport_date() != null
+									? new SimpleDateFormat("dd-MM-yyyy").format(item.getReport_date())
+									: "");
+
+					// Apply data style for all other cells
+					for (int j = 0; j < 7; j++) {
+						if (j != 3) {
+							row.getCell(j).setCellStyle(dataStyle);
+						}
+					}
+				}
+			} else {
+				logger.info("No data found for BRRS_M_SIR — only header will be written.");
+			}
+
+			// Write to byte[]
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			workbook.write(bos);
+			workbook.close();
+
+			logger.info("Excel generation completed with {} row(s).", reportData != null ? reportData.size() : 0);
+			return bos.toByteArray();
+
+		} catch (Exception e) {
+			logger.error("Error generating BRRS_M_SIRExcel", e);
+			return new byte[0];
+		}
+	}
 		public void updateReport(M_SIR_Summary_Entity Entity) {
 		System.out.println("Report Date: " + Entity.getReport_date());
 		M_SIR_Summary_Entity existing=M_SIR_Summary_Repo.findById(Entity.getReport_date())
@@ -1905,7 +2027,6 @@ row=sheet.getRow(26);
 cell1=row.getCell(1);
 if(record.getR27_product() != null) {
 	cell1.setCellValue(record.getR27_product());
-	cell1.setCellStyle(numberStyle);
 }else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -1916,7 +2037,6 @@ if(record.getR27_product() != null) {
  cell1 = row.getCell(2);
 if (record.getR27_amt_6m() != null) {
 	cell1.setCellValue(record.getR27_amt_6m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -1926,7 +2046,6 @@ if (record.getR27_amt_6m() != null) {
  cell1 = row.getCell(4);
 if (record.getR27_capital_6m() != null) {
 	cell1.setCellValue(record.getR27_capital_6m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -1936,7 +2055,6 @@ if (record.getR27_capital_6m() != null) {
  cell1 = row.getCell(5);
 if (record.getR27_amt_6to24m() != null) {
 	cell1.setCellValue(record.getR27_amt_6to24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -1946,7 +2064,6 @@ if (record.getR27_amt_6to24m() != null) {
  cell1 = row.getCell(7);
 if (record.getR27_capital_6to24m() != null) {
 	cell1.setCellValue(record.getR27_capital_6to24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -1956,7 +2073,6 @@ if (record.getR27_capital_6to24m() != null) {
  cell1 = row.getCell(8);
 if (record.getR27_amt_gt24m() != null) {
 	cell1.setCellValue(record.getR27_amt_gt24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -1966,7 +2082,6 @@ if (record.getR27_amt_gt24m() != null) {
  cell1 = row.getCell(10);
 if (record.getR27_capital_gt24m() != null) {
 	cell1.setCellValue(record.getR27_capital_gt24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -1979,7 +2094,6 @@ row=sheet.getRow(27);
 cell1=row.getCell(1);
 if(record.getR28_product() != null) {
 	cell1.setCellValue(record.getR28_product());
-	cell1.setCellStyle(numberStyle);
 }else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3903,7 +4017,6 @@ row=sheet.getRow(26);
 cell1=row.getCell(1);
 if(record.getR27_product() != null) {
 	cell1.setCellValue(record.getR27_product());
-	cell1.setCellStyle(numberStyle);
 }else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3914,7 +4027,6 @@ if(record.getR27_product() != null) {
  cell1 = row.getCell(2);
 if (record.getR27_amt_6m() != null) {
 	cell1.setCellValue(record.getR27_amt_6m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3924,7 +4036,6 @@ if (record.getR27_amt_6m() != null) {
  cell1 = row.getCell(4);
 if (record.getR27_capital_6m() != null) {
 	cell1.setCellValue(record.getR27_capital_6m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3934,7 +4045,6 @@ if (record.getR27_capital_6m() != null) {
  cell1 = row.getCell(5);
 if (record.getR27_amt_6to24m() != null) {
 	cell1.setCellValue(record.getR27_amt_6to24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3944,7 +4054,6 @@ if (record.getR27_amt_6to24m() != null) {
  cell1 = row.getCell(7);
 if (record.getR27_capital_6to24m() != null) {
 	cell1.setCellValue(record.getR27_capital_6to24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3954,7 +4063,6 @@ if (record.getR27_capital_6to24m() != null) {
  cell1 = row.getCell(8);
 if (record.getR27_amt_gt24m() != null) {
 	cell1.setCellValue(record.getR27_amt_gt24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3964,7 +4072,6 @@ if (record.getR27_amt_gt24m() != null) {
  cell1 = row.getCell(10);
 if (record.getR27_capital_gt24m() != null) {
 	cell1.setCellValue(record.getR27_capital_gt24m().doubleValue());
-	cell1.setCellStyle(numberStyle);
 } else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
@@ -3977,7 +4084,6 @@ row=sheet.getRow(27);
 cell1=row.getCell(1);
 if(record.getR28_product() != null) {
 	cell1.setCellValue(record.getR28_product());
-	cell1.setCellStyle(numberStyle);
 }else {
 	cell1.setCellValue("");
 	cell1.setCellStyle(textStyle);
