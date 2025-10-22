@@ -656,7 +656,7 @@ function cancelModify() {
 // ✅ Format & parse numbers
 function formatNumber(num) {
     if (isNaN(num)) return "";
-    return num.toLocaleString('en-IN'); // ✅ Indian style: 1,11,115
+    return num.toLocaleString('en-US'); // ✅ Indian style: 1,11,115
 }
 function parseNumber(val) {
     return parseFloat(val.replace(/,/g, "")) || 0;
