@@ -59,7 +59,7 @@ import com.bornfire.brf.entities.M_SIR_Summary_Repo;
 @Service
 @Component
 public class M_SIR_ReportService {
-	private static final Logger logger = LoggerFactory.getLogger(M_CA7_ReportService.class);
+	private static final Logger logger = LoggerFactory.getLogger(M_SIR_ReportService.class);
 
 
 	@Autowired
