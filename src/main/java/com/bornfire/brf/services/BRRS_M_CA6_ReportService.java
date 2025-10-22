@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -836,7 +837,88 @@ public byte[] BRRS_M_CA6DetailExcel(String filename, String fromdate, String tod
     }
 }
 
+public void updateReport(M_CA6_Summary_Entity2 entity) {
+    System.out.println("Report Date: " + entity.getREPORT_DATE());
 
+    M_CA6_Summary_Entity2 existing = M_CA6_Summary_Repo2.findById(entity.getREPORT_DATE())
+        .orElseThrow(() -> new RuntimeException(
+            "Record not found for REPORT_DATE: " + entity.getREPORT_DATE()));
+
+    // --------------------------
+    // Update R28–R34
+    // --------------------------
+    try {
+        for (int i = 28; i <= 34; i++) {
+            String prefix = "R" + i + "_";
+            String[] fields = { "AMOUNT" };
+
+            for (String field : fields) {
+                String getterName = "get" + prefix + field;
+                String setterName = "set" + prefix + field;
+
+                try {
+                    Method getter = M_CA6_Summary_Entity2.class.getMethod(getterName);
+                    Method setter = M_CA6_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+
+                    Object newValue = getter.invoke(entity);
+                    setter.invoke(existing, newValue);
+
+                } catch (NoSuchMethodException e) {
+                    continue;
+                }
+            }
+        }
+
+        // Update R35 total
+        String getterName = "getR35_AMOUNT";
+        String setterName = "setR35_AMOUNT";
+        Method getter = M_CA6_Summary_Entity2.class.getMethod(getterName);
+        Method setter = M_CA6_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+        setter.invoke(existing, getter.invoke(entity));
+
+    } catch (Exception e) {
+        throw new RuntimeException("Error while updating R28–R35 fields", e);
+    }
+
+    // --------------------------
+    // Update R40–R46 + R47
+    // --------------------------
+    try {
+        for (int i = 40; i <= 46; i++) {
+            String prefix = "R" + i + "_";
+            String[] fields = { "AMOUNT" };
+
+            for (String field : fields) {
+                String getterName = "get" + prefix + field;
+                String setterName = "set" + prefix + field;
+
+                try {
+                    Method getter = M_CA6_Summary_Entity2.class.getMethod(getterName);
+                    Method setter = M_CA6_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+
+                    Object newValue = getter.invoke(entity);
+                    setter.invoke(existing, newValue);
+
+                } catch (NoSuchMethodException e) {
+                    continue;
+                }
+            }
+        }
+
+        // Update R47
+        Method getter = M_CA6_Summary_Entity2.class.getMethod("getR47_AMOUNT");
+        Method setter = M_CA6_Summary_Entity2.class.getMethod("setR47_AMOUNT", getter.getReturnType());
+        setter.invoke(existing, getter.invoke(entity));
+
+    } catch (Exception e) {
+        throw new RuntimeException("Error while updating R40–R47 fields", e);
+    }
+
+    // --------------------------
+    // Save updated entity
+    // --------------------------
+    M_CA6_Summary_Repo2.save(existing);
+}
 
 }
 
