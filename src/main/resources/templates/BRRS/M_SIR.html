@@ -855,11 +855,15 @@ $(document).ready(function(){
 		        processData: false,
 		        contentType: false,
 		        dataType: 'text',
-		        success: function () {
-		            $("#resultModalLabel").text("Success");
-		            $("#resultModalBody").text("Updated Successfully.");
-		            $("#resultModal").modal("show");
-		        },
+				success: function () {
+					            $("#resultModalLabel").text("Success");
+					            $("#resultModalBody").text("Updated Successfully.");
+					            $("#resultModal").modal("show");
+
+					            setTimeout(function() {
+					                location.reload();
+					            }, 800);
+					        },
 		        error: function (jqXHR) {
 		            console.error("Error response:", jqXHR.responseText);
 		            $("#resultModalLabel").text("Error");

@@ -590,11 +590,6 @@ public class RegulatoryReportServices {
 
 	
 	
-
-		case "M_SIR":
-			repdetail = M_SIR_ReportService.getM_SIRcurrentDtl(reportId, fromdate, todate, currency, dtltype,
-					pageable, Filter,type,version);
-			break;
 		case "M_IS":
 			repdetail = BRRS_M_IS_reportservice.getM_IScurrentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type,version);

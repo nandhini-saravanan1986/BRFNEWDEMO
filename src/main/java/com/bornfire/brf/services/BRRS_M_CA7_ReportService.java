@@ -506,7 +506,7 @@ public List<Object> getM_CA7Archival() {
 
 			if (!dataList.isEmpty()) {
 				for (int i = 0; i < dataList.size(); i++) {
-					M_CA7_Summary_Entity record = dataList.get(i);
+					M_CA7_Archival_Summary_Entity record = dataList.get(i);
 					System.out.println("rownumber="+startRow + i);
 					Row row = sheet.getRow(startRow + i);
 					if (row == null) {
