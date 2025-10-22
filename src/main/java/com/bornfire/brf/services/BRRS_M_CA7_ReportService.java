@@ -219,9 +219,6 @@ try {
 			throw new SecurityException(
 					"Template file exists but is not readable (check permissions): " + templatePath.toAbsolutePath());
 		}
-
-		// This try-with-resources block is perfect. It guarantees all resources are
-		// closed automatically.
 		try (InputStream templateInputStream = Files.newInputStream(templatePath);
 				Workbook workbook = WorkbookFactory.create(templateInputStream);
 				ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -312,12 +309,13 @@ try {
 						row=sheet.getRow(18);
 					 cell1 = row.getCell(2);
 						if (record.getR19_cap_year1()!= null) {
-							cell1.setCellValue(record.getR19_cap_year1().doubleValue());
+							cell1.setCellValue(record.getR19_cap_year1().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
+				
 
 						//row19
 						// Column d
@@ -335,7 +333,7 @@ try {
 						row=sheet.getRow(19);
 					 cell1 = row.getCell(2);
 					 	if (record.getR20_cap_year2()!= null) {
-							cell1.setCellValue(record.getR20_cap_year2().doubleValue());
+							cell1.setCellValue(record.getR20_cap_year2().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 							
 						} else {
@@ -357,7 +355,7 @@ try {
 						row=sheet.getRow(20);
 					 cell1 = row.getCell(2);
 						if (record.getR21_cap_year3()!= null) {
-							cell1.setCellValue(record.getR21_cap_year3().doubleValue());
+							cell1.setCellValue(record.getR21_cap_year3().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 							
 						} else {
@@ -380,7 +378,7 @@ try {
 						row=sheet.getRow(21);
 						cell1 = row.getCell(2);
 						if (record.getR22_cap_year4()!= null) {
-							cell1.setCellValue(record.getR22_cap_year4().doubleValue());
+							cell1.setCellValue(record.getR22_cap_year4().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 							
 						} else {
@@ -397,20 +395,20 @@ try {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
-	}
-	workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
-} else {
-	
-}
+				}
+				workbook.getCreationHelper().createFormulaEvaluator().evaluateAll();
+			} else {
+				
+			}
 
-// Write the final workbook content to the in-memory stream.
-workbook.write(out);
+			// Write the final workbook content to the in-memory stream.
+			workbook.write(out);
 
-logger.info("Service: Excel data successfully written to memory buffer ({} bytes).", out.size());
+			logger.info("Service: Excel data successfully written to memory buffer ({} bytes).", out.size());
 
-return out.toByteArray();
-}
-}
+			return out.toByteArray();
+			}
+			}
 
 public List<Object> getM_CA7Archival() {
 	List<Object> M_CA7Archivallist = new ArrayList<>();
@@ -508,7 +506,7 @@ public List<Object> getM_CA7Archival() {
 
 			if (!dataList.isEmpty()) {
 				for (int i = 0; i < dataList.size(); i++) {
-					M_CA7_Archival_Summary_Entity record = dataList.get(i);
+					M_CA7_Summary_Entity record = dataList.get(i);
 					System.out.println("rownumber="+startRow + i);
 					Row row = sheet.getRow(startRow + i);
 					if (row == null) {
@@ -551,12 +549,13 @@ public List<Object> getM_CA7Archival() {
 						row=sheet.getRow(18);
 					 cell1 = row.getCell(2);
 						if (record.getR19_cap_year1()!= null) {
-							cell1.setCellValue(record.getR19_cap_year1().doubleValue());
+							cell1.setCellValue(record.getR19_cap_year1().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
+				
 
 						//row19
 						// Column d
@@ -574,7 +573,7 @@ public List<Object> getM_CA7Archival() {
 						row=sheet.getRow(19);
 					 cell1 = row.getCell(2);
 					 	if (record.getR20_cap_year2()!= null) {
-							cell1.setCellValue(record.getR20_cap_year2().doubleValue());
+							cell1.setCellValue(record.getR20_cap_year2().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 							
 						} else {
@@ -596,7 +595,7 @@ public List<Object> getM_CA7Archival() {
 						row=sheet.getRow(20);
 					 cell1 = row.getCell(2);
 						if (record.getR21_cap_year3()!= null) {
-							cell1.setCellValue(record.getR21_cap_year3().doubleValue());
+							cell1.setCellValue(record.getR21_cap_year3().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 							
 						} else {
@@ -619,7 +618,7 @@ public List<Object> getM_CA7Archival() {
 						row=sheet.getRow(21);
 						cell1 = row.getCell(2);
 						if (record.getR22_cap_year4()!= null) {
-							cell1.setCellValue(record.getR22_cap_year4().doubleValue());
+							cell1.setCellValue(record.getR22_cap_year4().toString() + "%");
 							cell1.setCellStyle(numberStyle); 
 							
 						} else {
