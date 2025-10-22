@@ -588,10 +588,6 @@ public class RegulatoryReportServices {
 			break;
 
 
-		case "M_CA7":
-			repdetail = BRRS_M_CA7_ReportService.getM_CA7currentDtl(reportId, fromdate, todate, currency, dtltype,
-					pageable, Filter,type,version);
-			break;
 	
 	
 
@@ -1451,10 +1447,6 @@ public class RegulatoryReportServices {
 			return BRRS_M_PI_reportservice.BRRS_M_PIDetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
-		}else if ("M_CA_7Details".equals(filename)) {
-			return BRRS_M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
-					type, version);
-
 		}else if ("BRRS_M_GALORDetails".equals(filename)) {
 			return M_GALOR_ReportService.BRRS_M_GALORDetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
@@ -2013,10 +2005,6 @@ public class RegulatoryReportServices {
 
 		} else if ("M_PIDetail".equals(filename)) {
 			fileData = BRRS_M_PI_reportservice.BRRS_M_PIDetailExcel(filename, fromdate, todate, currency, dtltype,
-					type, version);
-
-		}else if ("M_CA_7Details".equals(filename)) {
-			fileData = BRRS_M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
 		}else if ("BRRS_M_GALORDetails".equals(filename)) {
