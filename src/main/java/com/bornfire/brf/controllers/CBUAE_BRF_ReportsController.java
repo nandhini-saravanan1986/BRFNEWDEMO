@@ -76,7 +76,7 @@ import com.bornfire.brf.services.BRRS_M_UNCONS_INVEST_ReportService;
 import com.bornfire.brf.services.BRRS_Q_BRANCHNET_ReportService;
 import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
 import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
-import com.bornfire.brf.services.M_CA7_ReportService;
+import com.bornfire.brf.services.BRRS_M_CA7_ReportService;
 import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
 
@@ -687,7 +687,7 @@ public class CBUAE_BRF_ReportsController {
 		     }
 		 }
 		 @Autowired
-		 M_CA7_ReportService M_CA7_ReportService;
+		 BRRS_M_CA7_ReportService BRRS_M_CA7_ReportService;
 		 @RequestMapping(value = "/MCA7updateAll", method = { RequestMethod.GET, RequestMethod.POST })
 		 @ResponseBody
 		 public ResponseEntity<String> updateAllReports(
@@ -707,7 +707,7 @@ public class CBUAE_BRF_ReportsController {
 		         BeanUtils.copyProperties(request1,Archivalrequest1);	
 		     }
 		     else {
-		    	 M_CA7_ReportService.updateReport(request1);
+		    	 BRRS_M_CA7_ReportService.updateReport(request1);
 		     }
 		     return ResponseEntity.ok("All Reports Updated Successfully");
 		     }

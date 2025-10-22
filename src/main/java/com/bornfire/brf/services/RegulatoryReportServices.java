@@ -50,7 +50,7 @@ public class RegulatoryReportServices {
 	BRRS_M_SFINP2_ReportService BRRS_M_SFINP2_reportservice;
 
 	@Autowired
-	M_CA7_ReportService M_CA7_ReportService;
+	BRRS_M_CA7_ReportService BRRS_M_CA7_ReportService;
 	@Autowired
 	M_SIR_ReportService M_SIR_ReportService;
 
@@ -277,7 +277,7 @@ public class RegulatoryReportServices {
 			break;
 
 		case "M_CA7":
-			repsummary = M_CA7_ReportService.getM_CA7View(reportId, fromdate, todate, currency, dtltype,
+			repsummary = BRRS_M_CA7_ReportService.getM_CA7View(reportId, fromdate, todate, currency, dtltype,
 					pageable, type, version);
 			break;
 		case "M_SIR":
@@ -589,7 +589,7 @@ public class RegulatoryReportServices {
 
 
 		case "M_CA7":
-			repdetail = M_CA7_ReportService.getM_CA7currentDtl(reportId, fromdate, todate, currency, dtltype,
+			repdetail = BRRS_M_CA7_ReportService.getM_CA7currentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type,version);
 			break;
 	
@@ -888,7 +888,7 @@ public class RegulatoryReportServices {
 		
 			case "M_CA7":
 				try {
-					repfile = M_CA7_ReportService.getM_CA7Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+					repfile = BRRS_M_CA7_ReportService.getM_CA7Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1452,7 +1452,7 @@ public class RegulatoryReportServices {
 					type, version);
 
 		}else if ("M_CA_7Details".equals(filename)) {
-			return M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
+			return BRRS_M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
 		}else if ("BRRS_M_GALORDetails".equals(filename)) {
@@ -1623,7 +1623,7 @@ public class RegulatoryReportServices {
 
 		case "M_CA7":
 			try {
-				archivalData = M_CA7_ReportService.getM_CA7Archival();
+				archivalData = BRRS_M_CA7_ReportService.getM_CA7Archival();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -2016,7 +2016,7 @@ public class RegulatoryReportServices {
 					type, version);
 
 		}else if ("M_CA_7Details".equals(filename)) {
-			fileData = M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
+			fileData = BRRS_M_CA7_ReportService.getM_CA_7DetailExcel(filename, fromdate, todate, currency, dtltype,
 					type, version);
 
 		}else if ("BRRS_M_GALORDetails".equals(filename)) {

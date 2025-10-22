@@ -56,9 +56,9 @@ import com.bornfire.brf.entities.M_CA7_Archival_Detail_Entity;
 @Component
 @Service
 
-public class M_CA7_ReportService {
+public class BRRS_M_CA7_ReportService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(M_CA7_ReportService.class);
+	private static final Logger logger = LoggerFactory.getLogger(BRRS_M_CA7_ReportService.class);
 
 
 	@Autowired
