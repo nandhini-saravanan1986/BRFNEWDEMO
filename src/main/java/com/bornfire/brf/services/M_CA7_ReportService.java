@@ -805,15 +805,23 @@ public List<Object> getM_CA7Archival() {
 			Font font = workbook.createFont();
 			font.setFontHeightInPoints((short)8); // size 8
 			font.setFontName("Arial");    
-
+			
 			CellStyle numberStyle = workbook.createCellStyle();
-			//numberStyle.setDataFormat(createHelper.createDataFormat().getFormat("0.000"));
+			// numberStyle.setDataFormat(createHelper.createDataFormat().getFormat("0.000"));
 			numberStyle.setBorderBottom(BorderStyle.THIN);
 			numberStyle.setBorderTop(BorderStyle.THIN);
 			numberStyle.setBorderLeft(BorderStyle.THIN);
 			numberStyle.setBorderRight(BorderStyle.THIN);
 			numberStyle.setFont(font);
+			numberStyle.setAlignment(HorizontalAlignment.CENTER);
+			numberStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+			CellStyle percentStyle = workbook.createCellStyle();
+			percentStyle.cloneStyleFrom(numberStyle);
+			percentStyle.setDataFormat(workbook.createDataFormat().getFormat("0.00%"));
+			percentStyle.setAlignment(HorizontalAlignment.RIGHT);
 			// --- End of Style Definitions ---
+
 
 			int startRow = 11;
 
@@ -828,20 +836,20 @@ public List<Object> getM_CA7Archival() {
 
 					//row12
 					// Column b 
-					Cell cell1 = row.createCell(1);
+					Cell cell1 = row.getCell(1);
 					if (record.getR12_pre_ifrs_pro() != null) {
 						cell1.setCellValue(record.getR12_pre_ifrs_pro().doubleValue());
-						cell1.setCellStyle(numberStyle);
+						
 					} else {
 						cell1.setCellValue("");
 						cell1.setCellStyle(textStyle);
 					}
 					//row12
 					// Column c
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 					if (record.getR12_post_ifrs9_pro() != null) {
 						cell1.setCellValue(record.getR12_post_ifrs9_pro().doubleValue());
-						cell1.setCellStyle(numberStyle);
+						
 					} else {
 						cell1.setCellValue("");
 						cell1.setCellStyle(textStyle);
@@ -849,10 +857,10 @@ public List<Object> getM_CA7Archival() {
 					//row12
 					// Column d
 					
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 					if (record.getR12_trans_amt() != null) {
 						cell1.setCellValue(record.getR12_trans_amt().doubleValue());
-						cell1.setCellStyle(numberStyle);
+						
 					} else {
 						cell1.setCellValue("");
 						cell1.setCellStyle(textStyle);
@@ -860,10 +868,10 @@ public List<Object> getM_CA7Archival() {
 					//row19
 					// Column c
 						row=sheet.getRow(18);
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 						if (record.getR19_cap_year1()!= null) {
 							cell1.setCellValue(record.getR19_cap_year1().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -871,10 +879,10 @@ public List<Object> getM_CA7Archival() {
 
 						//row19
 						// Column d
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 						if (record.getR19_amt_add_year1() != null) {
 							cell1.setCellValue(record.getR19_amt_add_year1().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -883,20 +891,21 @@ public List<Object> getM_CA7Archival() {
 						//row20
 						// Column c
 						row=sheet.getRow(19);
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 					 	if (record.getR20_cap_year2()!= null) {
 							cell1.setCellValue(record.getR20_cap_year2().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
 					 	//row20
 						// Column d		
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 						if (record.getR20_amt_add_year2() != null) {
 							cell1.setCellValue(record.getR20_amt_add_year2().doubleValue());
-							cell1.setCellStyle(numberStyle);
+						
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -904,20 +913,21 @@ public List<Object> getM_CA7Archival() {
 						//row21
 						// Column c
 						row=sheet.getRow(20);
-					 cell1 = row.createCell(2);
+					 cell1 = row.getCell(2);
 						if (record.getR21_cap_year3()!= null) {
 							cell1.setCellValue(record.getR21_cap_year3().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
 						//row21
 						// Column d	
-					 cell1 = row.createCell(3);
+					 cell1 = row.getCell(3);
 						if (record.getR21_amt_add_year3() != null) {
 							cell1.setCellValue(record.getR21_amt_add_year3().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							
 						} else {
 						cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
@@ -926,20 +936,21 @@ public List<Object> getM_CA7Archival() {
 						// Column c
 
 						row=sheet.getRow(21);
-						cell1 = row.createCell(2);
+						cell1 = row.getCell(2);
 						if (record.getR22_cap_year4()!= null) {
 							cell1.setCellValue(record.getR22_cap_year4().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							cell1.setCellStyle(numberStyle); 
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
 						}
 						//row22
 						// Column d										
-					cell1 = row.createCell(3);
+					cell1 = row.getCell(3);
 						if (record.getR22_amt_add_year4() != null) {
 							cell1.setCellValue(record.getR22_amt_add_year4().doubleValue());
-							cell1.setCellStyle(numberStyle);
+							
 						} else {
 							cell1.setCellValue("");
 							cell1.setCellStyle(textStyle);
