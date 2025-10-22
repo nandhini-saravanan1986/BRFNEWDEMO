@@ -117,7 +117,7 @@ System.out.println("Entered service method M_CA7......................");
 		}
 		mv.addObject("reportsummary", T1Master);
 }
-		mv.setViewName("BRRS/BRRS_M_CA7");		
+		mv.setViewName("BRRS/M_CA7");		
 		mv.addObject("displaymode", "summary");
 		System.out.println("scv" + mv.getViewName());
 		return mv;
