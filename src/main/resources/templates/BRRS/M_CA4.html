@@ -1262,7 +1262,7 @@ window.fileuploads = function(btn) {
 													style="text-align: center; background-color: #D8D8D8; font-weight: bold; padding: 10px; width: 50px">Line
 													no</th>
 												<th rowspan="2"
-													style="text-align: left; background-color: #D8D8D8; font-weight: bold; padding: 10px;">Item</th>
+													style="text-align: center; background-color: #D8D8D8; font-weight: bold; padding: 10px;">Item</th>
 
 												<th rowspan="1"
 													style="text-align: right; background-color: #D8D8D8; font-weight: bold; padding: 10px;">Name
@@ -1326,7 +1326,7 @@ window.fileuploads = function(btn) {
 
 
 
-												<td id="ROW10" style="font-weight: bold;"><input
+												<td id="ROW10" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input " type="text"
 													th:value="'Principal activity'" id="r10_item"
 													name="r10_item"
@@ -1393,7 +1393,7 @@ window.fileuploads = function(btn) {
 												<!-- <td  style="text-align: left; background-color: #b3b6b9;">
 											</td> -->
 
-												<td id="ROW11" style="font-weight: bold;"><input
+												<td id="ROW11" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Country of incorporation'" id="r11_item"
 													name="r11_item"
@@ -1521,7 +1521,7 @@ window.fileuploads = function(btn) {
 													readonly /></td> -->
 													
 													<td id="ROW13" style="font-weight: normal;">
-    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; padding: 4px;">
+    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; padding-left:30px;">
         Paid up amount plus related reserves/retained earnings owned by 
         <strong>group prior to</strong> application of regulatory adjustments
     </div>
@@ -1589,7 +1589,7 @@ window.fileuploads = function(btn) {
 													readonly /></td> -->
 													
 													<td id="ROW14" style="font-weight: normal;">
-    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left; padding: 4px;">
+    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left; padding-left:30px;">
         Paid up amount plus related reserves/retained earnings owned by 
         <strong>third parties p</strong>rior to application of regulatory adjustments
     </div>
@@ -1695,47 +1695,47 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r17_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub1" name="r17_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r17_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub2" name="r17_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r17_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub3" name="r17_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r17_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub4" name="r17_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r17_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub5" name="r17_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;"
+												<td id="ROW17" style="font-weight: bold; text-align: right; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r17_tot_amt != null ? #numbers.formatDecimal(report.r17_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1747,7 +1747,7 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW18" style="font-weight: bold;"><input
+												<td id="ROW18" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Paid up amount plus related reserves/retained earnings owned by group prior to application of regulatory adjustments'"
 													id="r18_item" name="r18_item"
@@ -1806,7 +1806,7 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW19" style="font-weight: bold;"><input
+												<td id="ROW19" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Paid up amount plus related reserves/retained earnings owned by third parties prior to application of regulatory adjustments'"
 													id="r19_item" name="r19_item"
@@ -1911,40 +1911,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub1" name="r22_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub2" name="r22_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub3" name="r22_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub4" name="r22_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub5" name="r22_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -1963,7 +1963,7 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW23" style="font-weight: bold;"><input
+												<td id="ROW23" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Paid up amount plus related reserves/retained earnings owned by group prior to application of regulatory adjustments'"
 													id="r23_item" name="r23_item"
@@ -2022,7 +2022,7 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW24" style="font-weight: bold;"><input
+												<td id="ROW24" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Paid up amount plus related reserves/retained earnings owned by third parties prior to application of regulatory adjustments'"
 													id="r24_item" name="r24_item"
@@ -2131,40 +2131,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r27_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub1" name="r27_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r27_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub2" name="r27_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r27_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub3" name="r27_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r27_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub4" name="r27_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r27_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub5" name="r27_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -2183,7 +2183,7 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW28" style="font-weight: bold;"><input
+												<td id="ROW28" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Paid up amount plus related reserves/retained earnings owned by group prior to application of regulatory adjustments'"
 													id="r28_item" name="r28_item"
@@ -2242,7 +2242,7 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW29" style="font-weight: bold;"><input
+												<td id="ROW29" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Paid up amount plus related reserves/retained earnings owned by third parties prior to application of regulatory adjustments'"
 													id="r29_item" name="r29_item"
@@ -2355,40 +2355,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r32_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub1" name="r32_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r32_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub2" name="r32_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r32_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub3" name="r32_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r32_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub4" name="r32_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r32_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub5" name="r32_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -2407,7 +2407,7 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td rowspan="2" style="text-align: left;"></td>
 
-												<td id="ROW33" style="font-weight: bold;"><input
+												<td id="ROW33" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Paid up amount plus related reserves/retained earnings owned by group prior to application of regulatory adjustments'"
 													id="r33_item" name="r33_item"
@@ -2476,7 +2476,7 @@ window.fileuploads = function(btn) {
 
 
 <td id="ROW34" style="font-weight: normal;">
-    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left; padding: 4px;">
+    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left; padding-left:30px;">
         Paid up amount plus related reserves/retained earnings owned by 
         <strong>third parties</strong> prior to application of regulatory adjustments
     </div>
@@ -2562,40 +2562,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r36_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub1" name="r36_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub2" name="r36_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub3" name="r36_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub4" name="r36_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub5" name="r36_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -2622,7 +2622,7 @@ window.fileuploads = function(btn) {
 													readonly /></td> -->
 													
 													<td id="ROW37" >
-    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left; padding: 4px;">
+    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left;padding-left:30px;">
         Paid up amount plus related reserves/retained earnings owned by 
         <strong>group</strong> prior to application of regulatory adjustments
     </div>
@@ -2690,7 +2690,7 @@ window.fileuploads = function(btn) {
  -->
  
  <td id="ROW38">
-    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left; padding: 4px;">
+    <div style="background-color: #FFFFFF; width: 900px; height: 28px; border: 1px solid transparent; text-align: left; padding-left:30px;">
         Paid up amount plus related reserves/retained earnings owned by 
         <strong>third parties</strong> prior to application of regulatory adjustments
     </div>
@@ -2757,40 +2757,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub1" name="r39_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r39_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub2" name="r39_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub3" name="r39_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub4" name="r39_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub5" name="r39_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -2986,47 +2986,47 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW43" style="font-weight: bold;"><input
+												<td id="ROW43" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Surplus Amount attributable to third parties'"
 													id="r43_item" name="r43_item"
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub1" name="r43_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input" type="text"
+												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r43_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub2" name="r43_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub3" name="r43_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub4" name="r43_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub5" name="r43_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3051,41 +3051,41 @@ window.fileuploads = function(btn) {
 													id="r44_item" name="r44_item"
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
-
-												<td id="ROW44" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+ 
+												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub1" name="r44_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub2" name="r44_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub3" name="r44_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub4" name="r44_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r44_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub5" name="r44_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3163,47 +3163,47 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW46" style="font-weight: bold;"><input
+												<td id="ROW46" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Surplus Amount attributable to third parties'"
 													id="r46_item" name="r46_item"
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input" type="text"
+												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub1" name="r46_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub2" name="r46_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub3" name="r46_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub4" name="r46_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r46_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub5" name="r46_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3229,40 +3229,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input  " type="text"
+												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r47_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub1" name="r47_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r47_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub2" name="r47_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r47_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub3" name="r47_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r47_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub4" name="r47_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input  " type="text"
+												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r47_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub5" name="r47_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3288,7 +3288,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW48" style="font-weight: bold; text-align: right;">
+												<td id="ROW48" style="font-weight: bold; text-align: right;" >
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r48_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r48_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r48_amt_name_of_sub1" name="r48_amt_name_of_sub1"
@@ -3340,47 +3340,47 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: left;"></td>
 
-												<td id="ROW49" style="font-weight: bold;"><input
+												<td id="ROW49" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Surplus Amount attributable to third parties'"
 													id="r49_item" name="r49_item"
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub1" name="r49_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub2" name="r49_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input" type="text"
+												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub3" name="r49_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub4" name="r49_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub5" name="r49_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3406,40 +3406,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r50_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub1" name="r50_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r50_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub2" name="r50_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r50_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub3" name="r50_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW50" style="font-weight: bold; text-align: right;"class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r50_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub4" name="r50_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r50_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub5" name="r50_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3517,47 +3517,47 @@ window.fileuploads = function(btn) {
 											<tr>
 												<td style="text-align: center;"></td>
 
-												<td id="ROW52" style="font-weight: bold;"><input
+												<td id="ROW52" style="font-weight: bold; padding-left:30px;"><input
 													class="display-input Show_input" type="text"
 													th:value="'Surplus Amount attributable to third parties'"
 													id="r52_item" name="r52_item"
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub1" name="r52_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub2" name="r52_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub3" name="r52_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r52_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub4" name="r52_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub5" name="r52_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3583,40 +3583,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub1" name="r53_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input" type="text"
+												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub2" name="r53_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r53_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub3" name="r53_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub4" name="r53_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub5" name="r53_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3642,40 +3642,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r54_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub1" name="r54_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r54_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub2" name="r54_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r54_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub3" name="r54_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r54_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub4" name="r54_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input" type="text"
+												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r54_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub5" name="r54_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3701,40 +3701,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub1" name="r55_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r55_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub2" name="r55_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub3" name="r55_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub4" name="r55_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub5" name="r55_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3760,40 +3760,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input" type="text"
+												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub1" name="r56_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub2" name="r56_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub3" name="r56_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub4" name="r56_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input  " type="text"
+												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r56_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub5" name="r56_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3819,40 +3819,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r57_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub1" name="r57_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r57_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub2" name="r57_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r57_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub3" name="r57_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r57_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub4" name="r57_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r57_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub5" name="r57_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
@@ -3878,40 +3878,40 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r58_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub1" name="r58_amt_name_of_sub1"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r58_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub2" name="r58_amt_name_of_sub2"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r58_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub3" name="r58_amt_name_of_sub3"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r58_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub4" name="r58_amt_name_of_sub4"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;">
-													<input class="display-input Show_input " type="text"
+												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r58_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub5" name="r58_amt_name_of_sub5"
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
