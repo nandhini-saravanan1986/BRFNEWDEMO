@@ -1135,7 +1135,7 @@ $(document).ready(function() {
 
 
 
-											<td style="text-align: left;"
+											<td style="text-align: left; padding-left:30px;"
 												th:text="${report?.r12_product ?: ''}"></td>
 
 											<!-- <td  id="r12_total" style="text-align: right;"
@@ -1157,7 +1157,7 @@ $(document).ready(function() {
 										<tr th:each="report: ${reportsummary}">
 
 
-											<td style="text-align: left;"
+											<td style="text-align: left; padding-left:30px;"
 												th:text="${report?.r13_product ?: ''}"></td>
 
 											<!-- <td style="text-align: right;"
@@ -1197,7 +1197,7 @@ $(document).ready(function() {
 
 
 
-											<td style="text-align: left;"
+											<td style="text-align: left; padding-left:30px;"
 												th:text="${report?.r15_product ?: ''}"></td>
 
 											<!-- <td   id="r15_total" style="text-align: right;" 
@@ -1218,7 +1218,7 @@ $(document).ready(function() {
                                             <tr  th:each="report : ${reportsummary1}" >
 
 
-                                        <td id="ROW16" style="font-weight: bold; text-align: left; "><input
+                                        <td id="ROW16" style="font-weight: bold; text-align: left; padding-left:30px; "><input
 													class="display-input Show_input " type="text"
 													th:value="'(ii) Repurchase Agreements'"
 													id="r16_product" name="r16_product"
@@ -1246,7 +1246,7 @@ $(document).ready(function() {
 
 
 
-											<td style="text-align: left;"
+											<td style="text-align: left; padding-left:30px;"
 												th:text="${report?.r17_product ?: ''}"></td>
 
 											<!-- <td   id="r17_total" style="text-align: right;"
@@ -1257,7 +1257,7 @@ $(document).ready(function() {
 
 
 
-<td id="r17_total" style="text-align: right;" 
+<td id="r17_total" style="text-align: right; " 
     th:text="${report?.r17_total != null ? #numbers.formatDecimal(report.r17_total, 1, 'COMMA', 0, 'POINT') : ''}"
     th:attr="RowId='R17', ColumnId='C2'"
     onclick="showdetailsbyRowAndColumn(this)">
@@ -1347,10 +1347,9 @@ $(document).ready(function() {
 												th:attr="RowId='R21', ColumnId='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td> -->
 												
-												<td id="r21_total" style="text-align: right;" 
+												<td id="r21_total" style="text-align: right;"  class="green-cell"
     th:text="${report?.r21_total != null ? #numbers.formatDecimal(report.r21_total, 1, 'COMMA', 0, 'POINT') : ''}"
-  th:attr="RowId='R21', ColumnId='C2'"
-    onclick="showdetailsbyRowAndColumn(this)" >
+  >
 </td>
 
 
@@ -1428,10 +1427,9 @@ $(document).ready(function() {
 
 
 
-<td id="r25_total" style="text-align: right;" 
+<td id="r25_total" style="text-align: right;"  class="green-cell"
     th:text="${report?.r25_total != null ? #numbers.formatDecimal(report.r25_total, 1, 'COMMA', 0, 'POINT') : ''}"
-    th:attr="RowId='R25', ColumnId='C2'"
-    onclick="showdetailsbyRowAndColumn(this)" >
+    >
 </td>
 										</tr>
 
@@ -1450,8 +1448,8 @@ $(document).ready(function() {
 													readonly /></td>
 
 												<td id="ROW26"
-													style=" font-weight: bold; text-align: right;"><input
-													class="display-input Show_input" type="text"
+													style=" font-weight: bold; text-align: right;" ><input
+													class="display-input Show_input " type="text"
 													th:value="${report.r26_total != null ? #numbers.formatDecimal(report.r26_total, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r26_total" name="r26_total"
 													style="background-color: #FFFFFF; width: 390px; height: 28px; border-color: transparent; text-align: right;"
@@ -1553,7 +1551,7 @@ $(document).ready(function() {
 												onclick="showdetailsbyRowAndColumn(this)"></td> -->
 
 
-<td style="text-align: right;"
+<td style="text-align: right; " 
     th:text="${report?.r31_total != null ? #numbers.formatDecimal(report.r31_total, 1, 'COMMA', 0, 'POINT') : ''}"
     th:attr="RowId='R31', ColumnId='C2'"
     onclick="showdetailsbyRowAndColumn(this)">
@@ -1565,9 +1563,9 @@ $(document).ready(function() {
 
 
 
-											<td style="text-align: left;" 
+											<td style="text-align: left; padding-left:20px;" 
 												>2.5% of (Total average customer deposits (M-SfinP2) less Pula equivalent of total average foreign
-												<br>currency deposits (M-DEP3))</br>
+												<br>  currency deposits (M-DEP3))</br>
 												</td>
 
 											<!-- <td style="text-align: right;" class="green-cell" 
@@ -1575,7 +1573,7 @@ $(document).ready(function() {
 												th:attr="RowId='R32', ColumnId='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td>
  -->
-<td style="text-align: right; height: 5px;" 
+<td style="text-align: right; height: 5px;" class="green-cell"
     th:text="${report?.r32_total != null ? #numbers.formatDecimal(report.r32_total, 1, 'COMMA', 0, 'POINT') : ''}"
     th:attr="RowId='R32', ColumnId='C2'"
     onclick="showdetailsbyRowAndColumn(this)">
@@ -1622,7 +1620,7 @@ $(document).ready(function() {
 
 
 
-											<td style="text-align: left; " 
+											<td style="text-align: left; padding-left:30px;" 
 												>10% of (Total average customer deposits (M-SfinP2) less Pula equivalent of total average foreign 
 												<br>currency deposits (M-DEP3))</br>			
 												</td>
@@ -1632,7 +1630,7 @@ $(document).ready(function() {
 												th:attr="RowId='R35', ColumnId='C2'"
 												onclick="showdetailsbyRowAndColumn(this)"></td> -->
 
-<td style="text-align: right; " 
+<td style="text-align: right; "  class="green-cell"
     th:text="${report?.r35_total != null ? #numbers.formatDecimal(report.r35_total, 1, 'COMMA', 0, 'POINT') : ''}"
     th:attr="RowId='R35', ColumnId='C2'"
     onclick="showdetailsbyRowAndColumn(this)">
