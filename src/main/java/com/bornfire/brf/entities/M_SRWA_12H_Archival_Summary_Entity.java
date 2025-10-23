@@ -719,7 +719,7 @@ public class M_SRWA_12H_Archival_Summary_Entity {
 	private BigDecimal R80_STD_SUPERVISORY_HAIRCUT;
 	private BigDecimal R80_APPLICABLE_RISK_WEIGHT;
 	
-	private String R81_PRODUCT;
+	private BigDecimal R81_PRODUCT;
 	private BigDecimal R81_ISSUER;
 	private BigDecimal R81_ISSUES_RATING;
 	private BigDecimal R81_1YR_VAL_OF_CRM;
@@ -4521,10 +4521,10 @@ public class M_SRWA_12H_Archival_Summary_Entity {
 	public void setR80_APPLICABLE_RISK_WEIGHT(BigDecimal r80_APPLICABLE_RISK_WEIGHT) {
 		R80_APPLICABLE_RISK_WEIGHT = r80_APPLICABLE_RISK_WEIGHT;
 	}
-	public String getR81_PRODUCT() {
+	public BigDecimal getR81_PRODUCT() {
 		return R81_PRODUCT;
 	}
-	public void setR81_PRODUCT(String r81_PRODUCT) {
+	public void setR81_PRODUCT(BigDecimal r81_PRODUCT) {
 		R81_PRODUCT = r81_PRODUCT;
 	}
 	public BigDecimal getR81_ISSUER() {

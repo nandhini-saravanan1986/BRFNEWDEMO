@@ -3,6 +3,7 @@ package com.bornfire.brf.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +15,9 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_M_SRWA_12H_SUMMARYTABLE")
+@Table(name = "BRRS_M_SRWA_12H_RESUB_SUMMARYTABLE")
 
-public class M_SRWA_12H_Summary_Entity {
+public class M_SRWA_12H_Resub_Summary_Entity {
 	
 	private String R11_PRODUCT;
 	private BigDecimal R11_ISSUER;
@@ -4621,15 +4622,7 @@ public class M_SRWA_12H_Summary_Entity {
 	}
 	public void setDEL_FLG(String dEL_FLG) {
 		DEL_FLG = dEL_FLG;
-	}
-	public M_SRWA_12H_Summary_Entity() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-    
-    
-    
-    
+	} 
     
 }
     

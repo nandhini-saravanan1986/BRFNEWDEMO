@@ -61,6 +61,8 @@ import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity5;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity6;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity7;
 import com.bornfire.brf.entities.M_SRWA_12G_Summary_Entity;
+import com.bornfire.brf.entities.M_SRWA_12H_Resub_Summary_Entity;
+import com.bornfire.brf.entities.M_SRWA_12H_Resub_Summary_Entity;
 import com.bornfire.brf.entities.M_SRWA_12H_Summary_Entity;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity1;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity2;
@@ -659,30 +661,58 @@ public class CBUAE_BRF_ReportsController {
 		                              .body("Update Failed: " + e.getMessage());
 		     }
 		 }
-		 	 @Autowired
-		 private BRRS_M_SRWA_12H_ReportService M_SRWA_12Hservice;
-		
-		 @RequestMapping(value = "/UpdateM_SRWA_12H", method = { RequestMethod.GET, RequestMethod.POST })
-		 @ResponseBody
-		 public ResponseEntity<String> updateReport(
-		     @RequestParam(required = false)
-		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-		     @ModelAttribute M_SRWA_12H_Summary_Entity request,
-		     HttpServletRequest req) {
-		     try {
-		         System.out.println("came to First controller");
-		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		       
-		         // ✅ set the asondate into entity
-		         request.setREPORT_DATE(asondate);
-		         M_SRWA_12Hservice.updateReport(request);
-		         return ResponseEntity.ok("Updated Successfully");
-		     } catch (Exception e) {
-		         e.printStackTrace();
-		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                              .body("Update Failed: " + e.getMessage());
-		     }
-		 }
+			
+@Autowired
+private BRRS_M_SRWA_12H_ReportService M_SRWA_12Hservice;
+
+@RequestMapping(value = "/UpdateM_SRWA_12H", method = { RequestMethod.GET, RequestMethod.POST })
+@ResponseBody
+public ResponseEntity<String> updateReport(
+    @RequestParam(required = false) 
+    @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+    @ModelAttribute M_SRWA_12H_Summary_Entity request,
+    HttpServletRequest req) {
+
+    try {
+        System.out.println("came to First controller");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        // ✅ set the asondate into entity
+        request.setREPORT_DATE(asondate);
+
+        M_SRWA_12Hservice.updateReport(request);
+        return ResponseEntity.ok("Updated Successfully");
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body("Update Failed: " + e.getMessage());
+    }
+}
+
+@RequestMapping(value = "/UpdateM_SRWA_12H_ReSub", method = { RequestMethod.GET, RequestMethod.POST })
+@ResponseBody
+public ResponseEntity<String> updateReportReSub(
+    @RequestParam(required = false) 
+    @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+    @ModelAttribute M_SRWA_12H_Resub_Summary_Entity request,
+    HttpServletRequest req) {
+
+    try {
+        System.out.println("Came to Resub Controller");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        //  set the asondate into entity
+        request.setREPORT_DATE(asondate);
+
+        M_SRWA_12Hservice.updateReportReSub(request);
+        return ResponseEntity.ok("Resubmission Updated Successfully");
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body("Resubmission Update Failed: " + e.getMessage());
+    }
+	}
+
 		 @Autowired
 		 BRRS_M_CA7_ReportService BRRS_M_CA7_ReportService;
 		 @RequestMapping(value = "/MCA7updateAll", method = { RequestMethod.GET, RequestMethod.POST })
@@ -1002,6 +1032,6 @@ public class CBUAE_BRF_ReportsController {
 			 
 			 
 			 
-	}
-				
+	
+			 }	
 

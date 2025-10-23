@@ -3,7 +3,7 @@
 <!-- 
 CREATED BY	: VINOTH KUMAR S 
 CREATED ON	: 07.07.2025
-PURPOSE		: ARCHIVAL
+PURPOSE		: resubmit
 -->
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
@@ -63,8 +63,6 @@ PURPOSE		: ARCHIVAL
 	background-color: #E77400;
 	border-color: #0c0c0c;
 }
-
-
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
@@ -304,8 +302,48 @@ $(window).on('beforeunload', function() {
 
 		window.history.back();
 	}
-
-
+	
+	// function getReport(a) {
+	//     // Retrieve data attributes
+	//     var todate = a.getAttribute("data-todate");
+	//     var asondate = a.getAttribute("data-todate");
+	//     var reportid = a.getAttribute("data-rptcode");
+	//     var version = a.getAttribute("data-version");
+	//     var fromdate =a.getAttribute("data-todate");
+	    
+	//     if (confirm("Do you want to open report?")) {
+  //           $('#loader').modal('show'); // Show again before submission
+  //           const type = 'RESUB';
+          
+  //           $('#loader').modal('hide');
+  //           location.href = "Reports/"+reportid+"?dtltype=report&fromdate="+fromdate+"&todate="+todate+"&type="+type+"&asondate="+asondate+"&version="+version;
+  //       }
+  //       else{
+	//     	$('#loader').modal('hide');
+	//     }
+	    
+	           
+	    
+	// }
+	function getReport(a) {
+	    // Retrieve data attributes
+	    var todate = a.getAttribute("data-todate");
+	    var asondate = a.getAttribute("data-todate");
+	    var reportid = a.getAttribute("data-rptcode");
+	    var version = a.getAttribute("data-version");
+	    var fromdate =a.getAttribute("data-todate");
+	    
+	    if (confirm("Do you want to open report?")) {
+            $('#loader').modal('show'); // Show again before submission
+            const type = 'RESUB';
+          
+            $('#loader').modal('hide');
+            location.href = "Reports/"+reportid+"?dtltype=report&fromdate="+fromdate+"&todate="+todate+"&type="+type+"&asondate="+asondate+"&version="+version;
+        }
+        else{
+	    	$('#loader').modal('hide');
+	    }
+    }
 	
     </script>
   
@@ -320,22 +358,10 @@ function getVali(a) {
 
     // Show loader
     $('#loader').modal('show');
-	location.href = 'Archival?rptcode=' + reportid;
+	location.href = 'Resubmission?rptcode=' + reportid;
 }
 
 
-function Resubmission(a) {
-  // Store ID of clicked element in localStorage
-    localStorage.setItem("activeMenuId", a.id);
-
-    // Show loader modal
-    $('#loader').modal('show');
-
-    // Delay navigation slightly so the loader is visible
-    setTimeout(function () {
-        location.href = "/BCDRS/" + a.id;
-    }, 300); 
-}
 </script>
 
 
@@ -354,16 +380,17 @@ function Resubmission(a) {
 			
 			<div class="card" >
 						
-		<div class="card-header" style="background-color: rgb(107, 122, 143); display: flex; align-items: center; justify-content: space-between;">
-    <div style="display: flex; align-items: center;" onclick="back();">
-        <div class="left-arrow-circle">
-            <i class="fa fa-arrow-left"></i>
-        </div>
-        <h5 style="font-family: arial; font-size: 20px; padding-top:10px; font-weight: bold; color: white;" th:text="${menu}"></h5>
-    </div>
+					<div class="card-header" style="background-color: rgb(107, 122, 143); display: flex; align-items: center; justify-content: space-between;">
+					    <div style="display: flex; align-items: center;" onclick="back();">
+					        <!-- ⬅️ Left circular arrow -->
+					        <div class="left-arrow-circle">
+					    		<i class="fa fa-arrow-left"></i>
+							</div>
+					        <!-- Title -->
+					        <h5 style="font-family: arial; font-size: 20px; padding-top:10px; font-weight: bold; color: white;" th:text="${menu}"></h5>
+		   				 </div>
 
-    <button type="button" class="custom-tab-btn" id="Monthly1-Resubmission"   style="margin-left: auto;" onclick="Resubmission(this)">Resubmission</button>
-</div>				
+					</div>					
 				
 			
 
@@ -374,14 +401,24 @@ function Resubmission(a) {
 							id="BRRSvalidation">
 							<thead style="background-color:#e9ecf0; font-family: Arial;">
 								<tr>									
-										<th>Report Code</th>
-										<th>Report Name</th>
+										<th>Report Date</th>
+										<th>Report Version</th>
 										<th>Domain</th>
 									</tr>
 							</thead>
 							<tbody style="font-family: Arial;">
+							
+							<tr th:each="ReData : ${Resubmitdata }">
+								<td class="underline" th:attr="data-rptcode=${rptcode},
+								 data-todate=${#dates.format(ReData[0],'dd/MM/yyyy')},
+								 data-version=${ReData[1]}"
+								style="color: #08a6f1;" th:text="${#dates.format(ReData[0],'dd/MM/yyyy')}" onclick="getReport(this);"></td>
+								<td th:text="${ReData[1]}"></td>
+								<td th:text="${domain}"></td>
 								
-								<tr th:each="userProfile : ${reportlist}"
+							</tr >
+								
+								<tr th:each="userProfile : ${resubmissionData}"
 									th:attr="data-cust_id=${userProfile.srlNo}"
 									th:id="${userProfile.srlNo}" class="userlist">
 								

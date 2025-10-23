@@ -500,4 +500,40 @@ public class NavigationController {
 		return "BRFValidations";
 	}
 
+
+	
+  @RequestMapping(value = "Monthly1-Resubmission", method = { RequestMethod.GET,RequestMethod.POST })
+	  public String brrsResubmission(Model md, HttpServletRequest req)
+	  {
+		  System.out.println("Testting");
+	  md.addAttribute("menu", "BRRS - BRRS RESUBMISSION");
+	System.out.println("count"+rrReportlist.getReportListmonthly1().size());
+	  md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
+	  
+	  return "BRRS/BRRSResubmission";
+	  
+	  }
+
+
+
+	    @RequestMapping(value = "Resubmission", method = { RequestMethod.GET,RequestMethod.POST })
+	  public String Resubmission(Model md,@RequestParam(value = "rptcode", required = false) String rptcode, HttpServletRequest req)
+	  {
+		  RRReport data=rrReportlist.getReportbyrptcode(rptcode);
+		  md.addAttribute("reportlist1", data);
+		  md.addAttribute("menu", data.getRptDescription());
+		  md.addAttribute("domain", data.getDomainId());
+		  md.addAttribute("rptcode", data.getRptCode());
+		  List<Object> resubmissionData =regulatoryreportservices.getResub(rptcode);
+		  md.addAttribute("Resubmitdata",resubmissionData );
+		//  List<Object> ArchivalData =regulatoryreportservices.getArchival(rptcode);
+		//  md.addAttribute("ArchivalData",ArchivalData );
+		 md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
+		  
+
+	 
+	  return "BRRS/BRRSResubmissionform";
+	 
+	  }
+
 }

@@ -320,22 +320,9 @@ function getVali(a) {
 
     // Show loader
     $('#loader').modal('show');
-	location.href = 'Archival?rptcode=' + reportid;
+	location.href = 'Resubmission?rptcode=' + reportid;
 }
 
-
-function Resubmission(a) {
-  // Store ID of clicked element in localStorage
-    localStorage.setItem("activeMenuId", a.id);
-
-    // Show loader modal
-    $('#loader').modal('show');
-
-    // Delay navigation slightly so the loader is visible
-    setTimeout(function () {
-        location.href = "/BCDRS/" + a.id;
-    }, 300); 
-}
 </script>
 
 
@@ -354,16 +341,17 @@ function Resubmission(a) {
 			
 			<div class="card" >
 						
-		<div class="card-header" style="background-color: rgb(107, 122, 143); display: flex; align-items: center; justify-content: space-between;">
-    <div style="display: flex; align-items: center;" onclick="back();">
-        <div class="left-arrow-circle">
-            <i class="fa fa-arrow-left"></i>
-        </div>
-        <h5 style="font-family: arial; font-size: 20px; padding-top:10px; font-weight: bold; color: white;" th:text="${menu}"></h5>
-    </div>
+					<div class="card-header" style="background-color: rgb(107, 122, 143); display: flex; align-items: center; justify-content: space-between;">
+					    <div style="display: flex; align-items: center;" onclick="back();">
+					        <!-- ⬅️ Left circular arrow -->
+					        <div class="left-arrow-circle">
+					    		<i class="fa fa-arrow-left"></i>
+							</div>
+					        <!-- Title -->
+					        <h5 style="font-family: arial; font-size: 20px; padding-top:10px; font-weight: bold; color: white;" th:text="${menu}"></h5>
+		   				 </div>
 
-    <button type="button" class="custom-tab-btn" id="Monthly1-Resubmission"   style="margin-left: auto;" onclick="Resubmission(this)">Resubmission</button>
-</div>				
+					</div>					
 				
 			
 
@@ -398,10 +386,8 @@ function Resubmission(a) {
 							</tbody>
 						</table>
 					</div>
-					<!-- <div class="card-footer text-center" style="background-color: white;">
-						  <button type="button" class="custom-tab-btn custom-tab-btn-xs" id="custom-tab-btnHome" onclick="home();">Home</button>
-						  <button type="button" class="custom-tab-btn custom-tab-btn-xs" id="custom-tab-btnBack" onclick="back();">Back</button>
-					</div> -->
+				
+					
 
 				</div>
 			</div>

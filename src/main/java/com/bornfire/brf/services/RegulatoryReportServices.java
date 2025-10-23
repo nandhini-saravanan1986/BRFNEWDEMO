@@ -1545,7 +1545,8 @@ public class RegulatoryReportServices {
 
 		List<Object> archivalData = new ArrayList<>();
 		switch (rptcode) {
-		case "M_SFINP2":
+		
+			case "M_SFINP2":
 			try {
 				archivalData = BRRS_M_SFINP2_reportservice.getM_SFINP2Archival();
 			} catch (Exception e) {
@@ -2180,4 +2181,42 @@ public class RegulatoryReportServices {
 //	}
 //
 //	
+
+
+
+//Resubmission
+	public List<Object> getResub(String rptcode) {
+
+		List<Object> resubmissionData = new ArrayList<>();
+		switch (rptcode) {
+		
+			case "M_SRWA_12H":
+			try {
+				resubmissionData = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HResub();
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			break;
+
+
+			//Everyone add your case here
+			//For example
+			// case "M_SRWA_12H":
+			// try {
+			// 	resubmissionData = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HResub();
+			// } catch (Exception e) {
+				
+			// 	e.printStackTrace();
+			// }
+			// break;
+			
+
+            //getM_SRWA_12HResub-->Created on ReportService
+		}
+		return resubmissionData ;
+	}
+
 }
+
+
