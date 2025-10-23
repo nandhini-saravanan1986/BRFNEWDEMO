@@ -1,3 +1,4 @@
+
 package com.bornfire.brf.services;
 
 import java.io.ByteArrayOutputStream;
@@ -522,6 +523,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row28
 				row = sheet.getRow(27);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR28_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR28_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR28_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR28_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR28_AMOUNT().doubleValue());
@@ -534,6 +559,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row29
 				row = sheet.getRow(28);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR29_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR29_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR29_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR29_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR29_AMOUNT().doubleValue());
@@ -546,6 +595,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row30
 				row = sheet.getRow(29);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR30_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR30_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR30_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR30_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR30_AMOUNT().doubleValue());
@@ -558,6 +631,31 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row31
 				row = sheet.getRow(30);
 				// Column D
+				
+				cell3 = row.createCell(2); 
+				if (record2.getR31_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR31_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR31_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR31_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR31_AMOUNT().doubleValue());
@@ -570,6 +668,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row32
 				row = sheet.getRow(31);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR32_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR32_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR32_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR32_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR32_AMOUNT().doubleValue());
@@ -582,6 +704,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row33
 				row = sheet.getRow(32);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR33_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR33_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR33_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR33_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR33_AMOUNT().doubleValue());
@@ -594,6 +740,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row34
 				row = sheet.getRow(33);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR34_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR34_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR34_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR34_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR34_AMOUNT().doubleValue());
@@ -606,6 +776,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row40
 				row = sheet.getRow(39);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR40_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR40_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR40_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR40_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR40_AMOUNT().doubleValue());
@@ -618,6 +812,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row41
 				row = sheet.getRow(40);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR41_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR41_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR41_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR41_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR41_AMOUNT().doubleValue());
@@ -630,6 +848,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row42
 				row = sheet.getRow(41);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR42_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR42_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR42_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR42_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR42_AMOUNT().doubleValue());
@@ -642,6 +884,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row43
 				row = sheet.getRow(42);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR43_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR43_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR43_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR43_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR43_AMOUNT().doubleValue());
@@ -654,6 +920,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row44
 				row = sheet.getRow(43);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR44_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR44_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR44_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR44_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR44_AMOUNT().doubleValue());
@@ -666,6 +956,30 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row45
 				row = sheet.getRow(44);
 				// Column D
+				cell3 = row.createCell(2); 
+				if (record2.getR45_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR45_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR45_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR45_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR45_AMOUNT().doubleValue());
@@ -678,6 +992,31 @@ public byte[] BRRS_M_CA6Excel(String filename,String reportId, String fromdate, 
 				//row46
 				row = sheet.getRow(45);
 				// Column D
+				
+				cell3 = row.createCell(2); 
+				if (record2.getR46_ISSUANCE_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(3);
+				if (record2.getR46_CONTRACTUAL_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
+				cell3 = row.createCell(4);
+				if (record2.getR46_EFFECTIVE_MATURITY_DATE() != null) {
+				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellStyle(dateStyle);
+				} else {
+				    cell3.setCellValue("");
+				    cell3.setCellStyle(textStyle);
+				}
 				cell3 = row.createCell(5);
 				if (record2.getR46_AMOUNT() != null) {
 					cell3.setCellValue(record2.getR46_AMOUNT().doubleValue());
@@ -845,7 +1184,7 @@ public void updateReport(M_CA6_Summary_Entity2 entity) {
             "Record not found for REPORT_DATE: " + entity.getREPORT_DATE()));
 
     // --------------------------
-    // Update R28–R34
+    // Update R28–R34 amounts
     // --------------------------
     try {
         for (int i = 28; i <= 34; i++) {
@@ -870,10 +1209,8 @@ public void updateReport(M_CA6_Summary_Entity2 entity) {
         }
 
         // Update R35 total
-        String getterName = "getR35_AMOUNT";
-        String setterName = "setR35_AMOUNT";
-        Method getter = M_CA6_Summary_Entity2.class.getMethod(getterName);
-        Method setter = M_CA6_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+        Method getter = M_CA6_Summary_Entity2.class.getMethod("getR35_AMOUNT");
+        Method setter = M_CA6_Summary_Entity2.class.getMethod("setR35_AMOUNT", getter.getReturnType());
         setter.invoke(existing, getter.invoke(entity));
 
     } catch (Exception e) {
@@ -881,7 +1218,7 @@ public void updateReport(M_CA6_Summary_Entity2 entity) {
     }
 
     // --------------------------
-    // Update R40–R46 + R47
+    // Update R40–R46 + R47 amounts
     // --------------------------
     try {
         for (int i = 40; i <= 46; i++) {
@@ -915,6 +1252,73 @@ public void updateReport(M_CA6_Summary_Entity2 entity) {
     }
 
     // --------------------------
+    // ✅ Update date fields
+    // --------------------------
+    try {
+        existing.setR28_ISSUANCE_DATE(entity.getR28_ISSUANCE_DATE());
+        existing.setR28_CONTRACTUAL_MATURITY_DATE(entity.getR28_CONTRACTUAL_MATURITY_DATE());
+        existing.setR28_EFFECTIVE_MATURITY_DATE(entity.getR28_EFFECTIVE_MATURITY_DATE());
+        
+        
+
+        existing.setR29_ISSUANCE_DATE(entity.getR29_ISSUANCE_DATE());
+        existing.setR29_CONTRACTUAL_MATURITY_DATE(entity.getR29_CONTRACTUAL_MATURITY_DATE());
+        existing.setR29_EFFECTIVE_MATURITY_DATE(entity.getR29_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR30_ISSUANCE_DATE(entity.getR30_ISSUANCE_DATE());
+        existing.setR30_CONTRACTUAL_MATURITY_DATE(entity.getR30_CONTRACTUAL_MATURITY_DATE());
+        existing.setR30_EFFECTIVE_MATURITY_DATE(entity.getR30_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR31_ISSUANCE_DATE(entity.getR31_ISSUANCE_DATE());
+        existing.setR31_CONTRACTUAL_MATURITY_DATE(entity.getR31_CONTRACTUAL_MATURITY_DATE());
+        existing.setR31_EFFECTIVE_MATURITY_DATE(entity.getR31_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR32_ISSUANCE_DATE(entity.getR32_ISSUANCE_DATE());
+        existing.setR32_CONTRACTUAL_MATURITY_DATE(entity.getR32_CONTRACTUAL_MATURITY_DATE());
+        existing.setR32_EFFECTIVE_MATURITY_DATE(entity.getR32_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR33_ISSUANCE_DATE(entity.getR33_ISSUANCE_DATE());
+        existing.setR33_CONTRACTUAL_MATURITY_DATE(entity.getR33_CONTRACTUAL_MATURITY_DATE());
+        existing.setR33_EFFECTIVE_MATURITY_DATE(entity.getR33_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR34_ISSUANCE_DATE(entity.getR34_ISSUANCE_DATE());
+        existing.setR34_CONTRACTUAL_MATURITY_DATE(entity.getR34_CONTRACTUAL_MATURITY_DATE());
+        existing.setR34_EFFECTIVE_MATURITY_DATE(entity.getR34_EFFECTIVE_MATURITY_DATE());
+
+        // Update dates R40–R46
+        existing.setR40_ISSUANCE_DATE(entity.getR40_ISSUANCE_DATE());
+        existing.setR40_CONTRACTUAL_MATURITY_DATE(entity.getR40_CONTRACTUAL_MATURITY_DATE());
+        existing.setR40_EFFECTIVE_MATURITY_DATE(entity.getR40_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR41_ISSUANCE_DATE(entity.getR41_ISSUANCE_DATE());
+        existing.setR41_CONTRACTUAL_MATURITY_DATE(entity.getR41_CONTRACTUAL_MATURITY_DATE());
+        existing.setR41_EFFECTIVE_MATURITY_DATE(entity.getR41_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR42_ISSUANCE_DATE(entity.getR42_ISSUANCE_DATE());
+        existing.setR42_CONTRACTUAL_MATURITY_DATE(entity.getR42_CONTRACTUAL_MATURITY_DATE());
+        existing.setR42_EFFECTIVE_MATURITY_DATE(entity.getR42_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR43_ISSUANCE_DATE(entity.getR43_ISSUANCE_DATE());
+        existing.setR43_CONTRACTUAL_MATURITY_DATE(entity.getR43_CONTRACTUAL_MATURITY_DATE());
+        existing.setR43_EFFECTIVE_MATURITY_DATE(entity.getR43_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR44_ISSUANCE_DATE(entity.getR44_ISSUANCE_DATE());
+        existing.setR44_CONTRACTUAL_MATURITY_DATE(entity.getR44_CONTRACTUAL_MATURITY_DATE());
+        existing.setR44_EFFECTIVE_MATURITY_DATE(entity.getR44_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR45_ISSUANCE_DATE(entity.getR45_ISSUANCE_DATE());
+        existing.setR45_CONTRACTUAL_MATURITY_DATE(entity.getR45_CONTRACTUAL_MATURITY_DATE());
+        existing.setR45_EFFECTIVE_MATURITY_DATE(entity.getR45_EFFECTIVE_MATURITY_DATE());
+
+        existing.setR46_ISSUANCE_DATE(entity.getR46_ISSUANCE_DATE());
+        existing.setR46_CONTRACTUAL_MATURITY_DATE(entity.getR46_CONTRACTUAL_MATURITY_DATE());
+        existing.setR46_EFFECTIVE_MATURITY_DATE(entity.getR46_EFFECTIVE_MATURITY_DATE());
+
+    } catch (Exception e) {
+        throw new RuntimeException("Error while updating date fields", e);
+    }
+
+    // --------------------------
     // Save updated entity
     // --------------------------
     M_CA6_Summary_Repo2.save(existing);
@@ -923,3 +1327,4 @@ public void updateReport(M_CA6_Summary_Entity2 entity) {
 }
 
 	
+
