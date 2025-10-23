@@ -404,6 +404,7 @@ $(window).on('beforeunload', function() {
 			alertMsg.innerHTML ='Download request Processing...';
 	   	 	showAlert();
 
+	   	 	
 			const baseUrl = '/BCDRS/Reports/startreport';
 			const downloadUrl = baseUrl +
 				'?filename=' + encodeURIComponent(filename) +
@@ -423,6 +424,9 @@ $(window).on('beforeunload', function() {
 		            sessionStorage.setItem("filename", filename);
 		            checkReport(jobId);
 		        });
+		    console.log("Report params:", {
+		        filename, fromdate, todate, currency, dtltype, type, version
+		    });
 		}
 
 		function checkReport(jobId) {
@@ -1070,7 +1074,7 @@ data-fromdate=${fromdate},
 data-todate=${todate}, 
 data-currency=${currency},  
 data-dtltype=${dtltype}, 
-data-filename='M_CA2',
+data-filename='M_CA2Detail',
 data-type=${type},
 data-version=${version}"
 
