@@ -213,6 +213,9 @@ public class RegulatoryReportServices {
 	@Autowired
 	BRRS_M_SECL_ReportService brrs_m_secl_reportservice;
 	
+	@Autowired
+	BRRS_M_SRWA_12G_ReportService brrs_m_srwa_12g_reportservice;
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(RegulatoryReportServices.class);
 
@@ -524,6 +527,11 @@ public class RegulatoryReportServices {
 		case "M_SECL":
 			repsummary = brrs_m_secl_reportservice.getM_SECLView(reportId, fromdate, todate, currency, dtltype, pageable,type, version);
 			break;
+			
+		case "M_SRWA_12G":
+			repsummary = brrs_m_srwa_12g_reportservice.getM_SRWA_12GView(reportId, fromdate, todate, currency, dtltype, pageable,type, version);
+			break;
+			
 		}
 		return repsummary;
 	}
@@ -1358,7 +1366,14 @@ public class RegulatoryReportServices {
 			}
 			break;
 					
-					
+		case "M_SRWA_12G":
+			try {
+				repfile = brrs_m_srwa_12g_reportservice.getM_SRWA_12GExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;			
 					
 					
 
@@ -1932,6 +1947,14 @@ public class RegulatoryReportServices {
 		case "M_CA6":
 			try {
 				archivalData = BRRS_M_CA6_reportservice.getM_CA6Archival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "M_SRWA_12G":
+			try {
+				archivalData = brrs_m_srwa_12g_reportservice.getM_SRWA_12GArchival();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

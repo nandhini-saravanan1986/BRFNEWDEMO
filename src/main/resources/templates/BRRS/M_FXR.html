@@ -1158,29 +1158,29 @@ function fileuploads(btn) {
 									<tr  style="background-color: #b3b6b9;">
 										<th  style="text-align: left; color:black;">Line no.</th>
 										<th  style="text-align: left; color:black;">Currency</th>
-										<th  style="text-align: left; color:black;">Net Spot Position</th>
-										<th  style="text-align: left; color:black;">Net Forward Position</th>
-										<th  style="text-align: left; color:black;">Guarantees</th>
-										<th  style="text-align: left; color:black;">Net Future income/expenses</th>
-										<th  style="text-align: left; color:black;">Net Delta Weighted FX Option Position</th>
-										<th  style="text-align: left; color:black; ">Other Items</th>
-										<th  style="text-align: left; color:black; ">Net Long Position</th>
-										<th  style="text-align: left; color:black; ">or</th>
-										<th  style="text-align: left; color:black; ">Net Short Position</th>
+										<th  style="text-align: right; color:black;">Net Spot Position</th>
+										<th  style="text-align: right; color:black;">Net Forward Position</th>
+										<th  style="text-align: right; color:black;">Guarantees</th>
+										<th  style="text-align: right; color:black;">Net Future income/expenses</th>
+										<th  style="text-align: right; color:black;">Net Delta Weighted FX Option Position</th>
+										<th  style="text-align: right; color:black; ">Other Items</th>
+										<th  style="text-align: right; color:black; ">Net Long Position</th>
+										<th  style="text-align: right; color:black; ">or</th>
+										<th  style="text-align: right; color:black; ">Net Short Position</th>
 									</tr>
 					
 										<tr>
 										    <th  style="text-align: left; color:black; "></th>
 											<th  style="text-align: center;color:black; ">A</th>
-											<th  style="text-align: center;color:black; ">B</th>
-											<th  style="text-align: center;color:black; ">C</th>
-											<th  style="text-align: center;color:black; ">D</th>
-											<th  style="text-align: left;color:black; ">E</th>
-											<th  style="text-align: center; color:black;">F</th>
-											<th  style="text-align: center; color:black;">G</th>
-											<th  style="text-align: center; color:black;">H</th>
-											<th  style="text-align: center; color:black;"></th>
-											<th  style="text-align: center; color:black;">I</th>
+											<th  style="text-align: right;color:black; ">B</th>
+											<th  style="text-align: right;color:black; ">C</th>
+											<th  style="text-align: right;color:black; ">D</th>
+											<th  style="text-align: right;color:black; ">E</th>
+											<th  style="text-align: right; color:black;">F</th>
+											<th  style="text-align: right; color:black;">G</th>
+											<th  style="text-align: right; color:black;">H</th>
+											<th  style="text-align: right; color:black;"></th>
+											<th  style="text-align: right; color:black;">I</th>
 										</tr>
 
 										
@@ -1814,10 +1814,10 @@ function fileuploads(btn) {
       <table class="sticky-header-table table table-bordered table-hover table-sm table-condensed" id="reports">
         <thead class="thead-light">
           <tr>
-            <th style="vertical-align: middle; text-align:left; color:black;">Long</th>
-            <th style="vertical-align: middle; text-align:left; color:black;">Short</th>
-            <th style="vertical-align: middle; text-align:left; color:black;">Total Gross Long &<br> Short Position</th>
-            <th style="vertical-align: middle; text-align:left; color:black;">Net Position</th>
+            <th style="vertical-align: middle; text-align:right; color:black;">Long</th>
+            <th style="vertical-align: middle; text-align:right; color:black;">Short</th>
+            <th style="vertical-align: middle; text-align:right; color:black;">Total Gross Long &<br> Short Position</th>
+            <th style="vertical-align: middle; text-align:right; color:black;">Net Position</th>
             <th ></th>
           </tr>
         </thead>
@@ -1927,17 +1927,17 @@ function fileuploads(btn) {
         <thead class="thead-light">
           <tr>
           	<th></th>
-            <th style="vertical-align: middle; text-align:left; color:black;">Greater of the Absolute <br>Value of Net Long<br> Position (J) or Net Short <br>Position (K)</th>
-            <th style="vertical-align: middle; text-align:left; color:black;">Absolute <br>Value Net<br> Gold Position (L)</th>
+            <th style="vertical-align: middle; text-align:right; color:black;">Greater of the Absolute <br>Value of Net Long<br> Position (J) or Net Short <br>Position (K)</th>
+            <th style="vertical-align: middle; text-align:right; color:black;">Absolute <br>Value Net<br> Gold Position (L)</th>
             <th style="vertical-align: middle; text-align:left; color:black;">Capital Requirement</th>
-            <th style="vertical-align: middle; text-align:left; color:black;">Capital Charge</th>
+            <th style="vertical-align: middle; text-align:right; color:black;">Capital Charge</th>
           </tr>
           <tr>
           	<th></th>
-            <th style="text-align:left; color:black;">M</th>
-            <th style="text-align:left; color:black;">N</th>
+            <th style="text-align:right; color:black;">M</th>
+            <th style="text-align:right; color:black;">N</th>
             <th style="text-align:left; color:black;">P</th>
-            <th style="text-align:left; color:black;">Q=(M+N)xP</th>
+            <th style="text-align:right; color:black;">Q=(M+N)xP</th>
           </tr>
         </thead>
         <tbody id="entity3" th:each="report: ${reportsummary3}" style="font-family: Arial;">
