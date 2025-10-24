@@ -452,12 +452,15 @@ function showmodify(btn) {
         }
     });
 
-    // Apply gray background for rows 10–58
+ // Apply gray background for rows 10–58, specific columns
     for (let i = 10; i <= 58; i++) {
-        // Define columns for all rows
-        let columns = [ "amt_name_of_sub1", "amt_name_of_sub2", "amt_name_of_sub3", "amt_name_of_sub4", "amt_name_of_sub5"];
-
-       
+        let columns = [
+            "amt_name_of_sub1",
+            "amt_name_of_sub2",
+            "amt_name_of_sub3",
+            "amt_name_of_sub4",
+            "amt_name_of_sub5"
+        ];
 
         columns.forEach(col => {
             let selector = `#r${i}_${col}`;
@@ -466,6 +469,13 @@ function showmodify(btn) {
             }
         });
     }
+
+    // Apply gray background to only r10_tot_amt and r11_tot_amt
+    ["#r10_tot_amt", "#r11_tot_amt"].forEach(selector => {
+        if ($(selector).length) {
+            $(selector).css("background-color", "#d3d3d3");
+        }
+    });
 
     // Toggle buttons
     $("#submitButton, #btnBack_edit, #cancelRecord").show();
@@ -1172,11 +1182,10 @@ window.fileuploads = function(btn) {
 
 
 
-						<span class="white-text"
-							style="color: white !important; font-size: 16px; margin-right: 20px;">Report
-							Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-07-04</span>
-						</span>
-
+				<span class="white-text"
+      style="color: white !important; font-size: 16px; margin-right: 20px;">
+    Report Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-07-04</span>
+</span>
 
 						<!-- Buttons -->
 						<input type="hidden" id="selectedTab" th:value="${displaymode}">
@@ -1333,7 +1342,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW10" style="font-weight: bold; text-align: right;"><input
+												<td id="ROW10" style="font-weight: bold; text-align: right; "><input
 													class="display-input Show_input " type="text"
 													th:value="${report.r10_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r10_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r10_amt_name_of_sub1" name="r10_amt_name_of_sub1"
@@ -1341,7 +1350,7 @@ window.fileuploads = function(btn) {
 													readonly /></td>
 
 
-												<td id="ROW10" style="font-weight: bold; text-align: right;"><input
+												<td id="ROW10" style="font-weight: bold; text-align: right;  padding-left:20px; "><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r10_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r10_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r10_amt_name_of_sub2" name="r10_amt_name_of_sub2"
@@ -1353,7 +1362,7 @@ window.fileuploads = function(btn) {
 
 
 
-												<td id="ROW10" style="font-weight: bold; text-align: right;"><input
+												<td id="ROW10" style="font-weight: bold; text-align: right;  padding-left:20px; "><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r10_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r10_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r10_amt_name_of_sub3" name="r10_amt_name_of_sub3"
@@ -1361,7 +1370,7 @@ window.fileuploads = function(btn) {
 													readonly /></td>
 
 
-												<td id="ROW10" style="font-weight: bold; text-align: right;"><input
+												<td id="ROW10" style="font-weight: bold; text-align: right;  padding-left:20px; "><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r10_amt_name_of_sub4  != null ? #numbers.formatDecimal(report.r10_amt_name_of_sub4 , 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r10_amt_name_of_sub4" name="r10_amt_name_of_sub4"
@@ -1369,7 +1378,7 @@ window.fileuploads = function(btn) {
 													readonly /></td>
 
 
-												<td id="ROW10" style="font-weight: bold; text-align: right;"><input
+												<td id="ROW10" style="font-weight: bold; text-align: right;  padding-left:20px; "><input
 													class="display-input Show_input" type="text"
 													th:value="${report.r10_amt_name_of_sub5  != null ? #numbers.formatDecimal(report.r10_amt_name_of_sub5 , 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r10_amt_name_of_sub5" name="r10_amt_name_of_sub5"
@@ -1379,9 +1388,14 @@ window.fileuploads = function(btn) {
 
 
 
-												<td id="r10_tot_amt" style="text-align: right;"
-													th:text="${report?.r10_tot_amt != null ? #numbers.formatDecimal(report.r10_tot_amt, 1, 'COMMA',0, 'POINT') : ''}">
-												</td>
+												
+												
+												<td id="ROW10" style="font-weight: bold; text-align: right;  padding-left:20px; "><input
+													class="display-input Show_input" type="text"
+													th:value="${report.r10_tot_amt  != null ? #numbers.formatDecimal(report.r10_tot_amt , 1, 'COMMA', 0, 'POINT') : '0'}"
+													id="r10_tot_amt" name="r10_tot_amt"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+													readonly /></td>
 
 
 											</tr>
@@ -1400,7 +1414,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW11" style="font-weight: bold; text-align: right;">
+												<td id="ROW11" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r11_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r11_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r11_amt_name_of_sub1" name="r11_amt_name_of_sub1"
@@ -1408,7 +1422,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW11" style="font-weight: bold; text-align: right;">
+												<td id="ROW11" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r11_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r11_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r11_amt_name_of_sub2" name="r11_amt_name_of_sub2"
@@ -1416,7 +1430,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW11" style="font-weight: bold; text-align: right;">
+												<td id="ROW11" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r11_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r11_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r11_amt_name_of_sub3" name="r11_amt_name_of_sub3"
@@ -1424,7 +1438,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW11" style="font-weight: bold; text-align: right;">
+												<td id="ROW11" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r11_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r11_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r11_amt_name_of_sub4" name="r11_amt_name_of_sub4"
@@ -1432,7 +1446,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW11" style="font-weight: bold; text-align: right;">
+												<td id="ROW11" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r11_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r11_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r11_amt_name_of_sub5" name="r11_amt_name_of_sub5"
@@ -1442,10 +1456,12 @@ window.fileuploads = function(btn) {
 
 
 
-
-												<td id="r11_tot_amt" style="text-align: right;"
-													th:text="${report?.r11_tot_amt != null ? #numbers.formatDecimal(report.r11_tot_amt, 1, 'COMMA',0, 'POINT') : ''}">
-												</td>
+	                               <td id="ROW11" style="font-weight: bold; text-align: right;  padding-left:20px; "><input
+													class="display-input Show_input" type="text"
+													th:value="${report.r11_tot_amt  != null ? #numbers.formatDecimal(report.r11_tot_amt , 1, 'COMMA', 0, 'POINT') : '0'}"
+													id="r11_tot_amt" name="r11_tot_amt"
+													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+													readonly /></td>
 
 
 
@@ -1461,7 +1477,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW12" style="font-weight: bold; text-align: right;"
+												<td id="ROW12" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r12_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r12_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1469,7 +1485,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
-												<td id="ROW12" style="font-weight: bold; text-align: right;"
+												<td id="ROW12" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r12_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r12_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1477,7 +1493,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
-												<td id="ROW12" style="font-weight: bold; text-align: right;"
+												<td id="ROW12" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r12_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r12_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1485,7 +1501,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
-												<td id="ROW12" style="font-weight: bold; text-align: right;"
+												<td id="ROW12" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r12_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r12_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1493,7 +1509,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
-												<td id="ROW12" style="font-weight: bold; text-align: right;"
+												<td id="ROW12" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r12_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r12_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1501,7 +1517,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
 													readonly /></td>
 
-												<td id="ROW12" style="font-weight: bold; text-align: right;"
+												<td id="ROW12" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r12_tot_amt != null ? #numbers.formatDecimal(report.r12_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1527,7 +1543,7 @@ window.fileuploads = function(btn) {
     </div>
 </td>
 
-												<td id="ROW13" style="font-weight: bold; text-align: right;">
+												<td id="ROW13" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r13_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r13_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r13_amt_name_of_sub1" name="r13_amt_name_of_sub1"
@@ -1535,7 +1551,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW13" style="font-weight: bold; text-align: right;">
+												<td id="ROW13" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r13_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r13_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r13_amt_name_of_sub2" name="r13_amt_name_of_sub2"
@@ -1543,7 +1559,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW13" style="font-weight: bold; text-align: right;">
+												<td id="ROW13" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r13_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r13_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r13_amt_name_of_sub3" name="r13_amt_name_of_sub3"
@@ -1551,7 +1567,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW13" style="font-weight: bold; text-align: right;">
+												<td id="ROW13" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r13_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r13_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r13_amt_name_of_sub4" name="r13_amt_name_of_sub4"
@@ -1559,7 +1575,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW13" style="font-weight: bold; text-align: right;">
+												<td id="ROW13" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r13_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r13_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r13_amt_name_of_sub5" name="r13_amt_name_of_sub5"
@@ -1567,7 +1583,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW13" style="font-weight: bold; text-align: right;"
+												<td id="ROW13" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r13_tot_amt != null ? #numbers.formatDecimal(report.r13_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1595,7 +1611,7 @@ window.fileuploads = function(btn) {
     </div>
 </td>
 
-												<td id="ROW14" style="font-weight: bold; text-align: right;">
+												<td id="ROW14" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r14_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r14_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r14_amt_name_of_sub1" name="r14_amt_name_of_sub1"
@@ -1603,7 +1619,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW14" style="font-weight: bold; text-align: right;">
+												<td id="ROW14" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r14_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r14_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r14_amt_name_of_sub2" name="r14_amt_name_of_sub2"
@@ -1611,7 +1627,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW14" style="font-weight: bold; text-align: right;">
+												<td id="ROW14" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r14_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r14_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r14_amt_name_of_sub3" name="r14_amt_name_of_sub3"
@@ -1619,7 +1635,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW14" style="font-weight: bold; text-align: right;">
+												<td id="ROW14" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r14_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r14_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r14_amt_name_of_sub4" name="r14_amt_name_of_sub4"
@@ -1627,7 +1643,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW14" style="font-weight: bold; text-align: right;">
+												<td id="ROW14" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r14_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r14_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r14_amt_name_of_sub5" name="r14_amt_name_of_sub5"
@@ -1635,7 +1651,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW14" style="font-weight: bold; text-align: right;"
+												<td id="ROW14" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r14_tot_amt != null ? #numbers.formatDecimal(report.r14_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1695,7 +1711,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW17" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r17_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub1" name="r17_amt_name_of_sub1"
@@ -1703,7 +1719,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW17" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r17_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub2" name="r17_amt_name_of_sub2"
@@ -1711,7 +1727,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW17" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r17_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub3" name="r17_amt_name_of_sub3"
@@ -1719,7 +1735,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW17" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r17_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub4" name="r17_amt_name_of_sub4"
@@ -1727,7 +1743,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW17" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW17" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r17_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r17_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r17_amt_name_of_sub5" name="r17_amt_name_of_sub5"
@@ -1754,7 +1770,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW18" style="font-weight: bold; text-align: right;">
+												<td id="ROW18" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r18_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r18_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r18_amt_name_of_sub1" name="r18_amt_name_of_sub1"
@@ -1762,7 +1778,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW18" style="font-weight: bold; text-align: right;">
+												<td id="ROW18" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r18_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r18_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r18_amt_name_of_sub2" name="r18_amt_name_of_sub2"
@@ -1770,7 +1786,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW18" style="font-weight: bold; text-align: right;">
+												<td id="ROW18" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r18_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r18_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r18_amt_name_of_sub3" name="r18_amt_name_of_sub3"
@@ -1778,7 +1794,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW18" style="font-weight: bold; text-align: right;">
+												<td id="ROW18" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r18_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r18_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r18_amt_name_of_sub4" name="r18_amt_name_of_sub4"
@@ -1786,7 +1802,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW18" style="font-weight: bold; text-align: right;">
+												<td id="ROW18" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r18_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r18_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r18_amt_name_of_sub5" name="r18_amt_name_of_sub5"
@@ -1794,7 +1810,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW18" style="font-weight: bold; text-align: right;"
+												<td id="ROW18" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r18_tot_amt != null ? #numbers.formatDecimal(report.r18_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1813,7 +1829,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW19" style="font-weight: bold; text-align: right;">
+												<td id="ROW19" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r19_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r19_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r19_amt_name_of_sub1" name="r19_amt_name_of_sub1"
@@ -1821,7 +1837,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW19" style="font-weight: bold; text-align: right;">
+												<td id="ROW19" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r19_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r19_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r19_amt_name_of_sub2" name="r19_amt_name_of_sub2"
@@ -1829,7 +1845,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW19" style="font-weight: bold; text-align: right;">
+												<td id="ROW19" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r19_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r19_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r19_amt_name_of_sub3" name="r19_amt_name_of_sub3"
@@ -1837,7 +1853,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW19" style="font-weight: bold; text-align: right;">
+												<td id="ROW19" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r19_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r19_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r19_amt_name_of_sub4" name="r19_amt_name_of_sub4"
@@ -1845,7 +1861,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW19" style="font-weight: bold; text-align: right;">
+												<td id="ROW19" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r19_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r19_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r19_amt_name_of_sub5" name="r19_amt_name_of_sub5"
@@ -1853,7 +1869,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW19" style="font-weight: bold; text-align: right;"
+												<td id="ROW19" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r19_tot_amt != null ? #numbers.formatDecimal(report.r19_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1911,7 +1927,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW22" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub1" name="r22_amt_name_of_sub1"
@@ -1919,7 +1935,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW22" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub2" name="r22_amt_name_of_sub2"
@@ -1927,7 +1943,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW22" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub3" name="r22_amt_name_of_sub3"
@@ -1935,7 +1951,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW22" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub4" name="r22_amt_name_of_sub4"
@@ -1943,7 +1959,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW22" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r22_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r22_amt_name_of_sub5" name="r22_amt_name_of_sub5"
@@ -1951,7 +1967,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW22" style="font-weight: bold; text-align: right;"
+												<td id="ROW22" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r22_tot_amt != null ? #numbers.formatDecimal(report.r22_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -1970,7 +1986,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW23" style="font-weight: bold; text-align: right;">
+												<td id="ROW23" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r23_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r23_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r23_amt_name_of_sub1" name="r23_amt_name_of_sub1"
@@ -1978,7 +1994,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW23" style="font-weight: bold; text-align: right;">
+												<td id="ROW23" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r23_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r23_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r23_amt_name_of_sub2" name="r23_amt_name_of_sub2"
@@ -1986,7 +2002,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW23" style="font-weight: bold; text-align: right;">
+												<td id="ROW23" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r23_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r23_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r23_amt_name_of_sub3" name="r23_amt_name_of_sub3"
@@ -1994,7 +2010,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW23" style="font-weight: bold; text-align: right;">
+												<td id="ROW23" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r23_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r23_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r23_amt_name_of_sub4" name="r23_amt_name_of_sub4"
@@ -2002,7 +2018,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW23" style="font-weight: bold; text-align: right;">
+												<td id="ROW23" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r23_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r23_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r23_amt_name_of_sub5" name="r23_amt_name_of_sub5"
@@ -2010,7 +2026,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW23" style="font-weight: bold; text-align: right;"
+												<td id="ROW23" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r23_tot_amt != null ? #numbers.formatDecimal(report.r23_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2029,7 +2045,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW24" style="font-weight: bold; text-align: right;">
+												<td id="ROW24" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r24_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r24_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r24_amt_name_of_sub1" name="r24_amt_name_of_sub1"
@@ -2037,7 +2053,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW24" style="font-weight: bold; text-align: right;">
+												<td id="ROW24" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r24_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r24_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r24_amt_name_of_sub2" name="r24_amt_name_of_sub2"
@@ -2045,7 +2061,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW24" style="font-weight: bold; text-align: right;">
+												<td id="ROW24" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r24_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r24_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r24_amt_name_of_sub3" name="r24_amt_name_of_sub3"
@@ -2053,7 +2069,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW24" style="font-weight: bold; text-align: right;">
+												<td id="ROW24" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r24_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r24_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r24_amt_name_of_sub4" name="r24_amt_name_of_sub4"
@@ -2061,7 +2077,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW24" style="font-weight: bold; text-align: right;">
+												<td id="ROW24" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r24_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r24_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r24_amt_name_of_sub5" name="r24_amt_name_of_sub5"
@@ -2069,7 +2085,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW24" style="font-weight: bold; text-align: right;"
+												<td id="ROW24" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r24_tot_amt != null ? #numbers.formatDecimal(report.r24_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2131,7 +2147,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW27" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r27_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub1" name="r27_amt_name_of_sub1"
@@ -2139,7 +2155,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW27" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r27_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub2" name="r27_amt_name_of_sub2"
@@ -2147,7 +2163,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW27" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r27_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub3" name="r27_amt_name_of_sub3"
@@ -2155,7 +2171,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW27" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r27_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub4" name="r27_amt_name_of_sub4"
@@ -2163,7 +2179,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW27" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r27_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r27_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r27_amt_name_of_sub5" name="r27_amt_name_of_sub5"
@@ -2171,7 +2187,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW27" style="font-weight: bold; text-align: right;"
+												<td id="ROW27" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r27_tot_amt != null ? #numbers.formatDecimal(report.r27_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2190,7 +2206,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW28" style="font-weight: bold; text-align: right;">
+												<td id="ROW28" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r28_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r28_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r28_amt_name_of_sub1" name="r28_amt_name_of_sub1"
@@ -2198,7 +2214,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW28" style="font-weight: bold; text-align: right;">
+												<td id="ROW28" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r28_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r28_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r28_amt_name_of_sub2" name="r28_amt_name_of_sub2"
@@ -2206,7 +2222,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW28" style="font-weight: bold; text-align: right;">
+												<td id="ROW28" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r28_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r28_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r28_amt_name_of_sub3" name="r28_amt_name_of_sub3"
@@ -2214,7 +2230,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW28" style="font-weight: bold; text-align: right;">
+												<td id="ROW28" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r28_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r28_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r28_amt_name_of_sub4" name="r28_amt_name_of_sub4"
@@ -2222,7 +2238,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW28" style="font-weight: bold; text-align: right;">
+												<td id="ROW28" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r28_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r28_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r28_amt_name_of_sub5" name="r28_amt_name_of_sub5"
@@ -2230,7 +2246,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW28" style="font-weight: bold; text-align: right;"
+												<td id="ROW28" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r28_tot_amt != null ? #numbers.formatDecimal(report.r28_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2249,7 +2265,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW29" style="font-weight: bold; text-align: right;">
+												<td id="ROW29" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r29_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r29_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r29_amt_name_of_sub1" name="r29_amt_name_of_sub1"
@@ -2257,7 +2273,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW29" style="font-weight: bold; text-align: right;">
+												<td id="ROW29" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r29_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r29_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r29_amt_name_of_sub2" name="r29_amt_name_of_sub2"
@@ -2265,7 +2281,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW29" style="font-weight: bold; text-align: right;">
+												<td id="ROW29" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r29_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r29_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r29_amt_name_of_sub3" name="r29_amt_name_of_sub3"
@@ -2273,7 +2289,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW29" style="font-weight: bold; text-align: right;">
+												<td id="ROW29" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r29_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r29_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r29_amt_name_of_sub4" name="r29_amt_name_of_sub4"
@@ -2281,7 +2297,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW29" style="font-weight: bold; text-align: right;">
+												<td id="ROW29" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r29_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r29_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r29_amt_name_of_sub5" name="r29_amt_name_of_sub5"
@@ -2289,7 +2305,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW29" style="font-weight: bold; text-align: right;"
+												<td id="ROW29" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r29_tot_amt != null ? #numbers.formatDecimal(report.r29_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2355,7 +2371,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW32" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r32_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub1" name="r32_amt_name_of_sub1"
@@ -2363,7 +2379,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW32" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r32_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub2" name="r32_amt_name_of_sub2"
@@ -2371,7 +2387,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW32" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r32_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub3" name="r32_amt_name_of_sub3"
@@ -2379,7 +2395,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW32" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r32_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub4" name="r32_amt_name_of_sub4"
@@ -2387,7 +2403,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW32" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r32_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r32_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r32_amt_name_of_sub5" name="r32_amt_name_of_sub5"
@@ -2395,7 +2411,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW32" style="font-weight: bold; text-align: right;"
+												<td id="ROW32" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r32_tot_amt != null ? #numbers.formatDecimal(report.r32_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2414,7 +2430,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW33" style="font-weight: bold; text-align: right;">
+												<td id="ROW33" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r33_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r33_amt_name_of_sub1, 1, 'COMMA',0, 'POINT') : '0'}"
 													id="r33_amt_name_of_sub1" name="r33_amt_name_of_sub1"
@@ -2422,7 +2438,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW33" style="font-weight: bold; text-align: right;">
+												<td id="ROW33" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r33_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r33_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r33_amt_name_of_sub2" name="r33_amt_name_of_sub2"
@@ -2430,7 +2446,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW33" style="font-weight: bold; text-align: right;">
+												<td id="ROW33" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r33_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r33_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r33_amt_name_of_sub3" name="r33_amt_name_of_sub3"
@@ -2438,7 +2454,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW33" style="font-weight: bold; text-align: right;">
+												<td id="ROW33" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r33_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r33_amt_name_of_sub4, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r33_amt_name_of_sub4" name="r33_amt_name_of_sub4"
@@ -2446,7 +2462,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW33" style="font-weight: bold; text-align: right;">
+												<td id="ROW33" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r33_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r33_amt_name_of_sub5, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r33_amt_name_of_sub5" name="r33_amt_name_of_sub5"
@@ -2454,7 +2470,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW33" style="font-weight: bold; text-align: right;"
+												<td id="ROW33" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r33_tot_amt != null ? #numbers.formatDecimal(report.r33_tot_amt, 1, 'NONE', 0, 'POINT') : '0'}"
@@ -2481,7 +2497,7 @@ window.fileuploads = function(btn) {
         <strong>third parties</strong> prior to application of regulatory adjustments
     </div>
 </td>
-												<td id="ROW34" style="font-weight: bold; text-align: right;">
+												<td id="ROW34" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r34_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r34_amt_name_of_sub1, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_amt_name_of_sub1" name="r34_amt_name_of_sub1"
@@ -2489,7 +2505,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW34" style="font-weight: bold; text-align: right;">
+												<td id="ROW34" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r34_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r34_amt_name_of_sub2, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_amt_name_of_sub2" name="r34_amt_name_of_sub2"
@@ -2497,7 +2513,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW34" style="font-weight: bold; text-align: right;">
+												<td id="ROW34" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r34_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r34_amt_name_of_sub3, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_amt_name_of_sub3" name="r34_amt_name_of_sub3"
@@ -2505,7 +2521,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW34" style="font-weight: bold; text-align: right;">
+												<td id="ROW34" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r34_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r34_amt_name_of_sub4, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_amt_name_of_sub4" name="r34_amt_name_of_sub4"
@@ -2513,7 +2529,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW34" style="font-weight: bold; text-align: right;">
+												<td id="ROW34" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r34_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r34_amt_name_of_sub5, 1, 'NONE', 0, 'POINT') : '0'}"
 													id="r34_amt_name_of_sub5" name="r34_amt_name_of_sub5"
@@ -2521,7 +2537,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW34" style="font-weight: bold; text-align: right;"
+												<td id="ROW34" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r34_tot_amt != null ? #numbers.formatDecimal(report.r34_tot_amt, 1, 'NONE', 0, 'POINT') : '0'}"
@@ -2562,7 +2578,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW36" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r36_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub1" name="r36_amt_name_of_sub1"
@@ -2570,7 +2586,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW36" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub2" name="r36_amt_name_of_sub2"
@@ -2578,7 +2594,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW36" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub3" name="r36_amt_name_of_sub3"
@@ -2586,7 +2602,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW36" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub4" name="r36_amt_name_of_sub4"
@@ -2594,7 +2610,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW36" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r36_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r36_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r36_amt_name_of_sub5" name="r36_amt_name_of_sub5"
@@ -2602,7 +2618,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW36" style="font-weight: bold; text-align: right;"
+												<td id="ROW36" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r36_tot_amt != null ? #numbers.formatDecimal(report.r36_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2628,7 +2644,7 @@ window.fileuploads = function(btn) {
     </div>
 </td>
 
-												<td id="ROW37" style="font-weight: bold; text-align: right;">
+												<td id="ROW37" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r37_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r37_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r37_amt_name_of_sub1" name="r37_amt_name_of_sub1"
@@ -2636,7 +2652,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW37" style="font-weight: bold; text-align: right;">
+												<td id="ROW37" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r37_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r37_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r37_amt_name_of_sub2" name="r37_amt_name_of_sub2"
@@ -2644,7 +2660,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW37" style="font-weight: bold; text-align: right;">
+												<td id="ROW37" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r37_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r37_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r37_amt_name_of_sub3" name="r37_amt_name_of_sub3"
@@ -2652,7 +2668,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW37" style="font-weight: bold; text-align: right;">
+												<td id="ROW37" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r37_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r37_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r37_amt_name_of_sub4" name="r37_amt_name_of_sub4"
@@ -2660,7 +2676,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW37" style="font-weight: bold; text-align: right;">
+												<td id="ROW37" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r37_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r37_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r37_amt_name_of_sub5" name="r37_amt_name_of_sub5"
@@ -2668,7 +2684,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW37" style="font-weight: bold; text-align: right;"
+												<td id="ROW37" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r37_tot_amt != null ? #numbers.formatDecimal(report.r37_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2698,7 +2714,7 @@ window.fileuploads = function(btn) {
  
  
  
-												<td id="ROW38" style="font-weight: bold; text-align: right;">
+												<td id="ROW38" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r38_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r38_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r38_amt_name_of_sub1" name="r38_amt_name_of_sub1"
@@ -2706,7 +2722,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW38" style="font-weight: bold; text-align: right;">
+												<td id="ROW38" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r38_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r38_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r38_amt_name_of_sub2" name="r38_amt_name_of_sub2"
@@ -2714,7 +2730,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW38" style="font-weight: bold; text-align: right;">
+												<td id="ROW38" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r38_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r38_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r38_amt_name_of_sub3" name="r38_amt_name_of_sub3"
@@ -2722,7 +2738,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW38" style="font-weight: bold; text-align: right;">
+												<td id="ROW38" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r38_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r38_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r38_amt_name_of_sub4" name="r38_amt_name_of_sub4"
@@ -2730,7 +2746,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW38" style="font-weight: bold; text-align: right;">
+												<td id="ROW38" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r38_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r38_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r38_amt_name_of_sub5" name="r38_amt_name_of_sub5"
@@ -2738,7 +2754,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW38" style="font-weight: bold; text-align: right;"
+												<td id="ROW38" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r38_tot_amt != null ? #numbers.formatDecimal(report.r38_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2757,7 +2773,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW39" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub1" name="r39_amt_name_of_sub1"
@@ -2765,7 +2781,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW39" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r39_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub2" name="r39_amt_name_of_sub2"
@@ -2773,7 +2789,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW39" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub3" name="r39_amt_name_of_sub3"
@@ -2781,7 +2797,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW39" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub4" name="r39_amt_name_of_sub4"
@@ -2789,7 +2805,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW39" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r39_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r39_amt_name_of_sub5" name="r39_amt_name_of_sub5"
@@ -2797,7 +2813,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW39" style="font-weight: bold; text-align: right;"
+												<td id="ROW39" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r39_tot_amt != null ? #numbers.formatDecimal(report.r39_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2816,7 +2832,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW40" style="font-weight: bold; text-align: right;">
+												<td id="ROW40" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r40_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r40_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r40_amt_name_of_sub1" name="r40_amt_name_of_sub1"
@@ -2824,7 +2840,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW40" style="font-weight: bold; text-align: right;">
+												<td id="ROW40" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r40_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r40_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r40_amt_name_of_sub2" name="r40_amt_name_of_sub2"
@@ -2832,7 +2848,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW40" style="font-weight: bold; text-align: right;">
+												<td id="ROW40" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r40_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r40_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r40_amt_name_of_sub3" name="r40_amt_name_of_sub3"
@@ -2840,7 +2856,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW40" style="font-weight: bold; text-align: right;">
+												<td id="ROW40" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r40_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r40_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r40_amt_name_of_sub4" name="r40_amt_name_of_sub4"
@@ -2848,7 +2864,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW40" style="font-weight: bold; text-align: right;">
+												<td id="ROW40" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r40_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r40_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r40_amt_name_of_sub5" name="r40_amt_name_of_sub5"
@@ -2856,7 +2872,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW40" style="font-weight: bold; text-align: right;"
+												<td id="ROW40" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r40_tot_amt != null ? #numbers.formatDecimal(report.r40_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2875,7 +2891,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW41" style="font-weight: bold; text-align: right;">
+												<td id="ROW41" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r41_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r41_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r41_amt_name_of_sub1" name="r41_amt_name_of_sub1"
@@ -2883,7 +2899,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW41" style="font-weight: bold; text-align: right;">
+												<td id="ROW41" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r41_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r41_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r41_amt_name_of_sub2" name="r41_amt_name_of_sub2"
@@ -2891,7 +2907,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW41" style="font-weight: bold; text-align: right;">
+												<td id="ROW41" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r41_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r41_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r41_amt_name_of_sub3" name="r41_amt_name_of_sub3"
@@ -2899,7 +2915,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW41" style="font-weight: bold; text-align: right;">
+												<td id="ROW41" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r41_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r41_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r41_amt_name_of_sub4" name="r41_amt_name_of_sub4"
@@ -2907,7 +2923,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW41" style="font-weight: bold; text-align: right;">
+												<td id="ROW41" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r41_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r41_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r41_amt_name_of_sub5" name="r41_amt_name_of_sub5"
@@ -2915,7 +2931,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW41" style="font-weight: bold; text-align: right;"
+												<td id="ROW41" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r41_tot_amt != null ? #numbers.formatDecimal(report.r41_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2934,7 +2950,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW42" style="font-weight: bold; text-align: right;">
+												<td id="ROW42" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r42_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r42_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r42_amt_name_of_sub1" name="r42_amt_name_of_sub1"
@@ -2942,7 +2958,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW42" style="font-weight: bold; text-align: right;">
+												<td id="ROW42" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r42_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r42_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r42_amt_name_of_sub2" name="r42_amt_name_of_sub2"
@@ -2950,7 +2966,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW42" style="font-weight: bold; text-align: right;">
+												<td id="ROW42" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r42_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r42_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r42_amt_name_of_sub3" name="r42_amt_name_of_sub3"
@@ -2958,7 +2974,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW42" style="font-weight: bold; text-align: right;">
+												<td id="ROW42" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r42_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r42_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r42_amt_name_of_sub4" name="r42_amt_name_of_sub4"
@@ -2966,7 +2982,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW42" style="font-weight: bold; text-align: right;">
+												<td id="ROW42" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r42_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r42_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r42_amt_name_of_sub5" name="r42_amt_name_of_sub5"
@@ -2974,7 +2990,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW42" style="font-weight: bold; text-align: right;"
+												<td id="ROW42" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r42_tot_amt != null ? #numbers.formatDecimal(report.r42_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -2993,7 +3009,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW43" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub1" name="r43_amt_name_of_sub1"
@@ -3001,7 +3017,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW43" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r43_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub2" name="r43_amt_name_of_sub2"
@@ -3009,7 +3025,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW43" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub3" name="r43_amt_name_of_sub3"
@@ -3017,7 +3033,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW43" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub4" name="r43_amt_name_of_sub4"
@@ -3025,7 +3041,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW43" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r43_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r43_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r43_amt_name_of_sub5" name="r43_amt_name_of_sub5"
@@ -3033,7 +3049,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW43" style="font-weight: bold; text-align: right;"
+												<td id="ROW43" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r43_tot_amt != null ? #numbers.formatDecimal(report.r43_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3052,7 +3068,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
  
-												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW44" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub1" name="r44_amt_name_of_sub1"
@@ -3060,7 +3076,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW44" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub2" name="r44_amt_name_of_sub2"
@@ -3068,7 +3084,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW44" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub3" name="r44_amt_name_of_sub3"
@@ -3076,7 +3092,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW44" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r44_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub4" name="r44_amt_name_of_sub4"
@@ -3084,7 +3100,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW44" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r44_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r44_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r44_amt_name_of_sub5" name="r44_amt_name_of_sub5"
@@ -3092,7 +3108,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW44" style="font-weight: bold; text-align: right;"
+												<td id="ROW44" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r44_tot_amt != null ? #numbers.formatDecimal(report.r44_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3111,7 +3127,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW45" style="font-weight: bold; text-align: right;">
+												<td id="ROW45" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r45_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r45_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r45_amt_name_of_sub1" name="r45_amt_name_of_sub1"
@@ -3119,7 +3135,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW45" style="font-weight: bold; text-align: right;">
+												<td id="ROW45" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r45_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r45_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r45_amt_name_of_sub2" name="r45_amt_name_of_sub2"
@@ -3127,7 +3143,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW45" style="font-weight: bold; text-align: right;">
+												<td id="ROW45" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r45_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r45_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r45_amt_name_of_sub3" name="r45_amt_name_of_sub3"
@@ -3135,7 +3151,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW45" style="font-weight: bold; text-align: right;">
+												<td id="ROW45" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r45_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r45_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r45_amt_name_of_sub4" name="r45_amt_name_of_sub4"
@@ -3143,7 +3159,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW45" style="font-weight: bold; text-align: right;">
+												<td id="ROW45" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r45_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r45_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r45_amt_name_of_sub5" name="r45_amt_name_of_sub5"
@@ -3151,7 +3167,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW45" style="font-weight: bold; text-align: right;"
+												<td id="ROW45" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r45_tot_amt != null ? #numbers.formatDecimal(report.r45_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3170,7 +3186,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW46" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub1" name="r46_amt_name_of_sub1"
@@ -3178,7 +3194,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW46" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub2" name="r46_amt_name_of_sub2"
@@ -3186,7 +3202,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW46" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub3" name="r46_amt_name_of_sub3"
@@ -3194,7 +3210,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW46" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r46_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub4" name="r46_amt_name_of_sub4"
@@ -3202,7 +3218,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW46" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r46_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r46_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r46_amt_name_of_sub5" name="r46_amt_name_of_sub5"
@@ -3210,7 +3226,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW46" style="font-weight: bold; text-align: right;"
+												<td id="ROW46" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r46_tot_amt != null ? #numbers.formatDecimal(report.r46_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3229,7 +3245,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW47" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r47_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub1" name="r47_amt_name_of_sub1"
@@ -3237,7 +3253,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW47" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r47_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub2" name="r47_amt_name_of_sub2"
@@ -3245,7 +3261,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW47" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r47_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub3" name="r47_amt_name_of_sub3"
@@ -3253,7 +3269,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW47" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r47_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub4" name="r47_amt_name_of_sub4"
@@ -3261,7 +3277,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW47" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r47_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r47_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r47_amt_name_of_sub5" name="r47_amt_name_of_sub5"
@@ -3269,7 +3285,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW47" style="font-weight: bold; text-align: right;"
+												<td id="ROW47" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r47_tot_amt != null ? #numbers.formatDecimal(report.r47_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3288,7 +3304,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW48" style="font-weight: bold; text-align: right;" >
+												<td id="ROW48" style="font-weight: bold; text-align: right;  padding-left:20px; " >
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r48_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r48_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r48_amt_name_of_sub1" name="r48_amt_name_of_sub1"
@@ -3296,7 +3312,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW48" style="font-weight: bold; text-align: right;">
+												<td id="ROW48" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r48_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r48_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r48_amt_name_of_sub2" name="r48_amt_name_of_sub2"
@@ -3304,7 +3320,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW48" style="font-weight: bold; text-align: right;">
+												<td id="ROW48" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r48_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r48_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r48_amt_name_of_sub3" name="r48_amt_name_of_sub3"
@@ -3312,7 +3328,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW48" style="font-weight: bold; text-align: right;">
+												<td id="ROW48" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r48_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r48_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r48_amt_name_of_sub4" name="r48_amt_name_of_sub4"
@@ -3320,7 +3336,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW48" style="font-weight: bold; text-align: right;">
+												<td id="ROW48" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r48_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r48_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r48_amt_name_of_sub5" name="r48_amt_name_of_sub5"
@@ -3328,7 +3344,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW48" style="font-weight: bold; text-align: right;"
+												<td id="ROW48" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r48_tot_amt != null ? #numbers.formatDecimal(report.r48_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3347,7 +3363,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW49" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub1" name="r49_amt_name_of_sub1"
@@ -3355,7 +3371,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW49" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub2" name="r49_amt_name_of_sub2"
@@ -3363,7 +3379,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW49" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub3" name="r49_amt_name_of_sub3"
@@ -3371,7 +3387,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW49" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub4" name="r49_amt_name_of_sub4"
@@ -3379,7 +3395,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW49" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r49_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r49_amt_name_of_sub5" name="r49_amt_name_of_sub5"
@@ -3387,7 +3403,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW49" style="font-weight: bold; text-align: right;"
+												<td id="ROW49" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r49_tot_amt != null ? #numbers.formatDecimal(report.r49_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3406,7 +3422,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW50" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r50_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub1" name="r50_amt_name_of_sub1"
@@ -3414,7 +3430,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW50" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r50_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub2" name="r50_amt_name_of_sub2"
@@ -3422,7 +3438,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW50" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r50_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub3" name="r50_amt_name_of_sub3"
@@ -3430,7 +3446,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;"class="gray-cell">
+												<td id="ROW50" style="font-weight: bold; text-align: right;  padding-left:20px; "class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r50_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub4" name="r50_amt_name_of_sub4"
@@ -3438,7 +3454,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW50" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r50_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r50_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r50_amt_name_of_sub5" name="r50_amt_name_of_sub5"
@@ -3446,7 +3462,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW50" style="font-weight: bold; text-align: right;"
+												<td id="ROW50" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r50_tot_amt != null ? #numbers.formatDecimal(report.r50_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3465,7 +3481,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW51" style="font-weight: bold; text-align: right;">
+												<td id="ROW51" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r51_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r51_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r51_amt_name_of_sub1" name="r51_amt_name_of_sub1"
@@ -3473,7 +3489,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW51" style="font-weight: bold; text-align: right;">
+												<td id="ROW51" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r51_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r51_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r51_amt_name_of_sub2" name="r51_amt_name_of_sub2"
@@ -3481,7 +3497,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW51" style="font-weight: bold; text-align: right;">
+												<td id="ROW51" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r51_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r51_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r51_amt_name_of_sub3" name="r51_amt_name_of_sub3"
@@ -3489,7 +3505,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW51" style="font-weight: bold; text-align: right;">
+												<td id="ROW51" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r51_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r51_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r51_amt_name_of_sub4" name="r51_amt_name_of_sub4"
@@ -3497,7 +3513,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW51" style="font-weight: bold; text-align: right;">
+												<td id="ROW51" style="font-weight: bold; text-align: right;  padding-left:20px; ">
 													<input class="display-input Show_input" type="text"
 													th:value="${report.r51_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r51_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r51_amt_name_of_sub5" name="r51_amt_name_of_sub5"
@@ -3505,7 +3521,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW51" style="font-weight: bold; text-align: right;"
+												<td id="ROW51" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r51_tot_amt != null ? #numbers.formatDecimal(report.r51_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3524,7 +3540,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left;"
 													readonly /></td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW52" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub1" name="r52_amt_name_of_sub1"
@@ -3532,7 +3548,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW52" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub2" name="r52_amt_name_of_sub2"
@@ -3540,7 +3556,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW52" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub3" name="r52_amt_name_of_sub3"
@@ -3548,7 +3564,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW52" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r52_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub4" name="r52_amt_name_of_sub4"
@@ -3556,7 +3572,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW52" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r52_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r52_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r52_amt_name_of_sub5" name="r52_amt_name_of_sub5"
@@ -3564,7 +3580,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW52" style="font-weight: bold; text-align: right;"
+												<td id="ROW52" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r52_tot_amt != null ? #numbers.formatDecimal(report.r52_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3583,7 +3599,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW53" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub1" name="r53_amt_name_of_sub1"
@@ -3591,7 +3607,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW53" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub2" name="r53_amt_name_of_sub2"
@@ -3599,7 +3615,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW53" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r53_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub3" name="r53_amt_name_of_sub3"
@@ -3607,7 +3623,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW53" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub4" name="r53_amt_name_of_sub4"
@@ -3615,7 +3631,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW53" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r53_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r53_amt_name_of_sub5" name="r53_amt_name_of_sub5"
@@ -3623,7 +3639,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW53" style="font-weight: bold; text-align: right;"
+												<td id="ROW53" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r53_tot_amt != null ? #numbers.formatDecimal(report.r53_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3642,7 +3658,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW54" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r54_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub1" name="r54_amt_name_of_sub1"
@@ -3650,7 +3666,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW54" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r54_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub2" name="r54_amt_name_of_sub2"
@@ -3658,7 +3674,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW54" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r54_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub3" name="r54_amt_name_of_sub3"
@@ -3666,7 +3682,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW54" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r54_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub4" name="r54_amt_name_of_sub4"
@@ -3674,7 +3690,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW54" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r54_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r54_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r54_amt_name_of_sub5" name="r54_amt_name_of_sub5"
@@ -3682,7 +3698,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW54" style="font-weight: bold; text-align: right;"
+												<td id="ROW54" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r54_tot_amt != null ? #numbers.formatDecimal(report.r54_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3701,7 +3717,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW55" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub1" name="r55_amt_name_of_sub1"
@@ -3709,7 +3725,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW55" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r55_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub2" name="r55_amt_name_of_sub2"
@@ -3717,7 +3733,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW55" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub3" name="r55_amt_name_of_sub3"
@@ -3725,7 +3741,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW55" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub4" name="r55_amt_name_of_sub4"
@@ -3733,7 +3749,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW55" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r55_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r55_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r55_amt_name_of_sub5" name="r55_amt_name_of_sub5"
@@ -3741,7 +3757,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW55" style="font-weight: bold; text-align: right;"
+												<td id="ROW55" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r55_tot_amt != null ? #numbers.formatDecimal(report.r55_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3760,7 +3776,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW56" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub1" name="r56_amt_name_of_sub1"
@@ -3768,7 +3784,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW56" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub2" name="r56_amt_name_of_sub2"
@@ -3776,7 +3792,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW56" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub3" name="r56_amt_name_of_sub3"
@@ -3784,7 +3800,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW56" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r56_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub4" name="r56_amt_name_of_sub4"
@@ -3792,7 +3808,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW56" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r56_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r56_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r56_amt_name_of_sub5" name="r56_amt_name_of_sub5"
@@ -3800,7 +3816,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW56" style="font-weight: bold; text-align: right;"
+												<td id="ROW56" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r56_tot_amt != null ? #numbers.formatDecimal(report.r56_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3819,7 +3835,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW57" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r57_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub1" name="r57_amt_name_of_sub1"
@@ -3827,7 +3843,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW57" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r57_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub2" name="r57_amt_name_of_sub2"
@@ -3835,7 +3851,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW57" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r57_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub3" name="r57_amt_name_of_sub3"
@@ -3843,7 +3859,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW57" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r57_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub4" name="r57_amt_name_of_sub4"
@@ -3851,7 +3867,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW57" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r57_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r57_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r57_amt_name_of_sub5" name="r57_amt_name_of_sub5"
@@ -3859,7 +3875,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW57" style="font-weight: bold; text-align: right;"
+												<td id="ROW57" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r57_tot_amt != null ? #numbers.formatDecimal(report.r57_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
@@ -3878,7 +3894,7 @@ window.fileuploads = function(btn) {
 													style="background-color: #FFFFFF; width: 900px; height: 28px; border-color: transparent; text-align: left; font-weight: bold;"
 													readonly /></td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW58" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r58_amt_name_of_sub1 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub1, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub1" name="r58_amt_name_of_sub1"
@@ -3886,7 +3902,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW58" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r58_amt_name_of_sub2 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub2, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub2" name="r58_amt_name_of_sub2"
@@ -3894,7 +3910,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW58" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r58_amt_name_of_sub3 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub3, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub3" name="r58_amt_name_of_sub3"
@@ -3902,7 +3918,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW58" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input  gray-cell" type="text"
 													th:value="${report.r58_amt_name_of_sub4 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub4, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub4" name="r58_amt_name_of_sub4"
@@ -3910,7 +3926,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;" class="gray-cell">
+												<td id="ROW58" style="font-weight: bold; text-align: right;  padding-left:20px; " class="gray-cell">
 													<input class="display-input Show_input gray-cell " type="text"
 													th:value="${report.r58_amt_name_of_sub5 != null ? #numbers.formatDecimal(report.r58_amt_name_of_sub5, 1, 'COMMA', 0, 'POINT') : '0'}"
 													id="r58_amt_name_of_sub5" name="r58_amt_name_of_sub5"
@@ -3918,7 +3934,7 @@ window.fileuploads = function(btn) {
 													readonly />
 												</td>
 
-												<td id="ROW58" style="font-weight: bold; text-align: right;"
+												<td id="ROW58" style="font-weight: bold; text-align: right;  padding-left:20px; "
 													class="gray-cell"><input
 													class="display-input Show_input gray-cell" type="text"
 													th:value="${report.r58_tot_amt != null ? #numbers.formatDecimal(report.r58_tot_amt, 1, 'COMMA', 0, 'POINT') : '0'}"
