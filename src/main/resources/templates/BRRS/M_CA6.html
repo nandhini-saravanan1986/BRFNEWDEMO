@@ -418,10 +418,11 @@ function downloadfile(button) {
 				window.URL.revokeObjectURL(url);
 				document.body.removeChild(a);
 
-				showResultModal('BRRS', 'The file has been downloaded successfully.');
-			} else {
-				showResultModal('Information', 'No data was available to create a download.');
-			}
+
+					showResultModal('Success', filename + ' downloaded successfully.');
+				} else {
+					showResultModal('Information', 'No data was available to create a download.');
+				}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			$('#loader').modal('hide');

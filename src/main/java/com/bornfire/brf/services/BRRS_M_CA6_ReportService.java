@@ -1201,6 +1201,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 
 
+
 				//row12
 				// Column D
 				Cell cell3 = row.createCell(3);
@@ -1464,7 +1465,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR28_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR28_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1472,7 +1473,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR28_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR28_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR28_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1500,7 +1501,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR29_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR29_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR29_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1508,7 +1509,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR29_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR29_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR29_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1536,7 +1537,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR30_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR30_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR30_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1544,7 +1545,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR30_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR30_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR30_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1573,7 +1574,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR31_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR31_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR31_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1581,7 +1582,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR31_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR31_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR31_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1609,7 +1610,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR32_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR32_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR32_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1617,7 +1618,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR32_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR32_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR32_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1645,7 +1646,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR33_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR33_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR33_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1653,7 +1654,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR33_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR33_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR33_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1681,7 +1682,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR34_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR34_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR34_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1689,7 +1690,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR34_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR34_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR34_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1717,7 +1718,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR40_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR40_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR40_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1725,7 +1726,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR40_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR40_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR40_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1753,7 +1754,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR41_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR41_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR41_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1761,7 +1762,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR41_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR41_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR41_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1789,7 +1790,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR42_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR42_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR42_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1797,7 +1798,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR42_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR42_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR42_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1825,7 +1826,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR43_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR43_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR43_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1833,7 +1834,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR43_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR43_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR43_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1861,7 +1862,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR44_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR44_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR44_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1869,7 +1870,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR44_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR44_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR44_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1897,7 +1898,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR45_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR45_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR45_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1905,7 +1906,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR45_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR45_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR45_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1934,7 +1935,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(3);
 				if (record2.getR46_CONTRACTUAL_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR46_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR46_CONTRACTUAL_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
@@ -1942,7 +1943,7 @@ public byte[] getExcelM_CA6ARCHIVAL(String filename,String reportId, String from
 				}
 				cell3 = row.createCell(4);
 				if (record2.getR46_EFFECTIVE_MATURITY_DATE() != null) {
-				    cell3.setCellValue(record2.getR46_ISSUANCE_DATE());
+				    cell3.setCellValue(record2.getR46_EFFECTIVE_MATURITY_DATE());
 				    cell3.setCellStyle(dateStyle);
 				} else {
 				    cell3.setCellValue("");
