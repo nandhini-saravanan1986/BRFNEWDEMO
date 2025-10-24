@@ -1108,9 +1108,9 @@ data-version=${version}"
 											<th rowspan="1"
 												style = "text-align: center; font-weight:bold;color:black;">Item</th>
 											<th rowspan="1"
-												style=" font-weight:bold; text-align: center; color:black;">Amount (P'000)</th>
+												style=" font-weight:bold; text-align: right; color:black;">Amount (P'000)</th>
 											<th rowspan="1"
-												style=" font-weight:bold; text-align: center; color:black;">Amount (P'000)</th>
+												style=" font-weight:bold; text-align: right; color:black;">Amount (P'000)</th>
 											
 										</tr>
 													</thead>
@@ -1193,7 +1193,7 @@ data-version=${version}"
         					<div  th:text="'reserves' + ${#strings.substringAfter(report.r17_product, 'reserves')}"></div>
         					</td>
 							<td  th:attr="reportLable='R17', reportAddlCriteria1='C2'" style="text-align: right;background-color:black; "></td>
-							<td th:text="${report.r17_amount_2}" th:attr="reportLable='R17', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>  </tr>
+							<td th:text="${report.r17_amount_2}" th:attr="reportLable='R17', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 							
 							<tr><td style="text-align: center; "></td>
 							  <td style=""  th:text="${report.r18_product}"></td>
@@ -1248,22 +1248,22 @@ data-version=${version}"
         					<div  th:text="'and' + ${#strings.substringAfter(report.r22_product, 'and')}"></div>
         					</td>
 							<td  th:attr="reportLable='R22', reportAddlCriteria1='C2'"  style="text-align: left; background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
-							<td th:text="${report.r22_amount_2}" th:attr="reportLable='R22', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white;"></td> 
+							<td th:text="${report.r22_amount_2}" th:attr="reportLable='R22', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td> 
 							
 							<tr><td style="text-align: center; ">6 (a)</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r23_product}"></td>
 							<td  th:attr="reportLable='R23', reportAddlCriteria1='C2'"  style="text-align:right; background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-							<td th:text="${report.r23_amount_2}" th:attr="reportLable='R22', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>
+							<td th:text="${report.r23_amount_2}" th:attr="reportLable='R22', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
 							
 							<tr><td style="text-align: center; ">6 (b)</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r24_product}"></td>
 							<td  th:attr="reportLable='R24', reportAddlCriteria1='C2'" ></td>
-							<td th:text="${report.r24_amount_2}" th:attr="reportLable='R24', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>
+							<td th:text="${report.r24_amount_2}" th:attr="reportLable='R24', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
 							
 							<tr><td style="text-align: center; "></td>
 							  <td style=" font-weight:bold;"  th:text="${report.r25_product}"></td>
 							<td  th:attr="reportLable='R25', reportAddlCriteria1='C2'" style="text-align:right;">M-CA7 (2) Column 3</td>
-							<td th:text="${report.r25_amount_2}" th:attr="reportLable='R25', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>
+							<td th:text="${report.r25_amount_2}" th:attr="reportLable='R25', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
 							
 							<tr>
     						<td style="text-align: center; ">7</td>
@@ -1272,7 +1272,7 @@ data-version=${version}"
         					<div  th:text="'Lines' + ${#strings.substringAfter(report.r26_product, 'Lines')}"></div>
         					</td>
     						<td th:attr="reportLable='R26', reportAddlCriteria1='C2'"  style="text-align: left; background-color:black"></td>
-    						<td th:text="${report.r26_amount_2}" th:attr="reportLable='R26', reportAddlCriteria1='C3'"  style="text-align:right; font-weight:bold; background-color: rgb(107, 122, 143); color: white;"></td>
+    						<td th:text="${report.r26_amount_2}" th:attr="reportLable='R26', reportAddlCriteria1='C3'"  style="text-align:right; font-weight:bold; background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
 							</tr>
 							</tbody>
 							</table>
@@ -1294,7 +1294,7 @@ data-version=${version}"
 											<th rowspan="1"
 												style=" font-weight:bold;text-align: center;color:black; border:2px solid black;">Amount (P'000)</th>
 											<th rowspan="1"
-												style=" font-weight:bold;text-align: center;color:black;border:2px solid black;">Amount (P'000)</th>
+												style=" font-weight:bold;text-align: right;color:black;border:2px solid black;">Amount (P'000)</th>
 											
 										</tr>
 										
@@ -1320,7 +1320,7 @@ data-version=${version}"
         					<div  th:text="'Additional' + ${#strings.substringAfter(report.r31_product, 'Additional')}"></div>
         					</td>
 							<td th:attr="reportLable='R31', reportAddlCriteria1='C2'"  style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
-							<td th:text="${report.r31_amount_2}" th:attr="reportLable='R31', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r31_amount_2}" th:attr="reportLable='R31', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 
 							<tr><td style="text-align: center; ">10</td>
 							  <td style=" font-weight:bold;">
@@ -1345,22 +1345,22 @@ data-version=${version}"
         					<div  th:text="'Tier' + ${#strings.substringAfter(report.r33_product, 'Tier')}"></div>
         					</td>
 							<td th:attr="reportLable='R33', reportAddlCriteria1='C2'"  style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
-							<td th:text="${report.r33_amount_2}" th:attr="reportLable='R33', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r33_amount_2}" th:attr="reportLable='R33', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 							  
 							<tr><td style="text-align: center; ">12</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r34_product}"></td>
 							<td th:attr="reportLable='R34', reportAddlCriteria1='C2'"  style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-							<td th:text="${report.r34_amount_2}" th:attr="reportLable='R34', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r34_amount_2}" th:attr="reportLable='R34', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 							
 							<tr><td style="text-align: center; ">13</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r35_product}"></td>
 							<td th:attr="reportLable='R35', reportAddlCriteria1='C2'"  style="text-align: left;background-color:#C0C0C0; "></td>
-							<td th:text="${report.r35_amount_2}" th:attr="reportLable='R35', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r35_amount_2}" th:attr="reportLable='R35', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 							  
 							<tr><td style="text-align: center; ">14</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r36_product}"></td>
 							<td th:attr="reportLable='R36', reportAddlCriteria1='C2'"  style="text-align: left; "></td>
-							<td th:text="${report.r36_amount_2}" th:attr="reportLable='R36', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr> 
+							<td th:text="${report.r36_amount_2}" th:attr="reportLable='R36', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white;vertical-align: middle; "></td>  </tr> 
 							
 							</tbody>
 							</table>
@@ -1382,7 +1382,7 @@ data-version=${version}"
 											<th rowspan="1"
 												style=" font-weight:bold;text-align: center;border:2px solid black;color:black;">Amount (P'000)</th>
 											<th rowspan="1"
-												style=" font-weight:bold;text-align: center; border:2px solid black;color:black;">Amount (P'000)</th>
+												style=" font-weight:bold;text-align: right; border:2px solid black;color:black;">Amount (P'000)</th>
 											
 										</tr>
 										
@@ -1405,7 +1405,7 @@ data-version=${version}"
 							<tr><td style="text-align: center; ">16</td>
 							  <td style=" font-weight:bold; vertical-align: middle;"  th:text="${report.r41_product}"></td>
 							<td th:attr="reportLable='R41', reportAddlCriteria1='C2'"  style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
-							<td th:text="${report.r41_amount_2}" th:attr="reportLable='R41', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r41_amount_2}" th:attr="reportLable='R41', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 
 							<tr><td style="text-align: center; ">17</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r42_product}"></td>
@@ -1446,7 +1446,7 @@ data-version=${version}"
         					<div  th:text="'inclusion' + ${#strings.substringAfter(report.r45_product, 'inclusion')}"></div>
         					</td>
 							<td th:attr="reportLable='R45', reportAddlCriteria1='C2'"  style="text-align: left;background-color:#C0C0C0;vertical-align: middle; ">Ref. (9) M-CA4</td>
-							<td th:text="${report.r45_amount_2}" th:attr="reportLable='R45', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: bottom; text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r45_amount_2}" th:attr="reportLable='R45', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
 							  
 							<tr><td style="text-align: center; ">21</td>
 							  <td style=" font-weight:bold;">
@@ -1468,17 +1468,17 @@ data-version=${version}"
 							<tr><td style="text-align: center; ">22</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r47_product}"></td>
 							<td th:attr="reportLable='R47', reportAddlCriteria1='C2'"  style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-							<td th:text="${report.r47_amount_2}" th:attr="reportLable='R47', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r47_amount_2}" th:attr="reportLable='R47', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 							
 							<tr><td style="text-align: center; ">23</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r48_product}"></td>
 							<td th:attr="reportLable='R48', reportAddlCriteria1='C2'"  style="text-align: left;background-color:#C0C0C0; "></td>
-							<td th:text="${report.r48_amount_2}" th:attr="reportLable='R48', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r48_amount_2}" th:attr="reportLable='R48', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 							
 							<tr><td style="text-align: center; ">24</td>
 							  <td style=" font-weight:bold;"  th:text="${report.r49_product}"></td>
 							<td th:attr="reportLable='R49', reportAddlCriteria1='C2'" style="text-align: left; "></td>
-							<td th:text="${report.r49_amount_2}" th:attr="reportLable='R49', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; "></td>  </tr>
+							<td th:text="${report.r49_amount_2}" th:attr="reportLable='R49', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>  </tr>
 							</tbody>
 							</table>
 							</div>
