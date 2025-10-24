@@ -82,6 +82,7 @@ import com.bornfire.brf.entities.Q_STAFF_Summary_Entity2;
 import com.bornfire.brf.entities.Q_STAFF_Summary_Entity3;
 import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA4_ReportService;
+import com.bornfire.brf.services.BRRS_M_CA5_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA6_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA7_ReportService;
 import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
@@ -97,6 +98,9 @@ import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
 import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
 
+import com.bornfire.brf.entities.M_CA5_Summary_Entity1;
+
+import com.bornfire.brf.entities.M_CA5_Summary_Entity2;
 @Controller
 @ConfigurationProperties("default")
 @RequestMapping(value = "Reports")
@@ -1034,7 +1038,36 @@ public ResponseEntity<String> updateReportReSub(
 			 } 
 			 
 			 
-			 
+			 @Autowired
+			 private BRRS_M_CA5_ReportService CA5reportService;
+			
+			
+			 @RequestMapping(value = "/CA5updateAll", method = { RequestMethod.GET, RequestMethod.POST })
+			 @ResponseBody
+			 public ResponseEntity<String> updateAllReports(
+			         @RequestParam(required = false)
+			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			         @ModelAttribute M_CA5_Summary_Entity1 request1,
+			         @ModelAttribute M_CA5_Summary_Entity2 request2
+			         
+			 ) {
+			     try {
+			         System.out.println("Came to single controller");
+			         // set date into all 4 entities
+			         request1.setReport_date(asondate);
+			         request2.setReport_date(asondate);
+			         
+			         // call services
+			         CA5reportService.updateReport(request1);
+			         CA5reportService.updateReport2(request2);
+			         
+			         return ResponseEntity.ok("Updated Successfully");
+			     } catch (Exception e) {
+			         e.printStackTrace();
+			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                              .body("Update Failed: " + e.getMessage());
+			     }
+			 }
 			 
 	
 			 }	

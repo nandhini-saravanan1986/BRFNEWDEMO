@@ -629,11 +629,7 @@ public class RegulatoryReportServices {
 			repdetail = M_LA5_ReportService.getBRRS_M_LA5currentDtl(reportId, fromdate, todate, currency, dtltype,
 					pageable, Filter,type,version);
 			break;
-			
-		case "M_CA5":
-			repdetail = brrs_m_ca5_reportservice.getM_CA5currentDtl(reportId, fromdate, todate, currency, dtltype,
-					pageable, Filter,type, version);
-			break;
+	
 			
 		case "M_SRWA_12D":
 			repdetail = brrs_m_srwa_12d_reportservice.getM_SRWA_12DcurrentDtl(reportId, fromdate, todate, currency, dtltype,
@@ -978,7 +974,7 @@ public class RegulatoryReportServices {
 			
 		case "M_CA5":
 			try {
-				repfile = brrs_m_ca5_reportservice.getM_CA5Excel(filename, reportId, fromdate, todate, currency, dtltype);
+				repfile = brrs_m_ca5_reportservice.getM_CA5Excel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
