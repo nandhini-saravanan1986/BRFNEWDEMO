@@ -731,15 +731,23 @@ public class M_SRWA_12H_Summary_Entity {
     
     @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Id
-	public Date REPORT_DATE;
-    public String REPORT_VERSION;
+    @Id
+    @Column(name = "REPORT_DATE")
+    private Date reportDate;
+
+    @Column(name = "REPORT_VERSION")
+    private String reportVersion;
+
+@Column(name = "REPORT_RESUBDATE")
+@Temporal(TemporalType.TIMESTAMP)
+private Date reportResubDate;
     public String REPORT_FREQUENCY;
     public String REPORT_CODE;
     public String REPORT_DESC;
     public String ENTITY_FLG;
     public String MODIFY_FLG;
     public String DEL_FLG;
+	
 	public String getR11_PRODUCT() {
 		return R11_PRODUCT;
 	}
@@ -4574,18 +4582,12 @@ public class M_SRWA_12H_Summary_Entity {
 	public void setR81_APPLICABLE_RISK_WEIGHT(BigDecimal r81_APPLICABLE_RISK_WEIGHT) {
 		R81_APPLICABLE_RISK_WEIGHT = r81_APPLICABLE_RISK_WEIGHT;
 	}
-	public Date getREPORT_DATE() {
-		return REPORT_DATE;
-	}
-	public void setREPORT_DATE(Date rEPORT_DATE) {
-		REPORT_DATE = rEPORT_DATE;
-	}
-	public String getREPORT_VERSION() {
-		return REPORT_VERSION;
-	}
-	public void setREPORT_VERSION(String rEPORT_VERSION) {
-		REPORT_VERSION = rEPORT_VERSION;
-	}
+    public Date getReportDate() { return reportDate; }
+    public void setReportDate(Date reportDate) { this.reportDate = reportDate; }
+
+    public String getReportVersion() { return reportVersion; }
+    public void setReportVersion(String reportVersion) { this.reportVersion = reportVersion; }
+	
 	public String getREPORT_FREQUENCY() {
 		return REPORT_FREQUENCY;
 	}
@@ -4626,7 +4628,13 @@ public class M_SRWA_12H_Summary_Entity {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
+	public Date getReportResubDate() {
+		return reportResubDate;
+	}
+	public void setReportResubDate(Date reportResubDate) {
+		this.reportResubDate = reportResubDate;
+	}
+  
     
     
     

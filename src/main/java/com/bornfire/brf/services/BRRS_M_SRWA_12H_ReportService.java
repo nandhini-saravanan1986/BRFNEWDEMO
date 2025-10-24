@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -153,8 +155,8 @@ public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String t
 
         // ---------- CASE 2: RESUB ----------
         else if ("RESUB".equalsIgnoreCase(type) && version != null) {
-            List<M_SRWA_12H_Resub_Summary_Entity> T1Master =
-                M_SRWA_12H_Resub_Summary_Repo.getdatabydateListResub(d1, version);
+            List<M_SRWA_12H_Archival_Summary_Entity> T1Master =
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListarchival(d1, version);
             
             mv.addObject("reportsummary", T1Master);
         }
@@ -181,11 +183,11 @@ public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String t
 
 	public void updateReport(M_SRWA_12H_Summary_Entity updatedEntity) {
 	    System.out.println("Came to services 1");
-	    System.out.println("Report Date: " + updatedEntity.getREPORT_DATE());
+	    System.out.println("Report Date: " + updatedEntity.getReportDate());
 
-	    M_SRWA_12H_Summary_Entity existing = M_SRWA_12H_Summary_Repo.findById(updatedEntity.getREPORT_DATE())
+	    M_SRWA_12H_Summary_Entity existing = M_SRWA_12H_Summary_Repo.findById(updatedEntity.getReportDate())
 	            .orElseThrow(() -> new RuntimeException(
-	                    "Record not found for REPORT_DATE: " + updatedEntity.getREPORT_DATE()));
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReportDate()));
 
 	    try {
 	        // 1️⃣ Loop from R11 to R15 and copy fields
@@ -15353,17 +15355,35 @@ public List<Object> getM_SRWA_12HArchival() {
 
 
 
-@Autowired
-BRRS_M_SRWA_12H_Resub_Summary_Repo M_SRWA_12H_Resub_Summary_Repo;
+// @Autowired
+// BRRS_M_SRWA_12H_Resub_Summary_Repo M_SRWA_12H_Resub_Summary_Repo;
+	
+// 	public List<Object> getM_SRWA_12HResub() {
+// 		List<Object> M_SRWA_12HResub = new ArrayList<>();
+// 		try {
+// 			M_SRWA_12HResub = M_SRWA_12H_Resub_Summary_Repo.getM_SRWA_12HResub();
+// 			System.out.println("countser" + M_SRWA_12HResub.size());
+// 		} catch (Exception e) {
+// 			// Log the exception
+// 			System.err.println("Error fetching M_SFINP2 Archival data: " + e.getMessage());
+// 			e.printStackTrace();
+
+// 			// Optionally, you can rethrow it or return empty list
+// 			// throw new RuntimeException("Failed to fetch data", e);
+// 		}
+// 		return M_SRWA_12HResub;
+// 	}
+
+
 	
 	public List<Object> getM_SRWA_12HResub() {
 		List<Object> M_SRWA_12HResub = new ArrayList<>();
 		try {
-			M_SRWA_12HResub = M_SRWA_12H_Resub_Summary_Repo.getM_SRWA_12HResub();
+			M_SRWA_12HResub = M_SRWA_12H_Archival_Summary_Repo.getM_SRWA_12Harchival();
 			System.out.println("countser" + M_SRWA_12HResub.size());
 		} catch (Exception e) {
 			// Log the exception
-			System.err.println("Error fetching M_SFINP2 Archival data: " + e.getMessage());
+			System.err.println("Error fetching M_SRWA_12H Archival data: " + e.getMessage());
 			e.printStackTrace();
 
 			// Optionally, you can rethrow it or return empty list
@@ -15372,26 +15392,46 @@ BRRS_M_SRWA_12H_Resub_Summary_Repo M_SRWA_12H_Resub_Summary_Repo;
 		return M_SRWA_12HResub;
 	}
 
-
-
 	
-    public void updateReportReSub(M_SRWA_12H_Resub_Summary_Entity updatedEntity) {
-        System.out.println(" Came to Resub Service");
-        System.out.println("Report Date: " + updatedEntity.getREPORT_DATE());
+ public void updateReportReSub(M_SRWA_12H_Summary_Entity updatedEntity) {
+        System.out.println("Came to Resub Service");
+        System.out.println("Report Date: " + updatedEntity.getReportDate());
 
-        // 1️⃣ Find existing record
-        M_SRWA_12H_Resub_Summary_Entity existing =
-                M_SRWA_12H_Resub_Summary_Repo.findById(updatedEntity.getREPORT_DATE())
-                        .orElseThrow(() -> new RuntimeException(
-                                "Record not found for REPORT_DATE: " + updatedEntity.getREPORT_DATE()));
+        Date reportDate = updatedEntity.getReportDate();
+
+        // 1️⃣ Find the latest version for this report date
+        Optional<M_SRWA_12H_Summary_Entity> latestEntityOpt =
+                M_SRWA_12H_Summary_Repo.findTopByReportDateOrderByReportVersionDesc(reportDate);
+
+        int newVersion = 1;
+        if (latestEntityOpt.isPresent()) {
+            M_SRWA_12H_Summary_Entity latestEntity = latestEntityOpt.get();
+            try {
+                newVersion = Integer.parseInt(latestEntity.getReportVersion()) + 1;
+            } catch (NumberFormatException e) {
+                newVersion = 1; // fallback if version not numeric
+            }
+        }
+
+        // 2️⃣ Optional: Check duplicate version
+        boolean exists = M_SRWA_12H_Summary_Repo
+                .findByReportDateAndReportVersion(reportDate, String.valueOf(newVersion))
+                .isPresent();
+
+        if (exists) {
+            throw new RuntimeException("Version " + newVersion + " already exists for report date " + reportDate);
+        }
 
         try {
-            // 2️⃣ Update all fields dynamically
+            // 3️⃣ Create new entity
+            M_SRWA_12H_Summary_Entity newEntity = new M_SRWA_12H_Summary_Entity();
+
+            // Copy dynamic R fields (R12–R81)
             for (int i = 12; i <= 81; i++) {
                 String[] fields = {
-                    "PRODUCT", "ISSUER", "ISSUES_RATING",
-                    "1YR_VAL_OF_CRM", "1YR_5YR_VAL_OF_CRM", "5YR_VAL_OF_CRM",
-                    "OTHER", "STD_SUPERVISORY_HAIRCUT", "APPLICABLE_RISK_WEIGHT"
+                        "PRODUCT", "ISSUER", "ISSUES_RATING",
+                        "1YR_VAL_OF_CRM", "1YR_5YR_VAL_OF_CRM", "5YR_VAL_OF_CRM",
+                        "OTHER", "STD_SUPERVISORY_HAIRCUT", "APPLICABLE_RISK_WEIGHT"
                 };
 
                 for (String field : fields) {
@@ -15399,26 +15439,33 @@ BRRS_M_SRWA_12H_Resub_Summary_Repo M_SRWA_12H_Resub_Summary_Repo;
                     String setterName = "setR" + i + "_" + field;
 
                     try {
-                        Method getter = M_SRWA_12H_Resub_Summary_Entity.class.getMethod(getterName);
-                        Method setter = M_SRWA_12H_Resub_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+                        Method getter = M_SRWA_12H_Summary_Entity.class.getMethod(getterName);
+                        Method setter = M_SRWA_12H_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
 
                         Object newValue = getter.invoke(updatedEntity);
-                        setter.invoke(existing, newValue);
+                        setter.invoke(newEntity, newValue);
 
                     } catch (NoSuchMethodException e) {
-                        // Skip fields that don’t exist in this entity
+                        // skip missing fields
                         continue;
                     }
                 }
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException("Error while updating report fields", e);
-        }
+            // 4️⃣ Set metadata
+            newEntity.setReportDate(reportDate);
+            newEntity.setReportVersion(String.valueOf(newVersion));
+            newEntity.setReportResubDate(new Date()); // current timestamp
 
-        System.out.println("💾 Saving Updated Entity");
-        M_SRWA_12H_Resub_Summary_Repo.save(existing);
+            System.out.println("Saving new version: " + newVersion);
+            M_SRWA_12H_Summary_Repo.save(newEntity);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while creating resubmission record", e);
+        }
     }
+
+
 
 
 // public List<Object> getM_SRWA_12Harchival() {

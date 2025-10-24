@@ -678,7 +678,7 @@ public ResponseEntity<String> updateReport(
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         // ✅ set the asondate into entity
-        request.setREPORT_DATE(asondate);
+        request.setReportDate(asondate);
 
         M_SRWA_12Hservice.updateReport(request);
         return ResponseEntity.ok("Updated Successfully");
@@ -692,26 +692,33 @@ public ResponseEntity<String> updateReport(
 @RequestMapping(value = "/UpdateM_SRWA_12H_ReSub", method = { RequestMethod.GET, RequestMethod.POST })
 @ResponseBody
 public ResponseEntity<String> updateReportReSub(
-    @RequestParam(required = false) 
-    @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-    @ModelAttribute M_SRWA_12H_Resub_Summary_Entity request,
-    HttpServletRequest req) {
+        @RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+        @ModelAttribute M_SRWA_12H_Summary_Entity request,
+        HttpServletRequest req) {
 
     try {
         System.out.println("Came to Resub Controller");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        //  set the asondate into entity
-        request.setREPORT_DATE(asondate);
+        if (asondate != null) {
+            // Set the asondate into the entity
+            request.setReportDate(asondate);
+            System.out.println("Set Report Date: " + asondate);
+        } else {
+            System.out.println("Asondate parameter is null; using entity value: " + request.getReportDate());
+        }
 
+        // Call service to create a new versioned row
         M_SRWA_12Hservice.updateReportReSub(request);
+
         return ResponseEntity.ok("Resubmission Updated Successfully");
+
     } catch (Exception e) {
         e.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                             .body("Resubmission Update Failed: " + e.getMessage());
+                .body("Resubmission Update Failed: " + e.getMessage());
     }
-	}
+}
+
 
 		 @Autowired
 		 BRRS_M_CA7_ReportService BRRS_M_CA7_ReportService;
