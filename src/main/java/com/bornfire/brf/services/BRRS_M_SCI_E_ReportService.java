@@ -3,6 +3,7 @@ package com.bornfire.brf.services;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,7 +46,7 @@ import com.bornfire.brf.entities.BRRS_M_SCI_E_Archival_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_M_SCI_E_Detail_Repo;
 import com.bornfire.brf.entities.M_SCI_E_Summary_Entity;
 import com.bornfire.brf.entities.BRRS_M_SCI_E_Summary_Repo;
-
+import com.bornfire.brf.entities.M_GMIRT_Summary_Entity;
 import com.bornfire.brf.entities.M_SCI_E_Archival_Detail_Entity;
 import com.bornfire.brf.entities.M_SCI_E_Archival_Summary_Entity;
 
@@ -3615,5 +3616,58 @@ Cell cellC,cellD;
 		}
 	}
 
+	
+	
+	
+	
+	
+	public void updateReport(M_SCI_E_Summary_Entity updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SCI_E_Summary_Entity existing = brrs_m_sci_e_summary_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // ✅ Only for specific row numbers
+	        int[] rows = {45, 46, 54, 58, 59, 60, 66, 67, 68, 74, 85};
+
+	        for (int row : rows) {
+	            String prefix = "R" + row + "_";
+
+	            // ✅ Fields to update
+	            String[] fields = {"month"};
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field; // e.g. getR45_month
+	                String setterName = "set" + prefix + field; // e.g. setR45_month
+
+	                try {
+	                    Method getter = M_SCI_E_Summary_Entity.class.getMethod(getterName);
+	                    Method setter = M_SCI_E_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields gracefully
+	                    continue;
+	                }
+	            }
+	        }
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // ✅ Save updated entity
+	    brrs_m_sci_e_summary_repo.save(existing);
+	}
+
+	
+	
+	
+	
 
 }
