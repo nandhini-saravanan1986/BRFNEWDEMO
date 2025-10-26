@@ -96,26 +96,35 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_CA6_ReportSe
 		int currentPage = pageable.getPageNumber();
 		int startItem = currentPage * pageSize;	
 
-		if (type.equals("ARCHIVAL")& version !=null) {
-			System.out.println(type);
+		if ("ARCHIVAL".equals(type) && version != null) 
+ {
+
+			
 			List<M_CA6_Archival_Summary_Entity1> T1Master = new ArrayList<M_CA6_Archival_Summary_Entity1>();
 			List<M_CA6_Archival_Summary_Entity2> T2Master = new ArrayList<M_CA6_Archival_Summary_Entity2>();
-			System.out.println(version);
+
 			try {
-				Date d1=dateformat.parse(todate);
-				T1Master = BRRS_M_CA6_Archival_Summary_Repo1.getdatabydateListarchival(dateformat.parse(todate), version);
-				T2Master = BRRS_M_CA6_Archival_Summary_Repo2.getdatabydateListarchival(dateformat.parse(todate), version);
+				Date d1 = dateformat.parse(todate);
+				// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
 
+				//T1Master = hs.createQuery("from  BRF1_REPORT_ENTITY a where a.report_date = ?1 ", BRF1_REPORT_ENTITY.class)
+					//	.setParameter(1, df.parse(todate)).getResultList();
+				 T1Master=BRRS_M_CA6_Archival_Summary_Repo1.getdatabydateListarchival(dateformat.parse(todate), version);
+				 T2Master=BRRS_M_CA6_Archival_Summary_Repo2.getdatabydateListarchival(dateformat.parse(todate), version);
 
-				
-
+			
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 
+			// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
+
+			
+			System.out.println("Archival T1 size=" + T1Master.size());
+			System.out.println("Archival T2 size=" + T2Master.size());
 			mv.addObject("reportsummary", T1Master);
 			mv.addObject("reportsummary1", T2Master);
-		} else{
+			} else{
 		
 		 
 		
@@ -1093,7 +1102,6 @@ public byte[] getM_CA6Excel(String filename,String reportId, String fromdate, St
 		return out.toByteArray();
 	}
 }
-
 
 
 public List<Object> getM_CA6Archival() {

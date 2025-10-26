@@ -958,29 +958,28 @@ public ResponseEntity<String> updateReportReSub(
 			 @RequestMapping(value = "/MCA6updateAll", method = { RequestMethod.GET, RequestMethod.POST })
 			 @ResponseBody
 			 public ResponseEntity<String> updateAllReports(
-			     @RequestParam(required = false)
-			     @DateTimeFormat(pattern = "yyyy-MM-dd") Date asondate,  // ✅ ISO format
-			     @RequestParam(required = false) String type,
-			     @ModelAttribute M_CA6_Summary_Entity2 request1
+			         @RequestParam(required = false)
+			         @DateTimeFormat(pattern = "yyyy-MM-dd") Date asondate,  // ✅ ISO format
+			         @RequestParam(required = false) String type,
+			         @ModelAttribute M_CA6_Summary_Entity2 request1
 			 ) {
 			     try {
+			         System.out.println("Came to single controller");
+			         System.out.println(type);
+			         // set date into all 4 entities
 			         request1.setREPORT_DATE(asondate);
-
-			         if ("ARCHIVAL".equalsIgnoreCase(type)) {
-			             M_CA6_Archival_Summary_Entity2 archival = new M_CA6_Archival_Summary_Entity2();
-			             BeanUtils.copyProperties(request1, archival);
-			         } else {
-			             BRRS_M_CA6_ReportService.updateReport(request1);
-			         }
-
-			         return ResponseEntity.ok("Updated Successfully");
-			     } catch (Exception e) {
+			  
+			     
+			    	 BRRS_M_CA6_ReportService.updateReport(request1);
+			    
+			   return ResponseEntity.ok("Updated Successfully");
+			     }
+			     catch (Exception e) {
 			         e.printStackTrace();
 			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 			                              .body("Update Failed: " + e.getMessage());
 			     }
 			 }
-
 
 
 
