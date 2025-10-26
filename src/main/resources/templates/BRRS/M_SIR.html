@@ -709,7 +709,7 @@ const fixedRisk = {
 // ========================
 function formatNumber(num) {
     if (isNaN(num)) return "";
-    return Math.round(num).toLocaleString('en-IN'); // ✅ 1,11,115 format
+    return Math.round(num).toLocaleString('en-US'); // ✅ 1,11,115 format
 }
 
 function parseNumber(val) {
@@ -813,69 +813,71 @@ $(document).ready(function(){
     }
 });
 </script>
-<script>
-	function closemodel(){
-		$("#resultModel").modal("hide");
-		$('#loader').modal('hide');
-		setTimeout(function () {
-	        location.reload();
-	    }, 300);		
-	}
-	
-	function fileuploads(btn){
-		const asondate = btn.getAttribute("data-todate");
-		const type = btn.getAttribute("data-type");
-		
-		$('#loader').modal('show');
-		
-		
-		calculateAll();
-		$("#fileupload input[type='text']").each(function () {
-		    $(this).val($(this).val().replace(/,/g, '').replace('%',''));
-		});
+<script>// 1️⃣ Recalculate all values before sending
+calculateAll();
 
-		if (!$("#fileupload").valid()) {
-		        $('#loader').modal('hide');
-		        return;
-		}
-		const formData = new FormData();
-		formData.append("asondate", asondate);
-		formData.append("type",type);
-		
-		$('#fileupload').find(':input').each(function () {
-			        const name = $(this).attr('name');
-			        if (name) {
-			            formData.append(name, $(this).val());
-			        }
-		});
-		$.ajax({
-		        url: './MSIRupdateAll',
-		        type: 'POST',
-		        data: formData,
-		        processData: false,
-		        contentType: false,
-		        dataType: 'text',
-				success: function () {
-					            $("#resultModalLabel").text("Success");
-					            $("#resultModalBody").text("Updated Successfully.");
-					            $("#resultModal").modal("show");
+// 2️⃣ Normalize all input fields
+$("#fileupload input[type='text']").each(function () {
+    let val = $(this).val().trim();
+    if (val === "" || val === "-") val = "0";
+    val = val.replace(/,/g,''); // remove commas
+    if ($(this).attr('id').includes('_risk_')) {
+        val = parseFloat(val.replace('%','')) / 100; // convert % to decimal
+    } else {
+        val = parseFloat(val);
+    }
+    $(this).val(val); // update text input to numeric for safety
+});
 
-					            setTimeout(function() {
-					                location.reload();
-					            }, 800);
-					        },
-		        error: function (jqXHR) {
-		            console.error("Error response:", jqXHR.responseText);
-		            $("#resultModalLabel").text("Error");
-		            $("#resultModalBody").text("Update failed. Check console for details.");
-		            $("#resultModal").modal("show");
-		        },
-		        complete: function () {
-		            $('#loader').modal('hide');
-		        }
-		    });
-		}
-	
+// 3️⃣ Add numeric hidden fields (if not already added)
+$("#fileupload input[type='text']").each(function () {
+    const hiddenId = $(this).attr('id') + "_val";
+    if ($("#" + hiddenId).length === 0) {
+        $("<input>").attr({
+            type: "hidden",
+            id: hiddenId,
+            value: $(this).val()
+        }).appendTo("#fileupload");
+    } else {
+        $("#" + hiddenId).val($(this).val());
+    }
+});
+
+// 4️⃣ Prepare FormData with hidden numeric fields
+const formData = new FormData();
+formData.append("asondate", asondate);
+formData.append("type", type);
+
+$('#fileupload').find(':input[type="hidden"]').each(function() {
+    const name = $(this).attr('name') || $(this).attr('id');
+    formData.append(name, $(this).val());
+});
+
+// 5️⃣ Send via AJAX
+$.ajax({
+    url:'./MSIRupdateAll',
+    type:'POST',
+    data:formData,
+    processData:false,
+    contentType:false,
+    dataType:'text',
+    success:function(){
+        $("#resultModalLabel").text("Success");
+        $("#resultModalBody").text("Updated Successfully.");
+        $("#resultModal").modal("show");
+        setTimeout(()=>location.reload(),800);
+    },
+    error:function(jqXHR){
+        console.error("Error response:", jqXHR.responseText);
+        $("#resultModalLabel").text("Error");
+        $("#resultModalBody").text("Update failed. Check console for details.");
+        $("#resultModal").modal("show");
+    },
+    complete:function(){
+        $('#loader').modal('hide');
+    }
+});
+
 </script>
 
 </script>
