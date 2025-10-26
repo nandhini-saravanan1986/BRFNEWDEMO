@@ -3,6 +3,7 @@ package com.bornfire.brf.services;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,6 +48,7 @@ import com.bornfire.brf.entities.BRRS_M_SRWA_12A_Summary4_Repo;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12A_Summary5_Repo;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12A_Summary6_Repo;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12A_Summary7_Repo;
+import com.bornfire.brf.entities.M_CA4_Summary_Entity;
 import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity1;
 
 import com.bornfire.brf.entities.M_SRWA_12A_Archival_Detail_Entity;
@@ -73,6 +75,7 @@ import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity4;
 import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity5;
 import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity6;
 import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity7;
+import com.bornfire.brf.entities.M_UNCONS_INVEST_Summary_Entity3;
 
 @Component
 @Service
@@ -497,16 +500,15 @@ public class BRRS_M_SRWA_12A_ReportService {
 
 		}
 
-		// Column 7G - Exposures eligible for CRM under the Substitution Approach
-
-		Cell cellG = row.createCell(6); // fixed index
-		if (record.getR19_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR19_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * // Column 7G - Exposures eligible for CRM under the Substitution Approach
+		 * 
+		 * Cell cellG = row.createCell(6); // fixed index if
+		 * (record.getR19_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR19_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		// Column 8H - Guarantees by Eligible Guarantors
 
@@ -672,15 +674,14 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		// Column 7G - Exposures eligible for CRM under the Substitution Approach
-		cellG = row.createCell(6); // fixed index
-		if (record.getR20_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR20_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * // Column 7G - Exposures eligible for CRM under the Substitution Approach
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR20_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR20_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		// Column 8H - Guarantees by Eligible Guarantors
 		cellH = row.createCell(7); // fixed index
@@ -831,14 +832,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR21_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR21_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR21_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR21_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR21_crm_sub_non_col_guar() != null) {
@@ -977,14 +977,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR22_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR22_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR22_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR22_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR22_crm_sub_non_col_guar() != null) {
@@ -1123,14 +1122,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR23_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR23_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR23_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR23_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR23_crm_sub_non_col_guar() != null) {
@@ -1269,14 +1267,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR24_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR24_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR24_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR24_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR24_crm_sub_non_col_guar() != null) {
@@ -1417,23 +1414,24 @@ public class BRRS_M_SRWA_12A_ReportService {
 
 		// only for non performing loans - Total Exposure after Netting and Specific
 		// Provisions
-		cellF = row.createCell(5); // fixed index
-		if (record.getR25_tot_expo_net_spe() != null) {
-			cellF.setCellValue(record.getR25_tot_expo_net_spe().doubleValue());
-			cellF.setCellStyle(numberStyle);
-		} else {
-			cellF.setCellValue("");
-			cellF.setCellStyle(textStyle);
+		cellF = row.getCell(5);
+		if (cellF == null) {
+		    cellF = row.createCell(5);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR25_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR25_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
+		if (record.getR25_tot_expo_net_spe() != null) {
+		    cellF.setCellValue(record.getR25_tot_expo_net_spe().doubleValue());
 		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
+		    cellF.setCellValue("");
 		}
+
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR25_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR25_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR25_crm_sub_non_col_guar() != null) {
@@ -1498,24 +1496,49 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellN.setCellStyle(textStyle);
 		}
 
+		/*
+		 * // only for non performing loans - Exposures Covered by CRM cellO =
+		 * row.createCell(14); // fixed index if (record.getR25_crm_sub_col_exp_cov() !=
+		 * null) {
+		 * cellO.setCellValue(record.getR25_crm_sub_col_exp_cov().doubleValue());
+		 * cellO.setCellStyle(numberStyle); } else { cellO.setCellValue("");
+		 * cellO.setCellStyle(textStyle); }
+		 */
+		
+		
 		// only for non performing loans - Exposures Covered by CRM
-		cellO = row.createCell(14); // fixed index
-		if (record.getR25_crm_sub_col_exp_cov() != null) {
-			cellO.setCellValue(record.getR25_crm_sub_col_exp_cov().doubleValue());
-			cellO.setCellStyle(numberStyle);
-		} else {
-			cellO.setCellValue("");
-			cellO.setCellStyle(textStyle);
+		cellO = row.getCell(14);
+		if (cellO == null) {
+		    cellO = row.createCell(14);
 		}
 
-		// only for non performing loans - Eligible Exposures not Covered by CRM
-		cellP = row.createCell(15); // fixed index
-		if (record.getR25_crm_sub_col_elig_exp_not_cov() != null) {
-			cellP.setCellValue(record.getR25_crm_sub_col_elig_exp_not_cov().doubleValue());
-			cellP.setCellStyle(numberStyle);
+		if (record.getR25_crm_sub_col_exp_cov() != null) {
+		    cellO.setCellValue(record.getR25_crm_sub_col_exp_cov().doubleValue());
 		} else {
-			cellP.setCellValue("");
-			cellP.setCellStyle(textStyle);
+		    cellO.setCellValue("");
+		}
+		
+		
+		/*
+		 * // only for non performing loans - Eligible Exposures not Covered by CRM
+		 * cellP = row.createCell(15); // fixed index if
+		 * (record.getR25_crm_sub_col_elig_exp_not_cov() != null) {
+		 * cellP.setCellValue(record.getR25_crm_sub_col_elig_exp_not_cov().doubleValue()
+		 * ); cellP.setCellStyle(numberStyle); } else { cellP.setCellValue("");
+		 * cellP.setCellStyle(textStyle); }
+		 */
+		
+		
+		// only for non performing loans - Eligible Exposures not Covered by CRM
+		cellP = row.getCell(15);
+		if (cellP == null) {
+		    cellP = row.createCell(15);
+		}
+
+		if (record.getR25_crm_sub_col_elig_exp_not_cov() != null) {
+		    cellP.setCellValue(record.getR25_crm_sub_col_elig_exp_not_cov().doubleValue());
+		} else {
+		    cellP.setCellValue("");
 		}
 
 		cellQ = row.createCell(16); // fixed index
@@ -1527,14 +1550,26 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellQ.setCellStyle(textStyle);
 		}
 
+		/*
+		 * // only for non performing loans - RWA of Exposures Covered by CRM cellR =
+		 * row.createCell(17); // fixed index if (record.getR25_crm_sub_rwa_cov_crm() !=
+		 * null) {
+		 * cellR.setCellValue(record.getR25_crm_sub_rwa_cov_crm().doubleValue());
+		 * cellR.setCellStyle(numberStyle); } else { cellR.setCellValue("");
+		 * cellR.setCellStyle(textStyle); }
+		 */
+		
+		
 		// only for non performing loans - RWA of Exposures Covered by CRM
-		cellR = row.createCell(17); // fixed index
+		cellR = row.getCell(17);
+		if (cellR == null) {
+		    cellR = row.createCell(17);
+		}
+
 		if (record.getR25_crm_sub_rwa_cov_crm() != null) {
-			cellR.setCellValue(record.getR25_crm_sub_rwa_cov_crm().doubleValue());
-			cellR.setCellStyle(numberStyle);
+		    cellR.setCellValue(record.getR25_crm_sub_rwa_cov_crm().doubleValue());
 		} else {
-			cellR.setCellValue("");
-			cellR.setCellStyle(textStyle);
+		    cellR.setCellValue("");
 		}
 
 		cellS = row.createCell(18); // fixed index
@@ -1546,15 +1581,29 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellS.setCellStyle(textStyle);
 		}
 
+		/*
+		 * // only for non performing loans - RWA of Exposures not Covered by CRM cellT
+		 * = row.createCell(19); // fixed index if
+		 * (record.getR25_crm_sub_rwa_not_cov_crm() != null) {
+		 * cellT.setCellValue(record.getR25_crm_sub_rwa_not_cov_crm().doubleValue());
+		 * cellT.setCellStyle(numberStyle); } else { cellT.setCellValue("");
+		 * cellT.setCellStyle(textStyle); }
+		 */
+		
 		// only for non performing loans - RWA of Exposures not Covered by CRM
-		cellT = row.createCell(19); // fixed index
-		if (record.getR25_crm_sub_rwa_not_cov_crm() != null) {
-			cellT.setCellValue(record.getR25_crm_sub_rwa_not_cov_crm().doubleValue());
-			cellT.setCellStyle(numberStyle);
-		} else {
-			cellT.setCellValue("");
-			cellT.setCellStyle(textStyle);
+		cellT = row.getCell(19);
+		if (cellT == null) {
+		    cellT = row.createCell(19);
 		}
+
+		if (record.getR25_crm_sub_rwa_not_cov_crm() != null) {
+		    cellT.setCellValue(record.getR25_crm_sub_rwa_not_cov_crm().doubleValue());
+		} else {
+		    cellT.setCellValue("");
+		}
+		
+		
+		
 
 		cellU = row.createCell(20); // fixed index
 		if (record.getR25_crm_comp_col_expo_elig() != null) {
@@ -1583,55 +1632,93 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellW.setCellStyle(textStyle);
 		}
 
+		/*
+		 * // only for non performing loans - Exposure Value after CRM cellX =
+		 * row.createCell(23); // fixed index if (record.getR25_crm_comp_col_expo_val()
+		 * != null) {
+		 * cellX.setCellValue(record.getR25_crm_comp_col_expo_val().doubleValue());
+		 * cellX.setCellStyle(numberStyle); } else { cellX.setCellValue("");
+		 * cellX.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - RWA of Eligible Exposures not Covered by
+		 * CRM cellY = row.createCell(24); // fixed index if
+		 * (record.getR25_rwa_elig_expo_not_cov_crm() != null) {
+		 * cellY.setCellValue(record.getR25_rwa_elig_expo_not_cov_crm().doubleValue());
+		 * cellY.setCellStyle(numberStyle); } else { cellY.setCellValue("");
+		 * cellY.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - Unsecured Exposure subject to Credit Risk
+		 * cellZ = row.createCell(25); // fixed index if
+		 * (record.getR25_rwa_unsec_expo_cre_ris() != null) {
+		 * cellZ.setCellValue(record.getR25_rwa_unsec_expo_cre_ris().doubleValue());
+		 * cellZ.setCellStyle(numberStyle); } else { cellZ.setCellValue("");
+		 * cellZ.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - RWA of unsecured expsure cellAA =
+		 * row.createCell(26); // fixed index if (record.getR25_rwa_unsec_expo() !=
+		 * null) { cellAA.setCellValue(record.getR25_rwa_unsec_expo().doubleValue());
+		 * cellAA.setCellStyle(numberStyle); } else { cellAA.setCellValue("");
+		 * cellAA.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - Total Risk Weighted Assets cellAB =
+		 * row.createCell(27); // fixed index if (record.getR25_rwa_tot_ris_wei_ass() !=
+		 * null) {
+		 * cellAB.setCellValue(record.getR25_rwa_tot_ris_wei_ass().doubleValue());
+		 * cellAB.setCellStyle(numberStyle); } else { cellAB.setCellValue("");
+		 * cellAB.setCellStyle(textStyle); }
+		 */
+		
+		
 		// only for non performing loans - Exposure Value after CRM
-		cellX = row.createCell(23); // fixed index
+		cellX = row.getCell(23);
+		if (cellX == null) cellX = row.createCell(23);
+
 		if (record.getR25_crm_comp_col_expo_val() != null) {
-			cellX.setCellValue(record.getR25_crm_comp_col_expo_val().doubleValue());
-			cellX.setCellStyle(numberStyle);
+		    cellX.setCellValue(record.getR25_crm_comp_col_expo_val().doubleValue());
 		} else {
-			cellX.setCellValue("");
-			cellX.setCellStyle(textStyle);
+		    cellX.setCellValue("");
 		}
 
 		// only for non performing loans - RWA of Eligible Exposures not Covered by CRM
-		cellY = row.createCell(24); // fixed index
+		cellY = row.getCell(24);
+		if (cellY == null) cellY = row.createCell(24);
+
 		if (record.getR25_rwa_elig_expo_not_cov_crm() != null) {
-			cellY.setCellValue(record.getR25_rwa_elig_expo_not_cov_crm().doubleValue());
-			cellY.setCellStyle(numberStyle);
+		    cellY.setCellValue(record.getR25_rwa_elig_expo_not_cov_crm().doubleValue());
 		} else {
-			cellY.setCellValue("");
-			cellY.setCellStyle(textStyle);
+		    cellY.setCellValue("");
 		}
 
 		// only for non performing loans - Unsecured Exposure subject to Credit Risk
-		cellZ = row.createCell(25); // fixed index
+		cellZ = row.getCell(25);
+		if (cellZ == null) cellZ = row.createCell(25);
+
 		if (record.getR25_rwa_unsec_expo_cre_ris() != null) {
-			cellZ.setCellValue(record.getR25_rwa_unsec_expo_cre_ris().doubleValue());
-			cellZ.setCellStyle(numberStyle);
+		    cellZ.setCellValue(record.getR25_rwa_unsec_expo_cre_ris().doubleValue());
 		} else {
-			cellZ.setCellValue("");
-			cellZ.setCellStyle(textStyle);
+		    cellZ.setCellValue("");
 		}
 
-		// only for non performing loans - RWA of unsecured expsure
-		cellAA = row.createCell(26); // fixed index
+		// only for non performing loans - RWA of unsecured exposure
+		cellAA = row.getCell(26);
+		if (cellAA == null) cellAA = row.createCell(26);
+
 		if (record.getR25_rwa_unsec_expo() != null) {
-			cellAA.setCellValue(record.getR25_rwa_unsec_expo().doubleValue());
-			cellAA.setCellStyle(numberStyle);
+		    cellAA.setCellValue(record.getR25_rwa_unsec_expo().doubleValue());
 		} else {
-			cellAA.setCellValue("");
-			cellAA.setCellStyle(textStyle);
+		    cellAA.setCellValue("");
 		}
 
 		// only for non performing loans - Total Risk Weighted Assets
-		cellAB = row.createCell(27); // fixed index
+		cellAB = row.getCell(27);
+		if (cellAB == null) cellAB = row.createCell(27);
+
 		if (record.getR25_rwa_tot_ris_wei_ass() != null) {
-			cellAB.setCellValue(record.getR25_rwa_tot_ris_wei_ass().doubleValue());
-			cellAB.setCellStyle(numberStyle);
+		    cellAB.setCellValue(record.getR25_rwa_tot_ris_wei_ass().doubleValue());
 		} else {
-			cellAB.setCellValue("");
-			cellAB.setCellStyle(textStyle);
+		    cellAB.setCellValue("");
 		}
+		
 
 		// row26
 		row = sheet.getRow(25);
@@ -1662,14 +1749,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR26_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR26_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR26_crm_sub_non_col_guar() != null) {
@@ -1808,14 +1888,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR27_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR27_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR27_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR27_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR27_crm_sub_non_col_guar() != null) {
@@ -1954,14 +2033,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR28_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR28_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR28_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR28_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR28_crm_sub_non_col_guar() != null) {
@@ -2120,15 +2198,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellValue("");
 			cellE.setCellStyle(textStyle);
 		}
-
-		cellG = row.createCell(6); // fixed index
-		if (record.getR32_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR32_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR32_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR32_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR32_crm_sub_non_col_guar() != null) {
@@ -2267,14 +2343,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR33_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR33_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR33_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR33_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR33_crm_sub_non_col_guar() != null) {
@@ -2413,14 +2488,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR34_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR34_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR34_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR34_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR34_crm_sub_non_col_guar() != null) {
@@ -2559,14 +2633,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR35_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR35_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR35_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR35_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR35_crm_sub_non_col_guar() != null) {
@@ -2705,14 +2778,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR36_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR36_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR36_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR36_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR36_crm_sub_non_col_guar() != null) {
@@ -2851,14 +2923,13 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR37_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR37_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR37_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR37_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR37_crm_sub_non_col_guar() != null) {
@@ -2999,23 +3070,34 @@ public class BRRS_M_SRWA_12A_ReportService {
 
 		// only for non performing loans - Total Exposure after Netting and Specific
 		// Provisions
-		cellF = row.createCell(5); // fixed index
+		
+		
+		cellF = row.getCell(5);
+		if (cellF == null) cellF = row.createCell(5);
+
 		if (record.getR38_tot_expo_net_spe() != null) {
-			cellF.setCellValue(record.getR38_tot_expo_net_spe().doubleValue());
-			cellF.setCellStyle(numberStyle);
+		    cellF.setCellValue(record.getR38_tot_expo_net_spe().doubleValue());
 		} else {
-			cellF.setCellValue("");
-			cellF.setCellStyle(textStyle);
+		    cellF.setCellValue("");
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR38_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR38_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
+		
+		/*
+		 * cellF = row.createCell(5); // fixed index if
+		 * (record.getR38_tot_expo_net_spe() != null) {
+		 * cellF.setCellValue(record.getR38_tot_expo_net_spe().doubleValue());
+		 * cellF.setCellStyle(numberStyle); } else { cellF.setCellValue("");
+		 * cellF.setCellStyle(textStyle); }
+		 */
+
+		/*
+		 * cellG = row.createCell(6); // fixed index if
+		 * (record.getR38_crm_sub_elig_sub_app() != null) {
+		 * cellG.setCellValue(record.getR38_crm_sub_elig_sub_app().doubleValue());
+		 * cellG.setCellStyle(numberStyle); } else { cellG.setCellValue("");
+		 * cellG.setCellStyle(textStyle); }
+		 */
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR38_crm_sub_non_col_guar() != null) {
@@ -3081,24 +3163,41 @@ public class BRRS_M_SRWA_12A_ReportService {
 		}
 
 		// only for non performing loans - Exposures Covered by CRM
-		cellO = row.createCell(14); // fixed index
+		
+		cellO = row.getCell(14);
+		if (cellO == null) cellO = row.createCell(14);
+
 		if (record.getR38_crm_sub_col_exp_cov() != null) {
-			cellO.setCellValue(record.getR38_crm_sub_col_exp_cov().doubleValue());
-			cellO.setCellStyle(numberStyle);
+		    cellO.setCellValue(record.getR38_crm_sub_col_exp_cov().doubleValue());
 		} else {
-			cellO.setCellValue("");
-			cellO.setCellStyle(textStyle);
+		    cellO.setCellValue("");
 		}
+		/*
+		 * cellO = row.createCell(14); // fixed index if
+		 * (record.getR38_crm_sub_col_exp_cov() != null) {
+		 * cellO.setCellValue(record.getR38_crm_sub_col_exp_cov().doubleValue());
+		 * cellO.setCellStyle(numberStyle); } else { cellO.setCellValue("");
+		 * cellO.setCellStyle(textStyle); }
+		 */
 
 		// only for non performing loans - Eligible Exposures not Covered by CRM
-		cellP = row.createCell(15); // fixed index
+		
+		cellP = row.getCell(15);
+		if (cellP == null) cellP = row.createCell(15);
+
 		if (record.getR38_crm_sub_col_elig_exp_not_cov() != null) {
-			cellP.setCellValue(record.getR38_crm_sub_col_elig_exp_not_cov().doubleValue());
-			cellP.setCellStyle(numberStyle);
+		    cellP.setCellValue(record.getR38_crm_sub_col_elig_exp_not_cov().doubleValue());
 		} else {
-			cellP.setCellValue("");
-			cellP.setCellStyle(textStyle);
+		    cellP.setCellValue("");
 		}
+		
+		/*
+		 * cellP = row.createCell(15); // fixed index if
+		 * (record.getR38_crm_sub_col_elig_exp_not_cov() != null) {
+		 * cellP.setCellValue(record.getR38_crm_sub_col_elig_exp_not_cov().doubleValue()
+		 * ); cellP.setCellStyle(numberStyle); } else { cellP.setCellValue("");
+		 * cellP.setCellStyle(textStyle); }
+		 */
 
 		cellQ = row.createCell(16); // fixed index
 		if (record.getR38_crm_sub_rwa_ris_crm() != null) {
@@ -3110,14 +3209,22 @@ public class BRRS_M_SRWA_12A_ReportService {
 		}
 
 		// only for non performing loans - RWA of Exposures Covered by CRM
-		cellR = row.createCell(17); // fixed index
+		
+		cellR = row.getCell(17);
+		if (cellR == null) cellR = row.createCell(17);
+
 		if (record.getR38_crm_sub_rwa_cov_crm() != null) {
-			cellR.setCellValue(record.getR38_crm_sub_rwa_cov_crm().doubleValue());
-			cellR.setCellStyle(numberStyle);
+		    cellR.setCellValue(record.getR38_crm_sub_rwa_cov_crm().doubleValue());
 		} else {
-			cellR.setCellValue("");
-			cellR.setCellStyle(textStyle);
+		    cellR.setCellValue("");
 		}
+		/*
+		 * cellR = row.createCell(17); // fixed index if
+		 * (record.getR38_crm_sub_rwa_cov_crm() != null) {
+		 * cellR.setCellValue(record.getR38_crm_sub_rwa_cov_crm().doubleValue());
+		 * cellR.setCellStyle(numberStyle); } else { cellR.setCellValue("");
+		 * cellR.setCellStyle(textStyle); }
+		 */
 
 		cellS = row.createCell(18); // fixed index
 		if (record.getR38_crm_sub_rwa_org_cou() != null) {
@@ -3129,14 +3236,22 @@ public class BRRS_M_SRWA_12A_ReportService {
 		}
 
 		// only for non performing loans - RWA of Exposures not Covered by CRM
-		cellT = row.createCell(19); // fixed index
+		
+		cellT = row.getCell(19);
+		if (cellT == null) cellT = row.createCell(19);
+
 		if (record.getR38_crm_sub_rwa_not_cov_crm() != null) {
-			cellT.setCellValue(record.getR38_crm_sub_rwa_not_cov_crm().doubleValue());
-			cellT.setCellStyle(numberStyle);
+		    cellT.setCellValue(record.getR38_crm_sub_rwa_not_cov_crm().doubleValue());
 		} else {
-			cellT.setCellValue("");
-			cellT.setCellStyle(textStyle);
+		    cellT.setCellValue("");
 		}
+		/*
+		 * cellT = row.createCell(19); // fixed index if
+		 * (record.getR38_crm_sub_rwa_not_cov_crm() != null) {
+		 * cellT.setCellValue(record.getR38_crm_sub_rwa_not_cov_crm().doubleValue());
+		 * cellT.setCellStyle(numberStyle); } else { cellT.setCellValue("");
+		 * cellT.setCellStyle(textStyle); }
+		 */
 
 		cellU = row.createCell(20); // fixed index
 		if (record.getR38_crm_comp_col_expo_elig() != null) {
@@ -3165,56 +3280,96 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellW.setCellStyle(textStyle);
 		}
 
-		// only for non performing loans - Exposure Value after CRM
-		cellX = row.createCell(23); // fixed index
+		/*
+		 * // only for non performing loans - Exposure Value after CRM cellX =
+		 * row.createCell(23); // fixed index if (record.getR38_crm_comp_col_expo_val()
+		 * != null) {
+		 * cellX.setCellValue(record.getR38_crm_comp_col_expo_val().doubleValue());
+		 * cellX.setCellStyle(numberStyle); } else { cellX.setCellValue("");
+		 * cellX.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - RWA of Eligible Exposures not Covered by
+		 * CRM cellY = row.createCell(24); // fixed index if
+		 * (record.getR38_rwa_elig_expo_not_cov_crm() != null) {
+		 * cellY.setCellValue(record.getR38_rwa_elig_expo_not_cov_crm().doubleValue());
+		 * cellY.setCellStyle(numberStyle); } else { cellY.setCellValue("");
+		 * cellY.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - Unsecured Exposure subject to Credit Risk
+		 * cellZ = row.createCell(25); // fixed index if
+		 * (record.getR38_rwa_unsec_expo_cre_ris() != null) {
+		 * cellZ.setCellValue(record.getR38_rwa_unsec_expo_cre_ris().doubleValue());
+		 * cellZ.setCellStyle(numberStyle); } else { cellZ.setCellValue("");
+		 * cellZ.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - RWA of unsecured exposure cellAA =
+		 * row.createCell(26); // fixed index if (record.getR38_rwa_unsec_expo() !=
+		 * null) { cellAA.setCellValue(record.getR38_rwa_unsec_expo().doubleValue());
+		 * cellAA.setCellStyle(numberStyle); } else { cellAA.setCellValue("");
+		 * cellAA.setCellStyle(textStyle); }
+		 * 
+		 * // only for non performing loans - Total Risk Weighted Assets cellAB =
+		 * row.createCell(27); // fixed index if (record.getR38_rwa_tot_ris_wei_ass() !=
+		 * null) {
+		 * cellAB.setCellValue(record.getR38_rwa_tot_ris_wei_ass().doubleValue());
+		 * cellAB.setCellStyle(numberStyle); } else { cellAB.setCellValue("");
+		 * cellAB.setCellStyle(textStyle); }
+		 */
+		
+		cellX = row.getCell(23);
+		if (cellX == null) cellX = row.createCell(23);
+
 		if (record.getR38_crm_comp_col_expo_val() != null) {
-			cellX.setCellValue(record.getR38_crm_comp_col_expo_val().doubleValue());
-			cellX.setCellStyle(numberStyle);
+		    cellX.setCellValue(record.getR38_crm_comp_col_expo_val().doubleValue());
 		} else {
-			cellX.setCellValue("");
-			cellX.setCellStyle(textStyle);
+		    cellX.setCellValue("");
 		}
 
-		// only for non performing loans - RWA of Eligible Exposures not Covered by CRM
-		cellY = row.createCell(24); // fixed index
+		// RWA of Eligible Exposures not Covered by CRM
+		cellY = row.getCell(24);
+		if (cellY == null) cellY = row.createCell(24);
+
 		if (record.getR38_rwa_elig_expo_not_cov_crm() != null) {
-			cellY.setCellValue(record.getR38_rwa_elig_expo_not_cov_crm().doubleValue());
-			cellY.setCellStyle(numberStyle);
+		    cellY.setCellValue(record.getR38_rwa_elig_expo_not_cov_crm().doubleValue());
 		} else {
-			cellY.setCellValue("");
-			cellY.setCellStyle(textStyle);
+		    cellY.setCellValue("");
 		}
 
-		// only for non performing loans - Unsecured Exposure subject to Credit Risk
-		cellZ = row.createCell(25); // fixed index
+		// Unsecured Exposure subject to Credit Risk
+		cellZ = row.getCell(25);
+		if (cellZ == null) cellZ = row.createCell(25);
+
 		if (record.getR38_rwa_unsec_expo_cre_ris() != null) {
-			cellZ.setCellValue(record.getR38_rwa_unsec_expo_cre_ris().doubleValue());
-			cellZ.setCellStyle(numberStyle);
+		    cellZ.setCellValue(record.getR38_rwa_unsec_expo_cre_ris().doubleValue());
 		} else {
-			cellZ.setCellValue("");
-			cellZ.setCellStyle(textStyle);
+		    cellZ.setCellValue("");
 		}
 
-		// only for non performing loans - RWA of unsecured exposure
-		cellAA = row.createCell(26); // fixed index
+		// RWA of unsecured exposure
+		cellAA = row.getCell(26);
+		if (cellAA == null) cellAA = row.createCell(26);
+
 		if (record.getR38_rwa_unsec_expo() != null) {
-			cellAA.setCellValue(record.getR38_rwa_unsec_expo().doubleValue());
-			cellAA.setCellStyle(numberStyle);
+		    cellAA.setCellValue(record.getR38_rwa_unsec_expo().doubleValue());
 		} else {
-			cellAA.setCellValue("");
-			cellAA.setCellStyle(textStyle);
+		    cellAA.setCellValue("");
 		}
 
-		// only for non performing loans - Total Risk Weighted Assets
-		cellAB = row.createCell(27); // fixed index
+		// Total Risk Weighted Assets
+		cellAB = row.getCell(27);
+		if (cellAB == null) cellAB = row.createCell(27);
+
 		if (record.getR38_rwa_tot_ris_wei_ass() != null) {
-			cellAB.setCellValue(record.getR38_rwa_tot_ris_wei_ass().doubleValue());
-			cellAB.setCellStyle(numberStyle);
+		    cellAB.setCellValue(record.getR38_rwa_tot_ris_wei_ass().doubleValue());
 		} else {
-			cellAB.setCellValue("");
-			cellAB.setCellStyle(textStyle);
+		    cellAB.setCellValue("");
 		}
-
+		
+		
+		
+		
+		
+		
 		// row39
 		row = sheet.getRow(38);
 		cellC = row.createCell(2); // fixed index
@@ -3244,14 +3399,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR39_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR39_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR39_crm_sub_non_col_guar() != null) {
@@ -3390,14 +3538,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR40_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR40_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR40_crm_sub_non_col_guar() != null) {
@@ -3536,14 +3677,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR41_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR41_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR41_crm_sub_non_col_guar() != null) {
@@ -3723,14 +3857,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR44_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR44_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR44_crm_sub_non_col_guar() != null) {
@@ -3869,14 +3996,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR47_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR47_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR47_crm_sub_non_col_guar() != null) {
@@ -4015,14 +4135,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR48_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR48_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR48_crm_sub_non_col_guar() != null) {
@@ -4161,15 +4274,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR49_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR49_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
-
+		
 		cellH = row.createCell(7); // fixed index
 		if (record.getR49_crm_sub_non_col_guar() != null) {
 			cellH.setCellValue(record.getR49_crm_sub_non_col_guar().doubleValue());
@@ -4307,14 +4412,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR50_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR50_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR50_crm_sub_non_col_guar() != null) {
@@ -4453,14 +4551,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR51_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR51_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR51_crm_sub_non_col_guar() != null) {
@@ -4599,14 +4690,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR52_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR52_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR52_crm_sub_non_col_guar() != null) {
@@ -4756,14 +4840,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellF.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR53_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR53_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR53_crm_sub_non_col_guar() != null) {
@@ -4992,14 +5069,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR54_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR54_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+	
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR54_crm_sub_non_col_guar() != null) {
@@ -5138,14 +5208,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR55_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR55_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR55_crm_sub_non_col_guar() != null) {
@@ -5284,14 +5347,7 @@ public class BRRS_M_SRWA_12A_ReportService {
 			cellE.setCellStyle(textStyle);
 		}
 
-		cellG = row.createCell(6); // fixed index
-		if (record.getR56_crm_sub_elig_sub_app() != null) {
-			cellG.setCellValue(record.getR56_crm_sub_elig_sub_app().doubleValue());
-			cellG.setCellStyle(numberStyle);
-		} else {
-			cellG.setCellValue("");
-			cellG.setCellStyle(textStyle);
-		}
+		
 
 		cellH = row.createCell(7); // fixed index
 		if (record.getR56_crm_sub_non_col_guar() != null) {
@@ -29608,32 +29664,34 @@ public class BRRS_M_SRWA_12A_ReportService {
 	public List<Object> getM_SRWA_12AArchival() {
 	
 		List<Object> M_SRWA_12AArchivallist = new ArrayList<>();
-		List<Object> M_SRWA_12AArchivallist1 = new ArrayList<>();
-		List<Object> M_SRWA_12AArchivallist2 = new ArrayList<>();
-		List<Object> M_SRWA_12AArchivallist3 = new ArrayList<>();
-		List<Object> M_SRWA_12AArchivallist4 = new ArrayList<>();
-		List<Object> M_SRWA_12AArchivallist5 = new ArrayList<>();
-		List<Object> M_SRWA_12AArchivallist6 = new ArrayList<>();
 		
+		/*
+		 * List<Object> M_SRWA_12AArchivallist1 = new ArrayList<>(); List<Object>
+		 * M_SRWA_12AArchivallist2 = new ArrayList<>(); List<Object>
+		 * M_SRWA_12AArchivallist3 = new ArrayList<>(); List<Object>
+		 * M_SRWA_12AArchivallist4 = new ArrayList<>(); List<Object>
+		 * M_SRWA_12AArchivallist5 = new ArrayList<>(); List<Object>
+		 * M_SRWA_12AArchivallist6 = new ArrayList<>();
+		 */
 		
 		
 		try {
 			M_SRWA_12AArchivallist = m_srwa_12a_Archival_Summary_Repo1.getM_SRWA_12Aarchival();
-			M_SRWA_12AArchivallist1 = m_srwa_12a_Archival_Summary_Repo2.getM_SRWA_12Aarchival();
-			M_SRWA_12AArchivallist2 = m_srwa_12a_Archival_Summary_Repo3.getM_SRWA_12Aarchival();
-			M_SRWA_12AArchivallist3 = m_srwa_12a_Archival_Summary_Repo4.getM_SRWA_12Aarchival();
-			M_SRWA_12AArchivallist4 = m_srwa_12a_Archival_Summary_Repo5.getM_SRWA_12Aarchival();
-			M_SRWA_12AArchivallist5 = m_srwa_12a_Archival_Summary_Repo6.getM_SRWA_12Aarchival();
-			M_SRWA_12AArchivallist6 = m_srwa_12a_Archival_Summary_Repo7.getM_SRWA_12Aarchival();
+			M_SRWA_12AArchivallist = m_srwa_12a_Archival_Summary_Repo2.getM_SRWA_12Aarchival();
+			M_SRWA_12AArchivallist = m_srwa_12a_Archival_Summary_Repo3.getM_SRWA_12Aarchival();
+			M_SRWA_12AArchivallist = m_srwa_12a_Archival_Summary_Repo4.getM_SRWA_12Aarchival();
+			M_SRWA_12AArchivallist = m_srwa_12a_Archival_Summary_Repo5.getM_SRWA_12Aarchival();
+			M_SRWA_12AArchivallist = m_srwa_12a_Archival_Summary_Repo6.getM_SRWA_12Aarchival();
+			M_SRWA_12AArchivallist = m_srwa_12a_Archival_Summary_Repo7.getM_SRWA_12Aarchival();
 			
 			
 			System.out.println("countser" + M_SRWA_12AArchivallist.size());
-			System.out.println("countser" + M_SRWA_12AArchivallist1.size());
-			System.out.println("countser" + M_SRWA_12AArchivallist2.size());
-			System.out.println("countser" + M_SRWA_12AArchivallist3.size());
-			System.out.println("countser" + M_SRWA_12AArchivallist4.size());
-			System.out.println("countser" + M_SRWA_12AArchivallist5.size());
-			System.out.println("countser" + M_SRWA_12AArchivallist6.size());
+			System.out.println("countser" + M_SRWA_12AArchivallist.size());
+			System.out.println("countser" + M_SRWA_12AArchivallist.size());
+			System.out.println("countser" + M_SRWA_12AArchivallist.size());
+			System.out.println("countser" + M_SRWA_12AArchivallist.size());
+			System.out.println("countser" + M_SRWA_12AArchivallist.size());
+			System.out.println("countser" + M_SRWA_12AArchivallist.size());
 			
 			
 		} catch (Exception e) {
@@ -58909,5 +58967,525 @@ public class BRRS_M_SRWA_12A_ReportService {
 		
 	
 	}
+	
+
+
+	
+	
+	public void updateReport1(M_SRWA_12A_Summary_Entity1 updatedEntity) {
+	    System.out.println("Came to services");
+		 System.out.println("Report Date: " + updatedEntity.getReport_date()); 
+
+		
+	    
+	    
+	    // 🔹 Use TRUNC-based query instead of findById
+	    List<M_SRWA_12A_Summary_Entity1> existingList =
+	            brrs_m_srwa_12a_summary1_repo.getdatabydateList(updatedEntity.getReport_date());
+
+	    if (existingList.isEmpty()) {
+	        throw new RuntimeException("Record not found for REPORT_DATE: " + updatedEntity.getReport_date());
+	    }
+
+	    // Assuming only one record per date
+	    M_SRWA_12A_Summary_Entity1 existing = existingList.get(0);
+	    
+	    
+	    try {
+	        // 1️⃣ Loop from R19 to R57 and copy fields
+	    	
+	        for (int i = 19; i <= 57; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = {"exposure_class","expo_crm", "spe_pro_expo", "amt_elig_sht_net",
+	    	        	"tot_expo_net_spe","crm_sub_elig_sub_app","crm_sub_non_col_guar",
+	    	        	"crm_sub_non_col_cre_der","crm_sub_col_elig_cash",
+	    	        	"crm_sub_col_elig_trea_bills",
+	    	        	"crm_sub_col_elig_deb_sec",
+	    	        	"crm_sub_col_elig_equi",
+	    	        	"crm_sub_col_elig_unit_tru",
+	    	        	"crm_sub_col_exp_cov",
+	    	        	"crm_sub_col_elig_exp_not_cov",
+	    	        	"crm_sub_rwa_ris_crm",
+	    	        	"crm_sub_rwa_cov_crm",
+	    	        	"crm_sub_rwa_org_cou",
+	    	        	"crm_sub_rwa_not_cov_crm",
+	    	        	"crm_comp_col_expo_elig",
+	    	        	"crm_comp_col_elig_expo_vol_adj",
+	    	        	"crm_comp_col_elig_fin_hai",
+	    	        	"crm_comp_col_expo_val",
+	    	        	"rwa_elig_expo_not_cov_crm",
+	    	        	"rwa_unsec_expo_cre_ris",
+	    	        	"rwa_unsec_expo",
+	    	        	"rwa_tot_ris_wei_ass" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; 
+	                   String setterName = "set" + prefix + field; 
+
+	                try {
+	                    Method getter = M_SRWA_12A_Summary_Entity1.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12A_Summary_Entity1.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_srwa_12a_summary1_repo.save(existing);
+	}
+
+
+	 
+	public void updateReport2(M_SRWA_12A_Summary_Entity2 updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SRWA_12A_Summary_Entity2 existing = brrs_m_srwa_12a_summary2_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R60 to R99 and copy fields
+	    	
+	        for (int i = 60; i <= 99; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = {"exposure_class","expo_crm", "spe_pro_expo", "amt_elig_sht_net",
+	    	        	"tot_expo_net_spe","crm_sub_elig_sub_app","crm_sub_non_col_guar",
+	    	        	"crm_sub_non_col_cre_der","crm_sub_col_elig_cash",
+	    	        	"crm_sub_col_elig_trea_bills",
+	    	        	"crm_sub_col_elig_deb_sec",
+	    	        	"crm_sub_col_elig_equi",
+	    	        	"crm_sub_col_elig_unit_tru",
+	    	        	"crm_sub_col_exp_cov",
+	    	        	"crm_sub_col_elig_exp_not_cov",
+	    	        	"crm_sub_rwa_ris_crm",
+	    	        	"crm_sub_rwa_cov_crm",
+	    	        	"crm_sub_rwa_org_cou",
+	    	        	"crm_sub_rwa_not_cov_crm",
+	    	        	"crm_comp_col_expo_elig",
+	    	        	"crm_comp_col_elig_expo_vol_adj",
+	    	        	"crm_comp_col_elig_fin_hai",
+	    	        	"crm_comp_col_expo_val",
+	    	        	"rwa_elig_expo_not_cov_crm",
+	    	        	"rwa_unsec_expo_cre_ris",
+	    	        	"rwa_unsec_expo",
+	    	        	"rwa_tot_ris_wei_ass" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; 
+	                   String setterName = "set" + prefix + field; 
+
+	                try {
+	                    Method getter = M_SRWA_12A_Summary_Entity2.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12A_Summary_Entity2.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_srwa_12a_summary2_repo.save(existing);
+	}
+	
+	
+	
+	
+	public void updateReport3(M_SRWA_12A_Summary_Entity3 updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SRWA_12A_Summary_Entity3 existing = brrs_m_srwa_12a_summary3_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R100 to R133 and copy fields
+	    	
+	        for (int i = 100; i <= 133; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = {"exposure_class","expo_crm", "spe_pro_expo", "amt_elig_sht_net",
+	    	        	"tot_expo_net_spe","crm_sub_elig_sub_app","crm_sub_non_col_guar",
+	    	        	"crm_sub_non_col_cre_der","crm_sub_col_elig_cash",
+	    	        	"crm_sub_col_elig_trea_bills",
+	    	        	"crm_sub_col_elig_deb_sec",
+	    	        	"crm_sub_col_elig_equi",
+	    	        	"crm_sub_col_elig_unit_tru",
+	    	        	"crm_sub_col_exp_cov",
+	    	        	"crm_sub_col_elig_exp_not_cov",
+	    	        	"crm_sub_rwa_ris_crm",
+	    	        	"crm_sub_rwa_cov_crm",
+	    	        	"crm_sub_rwa_org_cou",
+	    	        	"crm_sub_rwa_not_cov_crm",
+	    	        	"crm_comp_col_expo_elig",
+	    	        	"crm_comp_col_elig_expo_vol_adj",
+	    	        	"crm_comp_col_elig_fin_hai",
+	    	        	"crm_comp_col_expo_val",
+	    	        	"rwa_elig_expo_not_cov_crm",
+	    	        	"rwa_unsec_expo_cre_ris",
+	    	        	"rwa_unsec_expo",
+	    	        	"rwa_tot_ris_wei_ass" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; 
+	                   String setterName = "set" + prefix + field; 
+
+	                try {
+	                    Method getter = M_SRWA_12A_Summary_Entity3.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12A_Summary_Entity3.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_srwa_12a_summary3_repo.save(existing);
+	}
+	
+	
+
+
+	
+	
+	
+	
+	
+
+	public void updateReport4(M_SRWA_12A_Summary_Entity4 updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SRWA_12A_Summary_Entity4 existing = brrs_m_srwa_12a_summary4_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R100 to R133 and copy fields
+	    	
+	        for (int i = 145; i <= 178; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = { "exposure_class_off_bal",
+	    	    	    "nom_pri_amt",
+	    	    	    "ccf",
+	    	    	    "cea",
+	    	    	    "cea_elig_coun_bilt_net",
+	    	    	    "cea_aft_net",
+	    	    	    "crm_sub_app_cea_elig",
+	    	    	    "crm_sub_app_non_col_guar_elig",
+	    	    	    "crm_sub_app_non_col_cre_der",
+	    	    	    "crm_sub_app_col_elig_cash",
+	    	    	    "crm_sub_app_col_elig_tre_bills",
+	    	    	    "crm_sub_app_col_elig_deb_sec",
+	    	    	    "crm_sub_app_col_elig_euiq",
+	    	    	    "crm_sub_app_col_elig_uni_tru",
+	    	    	    "crm_sub_app_col_cea_cov",
+	    	    	    "crm_sub_app_col_cea_not_cov",
+	    	    	    "crm_sub_app_rwa_ris_wei_crm",
+	    	    	    "crm_sub_app_rwa_ris_cea_cov",
+	    	    	    "crm_sub_app_rwa_appl_org_coun",
+	    	    	    "crm_sub_app_rwa_ris_cea_not_cov",
+	    	    	    "crm_com_app_col_cea_elig_crm",
+	    	    	    "crm_com_app_col_elig_cea_vol_adj",
+	    	    	    "crm_com_app_col_elig_fin_hai",
+	    	    	    "crm_com_app_col_cea_val_aft_crm",
+	    	    	    "rwa_elig_cea_not_cov",
+	    	    	    "rwa_unsec_cea_sub_cre_ris",
+	    	    	    "rwa_unsec_cea",
+	    	    	    "rwa_tot_ris_wei_ass" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; 
+	                   String setterName = "set" + prefix + field; 
+
+	                try {
+	                    Method getter = M_SRWA_12A_Summary_Entity4.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12A_Summary_Entity4.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_srwa_12a_summary4_repo.save(existing);
+	}
+	
+	
+	
+	public void updateReport5(M_SRWA_12A_Summary_Entity5 updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SRWA_12A_Summary_Entity5 existing = brrs_m_srwa_12a_summary5_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R100 to R133 and copy fields
+	    	
+	        for (int i = 179; i <= 212; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = { "exposure_class_off_bal",
+	    	    	    "nom_pri_amt",
+	    	    	    "ccf",
+	    	    	    "cea",
+	    	    	    "cea_elig_coun_bilt_net",
+	    	    	    "cea_aft_net",
+	    	    	    "crm_sub_app_cea_elig",
+	    	    	    "crm_sub_app_non_col_guar_elig",
+	    	    	    "crm_sub_app_non_col_cre_der",
+	    	    	    "crm_sub_app_col_elig_cash",
+	    	    	    "crm_sub_app_col_elig_tre_bills",
+	    	    	    "crm_sub_app_col_elig_deb_sec",
+	    	    	    "crm_sub_app_col_elig_euiq",
+	    	    	    "crm_sub_app_col_elig_uni_tru",
+	    	    	    "crm_sub_app_col_cea_cov",
+	    	    	    "crm_sub_app_col_cea_not_cov",
+	    	    	    "crm_sub_app_rwa_ris_wei_crm",
+	    	    	    "crm_sub_app_rwa_ris_cea_cov",
+	    	    	    "crm_sub_app_rwa_appl_org_coun",
+	    	    	    "crm_sub_app_rwa_ris_cea_not_cov",
+	    	    	    "crm_com_app_col_cea_elig_crm",
+	    	    	    "crm_com_app_col_elig_cea_vol_adj",
+	    	    	    "crm_com_app_col_elig_fin_hai",
+	    	    	    "crm_com_app_col_cea_val_aft_crm",
+	    	    	    "rwa_elig_cea_not_cov",
+	    	    	    "rwa_unsec_cea_sub_cre_ris",
+	    	    	    "rwa_unsec_cea",
+	    	    	    "rwa_tot_ris_wei_ass" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; 
+	                   String setterName = "set" + prefix + field; 
+
+	                try {
+	                    Method getter = M_SRWA_12A_Summary_Entity5.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12A_Summary_Entity5.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_srwa_12a_summary5_repo.save(existing);
+	}
+	
+	
+	
+	public void updateReport6(M_SRWA_12A_Summary_Entity6 updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SRWA_12A_Summary_Entity6 existing = brrs_m_srwa_12a_summary6_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R100 to R133 and copy fields
+	    	
+	        for (int i = 213; i <= 246; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = { "exposure_class_off_bal",
+	    	    	    "nom_pri_amt",
+	    	    	    "ccf",
+	    	    	    "cea",
+	    	    	    "cea_elig_coun_bilt_net",
+	    	    	    "cea_aft_net",
+	    	    	    "crm_sub_app_cea_elig",
+	    	    	    "crm_sub_app_non_col_guar_elig",
+	    	    	    "crm_sub_app_non_col_cre_der",
+	    	    	    "crm_sub_app_col_elig_cash",
+	    	    	    "crm_sub_app_col_elig_tre_bills",
+	    	    	    "crm_sub_app_col_elig_deb_sec",
+	    	    	    "crm_sub_app_col_elig_euiq",
+	    	    	    "crm_sub_app_col_elig_uni_tru",
+	    	    	    "crm_sub_app_col_cea_cov",
+	    	    	    "crm_sub_app_col_cea_not_cov",
+	    	    	    "crm_sub_app_rwa_ris_wei_crm",
+	    	    	    "crm_sub_app_rwa_ris_cea_cov",
+	    	    	    "crm_sub_app_rwa_appl_org_coun",
+	    	    	    "crm_sub_app_rwa_ris_cea_not_cov",
+	    	    	    "crm_com_app_col_cea_elig_crm",
+	    	    	    "crm_com_app_col_elig_cea_vol_adj",
+	    	    	    "crm_com_app_col_elig_fin_hai",
+	    	    	    "crm_com_app_col_cea_val_aft_crm",
+	    	    	    "rwa_elig_cea_not_cov",
+	    	    	    "rwa_unsec_cea_sub_cre_ris",
+	    	    	    "rwa_unsec_cea",
+	    	    	    "rwa_tot_ris_wei_ass" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; 
+	                   String setterName = "set" + prefix + field; 
+
+	                try {
+	                    Method getter = M_SRWA_12A_Summary_Entity6.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12A_Summary_Entity6.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_srwa_12a_summary6_repo.save(existing);
+	}
+	
+	
+	
+	public void updateReport7(M_SRWA_12A_Summary_Entity7 updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SRWA_12A_Summary_Entity7 existing = brrs_m_srwa_12a_summary7_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R100 to R133 and copy fields
+	    	
+	        for (int i = 247; i <= 253; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = { "exposure_class_off_bal",
+	    	    	    "nom_pri_amt",
+	    	    	    "ccf",
+	    	    	    "cea",
+	    	    	    "cea_elig_coun_bilt_net",
+	    	    	    "cea_aft_net",
+	    	    	    "crm_sub_app_cea_elig",
+	    	    	    "crm_sub_app_non_col_guar_elig",
+	    	    	    "crm_sub_app_non_col_cre_der",
+	    	    	    "crm_sub_app_col_elig_cash",
+	    	    	    "crm_sub_app_col_elig_tre_bills",
+	    	    	    "crm_sub_app_col_elig_deb_sec",
+	    	    	    "crm_sub_app_col_elig_euiq",
+	    	    	    "crm_sub_app_col_elig_uni_tru",
+	    	    	    "crm_sub_app_col_cea_cov",
+	    	    	    "crm_sub_app_col_cea_not_cov",
+	    	    	    "crm_sub_app_rwa_ris_wei_crm",
+	    	    	    "crm_sub_app_rwa_ris_cea_cov",
+	    	    	    "crm_sub_app_rwa_appl_org_coun",
+	    	    	    "crm_sub_app_rwa_ris_cea_not_cov",
+	    	    	    "crm_com_app_col_cea_elig_crm",
+	    	    	    "crm_com_app_col_elig_cea_vol_adj",
+	    	    	    "crm_com_app_col_elig_fin_hai",
+	    	    	    "crm_com_app_col_cea_val_aft_crm",
+	    	    	    "rwa_elig_cea_not_cov",
+	    	    	    "rwa_unsec_cea_sub_cre_ris",
+	    	    	    "rwa_unsec_cea",
+	    	    	    "rwa_tot_ris_wei_ass" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; 
+	                   String setterName = "set" + prefix + field; 
+
+	                try {
+	                    Method getter = M_SRWA_12A_Summary_Entity7.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12A_Summary_Entity7.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_srwa_12a_summary7_repo.save(existing);
+	}
+	
+	
 	
 }

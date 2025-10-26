@@ -3,6 +3,7 @@ package com.bornfire.brf.services;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,6 +43,7 @@ import com.bornfire.brf.entities.BRRS_M_GMIRT_Archival_Detail_Repo;
 import com.bornfire.brf.entities.BRRS_M_GMIRT_Archival_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_M_GMIRT_Detail_Repo;
 import com.bornfire.brf.entities.BRRS_M_GMIRT_Summary_Repo;
+import com.bornfire.brf.entities.M_EPR_Summary_Entity;
 import com.bornfire.brf.entities.M_GMIRT_Archival_Detail_Entity;
 import com.bornfire.brf.entities.M_GMIRT_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_GMIRT_Detail_Entity;
@@ -1378,6 +1380,53 @@ public class BRRS_M_GMIRT_ReportService {
 	}
 	
 	
+	
+	public void updateReport(M_GMIRT_Summary_Entity updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_GMIRT_Summary_Entity existing = brrs_m_gmirt_summary_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R11 to R23 and copy fields
+	    	
+	        for (int i = 9; i <= 12; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = {"currency", "pula", "usd", "zar", "gbp", "euro", "jpy", "rupee", "renminbi", "other", "tot_cap_req"
+ };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; // e.g., getR10
+	                   String setterName = "set" + prefix + field; // e.g., setR10
+
+	                try {
+	                    Method getter = M_GMIRT_Summary_Entity.class.getMethod(getterName);
+	                    Method setter = M_GMIRT_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_gmirt_summary_repo.save(existing);
+	}
+
 	
 	
 	

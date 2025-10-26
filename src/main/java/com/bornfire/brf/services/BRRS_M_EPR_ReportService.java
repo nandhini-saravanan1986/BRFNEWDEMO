@@ -3,6 +3,7 @@ package com.bornfire.brf.services;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,7 +44,7 @@ import com.bornfire.brf.entities.BRRS_M_EPR_Archival_Detail_Repo;
 import com.bornfire.brf.entities.BRRS_M_EPR_Archival_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_M_EPR_Detail_Repo;
 import com.bornfire.brf.entities.BRRS_M_EPR_Summary_Repo;
-
+import com.bornfire.brf.entities.M_CA4_Summary_Entity;
 import com.bornfire.brf.entities.M_EPR_Archival_Detail_Entity;
 import com.bornfire.brf.entities.M_EPR_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_EPR_Detail_Entity;
@@ -143,94 +144,7 @@ public class BRRS_M_EPR_ReportService {
 
 	}
 
-	public ModelAndView getM_EPRcurrentDtl(String reportId, String fromdate, String todate, String currency,
-			String dtltype, Pageable pageable, String filter, String type, String version) {
-
-		int pageSize = pageable != null ? pageable.getPageSize() : 10;
-		int currentPage = pageable != null ? pageable.getPageNumber() : 0;
-		int totalPages = 0;
-		
-		ModelAndView mv = new ModelAndView();
-
-		Session hs = sessionFactory.getCurrentSession();
-		
-
-		try {
-			Date parsedDate = null;
-
-			if (todate != null && !todate.isEmpty()) {
-				parsedDate = dateformat.parse(todate);
-			}
-
-			String rowId = null;
-			String columnId = null;
-
-			// ✅ Split the filter string here
-			if (filter != null && filter.contains(",")) {
-				String[] parts = filter.split(",");
-				if (parts.length >= 2) {
-					rowId = parts[0];
-					columnId = parts[1];
-				}
-			}
-
-			
-			System.out.println(type);
-			if ("ARCHIVAL".equals(type) && version != null) {
-				System.out.println(type);
-				// 🔹 Archival branch
-				List<M_EPR_Archival_Detail_Entity> T1Dt1;
-				if (rowId != null && columnId != null) {
-					T1Dt1 = m_epr_Archival_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate, version);
-				} else {
-					T1Dt1 = m_epr_Archival_Detail_Repo.getdatabydateList(parsedDate, version);
-				}
-
-				mv.addObject("reportdetails", T1Dt1);
-				mv.addObject("reportmaster12", T1Dt1);
-				System.out.println("ARCHIVAL COUNT: " + (T1Dt1 != null ? T1Dt1.size() : 0));
-
-			} else {
-				// 🔹 Current branch
-				List<M_EPR_Detail_Entity> T1Dt1;
-				
-			if (rowId != null && columnId != null) {
-				T1Dt1 = brrs_m_epr_detail_repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate);
-			} else {
-				T1Dt1 = brrs_m_epr_detail_repo.getdatabydateList(parsedDate, currentPage, pageSize);
-				totalPages = brrs_m_epr_detail_repo.getdatacount(parsedDate);
-				mv.addObject("pagination", "YES");
-
-			}
-			mv.addObject("reportdetails", T1Dt1);
-			mv.addObject("reportmaster12", T1Dt1);
-			System.out.println("LISTCOUNT: " + T1Dt1.size());
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-			mv.addObject("errorMessage", "Invalid date format: " + todate);
-		} catch (Exception e) {
-			e.printStackTrace();
-			mv.addObject("errorMessage", "Unexpected error: " + e.getMessage());
-		}
-
-		// Page<Object> T1Dt1Page = new PageImpl<Object>(pagedlist,
-		// PageRequest.of(currentPage, pageSize), T1Dt1.size());
-		// mv.addObject("reportdetails", T1Dt1Page.getContent());
-				// mv.addObject("reportmaster1", qr);
-				// mv.addObject("singledetail", new T1CurProdDetail());
-		
-
-		mv.setViewName("BRRS/M_EPR");
-		mv.addObject("displaymode", "Details");
-		mv.addObject("currentPage", currentPage);
-		System.out.println("totalPages: " + (int) Math.ceil((double) totalPages / 100));
-		mv.addObject("totalPages", (int) Math.ceil((double) totalPages / 100));
-		
-		mv.addObject("reportsflag", "reportsflag");
-		mv.addObject("menu", reportId);
-		return mv;
-	}
+	
 
 	public byte[] getM_EPRExcel(String filename, String reportId, String fromdate, String todate, String currency,
 			String dtltype, String type, String version) throws Exception {
@@ -3095,6 +3009,55 @@ public class BRRS_M_EPR_ReportService {
 	}
 	
 	
+	
+	
+	public void updateReport(M_EPR_Summary_Entity updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_EPR_Summary_Entity existing = brrs_m_epr_summary_repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1️⃣ Loop from R11 to R23 and copy fields
+	    	
+	        for (int i = 11; i <= 23; i++) {
+				
+	        	 String prefix = "R" + i + "_";
+
+	            String[] fields = {"market","gpfsr_nom_amt","gpfsr_pos_att8_per_spe_ris","gpfsr_chrg","gpfsr_nom_amt1","gpfsr_pos_att4_per_spe_ris","gpfsr_chrg1", 
+	                	"gpfsr_nom_amt2","gpfsr_pos_att2_per_spe_ris","gpfsr_chrg2","tot_spe_ris_chrg","net_pos_gen_mar_ris","gen_mar_ris_chrg_8per","2per_gen_mar_ris_chrg_div_port",
+	                	"tot_gen_mar_risk_chrg","tot_mar_ris_chrg" };
+
+	            for (String field : fields) {
+	            	   String getterName = "get" + prefix + field; // e.g., getR10
+	                   String setterName = "set" + prefix + field; // e.g., setR10
+
+	                try {
+	                    Method getter = M_EPR_Summary_Entity.class.getMethod(getterName);
+	                    Method setter = M_EPR_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+
+	       
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    brrs_m_epr_summary_repo.save(existing);
+	}
+
 	
 	
 	

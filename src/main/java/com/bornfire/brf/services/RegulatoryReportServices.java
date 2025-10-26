@@ -739,11 +739,11 @@ public class RegulatoryReportServices {
 						pageable, Filter, type, version);
 				break;
 				
-			case "M_EPR":
-				
-				repdetail = brrs_m_epr_reportservice. getM_EPRcurrentDtl(reportId, fromdate, todate, currency, dtltype,
-						pageable, Filter, type, version);
-				break;
+//			case "M_EPR":
+//				
+//				repdetail = brrs_m_epr_reportservice. getM_EPRcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+//						pageable, Filter, type, version);
+//				break;
 				
 	        case "M_GMIRT":
 				

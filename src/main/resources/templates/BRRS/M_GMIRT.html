@@ -302,7 +302,8 @@ label.error {
 }
 
 .green-cell {
-	background-color: #92D050 !important;
+	 background-color: rgb(107, 122, 143) !important;
+    color: white !important;
 }
 </style>
 
@@ -340,31 +341,8 @@ $(window).on('beforeunload', function() {
 	//to fetch summary from the database - called from the summary button
 	function showdetails() {
 
-					var Callurl;
-					$('#loader').modal('show');
-					Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype},type=${type},version=${version})}]]*/
-						location.href = Callurl;
-					console.log(Callurl);
-					/*  $.ajax({
-						 type: 'get',
-						 url: Callurl,
-						 beforeSend: function () {
-							 $('#loader').modal('show'); // 🔄 Show loader
-						 },
-						 success: function (data) {
-							 $('.content').html(data);
-							 //$("#detailsbtn").addClass("active");
-							 //tablepagination();
-						 },
-						 complete: function () {
-							 $('#loader').modal('hide');
-						 },
-						 error: function () {
-								  $('#loader').modal('hide');
-							 alert("Something went wrongss. Please try again.");
-						  
-						 }
-					 }); */
+		showResultModal('BRRS',' Details page not available for Manual Report');
+		
 				}
 		
 				function showsummary() {
@@ -638,6 +616,309 @@ function showdetailsbyRowAndColumn(a) {
 </script>
 
 
+<script>
+	// Show Modify (enable inputs & dropdowns)
+function showmodify(btn) {
+    // IDs that should always remain readonly
+  
+
+ // Columns to remain readonly
+var readonlyColumnsR12 = [
+    "pula",
+    "usd",
+    "zar",
+    "gbp",
+    "euro",
+    "jpy",
+    "rupee",
+    "renminbi",
+    "other",
+    "tot_cap_req"
+];
+
+var readonlyCurrencyColumns = ["currency"];
+
+// Generate readonly IDs
+var readonlyIds = [];
+
+// R12 numeric columns
+readonlyColumnsR12.forEach(col => {
+    readonlyIds.push(`r12_${col}`);
+});
+
+// R9–R12 currency columns
+for (let i = 9; i <= 12; i++) {
+    readonlyCurrencyColumns.forEach(col => {
+        readonlyIds.push(`r${i}_${col}`);
+    });
+}
+
+// Make all .Show_input editable except the readonlyIds
+$(".Show_input").each(function () {
+    if (!readonlyIds.includes(this.id)) {
+        $(this).removeAttr("readonly").removeAttr("disabled");
+    }
+});
+
+
+ 
+// Apply gray background for rows R9–R11, specific columns
+for (let i = 9; i <= 11; i++) {
+    let columns = [
+      
+        "pula",
+        "usd",
+        "zar",
+        "gbp",
+        "euro",
+        "jpy",
+        "rupee",
+        "renminbi",
+        "other",
+        "tot_cap_req"
+    ];
+
+    columns.forEach(col => {
+        let selector = `#r${i}_${col}`;
+        if ($(selector).length) {
+            $(selector).css("background-color", "#d3d3d3");
+        }
+    });
+}
+
+  
+
+    // Toggle buttons
+    $("#submitButton, #btnBack_edit, #cancelRecord").show();
+    $("#btnBack").hide();
+
+    // Hide the clicked Modify button
+    $(btn).hide();
+}
+
+
+//Cancel / Reset function
+function cancelModify() {
+    if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
+        // ✅ Only when user clicks YES
+        location.reload();
+        
+        $(".Show_input").attr("readonly", true).attr("disabled", true);
+
+       
+        	
+            
+        
+
+        $("#submitButton, #btnBack_edit").hide();
+        $("#btnBack").show();
+
+        // Hide Cancel button again
+        $("#cancelRecord").hide();
+
+        // Show all Modify buttons
+        $("#addRecord").show();
+    }
+    // ❌ If user clicks CANCEL, nothing happens
+
+    }
+
+	
+
+	</script>
+
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+//✅ Calculate R12 totals based on R9, R10, R11
+function calculateR12Totals() {
+    let pula = 0,
+        usd = 0,
+        zar = 0,
+        gbd = 0,
+        euro = 0,
+        jpy = 0,
+        rupee = 0,
+        renminbi = 0,
+        other = 0,
+        tot_cap_req = 0;
+
+    for (let i = 9; i <= 11; i++) {
+        let P = parseFloat($("#r" + i + "_pula").val().replace(/,/g, "")) || 0;
+        let U = parseFloat($("#r" + i + "_usd").val().replace(/,/g, "")) || 0;
+        let Z = parseFloat($("#r" + i + "_zar").val().replace(/,/g, "")) || 0;
+        let G = parseFloat($("#r" + i + "_gbp").val().replace(/,/g, "")) || 0;
+        let E = parseFloat($("#r" + i + "_euro").val().replace(/,/g, "")) || 0;
+        let J = parseFloat($("#r" + i + "_jpy").val().replace(/,/g, "")) || 0;
+        let R = parseFloat($("#r" + i + "_rupee").val().replace(/,/g, "")) || 0;
+        let RE = parseFloat($("#r" + i + "_renminbi").val().replace(/,/g, "")) || 0;
+        let O = parseFloat($("#r" + i + "_other").val().replace(/,/g, "")) || 0;
+        let T = parseFloat($("#r" + i + "_tot_cap_req").val().replace(/,/g, "")) || 0;
+
+        pula += P;
+        usd += U;
+        zar += Z;
+        gbd += G;
+        euro += E;
+        jpy += J;
+        rupee += R;
+        renminbi += RE;
+        other += O;
+        tot_cap_req += T;
+    }
+
+    $("#r12_pula").val(pula.toLocaleString('en-US'));
+    $("#r12_usd").val(usd.toLocaleString('en-US'));
+    $("#r12_zar").val(zar.toLocaleString('en-US'));
+    $("#r12_gbp").val(gbd.toLocaleString('en-US'));
+    $("#r12_euro").val(euro.toLocaleString('en-US'));
+    $("#r12_jpy").val(jpy.toLocaleString('en-US'));
+    $("#r12_rupee").val(rupee.toLocaleString('en-US'));
+    $("#r12_renminbi").val(renminbi.toLocaleString('en-US'));
+    $("#r12_other").val(other.toLocaleString('en-US'));
+    $("#r12_tot_cap_req").val(tot_cap_req.toLocaleString('en-US'));
+}
+
+// ✅ Initialize calculation on page load and add input listeners
+$(document).ready(function() {
+    calculateR12Totals();
+
+    for (let i = 9; i <= 11; i++) {
+        $("#r" + i + "_pula, " +
+          "#r" + i + "_usd, " +
+          "#r" + i + "_zar, " +
+          "#r" + i + "_gbp, " +
+          "#r" + i + "_euro, " +
+          "#r" + i + "_jpy, " +
+          "#r" + i + "_rupee, " +
+          "#r" + i + "_renminbi, " +
+          "#r" + i + "_other, " +
+          "#r" + i + "_tot_cap_req"
+        ).on("input", calculateR12Totals);
+    }
+});
+
+</script>
+
+
+
+
+<script>
+	
+
+	// This function is for closing the modal after an action is complete.
+	// It hides the result and loader modals and reloads the page.
+	function closemodel() {
+	    $("#resultModal").modal("hide");
+	    $('#loader').modal('hide');
+
+	    // Reload the page after a short delay to ensure the modal animation completes smoothly.
+	    setTimeout(function () {
+	        location.reload();
+	    }, 300);
+	}
+
+	// This is the main function that orchestrates the entire form submission process.
+	// It is triggered by the "Update" button click.
+// Make the function global so onclick="fileuploads(this)" can see it
+window.fileuploads = function(btn) {
+    // Get the report date from the button's data attribute
+    const asondate = btn.getAttribute("data-todate");
+
+    // Show loading spinner
+    $('#loader').modal('show');
+
+    // Ensure totals are calculated before submission
+    if (typeof calculateTotals === "function") calculateTotals();
+
+    // Remove commas from all text inputs inside #fileupload
+    $("#fileupload input[type='text']").each(function () {
+        const val = $(this).val();
+        if (val && val.includes(",")) {
+            $(this).val(val.replace(/,/g, ''));
+        }
+    });
+
+    // Validate form
+    if (!$("#fileupload").valid()) {
+        $('#loader').modal('hide');
+        return;
+    }
+
+    // Prepare FormData
+    const formData1 = new FormData();
+    formData1.append("asondate", asondate);
+
+    // Append row fields to FormData
+    for (let i = 9; i <= 12; i++) {
+        ["currency", "pula", "usd", "zar", "gbp", "euro", "jpy", "rupee", "renminbi", "other", "tot_cap_req"]
+        .forEach(field => {
+            const input = $("#r" + i + "_" + field);
+            if (input.length) {
+                formData1.append(input.attr("name"), input.val());
+            }
+        });
+    }
+
+    // Send AJAX request
+    $.ajax({
+        url: './M_GMIRTupdate',
+        type: 'POST',
+        data: formData1,
+        processData: false,
+        contentType: false,
+        dataType: 'text'
+    })
+    .done(function() {
+        $("#resultModalLabel").text("Success");
+        $("#resultModalBody").text("Updated successfully.");
+        $("#resultModal").modal("show");
+    })
+    .fail(function(jqXHR) {
+        console.error("Error response:", jqXHR.responseText);
+        $("#resultModalLabel").text("Error");
+        $("#resultModalBody").text("One or more updates failed. Check console for details.");
+        $("#resultModal").modal("show");
+    })
+    .always(function() {
+        $('#loader').modal('hide');
+    });
+};
+
+
+
+
+
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
@@ -670,9 +951,9 @@ function showdetailsbyRowAndColumn(a) {
 						style="display: flex; color: white; align-items: center;">
 						<!-- 📅 Date -->
 						<span class="white-text"
-							style="color: white !important; font-size: 16px; margin-right: 20px;">Report
-							Date: <span th:text="${asondate}">2025-07-04</span>
-						</span>
+      style="color: white !important; font-size: 16px; margin-right: 20px;">
+    Report Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-07-04</span>
+</span>
 
 						<!-- Buttons -->
 						<input type="hidden" id="selectedTab" th:value="${displaymode}">
@@ -682,6 +963,25 @@ function showdetailsbyRowAndColumn(a) {
 						<button type="button" class="custom-tab-btn"
 							id="custom-tab-btnDetails" onclick="showdetails();"
 							th:if="${displaymode == 'summary'}">Details</button>
+							
+							
+							
+							
+								<!-- Modify button -->
+						<button type="button" class="custom-tab-btn"
+							onclick="showmodify(this);" title="Click to EDIT Records"
+							th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
+							th:if="${type != 'ARCHIVAL'}" id="addRecord">Modify</button>
+
+						<!-- Cancel button (hidden initially) -->
+						<button type="button" class="custom-tab-btn"
+							title="Cancel editing" id="cancelRecord"
+							onclick="cancelModify();" style="display: none;">Cancel</button>
+							
+							
+							
+							
+							
 						<button type="button" class="custom-tab-btn"
 							id="custom-tab-btnAdd" th:if="${displaymode == 'summary'}"
 							th:attr="data-reportid=${reportid}, 
@@ -716,6 +1016,9 @@ function showdetailsbyRowAndColumn(a) {
 				<div th:if="${displaymode == 'summary'}">
 					<div class="row">
 						<div class="col-sm-12">
+						
+						
+						<form action="#" method="POST" id="fileupload">
 							<div
 								class="table-wrapper table-responsive scrollable-table-container"
 								style="border-right: 1px solid #dee2e6;">
@@ -726,31 +1029,31 @@ function showdetailsbyRowAndColumn(a) {
 										<tr>
 
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">Line
+												style="text-align: left; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 100px;">Line
 												no.</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">Currency</th>
+												style="text-align: left; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 300px;">Currency</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">Pula</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px;  width: 150px;" >Pula</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">USD</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">USD</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">ZAR</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">ZAR</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">GBP</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">GBP</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">EURO</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">EURO</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">JPY</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">JPY</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">RUPEE</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">RUPEE</th>
 
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">RENMINBI</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">RENMINBI</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">Other</th>
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px; width: 150px;">Other</th>
 											<th
-												style="text-align: left; font-weight: bold; background-color: #b3b6b9;">Total
+												style="text-align: right; font-weight: bold; background-color: #D8D8D8; padding: 10px;width: 250px; ">Total
 												capital required</th>
 
 
@@ -765,208 +1068,343 @@ function showdetailsbyRowAndColumn(a) {
 										style="font-family: Arial;">
 
 										<tr>
-											<td style="text-align: right; font-weight: bold;">1</td>
+											<td style="text-align: right; ">1</td>
 
 
-											<td style="text-align: left;" th:text="${report.r9_currency}"></td>
+										<td id="ROW9" style="font-weight: bold; text-align: left;">
+    <input class="display-input Show_input" type="text"
+           th:value="'Net open position'"
+           id="r9_currency" name="r9_currency"
+           style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_pula}"
-												th:attr="RowId='R9', ColumnId='C3'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+										<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_pula != null ? #numbers.formatDecimal(report.r9_pula,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_pula" name="r9_pula"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_usd}"
-												th:attr="RowId='R9', ColumnId='C4'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+										<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_usd != null ? #numbers.formatDecimal(report.r9_usd,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_usd" name="r9_usd"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_zar}"
-												th:attr="RowId='R9', ColumnId='C5'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+								<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_zar != null ? #numbers.formatDecimal(report.r9_zar,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_zar" name="r9_zar"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_gbp }"
-												th:attr="RowId='R9', ColumnId='C6'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_gbp != null ? #numbers.formatDecimal(report.r9_gbp,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_gbp" name="r9_gbp"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_euro}"
-												th:attr="RowId='R9', ColumnId='C7'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_euro != null ? #numbers.formatDecimal(report.r9_euro,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_euro" name="r9_euro"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_jpy}"
-												th:attr="RowId='R9', ColumnId='C8'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_jpy != null ? #numbers.formatDecimal(report.r9_jpy,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_jpy" name="r9_jpy"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_rupee}"
-												th:attr="RowId='R9', ColumnId='C9'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_rupee != null ? #numbers.formatDecimal(report.r9_rupee,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_rupee" name="r9_rupee"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;"
-												th:text="${report.r9_renminbi}"
-												th:attr="RowId='R9', ColumnId='C10'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_renminbi != null ? #numbers.formatDecimal(report.r9_renminbi,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_renminbi" name="r9_renminbi"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;" th:text="${report.r9_other}"
-												th:attr="RowId='R9', ColumnId='C11'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;">
+    <input class="display-input Show_input" type="text"
+           th:value="${report.r9_other != null ? #numbers.formatDecimal(report.r9_other,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_other" name="r9_other"
+           style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-											<td style="text-align: right;"
-												th:text="${report.r9_tot_cap_req}"
-												th:attr="RowId='R9', ColumnId='C12'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
+<td id="ROW9" style="font-weight: bold; text-align: right; padding-left:20px;" >
+    <input class="display-input Show_input " type="text"
+           th:value="${report.r9_tot_cap_req != null ? #numbers.formatDecimal(report.r9_tot_cap_req,0,'COMMA',0,'POINT') : '0'}"
+           id="r9_tot_cap_req" name="r9_tot_cap_req"
+           style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right;"
+           readonly />
+</td>
 
-										</tr>
+	</tr>
+
+										<tr>
+    <td style="text-align: right;">2</td>
+    <td id="ROW10" style="font-weight: bold; text-align: left;">
+        <input class="display-input Show_input" type="text"
+               th:value="'Charge for basis and gap risk*'"
+               id="r10_currency" name="r10_currency"
+               style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_pula != null ? #numbers.formatDecimal(report.r10_pula,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_pula" name="r10_pula"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_usd != null ? #numbers.formatDecimal(report.r10_usd,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_usd" name="r10_usd"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_zar != null ? #numbers.formatDecimal(report.r10_zar,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_zar" name="r10_zar"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_gbp != null ? #numbers.formatDecimal(report.r10_gbp,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_gbp" name="r10_gbp"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_euro != null ? #numbers.formatDecimal(report.r10_euro,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_euro" name="r10_euro"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_jpy != null ? #numbers.formatDecimal(report.r10_jpy,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_jpy" name="r10_jpy"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_rupee != null ? #numbers.formatDecimal(report.r10_rupee,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_rupee" name="r10_rupee"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_renminbi != null ? #numbers.formatDecimal(report.r10_renminbi,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_renminbi" name="r10_renminbi"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r10_other != null ? #numbers.formatDecimal(report.r10_other,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_other" name="r10_other"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW10" style="font-weight: bold; text-align: right; padding-left:20px;" >
+        <input class="display-input Show_input " type="text"
+               th:value="${report.r10_tot_cap_req != null ? #numbers.formatDecimal(report.r10_tot_cap_req,0,'COMMA',0,'POINT') : '0'}"
+               id="r10_tot_cap_req" name="r10_tot_cap_req"
+               style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+</tr>
+
 
 
 										<tr>
-											<td style="text-align: right; font-weight: bold;">2</td>
+    <td style="text-align: right;">3</td>
+    <td id="ROW11" style="font-weight: bold; text-align: left;">
+        <input class="display-input Show_input" type="text"
+               th:value="'Charge for correlation effects'"
+               id="r11_currency" name="r11_currency"
+               style="background-color: #FFFFFF; width:300px; height: 28px; border-color: transparent; text-align: left;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_pula != null ? #numbers.formatDecimal(report.r11_pula,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_pula" name="r11_pula"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_usd != null ? #numbers.formatDecimal(report.r11_usd,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_usd" name="r11_usd"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_zar != null ? #numbers.formatDecimal(report.r11_zar,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_zar" name="r11_zar"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_gbp != null ? #numbers.formatDecimal(report.r11_gbp,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_gbp" name="r11_gbp"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_euro != null ? #numbers.formatDecimal(report.r11_euro,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_euro" name="r11_euro"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_jpy != null ? #numbers.formatDecimal(report.r11_jpy,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_jpy" name="r11_jpy"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_rupee != null ? #numbers.formatDecimal(report.r11_rupee,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_rupee" name="r11_rupee"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_renminbi != null ? #numbers.formatDecimal(report.r11_renminbi,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_renminbi" name="r11_renminbi"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;">
+        <input class="display-input Show_input" type="text"
+               th:value="${report.r11_other != null ? #numbers.formatDecimal(report.r11_other,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_other" name="r11_other"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW11" style="font-weight: bold; text-align: right; padding-left:20px;" >
+        <input class="display-input Show_input " type="text"
+               th:value="${report.r11_tot_cap_req != null ? #numbers.formatDecimal(report.r11_tot_cap_req,0,'COMMA',0,'POINT') : '0'}"
+               id="r11_tot_cap_req" name="r11_tot_cap_req"
+               style="background-color: #FFFFFF; width:250px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+</tr>
 
-											<td style="text-align: left;"
-												th:text="${report.r10_currency}"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_pula}"
-												th:attr="RowId='R10', ColumnId='C3'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_usd}"
-												th:attr="RowId='R10', ColumnId='C4'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_zar}"
-												th:attr="RowId='R10', ColumnId='C5'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_gbp}"
-												th:attr="RowId='R10', ColumnId='C6'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_euro}"
-												th:attr="RowId='R10', ColumnId='C7'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_jpy}"
-												th:attr="RowId='R10', ColumnId='C8'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_rupee}"
-												th:attr="RowId='R10', ColumnId='C9'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;"
-												th:text="${report.r10_renminbi}"
-												th:attr="RowId='R10', ColumnId='C10'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r10_other}"
-												th:attr="RowId='R10', ColumnId='C11'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;"
-												th:text="${report.r10_tot_cap_req}"
-												th:attr="RowId='R10', ColumnId='C12'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-										</tr>
-
-
-
-										<tr>
-											<td style="text-align: right; font-weight: bold;">3</td>
-
-											<td style="text-align: left;"
-												th:text="${report.r11_currency}"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_pula}"
-												th:attr="RowId='R11', ColumnId='C3'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_usd}"
-												th:attr="RowId='R11', ColumnId='C4'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_zar}"
-												th:attr="RowId='R11', ColumnId='C5'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_gbp}"
-												th:attr="RowId='R11', ColumnId='C6'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_euro}"
-												th:attr="RowId='R11', ColumnId='C7'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_jpy}"
-												th:attr="RowId='R11', ColumnId='C8'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_rupee}"
-												th:attr="RowId='R11', ColumnId='C9'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;"
-												th:text="${report.r11_renminbi}"
-												th:attr="RowId='R11', ColumnId='C10'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;" th:text="${report.r11_other}"
-												th:attr="RowId='R11', ColumnId='C11'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-
-											<td style="text-align: right;"
-												th:text="${report.r11_tot_cap_req}"
-												th:attr="RowId='R11', ColumnId='C12'"
-												onclick="showdetailsbyRowAndColumn(this)"></td>
-										</tr>
-
-
-
-										<tr>
-											<td style="text-align: right; font-weight: bold;">4</td>
-
-											<td style="text-align: left; font-weight: bold;"
-												th:text="${report.r12_currency}"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_pula}"
-												th:attr="RowId='R12', ColumnId='C3'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_usd}"
-												th:attr="RowId='R12', ColumnId='C4'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_zar}"
-												th:attr="RowId='R12', ColumnId='C5'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_gbp}"
-												th:attr="RowId='R12', ColumnId='C6'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_euro}"
-												th:attr="RowId='R12', ColumnId='C7'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_jpy}"
-												th:attr="RowId='R12', ColumnId='C8'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_rupee}"
-												th:attr="RowId='R12', ColumnId='C9'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;"
-												th:text="${report.r12_renminbi}"
-												th:attr="RowId='R12', ColumnId='C10'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;" th:text="${report.r12_other}"
-												th:attr="RowId='R12', ColumnId='C11'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-
-											<td style="text-align: right;"
-												th:text="${report.r12_tot_cap_req}"
-												th:attr="RowId='R12', ColumnId='C12'"
-												onclick="showdetailsbyRowAndColumn(this)" class="green-cell"></td>
-										</tr>
-
-
+<tr>
+    <td style="text-align: right;">4</td>
+    <td id="ROW12" style="font-weight: bold; text-align: left;">
+        <input class="display-input Show_input" type="text"
+               th:value="'TOTAL CAPITAL REQUIRED' "
+               id="r12_currency" name="r12_currency"
+               style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left; font-weight:bold;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_pula  }"
+               id="r12_pula" name="r12_pula"
+               style="background-color: #FFFFFF; width: 100px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_usd }"
+               id="r12_usd" name="r12_usd"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_zar }"
+               id="r12_zar" name="r12_zar"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_gbp }"
+               id="r12_gbp" name="r12_gbp"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right; " class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_euro }"
+               id="r12_euro" name="r12_euro"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_jpy }"
+               id="r12_jpy" name="r12_jpy"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_rupee }"
+               id="r12_rupee" name="r12_rupee"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_renminbi }"
+               id="r12_renminbi" name="r12_renminbi"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_other }"
+               id="r12_other" name="r12_other"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+    <td id="ROW12" style="font-weight: bold; text-align: right;" class="green-cell">
+        <input class="display-input Show_input green-cell" type="text"
+               th:value="${report.r12_tot_cap_req }"
+               id="r12_tot_cap_req" name="r12_tot_cap_req"
+               style="background-color: #FFFFFF; width: 150px; height: 28px; border-color: transparent; text-align: right;"
+               readonly />
+    </td>
+</tr>
 
 
 
@@ -979,97 +1417,22 @@ function showdetailsbyRowAndColumn(a) {
 
 							</div>
 
+<div style="text-align: center; margin-top: 10px;">
 
-						</div>
-					</div>
-				</div>
-
-				<div th:if="${displaymode == 'Details'}">
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="table-responsive scrollable-table-container "
-								style="border-right: 1px solid #dee2e6;">
-								<table
-									class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
-									id="reportss">
-									<thead class="thead-light">
-										<tr>
-											<th></th>
-											<th>CUST_ID</th>
-											<th>ACCT_NUMBER</th>
-											<th>ACCT_NAME</th>
-
-											<th style="text-align: right;">ACCT_BALANCE_IN_PULA</th>
-
-											<th>ROW_ID</th>
-											<th>COLUMN_ID</th>
-
-											<th>REPORT_DATE</th>
-										</tr>
-
-									</thead>
-
-									<tbody style="font-family: Arial;">
-										<tr th:each="report: ${reportdetails}">
-											<td><a data-toggle="tooltip" class="editrec"
-												title="Click to Edit this Record"> <i
-													class="fas fa-edit" onclick="editRecord(this)"></i>
-											</a></td>
-											<td th:text="${report.custId}"></td>
-											<td th:text="${report.acctNumber}"></td>
-											<td th:text="${report.acctName}"></td>
-											<td
-												th:text="${#numbers.formatDecimal(report.acctBalanceInPula, 1, 3)}"
-												style="text-align: right;"></td>
-											<td style="text-align: left;" th:text="${report.rowId}"></td>
-											<td th:text="${report.columnId}"></td>
-											<td
-												th:text="${#dates.format(report.reportDate, 'dd-MM-yyyy')}"></td>
-
-										</tr>
-									</tbody>
-								</table>
-
-								<div style="margin-top: 20px; text-align: center;"
-									th:if="${pagination=='YES'}">
-
-
-
-									<a th:if="${currentPage > 0}"
-										th:href="@{'/Reports/' + ${reportid} + '/Details'(
-																	    asondate=${asondate},                             
-																	    fromdate=${fromdate},
-																	    todate=${todate},
-																	    currency=${currency},
-																	    dtltype=${dtltype},
-																	    type=${type},
-																	    version=${version},
-																	    page=${currentPage - 100},
-																	    size=100
-																	)}">
-										Previous </a> <span>Page [[${currentPage / 100 + 1}]] of
-										[[${totalPages}]]</span> <a
-										th:if="${currentPage < (totalPages - 1) * 100}"
-										th:href="@{'/Reports/' + ${reportid} + '/Details'(
-																	    asondate=${asondate},
-																	    fromdate=${fromdate},
-																	    todate=${todate},
-																	    currency=${currency},
-																	    dtltype=${dtltype},
-																	    type=${type},
-																	    version=${version},
-																	    page=${currentPage + 100},
-																	    size=100
-																	)}">
-										Next </a>
+									<button id="submitButton" type="button"
+										class="custom-tab-btn Show_input" form="fileupload"
+										th:attr="data-todate=${asondate}" onclick="fileuploads(this);"
+										style="display: none;">Submit</button>
 								</div>
 
-							</div>
 
+                  </form>
 
 						</div>
 					</div>
 				</div>
+
+				
 
 			</div>
 

@@ -42,17 +42,28 @@ import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity4;
 import com.bornfire.brf.entities.BRRS_M_CR_Summary_Entity;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12E_LTV_Summary_Entity;
 import com.bornfire.brf.entities.M_CA4_Summary_Entity;
+import com.bornfire.brf.entities.M_CA5_Summary_Entity1;
+import com.bornfire.brf.entities.M_CA5_Summary_Entity2;
 import com.bornfire.brf.entities.M_CA6_Archival_Summary_Entity2;
 import com.bornfire.brf.entities.M_CA6_Summary_Entity2;
 import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
+import com.bornfire.brf.entities.M_EPR_Summary_Entity;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
+import com.bornfire.brf.entities.M_GMIRT_Summary_Entity;
 import com.bornfire.brf.entities.M_LIQ_Manual_Summary_Entity;
 import com.bornfire.brf.entities.M_SECL_Summary_Entity;
 import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_SIR_Summary_Entity;
+import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity1;
+import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity2;
+import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity3;
+import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity4;
+import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity5;
+import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity6;
+import com.bornfire.brf.entities.M_SRWA_12A_Summary_Entity7;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity1;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity2;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity3;
@@ -61,8 +72,6 @@ import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity5;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity6;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity7;
 import com.bornfire.brf.entities.M_SRWA_12G_Summary_Entity;
-import com.bornfire.brf.entities.M_SRWA_12H_Resub_Summary_Entity;
-import com.bornfire.brf.entities.M_SRWA_12H_Resub_Summary_Entity;
 import com.bornfire.brf.entities.M_SRWA_12H_Summary_Entity;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity1;
 import com.bornfire.brf.entities.M_UNCONS_INVEST_Archival_Summary_Entity2;
@@ -85,9 +94,12 @@ import com.bornfire.brf.services.BRRS_M_CA4_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA5_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA6_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA7_ReportService;
+import com.bornfire.brf.services.BRRS_M_EPR_ReportService;
 import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
+import com.bornfire.brf.services.BRRS_M_GMIRT_ReportService;
 import com.bornfire.brf.services.BRRS_M_LIQ_ReportService;
 import com.bornfire.brf.services.BRRS_M_SECL_ReportService;
+import com.bornfire.brf.services.BRRS_M_SRWA_12A_ReportService;
 import com.bornfire.brf.services.BRRS_M_SRWA_12B_ReportService;
 import com.bornfire.brf.services.BRRS_M_SRWA_12G_ReportService;
 import com.bornfire.brf.services.BRRS_M_SRWA_12H_ReportService;
@@ -97,10 +109,6 @@ import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
 import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
 import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
-
-import com.bornfire.brf.entities.M_CA5_Summary_Entity1;
-
-import com.bornfire.brf.entities.M_CA5_Summary_Entity2;
 @Controller
 @ConfigurationProperties("default")
 @RequestMapping(value = "Reports")
@@ -1068,6 +1076,133 @@ public ResponseEntity<String> updateReportReSub(
 			                              .body("Update Failed: " + e.getMessage());
 			     }
 			 }
+			 
+			 
+			 
+			 
+			 
+			 @Autowired
+				BRRS_M_SRWA_12A_ReportService brrs_m_srwa_12a_reportservice;
+			
+
+			 @RequestMapping(value = "/M_SRWA_12AupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+			 @ResponseBody
+			 public ResponseEntity<String> updateAllReports(
+			         @RequestParam(required = false)
+			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+
+			         @ModelAttribute M_SRWA_12A_Summary_Entity1 request1,
+			         @ModelAttribute M_SRWA_12A_Summary_Entity2 request2,
+			         @ModelAttribute M_SRWA_12A_Summary_Entity3 request3,
+			         @ModelAttribute M_SRWA_12A_Summary_Entity4 request4,
+			         @ModelAttribute M_SRWA_12A_Summary_Entity5 request5,
+			         @ModelAttribute M_SRWA_12A_Summary_Entity6 request6,
+			         @ModelAttribute M_SRWA_12A_Summary_Entity7 request7
+			 ) {
+			     try {
+			         System.out.println("Came to single controller");
+
+			         // set date into all 3 entities
+			         request1.setReport_date(asondate);
+			         request2.setReport_date(asondate);
+			         request3.setReport_date(asondate);
+			         request4.setReport_date(asondate);
+			         request5.setReport_date(asondate);
+			         request6.setReport_date(asondate); 
+			         request7.setReport_date(asondate);
+			     
+
+			         // call services
+			         brrs_m_srwa_12a_reportservice.updateReport1(request1);
+			         brrs_m_srwa_12a_reportservice.updateReport2(request2);
+			         brrs_m_srwa_12a_reportservice.updateReport3(request3);
+			         brrs_m_srwa_12a_reportservice.updateReport4(request4);
+			         brrs_m_srwa_12a_reportservice.updateReport5(request5);
+			         brrs_m_srwa_12a_reportservice.updateReport6(request6);
+			         brrs_m_srwa_12a_reportservice.updateReport7(request7);
+
+
+			         return ResponseEntity.ok("All Reports Updated Successfully");
+			     } catch (Exception e) {
+			         e.printStackTrace();
+			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                              .body("Update Failed: " + e.getMessage());
+			     }
+			 }
+			 
+			 
+			 
+			 
+			 @Autowired
+			 private BRRS_M_EPR_ReportService  brrs_m_epr_reportservice;
+			 
+			 
+			 @RequestMapping(value = "/M_EPRupdate", method = { RequestMethod.GET, RequestMethod.POST })
+			 @ResponseBody
+			 public ResponseEntity<String> updateReport(
+			     @RequestParam(required = false) 
+			     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			     @ModelAttribute M_EPR_Summary_Entity request
+			    ) {
+
+			     try {
+			         System.out.println("came to single controller");
+			         
+			         // ✅ set the asondate into entity
+			         request.setReport_date(asondate);
+			         
+			         
+			      // call services
+			         brrs_m_epr_reportservice.updateReport(request);
+			         
+			         
+			         return ResponseEntity.ok(" Updated Successfully");
+			     } catch (Exception e) {
+			         e.printStackTrace();
+			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                              .body("Update Failed: " + e.getMessage());
+			     }
+			 }
+			 
+			 
+			 @Autowired
+				BRRS_M_GMIRT_ReportService brrs_m_gmirt_reportservice;
+			 
+			 
+			 @RequestMapping(value = "/M_GMIRTupdate", method = { RequestMethod.GET, RequestMethod.POST })
+			 @ResponseBody
+			 public ResponseEntity<String> updateReport(
+			     @RequestParam(required = false) 
+			     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			     @ModelAttribute M_GMIRT_Summary_Entity request
+			    ) {
+
+			     try {
+			         System.out.println("came to single controller");
+			         
+			         // ✅ set the asondate into entity
+			         request.setReport_date(asondate);
+			         
+			         
+			      // call services
+			         brrs_m_gmirt_reportservice.updateReport(request);
+			         
+			         
+			         return ResponseEntity.ok(" Updated Successfully");
+			     } catch (Exception e) {
+			         e.printStackTrace();
+			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                              .body("Update Failed: " + e.getMessage());
+			     }
+			 }
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 			 
 	
 			 }	
