@@ -1279,7 +1279,7 @@ data-version=${version}"
     <tr>
         <td style="text-align: center;vertical-align:middle;">11</td>
         <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r33_product, 'Lines')}"></div>
+            <div th:text="${#strings.substringBefore(report.r33_product, 'Tier')}"></div>
             <div th:text="'Tier' + ${#strings.substringAfter(report.r33_product, 'Tier')}"></div>
         </td>
         <td th:attr="reportLable='R33', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
@@ -1428,8 +1428,8 @@ data-version=${version}"
 											<th>ACCT NO</th>
 											<th>ACCT NAME</th>
 											<th style="text-align:right;">ACCT BALANCE</th>
-											<th>ROW ID</th>
-											<th>COLUMN ID</th>
+											<th>REPORT LABLE</th>
+											<th>REPORT ADDL CRITERIA 1</th>
 											<th>REPORT_DATE</th>
 										</tr>
 
