@@ -812,7 +812,7 @@ function fileuploads(btn) {
 										 <td id="ROW9" style="font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);" >
 	                                    <input class="display-input Show_input "
 	                                    type="text"
-	                                    th:value="${report.R9_TOTAL != null ? #numbers.formatDecimal(report.R9_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R9_TOTAL }"
 	                                    id="R9_TOTAL"
 	                                    name="R9_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -846,7 +846,7 @@ function fileuploads(btn) {
 										 <td id="ROW10" style="font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R10_TOTAL != null ? #numbers.formatDecimal(report.R10_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R10_TOTAL }"
 	                                    id="R10_TOTAL"
 	                                    name="R10_TOTAL" 
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white; "readonly />
@@ -879,7 +879,7 @@ function fileuploads(btn) {
 										 <td id="ROW11" style="font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R11_TOTAL != null ? #numbers.formatDecimal(report.R11_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R11_TOTAL }"
 	                                    id="R11_TOTAL"
 	                                    name="R11_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -912,7 +912,7 @@ function fileuploads(btn) {
 										 <td id="ROW12" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R12_TOTAL != null ? #numbers.formatDecimal(report.R12_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R12_TOTAL }"
 	                                    id="R12_TOTAL"
 	                                    name="R12_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -945,7 +945,7 @@ function fileuploads(btn) {
 										 <td id="ROW13" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R13_TOTAL != null ? #numbers.formatDecimal(report.R13_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R13_TOTAL }"
 	                                    id="R13_TOTAL"
 	                                    name="R13_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -978,7 +978,7 @@ function fileuploads(btn) {
 										 <td id="ROW14" style="font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R14_TOTAL != null ? #numbers.formatDecimal(report.R14_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R14_TOTAL }"
 	                                    id="R14_TOTAL"
 	                                    name="R14_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -994,7 +994,7 @@ function fileuploads(btn) {
 	                                    <td id="ROW15" style="font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
                                         type="text"
-                                        th:value="${report.R15_LOCAL != null ? #numbers.formatDecimal(report.R15_LOCAL, 0, 'COMMA', 0, 'POINT') : '0'}"
+                                        th:value="${report.R15_LOCAL }"
                                         id="R15_LOCAL"
                                         name="R15_LOCAL"
                                         style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"
@@ -1002,7 +1002,7 @@ function fileuploads(btn) {
 	                                    <td id="ROW15" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R15_EXPARIATES != null ? #numbers.formatDecimal(report.R15_EXPARIATES, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R15_EXPARIATES }"
 	                                    id="R15_EXPARIATES"
 	                                    name="R15_EXPARIATES"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1011,7 +1011,7 @@ function fileuploads(btn) {
 										 <td id="ROW15" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R15_TOTAL != null ? #numbers.formatDecimal(report.R15_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R15_TOTAL }"
 	                                    id="R15_TOTAL"
 	                                    name="R15_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1064,7 +1064,7 @@ function fileuploads(btn) {
 										 <td id="ROW21" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R21_TOTAL != null ? #numbers.formatDecimal(report.R21_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R21_TOTAL }"
 	                                    id="R21_TOTAL"
 	                                    name="R21_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1097,7 +1097,7 @@ function fileuploads(btn) {
 										 <td id="ROW22" style="font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R22_TOTAL != null ? #numbers.formatDecimal(report.R22_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R22_TOTAL }"
 	                                    id="R22_TOTAL"
 	                                    name="R22_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1130,7 +1130,7 @@ function fileuploads(btn) {
 										 <td id="ROW23" style="font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R23_TOTAL != null ? #numbers.formatDecimal(report.R23_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R23_TOTAL }"
 	                                    id="R23_TOTAL"
 	                                    name="R23_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1163,7 +1163,7 @@ function fileuploads(btn) {
 										 <td id="ROW24" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R24_TOTAL != null ? #numbers.formatDecimal(report.R24_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R24_TOTAL }"
 	                                    id="R24_TOTAL"
 	                                    name="R24_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1196,7 +1196,7 @@ function fileuploads(btn) {
 										 <td id="ROW25" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R25_TOTAL != null ? #numbers.formatDecimal(report.R25_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R25_TOTAL }"
 	                                    id="R25_TOTAL"
 	                                    name="R25_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1229,7 +1229,7 @@ function fileuploads(btn) {
 										 <td id="ROW26" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R26_TOTAL != null ? #numbers.formatDecimal(report.R26_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R26_TOTAL }"
 	                                    id="R26_TOTAL"
 	                                    name="R26_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1262,7 +1262,7 @@ function fileuploads(btn) {
 										 <td id="ROW27" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R27_TOTAL != null ? #numbers.formatDecimal(report.R27_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R27_TOTAL }"
 	                                    id="R27_TOTAL"
 	                                    name="R27_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1278,7 +1278,7 @@ function fileuploads(btn) {
 	                                    <td id="ROW28" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
                                         type="text"
-                                        th:value="${report.R28_LOCAL != null ? #numbers.formatDecimal(report.R28_LOCAL, 0, 'COMMA', 0, 'POINT') : '0'}"
+                                        th:value="${report.R28_LOCAL }"
                                         id="R28_LOCAL"
                                         name="R28_LOCAL"
                                         style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"
@@ -1286,7 +1286,7 @@ function fileuploads(btn) {
 	                                    <td id="ROW28" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R28_EXPARIATES != null ? #numbers.formatDecimal(report.R28_EXPARIATES, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R28_EXPARIATES }"
 	                                    id="R28_EXPARIATES"
 	                                    name="R28_EXPARIATES"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1295,7 +1295,7 @@ function fileuploads(btn) {
 										 <td id="ROW28" style=" font-weight: bold;padding-left: 20px;background-color: rgb(107, 122, 143);">
 	                                    <input class="display-input Show_input"
 	                                    type="text"
-	                                    th:value="${report.R28_TOTAL != null ? #numbers.formatDecimal(report.R28_TOTAL, 1, 'COMMA', 0, 'POINT') : '0'}"
+	                                    th:value="${report.R28_TOTAL }"
 	                                    id="R28_TOTAL"
 	                                    name="R28_TOTAL"
 	                                    style="background-color: #FFFFFF; width: 330px; height: 28px; border-color: transparent; text-align: right;background-color: rgb(107, 122, 143);color: white;"readonly />
@@ -1526,28 +1526,28 @@ function fileuploads(btn) {
 			</td>
 			<td id="ROW38" style="font-weight: bold;padding-left: 20px; background-color: rgb(107,122,143);">
 				<input class="display-input Show_input" type="text"
-					th:value="${report.R38_ORIGINAL_AMT != null ? #numbers.formatDecimal(report.R38_ORIGINAL_AMT, 0, 'COMMA', 0, 'POINT') : '0'}"
+					th:value="${report.R38_ORIGINAL_AMT }"
 					id="R38_ORIGINAL_AMT" name="R38_ORIGINAL_AMT"
 					style="width: 100%; height: 35px; border: none; text-align: right; background-color: rgb(107,122,143); color: white;"
 					readonly />
 			</td>
 			<td id="ROW38" style="font-weight: bold;padding-left: 20px; background-color: rgb(107,122,143);">
 				<input class="display-input Show_input" type="text"
-					th:value="${report.R38_BALANCE_OUTSTANDING != null ? #numbers.formatDecimal(report.R38_BALANCE_OUTSTANDING, 1, 'COMMA', 0, 'POINT') : '0'}"
+					th:value="${report.R38_BALANCE_OUTSTANDING }"
 					id="R38_BALANCE_OUTSTANDING" name="R38_BALANCE_OUTSTANDING"
 					style="width: 100%; height: 35px; border: none; text-align: right; background-color: rgb(107,122,143); color: white;"
 					readonly />
 			</td>
 			<td id="ROW38" style="font-weight: bold; padding-left: 20px;background-color: rgb(107,122,143);">
 				<input class="display-input Show_input" type="text"
-					th:value="${report.R38_NO_OF_ACS != null ? #numbers.formatDecimal(report.R38_NO_OF_ACS, 1, 'COMMA', 0, 'POINT') : '0'}"
+					th:value="${report.R38_NO_OF_ACS }"
 					id="R38_NO_OF_ACS" name="R38_NO_OF_ACS"
 					style="width: 100%; height: 35px; border: none; text-align: right; background-color: rgb(107,122,143); color: white;"
 					readonly />
 			</td>
 			<td id="ROW38" style="font-weight: bold;padding-left: 20px;">
 				<input class="display-input Show_input" type="text"
-					th:value="${report.R38_INTEREST_RATE != null ? #numbers.formatDecimal(report.R38_INTEREST_RATE, 1, 'COMMA', 2, 'POINT') : '0.00'}"
+					th:value="${report.R38_INTEREST_RATE }"
 					id="R38_INTEREST_RATE" name="R38_INTEREST_RATE"
 					style="background-color: #FFFFFF; width: 100%; height: 35px; border: none; text-align: right;"
 					readonly />
