@@ -1244,12 +1244,13 @@ function cancelModify() {
         <button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();" th:if="${displaymode == 'summary'}">Details</button>
         			
 							<!-- Modify button -->
-						<button type="button" class="custom-tab-btn"
-							onclick="showmodify(this);" title="Click to EDIT Records"
-							th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
-							th:if="${type != 'ARCHIVAL'  }"
-							id="addRecord">Modify</button>
-
+<button type="button" class="custom-tab-btn"
+        onclick="showmodify(this);"
+        title="Click to EDIT Records"
+		th:if="${type != 'ARCHIVAL'}"
+       th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
+        id="addRecord">Modify</button>
+        
 						<!-- Cancel button (hidden initially) -->
 					     <button type="button" class="custom-tab-btn"
 							title="Cancel editing" id="cancelRecord"
@@ -1321,7 +1322,7 @@ data-version=${version}"
         <td style="text-align: center; vertical-align:middle;">1</td>
         <td style="font-weight:bold;" th:text="${report.r10_product}"></td>
         <td th:attr="reportLable='R10', reportAddlCriteria1='C2'" style="text-align: right;background-color:black;"></td>
-        <td th:text="${#numbers.formatDecimal(report.r10_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R10', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
+        <td id="r10_amount_2" th:text="${#numbers.formatDecimal(report.r10_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R10', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">2</td>
@@ -1437,7 +1438,7 @@ data-version=${version}"
     <tr>
         <td style="text-align: center;"></td>
         <td style="" th:text="${report.r20_product}"></td>
-        <td id="r20_amount_1" th:text="${#numbers.formatDecimal(report.r20_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R20', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
+        <td id="r20_amount_1" th:text="${report?.r20_amount_1 != null ? #numbers.formatDecimal(report.r20_amount_1, 1, 'COMMA', 0, 'POINT') : ''}" th:attr="reportLable='R20', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
         <td th:attr="reportLable='R20', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
     </tr>
     <tr>
@@ -1461,25 +1462,26 @@ data-version=${version}"
             <div th:text="'and' + ${#strings.substringAfter(report.r22_product, 'and')}"></div>
         </td>
         <td th:attr="reportLable='R22', reportAddlCriteria1='C2'" style="text-align: left; background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
-        <td id="r22_amount_2" th:text="${#numbers.formatDecimal(report.r22_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <!-- onclick="showdetailsbyRowAndColumn(this)" -->
+        <td id="r22_amount_2" th:text="${#numbers.formatDecimal(report.r22_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">6 (a)</td>
         <td style="font-weight:bold;" th:text="${report.r23_product}"></td>
         <td th:attr="reportLable='R23', reportAddlCriteria1='C2'" style="text-align:right; background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-        <td id="r23_amount_2" th:text="${#numbers.formatDecimal(report.r23_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r23_amount_2" th:text="${#numbers.formatDecimal(report.r23_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">6 (b)</td>
         <td style="font-weight:bold;" th:text="${report.r24_product}"></td>
         <td th:attr="reportLable='R24', reportAddlCriteria1='C2'"></td>
-        <td id="r24_amount_2" th:text="${#numbers.formatDecimal(report.r24_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R24', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r24_amount_2" th:text="${#numbers.formatDecimal(report.r24_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R24', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;"></td>
         <td style="font-weight:bold;" th:text="${report.r25_product}"></td>
         <td th:attr="reportLable='R25', reportAddlCriteria1='C2'" style="text-align:right;">M-CA7 (2) Column 3</td>
-        <td id="r25_amount_2" th:text="${#numbers.formatDecimal(report.r25_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R25', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r25_amount_2" th:text="${#numbers.formatDecimal(report.r25_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R25', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;">7</td>
@@ -1530,7 +1532,7 @@ data-version=${version}"
             <div th:text="'Additional' + ${#strings.substringAfter(report.r31_product, 'Additional')}"></div>
         </td>
         <td th:attr="reportLable='R31', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
-        <td id="r31_amount_2" th:text="${#numbers.formatDecimal(report.r31_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R31', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r31_amount_2" th:text="${#numbers.formatDecimal(report.r31_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R31', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">10</td>
@@ -1555,13 +1557,13 @@ data-version=${version}"
             <div th:text="'Tier' + ${#strings.substringAfter(report.r33_product, 'Tier')}"></div>
         </td>
         <td th:attr="reportLable='R33', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
-        <td id="r33_amount_2" th:text="${#numbers.formatDecimal(report.r33_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R33', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r33_amount_2" th:text="${#numbers.formatDecimal(report.r33_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R33', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">12</td>
         <td style="font-weight:bold;" th:text="${report.r34_product}"></td>
         <td th:attr="reportLable='R34', reportAddlCriteria1='C2'" style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-        <td id="r34_amount_2" th:text="${#numbers.formatDecimal(report.r34_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R34', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r34_amount_2" th:text="${#numbers.formatDecimal(report.r34_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R34', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">13</td>
@@ -1612,7 +1614,7 @@ data-version=${version}"
         <td style="text-align: center;vertical-align:middle;">16</td>
         <td style="font-weight:bold; vertical-align: middle;" th:text="${report.r41_product}"></td>
         <td th:attr="reportLable='R41', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
-        <td id="r41_amount_2" th:text="${#numbers.formatDecimal(report.r41_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R41', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r41_amount_2" th:text="${#numbers.formatDecimal(report.r41_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R41', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">17</td>
@@ -1661,7 +1663,7 @@ data-version=${version}"
             <div th:text="'inclusion' + ${#strings.substringAfter(report.r45_product, 'inclusion')}"></div>
         </td>
         <td th:attr="reportLable='R45', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0;vertical-align: middle;">Ref. (9) M-CA4</td>
-        <td id="r45_amount_2" th:text="${#numbers.formatDecimal(report.r45_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R45', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>
+        <td id="r45_amount_2" th:text="${#numbers.formatDecimal(report.r45_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R45', reportAddlCriteria1='C3'"  style="vertical-align: middle; text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">21</td>
@@ -1683,7 +1685,7 @@ data-version=${version}"
         <td style="text-align: center;vertical-align:middle;">22</td>
         <td style="font-weight:bold;" th:text="${report.r47_product}"></td>
         <td th:attr="reportLable='R47', reportAddlCriteria1='C2'" style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-        <td id="r47_amount_2" th:text="${#numbers.formatDecimal(report.r47_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R47', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+        <td id="r47_amount_2" th:text="${#numbers.formatDecimal(report.r47_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R47', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
     </tr>
     <tr>
         <td style="text-align: center;vertical-align:middle;">23</td>
