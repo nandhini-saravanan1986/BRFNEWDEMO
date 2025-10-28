@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bornfire.brf.entities.BRRS_Q_SMME_Intrest_Income_Archival_Detail_Repo;
-import com.bornfire.brf.entities.BRRS_Q_SMME_Archival_Summary_Repo;
+import com.bornfire.brf.entities.BRRS_Q_SMME_Intrest_Income_Archival_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_Q_SMME_Intrest_Income_Detail_Repo;
 import com.bornfire.brf.entities.Q_SMME_Intrest_Income_Archival_Detail_Entity;
 import com.bornfire.brf.entities.Q_SMME_Intrest_Income_Archival_Summary_Entity;
@@ -68,7 +68,7 @@ public class BRRS_Q_SMME_Intrest_Income_ReportService<BBRS_Q_SMME_Detail_Repo> {
 	BRRS_Q_SMME_Intrest_Income_Archival_Detail_Repo Q_SMME_Archival_Detail_Repo;
 
 	@Autowired
-	BRRS_Q_SMME_Archival_Summary_Repo Q_SMME_Archival_Summary_Repo;
+	BRRS_Q_SMME_Intrest_Income_Archival_Summary_Repo Q_SMME_Archival_Summary_Repo;
 
 
 	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
@@ -1647,7 +1647,7 @@ public byte[] getDetailExcelARCHIVAL(String filename,
                 }
             }
         } else {
-            logger.info("⚠️ No data found for BRRS_Q_SMME ARCHIVAL — only header will be written.");
+            logger.info("⚠ No data found for BRRS_Q_SMME ARCHIVAL — only header will be written.");
         }
 
         // --- Write to byte[] ---
