@@ -114,6 +114,8 @@ import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
 import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
 import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
+import com.bornfire.brf.services.BRRS_M_SRWA_12F_ReportService;
+import com.bornfire.brf.entities.M_SRWA_12F_Summary_Entity;
 
 @Controller
 @ConfigurationProperties("default")
@@ -1267,6 +1269,34 @@ public ResponseEntity<String> updateReportReSub(
 			     }
 			 }
 			 
+			 
+			 @Autowired
+			 private BRRS_M_SRWA_12F_ReportService SRWA12FreportService;
+			
+			
+			 @RequestMapping(value = "/SRWA12FupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+			 @ResponseBody
+			 public ResponseEntity<String> updateAllReports(
+			         @RequestParam(required = false)
+			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+			         @ModelAttribute M_SRWA_12F_Summary_Entity request1
+			         
+			 ) {
+			     try {
+			         System.out.println("Came to single controller");
+			         // set date into all 4 entities
+			         request1.setREPORT_DATE(asondate);
+			         
+			         // call services
+			         SRWA12FreportService.updateReport(request1);
+			         
+			         return ResponseEntity.ok("Updated Successfully");
+			     } catch (Exception e) {
+			         e.printStackTrace();
+			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                              .body("Update Failed: " + e.getMessage());
+			     }
+			 }
 			 
 	
 			 }	
