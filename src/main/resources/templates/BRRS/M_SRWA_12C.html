@@ -1034,17 +1034,17 @@ $(document).ready(function() {
 							<thead class="thead-light">
   									 <!-- First header row -->
                                    <tr style="background-color: #b3b6b9">
-                                        <th rowspan="1" style="text-align: center; background-color: #D8D8D8; vertical-align: center; padding:10px;">Line no.</th>
+                                        <th rowspan="1" style="text-align: center; background-color: #D8D8D8; vertical-align: center; padding:10px; ">Line no.</th>
                                         <th colspan="2" style="text-align: center; background-color: #D8D8D8; vertical-align: center; padding:10px;">Number of working days after the agreed settlement date:</th>
                                         <th rowspan="1" style="text-align: right; background-color:#D8D8D8; vertical-align: center; padding:10px;">Number of Failed Trades</th>
-										 <th colspan="1" style="text-align: right; background-color:#D8D8D8; vertical-align: center; padding:10px;">Positive Current Exposure</th>
-										  <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;">Risk Multiplier</th>
-										   <th colspan="1" style="text-align: right; background-color:#D8D8D8; vertical-align: center; padding:10px;">RWA</th>
+										 <th colspan="1" style="text-align: right; background-color:#D8D8D8; vertical-align: center; padding:10px; ">Positive Current Exposure</th>
+										  <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;  ">Risk Multiplier</th>
+										   <th colspan="1" style="text-align: right; background-color:#D8D8D8; vertical-align: center; padding:10px; ">RWA</th>
                                     </tr>
 									<tr>
 		<th style="text-align: center; background-color:#D8D8D8;"> </th>
-        <th style="text-align: center; background-color:#D8D8D8;"> </th>
-        <th style="text-align: center; background-color:#D8D8D8;"> </th>
+        <th style="text-align: center; background-color:#D8D8D8; "> </th>
+        <th style="text-align: center; background-color:#D8D8D8; "> </th>
         <th style="text-align: center; background-color:#D8D8D8;">(1)</th>
         <th style="text-align: center; background-color:#D8D8D8;">(2)</th>
         <th style="text-align: center; background-color:#D8D8D8;">(3)</th>
@@ -1111,7 +1111,7 @@ $(document).ready(function() {
         th:value="${report.R12_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R12_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R12_NUMBER_OF_FAILED_TRADES"
         name="R12_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width:  200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 											
@@ -1128,7 +1128,7 @@ $(document).ready(function() {
         th:value="${report.R12_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R12_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R12_POSITIVE_CURRENT_EXPOSURE"
         name="R12_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 											
@@ -1150,7 +1150,7 @@ $(document).ready(function() {
        
         id="R12_RWA"
         name="R12_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 											
@@ -1193,7 +1193,7 @@ $(document).ready(function() {
         th:value="${report.R13_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R13_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R13_NUMBER_OF_FAILED_TRADES"
         name="R13_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
    										     
@@ -1211,7 +1211,7 @@ $(document).ready(function() {
         th:value="${report.R13_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R13_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R13_POSITIVE_CURRENT_EXPOSURE"
         name="R13_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
   									       
@@ -1241,7 +1241,7 @@ $(document).ready(function() {
        
         id="R13_RWA"
         name="R13_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
  
@@ -1262,7 +1262,7 @@ $(document).ready(function() {
         th:value="'From 31 to 45 days'"
         id="R14_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
         name="R14_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left;  padding-left: 20px;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;  padding-left: 20px;"
         readonly />
 </td>
         
@@ -1291,7 +1291,7 @@ $(document).ready(function() {
         th:value="${report.R14_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R14_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R14_NUMBER_OF_FAILED_TRADES"
         name="R14_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 
@@ -1304,7 +1304,7 @@ $(document).ready(function() {
         th:value="${report.R14_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R14_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R14_POSITIVE_CURRENT_EXPOSURE"
         name="R14_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 
@@ -1322,7 +1322,7 @@ $(document).ready(function() {
      
         id="R14_RWA"
         name="R14_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
        
@@ -1357,7 +1357,7 @@ $(document).ready(function() {
         th:value="'46 or more days'"
         id="R15_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
         name="R15_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left;padding-left: 20px;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;padding-left: 20px;"
         readonly />
 </td>
 
@@ -1370,7 +1370,7 @@ $(document).ready(function() {
         th:value="${report.R15_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R15_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R15_NUMBER_OF_FAILED_TRADES"
         name="R15_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 
@@ -1383,7 +1383,7 @@ $(document).ready(function() {
         th:value="${report.R15_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R15_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R15_POSITIVE_CURRENT_EXPOSURE"
         name="R15_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 
@@ -1401,7 +1401,7 @@ $(document).ready(function() {
    
         id="R15_RWA"
         name="R15_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
         
@@ -1440,7 +1440,7 @@ $(document).ready(function() {
         th:value="'TOTAL Failed DvP Trades'"
         id="R16_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
         name="R16_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; border-color: transparent; text-align: left;  font-weight: bold;"
+        style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;  font-weight: bold;"
         readonly />
 </td>
 
@@ -1453,7 +1453,7 @@ $(document).ready(function() {
         th:value="${report.R16_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R16_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R16_NUMBER_OF_FAILED_TRADES_INPUT"
         name="R16_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 
@@ -1466,7 +1466,7 @@ $(document).ready(function() {
         th:value="${report.R16_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R16_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R16_POSITIVE_CURRENT_EXPOSURE_INPUT"
         name="R16_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 
@@ -1481,7 +1481,7 @@ $(document).ready(function() {
         th:value="${report.R16_RWA != null ? #numbers.formatDecimal(report.R16_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R16_RWA"
         name="R16_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; border-color: transparent; text-align: right;"
+        style="background-color: #ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
         readonly />
 </td>
 
@@ -1502,10 +1502,10 @@ $(document).ready(function() {
                                     <tr style="background-color: #b3b6b9">
                                         <th rowspan="1" style="text-align: center; background-color: #D8D8D8; vertical-align: center; padding:10px;"></th>
                                         <th colspan="2" style="text-align: center; background-color: #D8D8D8; vertical-align: center; padding:10px;">Number of working days after the agreed settlement date:</th>
-                                        <th rowspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;">Number of Failed Trades</th>
-										 <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;">Balance</th>
-										  <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;">Risk Multiplier</th>
-										   <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;">RWA</th>
+                                        <th rowspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;  ">Number of Failed Trades</th>
+										 <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;  ">Balance</th>
+										  <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px; ">Risk Multiplier</th>
+										   <th colspan="1" style="text-align: center; background-color:#D8D8D8; vertical-align: center; padding:10px;  ">RWA</th>
                                     </tr>
 									<tr>
 		<th style="text-align: center; background-color:#D8D8D8;"></th>
@@ -1568,7 +1568,7 @@ $(document).ready(function() {
         th:value="${report.R20_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R20_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R20_NUMBER_OF_FAILED_TRADES"
         name="R20_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; 
+        style="background-color: #FFFFFF; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1589,7 +1589,7 @@ $(document).ready(function() {
         th:value="${report.R20_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R20_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R20_POSITIVE_CURRENT_EXPOSURE"
         name="R20_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; 
+        style="background-color: #FFFFFF; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1603,7 +1603,7 @@ $(document).ready(function() {
         th:value="${report.R20_RISK_MULTIPLIER != null ? report.R20_RISK_MULTIPLIER + '%' : '0%'}"
         id="R20_RISK_MULTIPLIER"
         name="R20_RISK_MULTIPLIER"
-        style="background-color: #FFFFFF; width: 100px; height: 28px; 
+        style="background-color: #FFFFFF; width: 200px; height: 28px; 
                border-color: transparent; text-align: center; font-weight: normal;"
         readonly />
 </td>
@@ -1617,7 +1617,7 @@ $(document).ready(function() {
         th:value="${report.R20_RWA != null ? #numbers.formatDecimal(report.R20_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R20_RWA"
         name="R20_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; 
+        style="background-color: #ADFF2F; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1643,7 +1643,7 @@ $(document).ready(function() {
         th:value="${report.R21_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R21_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R21_NUMBER_OF_FAILED_TRADES"
         name="R21_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; 
+        style="background-color: #FFFFFF; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1657,7 +1657,7 @@ $(document).ready(function() {
         th:value="${report.R21_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R21_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R21_POSITIVE_CURRENT_EXPOSURE"
         name="R21_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; 
+        style="background-color: #FFFFFF; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1680,7 +1680,7 @@ $(document).ready(function() {
         th:value="${report.R21_RWA != null ? #numbers.formatDecimal(report.R21_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R21_RWA"
         name="R21_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; 
+        style="background-color: #ADFF2F; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1706,7 +1706,7 @@ $(document).ready(function() {
         th:value="${report.R22_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R22_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R22_NUMBER_OF_FAILED_TRADES"
         name="R22_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px;
+        style="background-color: #FFFFFF; width: 200px; height: 28px;
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1720,7 +1720,7 @@ $(document).ready(function() {
         th:value="${report.R22_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R22_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R22_POSITIVE_CURRENT_EXPOSURE"
         name="R22_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px;
+        style="background-color: #FFFFFF; width: 200px; height: 28px;
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1743,7 +1743,7 @@ $(document).ready(function() {
         th:value="${report.R22_RWA != null ? #numbers.formatDecimal(report.R22_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R22_RWA"
         name="R22_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px; 
+        style="background-color: #ADFF2F; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1767,7 +1767,7 @@ $(document).ready(function() {
         th:value="${report.R23_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R23_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R23_NUMBER_OF_FAILED_TRADES"
         name="R23_NUMBER_OF_FAILED_TRADES"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; 
+        style="background-color: #FFFFFF; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1781,7 +1781,7 @@ $(document).ready(function() {
         th:value="${report.R23_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R23_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R23_POSITIVE_CURRENT_EXPOSURE"
         name="R23_POSITIVE_CURRENT_EXPOSURE"
-        style="background-color: #FFFFFF; width: 300px; height: 28px; 
+        style="background-color: #FFFFFF; width: 200px; height: 28px; 
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1805,7 +1805,7 @@ $(document).ready(function() {
         th:value="${report.R23_RWA != null ? #numbers.formatDecimal(report.R23_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R23_RWA"
         name="R23_RWA"
-        style="background-color: #ADFF2F; width: 300px; height: 28px;
+        style="background-color: #ADFF2F; width: 200px; height: 28px;
                border-color: transparent; text-align: right; font-weight: normal;"
         readonly />
         
@@ -1835,7 +1835,7 @@ $(document).ready(function() {
         th:value="${report.R24_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R24_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R24_NUMBER_OF_FAILED_TRADES"
         name="R24_NUMBER_OF_FAILED_TRADES"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1849,7 +1849,7 @@ $(document).ready(function() {
         th:value="${report.R24_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R24_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R24_POSITIVE_CURRENT_EXPOSURE"
         name="R24_POSITIVE_CURRENT_EXPOSURE"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1869,7 +1869,7 @@ $(document).ready(function() {
         th:value="${report.R24_RWA != null ? #numbers.formatDecimal(report.R24_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R24_RWA"
         name="R24_RWA"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; font-weight: normal; background-color: #ADFF2F;"
         readonly />
 </td>
@@ -1892,7 +1892,7 @@ $(document).ready(function() {
         th:value="${report.R25_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R25_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R25_NUMBER_OF_FAILED_TRADES"
         name="R25_NUMBER_OF_FAILED_TRADES"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1906,7 +1906,7 @@ $(document).ready(function() {
         th:value="${report.R25_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R25_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R25_POSITIVE_CURRENT_EXPOSURE"
         name="R25_POSITIVE_CURRENT_EXPOSURE"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1930,7 +1930,7 @@ $(document).ready(function() {
         th:value="${report.R25_RWA != null ? #numbers.formatDecimal(report.R25_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R25_RWA"
         name="R25_RWA"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                background-color: #ADFF2F;
                text-align: right; font-weight: normal;"
         readonly />
@@ -1956,7 +1956,7 @@ $(document).ready(function() {
         th:value="${report.R26_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R26_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R26_NUMBER_OF_FAILED_TRADES"
         name="R26_NUMBER_OF_FAILED_TRADES"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1970,7 +1970,7 @@ $(document).ready(function() {
         th:value="${report.R26_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R26_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R26_POSITIVE_CURRENT_EXPOSURE"
         name="R26_POSITIVE_CURRENT_EXPOSURE"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; font-weight: normal;"
         readonly />
 </td>
@@ -1991,7 +1991,7 @@ $(document).ready(function() {
         th:value="${report.R26_RWA != null ? #numbers.formatDecimal(report.R26_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R26_RWA"
         name="R26_RWA"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; background-color: #ADFF2F; font-weight: normal;"
         readonly />
 </td>
@@ -2012,7 +2012,7 @@ $(document).ready(function() {
         th:value="'TOTAL Failed Non DvP Trades'"
         id="R27_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
         name="R27_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
-        style="width: 1700px; height: 28px; border-color: transparent;
+        style="width: 300px; height: 28px; border-color: transparent;
                background-color: #FFFFFF; text-align: left; font-weight: bold;"
         readonly />
 </td>
@@ -2030,7 +2030,7 @@ $(document).ready(function() {
         th:value="${report.R27_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R27_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R27_NUMBER_OF_FAILED_TRADES"
         name="R27_NUMBER_OF_FAILED_TRADES"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; background-color: #ADFF2F; font-weight: normal;"
         readonly />
 </td>
@@ -2044,7 +2044,7 @@ $(document).ready(function() {
         th:value="${report.R27_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R27_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R27_POSITIVE_CURRENT_EXPOSURE"
         name="R27_POSITIVE_CURRENT_EXPOSURE"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; background-color: #ADFF2F; font-weight: normal;"
         readonly />
 </td>
@@ -2062,7 +2062,7 @@ $(document).ready(function() {
         th:value="${report.R27_RWA != null ? #numbers.formatDecimal(report.R27_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R27_RWA"
         name="R27_RWA"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; background-color: #ADFF2F; font-weight: normal;"
         readonly />
 </td>
@@ -2083,7 +2083,7 @@ $(document).ready(function() {
         th:value="'TOTAL ALL FAILED TRADES'"
         id="R28_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
         name="R28_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"
-        style="width: 1700px; height: 28px; border-color: transparent;
+        style="width: 300px; height: 28px; border-color: transparent;
                background-color: #FFFFFF; text-align: left; font-weight: bold;"
         readonly />
 </td>
@@ -2102,7 +2102,7 @@ $(document).ready(function() {
         th:value="${report.R28_NUMBER_OF_FAILED_TRADES != null ? #numbers.formatDecimal(report.R28_NUMBER_OF_FAILED_TRADES, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R28_NUMBER_OF_FAILED_TRADES"
         name="R28_NUMBER_OF_FAILED_TRADES"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; background-color: #ADFF2F; font-weight: normal;"
         readonly />
 </td>
@@ -2116,7 +2116,7 @@ $(document).ready(function() {
         th:value="${report.R28_POSITIVE_CURRENT_EXPOSURE != null ? #numbers.formatDecimal(report.R28_POSITIVE_CURRENT_EXPOSURE, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R28_POSITIVE_CURRENT_EXPOSURE"
         name="R28_POSITIVE_CURRENT_EXPOSURE"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; background-color: #ADFF2F; font-weight: normal;"
         readonly />
 </td>
@@ -2135,7 +2135,7 @@ $(document).ready(function() {
         th:value="${report.R28_RWA != null ? #numbers.formatDecimal(report.R28_RWA, 1, 'COMMA', 0, 'POINT') : '0'}"
         id="R28_RWA"
         name="R28_RWA"
-        style="width: 300px; height: 28px; border-color: transparent;
+        style="width: 200px; height: 28px; border-color: transparent;
                text-align: right; background-color: #ADFF2F; font-weight: normal;"
         readonly />
 </td>

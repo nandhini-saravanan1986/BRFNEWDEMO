@@ -266,16 +266,13 @@ public byte[] getBRRS_M_SRWA_12CExcel(String filename,String reportId, String fr
 						cell4.setCellValue("");
 						cell4.setCellStyle(textStyle);
 					}
-					// Column F
-					Cell cell5 = row.createCell(5);
-					if (record.getR12_RISK_MULTIPLIER() != null) {
-						cell5.setCellValue(record.getR12_RISK_MULTIPLIER().doubleValue() / 100);
-						cell5.setCellStyle(percentStyle);
-					} else {
-						cell5.setCellValue("");
-						cell5.setCellStyle(textStyle);
-					}
-					
+					/*
+					 * // Column F Cell cell5 = row.createCell(5); if
+					 * (record.getR12_RISK_MULTIPLIER() != null) {
+					 * cell5.setCellValue(record.getR12_RISK_MULTIPLIER().doubleValue() / 100);
+					 * cell5.setCellStyle(percentStyle); } else { cell5.setCellValue("");
+					 * cell5.setCellStyle(textStyle); }
+					 */
 					
 									
 
@@ -300,7 +297,7 @@ public byte[] getBRRS_M_SRWA_12CExcel(String filename,String reportId, String fr
 						cell4.setCellStyle(textStyle);
 					}
 					// Column F
-					cell5 = row.createCell(5);
+					Cell cell5 = row.createCell(5);
 					if (record.getR13_RISK_MULTIPLIER() != null) {
 						
 						cell5.setCellValue(record.getR13_RISK_MULTIPLIER().doubleValue() / 100);
@@ -371,26 +368,21 @@ public byte[] getBRRS_M_SRWA_12CExcel(String filename,String reportId, String fr
 						cell5.setCellStyle(textStyle);
 					}
 					
-					//row16
-					row = sheet.getRow(15);			
-					// Column D 
-					cell3 = row.getCell(3);
-					if (record.getR16_NUMBER_OF_FAILED_TRADES() != null) {
-						cell3.setCellValue(record.getR16_NUMBER_OF_FAILED_TRADES().doubleValue());
-						
-					} else {
-						cell3.setCellValue("");
-
-					}
-					// Column E
-					cell4 = row.getCell(4);
-					if (record.getR16_POSITIVE_CURRENT_EXPOSURE() != null) {
-						cell4.setCellValue(record.getR16_POSITIVE_CURRENT_EXPOSURE().doubleValue());
-
-					} else {
-						cell4.setCellValue("");
-
-					}
+					/*
+					 * //row16 row = sheet.getRow(15); // Column D cell3 = row.getCell(3); if
+					 * (record.getR16_NUMBER_OF_FAILED_TRADES() != null) {
+					 * cell3.setCellValue(record.getR16_NUMBER_OF_FAILED_TRADES().doubleValue());
+					 * 
+					 * } else { cell3.setCellValue("");
+					 * 
+					 * } // Column E cell4 = row.getCell(4); if
+					 * (record.getR16_POSITIVE_CURRENT_EXPOSURE() != null) {
+					 * cell4.setCellValue(record.getR16_POSITIVE_CURRENT_EXPOSURE().doubleValue());
+					 * 
+					 * } else { cell4.setCellValue("");
+					 * 
+					 * }
+					 */
 					
 					//row20
 					row = sheet.getRow(19);			
