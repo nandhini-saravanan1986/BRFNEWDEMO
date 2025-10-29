@@ -1,18 +1,18 @@
 
 package com.bornfire.brf.services;
 import java.io.ByteArrayOutputStream;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -40,10 +40,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bornfire.brf.entities.M_SRWA_12C_Detail_Entity;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12C_Detail_Repo;
-import com.bornfire.brf.entities.M_SRWA_12C_Summary_Entity;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12C_Summary_Repo;
+import com.bornfire.brf.entities.M_SCI_E_Summary_Entity;
+import com.bornfire.brf.entities.M_SRWA_12C_Detail_Entity;
+import com.bornfire.brf.entities.M_SRWA_12C_Summary_Entity;
 
 
 @Component
@@ -683,6 +684,100 @@ public byte[] getBRRS_M_SRWA_12CExcel(String filename,String reportId, String fr
 	    }
 	}
 
+	
+	
+	
+	
+	public void updateReport(M_SRWA_12C_Summary_Entity updatedEntity) {
+	    System.out.println("Came to services");
+	    System.out.println("Report Date: " + updatedEntity.getREPORT_DATE());
+
+	    Date reportDate = updatedEntity.getREPORT_DATE();
+	    List<M_SRWA_12C_Summary_Entity> existingList =
+	            BRRS_M_SRWA_12C_Summary_Repo.getdatabydateList(reportDate);
+
+	    M_SRWA_12C_Summary_Entity existing;
+
+	    if (!existingList.isEmpty()) {
+	        existing = existingList.get(0);
+	        System.out.println(" Existing record found for date: " + reportDate);
+	    } else {
+	        existing = new M_SRWA_12C_Summary_Entity();
+	        existing.setREPORT_DATE(reportDate);
+	        System.out.println("⚠️ No record found — creating new entry for date: " + reportDate);
+	    }
+	    try {
+	        // -------------------------------
+	        // ✅ COLUMN C
+	        // -------------------------------
+	        int[] cRows = {11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
+	        for (int row : cRows) {
+	            String prefix = "R" + row + "_";
+	            String[] fields = {"NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE"};
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field;
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_SRWA_12C_Summary_Entity.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12C_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    continue; // Skip missing field
+	                }
+	            }
+	        }
+
+	        // -------------------------------
+	        // ✅ COLUMNS D, E, F, G
+	        // -------------------------------
+	        int[] commonRows = {12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 26, 27, 28};
+
+	        for (int row : commonRows) {
+	            String prefix = "R" + row + "_";
+
+	            // ✅ Fields for D, E, F, G
+	            String[] fields = {
+	                "NUMBER_OF_FAILED_TRADES",          // D
+	                "POSITIVE_CURRENT_EXPOSURE",        // E
+	                "RISK_MULTIPLIER",                  // F
+	                "RWA"                               // G
+	            };
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field;
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_SRWA_12C_Summary_Entity.class.getMethod(getterName);
+	                    Method setter = M_SRWA_12C_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    continue; // Skip missing field gracefully
+	                }
+	            }
+	        }
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // ✅ Save updated entity
+	    BRRS_M_SRWA_12C_Summary_Repo.save(existing);
+	}
+
+	
+	
+
+	
+	
 
 }
 
