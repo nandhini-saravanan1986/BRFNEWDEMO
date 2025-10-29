@@ -300,8 +300,8 @@ public class RegulatoryReportServices {
 			break;
 
 		case "M_SRWA_12C":
-			repsummary = BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CView(reportId, fromdate, todate, currency,
-					dtltype, pageable);
+			repsummary = BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CView(reportId, fromdate, todate, currency, dtltype,
+						pageable, type, version);
 			break;
 
 		case "M_CA1":
@@ -932,8 +932,7 @@ public class RegulatoryReportServices {
 
 		case "M_SRWA_12C":
 			try {
-				repfile = BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CExcel(filename, reportId, fromdate, todate,
-						currency, dtltype);
+				repfile = BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
