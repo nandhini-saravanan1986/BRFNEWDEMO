@@ -115,7 +115,7 @@ public class BRRS_Q_SMME_Intrest_Income_ReportService<BBRS_Q_SMME_Detail_Repo> {
 		}
 
 		// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
-		mv.setViewName("BRRS/Q_SMME");
+		mv.setViewName("BRRS/Q_SMME_INTREST_INCOME");
 		mv.addObject("displaymode", "summary");
 		System.out.println("scv" + mv.getViewName());
 		return mv;
@@ -195,7 +195,7 @@ public ModelAndView getBRRS_Q_SMMEcurrentDtl(String reportId,
         mv.addObject("errorMessage", "Unexpected error: " + e.getMessage());
     }
 
-    mv.setViewName("BRRS/Q_SMME"); // Make sure file is BRRS/Q_SMME.html
+    mv.setViewName("BRRS/Q_SMME_INTREST_INCOME"); // Make sure file is BRRS/Q_SMME.html
     mv.addObject("displaymode", "Details");
     mv.addObject("currentPage", currentPage);
     mv.addObject("totalPages", (int) Math.ceil((double) totalPages / pageSize));

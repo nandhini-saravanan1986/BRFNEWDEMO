@@ -82,7 +82,7 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_SRWA_12H_Rep
 	
 	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
 
-
+//Detail View
 	//   public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String
 	//   todate, String currency, String dtltype, Pageable pageable, String type,
 	//   String version) {
@@ -156,7 +156,7 @@ public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String t
         // ---------- CASE 2: RESUB ----------
         else if ("RESUB".equalsIgnoreCase(type) && version != null) {
             List<M_SRWA_12H_Archival_Summary_Entity> T1Master =
-                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListarchival(d1, version);
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
             
             mv.addObject("reportsummary", T1Master);
         }
@@ -164,8 +164,8 @@ public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String t
         // ---------- CASE 3: NORMAL ----------
         else {
             List<M_SRWA_12H_Summary_Entity> T1Master = 
-                M_SRWA_12H_Summary_Repo.getdatabydateList(d1);
-            
+                M_SRWA_12H_Summary_Repo.getdatabydateListWithVersion(todate);
+            System.out.println("T1Master Size "+T1Master.size());
             mv.addObject("reportsummary", T1Master);
         }
 
@@ -185,9 +185,10 @@ public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String t
 	    System.out.println("Came to services 1");
 	    System.out.println("Report Date: " + updatedEntity.getReportDate());
 
-	    M_SRWA_12H_Summary_Entity existing = M_SRWA_12H_Summary_Repo.findById(updatedEntity.getReportDate())
-	            .orElseThrow(() -> new RuntimeException(
-	                    "Record not found for REPORT_DATE: " + updatedEntity.getReportDate()));
+	  M_SRWA_12H_Summary_Entity existing = M_SRWA_12H_Summary_Repo
+        .findTopByReportDateOrderByReportVersionDesc(updatedEntity.getReportDate())
+        .orElseThrow(() -> new RuntimeException(
+                "Record not found for REPORT_DATE: " + updatedEntity.getReportDate()));
 
 	    try {
 	        // 1️⃣ Loop from R11 to R15 and copy fields
@@ -226,11 +227,7 @@ public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String t
 	   
 	}
 	
-
-
-
-
-	
+//Detail View
 	//    public ModelAndView getM_SRWA_12HcurrentDtl(String reportId, String fromdate, String todate, String currency,
 	// 		String dtltype, Pageable pageable, String filter) {
 
@@ -290,9 +287,8 @@ public ModelAndView getM_SRWA_12HView(String reportId, String fromdate, String t
 	// }
 
 
-	
 
-
+//Download For Summary
 public byte[] BRRS_M_SRWA_12HExcel(String filename, String reportId,
                                    String fromdate, String todate,
                                    String currency, String dtltype,
@@ -7822,17 +7818,8 @@ public byte[] BRRS_M_SRWA_12HExcel(String filename, String reportId,
 	}
 }
 
-public List<Object> getM_SRWA_12HArchival() {
-    List<Object> M_SRWA_12HArchivallist = new ArrayList<>();
-    try {
-        M_SRWA_12HArchivallist = M_SRWA_12H_Archival_Summary_Repo.getM_SRWA_12Harchival();
-        System.out.println("countser" + M_SRWA_12HArchivallist.size());
-    } catch (Exception e) {
-        System.err.println("Error fetching M_SRWA_12 Archival data: " + e.getMessage());
-        e.printStackTrace();
-    }
-    return M_SRWA_12HArchivallist;
-}
+
+
 
 
 	  public byte[] BRRS_M_SRWA_12HArchivalExcel(String filename, String reportId, String fromdate,
@@ -15347,74 +15334,78 @@ public List<Object> getM_SRWA_12HArchival() {
 
 			return out.toByteArray();
 		}
-					
-					
-
 	}
 
+//Resubmission for M_SRWA_12H
+public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HResub() {
+    List<M_SRWA_12H_Archival_Summary_Entity> resubList = new ArrayList<>();
+    try {
+        List<M_SRWA_12H_Archival_Summary_Entity> latestArchivalList =
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
 
+        if (latestArchivalList != null && !latestArchivalList.isEmpty()) {
+            resubList.addAll(latestArchivalList);
+            System.out.println("Fetched " + latestArchivalList.size() + " record(s)");
+        } else {
+            System.out.println("No archival data found.");
+        }
+    } catch (Exception e) {
+        System.err.println("Error fetching M_SRWA_12H Resub data: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return resubList;
+}
 
+// Archival for M_SRWA_12H
+public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HArchival() {
+    List<M_SRWA_12H_Archival_Summary_Entity> archivalList = new ArrayList<>();
 
-// @Autowired
-// BRRS_M_SRWA_12H_Resub_Summary_Repo M_SRWA_12H_Resub_Summary_Repo;
-	
-// 	public List<Object> getM_SRWA_12HResub() {
-// 		List<Object> M_SRWA_12HResub = new ArrayList<>();
-// 		try {
-// 			M_SRWA_12HResub = M_SRWA_12H_Resub_Summary_Repo.getM_SRWA_12HResub();
-// 			System.out.println("countser" + M_SRWA_12HResub.size());
-// 		} catch (Exception e) {
-// 			// Log the exception
-// 			System.err.println("Error fetching M_SFINP2 Archival data: " + e.getMessage());
-// 			e.printStackTrace();
+    try {
+        List<M_SRWA_12H_Archival_Summary_Entity> repoData =
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
 
-// 			// Optionally, you can rethrow it or return empty list
-// 			// throw new RuntimeException("Failed to fetch data", e);
-// 		}
-// 		return M_SRWA_12HResub;
-// 	}
-
-
-	
-	public List<Object> getM_SRWA_12HResub() {
-		List<Object> M_SRWA_12HResub = new ArrayList<>();
-		try {
-			M_SRWA_12HResub = M_SRWA_12H_Archival_Summary_Repo.getM_SRWA_12Harchival();
-			System.out.println("countser" + M_SRWA_12HResub.size());
-		} catch (Exception e) {
-			// Log the exception
-			System.err.println("Error fetching M_SRWA_12H Archival data: " + e.getMessage());
-			e.printStackTrace();
-
-			// Optionally, you can rethrow it or return empty list
-			// throw new RuntimeException("Failed to fetch data", e);
+        if (repoData != null && !repoData.isEmpty()) {
+            archivalList.addAll(repoData);
+            System.out.println(" Fetched " + repoData.size() + " archival record");
+            M_SRWA_12H_Archival_Summary_Entity first = repoData.get(0);
+            System.out.println("Latest archival version: " + first.getReportVersion());
+        } else {
+            System.out.println(" No archival data found.");
 		}
-		return M_SRWA_12HResub;
-	}
+    } catch (Exception e) {
+        System.err.println(" Error fetching M_SRWA_12H Archival data: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return archivalList;
+}
+//Resubmit the values , latest version and Resub Date
+public void updateReportReSub(M_SRWA_12H_Summary_Entity updatedEntity) {
+    System.out.println("Came to Resub Service");
+    System.out.println("Report Date: " + updatedEntity.getReportDate());
 
-	
- public void updateReportReSub(M_SRWA_12H_Summary_Entity updatedEntity) {
-        System.out.println("Came to Resub Service");
-        System.out.println("Report Date: " + updatedEntity.getReportDate());
+    Date reportDate = updatedEntity.getReportDate();
+    int newVersion = 1;
 
-        Date reportDate = updatedEntity.getReportDate();
+    try {
+        // Fetch the latest archival version for this report date
+        Optional<M_SRWA_12H_Archival_Summary_Entity> latestArchivalOpt =
+                M_SRWA_12H_Archival_Summary_Repo.getLatestArchivalVersionByDate(reportDate);
 
-        // 1️⃣ Find the latest version for this report date
-        Optional<M_SRWA_12H_Summary_Entity> latestEntityOpt =
-                M_SRWA_12H_Summary_Repo.findTopByReportDateOrderByReportVersionDesc(reportDate);
-
-        int newVersion = 1;
-        if (latestEntityOpt.isPresent()) {
-            M_SRWA_12H_Summary_Entity latestEntity = latestEntityOpt.get();
+        // Determine next version number
+        if (latestArchivalOpt.isPresent()) {
+            M_SRWA_12H_Archival_Summary_Entity latestArchival = latestArchivalOpt.get();
             try {
-                newVersion = Integer.parseInt(latestEntity.getReportVersion()) + 1;
+                newVersion = Integer.parseInt(latestArchival.getReportVersion()) + 1;
             } catch (NumberFormatException e) {
-                newVersion = 1; // fallback if version not numeric
+                System.err.println("Invalid version format. Defaulting to version 1");
+                newVersion = 1;
             }
+        } else {
+            System.out.println("No previous archival found for date: " + reportDate);
         }
 
-        // 2️⃣ Optional: Check duplicate version
-        boolean exists = M_SRWA_12H_Summary_Repo
+        // Prevent duplicate version number
+        boolean exists = M_SRWA_12H_Archival_Summary_Repo
                 .findByReportDateAndReportVersion(reportDate, String.valueOf(newVersion))
                 .isPresent();
 
@@ -15422,128 +15413,29 @@ public List<Object> getM_SRWA_12HArchival() {
             throw new RuntimeException("Version " + newVersion + " already exists for report date " + reportDate);
         }
 
-        try {
-            // 3️⃣ Create new entity
-            M_SRWA_12H_Summary_Entity newEntity = new M_SRWA_12H_Summary_Entity();
+        // Copy summary entity to archival entity
+        M_SRWA_12H_Archival_Summary_Entity archivalEntity = new M_SRWA_12H_Archival_Summary_Entity();
+        org.springframework.beans.BeanUtils.copyProperties(updatedEntity, archivalEntity);
 
-            // Copy dynamic R fields (R12–R81)
-            for (int i = 12; i <= 81; i++) {
-                String[] fields = {
-                        "PRODUCT", "ISSUER", "ISSUES_RATING",
-                        "1YR_VAL_OF_CRM", "1YR_5YR_VAL_OF_CRM", "5YR_VAL_OF_CRM",
-                        "OTHER", "STD_SUPERVISORY_HAIRCUT", "APPLICABLE_RISK_WEIGHT"
-                };
+        archivalEntity.setReportDate(reportDate);
+        archivalEntity.setReportVersion(String.valueOf(newVersion));
+        archivalEntity.setReportResubDate(new Date());
 
-                for (String field : fields) {
-                    String getterName = "getR" + i + "_" + field;
-                    String setterName = "setR" + i + "_" + field;
+        System.out.println("Saving new archival version: " + newVersion);
 
-                    try {
-                        Method getter = M_SRWA_12H_Summary_Entity.class.getMethod(getterName);
-                        Method setter = M_SRWA_12H_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+        // Save new version to repository
+        M_SRWA_12H_Archival_Summary_Repo.save(archivalEntity);
 
-                        Object newValue = getter.invoke(updatedEntity);
-                        setter.invoke(newEntity, newValue);
+        System.out.println(" Saved archival version successfully: " + newVersion);
 
-                    } catch (NoSuchMethodException e) {
-                        // skip missing fields
-                        continue;
-                    }
-                }
-            }
-
-            // 4️⃣ Set metadata
-            newEntity.setReportDate(reportDate);
-            newEntity.setReportVersion(String.valueOf(newVersion));
-            newEntity.setReportResubDate(new Date()); // current timestamp
-
-            System.out.println("Saving new version: " + newVersion);
-            M_SRWA_12H_Summary_Repo.save(newEntity);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Error while creating resubmission record", e);
-        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException("Error while creating archival resubmission record", e);
     }
+}
 
 
-
-
-// public List<Object> getM_SRWA_12Harchival() {
-// 		List<Object> M_SRWA_12HArchival = new ArrayList<>();
-// 		try {
-// 			M_SRWA_12HArchival = M_SRWA_12H_Archival_Summary_Repo.getM_SRWA_12Harchival();
-// 			System.out.println("countser" + M_SRWA_12HArchival.size());
-// 		} catch (Exception e) {
-// 			// Log the exception
-// 			System.err.println("Error fetching M_SRWA_12H Archival data: " + e.getMessage());
-// 			e.printStackTrace();
-
-// 			// Optionally, you can rethrow it or return empty list
-// 			// throw new RuntimeException("Failed to fetch data", e);
-// 		}
-// 		return M_SRWA_12HArchival;
-// 	}
-
-
-
- 
-// public void resubmitReportarchival(M_SRWA_12H_Archival_Summary_Entity request) {
-//     System.out.println("Came to Resubmit Archival Service");
-//     System.out.println("Report Date: " + request.getREPORT_DATE());
-
-//     try {
-//         // 1️⃣ Fetch the existing archival row (version 1)
-//         M_SRWA_12H_Archival_Summary_Entity existing =
-//             M_SRWA_12H_Archival_Summary_Repo.findById(request.getREPORT_DATE())
-//             .orElseThrow(() -> new RuntimeException(
-//                 "Record not found for REPORT_DATE: " + request.getREPORT_DATE()));
-
-//         // 2️⃣ Create a new entity for version 2
-//         M_SRWA_12H_Archival_Summary_Entity newRow = new M_SRWA_12H_Archival_Summary_Entity();
-
-//         // Copy all fields dynamically
-//         for (int i = 12; i <= 81; i++) {
-//             String[] fields = {"PRODUCT", "ISSUER", "ISSUES_RATING",
-//                                "1YR_VAL_OF_CRM", "1YR_5YR_VAL_OF_CRM", "5YR_VAL_OF_CRM",
-//                                "OTHER", "STD_SUPERVISORY_HAIRCUT", "APPLICABLE_RISK_WEIGHT"};
-
-//             for (String field : fields) {
-//                 String getterName = "getR" + i + "_" + field;
-//                 String setterName = "setR" + i + "_" + field;
-
-//                 try {
-//                     Method getter = M_SRWA_12H_Archival_Summary_Entity.class.getMethod(getterName);
-//                     Method setter = M_SRWA_12H_Archival_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
-
-//                     Object value = getter.invoke(request); // or existing
-//                     setter.invoke(newRow, value);
-
-//                 } catch (NoSuchMethodException e) {
-//                     continue;
-//                 }
-//             }
-//         }
-
-//         // 3️⃣ Set the new version automatically
-//         newRow.setREPORT_VERSION("Version 2"); // if REPORT_VERSION is String
-//         // or: newRow.setREPORT_VERSION(2); // if Integer
-
-//         // 4️⃣ Set report date (or ID) if needed
-//         newRow.setREPORT_DATE(request.getREPORT_DATE());
-
-//         // 5️⃣ Save new row
-//         M_SRWA_12H_Archival_Summary_Repo.save(newRow);
-
-//         System.out.println("✅ Resubmission stored as version 2!");
-
-//     } catch (Exception e) {
-//         throw new RuntimeException("Error while resubmitting archival report", e);
-//     }
-// }
-
-
-
-
+///Downloaded for Archival & Resub
 	  public byte[] BRRS_M_SRWA_12HResubExcel(String filename, String reportId, String fromdate,
                                     String todate, String currency, String dtltype,
                                     String type, String version) throws Exception {
@@ -22979,32 +22871,7 @@ public List<Object> getM_SRWA_12HArchival() {
 					
 				}
 
-				
-//row80
 
-				// // Column B
-				// Cell cell1 = row.createCell(1);
-				// if (record.getR81_PRODUCT() != null) {
-				// 	cell1.setCellValue(record.getR81_PRODUCT().doubleValue());
-				// 	cell1.setCellStyle(numberStyle);
-					
-				// } else {
-				// 	cell1.setCellValue("");
-				// 	cell1.setCellStyle(numberStyle);
-			
-
-				// }
-				// Column C
-				//  cell2 = row.createCell(2);
-                // if (record.getR81_ISSUER() != null) {
-                //    cell2.setCellValue(record.getR81_ISSUER().doubleValue());
-                //    cell2.setCellStyle(numberStyle);
-                // } else {
-                //    cell2.setCellValue("");
-                //    cell2.setCellStyle(textStyle);
-                // }
-                // Column C
-			
             row = sheet.getRow(80);
 
 					cell2 = row.getCell(1);

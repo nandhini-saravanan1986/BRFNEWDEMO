@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,6 +15,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@IdClass(M_SRWA_12H_Summary_PK.class)
 @Table(name = "BRRS_M_SRWA_12H_SUMMARYTABLE")
 
 public class M_SRWA_12H_Summary_Entity {
@@ -734,7 +736,7 @@ public class M_SRWA_12H_Summary_Entity {
     @Id
     @Column(name = "REPORT_DATE")
     private Date reportDate;
-
+@Id
     @Column(name = "REPORT_VERSION")
     private String reportVersion;
 

@@ -303,28 +303,6 @@ $(window).on('beforeunload', function() {
 		window.history.back();
 	}
 	
-	// function getReport(a) {
-	//     // Retrieve data attributes
-	//     var todate = a.getAttribute("data-todate");
-	//     var asondate = a.getAttribute("data-todate");
-	//     var reportid = a.getAttribute("data-rptcode");
-	//     var version = a.getAttribute("data-version");
-	//     var fromdate =a.getAttribute("data-todate");
-	    
-	//     if (confirm("Do you want to open report?")) {
-  //           $('#loader').modal('show'); // Show again before submission
-  //           const type = 'RESUB';
-          
-  //           $('#loader').modal('hide');
-  //           location.href = "Reports/"+reportid+"?dtltype=report&fromdate="+fromdate+"&todate="+todate+"&type="+type+"&asondate="+asondate+"&version="+version;
-  //       }
-  //       else{
-	//     	$('#loader').modal('hide');
-	//     }
-	    
-	           
-	    
-	// }
 	function getReport(a) {
 	    // Retrieve data attributes
 	    var todate = a.getAttribute("data-todate");
@@ -343,7 +321,25 @@ $(window).on('beforeunload', function() {
         else{
 	    	$('#loader').modal('hide');
 	    }
-    }
+	    
+    }      
+	    
+	// }
+// function getReport(a, event) {
+//     event.stopPropagation(); // ✅ prevent other click events from interfering
+
+//     const todate = a.getAttribute("data-todate");
+//     const version = a.getAttribute("data-version");
+//     const reportid = a.getAttribute("data-rptcode");
+
+//     if (confirm("Do you want to open report?")) {
+//         const baseUrl = window.location.origin + "/BCDRS/Resubmission";
+//         location.href = baseUrl + "?rptcode=" + reportid +
+//                         "&date=" + encodeURIComponent(todate) +
+//                         "&version=" + encodeURIComponent(version);
+//     }
+// }
+
 	
     </script>
   
@@ -406,7 +402,7 @@ function getVali(a) {
 										<th>Domain</th>
 									</tr>
 							</thead>
-							<tbody style="font-family: Arial;">
+							<!-- <tbody style="font-family: Arial;">
 							
 							<tr th:each="ReData : ${Resubmitdata }">
 								<td class="underline" th:attr="data-rptcode=${rptcode},
@@ -416,7 +412,31 @@ function getVali(a) {
 								<td th:text="${ReData[1]}"></td>
 								<td th:text="${domain}"></td>
 								
-							</tr >
+							</tr > -->
+
+
+              							<tbody style="font-family: Arial;">
+<tr th:each="ReData : ${Resubmitdata}">
+    <!-- <td class="underline"
+        th:attr="data-rptcode=${rptcode},
+                 data-todate=${#dates.format(ReData.reportDate,'dd/MM/yyyy')},
+                 data-version=${ReData.reportVersion}"
+        style="color: #08a6f1;"
+        th:text="${#dates.format(ReData.reportDate,'dd/MM/yyyy')}"
+        onclick="getReport(this);">
+    </td> -->
+<td class="underline"
+    th:attr="data-rptcode=${rptcode},
+             data-todate=${#dates.format(ReData.reportDate,'dd/MM/yyyy')},
+             data-version=${ReData.reportVersion}"
+    style="color: #08a6f1; cursor: pointer;"
+    th:text="${#dates.format(ReData.reportDate,'dd/MM/yyyy')}"
+    onclick="getReport(this, event)">
+</td>
+
+    <td th:text="${ReData.reportVersion}"></td>
+    <td th:text="${domain}"></td>
+</tr>
 								
 								<tr th:each="userProfile : ${resubmissionData}"
 									th:attr="data-cust_id=${userProfile.srlNo}"

@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,10 +30,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
@@ -49,6 +53,7 @@ import com.bornfire.brf.entities.M_CA6_Summary_Entity2;
 import com.bornfire.brf.entities.M_CA7_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_CA7_Summary_Entity;
 import com.bornfire.brf.entities.M_EPR_Summary_Entity;
+import com.bornfire.brf.entities.M_FAS_Archival_Detail_Entity;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
@@ -98,6 +103,7 @@ import com.bornfire.brf.services.BRRS_M_CA5_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA6_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA7_ReportService;
 import com.bornfire.brf.services.BRRS_M_EPR_ReportService;
+import com.bornfire.brf.services.BRRS_M_FAS_ReportService;
 import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
 import com.bornfire.brf.services.BRRS_M_GMIRT_ReportService;
 import com.bornfire.brf.services.BRRS_M_LIQ_ReportService;
@@ -114,8 +120,6 @@ import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
 import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
 import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
-import com.bornfire.brf.services.BRRS_M_SRWA_12F_ReportService;
-import com.bornfire.brf.entities.M_SRWA_12F_Summary_Entity;
 
 @Controller
 @ConfigurationProperties("default")
@@ -1269,35 +1273,33 @@ public ResponseEntity<String> updateReportReSub(
 			     }
 			 }
 			 
-			 
-			 @Autowired
-			 private BRRS_M_SRWA_12F_ReportService SRWA12FreportService;
-			
-			
-			 @RequestMapping(value = "/SRWA12FupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
-			 @ResponseBody
-			 public ResponseEntity<String> updateAllReports(
-			         @RequestParam(required = false)
-			         @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-			         @ModelAttribute M_SRWA_12F_Summary_Entity request1
-			         
-			 ) {
-			     try {
-			         System.out.println("Came to single controller");
-			         // set date into all 4 entities
-			         request1.setREPORT_DATE(asondate);
-			         
-			         // call services
-			         SRWA12FreportService.updateReport(request1);
-			         
-			         return ResponseEntity.ok("Updated Successfully");
-			     } catch (Exception e) {
-			         e.printStackTrace();
-			         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-			                              .body("Update Failed: " + e.getMessage());
-			     }
-			 }
-			 
+
+
+// @RestController
+// @RequestMapping("/BCDRS/Reports/M_FAS")  // 👈 must match the URL prefix
+// public class BRRS_M_FAS_Controller {
+
+//     @PostMapping("/saveUpdatedBalances")  // 👈 matches the AJAX endpoint
+//     public ResponseEntity<String> saveUpdatedBalances(
+//             @RequestBody List<M_FAS_Archival_Detail_Entity> updates) {
+
+//         try {
+//             System.out.println("✅ Controller reached: saveUpdatedBalances");
+//             for (M_FAS_Archival_Detail_Entity update : updates) {
+//                 BRRS_M_FAS_ReportService.updateAccountBalance(
+//                         update.getCustId(),
+//                         update.getAcctNumber(),
+//                         update.getAcctBalanceInpula());
+//             }
+//             return ResponseEntity.ok("Updated successfully!");
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                                  .body("Error: " + e.getMessage());
+//         }
+//     }
+// }
+
 	
 			 }	
 

@@ -388,17 +388,22 @@ function getVali(a) {
 										<th>Domain</th>
 									</tr>
 							</thead>
-							<tbody style="font-family: Arial;">
-							
-							<tr th:each="archival : ${Archivaldata}">
-								<td class="underline" th:attr="data-rptcode=${rptcode},
-								 data-todate=${#dates.format(archival[0],'dd/MM/yyyy')},
-								 data-version=${archival[1]}"
-								style="color: #08a6f1;" th:text="${#dates.format(archival[0],'dd/MM/yyyy')}" onclick="getReport(this);"></td>
-								<td th:text="${archival[1]}"></td>
-								<td th:text="${domain}"></td>
-								
-							</tr >
+<tbody style="font-family: Arial;">
+    <tr th:each="archival : ${Archivaldata}">
+        <td class="underline"
+            th:attr="data-rptcode=${rptcode},
+                     data-todate=${#dates.format(archival.reportDate, 'dd/MM/yyyy')},
+                     data-version=${archival.reportVersion}"
+            style="color: #08a6f1; cursor: pointer;"
+            th:text="${#dates.format(archival.reportDate, 'dd/MM/yyyy')}"
+            onclick="getReport(this, event)">
+        </td>
+        <td th:text="${archival.reportVersion}"></td>
+        <td th:text="${domain}"></td>
+    </tr>
+</tbody>
+
+
 								
 								<!-- <tr th:each="userProfile : ${reportlist}"
 									th:attr="data-cust_id=${userProfile.srlNo}"
