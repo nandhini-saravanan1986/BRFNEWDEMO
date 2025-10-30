@@ -3,6 +3,7 @@ package com.bornfire.brf.services;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -987,21 +989,7 @@ if (record.getR27_close_bal() != null) {
 		}
 	}
 
-	public List<Object> getM_FASArchival() {
-		List<Object> M_SFINP2Archivallist = new ArrayList<>();
-		try {
-			M_SFINP2Archivallist = m_FAS_Archival_Summary_Repo.getM_FASarchival();
-			System.out.println("countser" + M_SFINP2Archivallist.size());
-		} catch (Exception e) {
-			// Log the exception
-			System.err.println("Error fetching M_SFINP2 Archival data: " + e.getMessage());
-			e.printStackTrace();
-
-			// Optionally, you can rethrow it or return empty list
-			// throw new RuntimeException("Failed to fetch data", e);
-		}
-		return M_SFINP2Archivallist;
-	}
+	
 
 	public byte[] getSummaryExcelARCHIVAL(String filename, String reportId, String fromdate, String todate,
 										   String currency, String dtltype, String type, String version) throws Exception {
@@ -1796,5 +1784,92 @@ if (record.getR27_close_bal() != null) {
       }
   }
 
+  
+//Resubmission for M_FAS
+public List<M_FAS_Archival_Detail_Entity> getM_FASResub() {
+    List<M_FAS_Archival_Detail_Entity> resubList = new ArrayList<>();
+    try {
+        List<M_FAS_Archival_Detail_Entity> latestArchivalList =
+                m_FAS_Archival_Detail_Repo.getdatabydateListWithVersion();
+
+        if (latestArchivalList != null && !latestArchivalList.isEmpty()) {
+            resubList.addAll(latestArchivalList);
+            System.out.println("Fetched " + latestArchivalList.size() + " record(s)");
+        } else {
+            System.out.println("No archival data found.");
+        }
+    } catch (Exception e) {
+        System.err.println("Error fetching M_FAS Resub data: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return resubList;
+}
+
+// Archival for M_FAS VIEW 
+public List<M_FAS_Archival_Detail_Entity> getM_FASArchival() {
+    List<M_FAS_Archival_Detail_Entity> archivalList = new ArrayList<>();
+
+    try {
+        List<M_FAS_Archival_Detail_Entity> repoData =
+                m_FAS_Archival_Detail_Repo.getdatabydateListWithVersion();
+
+        if (repoData != null && !repoData.isEmpty()) {
+            archivalList.addAll(repoData);
+            System.out.println(" Fetched " + repoData.size() + " archival record");
+            M_FAS_Archival_Detail_Entity first = repoData.get(0);
+            System.out.println("Latest archival version: " + first.getDataEntryVersion());
+        } else {
+            System.out.println(" No archival data found.");
+		}
+    } catch (Exception e) {
+        System.err.println(" Error fetching M_FAS Archival data: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return archivalList;
+}
+// public List<Object> getM_FASArchival() {
+// 		List<Object> M_SFINP2Archivallist = new ArrayList<>();
+// 		try {
+// 			M_SFINP2Archivallist = m_FAS_Archival_Summary_Repo.getM_FASarchival();
+// 			System.out.println("countser" + M_SFINP2Archivallist.size());
+// 		} catch (Exception e) {
+// 			// Log the exception
+// 			System.err.println("Error fetching M_SFINP2 Archival data: " + e.getMessage());
+// 			e.printStackTrace();
+
+
+// 			// Optionally, you can rethrow it or return empty list
+// 			// throw new RuntimeException("Failed to fetch data", e);
+// 		}
+// 		return M_SFINP2Archivallist;
+// 	}
+
+//  @Autowired
+//     private M_FAS_Archival_Detail_Repo m_FAS_Archival_Detail_Repo;
+
+    // ✅ Updates balance for a specific customer & account
+    public void updateAccountBalance(String custId, String acctNumber, BigDecimal acctBalanceInpula) {
+        System.out.println("➡️ Service reached: updateAccountBalance");
+        System.out.println("Customer ID: " + custId + ", Account No: " + acctNumber + ", New Balance: " + acctBalanceInpula);
+
+        // Find record by custId and acctNumber
+        Optional<M_FAS_Archival_Detail_Entity> optionalEntity =
+                m_FAS_Archival_Detail_Repo.findByCustIdAndAcctNumber(custId, acctNumber);
+
+        if (optionalEntity.isPresent()) {
+            M_FAS_Archival_Detail_Entity existing = optionalEntity.get();
+
+            // Update the balance
+            existing.setAcctBalanceInpula(acctBalanceInpula);
+
+            // Save the updated entity
+            m_FAS_Archival_Detail_Repo.save(existing);
+
+            System.out.println("✅ Updated account balance successfully for CustID: " + custId);
+        } else {
+            System.err.println("❌ Record not found for CustID: " + custId + ", Account: " + acctNumber);
+            throw new RuntimeException("Record not found for CustID: " + custId + ", Account: " + acctNumber);
+        }
+    }
 
 }

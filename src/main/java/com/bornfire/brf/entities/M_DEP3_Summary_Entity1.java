@@ -142,14 +142,14 @@ private BigDecimal	r16_pula_equivalent;
 private BigDecimal	r16_avg_pula_equivalent;
    
 private String	r17_foreign_curr_acc_by_curr;
-// private BigDecimal	r17_ex_rate_buy;
-// private BigDecimal	r17_ex_rate_mid;
-// private BigDecimal	r17_ex_rate_sell;
+private BigDecimal	r17_ex_rate_buy;
+private BigDecimal	r17_ex_rate_mid;
+private BigDecimal	r17_ex_rate_sell;
 private BigDecimal	r17_current;
 private BigDecimal	r17_call;
 private BigDecimal	r17_savings;
-// private BigDecimal	r17_notice_0to31;
-// private BigDecimal	r17_notice_32to88;
+private BigDecimal	r17_notice_0to31;
+private BigDecimal	r17_notice_32to88;
 private BigDecimal	r17_fix_depo_91_day_depo;
 private BigDecimal	r17_fix_depo_1to2;
 private BigDecimal	r17_fix_depo_4to6;
@@ -157,15 +157,15 @@ private BigDecimal	r17_fix_depo_7to12;
 private BigDecimal	r17_fix_depo_13to18;
 private BigDecimal	r17_fix_depo_19to24;
 private BigDecimal	r17_fix_depo_over24;
-// private BigDecimal	r17_cer_of_depo;
+private BigDecimal	r17_cer_of_depo;
 private BigDecimal	r17_total;
 private BigDecimal	r17_pula_equivalent;
 private BigDecimal	r17_avg_pula_equivalent;
    
 private String	r18_foreign_curr_acc_by_curr;
-// private BigDecimal	r18_ex_rate_buy;
-// private BigDecimal	r18_ex_rate_mid;
-// private BigDecimal	r18_ex_rate_sell;
+private BigDecimal	r18_ex_rate_buy;
+private BigDecimal	r18_ex_rate_mid;
+private BigDecimal	r18_ex_rate_sell;
 private BigDecimal	r18_current;
 private BigDecimal	r18_call;
 private BigDecimal	r18_savings;
@@ -922,24 +922,24 @@ public String getR17_foreign_curr_acc_by_curr() {
 public void setR17_foreign_curr_acc_by_curr(String r17_foreign_curr_acc_by_curr) {
     this.r17_foreign_curr_acc_by_curr = r17_foreign_curr_acc_by_curr;
 }
-// public BigDecimal getR17_ex_rate_buy() {
-//     return r17_ex_rate_buy;
-// }
-// public void setR17_ex_rate_buy(BigDecimal r17_ex_rate_buy) {
-//     this.r17_ex_rate_buy = r17_ex_rate_buy;
-// }
-// public BigDecimal getR17_ex_rate_mid() {
-//     return r17_ex_rate_mid;
-// }
-// public void setR17_ex_rate_mid(BigDecimal r17_ex_rate_mid) {
-//     this.r17_ex_rate_mid = r17_ex_rate_mid;
-// }
-// public BigDecimal getR17_ex_rate_sell() {
-//     return r17_ex_rate_sell;
-// }
-// public void setR17_ex_rate_sell(BigDecimal r17_ex_rate_sell) {
-//     this.r17_ex_rate_sell = r17_ex_rate_sell;
-// }
+public BigDecimal getR17_ex_rate_buy() {
+    return r17_ex_rate_buy;
+}
+public void setR17_ex_rate_buy(BigDecimal r17_ex_rate_buy) {
+    this.r17_ex_rate_buy = r17_ex_rate_buy;
+}
+public BigDecimal getR17_ex_rate_mid() {
+    return r17_ex_rate_mid;
+}
+public void setR17_ex_rate_mid(BigDecimal r17_ex_rate_mid) {
+    this.r17_ex_rate_mid = r17_ex_rate_mid;
+}
+public BigDecimal getR17_ex_rate_sell() {
+    return r17_ex_rate_sell;
+}
+public void setR17_ex_rate_sell(BigDecimal r17_ex_rate_sell) {
+    this.r17_ex_rate_sell = r17_ex_rate_sell;
+}
 public BigDecimal getR17_current() {
     return r17_current;
 }
@@ -958,18 +958,18 @@ public BigDecimal getR17_savings() {
 public void setR17_savings(BigDecimal r17_savings) {
     this.r17_savings = r17_savings;
 }
-// public BigDecimal getR17_notice_0to31() {
-//     return r17_notice_0to31;
-// }
-// public void setR17_notice_0to31(BigDecimal r17_notice_0to31) {
-//     this.r17_notice_0to31 = r17_notice_0to31;
-// }
-// public BigDecimal getR17_notice_32to88() {
-//     return r17_notice_32to88;
-// }
-// public void setR17_notice_32to88(BigDecimal r17_notice_32to88) {
-//     this.r17_notice_32to88 = r17_notice_32to88;
-// }
+public BigDecimal getR17_notice_0to31() {
+    return r17_notice_0to31;
+}
+public void setR17_notice_0to31(BigDecimal r17_notice_0to31) {
+    this.r17_notice_0to31 = r17_notice_0to31;
+}
+public BigDecimal getR17_notice_32to88() {
+    return r17_notice_32to88;
+}
+public void setR17_notice_32to88(BigDecimal r17_notice_32to88) {
+    this.r17_notice_32to88 = r17_notice_32to88;
+}
 public BigDecimal getR17_fix_depo_91_day_depo() {
     return r17_fix_depo_91_day_depo;
 }
@@ -1012,12 +1012,12 @@ public BigDecimal getR17_fix_depo_over24() {
 public void setR17_fix_depo_over24(BigDecimal r17_fix_depo_over24) {
     this.r17_fix_depo_over24 = r17_fix_depo_over24;
 }
-// public BigDecimal getR17_cer_of_depo() {
-//     return r17_cer_of_depo;
-// }
-// public void setR17_cer_of_depo(BigDecimal r17_cer_of_depo) {
-//     this.r17_cer_of_depo = r17_cer_of_depo;
-// }
+public BigDecimal getR17_cer_of_depo() {
+    return r17_cer_of_depo;
+}
+public void setR17_cer_of_depo(BigDecimal r17_cer_of_depo) {
+    this.r17_cer_of_depo = r17_cer_of_depo;
+}
 public BigDecimal getR17_total() {
     return r17_total;
 }
@@ -1042,24 +1042,24 @@ public String getR18_foreign_curr_acc_by_curr() {
 public void setR18_foreign_curr_acc_by_curr(String r18_foreign_curr_acc_by_curr) {
     this.r18_foreign_curr_acc_by_curr = r18_foreign_curr_acc_by_curr;
 }
-// public BigDecimal getR18_ex_rate_buy() {
-//     return r18_ex_rate_buy;
-// }
-// public void setR18_ex_rate_buy(BigDecimal r18_ex_rate_buy) {
-//     this.r18_ex_rate_buy = r18_ex_rate_buy;
-// }
-// public BigDecimal getR18_ex_rate_mid() {
-//     return r18_ex_rate_mid;
-// }
-// public void setR18_ex_rate_mid(BigDecimal r18_ex_rate_mid) {
-//     this.r18_ex_rate_mid = r18_ex_rate_mid;
-// }
-// public BigDecimal getR18_ex_rate_sell() {
-//     return r18_ex_rate_sell;
-// }
-// public void setR18_ex_rate_sell(BigDecimal r18_ex_rate_sell) {
-//     this.r18_ex_rate_sell = r18_ex_rate_sell;
-// }
+public BigDecimal getR18_ex_rate_buy() {
+    return r18_ex_rate_buy;
+}
+public void setR18_ex_rate_buy(BigDecimal r18_ex_rate_buy) {
+    this.r18_ex_rate_buy = r18_ex_rate_buy;
+}
+public BigDecimal getR18_ex_rate_mid() {
+    return r18_ex_rate_mid;
+}
+public void setR18_ex_rate_mid(BigDecimal r18_ex_rate_mid) {
+    this.r18_ex_rate_mid = r18_ex_rate_mid;
+}
+public BigDecimal getR18_ex_rate_sell() {
+    return r18_ex_rate_sell;
+}
+public void setR18_ex_rate_sell(BigDecimal r18_ex_rate_sell) {
+    this.r18_ex_rate_sell = r18_ex_rate_sell;
+}
 public BigDecimal getR18_current() {
     return r18_current;
 }

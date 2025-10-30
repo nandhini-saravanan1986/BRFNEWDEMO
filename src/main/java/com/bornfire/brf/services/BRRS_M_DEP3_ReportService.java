@@ -38,6 +38,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Detail_Repo;
+import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Manual_Summary_Repo1;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Summary_Repo1;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Manual_Summary_Repo2;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Archival_Manual_Summary_Repo3;
@@ -47,6 +48,7 @@ import com.bornfire.brf.entities.BRRS_M_DEP3_Manual_Summary_Repo2;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Manual_Summary_Repo3;
 import com.bornfire.brf.entities.BRRS_M_DEP3_Summary_Repo1;
 import com.bornfire.brf.entities.M_DEP3_Archival_Detail_Entity;
+import com.bornfire.brf.entities.M_DEP3_Archival_Manual_Summary_Entity1;
 import com.bornfire.brf.entities.M_DEP3_Archival_Summary_Entity1;
 import com.bornfire.brf.entities.M_DEP3_Archival_Manual_Summary_Entity2;
 import com.bornfire.brf.entities.M_DEP3_Archival_Manual_Summary_Entity3;
@@ -86,6 +88,9 @@ public class BRRS_M_DEP3_ReportService {
 	@Autowired
 	BRRS_M_DEP3_Archival_Summary_Repo1 M_DEP3_Archival_Summary_Repo1;
 
+
+    @Autowired
+	BRRS_M_DEP3_Archival_Manual_Summary_Repo1 m_DEP3_Archival_Manual_Summary_Repo1;
 	@Autowired
 	BRRS_M_DEP3_Archival_Manual_Summary_Repo2 m_DEP3_Archival_Manual_Summary_Repo2;
 
@@ -106,26 +111,29 @@ public class BRRS_M_DEP3_ReportService {
 		int currentPage = pageable.getPageNumber();
 		int startItem = currentPage * pageSize;
 
-		if (type.equals("ARCHIVAL") & version != null) {
-			List<M_DEP3_Archival_Summary_Entity1> T1Master = new ArrayList<M_DEP3_Archival_Summary_Entity1>();
-			List<M_DEP3_Archival_Manual_Summary_Entity2> T1Master1 = new ArrayList<M_DEP3_Archival_Manual_Summary_Entity2>();
-			List<M_DEP3_Archival_Manual_Summary_Entity3> T1Master2 = new ArrayList<M_DEP3_Archival_Manual_Summary_Entity3>();
-            // List<M_DEP3_Archival_Manual_Summary_Entity1> T1Master3 = new ArrayList<M_DEP3_Archival_Manual_Summary_Entity1>();
-			try {
-				Date d1 = dateformat.parse(todate);
-				T1Master = M_DEP3_Archival_Summary_Repo1.getdatabydateListarchival(todate, version);
-				T1Master1 = m_DEP3_Archival_Manual_Summary_Repo2.getdatabydateListarchival(todate, version);
-				T1Master2 = m_DEP3_Archival_Manual_Summary_Repo3.getdatabydateListarchival(todate, version);
-                // T1Master3 = m_DEP3_Archival_Manual_Summary_Repo1.getdatabydateListarchival(todate, version);
+if (type.equals("ARCHIVAL") & version != null) {
+    List<M_DEP3_Archival_Summary_Entity1> T1Master = new ArrayList<>();
+    List<M_DEP3_Archival_Manual_Summary_Entity2> T1Master1 = new ArrayList<>();
+    List<M_DEP3_Archival_Manual_Summary_Entity3> T1Master2 = new ArrayList<>();
+   List<M_DEP3_Archival_Manual_Summary_Entity1> T1Master3 = new ArrayList<>();
 
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+    try {
+        Date d1 = dateformat.parse(todate);
+        T1Master = M_DEP3_Archival_Summary_Repo1.getdatabydateListarchival(todate, version);
+        T1Master1 = m_DEP3_Archival_Manual_Summary_Repo2.getdatabydateListarchival(todate, version);
+        T1Master2 = m_DEP3_Archival_Manual_Summary_Repo3.getdatabydateListarchival(todate, version);
+       T1Master3 = m_DEP3_Archival_Manual_Summary_Repo1.getdatabydateListarchival(todate, version); // ✅ add this
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
 
-			mv.addObject("reportsummary", T1Master);
-			mv.addObject("reportsummary1", T1Master1);
-            mv.addObject("reportsummary2", T1Master2);
-            // mv.addObject("reportsummary3", T1Master3);
+    mv.addObject("reportsummary", T1Master);
+    mv.addObject("reportsummary1", T1Master1);
+    mv.addObject("reportsummary2", T1Master2);
+   mv.addObject("reportsummary3", T1Master3); 
+
+
+
 		} else {
 			List<M_DEP3_Summary_Entity1> T1Master = new ArrayList<M_DEP3_Summary_Entity1>();
 			List<M_DEP3_Manual_Summary_Entity2> T1Master1 = new ArrayList<M_DEP3_Manual_Summary_Entity2>();
@@ -146,6 +154,7 @@ public class BRRS_M_DEP3_ReportService {
 			mv.addObject("reportsummary1", T1Master1);
             mv.addObject("reportsummary2", T1Master2);
             mv.addObject("reportsummary3", T1Master3);
+            System.out.println("reportsummary3 size = " + T1Master3.size());
 		}
 
 		// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
@@ -156,6 +165,92 @@ public class BRRS_M_DEP3_ReportService {
 	}
 
 
+ // 🔹 Update for Manual Entity
+    public void updateReport1(M_DEP3_Manual_Summary_Entity1 updatedEntity) {
+        System.out.println("Came to services (Manual)");
+        System.out.println("Report Date: " + updatedEntity.getREPORT_DATE());
+
+        M_DEP3_Manual_Summary_Entity1 existing = M_DEP3_Manual_Summary_Repo1
+                .findById(updatedEntity.getREPORT_DATE())
+                .orElseThrow(() -> new RuntimeException(
+                        "Record not found for REPORT_DATE: " + updatedEntity.getREPORT_DATE()));
+
+        try {
+            // 🔁 Loop from R11 to R17 and copy fields
+            for (int i = 11; i <= 18; i++) {
+                String prefix = "R" + i + "_";
+                String[] fields = { "foreign_curr_acc_by_curr","ex_rate_buy", "ex_rate_mid", "ex_rate_sell","current", "call", "savings", "notice_0to31", "notice_32to88",
+                        "fix_depo_91_day_depo", "fix_depo_1to2", "fix_depo_4to6", "fix_depo_7to12", "fix_depo_13to18",
+                        "fix_depo_19to24", "fix_depo_over24", "cer_of_depo", "total","pula_equivalent","avg_pula_equivalent" };
+
+                for (String field : fields) {
+                    String getterName = "get" + prefix + field;
+                    String setterName = "set" + prefix + field;
+
+                    try {
+                        Method getter = M_DEP3_Manual_Summary_Entity1.class.getMethod(getterName);
+                        Method setter = M_DEP3_Manual_Summary_Entity1.class.getMethod(setterName,
+                                getter.getReturnType());
+
+                        Object newValue = getter.invoke(updatedEntity);
+                        setter.invoke(existing, newValue);
+
+                    } catch (NoSuchMethodException e) {
+                        // Ignore missing field
+                        continue;
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while updating manual report fields", e);
+        }
+
+        // ✅ Save updated entity
+        M_DEP3_Manual_Summary_Repo1.save(existing);
+    }
+
+    // 🔹 Overloaded method: Update for Summary Entity
+    public void updateReport1(M_DEP3_Summary_Entity1 updatedEntity) {
+        System.out.println("Came to services (Summary)");
+        System.out.println("Report Date: " + updatedEntity.getREPORT_DATE());
+
+        M_DEP3_Summary_Entity1 existing = M_DEP3_Summary_Repo1
+                .findById(updatedEntity.getREPORT_DATE())
+                .orElseThrow(() -> new RuntimeException(
+                        "Record not found for REPORT_DATE: " + updatedEntity.getREPORT_DATE()));
+
+        try {
+            for (int i = 11; i <= 18; i++) {
+                String prefix = "R" + i + "_";
+                String[] fields = { "foreign_curr_acc_by_curr","ex_rate_buy", "ex_rate_mid", "ex_rate_sell","current", "call", "savings", "notice_0to31", "notice_32to88",
+                        "fix_depo_91_day_depo", "fix_depo_1to2", "fix_depo_4to6", "fix_depo_7to12", "fix_depo_13to18",
+                        "fix_depo_19to24", "fix_depo_over24", "cer_of_depo", "total","pula_equivalent","avg_pula_equivalent" };
+
+                for (String field : fields) {
+                    String getterName = "get" + prefix + field;
+                    String setterName = "set" + prefix + field;
+
+                    try {
+                        Method getter = M_DEP3_Summary_Entity1.class.getMethod(getterName);
+                        Method setter = M_DEP3_Summary_Entity1.class.getMethod(setterName, getter.getReturnType());
+
+                        Object newValue = getter.invoke(updatedEntity);
+                        setter.invoke(existing, newValue);
+
+                    } catch (NoSuchMethodException e) {
+                        continue;
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while updating summary report fields", e);
+        }
+
+        // ✅ Save updated entity
+        M_DEP3_Summary_Repo1.save(existing);
+    }
     
 	public void updateReport2(M_DEP3_Manual_Summary_Entity2  updatedEntity) {
 	    System.out.println("Came to services 2");

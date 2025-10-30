@@ -1,3 +1,4 @@
+
     
 package com.bornfire.brf.entities;
 import java.math.BigDecimal;
@@ -12,8 +13,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_M_DEP3_MANUAL_SUMMARYTABLE1")
-public class M_DEP3_Manual_Summary_Entity1 {
+@Table(name = "BRRS_M_DEP3_ARCHIVALTABLE_MANUAL_SUMMARY1")
+public class M_DEP3_Archival_Manual_Summary_Entity1 {
 
 private BigDecimal	r11_ex_rate_buy;
 private BigDecimal	r11_ex_rate_mid;
@@ -58,19 +59,18 @@ private BigDecimal	r16_notice_0to31;
 private BigDecimal	r16_notice_32to88;
 private BigDecimal	r16_cer_of_depo;
 
-// private BigDecimal	r17_ex_rate_buy;
-// private BigDecimal	r17_ex_rate_mid;
-// private BigDecimal	r17_ex_rate_sell;
+private BigDecimal	r17_ex_rate_buy;
+private BigDecimal	r17_ex_rate_mid;
+private BigDecimal	r17_ex_rate_sell;
 
-// private BigDecimal	r18_ex_rate_buy;
-// private BigDecimal	r18_ex_rate_mid;
-// private BigDecimal	r18_ex_rate_sell;
+private BigDecimal	r18_ex_rate_buy;
+private BigDecimal	r18_ex_rate_mid;
+private BigDecimal	r18_ex_rate_sell;
 private BigDecimal	r18_notice_0to31;
 private BigDecimal	r18_notice_32to88;
-private BigDecimal	r18_cer_of_depo;
-// private BigDecimal	r18_total;
-// private BigDecimal	r18_pula_equivalent;
-// private BigDecimal	r18_avg_pula_equivalent;
+private BigDecimal	r18_total;
+private BigDecimal	r18_pula_equivalent;
+private BigDecimal	r18_avg_pula_equivalent;
 @Id
 @Temporal(TemporalType.DATE)
 @DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -299,42 +299,42 @@ public BigDecimal getR16_cer_of_depo() {
 public void setR16_cer_of_depo(BigDecimal r16_cer_of_depo) {
     this.r16_cer_of_depo = r16_cer_of_depo;
 }
-// public BigDecimal getR17_ex_rate_buy() {
-//     return r17_ex_rate_buy;
-// }
-// public void setR17_ex_rate_buy(BigDecimal r17_ex_rate_buy) {
-//     this.r17_ex_rate_buy = r17_ex_rate_buy;
-// }
-// public BigDecimal getR17_ex_rate_mid() {
-//     return r17_ex_rate_mid;
-// }
-// public void setR17_ex_rate_mid(BigDecimal r17_ex_rate_mid) {
-//     this.r17_ex_rate_mid = r17_ex_rate_mid;
-// }
-// public BigDecimal getR17_ex_rate_sell() {
-//     return r17_ex_rate_sell;
-// }
-// public void setR17_ex_rate_sell(BigDecimal r17_ex_rate_sell) {
-//     this.r17_ex_rate_sell = r17_ex_rate_sell;
-// }
-// public BigDecimal getR18_ex_rate_buy() {
-//     return r18_ex_rate_buy;
-// }
-// public void setR18_ex_rate_buy(BigDecimal r18_ex_rate_buy) {
-//     this.r18_ex_rate_buy = r18_ex_rate_buy;
-// }
-// public BigDecimal getR18_ex_rate_mid() {
-//     return r18_ex_rate_mid;
-// }
-// public void setR18_ex_rate_mid(BigDecimal r18_ex_rate_mid) {
-//     this.r18_ex_rate_mid = r18_ex_rate_mid;
-// }
-// public BigDecimal getR18_ex_rate_sell() {
-//     return r18_ex_rate_sell;
-// }
-// public void setR18_ex_rate_sell(BigDecimal r18_ex_rate_sell) {
-//     this.r18_ex_rate_sell = r18_ex_rate_sell;
-// }
+public BigDecimal getR17_ex_rate_buy() {
+    return r17_ex_rate_buy;
+}
+public void setR17_ex_rate_buy(BigDecimal r17_ex_rate_buy) {
+    this.r17_ex_rate_buy = r17_ex_rate_buy;
+}
+public BigDecimal getR17_ex_rate_mid() {
+    return r17_ex_rate_mid;
+}
+public void setR17_ex_rate_mid(BigDecimal r17_ex_rate_mid) {
+    this.r17_ex_rate_mid = r17_ex_rate_mid;
+}
+public BigDecimal getR17_ex_rate_sell() {
+    return r17_ex_rate_sell;
+}
+public void setR17_ex_rate_sell(BigDecimal r17_ex_rate_sell) {
+    this.r17_ex_rate_sell = r17_ex_rate_sell;
+}
+public BigDecimal getR18_ex_rate_buy() {
+    return r18_ex_rate_buy;
+}
+public void setR18_ex_rate_buy(BigDecimal r18_ex_rate_buy) {
+    this.r18_ex_rate_buy = r18_ex_rate_buy;
+}
+public BigDecimal getR18_ex_rate_mid() {
+    return r18_ex_rate_mid;
+}
+public void setR18_ex_rate_mid(BigDecimal r18_ex_rate_mid) {
+    this.r18_ex_rate_mid = r18_ex_rate_mid;
+}
+public BigDecimal getR18_ex_rate_sell() {
+    return r18_ex_rate_sell;
+}
+public void setR18_ex_rate_sell(BigDecimal r18_ex_rate_sell) {
+    this.r18_ex_rate_sell = r18_ex_rate_sell;
+}
 public BigDecimal getR18_notice_0to31() {
     return r18_notice_0to31;
 }
@@ -347,25 +347,24 @@ public BigDecimal getR18_notice_32to88() {
 public void setR18_notice_32to88(BigDecimal r18_notice_32to88) {
     this.r18_notice_32to88 = r18_notice_32to88;
 }
-
-// public BigDecimal getR18_total() {
-//     return r18_total;
-// }
-// public void setR18_total(BigDecimal r18_total) {
-//     this.r18_total = r18_total;
-// }
-// public BigDecimal getR18_pula_equivalent() {
-//     return r18_pula_equivalent;
-// }
-// public void setR18_pula_equivalent(BigDecimal r18_pula_equivalent) {
-//     this.r18_pula_equivalent = r18_pula_equivalent;
-// }
-// public BigDecimal getR18_avg_pula_equivalent() {
-//     return r18_avg_pula_equivalent;
-// }
-// public void setR18_avg_pula_equivalent(BigDecimal r18_avg_pula_equivalent) {
-//     this.r18_avg_pula_equivalent = r18_avg_pula_equivalent;
-// }
+public BigDecimal getR18_total() {
+    return r18_total;
+}
+public void setR18_total(BigDecimal r18_total) {
+    this.r18_total = r18_total;
+}
+public BigDecimal getR18_pula_equivalent() {
+    return r18_pula_equivalent;
+}
+public void setR18_pula_equivalent(BigDecimal r18_pula_equivalent) {
+    this.r18_pula_equivalent = r18_pula_equivalent;
+}
+public BigDecimal getR18_avg_pula_equivalent() {
+    return r18_avg_pula_equivalent;
+}
+public void setR18_avg_pula_equivalent(BigDecimal r18_avg_pula_equivalent) {
+    this.r18_avg_pula_equivalent = r18_avg_pula_equivalent;
+}
 public Date getREPORT_DATE() {
     return REPORT_DATE;
 }
@@ -414,14 +413,9 @@ public String getDel_flg() {
 public void setDel_flg(String del_flg) {
     this.del_flg = del_flg;
 }
-public BigDecimal getR18_cer_of_depo() {
-    return r18_cer_of_depo;
-}
-public void setR18_cer_of_depo(BigDecimal r18_cer_of_depo) {
-    this.r18_cer_of_depo = r18_cer_of_depo;
-}
 
 
 
 }
+
 

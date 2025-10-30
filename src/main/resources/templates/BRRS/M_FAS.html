@@ -96,14 +96,14 @@ PURPOSE		: BRRSREPORT
         background-color: #e77400;
         border-color: #0c0c0c;
       }
-
+/* 
       .btn-primary:not (:disabled):not (.disabled).active,
       .btn-primary:not (:disabled):not (.disabled):active,
       .show > .btn-primary.dropdown-toggle {
         color: #fff;
         background-color: #cc000000;
         border-color: #161617;
-      }
+      } */
 
       #finusertb {
         width: 460px;
@@ -238,7 +238,7 @@ PURPOSE		: BRRSREPORT
         transition: 0.3s ease;
       }
 
-      /* When input or select is focused or has a value, move the label up */
+      /* When input or select is focused or has a value, move the label up 
       .form-control:focus ~ .form-legend,
       .form-control:not (:placeholder-shown) ~ .form-legend {
         top: -8px;
@@ -246,17 +246,17 @@ PURPOSE		: BRRSREPORT
         color: #007bff;
       }
 
-      /* Hover effect when the input/select is focused */
+      /* Hover effect when the input/select is focused 
       .form-control:focus:hover ~ .form-legend {
         color: #0056b3;
-        /* Darker shade of blue on hover */
+        /* Darker shade of blue on hover 
       }
 
-      /* Ensure the label returns to the normal color after focus or hover is removed */
+      /* Ensure the label returns to the normal color after focus or hover is removed 
       .form-control:not (:focus) ~ .form-legend {
         color: #aaa;
-        /* Normal label color */
-      }
+        /* Normal label color 
+      } */
     </style>
 
     <style>
@@ -490,24 +490,111 @@ function downloadfile(button) {
 			});
 		}
 
-function editRecord(){
-	showResultModal('Alert', 'Development in progress');
+// function editRecord(){
+// 	showResultModal('Alert', 'Development in progress');
 	
-}
-function closemodel(){
-	$('#alert').modal('hide');
-	$('#resultModal').modal('hide');
-	
+// }
+function closemodel() {
+    $('#alert').modal('hide');
+    $('#resultModal').modal('hide');
 }
 
-function showResultModal(title, message) {
-	// Set the text for the modal elements
-	$('#resultModalLabel').text(title);
-	$('#resultModalBody').text(message);
+// ✅ Enable inline editing
+function editRecord(icon) {
+    const row = icon.closest('tr');
+    const balanceCell = row.cells[4];
 
-	// Show the modal
-	$('#resultModal').modal('show');
+    // Prevent duplicate input
+    if (balanceCell.querySelector('input')) return;
+
+    const currentValue = balanceCell.innerText.trim();
+    balanceCell.innerHTML = `
+        <input type="number" step="0.01" value="${currentValue}"
+               style="width: 100px; text-align: right;" />
+    `;
+
+    row.classList.add('edited');
+
+    // Show modal feedback
+    $("#resultModalLabel").text("Edit Mode");
+    $("#resultModalBody").text("You can now modify the Account Balance.");
+    $("#resultModal").modal("show");
 }
+
+// ✅ Submit updated records (structured like fileuploads)
+function submitChanges(btn) {
+    // Step 1: Find table
+    const table = document.getElementById('reportTable');
+    if (!table) {
+        console.error("❌ Table not found!");
+        $("#resultModalLabel").text("Error");
+        $("#resultModalBody").text("Table not found — please check your table ID.");
+        $("#resultModal").modal("show");
+        return;
+    }
+
+    // Step 2: Identify edited rows
+    const editedRows = table.querySelectorAll('tr.edited');
+    if (editedRows.length === 0) {
+        $("#resultModalLabel").text("Info");
+        $("#resultModalBody").text("No changes to submit!");
+        $("#resultModal").modal("show");
+        return;
+    }
+
+    // Step 3: Build updated data array
+    const updatedData = [];
+    editedRows.forEach(row => {
+        const custId = row.cells[1].innerText.trim();
+        const acctNo = row.cells[2].innerText.trim();
+        const newBalance = row.cells[4].querySelector('input').value.trim();
+
+        // Replace input with formatted number
+        row.cells[4].innerHTML = parseFloat(newBalance).toFixed(2);
+
+        updatedData.push({
+            custId: custId,
+            acctNumber: acctNo,
+            acctBalanceInpula: newBalance
+        });
+
+        row.classList.remove('edited');
+    });
+
+    console.log("✅ Updated Data:", updatedData);
+
+    // Step 4: Show loader
+    $('#loader').modal('show');
+
+const apiUrl = '/BRRS/saveUpdatedBalances'; // ✅ Corrected URL
+
+
+    // Step 6: Send AJAX request
+    $.ajax({
+        url: apiUrl,
+        type: 'POST',
+        data: JSON.stringify(updatedData),
+        processData: false,
+        contentType: 'application/json',
+        dataType: 'text',
+
+        success: function (response) {
+            $("#resultModalLabel").text("BRRS");
+            $("#resultModalBody").text("✅ " + response);
+            $("#resultModal").modal("show");
+        },
+        error: function (jqXHR) {
+            $("#resultModalLabel").text("Error");
+            $("#resultModalBody").text("❌ Update failed: " + jqXHR.responseText);
+            $("#resultModal").modal("show");
+            console.error("Save error:", jqXHR);
+        },
+        complete: function () {
+            $('#loader').modal('hide');
+        }
+    });
+}
+
 
 </script>
 
@@ -745,7 +832,7 @@ function showdetailsbyRowAndColumn(a) {
                      				 data-todate=${todate}, 
                      				 data-currency=${currency},  
                      				 data-dtltype=${dtltype}, 
-                     				 data-filename='M_FAS.xls',
+                     				 data-filename='M_FAS.xlsx',
 					 				 data-type=${type},
 					    			 data-version=${version}"
                 onclick="downloadfile(this);"
@@ -996,10 +1083,7 @@ function showdetailsbyRowAndColumn(a) {
                   class="table-responsive scrollable-table-container"
                   style="border-right: 1px solid #dee2e6"
                 >
-                  <table
-                    class="sticky-header-table table table-bordered table-hover table-sm table-condensed"
-                    id="reportss"
-                  >
+                 <table id="reportTable" class="table table-bordered">
                     <thead class="thead-light">
                       <tr>
                         <th></th>
@@ -1037,6 +1121,7 @@ function showdetailsbyRowAndColumn(a) {
 
 
                   </table>
+                  <button class="btn btn-primary" onclick="submitChanges()">Submit</button>
                   <div
                     style="margin-top: 20px; text-align: center"
                     th:if="${pagination=='YES'}"
