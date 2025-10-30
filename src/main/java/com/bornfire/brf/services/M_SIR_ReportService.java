@@ -584,14 +584,14 @@ try {
 						cell1.setCellStyle(textStyle);
 					}
 					// Column D
-					 cell1 = row.getCell(3);
-					if (record.getR13_risk_6m() != null) {
-						cell1.setCellValue(record.getR13_risk_6m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}
+//					 cell1 = row.getCell(3);
+//					if (record.getR13_risk_6m() != null) {
+//						cell1.setCellValue(record.getR13_risk_6m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}
 					
 					// Column E 
 					 cell1 = row.getCell(4);
@@ -612,16 +612,14 @@ try {
 						cell1.setCellValue("");
 						cell1.setCellStyle(textStyle);
 					}	
-				
-					// Column G 
-					 cell1 = row.getCell(6);
-					if (record.getR13_risk_6to24m() != null) {
-						cell1.setCellValue(record.getR13_risk_6to24m().doubleValue());
-					
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}					
+//					 cell1 = row.getCell(6);
+//					if (record.getR13_risk_6to24m() != null) {
+//						cell1.setCellValue(record.getR13_risk_6to24m().doubleValue());
+//					
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}					
 				
 					// Column H
 					 cell1 = row.getCell(7);
@@ -643,15 +641,15 @@ try {
 						cell1.setCellStyle(textStyle);
 					}					
 				
-					// Column J 
-					 cell1 = row.getCell(9);
-					if (record.getR13_risk_gt24m() != null) {
-						cell1.setCellValue(record.getR13_risk_gt24m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}												
+																	
+//					 cell1 = row.getCell(9);
+//					if (record.getR13_risk_gt24m() != null) {
+//						cell1.setCellValue(record.getR13_risk_gt24m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}												
 				
 					// Column K
 					 cell1 = row.getCell(10);
@@ -685,14 +683,14 @@ try {
 						cell1.setCellStyle(textStyle);
 					}
 					// Column D
-					 cell1 = row.getCell(3);
-					if (record.getR14_risk_6m() != null) {
-						cell1.setCellValue(record.getR14_risk_6m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}
+//					 cell1 = row.getCell(3);
+//					if (record.getR14_risk_6m() != null) {
+//						cell1.setCellValue(record.getR14_risk_6m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}
 					
 					// Column E 
 					 cell1 = row.getCell(4);
@@ -715,14 +713,14 @@ try {
 					}	
 				
 					// Column G 
-					 cell1 = row.getCell(6);
-					if (record.getR14_risk_6to24m() != null) {
-						cell1.setCellValue(record.getR14_risk_6to24m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}					
+//					 cell1 = row.getCell(6);
+//					if (record.getR14_risk_6to24m() != null) {
+//						cell1.setCellValue(record.getR14_risk_6to24m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}					
 					
 					// Column H
 					 cell1 = row.getCell(7);
@@ -745,14 +743,14 @@ try {
 					}					
 				
 					// Column J 
-					 cell1 = row.getCell(9);
-					if (record.getR14_risk_gt24m() != null) {
-						cell1.setCellValue(record.getR14_risk_gt24m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}											
+//					 cell1 = row.getCell(9);
+//					if (record.getR14_risk_gt24m() != null) {
+//						cell1.setCellValue(record.getR14_risk_gt24m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}											
 					
 					// Column K
 					 cell1 = row.getCell(10);
@@ -787,14 +785,14 @@ try {
 						cell1.setCellStyle(textStyle);
 					}
 					// Column D
-					 cell1 = row.getCell(3);
-					if (record.getR15_risk_6m() != null) {
-						cell1.setCellValue(record.getR15_risk_6m().doubleValue());
-					
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}
+//					 cell1 = row.getCell(3);
+//					if (record.getR15_risk_6m() != null) {
+//						cell1.setCellValue(record.getR15_risk_6m().doubleValue());
+//					
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}
 				
 					// Column E 
 					 cell1 = row.getCell(4);
@@ -817,14 +815,14 @@ try {
 					}	
 					
 					// Column G 
-					 cell1 = row.getCell(6);
-					if (record.getR15_risk_6to24m() != null) {
-						cell1.setCellValue(record.getR15_risk_6to24m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}					
+//					 cell1 = row.getCell(6);
+//					if (record.getR15_risk_6to24m() != null) {
+//						cell1.setCellValue(record.getR15_risk_6to24m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}					
 				
 					// Column H
 					 cell1 = row.getCell(7);
@@ -847,14 +845,14 @@ try {
 					}					
 				
 					// Column J 
-					 cell1 = row.getCell(9);
-					if (record.getR15_risk_gt24m() != null) {
-						cell1.setCellValue(record.getR15_risk_gt24m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}											
+//					 cell1 = row.getCell(9);
+//					if (record.getR15_risk_gt24m() != null) {
+//						cell1.setCellValue(record.getR15_risk_gt24m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}											
 					
 					// Column K
 					 cell1 = row.getCell(10);
@@ -889,14 +887,14 @@ try {
 						cell1.setCellStyle(textStyle);
 					}
 					// Column D
-					 cell1 = row.getCell(3);
-					if (record.getR16_risk_6m() != null) {
-						cell1.setCellValue(record.getR16_risk_6m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}
+//					 cell1 = row.getCell(3);
+//					if (record.getR16_risk_6m() != null) {
+//						cell1.setCellValue(record.getR16_risk_6m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}
 				
 					// Column E 
 					 cell1 = row.getCell(4);
@@ -919,14 +917,14 @@ try {
 					}	
 					
 					// Column G 
-					 cell1 = row.getCell(6);
-					if (record.getR16_risk_6to24m() != null) {
-						cell1.setCellValue(record.getR16_risk_6to24m().doubleValue());
-						
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}					
+//					 cell1 = row.getCell(6);
+//					if (record.getR16_risk_6to24m() != null) {
+//						cell1.setCellValue(record.getR16_risk_6to24m().doubleValue());
+//						
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}					
 				
 					// Column H
 					 cell1 = row.getCell(7);
@@ -948,13 +946,13 @@ try {
 					}					
 				
 					// Column J 
-					 cell1 = row.getCell(9);
-					if (record.getR16_risk_gt24m() != null) {
-						cell1.setCellValue(record.getR16_risk_gt24m().doubleValue());
-					} else {
-						cell1.setCellValue("");
-						cell1.setCellStyle(textStyle);
-					}											
+//					 cell1 = row.getCell(9);
+//					if (record.getR16_risk_gt24m() != null) {
+//						cell1.setCellValue(record.getR16_risk_gt24m().doubleValue());
+//					} else {
+//						cell1.setCellValue("");
+//						cell1.setCellStyle(textStyle);
+//					}											
 					
 					// Column K
 					 cell1 = row.getCell(10);
@@ -987,13 +985,13 @@ if (record.getR17_amt_6m() != null) {
 	cell1.setCellStyle(textStyle);
 }
 // Column D
- cell1 = row.getCell(3);
-if (record.getR17_risk_6m() != null) {
-	cell1.setCellValue(record.getR17_risk_6m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}
+// cell1 = row.getCell(3);
+//if (record.getR17_risk_6m() != null) {
+//	cell1.setCellValue(record.getR17_risk_6m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}
 
 // Column E 
  cell1 = row.getCell(4);
@@ -1014,13 +1012,13 @@ if (record.getR17_amt_6to24m() != null) {
 }	
 
 // Column G 
- cell1 = row.getCell(6);
-if (record.getR17_risk_6to24m() != null) {
-	cell1.setCellValue(record.getR17_risk_6to24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}					
+// cell1 = row.getCell(6);
+//if (record.getR17_risk_6to24m() != null) {
+//	cell1.setCellValue(record.getR17_risk_6to24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}					
 
 // Column H
  cell1 = row.getCell(7);
@@ -1040,14 +1038,14 @@ if (record.getR17_amt_gt24m() != null) {
 	cell1.setCellStyle(textStyle);
 }					
 
-// Column J 
- cell1 = row.getCell(9);
-if (record.getR17_risk_gt24m() != null) {
-	cell1.setCellValue(record.getR17_risk_gt24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}											
+//Column J 
+// cell1 = row.getCell(9);
+//if (record.getR17_risk_gt24m() != null) {
+//	cell1.setCellValue(record.getR17_risk_gt24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}											
 
 // Column K
  cell1 = row.getCell(10);
@@ -1143,13 +1141,13 @@ if (record.getR19_amt_6m() != null) {
 	cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR19_risk_6m() != null) {
-	cell1.setCellValue(record.getR19_risk_6m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR19_risk_6m() != null) {
+//	cell1.setCellValue(record.getR19_risk_6m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1171,13 +1169,13 @@ if (record.getR19_amt_6to24m() != null) {
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR17_risk_6to24m() != null) {
-	cell1.setCellValue(record.getR17_risk_6to24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR19_risk_6to24m() != null) {
+//	cell1.setCellValue(record.getR19_risk_6to24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1198,13 +1196,13 @@ if (record.getR19_amt_gt24m() != null) {
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR19_risk_gt24m() != null) {
-	cell1.setCellValue(record.getR19_risk_gt24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR19_risk_gt24m() != null) {
+//	cell1.setCellValue(record.getR19_risk_gt24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1235,13 +1233,13 @@ if (record.getR20_amt_6m() != null) {
 	cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR20_risk_6m() != null) {
-	cell1.setCellValue(record.getR20_risk_6m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR20_risk_6m() != null) {
+//	cell1.setCellValue(record.getR20_risk_6m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1262,13 +1260,13 @@ if (record.getR20_amt_6to24m() != null) {
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR20_risk_6to24m() != null) {
-	cell1.setCellValue(record.getR20_risk_6to24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR20_risk_6to24m() != null) {
+//	cell1.setCellValue(record.getR20_risk_6to24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1289,13 +1287,13 @@ if (record.getR20_amt_gt24m() != null) {
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR20_risk_gt24m() != null) {
-	cell1.setCellValue(record.getR20_risk_gt24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR20_risk_gt24m() != null) {
+//	cell1.setCellValue(record.getR20_risk_gt24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1326,13 +1324,13 @@ if (record.getR21_amt_6m() != null) {
 	cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR21_risk_6m() != null) {
-	cell1.setCellValue(record.getR21_risk_6m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR21_risk_6m() != null) {
+//	cell1.setCellValue(record.getR21_risk_6m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1353,13 +1351,13 @@ if (record.getR21_amt_6to24m() != null) {
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR21_risk_6to24m() != null) {
-	cell1.setCellValue(record.getR21_risk_6to24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR21_risk_6to24m() != null) {
+//	cell1.setCellValue(record.getR21_risk_6to24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1380,13 +1378,13 @@ if (record.getR21_amt_gt24m() != null) {
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR21_risk_gt24m() != null) {
-	cell1.setCellValue(record.getR21_risk_gt24m().doubleValue());
-} else {
-	cell1.setCellValue("");
-	cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR21_risk_gt24m() != null) {
+//	cell1.setCellValue(record.getR21_risk_gt24m().doubleValue());
+//} else {
+//	cell1.setCellValue("");
+//	cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1420,12 +1418,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR22_risk_6m() != null) {
-cell1.setCellValue(record.getR22_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR22_risk_6m() != null) {
+//cell1.setCellValue(record.getR22_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1444,12 +1442,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR22_risk_6to24m() != null) {
-cell1.setCellValue(record.getR22_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR22_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR22_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1468,12 +1466,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR22_risk_gt24m() != null) {
-cell1.setCellValue(record.getR22_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR22_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR22_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1505,12 +1503,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR23_risk_6m() != null) {
-cell1.setCellValue(record.getR23_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR23_risk_6m() != null) {
+//cell1.setCellValue(record.getR23_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1529,12 +1527,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR23_risk_6to24m() != null) {
-cell1.setCellValue(record.getR23_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR23_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR23_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1553,12 +1551,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR23_risk_gt24m() != null) {
-cell1.setCellValue(record.getR23_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR23_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR23_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1588,12 +1586,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR24_risk_6m() != null) {
-cell1.setCellValue(record.getR24_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR24_risk_6m() != null) {
+//cell1.setCellValue(record.getR24_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1612,12 +1610,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR24_risk_6to24m() != null) {
-cell1.setCellValue(record.getR24_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR24_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR24_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1636,12 +1634,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR24_risk_gt24m() != null) {
-cell1.setCellValue(record.getR24_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR24_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR24_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1673,12 +1671,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR25_risk_6m() != null) {
-cell1.setCellValue(record.getR25_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR25_risk_6m() != null) {
+//cell1.setCellValue(record.getR25_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1697,12 +1695,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR25_risk_6to24m() != null) {
-cell1.setCellValue(record.getR25_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR25_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR25_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1721,12 +1719,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR25_risk_gt24m() != null) {
-cell1.setCellValue(record.getR25_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR25_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR25_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1761,12 +1759,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR26_risk_6m() != null) {
-cell1.setCellValue(record.getR26_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR26_risk_6m() != null) {
+//cell1.setCellValue(record.getR26_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1785,12 +1783,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR26_risk_6to24m() != null) {
-cell1.setCellValue(record.getR26_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR26_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR26_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1809,12 +1807,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR26_risk_gt24m() != null) {
-cell1.setCellValue(record.getR26_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR26_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR26_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1910,12 +1908,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR28_risk_6m() != null) {
-cell1.setCellValue(record.getR28_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR28_risk_6m() != null) {
+//cell1.setCellValue(record.getR28_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -1934,12 +1932,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR28_risk_6to24m() != null) {
-cell1.setCellValue(record.getR28_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR28_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR28_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -1958,12 +1956,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR28_risk_gt24m() != null) {
-cell1.setCellValue(record.getR28_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR28_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR28_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -1996,12 +1994,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR29_risk_6m() != null) {
-cell1.setCellValue(record.getR29_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR29_risk_6m() != null) {
+//cell1.setCellValue(record.getR29_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -2020,12 +2018,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR29_risk_6to24m() != null) {
-cell1.setCellValue(record.getR29_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR29_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR29_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -2044,12 +2042,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR29_risk_gt24m() != null) {
-cell1.setCellValue(record.getR29_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR29_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR29_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -2084,12 +2082,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR30_risk_6m() != null) {
-cell1.setCellValue(record.getR30_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR30_risk_6m() != null) {
+//cell1.setCellValue(record.getR30_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -2108,12 +2106,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR30_risk_6to24m() != null) {
-cell1.setCellValue(record.getR30_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR30_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR30_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -2132,12 +2130,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR30_risk_gt24m() != null) {
-cell1.setCellValue(record.getR30_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR30_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR30_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -2174,12 +2172,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR31_risk_6m() != null) {
-cell1.setCellValue(record.getR31_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR31_risk_6m() != null) {
+//cell1.setCellValue(record.getR31_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -2198,12 +2196,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR31_risk_6to24m() != null) {
-cell1.setCellValue(record.getR31_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR31_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR31_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -2222,12 +2220,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR31_risk_gt24m() != null) {
-cell1.setCellValue(record.getR31_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR31_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR31_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
@@ -2263,12 +2261,12 @@ cell1.setCellValue("");
 cell1.setCellStyle(textStyle);
 }
 //Column D
-cell1 = row.getCell(3);
-if (record.getR32_risk_6m() != null) {
-cell1.setCellValue(record.getR32_risk_6m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}
+//cell1 = row.getCell(3);
+//if (record.getR32_risk_6m() != null) {
+//cell1.setCellValue(record.getR32_risk_6m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}
 
 //Column E 
 cell1 = row.getCell(4);
@@ -2287,12 +2285,12 @@ cell1.setCellStyle(textStyle);
 }	
 
 //Column G 
-cell1 = row.getCell(6);
-if (record.getR32_risk_6to24m() != null) {
-cell1.setCellValue(record.getR32_risk_6to24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}					
+//cell1 = row.getCell(6);
+//if (record.getR32_risk_6to24m() != null) {
+//cell1.setCellValue(record.getR32_risk_6to24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}					
 
 //Column H
 cell1 = row.getCell(7);
@@ -2311,12 +2309,12 @@ cell1.setCellStyle(textStyle);
 }					
 
 //Column J 
-cell1 = row.getCell(9);
-if (record.getR32_risk_gt24m() != null) {
-cell1.setCellValue(record.getR32_risk_gt24m().doubleValue());} else {
-cell1.setCellValue("");
-cell1.setCellStyle(textStyle);
-}											
+//cell1 = row.getCell(9);
+//if (record.getR32_risk_gt24m() != null) {
+//cell1.setCellValue(record.getR32_risk_gt24m().doubleValue());} else {
+//cell1.setCellValue("");
+//cell1.setCellStyle(textStyle);
+//}											
 
 //Column K
 cell1 = row.getCell(10);
