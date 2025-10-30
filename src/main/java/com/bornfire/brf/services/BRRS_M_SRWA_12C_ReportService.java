@@ -43,6 +43,7 @@ import com.bornfire.brf.entities.BRRS_M_SRWA_12C_Archival_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12C_Detail_Repo;
 import com.bornfire.brf.entities.BRRS_M_SRWA_12C_Summary_Repo;
 import com.bornfire.brf.entities.M_SCI_E_Archival_Summary_Entity;
+import com.bornfire.brf.entities.M_SCI_E_Summary_Entity;
 import com.bornfire.brf.entities.M_SRWA_12C_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_SRWA_12C_Detail_Entity;
 import com.bornfire.brf.entities.M_SRWA_12C_Summary_Entity;
@@ -77,68 +78,65 @@ private static final Logger logger = LoggerFactory.getLogger(BRRS_M_SRWA_12C_Rep
 	SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy");
 	
 		
-		public ModelAndView getBRRS_M_SRWA_12CView(String reportId, String fromdate, String todate, String currency,
-				String dtltype, Pageable pageable,String type, String version) {
+	public ModelAndView getBRRS_M_SRWA_12CView(String reportId, String fromdate, String todate, String currency,
+			String dtltype, Pageable pageable,String type, String version) {
 
-			ModelAndView mv = new ModelAndView();
-			Session hs = sessionFactory.getCurrentSession();
-			int pageSize = pageable.getPageSize();
-			int currentPage = pageable.getPageNumber();
-			int startItem = currentPage * pageSize;
-			
-			
-			System.out.println("testing");
+		ModelAndView mv = new ModelAndView();
+		Session hs = sessionFactory.getCurrentSession();
+		int pageSize = pageable.getPageSize();
+		int currentPage = pageable.getPageNumber();
+		int startItem = currentPage * pageSize;
+
+		
+		System.out.println("testing");
+		System.out.println(version);
+		
+		
+		if (type.equals("ARCHIVAL") & version != null) {
+			System.out.println(type);
+			List<M_SRWA_12C_Archival_Summary_Entity> T1Master = new ArrayList<M_SRWA_12C_Archival_Summary_Entity>();
 			System.out.println(version);
-			
-			if (type.equals("ARCHIVAL") & version != null) {
-				System.out.println(type);
-				List<M_SRWA_12C_Archival_Summary_Entity> T1Master = new ArrayList<M_SRWA_12C_Archival_Summary_Entity>();
-				System.out.println(version);
-				try {
-					Date d1 = dateformat.parse(todate);
+			try {
+				Date d1 = dateformat.parse(todate);
 
-					// T1Master = hs.createQuery("from BRF1_REPORT_ENTITY a where a.report_date = ?1
-					// ", BRF1_REPORT_ENTITY.class)
-					// .setParameter(1, df.parse(todate)).getResultList();
+				// T1Master = hs.createQuery("from BRF1_REPORT_ENTITY a where a.report_date = ?1
+				// ", BRF1_REPORT_ENTITY.class)
+				// .setParameter(1, df.parse(todate)).getResultList();
 
-					T1Master = brrs_m_srwa_12c_archival_summary_repo.getdatabydateListarchival(dateformat.parse(todate), version);
+				T1Master = brrs_m_srwa_12c_archival_summary_repo.getdatabydateListarchival(dateformat.parse(todate), version);
 
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 
-				mv.addObject("reportsummary", T1Master);
-			} 
-			else
-			{
+			mv.addObject("reportsummary", T1Master);
+		} else {
+
 		List<M_SRWA_12C_Summary_Entity> T1Master = new ArrayList<M_SRWA_12C_Summary_Entity>();
-		System.out.println("after the list");
 		try {
 			Date d1 = dateformat.parse(todate);
 			// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
 
-			//T1Master = hs.createQuery("from  BRF1_REPORT_ENTITY a where a.report_date = ?1 ", BRF1_REPORT_ENTITY.class)
-				//	.setParameter(1, df.parse(todate)).getResultList();
+			// T1Master = hs.createQuery("from BRF1_REPORT_ENTITY a where a.report_date = ?1
+			// ", BRF1_REPORT_ENTITY.class)
+			// .setParameter(1, df.parse(todate)).getResultList();
 			T1Master = BRRS_M_SRWA_12C_Summary_Repo.getdatabydateList(dateformat.parse(todate));
 			mv.addObject("report_date", dateformat.format(d1));
-// 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-// Date reportDate = sdf.parse(todate); 
-// T1Master = BRRS_M_SRWA_12C_Summary_Repo.getdatabydateList(reportDate);
-		System.out.println("size of the t1master is:"+ T1Master.size());
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		mv.addObject("reportsummary", T1Master);
-			}
+		}
 		// T1rep = t1CurProdServiceRepo.getT1CurProdServices(d1);
 
 		mv.setViewName("BRRS/M_SRWA_12C");
+
 		
-		
-		//mv.addObject("reportmaster", T1Master);
+		// mv.addObject("reportmaster", T1Master);
 		mv.addObject("displaymode", "summary");
-		//mv.addObject("reportsflag", "reportsflag");
-		//mv.addObject("menu", reportId);
+		// mv.addObject("reportsflag", "reportsflag");
+		// mv.addObject("menu", reportId);
 		System.out.println("scv" + mv.getViewName());
 
 		return mv;
@@ -790,7 +788,7 @@ public byte[] getBRRS_M_SRWA_12CExcel(String filename, String reportId, String f
 			numberStyle.setFont(font);
 // --- End of Style Definitions ---
 
-			int startRow = 10;
+			int startRow = 11;
 
 			if (!dataList.isEmpty()) {
 				for (int i = 0; i < dataList.size(); i++) {
@@ -1193,7 +1191,21 @@ public byte[] getBRRS_M_SRWA_12CExcel(String filename, String reportId, String f
 	}
 
 	
-	
+	public List<Object> getM_SRWA_12CArchival() {
+		List<Object> M_SRWA_12CArchivallist = new ArrayList<>();
+		try {
+			M_SRWA_12CArchivallist = brrs_m_srwa_12c_archival_summary_repo.getM_SRWA_12Carchival();
+			System.out.println("countser" + M_SRWA_12CArchivallist.size());
+		} catch (Exception e) {
+			// Log the exception
+			System.err.println("Error fetching  M_SRWA_12C Archival data: " + e.getMessage());
+			e.printStackTrace();
+
+			// Optionally, you can rethrow it or return empty list
+			// throw new RuntimeException("Failed to fetch data", e);
+		}
+		return  M_SRWA_12CArchivallist;
+	}	
 
 	
 	

@@ -299,11 +299,27 @@ public class RegulatoryReportServices {
 			repsummary = BRRS_M_MRC_reportservice.getM_MRCView(reportId, fromdate, todate, currency, dtltype, pageable);
 			break;
 
-		case "M_SRWA_12C":
-			repsummary = BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CView(reportId, fromdate, todate, currency, dtltype,
-						pageable, type, version);
-			break;
+		/*
+		 * case "M_SRWA_12C": repsummary =
+		 * BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CView(reportId, fromdate,
+		 * todate, currency, dtltype, pageable, type, version); break;
+		 */
 
+			
+		case "M_SRWA_12C":
+		    repsummary = BRRS_M_SRWA_12C_reportservice.getBRRS_M_SRWA_12CView(
+		        reportId,
+		        fromdate,
+		        todate,
+		        currency,
+		        dtltype,
+		        pageable,
+		        type,
+		        version
+		    );
+		    break;
+		    
+		    
 		case "M_CA1":
 			repsummary = BRRS_M_CA1_reportservice.getBRRS_M_CA1View(reportId, fromdate, todate, currency, dtltype,
 					pageable);
@@ -1838,6 +1854,15 @@ public class RegulatoryReportServices {
 				case "Q_RLFA2":
 					try {
 						archivalData = brrs_q_rlfa2_reportservice.getQ_RLFA2Archival();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+					
+				case "M_SRWA_12C":
+					try {
+						archivalData = BRRS_M_SRWA_12C_reportservice.getM_SRWA_12CArchival();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

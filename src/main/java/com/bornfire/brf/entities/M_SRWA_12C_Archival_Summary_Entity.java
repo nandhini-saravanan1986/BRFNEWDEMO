@@ -15,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "BRRS_M_SRWA_12C_SUMMARYTABLE")
+@Table(name = "BRRS_M_SRWA_12C_ARCHIVALTABLE_SUMMARY")
 public class M_SRWA_12C_Archival_Summary_Entity{
     // R11
     @Column(name = "R11_NUMBER_OF_WORKING_DAYS_AFTER_THE_AGREED_SETTLEMENT_DATE", length = 100)
