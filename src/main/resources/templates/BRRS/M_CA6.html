@@ -494,7 +494,28 @@ function parseNumber(val) {
     if (!val) return 0;
     return parseFloat(val.toString().replace(/,/g, "")) || 0;
 }
+function calculationtable1() {
+    for (let i = 12; i <= 16; i++) {
+        // read user-entered values
+        let capAmt = parseNumber($("#R" + i + "_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val());
+        let eligibleAmt = parseNumber($("#R" + i + "_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val());
 
+        // ✅ store the same value back to ensure it’s captured (like your sample)
+        $("#R" + i + "_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val(formatNumber(capAmt));
+        $("#R" + i + "_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val(formatNumber(eligibleAmt));
+    }
+}
+function calculationtable2() {
+    for (let i = 20; i <= 24; i++) {
+        // read user-entered values
+        let capAmt = parseNumber($("#R" + i + "_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val());
+        let eligibleAmt = parseNumber($("#R" + i + "_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val());
+
+        // ✅ store the same value back to ensure it’s captured (like your sample)
+        $("#R" + i + "_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val(formatNumber(capAmt));
+        $("#R" + i + "_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT").val(formatNumber(eligibleAmt));
+    }
+}
 // ==============================
 // ✅ CALCULATE TIER 1 (R28–R34)
 // ==============================
@@ -525,6 +546,8 @@ function calculateTier2Total() {
 // ✅ CALCULATE ALL
 // ==============================
 function calculateAllTotals() {
+	calculationtable1();
+	calculationtable2()
     calculateTier1Total();
     calculateTier2Total();
 }
@@ -536,6 +559,20 @@ $(document).ready(function() {
     // Initial calculation
     calculateAllTotals();
 
+	for (let i = 12; i <= 16; i++) {
+	      $("#R" + i + "_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT, #R" + i + "_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT")
+	      .on("input", calculationtable1)
+	      .on("blur", function() {
+	          $(this).val(formatNumber(parseNumber($(this).val())));
+	      });
+	  }
+	  for (let i = 20; i <= 24; i++) {
+	  	      $("#R" + i + "_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT, #R" + i + "_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT")
+	  	      .on("input", calculationtable2)
+	  	      .on("blur", function() {
+	  	          $(this).val(formatNumber(parseNumber($(this).val())));
+	  	      });
+	  	  }
     // Recalculate dynamically on input change (Tier 1)
     for (let i = 28; i <= 34; i++) {
         $("#R" + i + "_AMOUNT").on("input", calculateTier1Total)
@@ -956,8 +993,8 @@ function showdetailsbyRowAndColumn(a) {
 										    <input class="display-input show_input"
 										           type="text"
 										           th:value="${#numbers.formatDecimal(report.R13_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT, 1, 'COMMA', 0, 'POINT')}"
-										           id="R12_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT"
-										           name="R12_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT"
+										           id="R13_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT"
+										           name="R13_CAP_ON_AMT_ELIGIBLE_FOR_PHASEOUT_TREATMENT"
 										           style="background-color:#FFFFFF; width: 100%; height: 28px; 
 										                  border-color: transparent; text-align: right;"
 										           readonly />
