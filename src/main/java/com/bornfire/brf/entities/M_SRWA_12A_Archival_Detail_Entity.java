@@ -17,72 +17,86 @@ public class M_SRWA_12A_Archival_Detail_Entity {
 	
 	
 	@Id
-    @Column(name = "CUST_ID", length = 100)
-    private String custId;
+	 @Column(name = "CUST_ID")
+   private String custId;
 
-    @Column(name = "ACCT_NUMBER", length = 100)
-    private String acctNumber;
+   @Column(name = "ACCT_NUMBER")
+   private String acctNumber;
 
-    @Column(name = "ACCT_NAME", length = 100)
-    private String acctName;
+   @Column(name = "ACCT_NAME")
+   private String acctName;
+ 
 
-    @Column(name = "DATA_TYPE", length = 100)
-    private String dataType;
-    
-    @Column(name = "ROW_ID", length = 100)
-    private String rowId;
-    
-    @Column(name = "COLUMN_ID", length = 100)
-    private String columnId;
+   @Column(name = "DATA_TYPE")
+   private String dataType;
 
-    @Column(name = "REPORT_REMARKS", length = 100)
-    private String reportRemarks;
+   @Column(name = "REPORT_NAME")
+   private String reportName;
+   
+   @Column(name = "REPORT_LABEL")
+   private String reportLable;
+   
+   @Column(name = "REPORT_ADDL_CRITERIA_1")
+   private String reportAddlCriteria_1;
+   
+   @Column(name = "REPORT_ADDL_CRITERIA_2")
+   private String reportAddlCriteria_2;
 
-    @Column(name = "MODIFICATION_REMARKS", length = 100)
-    private String modificationRemarks;
+   @Column(name = "REPORT_ADDL_CRITERIA_3")
+   private String reportAddlCriteria_3;
+   
+   @Column(name = "REPORT_REMARKS")
+   private String reportRemarks;
+   
+   @Column(name = "SANCTION_LIMIT")
+   private String sanctionLimit;
 
-    @Column(name = "DATA_ENTRY_VERSION", length = 100)
-    private String dataEntryVersion;
+   @Column(name = "MODIFICATION_REMARKS")
+   private String modificationRemarks;
 
-    @Column(name = "ACCT_BALANCE_IN_PULA", precision = 24, scale = 3)
-    private BigDecimal acctBalanceInPula;
-    
-    @Column(name = "REPORT_DATE")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date reportDate;
+   @Column(name = "DATA_ENTRY_VERSION")
+   private String dataEntryVersion;
 
-    @Column(name = "REPORT_NAME", length = 100)
-    private String reportName;
+   @Column(name = "ACCT_BALANCE_IN_PULA", precision = 24, scale = 3)
+   private BigDecimal acctBalanceInpula;
 
-    @Column(name = "CREATE_USER", length = 50)
-    private String createUser;
 
-    @Column(name = "CREATE_TIME")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date createTime;
+   @Column(name = "REPORT_DATE")
+   @DateTimeFormat(pattern = "dd-MM-yyyy")
+   private Date reportDate;
 
-    @Column(name = "MODIFY_USER", length = 50)
-    private String modifyUser;
+ 
+   @Column(name = "CREATE_USER")
+   private String createUser;
 
-    @Column(name = "MODIFY_TIME")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date modifyTime;
+   @Column(name = "CREATE_TIME")
+   @DateTimeFormat(pattern = "dd-MM-yyyy")
+   private Date createTime;
 
-    @Column(name = "VERIFY_USER", length = 50)
-    private String verifyUser;
+   @Column(name = "MODIFY_USER")
+   private String modifyUser;
 
-    @Column(name = "VERIFY_TIME")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date verifyTime;
 
-    @Column(name = "ENTITY_FLG", length = 1)
-    private String entityFlg;
+   @Column(name = "MODIFY_TIME")
+   @DateTimeFormat(pattern = "dd-MM-yyyy")
+   private Date modifyTime;
 
-    @Column(name = "MODIFY_FLG", length = 1)
-    private String modifyFlg;
+   @Column(name = "VERIFY_USER")
+   private String verifyUser;
 
-    @Column(name = "DEL_FLG", length = 1)
-    private String delFlg;
+
+   @Column(name = "VERIFY_TIME")
+   @DateTimeFormat(pattern = "dd-MM-yyyy")
+   private Date verifyTime;
+
+   @Column(name = "ENTITY_FLG")
+   private char entityFlg;
+
+   @Column(name = "MODIFY_FLG")
+   private char modifyFlg;
+
+   @Column(name = "DEL_FLG")
+   private char delFlg;
 
 	public String getCustId() {
 		return custId;
@@ -116,20 +130,44 @@ public class M_SRWA_12A_Archival_Detail_Entity {
 		this.dataType = dataType;
 	}
 
-	public String getRowId() {
-		return rowId;
+	public String getReportName() {
+		return reportName;
 	}
 
-	public void setRowId(String rowId) {
-		this.rowId = rowId;
+	public void setReportName(String reportName) {
+		this.reportName = reportName;
 	}
 
-	public String getColumnId() {
-		return columnId;
+	public String getReportLable() {
+		return reportLable;
 	}
 
-	public void setColumnId(String columnId) {
-		this.columnId = columnId;
+	public void setReportLable(String reportLable) {
+		this.reportLable = reportLable;
+	}
+
+	public String getReportAddlCriteria_1() {
+		return reportAddlCriteria_1;
+	}
+
+	public void setReportAddlCriteria_1(String reportAddlCriteria_1) {
+		this.reportAddlCriteria_1 = reportAddlCriteria_1;
+	}
+
+	public String getReportAddlCriteria_2() {
+		return reportAddlCriteria_2;
+	}
+
+	public void setReportAddlCriteria_2(String reportAddlCriteria_2) {
+		this.reportAddlCriteria_2 = reportAddlCriteria_2;
+	}
+
+	public String getReportAddlCriteria_3() {
+		return reportAddlCriteria_3;
+	}
+
+	public void setReportAddlCriteria_3(String reportAddlCriteria_3) {
+		this.reportAddlCriteria_3 = reportAddlCriteria_3;
 	}
 
 	public String getReportRemarks() {
@@ -138,6 +176,14 @@ public class M_SRWA_12A_Archival_Detail_Entity {
 
 	public void setReportRemarks(String reportRemarks) {
 		this.reportRemarks = reportRemarks;
+	}
+
+	public String getSanctionLimit() {
+		return sanctionLimit;
+	}
+
+	public void setSanctionLimit(String sanctionLimit) {
+		this.sanctionLimit = sanctionLimit;
 	}
 
 	public String getModificationRemarks() {
@@ -156,12 +202,12 @@ public class M_SRWA_12A_Archival_Detail_Entity {
 		this.dataEntryVersion = dataEntryVersion;
 	}
 
-	public BigDecimal getAcctBalanceInPula() {
-		return acctBalanceInPula;
+	public BigDecimal getAcctBalanceInpula() {
+		return acctBalanceInpula;
 	}
 
-	public void setAcctBalanceInPula(BigDecimal acctBalanceInPula) {
-		this.acctBalanceInPula = acctBalanceInPula;
+	public void setAcctBalanceInpula(BigDecimal acctBalanceInpula) {
+		this.acctBalanceInpula = acctBalanceInpula;
 	}
 
 	public Date getReportDate() {
@@ -170,14 +216,6 @@ public class M_SRWA_12A_Archival_Detail_Entity {
 
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
-	}
-
-	public String getReportName() {
-		return reportName;
-	}
-
-	public void setReportName(String reportName) {
-		this.reportName = reportName;
 	}
 
 	public String getCreateUser() {
@@ -228,27 +266,27 @@ public class M_SRWA_12A_Archival_Detail_Entity {
 		this.verifyTime = verifyTime;
 	}
 
-	public String getEntityFlg() {
+	public char getEntityFlg() {
 		return entityFlg;
 	}
 
-	public void setEntityFlg(String entityFlg) {
+	public void setEntityFlg(char entityFlg) {
 		this.entityFlg = entityFlg;
 	}
 
-	public String getModifyFlg() {
+	public char getModifyFlg() {
 		return modifyFlg;
 	}
 
-	public void setModifyFlg(String modifyFlg) {
+	public void setModifyFlg(char modifyFlg) {
 		this.modifyFlg = modifyFlg;
 	}
 
-	public String getDelFlg() {
+	public char getDelFlg() {
 		return delFlg;
 	}
 
-	public void setDelFlg(String delFlg) {
+	public void setDelFlg(char delFlg) {
 		this.delFlg = delFlg;
 	}
 

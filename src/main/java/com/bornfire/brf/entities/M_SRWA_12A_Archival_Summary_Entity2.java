@@ -24,7 +24,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	
 	
 	private String	r60_exposure_class;
-	private BigDecimal	r60_expo_crm;
+//	private BigDecimal	r60_expo_crm;
 	private BigDecimal	r60_spe_pro_expo;
 	private BigDecimal	r60_amt_elig_sht_net;
 	private BigDecimal	r60_tot_expo_net_spe;
@@ -108,7 +108,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	private BigDecimal	r62_rwa_tot_ris_wei_ass;
 	
 	private String	r63_exposure_class;
-	private BigDecimal	r63_expo_crm;
+//	private BigDecimal	r63_expo_crm;
 	private BigDecimal	r63_spe_pro_expo;
 	private BigDecimal	r63_amt_elig_sht_net;
 	private BigDecimal	r63_tot_expo_net_spe;
@@ -668,7 +668,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	private BigDecimal	r86_rwa_tot_ris_wei_ass;
 	
 	private String	r87_exposure_class;
-	private BigDecimal	r87_expo_crm;
+//	private BigDecimal	r87_expo_crm;
 	private BigDecimal	r87_spe_pro_expo;
 	private BigDecimal	r87_amt_elig_sht_net;
 	private BigDecimal	r87_tot_expo_net_spe;
@@ -808,7 +808,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	private BigDecimal	r91_rwa_tot_ris_wei_ass;
 	
 	private String	r92_exposure_class;
-	private BigDecimal	r92_expo_crm;
+//	private BigDecimal	r92_expo_crm;
 	private BigDecimal	r92_spe_pro_expo;
 	private BigDecimal	r92_amt_elig_sht_net;
 	private BigDecimal	r92_tot_expo_net_spe;
@@ -864,7 +864,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	private BigDecimal	r93_rwa_tot_ris_wei_ass;
 	
 	private String	r96_exposure_class;
-	private BigDecimal	r96_expo_crm;
+//	private BigDecimal	r96_expo_crm;
 	private BigDecimal	r96_spe_pro_expo;
 	private BigDecimal	r96_amt_elig_sht_net;
 	private BigDecimal	r96_tot_expo_net_spe;
@@ -994,12 +994,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	public void setR60_exposure_class(String r60_exposure_class) {
 		this.r60_exposure_class = r60_exposure_class;
 	}
-	public BigDecimal getR60_expo_crm() {
-		return r60_expo_crm;
-	}
-	public void setR60_expo_crm(BigDecimal r60_expo_crm) {
-		this.r60_expo_crm = r60_expo_crm;
-	}
+	
 	public BigDecimal getR60_spe_pro_expo() {
 		return r60_spe_pro_expo;
 	}
@@ -1480,12 +1475,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	public void setR63_exposure_class(String r63_exposure_class) {
 		this.r63_exposure_class = r63_exposure_class;
 	}
-	public BigDecimal getR63_expo_crm() {
-		return r63_expo_crm;
-	}
-	public void setR63_expo_crm(BigDecimal r63_expo_crm) {
-		this.r63_expo_crm = r63_expo_crm;
-	}
+	
 	public BigDecimal getR63_spe_pro_expo() {
 		return r63_spe_pro_expo;
 	}
@@ -4720,12 +4710,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	public void setR87_exposure_class(String r87_exposure_class) {
 		this.r87_exposure_class = r87_exposure_class;
 	}
-	public BigDecimal getR87_expo_crm() {
-		return r87_expo_crm;
-	}
-	public void setR87_expo_crm(BigDecimal r87_expo_crm) {
-		this.r87_expo_crm = r87_expo_crm;
-	}
+	
 	public BigDecimal getR87_spe_pro_expo() {
 		return r87_spe_pro_expo;
 	}
@@ -5530,12 +5515,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	public void setR92_exposure_class(String r92_exposure_class) {
 		this.r92_exposure_class = r92_exposure_class;
 	}
-	public BigDecimal getR92_expo_crm() {
-		return r92_expo_crm;
-	}
-	public void setR92_expo_crm(BigDecimal r92_expo_crm) {
-		this.r92_expo_crm = r92_expo_crm;
-	}
+	
 	public BigDecimal getR92_spe_pro_expo() {
 		return r92_spe_pro_expo;
 	}
@@ -5854,12 +5834,7 @@ public class M_SRWA_12A_Archival_Summary_Entity2 {
 	public void setR96_exposure_class(String r96_exposure_class) {
 		this.r96_exposure_class = r96_exposure_class;
 	}
-	public BigDecimal getR96_expo_crm() {
-		return r96_expo_crm;
-	}
-	public void setR96_expo_crm(BigDecimal r96_expo_crm) {
-		this.r96_expo_crm = r96_expo_crm;
-	}
+	
 	public BigDecimal getR96_spe_pro_expo() {
 		return r96_spe_pro_expo;
 	}

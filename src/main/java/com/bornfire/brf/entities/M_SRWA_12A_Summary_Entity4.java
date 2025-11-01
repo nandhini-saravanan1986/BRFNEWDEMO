@@ -401,7 +401,7 @@ public class M_SRWA_12A_Summary_Entity4 {
 	private BigDecimal	r157_rwa_tot_ris_wei_ass;
 	
 	private String	r158_exposure_class_off_bal;
-	private BigDecimal	r158_nom_pri_amt;
+//	private BigDecimal	r158_nom_pri_amt;
 	private BigDecimal	r158_ccf;
 	private BigDecimal	r158_cea;
 	private BigDecimal	r158_cea_elig_coun_bilt_net;
@@ -3216,12 +3216,7 @@ public class M_SRWA_12A_Summary_Entity4 {
 	public void setR158_exposure_class_off_bal(String r158_exposure_class_off_bal) {
 		this.r158_exposure_class_off_bal = r158_exposure_class_off_bal;
 	}
-	public BigDecimal getR158_nom_pri_amt() {
-		return r158_nom_pri_amt;
-	}
-	public void setR158_nom_pri_amt(BigDecimal r158_nom_pri_amt) {
-		this.r158_nom_pri_amt = r158_nom_pri_amt;
-	}
+	
 	public BigDecimal getR158_ccf() {
 		return r158_ccf;
 	}

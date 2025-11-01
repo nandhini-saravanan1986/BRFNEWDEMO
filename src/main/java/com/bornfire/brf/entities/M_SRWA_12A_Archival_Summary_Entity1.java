@@ -24,7 +24,7 @@ public class M_SRWA_12A_Archival_Summary_Entity1 {
 	
 	
 	private String	r19_exposure_class;
-	private BigDecimal	r19_expo_crm;
+//	private BigDecimal	r19_expo_crm;
 	private BigDecimal	r19_spe_pro_expo;
 	private BigDecimal	r19_amt_elig_sht_net;
 	private BigDecimal	r19_tot_expo_net_spe;
@@ -1026,12 +1026,7 @@ public class M_SRWA_12A_Archival_Summary_Entity1 {
 	public void setR19_exposure_class(String r19_exposure_class) {
 		this.r19_exposure_class = r19_exposure_class;
 	}
-	public BigDecimal getR19_expo_crm() {
-		return r19_expo_crm;
-	}
-	public void setR19_expo_crm(BigDecimal r19_expo_crm) {
-		this.r19_expo_crm = r19_expo_crm;
-	}
+	
 	public BigDecimal getR19_spe_pro_expo() {
 		return r19_spe_pro_expo;
 	}
