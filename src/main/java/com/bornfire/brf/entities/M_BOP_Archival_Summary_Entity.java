@@ -13,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "BRRS_M_BOP_ARCHIVALTABLE_SUMMARY")
-
 public class M_BOP_Archival_Summary_Entity {
 	
 	private String	r13_product;

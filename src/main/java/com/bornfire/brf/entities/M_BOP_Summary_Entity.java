@@ -1,7 +1,5 @@
 package com.bornfire.brf.entities;
 
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 

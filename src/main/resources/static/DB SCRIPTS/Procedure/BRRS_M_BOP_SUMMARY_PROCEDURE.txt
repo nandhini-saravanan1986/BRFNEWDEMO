@@ -16,8 +16,6 @@ V_R13_CP NUMBER(24,2) := 0;
 
 
 
-
-
 V_R14_PRODUCT VARCHAR2(100 BYTE)   := '1. To foreign Direct Investors';
 V_R14_OPEN_POSITION NUMBER(24,2) := 0;
 V_R14_CPDM_DT_INC NUMBER(24,2) := 0;

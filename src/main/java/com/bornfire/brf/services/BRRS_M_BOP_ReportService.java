@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-
-
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -192,8 +189,6 @@ public class BRRS_M_BOP_ReportService {
 
 			} else {
 				// 🔹 Current branch
-				
-				
 				List<M_BOP_Detail_Entity> T1Dt1;
 				if (rowId != null && columnId != null) {
 					T1Dt1 = M_BOP_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate);
