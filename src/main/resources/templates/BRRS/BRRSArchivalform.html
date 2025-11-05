@@ -389,7 +389,7 @@ function getVali(a) {
 									</tr>
 							</thead>
 <tbody style="font-family: Arial;">
-    <tr th:each="archival : ${Archivaldata}">
+    <!-- <tr th:each="archival : ${Archivaldata}">
         <td class="underline"
             th:attr="data-rptcode=${rptcode},
                      data-todate=${#dates.format(archival.reportDate, 'dd/MM/yyyy')},
@@ -400,9 +400,9 @@ function getVali(a) {
         </td>
         <td th:text="${archival.reportVersion}"></td>
         <td th:text="${domain}"></td>
-    </tr>
+    </tr> -->
 
-    <!-- <tr th:each="archival : ${Archivaldata}">
+    <tr th:each="archival : ${Archivaldata}">
     <td class="underline"
         th:attr="data-rptcode=${rptcode},
                  data-todate=${#dates.format(archival[0], 'dd/MM/yyyy')},
@@ -413,7 +413,7 @@ function getVali(a) {
     </td>
     <td th:text="${archival[1]}"></td> 
     <td th:text="${domain}"></td>
-</tr> -->
+</tr>
 <!-- 
     <tr th:each="archival : ${Archivaldata}">
         <td class="underline"
