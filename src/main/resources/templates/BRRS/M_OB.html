@@ -349,13 +349,13 @@ PURPOSE		: BWRBRREPORT
       	}
 
       	//to fetch summary from the database - called from the summary button
-      	function showdetails() {
+      	//function showdetails() {
 
-      				var Callurl;
-      				$('#loader').modal('show');
-      				Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype},type=${type},version=${version})}]]*/
-      					location.href = Callurl;
-      				console.log(Callurl);
+      		//		var Callurl;
+      			//	$('#loader').modal('show');
+      				//Callurl = /*[[@{'/Reports/'+${reportid}+'/Details'(asondate=${asondate},fromdate=${fromdate},todate=${todate},currency=${currency},dtltype=${dtltype},type=${type},version=${version})}]]*/
+      					//location.href = Callurl;
+      				//c/onsole.log(Callurl);
       				/*  $.ajax({
       					 type: 'get',
       					 url: Callurl,
@@ -376,8 +376,11 @@ PURPOSE		: BWRBRREPORT
 
       					 }
       				 }); */
-      			}
+      			//}
 
+      	function showdetails() {
+			 showResultModal('BRRS',' Details page not available for Manual Report');
+		}
       	function showsummary() {
       		$('#loader').modal('show');
       		var Callurl = /*[[@{'/Reports/' + ${reportid} (dtltype='report', fromdate=${fromdate}, todate=${todate}, type=${type}, asondate=${asondate})}]]*/;
@@ -386,257 +389,658 @@ PURPOSE		: BWRBRREPORT
       	}
     </script>
 
-    <script>
-      function activateTab(tabName) {
-        // Remove 'active' from all buttons
-        document.querySelectorAll(".custom-tab-btn").forEach((btn) => {
-          btn.classList.remove("active");
-        });
+<script>
+		function activateTab(tabName) {
+			// Remove 'active' from all buttons
+			document.querySelectorAll('.custom-tab-btn').forEach(btn => {
+				btn.classList.remove('active');
+			});
+			// Add 'active' to selected button
+			if (tabName === 'summary') {
+				document.getElementById('custom-tab-btnSummary').classList.add('active');
+			} else if (tabName === 'Details') {
+				document.getElementById('custom-tab-btnDetails').classList.add('active');
+			}
+		}
+		window.onload = function () {
+			/* setTimeout(function() {
+				var selectedTab = document.getElementById("selectedTab").value;
+				alert(selectedTab);
+				activateTab(selectedTab);
+			}, 10000); */ // 10,000 milliseconds = 10 seconds
 
-        // Add 'active' to selected button
-        if (tabName === "summary") {
-          document
-            .getElementById("custom-tab-btnSummary")
-            .classList.add("active");
-        } else if (tabName === "Details") {
-          document
-            .getElementById("custom-tab-btnDetails")
-            .classList.add("active");
+			var selectedTab = document.getElementById("selectedTab").value;
+			activateTab(selectedTab);
+		};
+		function downloadfile(button) {
+			var reportid = button.getAttribute('data-reportid');
+			var asondate = button.getAttribute('data-asondate');
+			var fromdate = button.getAttribute('data-fromdate');
+			var todate = button.getAttribute('data-todate');
+			var currency = button.getAttribute('data-currency');
+			var subreportid = button.getAttribute('data-subreportid');
+			var secid = button.getAttribute('data-secid');
+			var dtltype = button.getAttribute('data-dtltype');
+			var filename = button.getAttribute('data-filename');
+			var type = button.getAttribute('data-type');
+			var version = button.getAttribute('data-version');
+			$('#loader').modal('show');
+			$.ajax({
+				url: './downloadExcel?reportid=' + reportid +
+					'&fromdate=' + fromdate +
+					'&asondate=' + asondate +
+					'&todate=' + todate +
+					'&currency=' + currency +
+					'&subreportid=' + subreportid +
+					'&secid=' + secid +
+					'&filename=' + filename +
+					'&type=' + type +
+					'&version=' + version,
+				type: 'GET',
+				xhrFields: {
+					responseType: 'blob'
+				},
+				success: function (data) {
+					$('#loader').modal('hide');
+					if (data && data.size > 100) {
+						const blob = new Blob([data], {type: 'application/vnd.ms-excel'});
+						const url = window.URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.style.display = 'none';
+						a.href = url;
+						a.download = filename;
+						document.body.appendChild(a);
+						a.click();
+						window.URL.revokeObjectURL(url);
+						document.body.removeChild(a);
+						showResultModal('BRRS', 'M_OB downloaded successfully.');
+					} else {
+						showResultModal('Information', 'No data was available to create a download.');
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					$('#loader').modal('hide');
+					console.error("Download failed:", textStatus, errorThrown);
+					showResultModal('Error', 'An error occurred while downloading the file. Please try again.');
+				}
+			});
+		}
+		function editRecord() {
+			showResultModal('Alert', 'Development in progress');
+
+		}
+		function closemodel() {
+			$('#alert').modal('hide');
+			$('#resultModal').modal('hide');
+
+		}
+		function showResultModal(title, message) {
+			// Set the text for the modal elements
+			$('#resultModalLabel').text(title);
+			$('#resultModalBody').text(message);
+			// Show the modal
+			$('#resultModal').modal('show');
+		}
+	</script>
+	
+	<script>
+	// Show Modify (enable inputs & dropdowns)
+function showmodify(btn) {
+    
+    //$(".Show_input").removeAttr("readonly").removeAttr("disabled");
+    
+    // Make all editable fields editable 
+    $(".Show_input").not(".nonEditable").removeAttr("readonly").removeAttr("disabled");
+
+
+    // Highlight editable fields for rows 11 to 60
+    for (let i = 12; i <= 63; i++) {
+    if ([15, 29, 38, 41, 44, 49, 52, 58].includes(i)) continue;
+
+    let fields = ["OTHER_BORROW"];
+    fields.forEach(field => {
+        let selector = `#R${i}_${field}`;
+        if ($(selector).length) {
+            $(selector).css({ "background-color": "#d3d3d3" });
         }
-      }
+    });
+}
 
-      window.onload = function () {
-        /* setTimeout(function() {
-        var selectedTab = document.getElementById("selectedTab").value;
-        alert(selectedTab);
-        activateTab(selectedTab);
-    }, 10000); */ // 10,000 milliseconds = 10 seconds
 
-        var selectedTab = document.getElementById("selectedTab").value;
-        activateTab(selectedTab);
-      };
+    // Show buttons
+    $("#submitButton").show();
+    $("#cancelRecord").show(); // Show Cancel button only when Modify is clicked
+    
+    // Hide the clicked Modify button
+    $(btn).hide();
+}
 
-      function downloadfile(button) {
-        var reportid = button.getAttribute("data-reportid");
-        var asondate = button.getAttribute("data-asondate");
-        var fromdate = button.getAttribute("data-fromdate");
-        var todate = button.getAttribute("data-todate");
-        var currency = button.getAttribute("data-currency");
-        var subreportid = button.getAttribute("data-subreportid");
-        var secid = button.getAttribute("data-secid");
-        var dtltype = button.getAttribute("data-dtltype");
-        var filename = button.getAttribute("data-filename");
 
-        $("#loader").modal("show");
+//Cancel / Reset function
+function cancelModify() {
+    if (confirm("Are you sure you want to cancel changes? Page will reload.")) {
+        // ✅ Only when user clicks YES
+        location.reload();
+        
+        $(".Show_input").attr("readonly", true).attr("disabled", true);
 
-        $.ajax({
-          url:
-            "./downloadExcel?reportid=" +
-            reportid +
-            "&fromdate=" +
-            fromdate +
-            "&asondate=" +
-            asondate +
-            "&todate=" +
-            todate +
-            "&currency=" +
-            currency +
-            "&subreportid=" +
-            subreportid +
-            "&secid=" +
-            secid +
-            "&filename=" +
-            filename,
-          type: "GET",
-          xhrFields: {
-            responseType: "blob",
-          },
-          success: function (data) {
-            $("#loader").modal("hide");
+        $("#submitButton, #btnBack_edit").hide();
+        $("#btnBack").show();
 
-            if (data && data.size > 100) {
-              const blob = new Blob([data], {
-                type: "application/vnd.ms-excel",
-              });
-              const url = window.URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.style.display = "none";
-              a.href = url;
-              a.download = filename;
-              document.body.appendChild(a);
-              a.click();
-              window.URL.revokeObjectURL(url);
-              document.body.removeChild(a);
+        // Hide Cancel button again
+        $("#cancelRecord").hide();
 
-              showResultModal(
-                "BRRS",
-                "The file has been downloaded successfully."
-              );
-            } else {
-              showResultModal(
-                "Information",
-                "No data was available to create a download."
-              );
-            }
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            $("#loader").modal("hide");
-            console.error("Download failed:", textStatus, errorThrown);
-            showResultModal(
-              "Error",
-              "An error occurred while downloading the file. Please try again."
-            );
-          },
-        });
-      }
+        // Show all Modify buttons
+        $("#addRecord").show();
+    }
+    // ❌ If user clicks CANCEL, nothing happens
+}
 
-      function editRecord() {
-        showResultModal("Alert", "Development in progress");
-      }
-      function closemodel() {
-        $("#alert").modal("hide");
-        $("#resultModal").modal("hide");
-      }
 
-      function showResultModal(title, message) {
-        // Set the text for the modal elements
-        $("#resultModalLabel").text(title);
-        $("#resultModalBody").text(message);
+	
 
-        // Show the modal
-        $("#resultModal").modal("show");
-      }
-    </script>
+	</script>
+	
+	<SCRIPT>
+	// Calculate total for R15_OTHER_BORROW
+	function calculateR15Totals() {
+	    let total = 0;
 
-    <script>
-      function startReport(button) {
-        const alertMsg = document.getElementById("alertMessage");
-        const filename = button.getAttribute("data-filename");
-        const fromdate = button.getAttribute("data-fromdate");
-        const todate = button.getAttribute("data-todate");
-        const currency = button.getAttribute("data-currency");
-        const dtltype = button.getAttribute("data-dtltype");
-        const type = button.getAttribute("data-type");
-        const version = button.getAttribute("data-version");
-        const sessionfilename = sessionStorage.getItem("filename");
+	    for (let i = 16; i <= 28; i++) {
+	        let value = parseFloat($("#R" + i + "_OTHER_BORROW").val().replace(/,/g, "")) || 0;
+	        
 
-        if (sessionfilename == filename) {
-          alertMsg.innerHTML = "Download request already Processing...";
-          showAlert();
-          return;
+	        total += value;
+	    }
+
+	    // Put the totals into R15
+	    $("#R15_OTHER_BORROW").val(total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
+	    
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR15Totals();
+
+	    // Recalculate whenever R16–R28 values change
+	    for (let i = 16; i <= 28; i++) {
+	    	 //if ([15, 29].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR15Totals();
+	        });
+	    }
+	});
+	
+	// Calculate total for R29_OTHER_BORROW
+	function calculateR29Totals() {
+	    let total = 0;
+
+	    for (let i = 30; i <= 36; i++) {
+	        let value = parseFloat($("#R" + i + "_OTHER_BORROW").val().replace(/,/g, "")) || 0;
+	        
+
+	        total += value;
+	    }
+
+	    // Put the totals into R29
+	    $("#R29_OTHER_BORROW").val(total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
+	    
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR29Totals();
+
+	    // Recalculate whenever R30–R36 values change
+	    for (let i = 30; i <= 36; i++) {
+	    	 //if ([15, 29].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR29Totals();
+	        });
+	    }
+	});
+	
+	// Calculate total for R38_OTHER_BORROW
+	function calculateR38Totals() {
+	    let total = 0;
+
+	    for (let i = 39; i <= 40; i++) {
+	        let value = parseFloat($("#R" + i + "_OTHER_BORROW").val().replace(/,/g, "")) || 0;
+	        
+
+	        total += value;
+	    }
+
+	    // Put the totals into R38
+	    $("#R38_OTHER_BORROW").val(total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
+	    
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR38Totals();
+
+	    // Recalculate whenever R11–R16 values change
+	    for (let i = 39; i <= 40; i++) {
+	    	 //if ([15, 29].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR38Totals();
+	        });
+	    }
+	});
+	
+	// Calculate total for R44_OTHER_BORROW
+	function calculateR44Totals() {
+	    let total = 0;
+
+	    for (let i = 45; i <= 48; i++) {
+	        let value = parseFloat($("#R" + i + "_OTHER_BORROW").val().replace(/,/g, "")) || 0;
+	        
+
+	        total += value;
+	    }
+
+	    // Put the totals into R44
+	    $("#R44_OTHER_BORROW").val(total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
+	    
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR44Totals();
+
+	    // Recalculate whenever R45–R48 values change
+	    for (let i = 45; i <= 48; i++) {
+	    	 //if ([15, 29].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR44Totals();
+	        });
+	    }
+	});
+	
+	// Calculate total for R52_OTHER_BORROW
+	function calculateR52Totals() {
+	    let total = 0;
+
+	    for (let i = 53; i <= 57; i++) {
+	        let value = parseFloat($("#R" + i + "_OTHER_BORROW").val().replace(/,/g, "")) || 0;
+	        
+
+	        total += value;
+	    }
+
+	    // Put the totals into R52
+	    $("#R52_OTHER_BORROW").val(total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
+	    
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR52Totals();
+
+	    // Recalculate whenever R53–R57 values change
+	    for (let i = 53; i <= 57; i++) {
+	    	 //if ([15, 29].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR52Totals();
+	        });
+	    }
+	});
+	
+	// Calculate total for R58_OTHER_BORROW
+	function calculateR58Totals() {
+	    let total = 0;
+
+	    for (let i = 59; i <= 62; i++) {
+	        let value = parseFloat($("#R" + i + "_OTHER_BORROW").val().replace(/,/g, "")) || 0;
+	        
+
+	        total += value;
+	    }
+
+	    // Put the totals into R58
+	    $("#R58_OTHER_BORROW").val(total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
+	    
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR58Totals();
+
+	    // Recalculate whenever R59–R62 values change
+	    for (let i = 59; i <= 62; i++) {
+	    	 //if ([15, 29].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR58Totals();
+	        });
+	    }
+	});
+	
+	
+	// Calculate total for R11_OTHER_BORROW
+	function calculateR11Totals() {
+	    let total = 0;
+
+	    // Only these specific rows should be added
+	    let rowsToAdd = [12, 13, 14, 15, 29, 30];
+
+	    rowsToAdd.forEach(i => {
+	        let selector = `#R${i}_OTHER_BORROW`;
+	        let value = parseFloat($(selector).val()?.replace(/,/g, "")) || 0;
+	        total += value;
+	    });
+
+	    // Update R11 with total (formatted with commas)
+	    $("#R11_OTHER_BORROW").val(
+	        total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    );
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR11Totals();
+
+	    // Recalculate whenever R11–R16 values change
+	    for (let i = 12; i <= 36; i++) {
+	    	 if ([15, 29].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR11Totals();
+	        });
+	    }
+	});
+
+	// Calculate total for R49_OTHER_BORROW
+	function calculateR49Totals() {
+	    let total = 0;
+
+	    // Only these specific rows should be added
+	    let rowsToAdd = [50, 51, 52, 58];
+
+	    rowsToAdd.forEach(i => {
+	        let selector = `#R${i}_OTHER_BORROW`;
+	        let value = parseFloat($(selector).val()?.replace(/,/g, "")) || 0;
+	        total += value;
+	    });
+
+	    // Update R49 with total (formatted with commas)
+	    $("#R49_OTHER_BORROW").val(
+	        total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    );
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR49Totals();
+
+	    // Recalculate whenever R50–R62 values change
+	    for (let i = 50; i <= 62; i++) {
+	    	 if ([52, 58].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR49Totals();
+	        });
+	    }
+	});
+	
+	// Calculate total for R41_OTHER_BORROW
+	function calculateR41Totals() {
+	    let total = 0;
+
+	    // Only these specific rows should be added
+	    let rowsToAdd = [42, 43, 44, 49, 63];
+
+	    rowsToAdd.forEach(i => {
+	        let selector = `#R${i}_OTHER_BORROW`;
+	        let value = parseFloat($(selector).val()?.replace(/,/g, "")) || 0;
+	        total += value;
+	    });
+
+	    // Update R41 with total (formatted with commas)
+	    $("#R41_OTHER_BORROW").val(
+	        total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    );
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR41Totals();
+
+	    // Recalculate whenever R42–R63 values change
+	    for (let i = 42; i <= 63; i++) {
+	    	 if ([44, 49, 52, 58].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR41Totals();
+	        });
+	    }
+	}); 
+	
+	// Calculate total for R64_OTHER_BORROW
+	function calculateR64Totals() {
+	    let total = 0;
+
+	    // Only these specific rows should be added
+	    let rowsToAdd = [11, 41];
+
+	    rowsToAdd.forEach(i => {
+	        let selector = `#R${i}_OTHER_BORROW`;
+	        let value = parseFloat($(selector).val()?.replace(/,/g, "")) || 0;
+	        total += value;
+	    });
+
+	    // Update R64 with total (formatted with commas)
+	    $("#R64_OTHER_BORROW").val(
+	        total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+	    );
+	}
+
+
+	$(document).ready(function() {
+	    // Calculate once on load
+	    calculateR64Totals();
+
+	    // Recalculate whenever R12–R63 values change
+	    for (let i = 12; i <= 63; i++) {
+	    	 if ([15, 29, 38, 39, 40, 44, 49, 52, 58].includes(i)) continue;
+	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
+	            calculateR64Totals();
+	        });
+	    }
+	});
+	
+	</SCRIPT>
+
+<script>
+function closemodel() {
+    $("#resultModal").modal("hide");
+    $('#loader').modal('hide');
+    setTimeout(function () {
+        location.reload();
+    }, 300);
+}
+
+function fileuploads(btn) {
+    var asondate = btn.getAttribute("data-todate");
+    $('#loader').modal('show');
+
+    // Pre-calculations
+    calculateR11Totals();
+    calculateR15Totals();
+    calculateR29Totals();
+    calculateR38Totals();
+    calculateR41Totals();
+    calculateR44Totals();
+    calculateR49Totals();
+    calculateR52Totals();
+    calculateR58Totals();
+    calculateR64Totals();
+    
+    console.log("✅ Calculations executed successfully");
+
+    // Remove commas from numeric inputs
+    $("#fileupload input[type='text']").each(function () {
+        var val = $(this).val();
+        if (val && val.includes(",")) {
+            $(this).val(val.replace(/,/g, ''));
         }
+    });
 
-        alertMsg.innerHTML = "Download request Processing...";
-        showAlert();
+    if (!$("#fileupload").valid()) {
+        $('#loader').modal('hide');
+        return;
+    }
 
-        const baseUrl = "/BCDRS/Reports/startreport";
-        const downloadUrl =
-          baseUrl +
-          "?filename=" +
-          encodeURIComponent(filename) +
-          "&fromdate=" +
-          encodeURIComponent(fromdate) +
-          "&todate=" +
-          encodeURIComponent(todate) +
-          "&currency=" +
-          encodeURIComponent(currency) +
-          "&dtltype=" +
-          encodeURIComponent(dtltype) +
-          "&type=" +
-          encodeURIComponent(type) +
-          "&version=" +
-          encodeURIComponent(version);
-        fetch(downloadUrl) // ✅ no invalid characters now
-          .then((res) => res.text())
-          .then((jobId) => {
-            alertMsg.innerHTML = "Download request received..." + jobId;
-            showAlert();
-            sessionStorage.setItem("jobId", jobId);
-            sessionStorage.setItem("filename", filename);
-            checkReport(jobId);
-          });
-      }
+    // ✅ One combined FormData for all entities
+    const formData = new FormData();
+    formData.append("asondate", asondate);
 
-      function checkReport(jobId) {
-        const alertMsg = document.getElementById("alertMessage");
-        fetch("/BCDRS/Reports/checkreport?jobId=" + encodeURIComponent(jobId))
-          .then((res) => res.text())
-          .then((status) => {
-            if (status === "READY") {
-              alertMsg.innerHTML = "Report is ready! Downloading…";
-              showAlert();
-              const filename = sessionStorage.getItem("filename");
-              downloadDetailfile(jobId, filename);
-              sessionStorage.removeItem("jobId");
-              sessionStorage.removeItem("filename");
-            } else if (status === "PROCESSING") {
-              alertMsg.innerHTML = "Download Is Processing…";
-              showAlert();
-              setTimeout(() => checkReport(jobId), 5000);
-            } else if (status === "ERROR") {
-              alertMsg.innerHTML =
-                "No data was available to create a download.";
-              showAlert();
-              sessionStorage.removeItem("jobId");
-              sessionStorage.removeItem("filename");
+    // --- NEW: append type value (NORMAL, RESUB, ARCHIVAL) ---
+    const selectedType = $("#OBType").val(); // Get from dropdown
+    formData.append("type", selectedType);
+    console.log("Selected type:", selectedType);
+
+    // --- Entity fields (R10-R17) ---
+    for (let i = 11; i <= 64; i++) {
+        ["OTHER_BORROW"].forEach(field => {
+            const input = $("#R" + i + "_" + field);
+            if (input.length) {
+                formData.append(input.attr("name"), input.val());
             }
-          });
-      }
-
-      function downloadDetailfile(jobId, filename) {
-        //$('#loader').modal('show');
-
-        $.ajax({
-          url:
-            "/BCDRS/Reports/downloaddetailExcel?jobId=" +
-            jobId +
-            "&filename=" +
-            filename,
-          type: "GET",
-          xhrFields: {
-            responseType: "blob",
-          },
-          success: function (data) {
-            $("#loader").modal("hide");
-
-            if (data && data.size > 100) {
-              const blob = new Blob([data], {
-                type: "application/vnd.ms-excel",
-              });
-              const url = window.URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.style.display = "none";
-              a.href = url;
-              a.download = filename;
-              document.body.appendChild(a);
-              a.click();
-              window.URL.revokeObjectURL(url);
-              document.body.removeChild(a);
-
-              showResultModal(
-                "Success",
-                filename + " downloaded successfully."
-              );
-            } else {
-              showResultModal(
-                "Information",
-                "No data was available to create a download."
-              );
-            }
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            $("#loader").modal("hide");
-            console.error("Download failed:", textStatus, errorThrown);
-            showResultModal(
-              "Error",
-              "An error occurred while downloading the file. Please try again."
-            );
-          },
         });
-      }
-    </script>
+    }
+    console.log("✅ Entity executed successfully");
 
-    <script th:inline="javascript">
+    // ✅ Single AJAX call with type info
+    $.ajax({
+        url: './MOBupdateAll',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'text',
+        success: function (response) {
+            $("#resultModalLabel").text("BRRS");
+            $("#resultModalBody").text("Updated successfully");
+            $("#resultModal").modal("show");
+        },
+        error: function (xhr) {
+            console.log("Error response:", xhr.responseText);
+            $("#resultModalLabel").text("Error");
+            $("#resultModalBody").text("Update failed. Check console for details.");
+            $("#resultModal").modal("show");
+        },
+        complete: function () {
+            $('#loader').modal('hide');
+        }
+    });
+
+    console.log("✅ AJAX executed successfully");
+}
+</script>
+	
+	
+<!-- <script>
+		function activateTab(tabName) {
+			// Remove 'active' from all buttons
+			document.querySelectorAll('.custom-tab-btn').forEach(btn => {
+				btn.classList.remove('active');
+			});
+			// Add 'active' to selected button
+			if (tabName === 'summary') {
+				document.getElementById('custom-tab-btnSummary').classList.add('active');
+			} else if (tabName === 'Details') {
+				document.getElementById('custom-tab-btnDetails').classList.add('active');
+			}
+		}
+		window.onload = function () {
+			/* setTimeout(function() {
+				var selectedTab = document.getElementById("selectedTab").value;
+				alert(selectedTab);
+				activateTab(selectedTab);
+			}, 10000); */ // 10,000 milliseconds = 10 seconds
+
+			var selectedTab = document.getElementById("selectedTab").value;
+			activateTab(selectedTab);
+		};
+		function downloadfile(button) {
+			var reportid = button.getAttribute('data-reportid');
+			var asondate = button.getAttribute('data-asondate');
+			var fromdate = button.getAttribute('data-fromdate');
+			var todate = button.getAttribute('data-todate');
+			var currency = button.getAttribute('data-currency');
+			var subreportid = button.getAttribute('data-subreportid');
+			var secid = button.getAttribute('data-secid');
+			var dtltype = button.getAttribute('data-dtltype');
+			var filename = button.getAttribute('data-filename');
+			var type = button.getAttribute('data-type');
+			var version = button.getAttribute('data-version');
+			$('#loader').modal('show');
+			$.ajax({
+				url: './downloadExcel?reportid=' + reportid +
+					'&fromdate=' + fromdate +
+					'&asondate=' + asondate +
+					'&todate=' + todate +
+					'&currency=' + currency +
+					'&subreportid=' + subreportid +
+					'&secid=' + secid +
+					'&filename=' + filename +
+					'&type=' + type +
+					'&version=' + version,
+				type: 'GET',
+				xhrFields: {
+					responseType: 'blob'
+				},
+				success: function (data) {
+					$('#loader').modal('hide');
+					if (data && data.size > 100) {
+						const blob = new Blob([data], {type: 'application/vnd.ms-excel'});
+						const url = window.URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.style.display = 'none';
+						a.href = url;
+						a.download = filename;
+						document.body.appendChild(a);
+						a.click();
+						window.URL.revokeObjectURL(url);
+						document.body.removeChild(a);
+						showResultModal('BRRS', 'M_OB downloaded successfully.');
+					} else {
+						showResultModal('Information', 'No data was available to create a download.');
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					$('#loader').modal('hide');
+					console.error("Download failed:", textStatus, errorThrown);
+					showResultModal('Error', 'An error occurred while downloading the file. Please try again.');
+				}
+			});
+		}
+		function editRecord() {
+			showResultModal('Alert', 'Development in progress');
+
+		}
+		function closemodel() {
+			$('#alert').modal('hide');
+			$('#resultModal').modal('hide');
+
+		}
+		function showResultModal(title, message) {
+			// Set the text for the modal elements
+			$('#resultModalLabel').text(title);
+			$('#resultModalBody').text(message);
+			// Show the modal
+			$('#resultModal').modal('show');
+		}
+	</script> -->
+
+  <!-- <script th:inline="javascript">
       function showdetailsbyRowAndColumn(a) {
         var rowId = a.getAttribute("RowId");
         var columnId = a.getAttribute("ColumnId");
@@ -683,130 +1087,94 @@ PURPOSE		: BWRBRREPORT
           );
         }
       }
-    </script>
+    </script> -->  
   </head>
 
   <title>BRRS</title>
   <body>
-    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px">
-      <div class="row">
-        <div th:insert="HeaderMenu :: header"></div>
+	<div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+		<div class="row">
+			<div th:insert="HeaderMenu :: header"></div>
+			<div class="card">
+				<div class="card-header"
+					style="background-color: rgb(107, 122, 143); display: flex; align-items: center; justify-content: space-between;">
+					<div style="display: flex; align-items: center;" onclick="back();">
+						<!-- ⬅️ Left circular arrow -->
+						<div class="left-arrow-circle">
+							<i class="fa fa-arrow-left"></i>
+						</div>
+						<!-- Title -->
+						<h5
+							style="font-family: arial; font-size: 20px; padding-top: 10px; font-weight: bold; color: white;">(41) MONTHLY SCHEDULE: M-OB: OTHER BORROWINGS BY SECTOR</h5>
+					</div>
+					<div class="custom-tab-btn-group nav-buttons"
+						style="display: flex; color: white; align-items: center;">
+						<!-- 📅 Date -->
+						<span class="white-text"
+							style="color: white !important; font-size: 16px; margin-right: 20px;">Report Date: <span th:text="${#strings.replace(asondate, '/', '-')}">30-06-2025</span>
+						</span>
+						<!-- Buttons -->
+						<input type="hidden" id="selectedTab" th:value="${displaymode}">
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnSummary" onclick="showsummary();"
+							th:if="${displaymode == 'Details'}">Summary</button>
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnDetails" onclick="showdetails();"
+							th:if="${displaymode == 'summary'}">Details</button>
+						
+<!-- Modify button -->
+<button type="button" class="custom-tab-btn"
+        onclick="showmodify(this);"
+        title="Click to EDIT Records"
+		th:if="${type != 'ARCHIVAL'}"
+       th:classappend="${session.PERMISSIONS == 'W'} AND ${dtltype == 'report'} ? addedit "
+        id="addRecord">Modify</button>
 
-        <div class="card">
-          <div
-            class="card-header"
-            style="
-              background-color: rgb(107, 122, 143);
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            "
-          >
-            <div style="display: flex; align-items: center" onclick="back();">
-              <!-- ⬅️ Left circular arrow -->
-              <div class="left-arrow-circle">
-                <i class="fa fa-arrow-left"></i>
-              </div>
+<!-- Cancel button (hidden initially) -->
+<button type="button" class="custom-tab-btn"
+        title="Cancel editing"
+        id="cancelRecord"
+        onclick="cancelModify();"
+        style="display: none;">Cancel</button>
 
-              <!-- Title -->
-              <h5
-                style="
-                  font-family: arial;
-                  font-size: 20px;
-                  padding-top: 10px;
-                  font-weight: bold;
-                  color: white;
-                "
-              >
-                (41) MONTHLY SCHEDULE: M-OB: OTHER BORROWINGS BY SECTOR
-              </h5>
-            </div>
 
-            <div
-              class="custom-tab-btn-group nav-buttons"
-              style="display: flex; color: white; align-items: center"
-            >
-              <!-- 📅 Date -->
-              <span
-                class="white-text"
-                style="
-                  color: white !important;
-                  font-size: 16px;
-                  margin-right: 20px;
-                "
-                >Report Date: <span th:text="${asondate}">2025-09-11</span>
-              </span>
-
-              <!-- Buttons -->
-              <input type="hidden" id="selectedTab" th:value="${displaymode}" />
-              <button
-                type="button"
-                class="custom-tab-btn"
-                id="custom-tab-btnSummary"
-                onclick="showsummary();"
-                th:if="${displaymode == 'Details'}"
-              >
-                Summary
-              </button>
-              <button
-                type="button"
-                class="custom-tab-btn"
-                id="custom-tab-btnDetails"
-                onclick="showdetails();"
-                th:if="${displaymode == 'summary'}"
-              >
-                Details
-              </button>
-              <button
-                type="button"
-                class="custom-tab-btn"
-                id="custom-tab-btnAdd"
-                th:if="${displaymode == 'summary'}"
-                th:attr="data-reportid=${reportid}, 
-                    				 data-asondate=${asondate}, 
-                    				 data-fromdate=${fromdate}, 
-                     				 data-todate=${todate}, 
-                     				 data-currency=${currency},  
-                     				 data-dtltype=${dtltype}, 
-                     				 data-filename='M_OB.xls',
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+							th:if="${displaymode == 'summary'}" th:attr="data-reportid=${reportid},
+                   				 data-asondate=${asondate},
+                   				 data-fromdate=${fromdate},
+                    				 data-todate=${todate},
+                    				 data-currency=${currency}, 
+                    				 data-dtltype=${dtltype},
+                    				 data-filename='M_OB.xlsx',
 					 				 data-type=${type},
-					    			 data-version=${version}"
-                onclick="downloadfile(this);"
-              >
-                <i class="fa fa-download"></i>
-              </button>
-              <button
-                type="button"
-                class="custom-tab-btn"
-                id="custom-tab-btnAdd"
-                th:if="${displaymode == 'Details'}"
-                onclick="startReport(this);"
-                th:attr="
-						    data-fromdate=${fromdate},
-						    data-todate=${todate},
-						    data-filename='M_OBDetail',
-						  "
-              >
-                <i class="fa fa-download"></i>
-              </button>
-              <!---	<button type="button" class="custom-tab-btn"
-							id="custom-tab-btnAdd" th:if="${displaymode == 'Details'}"
-							th:attr="data-reportid=${reportid}, 
-                     data-asondate=${asondate}, 
-                     data-fromdate=${fromdate}, 
-                     data-todate=${todate}, 
-                     data-currency=${currency},  
-                     data-dtltype=${dtltype}, 
-                     data-filename='BRF2_18'",
-							onclick="editRecord();">
+					    			 data-version=${version}" onclick="downloadfile(this);">
 							<i class="fa fa-download"></i>
-						</button> -->
-            </div>
-          </div>
+						</button>
+						
+						
+						
 
+						<button type="button" class="custom-tab-btn" id="custom-tab-btnAdd"
+							th:if="${displaymode == 'Details'}" onclick="startReport(this);" th:attr="
+								    data-fromdate=${fromdate},
+								    data-todate=${todate},
+									data-currency=${currency},  
+												data-dtltype=${dtltype}, 
+								    data-filename='M_OBDetail',
+									data-type=${type},
+												data-version=${version}
+								  ">
+							<i class="fa fa-download"></i>
+						</button>
+
+
+
+					</div>
+					
+				</div>
           <div th:if="${displaymode == 'summary'}">
             <div class="row">
               <div class="col-sm-12">
+              <form action="#" method="POST" id="fileupload">
+						<input type="hidden" name="asondate" id="asondate" th:value="${asondate}" />
                 <div
                   class="table-wrapper table-responsive scrollable-table-container"
                   style="border-right: 1px solid #dee2e6"
@@ -823,7 +1191,7 @@ PURPOSE		: BWRBRREPORT
                         </th>
                         <th 
                           style="
-                            text-align: center;
+                            text-align: right;
                             padding-left: 20px;
                           "
                         >OTHER BORROWINGS 
@@ -835,435 +1203,600 @@ PURPOSE		: BWRBRREPORT
 
                     <tbody
                       th:each="report: ${reportsummary}"
-                      style="font-family: Arial"
-                    >
+                      style="font-family: Arial">
 
-                      <tr>
-                        <td
-                          style="padding-left: 20px"
-                          th:text="${report.R11_PRODUCT}"
-                        ></td>
-
-                        <td
-                          style="text-align: right"
-                          th:attr="RowId='R11', ColumnId='C2'"
-                          th:text="${report.R11_OTHER_BORROW}"
-                        ></td>
-                      </tr>
-
-                      <tr>
-  <td style="padding-left: 20px" th:text="${report.R12_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R12', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R12_OTHER_BORROW}"></td>
+<tr>
+<td style="font-weight:bold;">1.  Non-financial institutional units (sum of lines (i) to (vii)):</td>
+<td id="R11" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R11_OTHER_BORROW != null ? #numbers.formatDecimal(report.R11_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R11_OTHER_BORROW" name="R11_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R13_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R13', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R13_OTHER_BORROW}"></td>
+    <td style="padding-left:15px;">(i)    Central Government</td>
+	<td id="R12" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R12_OTHER_BORROW != null ? #numbers.formatDecimal(report.R12_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R12_OTHER_BORROW" name="R12_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R14_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R14', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R14_OTHER_BORROW}"></td>
+    <td style="padding-left:15px;">(ii)   Local Government</td>
+	<td id="R12" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R13_OTHER_BORROW != null ? #numbers.formatDecimal(report.R13_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R13_OTHER_BORROW" name="R13_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R15_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R15', ColumnId='C2'"
-      th:text="${report.R15_OTHER_BORROW}"></td>
+    <td style="padding-left:15px;">(iii)  Public Non-Financial Corporations</td>
+	<td id="R14" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R14_OTHER_BORROW != null ? #numbers.formatDecimal(report.R14_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R14_OTHER_BORROW" name="R14_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R16_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R16', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R16_OTHER_BORROW}"></td>
+<td style="padding-left:15px;">(iv)  Other Non-Financial Corporations (Private business enterprises) (sum of lines (a) to (m)):</td>
+<td id="R15" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R15_OTHER_BORROW != null ? #numbers.formatDecimal(report.R15_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R15_OTHER_BORROW" name="R15_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R17_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R17', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R17_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;"> a) Agriculture, Forestry, Fishing</td>
+	<td id="R16" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R16_OTHER_BORROW != null ? #numbers.formatDecimal(report.R16_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R16_OTHER_BORROW" name="R16_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R18_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R18', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R18_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">b) Mining and Quarying</td>
+	<td id="R17" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R17_OTHER_BORROW != null ? #numbers.formatDecimal(report.R17_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R17_OTHER_BORROW" name="R17_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R19_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R19', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R19_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">c) Manufacturing</td>
+	<td id="R18" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R18_OTHER_BORROW != null ? #numbers.formatDecimal(report.R18_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R18_OTHER_BORROW" name="R18_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R20_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R20', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R20_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">d) Construction</td>
+	<td id="R19" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R19_OTHER_BORROW != null ? #numbers.formatDecimal(report.R19_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R19_OTHER_BORROW" name="R19_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R21_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R21', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R21_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">e) Commercial real estate</td>
+	<td id="R20" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R20_OTHER_BORROW != null ? #numbers.formatDecimal(report.R20_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R20_OTHER_BORROW" name="R20_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R22_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R22', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R22_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">f) Electricity</td>
+	<td id="R21" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R21_OTHER_BORROW != null ? #numbers.formatDecimal(report.R21_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R21_OTHER_BORROW" name="R21_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R23_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R23', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R23_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">g) Water</td>
+	<td id="R22" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R22_OTHER_BORROW != null ? #numbers.formatDecimal(report.R22_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R22_OTHER_BORROW" name="R22_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R24_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R24', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R24_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">h) Telecommunication and Post</td>
+	<td id="R23" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R23_OTHER_BORROW != null ? #numbers.formatDecimal(report.R23_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R23_OTHER_BORROW" name="R23_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R25_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R25', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R25_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">i) Tourism and hotels</td>
+	<td id="R24" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R24_OTHER_BORROW != null ? #numbers.formatDecimal(report.R24_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R24_OTHER_BORROW" name="R24_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R26_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R26', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R26_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">j)Transport and storage</td>
+	<td id="R25" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R25_OTHER_BORROW != null ? #numbers.formatDecimal(report.R25_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R25_OTHER_BORROW" name="R25_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R27_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R27', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R27_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;"> k) Trade, restaurants and bars</td>
+	<td id="R26" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R26_OTHER_BORROW != null ? #numbers.formatDecimal(report.R26_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R26_OTHER_BORROW" name="R26_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R28_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R28', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R28_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">l) Business Services</td>
+	<td id="R27" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R27_OTHER_BORROW != null ? #numbers.formatDecimal(report.R27_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R27_OTHER_BORROW" name="R27_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R29_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R29', ColumnId='C2'"
-      th:text="${report.R29_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">m) Other community, social and personal services</td>
+	<td id="R28" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R28_OTHER_BORROW != null ? #numbers.formatDecimal(report.R28_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R28_OTHER_BORROW" name="R28_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R30_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R30', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R30_OTHER_BORROW}"></td>
+<td style="padding-left:15px;">(v)  Households (sum of lines (a) to (g)):</td>
+<td id="R29" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R29_OTHER_BORROW != null ? #numbers.formatDecimal(report.R29_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R29_OTHER_BORROW" name="R29_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R31_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R31', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R31_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">a) Residential property (owner occupied</td>
+	<td id="R30" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R30_OTHER_BORROW != null ? #numbers.formatDecimal(report.R30_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R30_OTHER_BORROW" name="R30_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R32_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R32', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R32_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">b) Residential property (rented)</td>
+	<td id="R31" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R31_OTHER_BORROW != null ? #numbers.formatDecimal(report.R31_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R31_OTHER_BORROW" name="R31_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R33_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R33', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R33_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;"> c) Personal Loans</td>
+	<td id="R32" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R32_OTHER_BORROW != null ? #numbers.formatDecimal(report.R32_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R32_OTHER_BORROW" name="R32_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R34_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R34', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R34_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">d) Motor vehicle</td>
+	<td id="R33" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R33_OTHER_BORROW != null ? #numbers.formatDecimal(report.R33_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R33_OTHER_BORROW" name="R33_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R35_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R35', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R35_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">e) Household goods</td>
+	<td id="R34" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R34_OTHER_BORROW != null ? #numbers.formatDecimal(report.R34_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R34_OTHER_BORROW" name="R34_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R36_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R36', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R36_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">f) Credit card loans</td>
+	<td id="R35" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R35_OTHER_BORROW != null ? #numbers.formatDecimal(report.R35_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R35_OTHER_BORROW" name="R35_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R37_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R37', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R37_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">g) Other*</td>
+	<td id="R36" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R36_OTHER_BORROW != null ? #numbers.formatDecimal(report.R36_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R36_OTHER_BORROW" name="R36_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R38_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R38', ColumnId='C2'"
-      th:text="${report.R38_OTHER_BORROW}"></td>
+    <td style="padding-left:15px;">(vi)  Non-Profit Institutions Serving Households</td>
+	<td id="R37" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R37_OTHER_BORROW != null ? #numbers.formatDecimal(report.R37_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R37_OTHER_BORROW" name="R37_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R39_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R39', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R39_OTHER_BORROW}"></td>
+<td style="padding-left:15px;">(vii) Non-Residents** (sum of lines (a) and (b)):</td>
+<td id="R38" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R38_OTHER_BORROW != null ? #numbers.formatDecimal(report.R38_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R38_OTHER_BORROW" name="R38_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R40_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R40', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R40_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">a) OtherNon-Financial Corporations</td>
+	<td id="R39" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R39_OTHER_BORROW != null ? #numbers.formatDecimal(report.R39_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R39_OTHER_BORROW" name="R39_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R41_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R41', ColumnId='C2'"
-      th:text="${report.R41_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">b) Households</td>
+	<td id="R40" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R40_OTHER_BORROW != null ? #numbers.formatDecimal(report.R40_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R40_OTHER_BORROW" name="R40_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R42_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R42', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R42_OTHER_BORROW}"></td>
+<td style="font-weight:bold;">2.  Financial institutional units (sum of lines (i) to (v)):</td>
+<td id="R41" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R41_OTHER_BORROW != null ? #numbers.formatDecimal(report.R41_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R41_OTHER_BORROW" name="R41_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R43_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R43', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R43_OTHER_BORROW}"></td>
+    <td style="padding-left:15px;">(i)    Central Bank</td>
+	<td id="R42" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R42_OTHER_BORROW != null ? #numbers.formatDecimal(report.R42_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R42_OTHER_BORROW" name="R42_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R44_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R44', ColumnId='C2'"
-      th:text="${report.R44_OTHER_BORROW}"></td>
+    <td style="padding-left:15px;">(ii)   Commercial Banks</td>
+	<td id="R43" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R43_OTHER_BORROW != null ? #numbers.formatDecimal(report.R43_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R43_OTHER_BORROW" name="R43_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R45_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R45', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R45_OTHER_BORROW}"></td>
+<td style="padding-left:15px;">(iii)  Other Depository Corporations (sum of lines (a) to (d)):</td>
+<td id="R44" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R44_OTHER_BORROW != null ? #numbers.formatDecimal(report.R44_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R44_OTHER_BORROW" name="R44_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R46_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R46', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R46_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">a) Botswana Savings Bank (BSB)</td>
+	<td id="R45" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R45_OTHER_BORROW != null ? #numbers.formatDecimal(report.R45_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R45_OTHER_BORROW" name="R45_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R47_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R47', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R47_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">b) Botswana Building Society (BBS)</td>
+	<td id="R46" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R46_OTHER_BORROW != null ? #numbers.formatDecimal(report.R46_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R46_OTHER_BORROW" name="R46_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R48_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R48', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R48_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">c) Domestic Money Market Unit Trusts</td>
+	<td id="R47" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R47_OTHER_BORROW != null ? #numbers.formatDecimal(report.R47_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R47_OTHER_BORROW" name="R47_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R49_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R49', ColumnId='C2'"
-      th:text="${report.R49_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">d) Other (specify)*</td>
+	<td id="R48" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R48_OTHER_BORROW != null ? #numbers.formatDecimal(report.R48_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R48_OTHER_BORROW" name="R48_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R50_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R50', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R50_OTHER_BORROW}"></td>
+<td style="padding-left:15px;">(iv)  Other Financial Corporations (sum of lines (a) to (d)):</td>
+<td id="R49" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R49_OTHER_BORROW != null ? #numbers.formatDecimal(report.R49_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R49_OTHER_BORROW" name="R49_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R51_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R51', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R51_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">a) Insurance Companies</td>
+	<td id="R50" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R50_OTHER_BORROW != null ? #numbers.formatDecimal(report.R50_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R50_OTHER_BORROW" name="R50_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R52_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R52', ColumnId='C2'"
-      th:text="${report.R52_OTHER_BORROW}"></td>
+    <td style="padding-left:25px;">b) Pension Funds</td>
+	<td id="R51" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R51_OTHER_BORROW != null ? #numbers.formatDecimal(report.R51_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R51_OTHER_BORROW" name="R51_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R53_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R53', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R53_OTHER_BORROW}"></td>
+<td style="padding-left:25px;">c) Other Financial Intermediaries (sum 1 to 5)</td>
+<td id="R52" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R52_OTHER_BORROW != null ? #numbers.formatDecimal(report.R52_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R52_OTHER_BORROW" name="R52_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R54_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R54', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R54_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;">1.Asset managers</td>
+	<td id="R53" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R53_OTHER_BORROW != null ? #numbers.formatDecimal(report.R53_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R53_OTHER_BORROW" name="R53_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R55_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R55', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R55_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;"> 2.Finance companies</td>
+	<td id="R54" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R54_OTHER_BORROW != null ? #numbers.formatDecimal(report.R54_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R54_OTHER_BORROW" name="R54_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R56_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R56', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R56_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;">3.Medical Aid Schemes</td>
+	<td id="R55" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R55_OTHER_BORROW != null ? #numbers.formatDecimal(report.R55_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R55_OTHER_BORROW" name="R55_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R57_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R57', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R57_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;"> 4.Public sector financial intermediaries</td>
+	<td id="R56" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R56_OTHER_BORROW != null ? #numbers.formatDecimal(report.R56_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R56_OTHER_BORROW" name="R56_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R58_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R58', ColumnId='C2'"
-      th:text="${report.R58_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;">5.SACCOs</td>
+	<td id="R57" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R57_OTHER_BORROW != null ? #numbers.formatDecimal(report.R57_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R57_OTHER_BORROW" name="R57_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R59_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R59', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R59_OTHER_BORROW}"></td>
+<td style="padding-left:25px;">d) Financial Auxiliaries (sum 1 to 4)</td>
+<td id="R58" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R58_OTHER_BORROW != null ? #numbers.formatDecimal(report.R58_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R58_OTHER_BORROW" name="R58_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R60_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R60', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R60_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;">1. Insurance brokers</td>
+	<td id="R59" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R59_OTHER_BORROW != null ? #numbers.formatDecimal(report.R59_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R59_OTHER_BORROW" name="R59_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R61_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R61', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R61_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;">2. Fund administrators</td>
+	<td id="R60" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R60_OTHER_BORROW != null ? #numbers.formatDecimal(report.R60_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R60_OTHER_BORROW" name="R60_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R62_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R62', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R62_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;"> 3. Bureau de change</td>
+	<td id="R61" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R61_OTHER_BORROW != null ? #numbers.formatDecimal(report.R61_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R61_OTHER_BORROW" name="R61_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
 
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R63_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R63', ColumnId='C2'"
-      onclick="showdetailsbyRowAndColumn(this)"
-      th:text="${report.R63_OTHER_BORROW}"></td>
+    <td style="padding-left:35px;">4. Other (specify)*</td>
+	<td id="R62" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R62_OTHER_BORROW != null ? #numbers.formatDecimal(report.R62_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R62_OTHER_BORROW" name="R62_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
+</tr>
+
+<tr>
+    <td style="padding-left:15px;">(v)  Non-residents</td>
+	<td id="R63" style="text-align:right;">
+		<input class="display-input Show_input "
+		type="text"
+		th:value="${report.R63_OTHER_BORROW != null ? #numbers.formatDecimal(report.R63_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+		id="R63_OTHER_BORROW" name="R63_OTHER_BORROW"
+		style="background-color: #FFFFFF; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+		readonly /></td>
 </tr>
   
 <tr>
-  <td style="padding-left: 20px" th:text="${report.R64_PRODUCT}"></td>
-  <td style="text-align: right"
-      th:attr="RowId='R64', ColumnId='C2'"
-      th:text="${report.R64_OTHER_BORROW}"></td>
+<td style="font-weight:bold;">TOTAL (Sum of lines 1 and 2)</td>
+<td id="R64" style="text-align:right;">
+	<input class="display-input Show_input nonEditable"
+	type="text"
+	th:value="${report.R64_OTHER_BORROW != null ? #numbers.formatDecimal(report.R64_OTHER_BORROW, 1, 'COMMA', 0, 'POINT') : '0'}"
+	id="R64_OTHER_BORROW" name="R64_OTHER_BORROW"
+	style="background-color: rgb(107, 122, 143); color: white; width: 220px; height: 28px; border-color: transparent; text-align: right;"
+	readonly /></td>
 </tr>
 
 
@@ -1271,6 +1804,20 @@ PURPOSE		: BWRBRREPORT
 
                     </tbody>
                   </table>
+                  </div>
+							<div style="text-align: center; margin-top: 10px;">
+								
+    <button id="submitButton" 
+            type="button"
+            class="custom-tab-btn Show_input" 
+            form="fileupload"
+            th:attr="data-todate=${asondate}" 
+            onclick="fileuploads(this);" 
+            style="display: none;">
+        Submit
+    </button>
+</div>
+							</form>
                 </div>
               </div>
             </div>
@@ -1496,7 +2043,7 @@ PURPOSE		: BWRBRREPORT
     /* Your existing CSS - this is the correct approach */
     .scrollable-table-container {
       /* This is the key: it creates the scroll context */
-      max-height: 820px;
+      max-height: 600px;
       /* Or a suitable height like 80vh for responsive design */
       overflow-y: auto;
       border: 1px solid #ccc;
@@ -1546,13 +2093,14 @@ PURPOSE		: BWRBRREPORT
       border: 1px solid #dee2e6;
     }
 
-    /* Sticky thead */
-    #reports thead th {
-      position: sticky;
-      top: 0;
-      background-color: #f8f9fa; /* Match Bootstrap thead-light */
-      z-index: 2;
-    }
+ 	/* Sticky thead */
+	#reports thead th {
+		position: sticky;
+		top: 0;
+		background-color: #D8D8D8; /* light gray header */
+		/* Match Bootstrap thead-light */
+		z-index: 2;
+	}
 
     div.dataTables_wrapper div.dataTables_paginate {
       text-align: right !important;
@@ -1588,5 +2136,12 @@ PURPOSE		: BWRBRREPORT
       display: inline-block;
       width: auto;
     }
+    .scrollable-table-container thead tr:nth-child(1),
+.scrollable-table-container thead tr:nth-child(2),
+.scrollable-table-container thead tr:nth-child(3),
+.scrollable-table-container thead tr:nth-child(4),
+.scrollable-table-container thead tr:nth-child(5) {
+    background-color: #D8D8D8; /* set header color */
+}
   </style>
 </html>

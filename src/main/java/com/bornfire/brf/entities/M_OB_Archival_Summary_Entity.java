@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "BRRS_M_OB_ARCHIVAL_TABLE_SUMMARY")
-public class BRRS_M_OB_Archival_Summary_Entity {
+public class M_OB_Archival_Summary_Entity {
 
 	
 	private	String	R11_PRODUCT;
@@ -2212,7 +2212,7 @@ public class BRRS_M_OB_Archival_Summary_Entity {
 
 
 
-	public BRRS_M_OB_Archival_Summary_Entity() {
+	public M_OB_Archival_Summary_Entity() {
         super();
     }
 

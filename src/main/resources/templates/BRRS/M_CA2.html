@@ -1263,7 +1263,7 @@ function cancelModify() {
                      data-todate=${todate}, 
                      data-currency=${currency},  
                      data-dtltype=${dtltype}, 
-                     data-filename='M_CA2.xls',
+                     data-filename='M_CA2.xlsx',
                      data-type=${type},
                      data-version=${version}"
             onclick="downloadfile(this);">
@@ -1299,407 +1299,385 @@ data-version=${version}"
 								class="table-wrapper table-responsive scrollable-table-container"
 								style="border-right: 1px solid #dee2e6;max-height:560px; overflow-y: auto;">
 								<h5 style = "font-weight:bold;color:black;">Common Equity Tier 1 (CET1) Capital<br> </h5>
-								<table
-									class="sticky-header-table table table-bordered table-cell table-sm table-condensed"
-									id="reports">
-									<thead class="thead-light" style=" top: 0;border:2px solid black; background-color: #b3b6b9; z-index: 1;">
-										<tr  style="background-color: black; ">
-											
-											<th rowspan="1" style="text-align: center; font-weight:bold; color:black;">Line no.</th>
-												<!--  style="background-color: #b3b6b9"
-												style="text-align: center; background-color: #b3b6b9"-->
-											<th rowspan="1"
-												style = "text-align: center; font-weight:bold;color:black;">Item</th>
-											<th rowspan="1"
-												style=" font-weight:bold; text-align: right; color:black;">Amount (P'000)</th>
-											<th rowspan="1"
-												style=" font-weight:bold; text-align: right; color:black;">Amount (P'000)</th>
-											
-										</tr>
-													</thead>
-							<tbody th:each="report: ${reportsummary}" style="font-family: Arial;">
-    <tr>
-        <td style="text-align: center; vertical-align:middle;">1</td>
-        <td style="font-weight:bold;" th:text="${report.r10_product}"></td>
-        <td th:attr="reportLable='R10', reportAddlCriteria1='C2'" style="text-align: right;background-color:black;"></td>
-        <td id="r10_amount_2" th:text="${#numbers.formatDecimal(report.r10_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R10', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">2</td>
-        <td style="font-weight:bold;" th:text="${report.r11_product}"></td>
-        <td th:attr="reportLable='R11', reportAddlCriteria1='C2'" style="text-align: right;background-color:black;"></td>
-        <!-- <td th:text="${#numbers.formatDecimal(report.r11_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R11', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-    	<td th:each="report: ${reportsummary1}" id="R11" style="text-align: right; width: 250px; padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r11_amount_2 != null ? #numbers.formatDecimal(report.r11_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r11_amount_2" name="r11_amount_2"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;" rowspan="5">3</td>
-        <td style="font-weight:bold;" th:text="${report.r12_product}"></td>
-        <td th:attr="reportLable='R12', reportAddlCriteria1='C2'" style="text-align: right; background-color:black;"></td>
-        <td id="r12_amount_2" th:text="${#numbers.formatDecimal(report.r12_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R12', reportAddlCriteria1='C3'" style="text-align: right; background-color: rgb(107, 122, 143); color: white;"></td>
-    </tr>
-    <tr>
-        <td style="font-weight:bold;">
-            <div style="padding-left: 30px;" th:text="${#strings.substringBefore(report.r13_product, 'year')}"></div>
-            <div th:text="'year' + ${#strings.substringAfter(report.r13_product, 'year')}"></div>
-        </td>
-        <!-- <td th:text="${#numbers.formatDecimal(report.r13_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R13', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        
-        <td th:each="report: ${reportsummary1}" id="R13" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r13_amount_1 != null ? #numbers.formatDecimal(report.r13_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r13_amount_1" name="r13_amount_1"
-			style="background-color: #FFFFFF; width: 250px; height: 50px; border-color: transparent; text-align: right; "
-		readonly /></td>
-		<td th:attr="reportLable='R13', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="padding-left: 30px;" th:text="${report.r14_product}"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r14_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R14', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        
-        <td th:each="report: ${reportsummary1}" id="R14" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r14_amount_1 != null ? #numbers.formatDecimal(report.r14_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r14_amount_1" name="r14_amount_1"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td>
-		<td th:attr="reportLable='R14', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="padding-left: 30px;" th:text="${report.r15_product}"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r15_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R15', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        
-        <td th:each="report: ${reportsummary1}" id="R15" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r15_amount_1 != null ? #numbers.formatDecimal(report.r15_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r15_amount_1" name="r15_amount_1"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td>
-		<td th:attr="reportLable='R15', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="padding-left: 30px;" th:text="${report.r16_product}"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r16_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R16', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        
-        <td th:each="report: ${reportsummary1}" id="R16" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r16_amount_1 != null ? #numbers.formatDecimal(report.r16_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r16_amount_1" name="r16_amount_1"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td>
-		<td th:attr="reportLable='R16', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">4</td>
-        <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r17_product, 'reserves')}"></div>
-            <div th:text="'reserves' + ${#strings.substringAfter(report.r17_product, 'reserves')}"></div>
-        </td>
-        <td th:attr="reportLable='R17', reportAddlCriteria1='C2'" style="text-align: right;background-color:black;"></td>
-        <td id="r17_amount_2" th:text="${#numbers.formatDecimal(report.r17_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R17', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;"></td>
-        <td style="" th:text="${report.r18_product}"></td>
-        
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r18_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R18', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        <td th:each="report: ${reportsummary1}" id="R18" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r18_amount_1 != null ? #numbers.formatDecimal(report.r18_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r18_amount_1" name="r18_amount_1"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td>
-		<td th:attr="reportLable='R18', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;"></td>
-        <td style="" th:text="${report.r19_product}"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r19_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R19', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        
-        <td th:each="report: ${reportsummary1}" id="R19" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r19_amount_1 != null ? #numbers.formatDecimal(report.r19_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r19_amount_1" name="r19_amount_1"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td>
-		<td th:attr="reportLable='R19', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;"></td>
-        <td style="" th:text="${report.r20_product}"></td>
-        <td id="r20_amount_1" th:text="${report?.r20_amount_1 != null ? #numbers.formatDecimal(report.r20_amount_1, 1, 'COMMA', 0, 'POINT') : ''}" th:attr="reportLable='R20', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
-        <td th:attr="reportLable='R20', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;"></td>
-        <td style="" th:text="${report.r21_product}"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r21_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R21', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        
-        <td th:each="report: ${reportsummary1}" id="R21" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r21_amount_1 != null ? #numbers.formatDecimal(report.r21_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r21_amount_1" name="r21_amount_1"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td>
-		<td th:attr="reportLable='R21', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">5</td>
-        <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r22_product, 'and')}"></div>
-            <div th:text="'and' + ${#strings.substringAfter(report.r22_product, 'and')}"></div>
-        </td>
-        <td th:attr="reportLable='R22', reportAddlCriteria1='C2'" style="text-align: left; background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
-        <!-- onclick="showdetailsbyRowAndColumn(this)" -->
-        <td id="r22_amount_2" th:text="${#numbers.formatDecimal(report.r22_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">6 (a)</td>
-        <td style="font-weight:bold;" th:text="${report.r23_product}"></td>
-        <td th:attr="reportLable='R23', reportAddlCriteria1='C2'" style="text-align:right; background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-        <td id="r23_amount_2" th:text="${#numbers.formatDecimal(report.r23_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">6 (b)</td>
-        <td style="font-weight:bold;" th:text="${report.r24_product}"></td>
-        <td th:attr="reportLable='R24', reportAddlCriteria1='C2'"></td>
-        <td id="r24_amount_2" th:text="${#numbers.formatDecimal(report.r24_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R24', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;"></td>
-        <td style="font-weight:bold;" th:text="${report.r25_product}"></td>
-        <td th:attr="reportLable='R25', reportAddlCriteria1='C2'" style="text-align:right;">M-CA7 (2) Column 3</td>
-        <td id="r25_amount_2" th:text="${#numbers.formatDecimal(report.r25_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R25', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;">7</td>
-        <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r26_product, 'Lines')}"></div>
-            <div th:text="'Lines' + ${#strings.substringAfter(report.r26_product, 'Lines')}"></div>
-        </td>
-        <td th:attr="reportLable='R26', reportAddlCriteria1='C2'" style="text-align: left; background-color:black"></td>
-        <td id="r26_amount_2" th:text="${#numbers.formatDecimal(report.r26_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R26', reportAddlCriteria1='C3'" style="text-align:right; font-weight:bold; background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-   </tr>
-							</tbody>
-							</table>
-							
-							<!-- second table -->
-							
-							<h5 style = "font-weight:bold;color:black;padding-top:20px;">Additional Tier 1 Capital<br> </h5>
-								<table
-									class="sticky-header-table table table-bordered table-cell table-sm table-condensed"
-									id="reports">
-									<thead class="thead-light" style=" top: 0; background-color: #b3b6b9; z-index: 1;">
-										<tr  style="background-color: black; ">
-											
-											<th rowspan="1" style="text-align: center;border:2px solid black; font-weight:bold; color:black;">Line no.</th>
-												<!--  style="background-color: #b3b6b9"
-												style="text-align: center; background-color: #b3b6b9"-->
-											<th rowspan="1"
-												style = "text-align: center; font-weight:bold;color:black;"></th>
-											<th rowspan="1"
-												style=" font-weight:bold;text-align: center;color:black; border:2px solid black;">Amount (P'000)</th>
-											<th rowspan="1"
-												style=" font-weight:bold;text-align: right;color:black;border:2px solid black;">Amount (P'000)</th>
-											
-										</tr>
-										
-													</thead>
+								
+				<table
+	class="sticky-header-table table table-bordered table-cell table-sm table-condensed"
+	id="reports">
+	<thead class="thead-light" style=" top: 0;border:2px solid black; background-color: #b3b6b9; z-index: 1;">
+		<tr style="background-color: black; ">
+			
+			<th rowspan="1" style="text-align: center; font-weight:bold; color:black;">Line no.</th>
+				<th rowspan="1"
+				style = "text-align: center; font-weight:bold;color:black;">Item</th>
+			<th rowspan="1"
+				style=" font-weight:bold; text-align: right; color:black;">Amount (P'000)</th>
+			<th rowspan="1"
+				style=" font-weight:bold; text-align: right; color:black;">Amount (P'000)</th>
+			
+		</tr>
+	</thead>
+	<tbody th:if="${!#lists.isEmpty(reportsummary)}" 
+		   th:with="report = ${reportsummary[0]}, 
+					report1 = ${!#lists.isEmpty(reportsummary1) ? reportsummary1[0] : null}" 
+		   style="font-family: Arial;">
+		<tr>
+			<td style="text-align: center; vertical-align:middle;">1</td>
+			<td style="font-weight:bold;" th:text="${report.r10_product}"></td>
+			<td th:attr="reportLable='R10', reportAddlCriteria1='C2'" style="text-align: right;background-color:black;"></td>
+			<td id="r10_amount_2" th:text="${#numbers.formatDecimal(report.r10_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R10', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">2</td>
+			<td style="font-weight:bold;" th:text="${report.r11_product}"></td>
+			<td th:attr="reportLable='R11', reportAddlCriteria1='C2'" style="text-align: right;background-color:black;"></td>
+			<td id="R11" style="text-align: right; width: 250px; padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r11_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r11_amount_2" name="r11_amount_2"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;" rowspan="5">3</td>
+			<td style="font-weight:bold;" th:text="${report.r12_product}"></td>
+			<td th:attr="reportLable='R12', reportAddlCriteria1='C2'" style="text-align: right; background-color:black;"></td>
+			<td id="r12_amount_2" th:text="${#numbers.formatDecimal(report.r12_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R12', reportAddlCriteria1='C3'" style="text-align: right; background-color: rgb(107, 122, 143); color: white;"></td>
+		</tr>
+		<tr>
+			<td style="font-weight:bold;">
+				<div style="padding-left: 30px;" th:text="${#strings.substringBefore(report.r13_product, 'year')}"></div>
+				<div th:text="'year' + ${#strings.substringAfter(report.r13_product, 'year')}"></div>
+			</td>
+			<td id="R13" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r13_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r13_amount_1" name="r13_amount_1"
+				style="background-color: #FFFFFF; width: 250px; height: 50px; border-color: transparent; text-align: right; "
+			readonly /></td>
+			<td th:attr="reportLable='R13', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="padding-left: 30px;" th:text="${report.r14_product}"></td>
+			<td id="R14" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r14_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r14_amount_1" name="r14_amount_1"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td>
+			<td th:attr="reportLable='R14', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="padding-left: 30px;" th:text="${report.r15_product}"></td>
+			<td id="R15" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r15_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r15_amount_1" name="r15_amount_1"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td>
+			<td th:attr="reportLable='R15', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="padding-left: 30px;" th:text="${report.r16_product}"></td>
+			<td id="R16" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r16_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r16_amount_1" name="r16_amount_1"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td>
+			<td th:attr="reportLable='R16', reportAddlCriteria1='C3'" style="text-align: right; background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">4</td>
+			<td style="font-weight:bold;">
+				<div th:text="${#strings.substringBefore(report.r17_product, 'reserves')}"></div>
+				<div th:text="'reserves' + ${#strings.substringAfter(report.r17_product, 'reserves')}"></div>
+			</td>
+			<td th:attr="reportLable='R17', reportAddlCriteria1='C2'" style="text-align: right;background-color:black;"></td>
+			<td id="r17_amount_2" th:text="${#numbers.formatDecimal(report.r17_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R17', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"></td>
+			<td style="" th:text="${report.r18_product}"></td>
+			
+			<td id="R18" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r18_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r18_amount_1" name="r18_amount_1"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td>
+			<td th:attr="reportLable='R18', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"></td>
+			<td style="" th:text="${report.r19_product}"></td>
+			<td id="R19" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r19_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r19_amount_1" name="r19_amount_1"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td>
+			<td th:attr="reportLable='R19', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"></td>
+			<td style="" th:text="${report.r20_product}"></td>
+			<td id="r20_amount_1" th:text="${report?.r20_amount_1 != null ? #numbers.formatDecimal(report.r20_amount_1, 1, 'COMMA', 0, 'POINT') : ''}" th:attr="reportLable='R20', reportAddlCriteria1='C2'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td>
+			<td th:attr="reportLable='R20', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"></td>
+			<td style="" th:text="${report.r21_product}"></td>
+			<td id="R21" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r21_amount_1, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r21_amount_1" name="r21_amount_1"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td>
+			<td th:attr="reportLable='R21', reportAddlCriteria1='C3'" style="text-align: right;background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">5</td>
+			<td style="font-weight:bold;">
+				<div th:text="${#strings.substringBefore(report.r22_product, 'and')}"></div>
+				<div th:text="'and' + ${#strings.substringAfter(report.r22_product, 'and')}"></div>
+			</td>
+			<td th:attr="reportLable='R22', reportAddlCriteria1='C2'" style="text-align: left; background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
+			<td id="r22_amount_2" th:text="${#numbers.formatDecimal(report.r22_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">6 (a)</td>
+			<td style="font-weight:bold;" th:text="${report.r23_product}"></td>
+			<td th:attr="reportLable='R23', reportAddlCriteria1='C2'" style="text-align:right; background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
+			<td id="r23_amount_2" th:text="${#numbers.formatDecimal(report.r23_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R22', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">6 (b)</td>
+			<td style="font-weight:bold;" th:text="${report.r24_product}"></td>
+			<td th:attr="reportLable='R24', reportAddlCriteria1='C2'"></td>
+			<td id="r24_amount_2" th:text="${#numbers.formatDecimal(report.r24_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R24', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"></td>
+			<td style="font-weight:bold;" th:text="${report.r25_product}"></td>
+			<td th:attr="reportLable='R25', reportAddlCriteria1='C2'" style="text-align:right;">M-CA7 (2) Column 3</td>
+			<td id="r25_amount_2" th:text="${#numbers.formatDecimal(report.r25_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R25', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">7</td>
+			<td style="font-weight:bold;">
+				<div th:text="${#strings.substringBefore(report.r26_product, 'Lines')}"></div>
+				<div th:text="'Lines' + ${#strings.substringAfter(report.r26_product, 'Lines')}"></div>
+			</td>
+			<td th:attr="reportLable='R26', reportAddlCriteria1='C2'" style="text-align: left; background-color:black"></td>
+			<td id="r26_amount_2" th:text="${#numbers.formatDecimal(report.r26_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R26', reportAddlCriteria1='C3'" style="text-align:right; font-weight:bold; background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+	   </tr>
+	</tbody>
+</table>
 
-<tbody th:each="report: ${reportsummary}" style="font-family: Arial;">
-    <tr style="background-color: black;">
-        <td rowspan="1" style="text-align: center;">8</td>
-        <td rowspan="1" style="text-align: center; border:2px solid black;font-weight:bold;color:black;">Item</td>
-        <td rowspan="1" style="font-weight:bold;background-color:#C0C0C0;"></td>
-        <td rowspan="1" style="font-weight:bold; background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">9</td>
-        <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r31_product, 'Additional')}"></div>
-            <div th:text="'Additional' + ${#strings.substringAfter(report.r31_product, 'Additional')}"></div>
-        </td>
-        <td th:attr="reportLable='R31', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
-        <td id="r31_amount_2" th:text="${#numbers.formatDecimal(report.r31_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R31', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">10</td>
-        <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r32_product, 'Additional')}"></div>
-            <div th:text="'Additional' + ${#strings.substringAfter(report.r32_product, 'Additional')}"></div>
-        </td>
-        <td th:text="${#numbers.formatDecimal(report.r32_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R32', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r32_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R32', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-   		<td th:each="report: ${reportsummary1}" id="R32" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r32_amount_2 != null ? #numbers.formatDecimal(report.r32_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r32_amount_2" name="r32_amount_2"
-			style="background-color: #FFFFFF; width: 250px; height: 50px; border-color: transparent; text-align: right; "
-		readonly /></td> 
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">11</td>
-        <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r33_product, 'Tier')}"></div>
-            <div th:text="'Tier' + ${#strings.substringAfter(report.r33_product, 'Tier')}"></div>
-        </td>
-        <td th:attr="reportLable='R33', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
-        <td id="r33_amount_2" th:text="${#numbers.formatDecimal(report.r33_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R33', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">12</td>
-        <td style="font-weight:bold;" th:text="${report.r34_product}"></td>
-        <td th:attr="reportLable='R34', reportAddlCriteria1='C2'" style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-        <td id="r34_amount_2" th:text="${#numbers.formatDecimal(report.r34_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R34', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">13</td>
-        <td style="font-weight:bold;" th:text="${report.r35_product}"></td>
-        <td th:attr="reportLable='R35', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0;"></td>
-        <td id="r35_amount_2" th:text="${#numbers.formatDecimal(report.r35_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R35', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">14</td>
-        <td style="font-weight:bold;" th:text="${report.r36_product}"></td>
-        <td th:attr="reportLable='R36', reportAddlCriteria1='C2'" style="text-align: left;"></td>
-        <td id="r36_amount_2" th:text="${#numbers.formatDecimal(report.r36_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R36', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white;vertical-align: middle;"></td>
-     </tr> 
-							
-							</tbody>
-							</table>
-							
-														<!-- third table -->
-							
-							<h5 style = "font-weight:bold;color:black;padding-top:20px;">Tier 2 Capital<br> </h5>
-								<table
-									class="sticky-header-table table table-bordered table-cell table-sm table-condensed"
-									id="reports">
-									<thead class="thead-light" style=" top: 0; background-color: #b3b6b9; z-index: 1;">
-										<tr  style="background-color: black; ">
-											
-											<th rowspan="1" style="text-align: center;border:2px solid black; font-weight:bold; color:black;">Line no.</th>
-												<!--  style="background-color: #b3b6b9"
-												style="text-align: center; background-color: #b3b6b9"-->
-											<th rowspan="1"
-												style = "text-align: center; font-weight:bold;color:black;"></th>
-											<th rowspan="1"
-												style=" font-weight:bold;text-align: center;border:2px solid black;color:black;">Amount (P'000)</th>
-											<th rowspan="1"
-												style=" font-weight:bold;text-align: right; border:2px solid black;color:black;">Amount (P'000)</th>
-											
-										</tr>
-										
+<h5 style = "font-weight:bold;color:black;padding-top:20px;">Additional Tier 1 Capital<br> </h5>
+	<table
+		class="sticky-header-table table table-bordered table-cell table-sm table-condensed"
+		id="reports">
+		<thead class="thead-light" style=" top: 0; background-color: #b3b6b9; z-index: 1;">
+			<tr  style="background-color: black; ">
+				
+				<th rowspan="1" style="text-align: center;border:2px solid black; font-weight:bold; color:black;">Line no.</th>
+					<th rowspan="1"
+					style = "text-align: center; font-weight:bold;color:black;"></th>
+				<th rowspan="1"
+					style=" font-weight:bold;text-align: center;color:black; border:2px solid black;">Amount (P'000)</th>
+				<th rowspan="1"
+					style=" font-weight:bold;text-align: right;color:black;border:2px solid black;">Amount (P'000)</th>
+				
+			</tr>
+			
+		</thead>
+	<tbody th:if="${!#lists.isEmpty(reportsummary)}" 
+		   th:with="report = ${reportsummary[0]}, 
+					report1 = ${!#lists.isEmpty(reportsummary1) ? reportsummary1[0] : null}" 
+		   style="font-family: Arial;">
+		<tr style="background-color: black;">
+			<td rowspan="1" style="text-align: center;">8</td>
+			<td rowspan="1" style="text-align: center; border:2px solid black;font-weight:bold;color:black;">Item</td>
+			<td rowspan="1" style="font-weight:bold;background-color:#C0C0C0;"></td>
+			<td rowspan="1" style="font-weight:bold; background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">9</td>
+			<td style="font-weight:bold;">
+				<div th:text="${#strings.substringBefore(report.r31_product, 'Additional')}"></div>
+				<div th:text="'Additional' + ${#strings.substringAfter(report.r31_product, 'Additional')}"></div>
+			</td>
+			<td th:attr="reportLable='R31', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
+			<td id="r31_amount_2" th:text="${#numbers.formatDecimal(report.r31_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R31', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">10</td>
+			<td style="font-weight:bold;">
+				<div th:text="${#strings.substringBefore(report.r32_product, 'Additional')}"></div>
+				<div th:text="'Additional' + ${#strings.substringAfter(report.r32_product, 'Additional')}"></div>
+			</td>
+			<td th:text="${#numbers.formatDecimal(report.r32_amount_1, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R32', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
+			<td id="R32" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r32_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r32_amount_2" name="r32_amount_2"
+				style="background-color: #FFFFFF; width: 250px; height: 50px; border-color: transparent; text-align: right; "
+			readonly /></td> 
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">11</td>
+			<td style="font-weight:bold;">
+				<div th:text="${#strings.substringBefore(report.r33_product, 'Tier')}"></div>
+				<div th:text="'Tier' + ${#strings.substringAfter(report.r33_product, 'Tier')}"></div>
+			</td>
+			<td th:attr="reportLable='R33', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (9) M-CA4</td>
+			<td id="r33_amount_2" th:text="${#numbers.formatDecimal(report.r33_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R33', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">12</td>
+			<td style="font-weight:bold;" th:text="${report.r34_product}"></td>
+			<td th:attr="reportLable='R34', reportAddlCriteria1='C2'" style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
+			<td id="r34_amount_2" th:text="${#numbers.formatDecimal(report.r34_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R34', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">13</td>
+			<td style="font-weight:bold;" th:text="${report.r35_product}"></td>
+			<td th:attr="reportLable='R35', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0;"></td>
+			<td id="r35_amount_2" th:text="${#numbers.formatDecimal(report.r35_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R35', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">14</td>
+			<td style="font-weight:bold;" th:text="${report.r36_product}"></td>
+			<td th:attr="reportLable='R36', reportAddlCriteria1='C2'" style="text-align: left;"></td>
+			<td id="r36_amount_2" th:text="${#numbers.formatDecimal(report.r36_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R36', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white;vertical-align: middle;"></td>
+		 </tr> 
+	</tbody>
+</table>
 
-<tbody th:each="report: ${reportsummary}" style="font-family: Arial;">
-    <tr style="background-color: black;">
-        <td rowspan="1" style="text-align: center; color:black;">15</td>
-        <td rowspan="1" style="text-align: center; border:2px solid black;font-weight:bold;color:black;">Item</td>
-        <td rowspan="1" style="font-weight:bold;background-color:#C0C0C0;"></td>
-        <td rowspan="1" style="font-weight:bold; background-color:black;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">16</td>
-        <td style="font-weight:bold; vertical-align: middle;" th:text="${report.r41_product}"></td>
-        <td th:attr="reportLable='R41', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
-        <td id="r41_amount_2" th:text="${#numbers.formatDecimal(report.r41_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R41', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">17</td>
-        <td style="font-weight:bold;" th:text="${report.r42_product}"></td>
-        <td th:attr="reportLable='R42', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r42_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R42', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-    	<td th:each="report: ${reportsummary1}" id="R42" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r42_amount_2 != null ? #numbers.formatDecimal(report.r42_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r42_amount_2" name="r42_amount_2"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td> 
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">18</td>
-        <td style="font-weight:bold;" th:text="${report.r43_product}"></td>
-        <td th:attr="reportLable='R43', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
-        <!-- <td th:text="${#numbers.formatDecimal(report.r43_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R43', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        <td th:each="report: ${reportsummary1}" id="R43" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r43_amount_2 != null ? #numbers.formatDecimal(report.r43_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r43_amount_2" name="r43_amount_2"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td> 
-        
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">19</td>
-        <td style="font-weight:bold;" th:text="${report.r44_product}"></td>
-        <td th:attr="reportLable='R44', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r44_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R44', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        <td th:each="report: ${reportsummary1}" id="R44" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r44_amount_2 != null ? #numbers.formatDecimal(report.r44_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r44_amount_2" name="r44_amount_2"
-			style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
-		readonly /></td> 
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">20</td>
-        <td style="font-weight:bold;">
-            <div th:text="${#strings.substringBefore(report.r45_product, 'inclusion')}"></div>
-            <div th:text="'inclusion' + ${#strings.substringAfter(report.r45_product, 'inclusion')}"></div>
-        </td>
-        <td th:attr="reportLable='R45', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0;vertical-align: middle;">Ref. (9) M-CA4</td>
-        <td id="r45_amount_2" th:text="${#numbers.formatDecimal(report.r45_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R45', reportAddlCriteria1='C3'"  style="vertical-align: middle; text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">21</td>
-        <td style="font-weight:bold;" >
-            <div th:text="${#strings.substringBefore(report.r46_product, '1.25')}"></div>
-            <div th:text="'1.25' + ${#strings.substringAfter(report.r46_product, '1.25')}"></div>
-        </td>
-        <td th:attr="reportLable='R46', reportAddlCriteria1='C2'" style="text-align: left;background-color :#C0C0C0;"></td>
-        <!-- <td th:each="report: ${reportsummary}" th:text="${#numbers.formatDecimal(report.r46_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R46', reportAddlCriteria1='C3'" onclick="showdetailsbyRowAndColumn(this)" style="vertical-align: middle; text-align: right;"></td> -->
-        <td th:each="report: ${reportsummary1}" id="R46" style="text-align: right; width: 250px;  padding-left:10px; ">
-    	<input
-			class="display-input Show_input " type="text"
-			th:value="${report.r46_amount_2 != null ? #numbers.formatDecimal(report.r46_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
-			id="r46_amount_2" name="r46_amount_2"
-			style="background-color: #FFFFFF; width: 250px; height: 50px; border-color: transparent; text-align: right; "
-		readonly /></td> 
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">22</td>
-        <td style="font-weight:bold;" th:text="${report.r47_product}"></td>
-        <td th:attr="reportLable='R47', reportAddlCriteria1='C2'" style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
-        <td id="r47_amount_2" th:text="${#numbers.formatDecimal(report.r47_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R47', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">23</td>
-        <td style="font-weight:bold;" th:text="${report.r48_product}"></td>
-        <td th:attr="reportLable='R48', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0;"></td>
-        <td id="r48_amount_2" th:text="${#numbers.formatDecimal(report.r48_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R48', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-    <tr>
-        <td style="text-align: center;vertical-align:middle;">24</td>
-        <td style="font-weight:bold;" th:text="${report.r49_product}"></td>
-        <td th:attr="reportLable='R49', reportAddlCriteria1='C2'" style="text-align: left;"></td>
-        <td id="r49_amount_2" th:text="${#numbers.formatDecimal(report.r49_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R49', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
-    </tr>
-</tbody>
+<h5 style = "font-weight:bold;color:black;padding-top:20px;">Tier 2 Capital<br> </h5>
+	<table
+		class="sticky-header-table table table-bordered table-cell table-sm table-condensed"
+		id="reports">
+		<thead class="thead-light" style=" top: 0; background-color: #b3b6b9; z-index: 1;">
+			<tr  style="background-color: black; ">
+				
+				<th rowspan="1" style="text-align: center;border:2px solid black; font-weight:bold; color:black;">Line no.</th>
+					<th rowspan="1"
+					style = "text-align: center; font-weight:bold;color:black;"></th>
+				<th rowspan="1"
+					style=" font-weight:bold;text-align: center;border:2px solid black;color:black;">Amount (P'000)</th>
+				<th rowspan="1"
+					style=" font-weight:bold;text-align: right; border:2px solid black;color:black;">Amount (P'000)</th>
+				
+			</tr>
+			
+	<tbody th:if="${!#lists.isEmpty(reportsummary)}" 
+		   th:with="report = ${reportsummary[0]}, 
+					report1 = ${!#lists.isEmpty(reportsummary1) ? reportsummary1[0] : null}" 
+		   style="font-family: Arial;">
+		<tr style="background-color: black;">
+			<td rowspan="1" style="text-align: center; color:black;">15</td>
+			<td rowspan="1" style="text-align: center; border:2px solid black;font-weight:bold;color:black;">Item</td>
+			<td rowspan="1" style="font-weight:bold;background-color:#C0C0C0;"></td>
+			<td rowspan="1" style="font-weight:bold; background-color:black;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">16</td>
+			<td style="font-weight:bold; vertical-align: middle;" th:text="${report.r41_product}"></td>
+			<td th:attr="reportLable='R41', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0; vertical-align: middle;">Ref. (10) M-CA5</td>
+			<td id="r41_amount_2" th:text="${#numbers.formatDecimal(report.r41_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R41', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">17</td>
+			<td style="font-weight:bold;" th:text="${report.r42_product}"></td>
+			<td th:attr="reportLable='R42', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
+			<td id="R42" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r42_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r42_amount_2" name="r42_amount_2"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td> 
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">18</td>
+			<td style="font-weight:bold;" th:text="${report.r43_product}"></td>
+			<td th:attr="reportLable='R43', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
+			<td id="R43" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r43_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r43_amount_2" name="r43_amount_2"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td> 
+			
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">19</td>
+			<td style="font-weight:bold;" th:text="${report.r44_product}"></td>
+			<td th:attr="reportLable='R44', reportAddlCriteria1='C2'" style="text-align: right;background-color :#C0C0C0;"></td>
+			<td id="R44" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r44_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r44_amount_2" name="r44_amount_2"
+				style="background-color: #FFFFFF; width: 250px; height: 28px; border-color: transparent; text-align: right; "
+			readonly /></td> 
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">20</td>
+			<td style="font-weight:bold;">
+				<div th:text="${#strings.substringBefore(report.r45_product, 'inclusion')}"></div>
+				<div th:text="'inclusion' + ${#strings.substringAfter(report.r45_product, 'inclusion')}"></div>
+			</td>
+			<td th:attr="reportLable='R45', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0;vertical-align: middle;">Ref. (9) M-CA4</td>
+			<td id="r45_amount_2" th:text="${#numbers.formatDecimal(report.r45_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R45', reportAddlCriteria1='C3'"  style="vertical-align: middle; text-align: right;background-color: rgb(107, 122, 143); color: white;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">21</td>
+			<td style="font-weight:bold;" >
+				<div th:text="${#strings.substringBefore(report.r46_product, '1.25')}"></div>
+				<div th:text="'1.25' + ${#strings.substringAfter(report.r46_product, '1.25')}"></div>
+			</td>
+			<td th:attr="reportLable='R46', reportAddlCriteria1='C2'" style="text-align: left;background-color :#C0C0C0;"></td>
+			<td id="R46" style="text-align: right; width: 250px;  padding-left:10px; ">
+			<input
+				class="display-input Show_input " type="text"
+				th:value="${report1 != null ? #numbers.formatDecimal(report1.r46_amount_2, 1, 'COMMA', 0, 'POINT') : '0'}"
+				id="r46_amount_2" name="r46_amount_2"
+				style="background-color: #FFFFFF; width: 250px; height: 50px; border-color: transparent; text-align: right; "
+			readonly /></td> 
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">22</td>
+			<td style="font-weight:bold;" th:text="${report.r47_product}"></td>
+			<td th:attr="reportLable='R47', reportAddlCriteria1='C2'" style="text-align: right;background-color:#C0C0C0; vertical-align: middle;">Ref. (8) M-CA3</td>
+			<td id="r47_amount_2" th:text="${#numbers.formatDecimal(report.r47_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R47', reportAddlCriteria1='C3'"  style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">23</td>
+			<td style="font-weight:bold;" th:text="${report.r48_product}"></td>
+			<td th:attr="reportLable='R48', reportAddlCriteria1='C2'" style="text-align: left;background-color:#C0C0C0;"></td>
+			<td id="r48_amount_2" th:text="${#numbers.formatDecimal(report.r48_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R48', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;vertical-align:middle;">24</td>
+			<td style="font-weight:bold;" th:text="${report.r49_product}"></td>
+			<td th:attr="reportLable='R49', reportAddlCriteria1='C2'" style="text-align: left;"></td>
+			<td id="r49_amount_2" th:text="${#numbers.formatDecimal(report.r49_amount_2, 1, 'COMMA', 0, 'POINT')}" th:attr="reportLable='R49', reportAddlCriteria1='C3'" style="text-align: right;background-color: rgb(107, 122, 143); color: white; vertical-align: middle;"></td>
+		</tr>
+	</tbody>
+</table>
 							</table>
 							</div>
 							
