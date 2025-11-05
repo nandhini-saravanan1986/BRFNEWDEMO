@@ -15362,7 +15362,7 @@ public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HArchival() {
 
     try {
         List<M_SRWA_12H_Archival_Summary_Entity> repoData =
-                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersionAll();
 
         if (repoData != null && !repoData.isEmpty()) {
             archivalList.addAll(repoData);

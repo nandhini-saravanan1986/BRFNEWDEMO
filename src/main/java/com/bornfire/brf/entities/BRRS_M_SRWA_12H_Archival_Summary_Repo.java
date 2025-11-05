@@ -37,4 +37,6 @@ public interface BRRS_M_SRWA_12H_Archival_Summary_Repo
     @Query(value = "SELECT *  FROM BRRS_M_SRWA_12H_ARCHIVALTABLE_SUMMARY WHERE REPORT_VERSION IS NOT NULL ORDER BY REPORT_VERSION DESC FETCH FIRST 1 ROWS ONLY ", nativeQuery = true)
     List<M_SRWA_12H_Archival_Summary_Entity> getdatabydateListWithVersion();
 
+        @Query(value = "SELECT *  FROM BRRS_M_SRWA_12H_ARCHIVALTABLE_SUMMARY WHERE REPORT_VERSION IS NOT NULL ", nativeQuery = true)
+    List<M_SRWA_12H_Archival_Summary_Entity> getdatabydateListWithVersionAll();
 }

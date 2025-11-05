@@ -1,9 +1,9 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <!-- 
-CREATED BY	: VINOTH KUMAR S 
-CREATED ON	: 07.07.2025
-PURPOSE		: resubmit
+CREATED BY	: GOPIKA
+CREATED ON	: 03.11.2025
+PURPOSE		: RESUBMISSION
 -->
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
@@ -415,16 +415,9 @@ function getVali(a) {
 							</tr > -->
 
 
-              							<tbody style="font-family: Arial;">
+<tbody style="font-family: Arial;">
 <tr th:each="ReData : ${Resubmitdata}">
-    <!-- <td class="underline"
-        th:attr="data-rptcode=${rptcode},
-                 data-todate=${#dates.format(ReData.reportDate,'dd/MM/yyyy')},
-                 data-version=${ReData.reportVersion}"
-        style="color: #08a6f1;"
-        th:text="${#dates.format(ReData.reportDate,'dd/MM/yyyy')}"
-        onclick="getReport(this);">
-    </td> -->
+
 <td class="underline"
     th:attr="data-rptcode=${rptcode},
              data-todate=${#dates.format(ReData.reportDate,'dd/MM/yyyy')},
@@ -433,10 +426,22 @@ function getVali(a) {
     th:text="${#dates.format(ReData.reportDate,'dd/MM/yyyy')}"
     onclick="getReport(this, event)">
 </td>
-
     <td th:text="${ReData.reportVersion}"></td>
     <td th:text="${domain}"></td>
 </tr>
+<!-- <tr th:each="ReData : ${Resubmitdata}">
+<td class="underline"
+    th:attr="data-rptcode=${rptcode},
+             data-todate=${#dates.format(ReData.reportDate,'dd/MM/yyyy')},
+             data-version=${ReData.dataEntryVersion}"
+    style="color: #08a6f1; cursor: pointer;"
+    th:text="${#dates.format(ReData.reportDate,'dd/MM/yyyy')}"
+    onclick="getReport(this, event)">
+</td> 
+ 
+    <td th:text="${ReData.dataEntryVersion}"></td>
+    <td th:text="${domain}"></td>
+</tr> -->
 								
 								<tr th:each="userProfile : ${resubmissionData}"
 									th:attr="data-cust_id=${userProfile.srlNo}"

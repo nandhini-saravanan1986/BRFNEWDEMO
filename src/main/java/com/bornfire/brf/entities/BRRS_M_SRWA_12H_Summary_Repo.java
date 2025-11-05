@@ -31,4 +31,7 @@ List<M_SRWA_12H_Summary_Entity> getdatabydateListWithVersion(String todate);
 
     // Check if a version exists for a report date
     Optional<M_SRWA_12H_Summary_Entity> findByReportDateAndReportVersion(Date reportDate, String reportVersion);
+
+        @Query(value = "SELECT *  FROM BRRS_M_SRWA_12H_SUMMARYTABLE WHERE REPORT_VERSION IS NOT NULL ORDER BY REPORT_VERSION DESC FETCH FIRST 1 ROWS ONLY ", nativeQuery = true)
+    List<M_SRWA_12H_Summary_Entity> getdatabydateListWithVersion();
 }

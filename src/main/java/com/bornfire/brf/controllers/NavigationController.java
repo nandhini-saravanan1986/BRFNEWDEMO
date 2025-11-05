@@ -496,36 +496,69 @@ public class NavigationController {
 
 
 	
-  @RequestMapping(value = "Monthly1-Resubmission", method = { RequestMethod.GET,RequestMethod.POST })
+//   @RequestMapping(value = "Monthly1-Resubmission", method = { RequestMethod.GET,RequestMethod.POST })
+// 	  public String brrsResubmission(Model md, HttpServletRequest req)
+// 	  {
+// 		  System.out.println("Testting");
+// 	  md.addAttribute("menu", "BRRS - BRRS RESUBMISSION");
+// 	System.out.println("count"+rrReportlist.getReportListmonthly1().size());
+// 	  md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
+// 	  return "BRRS/BRRSResubmission";
+// 	  }
+
+
+	  @RequestMapping(value = "Resubmission-1", method = { RequestMethod.GET,RequestMethod.POST })
 	  public String brrsResubmission(Model md, HttpServletRequest req)
 	  {
-		  System.out.println("Testting");
-	  md.addAttribute("menu", "BRRS - BRRS RESUBMISSION");
+	//String roleId = (String) req.getSession().getAttribute("ROLEID");
+	  //String domainid = (String) req.getSession().getAttribute("DOMAINID");
+	 // md.addAttribute("menu", "Monthly 1 - BRF Report");
 	System.out.println("count"+rrReportlist.getReportListmonthly1().size());
 	  md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
+	  
 	  return "BRRS/BRRSResubmission";
+	  
 	  }
 
-	@RequestMapping(value = "Resubmission", method = { RequestMethod.GET, RequestMethod.POST })
-public String Resubmission(
-        Model md,
-        @RequestParam(value = "rptcode", required = false) String rptcode,
-        @RequestParam(value = "date", required = false) String date,
-        @RequestParam(value = "version", required = false) String version,
-        HttpServletRequest req) {
-    System.out.println("rptcode: " + rptcode);
-    System.out.println("date: " + date);
-    System.out.println("version: " + version);
-    RRReport data = rrReportlist.getReportbyrptcode(rptcode);
-    md.addAttribute("reportlist1", data);
-    md.addAttribute("menu", data.getRptDescription());
-    md.addAttribute("domain", data.getDomainId());
-    md.addAttribute("rptcode", data.getRptCode());
-    List<Object> resubmissionData = regulatoryreportservices.getResub(rptcode);
-    md.addAttribute("Resubmitdata", resubmissionData);
-    md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
-    return "BRRS/BRRSResubmissionform";
-}
+// 	@RequestMapping(value = "Resubmission", method = { RequestMethod.GET, RequestMethod.POST })
+// public String Resubmission(
+//         Model md,
+//         @RequestParam(value = "rptcode", required = false) String rptcode,
+//         @RequestParam(value = "date", required = false) String date,
+//         @RequestParam(value = "version", required = false) String version,
+//         HttpServletRequest req) {
+//     System.out.println("rptcode: " + rptcode);
+//     System.out.println("date: " + date);
+//     System.out.println("version: " + version);
+//     RRReport data = rrReportlist.getReportbyrptcode(rptcode);
+//     md.addAttribute("reportlist1", data);
+//     md.addAttribute("menu", data.getRptDescription());
+//     md.addAttribute("domain", data.getDomainId());
+//     md.addAttribute("rptcode", data.getRptCode());
+//     // List<Object> resubmissionData = regulatoryreportservices.getResub(rptcode);
+//     // md.addAttribute("Resubmitdata", resubmissionData);
+//     md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());
+//     return "BRRS/BRRSResubmissionform";
+// }
 
+	@RequestMapping(value = "ResubmissionValidation", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ResubmissionValidation(Model md, @RequestParam(value = "rptcode", required = false) String rptcode,
+			@RequestParam(value = "todate", required = false) String todate, HttpServletRequest req) {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+
+		// md.addAttribute("reportvalue", "RBS Reports");
+		// md.addAttribute("reportid", "RBSReports");
+
+		String domainid = (String) req.getSession().getAttribute("DOMAINID");
+		// md.addAttribute("reportsflag", "reportsflag");
+		// md.addAttribute("menu", "RBS Data Maintenance");
+
+		md.addAttribute("reportlist", cbuae_brfvalidationsRepo.getValidationList(rptcode));
+		md.addAttribute("reportlist1", rrReportlist.getReportbyrptcode(rptcode));
+		md.addAttribute("RoleId", roleId);
+
+		// md.addAttribute("rpt_date", todate);
+		return "ResubmissionValidation";
+	}
 
 }

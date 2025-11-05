@@ -3,6 +3,7 @@ package com.bornfire.brf.services;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.transaction.Transactional;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bornfire.brf.entities.M_FAS_Archival_Detail_Entity;
 import com.bornfire.brf.entities.M_SRWA_12H_Archival_Summary_Entity;
 import com.bornfire.brf.entities.Q_ATF_ARCHIVAL_SUMMARY_REPO;
 
@@ -1754,14 +1756,14 @@ public class RegulatoryReportServices {
 			break;
 			
 			
-			case "Q_BRANCHNET":
-			try {
-				archivalData = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETArchival();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;	
+			// case "Q_BRANCHNET":
+			// try {
+			// 	archivalData = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETArchival();
+			// } catch (Exception e) {
+			// 	// TODO Auto-generated catch block
+			// 	e.printStackTrace();
+			// }
+			// break;	
 
 			case "Q_STAFF":
 			try {
@@ -1995,7 +1997,27 @@ public class RegulatoryReportServices {
 			}
 			break;
 			
+
+			       case "M_SRWA_12H":
+            try {         
+                //  Pass reportVersion as null (to fetch the latest)
+                String reportVersion = null;
+                // ✅ Call the correct method signature
+                List<M_SRWA_12H_Archival_Summary_Entity> resubList =
+                        BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
+                archivalData.addAll(resubList);
+
+                System.out.println(" M_SRWA_12H Archival data Fetched: " + resubList.size());
+            } catch (Exception e) {
+                System.err.println(" Error fetching M_SRWA_12H archival data: " + e.getMessage());
+                e.printStackTrace();
+            }
+            break;
 		}
+
+
+		
+ 
 		return archivalData;
 	}
 
@@ -2222,62 +2244,125 @@ public class RegulatoryReportServices {
 //	
 
 
-//Resub
-public List<Object> getResub(String rptcode) {
-    List<Object> resubmissionData = new ArrayList<>();
+//Resubmission View 
+//Report Date | Version | Domain
+// public List<Object> getResub(String rptcode) {
+//     List<Object> resubmissionData = new ArrayList<>();
 
-    switch (rptcode) {
-        case "M_SRWA_12H":
-            try {
-                // choose a version or pass null to fetch latest
-                String reportVersion = null; 
+//     switch (rptcode) {
+//         case "M_SRWA_12H":
+//             try {
+//                 // choose a version or pass null to fetch latest
+//                 String reportVersion = null; 
 
-                // Call the correct method
-                List<M_SRWA_12H_Archival_Summary_Entity> resubList =
-                        BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HResub();
+//                 // Call the correct method
+//                 List<M_SRWA_12H_Archival_Summary_Entity> resubList =
+//                         BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HResub();
 
-                resubmissionData.addAll(resubList);
+//                 resubmissionData.addAll(resubList);
 
-                System.out.println(" Resubmission data fetched for M_SRWA_12H: " + resubList.size());
-            } catch (Exception e) {
-                System.err.println(" Error fetching resubmission data: " + e.getMessage());
-                e.printStackTrace();
-            }
-            break;
+//                 System.out.println(" Resubmission data fetched for M_SRWA_12H: " + resubList.size());
+//             } catch (Exception e) {
+//                 System.err.println(" Error fetching resubmission data: " + e.getMessage());
+//                 e.printStackTrace();
+//             }
+//             break;
 
-        default:
-            System.out.println(" Unsupported report code: " + rptcode);
-    }
+// 					case "Q_BRANCHNET":
+// 				try {
+// 					Map<String, List<?>> resubData = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNET_ResubAll();
 
-    return resubmissionData;
+// 					resubmissionData.addAll((List<?>) resubData.get("Entity1"));
+// 					// resubmissionData.addAll((List<?>) resubData.get("Entity2"));
+// 					// resubmissionData.addAll((List<?>) resubData.get("Entity3"));
+// 					// resubmissionData.addAll((List<?>) resubData.get("Entity4"));
+// 					System.out.println("Resubmission data fetched for Q_BRANCHNET. Total records: " + resubmissionData.size());
+// 				} catch (Exception e) {
+// 					System.err.println("Error fetching resubmission data for Q_BRANCHNET: " + e.getMessage());
+// 					e.printStackTrace();
+// 				}
+// 				break;	
+
+// 				 case "M_FAS":
+//               try {
+//                   List<M_FAS_Archival_Detail_Entity> resubList =
+//                           BRRS_M_FAS_reportservice.getM_FASResub();
+//                   resubmissionData.addAll(resubList);
+//                   System.out.println("Resubmission data fetched for M_FAS: " + resubList.size());
+//               } catch (Exception e) {
+//                   System.err.println("Error fetching resubmission data: " + e.getMessage());
+//                   e.printStackTrace();
+//               }
+//               break;
+
+
+
+//         default:
+//             System.out.println(" Unsupported report code: " + rptcode);
+//     }
+
+//     return resubmissionData;
+// }
+
+
+
+//Archival View
+//Report Date | Version | Domain
+// public List<Object> getArchival1(String rptcode) {
+//     List<Object> archivalData = new ArrayList<>();
+
+    // switch (rptcode) {
+    //     case "M_SRWA_12H":
+    //         try {         
+    //             //  Pass reportVersion as null (to fetch the latest)
+    //             String reportVersion = null;
+    //             // ✅ Call the correct method signature
+    //             List<M_SRWA_12H_Archival_Summary_Entity> resubList =
+    //                     BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
+    //             archivalData.addAll(resubList);
+
+    //             System.out.println(" M_SRWA_12H Archival data Fetched: " + resubList.size());
+    //         } catch (Exception e) {
+    //             System.err.println(" Error fetching M_SRWA_12H archival data: " + e.getMessage());
+    //             e.printStackTrace();
+    //         }
+    //         break;
+
+	// 	case "Q_BRANCHNET":
+	// 			try {
+	// 				Map<String, List<?>> archivalMap = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETArchival();
+
+	// 				archivalData.addAll((List<?>) archivalMap.get("Entity1"));
+	// 				// archivalData.addAll((List<?>) archivalMap.get("Entity2"));
+	// 				// archivalData.addAll((List<?>) archivalMap.get("Entity3"));
+	// 				// archivalData.addAll((List<?>) archivalMap.get("Entity4"));
+
+	// 				System.out.println("Q_BRANCHNET archival data merged. Total: " + archivalData.size());
+	// 			} catch (Exception e) {
+	// 				System.err.println("Error fetching Q_BRANCHNET archival data: " + e.getMessage());
+	// 				e.printStackTrace();
+	// 			}
+	// 			break;	
+
+
+	// 			 case "M_FAS":
+    //         try {
+    //             // ✅ Call the M_FAS archival retrieval method
+    //             List<M_FAS_Archival_Detail_Entity> repoData =
+    //                     BRRS_M_FAS_reportservice.getM_FASArchival();
+
+    //             archivalData.addAll(repoData);
+    //             System.out.println("M_FAS Archival data fetched: " + repoData.size());
+    //         } catch (Exception e) {
+    //             System.err.println("Error fetching M_FAS archival data: " + e.getMessage());
+    //             e.printStackTrace();
+    //         }
+    //         break;
+    //     default:
+    //         System.out.println(" Unsupported report code: " + rptcode);
+    // }
+    // return archivalData;
 }
 
 
-//Archival
-public List<Object> getArchival1(String rptcode) {
-    List<Object> archivalData = new ArrayList<>();
 
-    switch (rptcode) {
-        case "M_SRWA_12H":
-            try {         
-                //  Pass reportVersion as null (to fetch the latest)
-                String reportVersion = null;
-                // ✅ Call the correct method signature
-                List<M_SRWA_12H_Archival_Summary_Entity> resubList =
-                        BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
-                archivalData.addAll(resubList);
-
-                System.out.println(" M_SRWA_12H Archival data Fetched: " + resubList.size());
-            } catch (Exception e) {
-                System.err.println(" Error fetching M_SRWA_12H archival data: " + e.getMessage());
-                e.printStackTrace();
-            }
-            break;
-        default:
-            System.out.println(" Unsupported report code: " + rptcode);
-    }
-    return archivalData;
-}
-
-
-}
