@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
+
 @Entity
 @Table(name = "BRRS_M_BOP_DETAILTABLE")
 public class M_BOP_Detail_Entity {

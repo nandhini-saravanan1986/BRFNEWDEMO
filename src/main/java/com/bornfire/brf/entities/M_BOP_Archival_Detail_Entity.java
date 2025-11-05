@@ -11,6 +11,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "BRRS_M_BOP_ARCHIVALTABLE_DETAIL")
+
+
 public class M_BOP_Archival_Detail_Entity {
 	
 	@Id
