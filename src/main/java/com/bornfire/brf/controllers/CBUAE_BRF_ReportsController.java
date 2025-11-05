@@ -7,7 +7,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,13 +29,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bornfire.brf.entities.BRRS_M_AIDP_Summary_Entity1;
@@ -56,13 +52,12 @@ import com.bornfire.brf.entities.M_CA7_Summary_Entity;
 import com.bornfire.brf.entities.M_DEP3_Manual_Summary_Entity2;
 import com.bornfire.brf.entities.M_DEP3_Manual_Summary_Entity3;
 import com.bornfire.brf.entities.M_EPR_Summary_Entity;
-import com.bornfire.brf.entities.M_FAS_Archival_Detail_Entity;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity1;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity2;
 import com.bornfire.brf.entities.M_FXR_Summary_Entity3;
 import com.bornfire.brf.entities.M_GMIRT_Summary_Entity;
 import com.bornfire.brf.entities.M_LIQ_Manual_Summary_Entity;
-import com.bornfire.brf.entities.M_SCI_E_Summary_Entity;
+import com.bornfire.brf.entities.M_SCI_E_Manual_Summary_Entity;
 import com.bornfire.brf.entities.M_SECL_Summary_Entity;
 import com.bornfire.brf.entities.M_SIR_Archival_Summary_Entity;
 import com.bornfire.brf.entities.M_SIR_Summary_Entity;
@@ -107,7 +102,6 @@ import com.bornfire.brf.services.BRRS_M_CA6_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA7_ReportService;
 import com.bornfire.brf.services.BRRS_M_DEP3_ReportService;
 import com.bornfire.brf.services.BRRS_M_EPR_ReportService;
-import com.bornfire.brf.services.BRRS_M_FAS_ReportService;
 import com.bornfire.brf.services.BRRS_M_FXR_ReportService;
 import com.bornfire.brf.services.BRRS_M_GMIRT_ReportService;
 import com.bornfire.brf.services.BRRS_M_LIQ_ReportService;
@@ -549,7 +543,7 @@ public class CBUAE_BRF_ReportsController {
 		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		       
 		         // ✅ set the asondate into entity
-		         request.setReportDate(asondate);
+		         request.setREPORT_DATE(asondate);
 		         Q_BRANCHNETservice.QBranchnetUpdate1(request);
 		         return ResponseEntity.ok("Updated Successfully");
 		     } catch (Exception e) {
@@ -601,7 +595,7 @@ public class CBUAE_BRF_ReportsController {
 		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		       
 		         // ✅ set the asondate into entity
-		         request.setReportDate(asondate);
+		         request.setREPORT_DATE(asondate);
 		         Q_BRANCHNETservice.QBranchnetUpdate2(request);
 		         return ResponseEntity.ok("Updated Successfully");
 		     } catch (Exception e) {
@@ -623,7 +617,7 @@ public class CBUAE_BRF_ReportsController {
 		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		      
 		         // ✅ set the asondate into entity
-		         request.setReportDate(asondate);
+		         request.setREPORT_DATE(asondate);
 		         Q_BRANCHNETservice.QBranchnetUpdate3(request);
 		         return ResponseEntity.ok("Updated Successfully");
 		     } catch (Exception e) {
@@ -645,7 +639,7 @@ public class CBUAE_BRF_ReportsController {
 		         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		        
 		         // ✅ set the asondate into entity
-		         request.setReportDate(asondate);
+		         request.setREPORT_DATE(asondate);
 		         Q_BRANCHNETservice.QBranchnetUpdate4(request);
 		         return ResponseEntity.ok("Updated Successfully");
 		     } catch (Exception e) {
@@ -1344,7 +1338,7 @@ public ResponseEntity<String> updateReportReSub(
 			 public ResponseEntity<String> updateReport(
 			     @RequestParam(required = false) 
 			     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
-			     @ModelAttribute M_SCI_E_Summary_Entity request
+			     @ModelAttribute M_SCI_E_Manual_Summary_Entity request
 			    ) {
 
 			     try {
