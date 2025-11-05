@@ -465,7 +465,7 @@ public class NavigationController {
 		  md.addAttribute("menu", data.getRptDescription());
 		  md.addAttribute("domain", data.getDomainId());
 		  md.addAttribute("rptcode", data.getRptCode());
-		  List<Object> Archivaldata=regulatoryreportservices.getArchival(rptcode);
+	List<Object> Archivaldata = regulatoryreportservices.getArchival(rptcode);
 		  md.addAttribute("Archivaldata",Archivaldata);
 //		  md.addAttribute("reportlist", rrReportlist.getReportListbrf());
 		  md.addAttribute("reportlist", rrReportlist.getReportListmonthly1());

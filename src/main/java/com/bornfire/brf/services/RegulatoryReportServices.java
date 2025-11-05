@@ -1782,6 +1782,41 @@ public class RegulatoryReportServices {
             // }
             // break;
 			
+			
+			//        case "M_SRWA_12H":
+            // try {         
+            //     //  Pass reportVersion as null (to fetch the latest)
+            //     String reportVersion = null;
+            //     // ✅ Call the correct method signature
+            //     List<M_SRWA_12H_Archival_Summary_Entity> resubList =
+            //             BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
+            //     archivalData.addAll(resubList);
+
+            //     System.out.println(" M_SRWA_12H Archival data Fetched: " + resubList.size());
+            // } catch (Exception e) {
+            //     System.err.println(" Error fetching M_SRWA_12H archival data: " + e.getMessage());
+            //     e.printStackTrace();
+            // }
+            // break;
+
+      case "M_SRWA_12H":
+                // ✅ Call the converted method that returns List<Object[]>
+                List<Object[]> srwaList = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
+                archivalData.addAll(srwaList);
+                System.out.println("Fetched M_SRWA_12H archival data: " + srwaList.size());
+                break;
+
+            // 🧩 Add other report types here as needed:
+            // case "M_FAS":
+            //     List<Object[]> fasList = BRRS_M_FAS_reportservice.getM_FAS_Archival();
+            //     archivalData.addAll(fasList);
+            //     break;
+
+            default:
+                System.out.println("No archival logic defined for report: " + rptcode);
+                break;
+
+
 			//MY
 			
 			
@@ -1998,21 +2033,6 @@ public class RegulatoryReportServices {
 			break;
 			
 
-			       case "M_SRWA_12H":
-            try {         
-                //  Pass reportVersion as null (to fetch the latest)
-                String reportVersion = null;
-                // ✅ Call the correct method signature
-                List<M_SRWA_12H_Archival_Summary_Entity> resubList =
-                        BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
-                archivalData.addAll(resubList);
-
-                System.out.println(" M_SRWA_12H Archival data Fetched: " + resubList.size());
-            } catch (Exception e) {
-                System.err.println(" Error fetching M_SRWA_12H archival data: " + e.getMessage());
-                e.printStackTrace();
-            }
-            break;
 		}
 
 

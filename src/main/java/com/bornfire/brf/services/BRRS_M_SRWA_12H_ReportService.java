@@ -15337,15 +15337,41 @@ public byte[] BRRS_M_SRWA_12HExcel(String filename, String reportId,
 	}
 
 //Resubmission for M_SRWA_12H
-public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HResub() {
-    List<M_SRWA_12H_Archival_Summary_Entity> resubList = new ArrayList<>();
+// public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HResub() {
+//     List<M_SRWA_12H_Archival_Summary_Entity> resubList = new ArrayList<>();
+//     try {
+//         List<M_SRWA_12H_Archival_Summary_Entity> latestArchivalList =
+//                 M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
+
+//         if (latestArchivalList != null && !latestArchivalList.isEmpty()) {
+//             resubList.addAll(latestArchivalList);
+//             System.out.println("Fetched " + latestArchivalList.size() + " record(s)");
+//         } else {
+//             System.out.println("No archival data found.");
+//         }
+//     } catch (Exception e) {
+//         System.err.println("Error fetching M_SRWA_12H Resub data: " + e.getMessage());
+//         e.printStackTrace();
+//     }
+//     return resubList;
+// }
+public List<Object[]> getM_SRWA_12HResub() {
+    List<Object[]> resubList = new ArrayList<>();
     try {
         List<M_SRWA_12H_Archival_Summary_Entity> latestArchivalList =
                 M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
 
         if (latestArchivalList != null && !latestArchivalList.isEmpty()) {
-            resubList.addAll(latestArchivalList);
-            System.out.println("Fetched " + latestArchivalList.size() + " record(s)");
+            for (M_SRWA_12H_Archival_Summary_Entity entity : latestArchivalList) {
+                // 🧩 Convert entity fields to Object[] for Thymeleaf
+                Object[] row = new Object[] {
+                    entity.getReportDate(),      // archival[0] → date
+                    entity.getReportVersion()      // archival[1] → version
+                    // add more fields here if your Thymeleaf needs them
+                };
+                resubList.add(row);
+            }
+            System.out.println("Fetched " + resubList.size() + " record(s)");
         } else {
             System.out.println("No archival data found.");
         }
@@ -15357,27 +15383,60 @@ public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HResub() {
 }
 
 // Archival for M_SRWA_12H
-public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HArchival() {
-    List<M_SRWA_12H_Archival_Summary_Entity> archivalList = new ArrayList<>();
+// public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HArchival() {
+//     List<M_SRWA_12H_Archival_Summary_Entity> archivalList = new ArrayList<>();
+
+//     try {
+//         List<M_SRWA_12H_Archival_Summary_Entity> repoData =
+//                 M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersionAll();
+
+//         if (repoData != null && !repoData.isEmpty()) {
+//             archivalList.addAll(repoData);
+//             System.out.println(" Fetched " + repoData.size() + " archival record");
+//             M_SRWA_12H_Archival_Summary_Entity first = repoData.get(0);
+//             System.out.println("Latest archival version: " + first.getReportVersion());
+//         } else {
+//             System.out.println(" No archival data found.");
+// 		}
+//     } catch (Exception e) {
+//         System.err.println(" Error fetching M_SRWA_12H Archival data: " + e.getMessage());
+//         e.printStackTrace();
+//     }
+//     return archivalList;
+// }
+public List<Object[]> getM_SRWA_12HArchival() {
+    List<Object[]> archivalList = new ArrayList<>();
 
     try {
         List<M_SRWA_12H_Archival_Summary_Entity> repoData =
                 M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersionAll();
 
         if (repoData != null && !repoData.isEmpty()) {
-            archivalList.addAll(repoData);
-            System.out.println(" Fetched " + repoData.size() + " archival record");
+            for (M_SRWA_12H_Archival_Summary_Entity entity : repoData) {
+                // 🧩 Convert each entity to Object[] for Thymeleaf
+                Object[] row = new Object[] {
+                    entity.getReportDate(),          // archival[0] → date
+                    entity.getReportVersion()    // archival[1] → version
+                    // You can add more fields here if needed (e.g., entity.getDomain())
+                };
+                archivalList.add(row);
+            }
+
+            System.out.println("Fetched " + archivalList.size() + " archival records");
             M_SRWA_12H_Archival_Summary_Entity first = repoData.get(0);
             System.out.println("Latest archival version: " + first.getReportVersion());
         } else {
-            System.out.println(" No archival data found.");
-		}
+            System.out.println("No archival data found.");
+        }
+
     } catch (Exception e) {
-        System.err.println(" Error fetching M_SRWA_12H Archival data: " + e.getMessage());
+        System.err.println("Error fetching M_SRWA_12H Archival data: " + e.getMessage());
         e.printStackTrace();
     }
+
     return archivalList;
 }
+
 //Resubmit the values , latest version and Resub Date
 public void updateReportReSub(M_SRWA_12H_Summary_Entity updatedEntity) {
     System.out.println("Came to Resub Service");
