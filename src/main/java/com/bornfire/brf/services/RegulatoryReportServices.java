@@ -1756,14 +1756,14 @@ public class RegulatoryReportServices {
 			break;
 			
 			
-			// case "Q_BRANCHNET":
-			// try {
-			// 	archivalData = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETArchival();
-			// } catch (Exception e) {
-			// 	// TODO Auto-generated catch block
-			// 	e.printStackTrace();
-			// }
-			// break;	
+			case "Q_BRANCHNET":
+			try {
+				archivalData = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETArchival();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;	
 
 			case "Q_STAFF":
 			try {
@@ -1800,18 +1800,10 @@ public class RegulatoryReportServices {
             // break;
 
       case "M_SRWA_12H":
-                // ✅ Call the converted method that returns List<Object[]>
                 List<Object[]> srwaList = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
                 archivalData.addAll(srwaList);
                 System.out.println("Fetched M_SRWA_12H archival data: " + srwaList.size());
                 break;
-
-            // 🧩 Add other report types here as needed:
-            // case "M_FAS":
-            //     List<Object[]> fasList = BRRS_M_FAS_reportservice.getM_FAS_Archival();
-            //     archivalData.addAll(fasList);
-            //     break;
-
             default:
                 System.out.println("No archival logic defined for report: " + rptcode);
                 break;
