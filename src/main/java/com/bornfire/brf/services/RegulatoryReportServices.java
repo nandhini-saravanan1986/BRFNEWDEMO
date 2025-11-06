@@ -402,7 +402,7 @@ public class RegulatoryReportServices {
 			break;
 
 				
-		case "Q_SMME":
+		case "Q_SMME_INTREST_INCOME":
 			repsummary = BRRS_Q_SMME_reportservice.getBRRS_Q_SMMEView( reportId, fromdate, todate, currency, dtltype, pageable, type, version);
             break;
 
@@ -706,7 +706,7 @@ public class RegulatoryReportServices {
 
 
 			
-	    case "Q_SMME":
+	    case "Q_SMME_INTREST_INCOME":
             repdetail = BRRS_Q_SMME_reportservice.getBRRS_Q_SMMEcurrentDtl(reportId, fromdate, todate, currency,dtltype, pageable, Filter, type, version);
 	        break;
 
@@ -1089,7 +1089,7 @@ public class RegulatoryReportServices {
 			break;
 
 		
-			case "Q_SMME":
+			case "Q_SMME_INTREST_INCOME":
 				try {
 					repfile = BRRS_Q_SMME_reportservice.getQ_SMMEExcel(filename, reportId, fromdate, todate, currency, dtltype,type,version);
 				} catch (Exception e) {
@@ -1717,7 +1717,7 @@ public class RegulatoryReportServices {
 
 
 			
-        case "Q_SMME":
+        case "Q_SMME_INTREST_INCOME":
 			try {
 				archivalData = BRRS_Q_SMME_reportservice.getQ_SMMEArchival();
 		} catch (Exception e) {

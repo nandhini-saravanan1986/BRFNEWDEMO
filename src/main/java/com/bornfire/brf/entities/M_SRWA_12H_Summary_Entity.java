@@ -15,7 +15,6 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@IdClass(M_SRWA_12H_Summary_PK.class)
 @Table(name = "BRRS_M_SRWA_12H_SUMMARYTABLE")
 
 public class M_SRWA_12H_Summary_Entity {
@@ -729,16 +728,13 @@ public class M_SRWA_12H_Summary_Entity {
 	private BigDecimal R81_OTHER;
 	private BigDecimal R81_STD_SUPERVISORY_HAIRCUT;
 	private BigDecimal R81_APPLICABLE_RISK_WEIGHT;
-
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Id
 	@Column(name = "REPORT_DATE")
 	private Date reportDate;
-	@Id
 	@Column(name = "REPORT_VERSION")
 	private String reportVersion;
-
 	@Column(name = "REPORT_RESUBDATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reportResubDate;
