@@ -693,10 +693,10 @@ public class RegulatoryReportServices {
 					pageable, Filter, type, version);
 			break;
 			
-		case "M_OB":
-			repdetail = BRRS_M_OB_ReportService.getM_OBcurrentDtl(reportId, fromdate, todate, currency, dtltype,
-					pageable, Filter, type, version);
-			break;
+//		case "M_OB":
+//			repdetail = BRRS_M_OB_ReportService.getM_OBcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+//					pageable, Filter, type, version);
+//			break;
 			
 		case "M_PD":
 			repdetail = BRRS_M_PD_ReportService.getM_PDcurrentDtl(reportId, fromdate, todate, currency, dtltype,
@@ -1501,10 +1501,10 @@ public class RegulatoryReportServices {
 					type, version);
 		}
 		
-		else if ("M_OBDetail".equals(filename)) {
-			return BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency, dtltype,
-					type, version);
-		}
+//		else if ("M_OBDetail".equals(filename)) {
+//			return BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency, dtltype,
+//					type, version);
+//		}
 		
 		else if ("M_PDDetail".equals(filename)) {
 			return BRRS_M_PD_ReportService.BRRS_M_PDDetailExcel(filename, fromdate, todate, currency, dtltype,
@@ -2116,10 +2116,10 @@ public class RegulatoryReportServices {
 						dtltype, type, version);
 		}
 		
-		else if ("M_OBDetail".equals(filename)) {
-				fileData = BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency,
-						dtltype, type, version);
-		}
+//		else if ("M_OBDetail".equals(filename)) {
+//				fileData = BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency,
+//						dtltype, type, version);
+//		}
 			
 		else if ("M_PDDetail".equals(filename)) {
 				fileData = BRRS_M_PD_ReportService.BRRS_M_PDDetailExcel(filename, fromdate, todate, currency,

@@ -12,8 +12,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "BRRS_M_SECA_SUMMARYTABLE")
-public class BRRS_M_SECA_Summary_Entity {
+@Table(name = "BRRS_M_SECA_ARCHIVAL_TABLE_SUMMARY")
+public class M_SECA_Archival_Summary_Entity {
 
 	private String R13_PRODUCT;
 	private BigDecimal R13_EQUITY;
@@ -8935,7 +8935,7 @@ public class BRRS_M_SECA_Summary_Entity {
 
 
 
-	public BRRS_M_SECA_Summary_Entity() {
+	public M_SECA_Archival_Summary_Entity() {
         super();
     }
 

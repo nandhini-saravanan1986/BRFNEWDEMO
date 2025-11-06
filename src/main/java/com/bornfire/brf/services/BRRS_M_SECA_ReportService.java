@@ -44,14 +44,14 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bornfire.brf.entities.BRRS_M_SECA_Archival_Detail_Entity;
-import com.bornfire.brf.entities.BRRS_M_SECA_Archival_Detail_Repo;
-import com.bornfire.brf.entities.BRRS_M_SECA_Archival_Summary_Entity;
-import com.bornfire.brf.entities.BRRS_M_SECA_Detail_Repo;
-import com.bornfire.brf.entities.BRRS_M_SECA_Summary_Entity;
+//import com.bornfire.brf.entities.BRRS_M_SECA_Archival_Detail_Entity;
+//import com.bornfire.brf.entities.BRRS_M_SECA_Archival_Detail_Repo;
+import com.bornfire.brf.entities.M_SECA_Archival_Summary_Entity;
+//import com.bornfire.brf.entities.BRRS_M_SECA_Detail_Repo;
+import com.bornfire.brf.entities.M_SECA_Summary_Entity;
 import com.bornfire.brf.entities.BRRS_M_SECA_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_M_SECA_Archival_Summary_Repo;
-import com.bornfire.brf.entities.BRRS_M_SECA_Detail_Entity;
+//import com.bornfire.brf.entities.BRRS_M_SECA_Detail_Entity;
 
 
 import java.math.BigDecimal;
@@ -69,14 +69,14 @@ public class BRRS_M_SECA_ReportService {
 
 
 
-	@Autowired
-	BRRS_M_SECA_Detail_Repo BRRS_M_SECA_Detail_Repo;
+//	@Autowired
+//	BRRS_M_SECA_Detail_Repo BRRS_M_SECA_Detail_Repo;
 
 	@Autowired
 	BRRS_M_SECA_Summary_Repo BRRS_M_SECA_Summary_Repo;
 
-	@Autowired
-	BRRS_M_SECA_Archival_Detail_Repo BRRS_M_SECA_Archival_Detail_Repo;
+//	@Autowired
+//	BRRS_M_SECA_Archival_Detail_Repo BRRS_M_SECA_Archival_Detail_Repo;
 
 	@Autowired
 	BRRS_M_SECA_Archival_Summary_Repo BRRS_M_SECA_Archival_Summary_Repo;
@@ -96,7 +96,7 @@ public class BRRS_M_SECA_ReportService {
 
 		if (type.equals("ARCHIVAL") & version != null) {
 			System.out.println(type);
-			List<BRRS_M_SECA_Archival_Summary_Entity> T1Master = new ArrayList<BRRS_M_SECA_Archival_Summary_Entity>();
+			List<M_SECA_Archival_Summary_Entity> T1Master = new ArrayList<M_SECA_Archival_Summary_Entity>();
 			System.out.println(version);
 			try {
 				Date d1 = dateformat.parse(todate);
@@ -112,7 +112,7 @@ public class BRRS_M_SECA_ReportService {
 
 			mv.addObject("reportsummary", T1Master);
 		} else {
-			List<BRRS_M_SECA_Summary_Entity> T1Master = new ArrayList<BRRS_M_SECA_Summary_Entity>();
+			List<M_SECA_Summary_Entity> T1Master = new ArrayList<M_SECA_Summary_Entity>();
 			try {
 				Date d1 = dateformat.parse(todate);
 
@@ -134,83 +134,83 @@ public class BRRS_M_SECA_ReportService {
 		return mv;
 	}
 
-	public ModelAndView getM_SECAcurrentDtl(String reportId, String fromdate, String todate, String currency,
-											  String dtltype, Pageable pageable, String Filter, String type, String version) {
-
-		int pageSize = pageable != null ? pageable.getPageSize() : 10;
-		int currentPage = pageable != null ? pageable.getPageNumber() : 0;
-		int totalPages = 0;
-
-		ModelAndView mv = new ModelAndView();
-		Session hs = sessionFactory.getCurrentSession();
-
-		try {
-			Date parsedDate = null;
-			if (todate != null && !todate.isEmpty()) {
-				parsedDate = dateformat.parse(todate);
-			}
-
-			String rowId = null;
-			String columnId = null;
-
-			// ✅ Split filter string into rowId & columnId
-			if (Filter != null && Filter.contains(",")) {
-				String[] parts = Filter.split(",");
-				if (parts.length >= 2) {
-					rowId = parts[0];
-					columnId = parts[1];
-				}
-			}
-			System.out.println(type);
-			if ("ARCHIVAL".equals(type) && version != null) {
-				System.out.println(type);
-				// 🔹 Archival branch
-				List<BRRS_M_SECA_Archival_Detail_Entity> T1Dt1;
-				if (rowId != null && columnId != null) {
-					T1Dt1 = BRRS_M_SECA_Archival_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate, version);
-				} else {
-					T1Dt1 = BRRS_M_SECA_Archival_Detail_Repo.getdatabydateList(parsedDate, version);
-				}
-
-				mv.addObject("reportdetails", T1Dt1);
-				mv.addObject("reportmaster12", T1Dt1);
-				System.out.println("ARCHIVAL COUNT: " + (T1Dt1 != null ? T1Dt1.size() : 0));
-
-			} else {
-				// 🔹 Current branch
-				List<BRRS_M_SECA_Detail_Entity> T1Dt1;
-				if (rowId != null && columnId != null) {
-					T1Dt1 = BRRS_M_SECA_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate);
-				} else {
-					T1Dt1 = BRRS_M_SECA_Detail_Repo.getdatabydateList(parsedDate, currentPage, pageSize);
-					totalPages = BRRS_M_SECA_Detail_Repo.getdatacount(parsedDate);
-					mv.addObject("pagination", "YES");
-				}
-
-				mv.addObject("reportdetails", T1Dt1);
-				mv.addObject("reportmaster12", T1Dt1);
-				System.out.println("LISTCOUNT: " + (T1Dt1 != null ? T1Dt1.size() : 0));
-			}
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-			mv.addObject("errorMessage", "Invalid date format: " + todate);
-		} catch (Exception e) {
-			e.printStackTrace();
-			mv.addObject("errorMessage", "Unexpected error: " + e.getMessage());
-		}
-
-		// ✅ Common attributes
-		mv.setViewName("BRRS/M_SECA");
-		mv.addObject("displaymode", "Details");
-		mv.addObject("currentPage", currentPage);
-		System.out.println("totalPages: " + (int) Math.ceil((double) totalPages / 100));
-		mv.addObject("totalPages", (int) Math.ceil((double) totalPages / 100));
-		mv.addObject("reportsflag", "reportsflag");
-		mv.addObject("menu", reportId);
-
-		return mv;
-	}
+//	public ModelAndView getM_SECAcurrentDtl(String reportId, String fromdate, String todate, String currency,
+//											  String dtltype, Pageable pageable, String Filter, String type, String version) {
+//
+//		int pageSize = pageable != null ? pageable.getPageSize() : 10;
+//		int currentPage = pageable != null ? pageable.getPageNumber() : 0;
+//		int totalPages = 0;
+//
+//		ModelAndView mv = new ModelAndView();
+//		Session hs = sessionFactory.getCurrentSession();
+//
+//		try {
+//			Date parsedDate = null;
+//			if (todate != null && !todate.isEmpty()) {
+//				parsedDate = dateformat.parse(todate);
+//			}
+//
+//			String rowId = null;
+//			String columnId = null;
+//
+//			// ✅ Split filter string into rowId & columnId
+//			if (Filter != null && Filter.contains(",")) {
+//				String[] parts = Filter.split(",");
+//				if (parts.length >= 2) {
+//					rowId = parts[0];
+//					columnId = parts[1];
+//				}
+//			}
+//			System.out.println(type);
+//			if ("ARCHIVAL".equals(type) && version != null) {
+//				System.out.println(type);
+//				// 🔹 Archival branch
+//				List<BRRS_M_SECA_Archival_Detail_Entity> T1Dt1;
+//				if (rowId != null && columnId != null) {
+//					T1Dt1 = BRRS_M_SECA_Archival_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate, version);
+//				} else {
+//					T1Dt1 = BRRS_M_SECA_Archival_Detail_Repo.getdatabydateList(parsedDate, version);
+//				}
+//
+//				mv.addObject("reportdetails", T1Dt1);
+//				mv.addObject("reportmaster12", T1Dt1);
+//				System.out.println("ARCHIVAL COUNT: " + (T1Dt1 != null ? T1Dt1.size() : 0));
+//
+//			} else {
+//				// 🔹 Current branch
+//				List<BRRS_M_SECA_Detail_Entity> T1Dt1;
+//				if (rowId != null && columnId != null) {
+//					T1Dt1 = BRRS_M_SECA_Detail_Repo.GetDataByRowIdAndColumnId(rowId, columnId, parsedDate);
+//				} else {
+//					T1Dt1 = BRRS_M_SECA_Detail_Repo.getdatabydateList(parsedDate, currentPage, pageSize);
+//					totalPages = BRRS_M_SECA_Detail_Repo.getdatacount(parsedDate);
+//					mv.addObject("pagination", "YES");
+//				}
+//
+//				mv.addObject("reportdetails", T1Dt1);
+//				mv.addObject("reportmaster12", T1Dt1);
+//				System.out.println("LISTCOUNT: " + (T1Dt1 != null ? T1Dt1.size() : 0));
+//			}
+//
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//			mv.addObject("errorMessage", "Invalid date format: " + todate);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			mv.addObject("errorMessage", "Unexpected error: " + e.getMessage());
+//		}
+//
+//		// ✅ Common attributes
+//		mv.setViewName("BRRS/M_SECA");
+//		mv.addObject("displaymode", "Details");
+//		mv.addObject("currentPage", currentPage);
+//		System.out.println("totalPages: " + (int) Math.ceil((double) totalPages / 100));
+//		mv.addObject("totalPages", (int) Math.ceil((double) totalPages / 100));
+//		mv.addObject("reportsflag", "reportsflag");
+//		mv.addObject("menu", reportId);
+//
+//		return mv;
+//	}
 
 
 	public byte[] BRRS_M_SECAExcel(String filename, String reportId, String fromdate, String todate, String currency,
@@ -224,7 +224,7 @@ public class BRRS_M_SECA_ReportService {
 		}
 
 		// Fetch data
-		List<BRRS_M_SECA_Summary_Entity> dataList = BRRS_M_SECA_Summary_Repo.getdatabydateList(dateformat.parse(todate));
+		List<M_SECA_Summary_Entity> dataList = BRRS_M_SECA_Summary_Repo.getdatabydateList(dateformat.parse(todate));
 
 		if (dataList.isEmpty()) {
 			logger.warn("Service: No data found for M_SECA report. Returning empty result.");
@@ -286,7 +286,7 @@ public class BRRS_M_SECA_ReportService {
 
 			if (!dataList.isEmpty()) {
 				for (int i = 0; i < dataList.size(); i++) {
-					BRRS_M_SECA_Summary_Entity record = dataList.get(i);
+					M_SECA_Summary_Entity record = dataList.get(i);
 					System.out.println("rownumber=" + startRow + i);
 					Row row = sheet.getRow(startRow + i);	
 					
@@ -4692,116 +4692,116 @@ public class BRRS_M_SECA_ReportService {
 		}
 	}
 
-	public byte[] BRRS_M_SECADetailExcel(String filename, String fromdate, String todate, String currency,
-										   String dtltype, String type, String version) {
-
-		try {
-			logger.info("Generating Excel for BRRS_M_SECA Details...");
-			System.out.println("came to Detail download service");
-			if (type.equals("ARCHIVAL") & version != null) {
-				byte[] ARCHIVALreport = getDetailExcelARCHIVAL(filename, fromdate, todate, currency, dtltype, type,
-						version);
-				return ARCHIVALreport;
-			}
-			XSSFWorkbook workbook = new XSSFWorkbook();
-			XSSFSheet sheet = workbook.createSheet("BRRS_M_SECADetails");
-
-			// Common border style
-			BorderStyle border = BorderStyle.THIN;
-			// Header style (left aligned)
-			CellStyle headerStyle = workbook.createCellStyle();
-			Font headerFont = workbook.createFont();
-			headerFont.setBold(true);
-			headerFont.setFontHeightInPoints((short) 10);
-			headerStyle.setFont(headerFont);
-			headerStyle.setAlignment(HorizontalAlignment.LEFT);
-			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			headerStyle.setBorderTop(border);
-			headerStyle.setBorderBottom(border);
-			headerStyle.setBorderLeft(border);
-			headerStyle.setBorderRight(border);
-
-			// Right-aligned header style for ACCT BALANCE
-			CellStyle rightAlignedHeaderStyle = workbook.createCellStyle();
-			rightAlignedHeaderStyle.cloneStyleFrom(headerStyle);
-			rightAlignedHeaderStyle.setAlignment(HorizontalAlignment.RIGHT);
-
-			// Default data style (left aligned)
-			CellStyle dataStyle = workbook.createCellStyle();
-			dataStyle.setAlignment(HorizontalAlignment.LEFT);
-			dataStyle.setBorderTop(border);
-			dataStyle.setBorderBottom(border);
-			dataStyle.setBorderLeft(border);
-			dataStyle.setBorderRight(border);
-
-			// ACCT BALANCE style (right aligned with 3 decimals)
-			CellStyle balanceStyle = workbook.createCellStyle();
-			balanceStyle.setAlignment(HorizontalAlignment.RIGHT);
-			balanceStyle.setDataFormat(workbook.createDataFormat().getFormat("0.000"));
-			balanceStyle.setBorderTop(border);
-			balanceStyle.setBorderBottom(border);
-			balanceStyle.setBorderLeft(border);
-			balanceStyle.setBorderRight(border);
-			// Header row
-			String[] headers = { "CUST ID", "ACCT NO", "ACCT NAME", "ACCT BALANCE", "ROWID", "COLUMNID",
-					"REPORT_DATE" };
-			XSSFRow headerRow = sheet.createRow(0);
-			for (int i = 0; i < headers.length; i++) {
-				Cell cell = headerRow.createCell(i);
-				cell.setCellValue(headers[i]);
-				if (i == 3) { // ACCT BALANCE
-					cell.setCellStyle(rightAlignedHeaderStyle);
-				} else {
-					cell.setCellStyle(headerStyle);
-				}
-				sheet.setColumnWidth(i, 5000);
-			}
-			// Get data
-			Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
-			List<BRRS_M_SECA_Detail_Entity> reportData = BRRS_M_SECA_Detail_Repo.getdatabydateList(parsedToDate);
-			if (reportData != null && !reportData.isEmpty()) {
-				int rowIndex = 1;
-				for (BRRS_M_SECA_Detail_Entity item : reportData) {
-					XSSFRow row = sheet.createRow(rowIndex++);
-					row.createCell(0).setCellValue(item.getCUST_ID());
-					row.createCell(1).setCellValue(item.getACCT_NUMBER());
-					row.createCell(2).setCellValue(item.getACCT_NAME());
-					// ACCT BALANCE (right aligned, 3 decimal places)
-					Cell balanceCell = row.createCell(3);
-					if (item.getACCT_BALANCE_IN_PULA() != null) {
-						balanceCell.setCellValue(item.getACCT_BALANCE_IN_PULA().doubleValue());
-					} else {
-						balanceCell.setCellValue(0.000);
-					}
-					balanceCell.setCellStyle(balanceStyle);
-					row.createCell(4).setCellValue(item.getROW_ID());
-					row.createCell(5).setCellValue(item.getCOLUMN_ID());
-					row.createCell(6)
-							.setCellValue(item.getREPORT_DATE() != null
-									? new SimpleDateFormat("dd-MM-yyyy").format(item.getREPORT_DATE())
-									: "");
-					// Apply data style for all other cells
-					for (int j = 0; j < 7; j++) {
-						if (j != 3) {
-							row.getCell(j).setCellStyle(dataStyle);
-						}
-					}
-				}
-			} else {
-				logger.info("No data found for BRRS_M_SECA — only header will be written.");
-			}
-			// Write to byte[]
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			workbook.write(bos);
-			workbook.close();
-			logger.info("Excel generation completed with {} row(s).", reportData != null ? reportData.size() : 0);
-			return bos.toByteArray();
-		} catch (Exception e) {
-			logger.error("Error generating BRRS_M_SECA Excel", e);
-			return new byte[0];
-		}
-	}
+//	public byte[] BRRS_M_SECADetailExcel(String filename, String fromdate, String todate, String currency,
+//										   String dtltype, String type, String version) {
+//
+//		try {
+//			logger.info("Generating Excel for BRRS_M_SECA Details...");
+//			System.out.println("came to Detail download service");
+//			if (type.equals("ARCHIVAL") & version != null) {
+//				byte[] ARCHIVALreport = getDetailExcelARCHIVAL(filename, fromdate, todate, currency, dtltype, type,
+//						version);
+//				return ARCHIVALreport;
+//			}
+//			XSSFWorkbook workbook = new XSSFWorkbook();
+//			XSSFSheet sheet = workbook.createSheet("BRRS_M_SECADetails");
+//
+//			// Common border style
+//			BorderStyle border = BorderStyle.THIN;
+//			// Header style (left aligned)
+//			CellStyle headerStyle = workbook.createCellStyle();
+//			Font headerFont = workbook.createFont();
+//			headerFont.setBold(true);
+//			headerFont.setFontHeightInPoints((short) 10);
+//			headerStyle.setFont(headerFont);
+//			headerStyle.setAlignment(HorizontalAlignment.LEFT);
+//			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+//			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+//			headerStyle.setBorderTop(border);
+//			headerStyle.setBorderBottom(border);
+//			headerStyle.setBorderLeft(border);
+//			headerStyle.setBorderRight(border);
+//
+//			// Right-aligned header style for ACCT BALANCE
+//			CellStyle rightAlignedHeaderStyle = workbook.createCellStyle();
+//			rightAlignedHeaderStyle.cloneStyleFrom(headerStyle);
+//			rightAlignedHeaderStyle.setAlignment(HorizontalAlignment.RIGHT);
+//
+//			// Default data style (left aligned)
+//			CellStyle dataStyle = workbook.createCellStyle();
+//			dataStyle.setAlignment(HorizontalAlignment.LEFT);
+//			dataStyle.setBorderTop(border);
+//			dataStyle.setBorderBottom(border);
+//			dataStyle.setBorderLeft(border);
+//			dataStyle.setBorderRight(border);
+//
+//			// ACCT BALANCE style (right aligned with 3 decimals)
+//			CellStyle balanceStyle = workbook.createCellStyle();
+//			balanceStyle.setAlignment(HorizontalAlignment.RIGHT);
+//			balanceStyle.setDataFormat(workbook.createDataFormat().getFormat("0.000"));
+//			balanceStyle.setBorderTop(border);
+//			balanceStyle.setBorderBottom(border);
+//			balanceStyle.setBorderLeft(border);
+//			balanceStyle.setBorderRight(border);
+//			// Header row
+//			String[] headers = { "CUST ID", "ACCT NO", "ACCT NAME", "ACCT BALANCE", "ROWID", "COLUMNID",
+//					"REPORT_DATE" };
+//			XSSFRow headerRow = sheet.createRow(0);
+//			for (int i = 0; i < headers.length; i++) {
+//				Cell cell = headerRow.createCell(i);
+//				cell.setCellValue(headers[i]);
+//				if (i == 3) { // ACCT BALANCE
+//					cell.setCellStyle(rightAlignedHeaderStyle);
+//				} else {
+//					cell.setCellStyle(headerStyle);
+//				}
+//				sheet.setColumnWidth(i, 5000);
+//			}
+//			// Get data
+//			Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
+//			List<BRRS_M_SECA_Detail_Entity> reportData = BRRS_M_SECA_Detail_Repo.getdatabydateList(parsedToDate);
+//			if (reportData != null && !reportData.isEmpty()) {
+//				int rowIndex = 1;
+//				for (BRRS_M_SECA_Detail_Entity item : reportData) {
+//					XSSFRow row = sheet.createRow(rowIndex++);
+//					row.createCell(0).setCellValue(item.getCUST_ID());
+//					row.createCell(1).setCellValue(item.getACCT_NUMBER());
+//					row.createCell(2).setCellValue(item.getACCT_NAME());
+//					// ACCT BALANCE (right aligned, 3 decimal places)
+//					Cell balanceCell = row.createCell(3);
+//					if (item.getACCT_BALANCE_IN_PULA() != null) {
+//						balanceCell.setCellValue(item.getACCT_BALANCE_IN_PULA().doubleValue());
+//					} else {
+//						balanceCell.setCellValue(0.000);
+//					}
+//					balanceCell.setCellStyle(balanceStyle);
+//					row.createCell(4).setCellValue(item.getROW_ID());
+//					row.createCell(5).setCellValue(item.getCOLUMN_ID());
+//					row.createCell(6)
+//							.setCellValue(item.getREPORT_DATE() != null
+//									? new SimpleDateFormat("dd-MM-yyyy").format(item.getREPORT_DATE())
+//									: "");
+//					// Apply data style for all other cells
+//					for (int j = 0; j < 7; j++) {
+//						if (j != 3) {
+//							row.getCell(j).setCellStyle(dataStyle);
+//						}
+//					}
+//				}
+//			} else {
+//				logger.info("No data found for BRRS_M_SECA — only header will be written.");
+//			}
+//			// Write to byte[]
+//			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//			workbook.write(bos);
+//			workbook.close();
+//			logger.info("Excel generation completed with {} row(s).", reportData != null ? reportData.size() : 0);
+//			return bos.toByteArray();
+//		} catch (Exception e) {
+//			logger.error("Error generating BRRS_M_SECA Excel", e);
+//			return new byte[0];
+//		}
+//	}
 
 	public List<Object> getM_SECAArchival() {
 		List<Object> M_SECAArchivallist = new ArrayList<>();
@@ -4825,7 +4825,7 @@ public class BRRS_M_SECA_ReportService {
 		if (type.equals("ARCHIVAL") & version != null) {
 
 		}
-		List<BRRS_M_SECA_Archival_Summary_Entity> dataList = BRRS_M_SECA_Archival_Summary_Repo
+		List<M_SECA_Archival_Summary_Entity> dataList = BRRS_M_SECA_Archival_Summary_Repo
 				.getdatabydateListarchival(dateformat.parse(todate), version);
 
 		if (dataList.isEmpty()) {
@@ -4893,7 +4893,7 @@ public class BRRS_M_SECA_ReportService {
 
 			if (!dataList.isEmpty()) {
 				for (int i = 0; i < dataList.size(); i++) {
-					BRRS_M_SECA_Archival_Summary_Entity record = dataList.get(i);
+					M_SECA_Archival_Summary_Entity record = dataList.get(i);
 					System.out.println("rownumber=" + startRow + i);
 					Row row = sheet.getRow(startRow + i);
 					if (row == null) {
@@ -9296,127 +9296,127 @@ public class BRRS_M_SECA_ReportService {
 		}
 	}
 
-	public byte[] getDetailExcelARCHIVAL(String filename, String fromdate, String todate, String currency,
-										 String dtltype, String type, String version) {
-		try {
-			logger.info("Generating Excel for BRRS_M_SECA ARCHIVAL Details...");
-			System.out.println("came to Detail download service");
-			if (type.equals("ARCHIVAL") & version != null) {
-
-			}
-			XSSFWorkbook workbook = new XSSFWorkbook();
-			XSSFSheet sheet = workbook.createSheet("M_SECADetail");
-
-			// Common border style
-			BorderStyle border = BorderStyle.THIN;
-
-			// Header style (left aligned)
-			CellStyle headerStyle = workbook.createCellStyle();
-			Font headerFont = workbook.createFont();
-			headerFont.setBold(true);
-			headerFont.setFontHeightInPoints((short) 10);
-			headerStyle.setFont(headerFont);
-			headerStyle.setAlignment(HorizontalAlignment.LEFT);
-			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			headerStyle.setBorderTop(border);
-			headerStyle.setBorderBottom(border);
-			headerStyle.setBorderLeft(border);
-			headerStyle.setBorderRight(border);
-
-			// Right-aligned header style for ACCT BALANCE
-			CellStyle rightAlignedHeaderStyle = workbook.createCellStyle();
-			rightAlignedHeaderStyle.cloneStyleFrom(headerStyle);
-			rightAlignedHeaderStyle.setAlignment(HorizontalAlignment.RIGHT);
-
-			// Default data style (left aligned)
-			CellStyle dataStyle = workbook.createCellStyle();
-			dataStyle.setAlignment(HorizontalAlignment.LEFT);
-			dataStyle.setBorderTop(border);
-			dataStyle.setBorderBottom(border);
-			dataStyle.setBorderLeft(border);
-			dataStyle.setBorderRight(border);
-
-			// ACCT BALANCE style (right aligned with 3 decimals)
-			CellStyle balanceStyle = workbook.createCellStyle();
-			balanceStyle.setAlignment(HorizontalAlignment.RIGHT);
-			balanceStyle.setDataFormat(workbook.createDataFormat().getFormat("0.000"));
-			balanceStyle.setBorderTop(border);
-			balanceStyle.setBorderBottom(border);
-			balanceStyle.setBorderLeft(border);
-			balanceStyle.setBorderRight(border);
-
-			// Header row
-			String[] headers = { "CUST ID", "ACCT NO", "ACCT NAME", "ACCT BALANCE", "ROWID", "COLUMNID",
-					"REPORT_DATE" };
-
-			XSSFRow headerRow = sheet.createRow(0);
-			for (int i = 0; i < headers.length; i++) {
-				Cell cell = headerRow.createCell(i);
-				cell.setCellValue(headers[i]);
-
-				if (i == 3) { // ACCT BALANCE
-					cell.setCellStyle(rightAlignedHeaderStyle);
-				} else {
-					cell.setCellStyle(headerStyle);
-				}
-
-				sheet.setColumnWidth(i, 5000);
-			}
-
-			// Get data
-			Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
-			List<BRRS_M_SECA_Archival_Detail_Entity> reportData = BRRS_M_SECA_Archival_Detail_Repo
-					.getdatabydateList(parsedToDate, version);
-
-			if (reportData != null && !reportData.isEmpty()) {
-				int rowIndex = 1;
-				for (BRRS_M_SECA_Archival_Detail_Entity item : reportData) {
-					XSSFRow row = sheet.createRow(rowIndex++);
-
-					row.createCell(0).setCellValue(item.getCUST_ID());
-					row.createCell(1).setCellValue(item.getACCT_NUMBER());
-					row.createCell(2).setCellValue(item.getACCT_NAME());
-
-					// ACCT BALANCE (right aligned, 3 decimal places)
-					Cell balanceCell = row.createCell(3);
-					if (item.getACCT_BALANCE_IN_PULA() != null) {
-						balanceCell.setCellValue(item.getACCT_BALANCE_IN_PULA().doubleValue());
-					} else {
-						balanceCell.setCellValue(0.000);
-					}
-					balanceCell.setCellStyle(balanceStyle);
-
-					row.createCell(4).setCellValue(item.getROW_ID());
-					row.createCell(5).setCellValue(item.getCOLUMN_ID());
-					row.createCell(6)
-							.setCellValue(item.getREPORT_DATE() != null
-									? new SimpleDateFormat("dd-MM-yyyy").format(item.getREPORT_DATE())
-									: "");
-
-					// Apply data style for all other cells
-					for (int j = 0; j < 7; j++) {
-						if (j != 3) {
-							row.getCell(j).setCellStyle(dataStyle);
-						}
-					}
-				}
-			} else {
-				logger.info("No data found for BRRS_M_SECA — only header will be written.");
-			}
-
-			// Write to byte[]
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			workbook.write(bos);
-			workbook.close();
-
-			logger.info("Excel generation completed with {} row(s).", reportData != null ? reportData.size() : 0);
-			return bos.toByteArray();
-
-		} catch (Exception e) {
-			logger.error("Error generating BRRS_M_SECAExcel", e);
-			return new byte[0];
-		}
-	}
+//	public byte[] getDetailExcelARCHIVAL(String filename, String fromdate, String todate, String currency,
+//										 String dtltype, String type, String version) {
+//		try {
+//			logger.info("Generating Excel for BRRS_M_SECA ARCHIVAL Details...");
+//			System.out.println("came to Detail download service");
+//			if (type.equals("ARCHIVAL") & version != null) {
+//
+//			}
+//			XSSFWorkbook workbook = new XSSFWorkbook();
+//			XSSFSheet sheet = workbook.createSheet("M_SECADetail");
+//
+//			// Common border style
+//			BorderStyle border = BorderStyle.THIN;
+//
+//			// Header style (left aligned)
+//			CellStyle headerStyle = workbook.createCellStyle();
+//			Font headerFont = workbook.createFont();
+//			headerFont.setBold(true);
+//			headerFont.setFontHeightInPoints((short) 10);
+//			headerStyle.setFont(headerFont);
+//			headerStyle.setAlignment(HorizontalAlignment.LEFT);
+//			headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+//			headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+//			headerStyle.setBorderTop(border);
+//			headerStyle.setBorderBottom(border);
+//			headerStyle.setBorderLeft(border);
+//			headerStyle.setBorderRight(border);
+//
+//			// Right-aligned header style for ACCT BALANCE
+//			CellStyle rightAlignedHeaderStyle = workbook.createCellStyle();
+//			rightAlignedHeaderStyle.cloneStyleFrom(headerStyle);
+//			rightAlignedHeaderStyle.setAlignment(HorizontalAlignment.RIGHT);
+//
+//			// Default data style (left aligned)
+//			CellStyle dataStyle = workbook.createCellStyle();
+//			dataStyle.setAlignment(HorizontalAlignment.LEFT);
+//			dataStyle.setBorderTop(border);
+//			dataStyle.setBorderBottom(border);
+//			dataStyle.setBorderLeft(border);
+//			dataStyle.setBorderRight(border);
+//
+//			// ACCT BALANCE style (right aligned with 3 decimals)
+//			CellStyle balanceStyle = workbook.createCellStyle();
+//			balanceStyle.setAlignment(HorizontalAlignment.RIGHT);
+//			balanceStyle.setDataFormat(workbook.createDataFormat().getFormat("0.000"));
+//			balanceStyle.setBorderTop(border);
+//			balanceStyle.setBorderBottom(border);
+//			balanceStyle.setBorderLeft(border);
+//			balanceStyle.setBorderRight(border);
+//
+//			// Header row
+//			String[] headers = { "CUST ID", "ACCT NO", "ACCT NAME", "ACCT BALANCE", "ROWID", "COLUMNID",
+//					"REPORT_DATE" };
+//
+//			XSSFRow headerRow = sheet.createRow(0);
+//			for (int i = 0; i < headers.length; i++) {
+//				Cell cell = headerRow.createCell(i);
+//				cell.setCellValue(headers[i]);
+//
+//				if (i == 3) { // ACCT BALANCE
+//					cell.setCellStyle(rightAlignedHeaderStyle);
+//				} else {
+//					cell.setCellStyle(headerStyle);
+//				}
+//
+//				sheet.setColumnWidth(i, 5000);
+//			}
+//
+//			// Get data
+//			Date parsedToDate = new SimpleDateFormat("dd/MM/yyyy").parse(todate);
+//			List<BRRS_M_SECA_Archival_Detail_Entity> reportData = BRRS_M_SECA_Archival_Detail_Repo
+//					.getdatabydateList(parsedToDate, version);
+//
+//			if (reportData != null && !reportData.isEmpty()) {
+//				int rowIndex = 1;
+//				for (BRRS_M_SECA_Archival_Detail_Entity item : reportData) {
+//					XSSFRow row = sheet.createRow(rowIndex++);
+//
+//					row.createCell(0).setCellValue(item.getCUST_ID());
+//					row.createCell(1).setCellValue(item.getACCT_NUMBER());
+//					row.createCell(2).setCellValue(item.getACCT_NAME());
+//
+//					// ACCT BALANCE (right aligned, 3 decimal places)
+//					Cell balanceCell = row.createCell(3);
+//					if (item.getACCT_BALANCE_IN_PULA() != null) {
+//						balanceCell.setCellValue(item.getACCT_BALANCE_IN_PULA().doubleValue());
+//					} else {
+//						balanceCell.setCellValue(0.000);
+//					}
+//					balanceCell.setCellStyle(balanceStyle);
+//
+//					row.createCell(4).setCellValue(item.getROW_ID());
+//					row.createCell(5).setCellValue(item.getCOLUMN_ID());
+//					row.createCell(6)
+//							.setCellValue(item.getREPORT_DATE() != null
+//									? new SimpleDateFormat("dd-MM-yyyy").format(item.getREPORT_DATE())
+//									: "");
+//
+//					// Apply data style for all other cells
+//					for (int j = 0; j < 7; j++) {
+//						if (j != 3) {
+//							row.getCell(j).setCellStyle(dataStyle);
+//						}
+//					}
+//				}
+//			} else {
+//				logger.info("No data found for BRRS_M_SECA — only header will be written.");
+//			}
+//
+//			// Write to byte[]
+//			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//			workbook.write(bos);
+//			workbook.close();
+//
+//			logger.info("Excel generation completed with {} row(s).", reportData != null ? reportData.size() : 0);
+//			return bos.toByteArray();
+//
+//		} catch (Exception e) {
+//			logger.error("Error generating BRRS_M_SECAExcel", e);
+//			return new byte[0];
+//		}
+//	}
 
 }

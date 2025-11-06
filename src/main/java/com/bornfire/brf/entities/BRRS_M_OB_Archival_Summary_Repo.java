@@ -10,9 +10,9 @@ public interface BRRS_M_OB_Archival_Summary_Repo extends JpaRepository<M_OB_Arch
 
 
 	
-	 @Query(value = "select REPORT_DATE, REPORT_VERSION from BRRS_M_OB_ARCHIVAL_TABLE_SUMMARY order by REPORT_VERSION", nativeQuery = true)
+	 @Query(value = "select REPORT_DATE, REPORT_VERSION from BRRS_M_OB_ARCHIVALTABLE_SUMMARY order by REPORT_VERSION", nativeQuery = true)
 	    List<Object> getM_OBarchival();
 
-	    @Query(value = "select * from BRRS_M_OB_ARCHIVAL_TABLE_SUMMARY where REPORT_DATE = ?1 and REPORT_VERSION = ?2", nativeQuery = true)
+	    @Query(value = "select * from BRRS_M_OB_ARCHIVALTABLE_SUMMARY where REPORT_DATE = ?1 and REPORT_VERSION = ?2", nativeQuery = true)
 	    List<M_OB_Archival_Summary_Entity> getdatabydateListarchival(Date report_date, String report_version);
 }

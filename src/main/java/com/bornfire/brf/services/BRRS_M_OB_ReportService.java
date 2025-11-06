@@ -45,15 +45,15 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bornfire.brf.entities.BRRS_M_OB_Archival_Detail_Entity;
-import com.bornfire.brf.entities.BRRS_M_OB_Archival_Detail_Repo;
+//import com.bornfire.brrs.entities.BRRS_M_OB_Archival_Detail_Entity;
+//import com.bornfire.brrs.entities.BRRS_M_OB_Archival_Detail_Repo;
 import com.bornfire.brf.entities.M_OB_Archival_Summary_Entity;
-import com.bornfire.brf.entities.BRRS_M_OB_Detail_Repo;
+//import com.bornfire.brrs.entities.BRRS_M_OB_Detail_Repo;
 import com.bornfire.brf.entities.M_OB_Summary_Entity;
 import com.bornfire.brf.entities.M_SRWA_12B_Summary_Entity1;
 import com.bornfire.brf.entities.BRRS_M_OB_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_M_OB_Archival_Summary_Repo;
-import com.bornfire.brf.entities.BRRS_M_OB_Detail_Entity;
+//import com.bornfire.brrs.entities.BRRS_M_OB_Detail_Entity;
 
 
 import java.math.BigDecimal;
@@ -70,15 +70,15 @@ public class BRRS_M_OB_ReportService {
 	SessionFactory sessionFactory;
 
 
-
-	@Autowired
-	BRRS_M_OB_Detail_Repo BRRS_M_OB_Detail_Repo;
+//
+//	@Autowired
+//	BRRS_M_OB_Detail_Repo BRRS_M_OB_Detail_Repo;
 
 	@Autowired
 	BRRS_M_OB_Summary_Repo BRRS_M_OB_Summary_Repo;
 
-	@Autowired
-	BRRS_M_OB_Archival_Detail_Repo BRRS_M_OB_Archival_Detail_Repo;
+//	@Autowired
+//	BRRS_M_OB_Archival_Detail_Repo BRRS_M_OB_Archival_Detail_Repo;
 
 	@Autowired
 	BRRS_M_OB_Archival_Summary_Repo BRRS_M_OB_Archival_Summary_Repo;
