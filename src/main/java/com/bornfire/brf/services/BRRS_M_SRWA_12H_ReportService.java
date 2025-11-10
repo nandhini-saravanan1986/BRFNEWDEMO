@@ -118,28 +118,29 @@ public class BRRS_M_SRWA_12H_ReportService {
 		try {
 			Date d1 = dateformat.parse(todate);
 
-			// ---------- CASE 1: ARCHIVAL ----------
-			if ("ARCHIVAL".equalsIgnoreCase(type) && version != null) {
-				List<M_SRWA_12H_Archival_Summary_Entity> T1Master = M_SRWA_12H_Archival_Summary_Repo
-						.getdatabydateListarchival(d1, version);
+	 // ---------- CASE 1: ARCHIVAL ----------
+        if ("ARCHIVAL".equalsIgnoreCase(type) && version != null) {
+            List<M_SRWA_12H_Archival_Summary_Entity> T1Master = 
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListarchival(d1, version);
+            
+            mv.addObject("reportsummary", T1Master);
+        }
 
-				mv.addObject("reportsummary", T1Master);
-			}
+        // ---------- CASE 2: RESUB ----------
+        else if ("RESUB".equalsIgnoreCase(type) && version != null) {
+            List<M_SRWA_12H_Archival_Summary_Entity> T1Master =
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListarchival(d1, version);
+            
+            mv.addObject("reportsummary", T1Master);
+        }
 
-			// ---------- CASE 2: RESUB ----------
-			else if ("RESUB".equalsIgnoreCase(type) && version != null) {
-				List<M_SRWA_12H_Archival_Summary_Entity> T1Master = M_SRWA_12H_Archival_Summary_Repo
-						.getdatabydateListWithVersion();
-
-				mv.addObject("reportsummary", T1Master);
-			}
-
-			// ---------- CASE 3: NORMAL ----------
-			else {
-				List<M_SRWA_12H_Summary_Entity> T1Master = M_SRWA_12H_Summary_Repo.getdatabydateListWithVersion(todate);
-				System.out.println("T1Master Size " + T1Master.size());
-				mv.addObject("reportsummary", T1Master);
-			}
+        // ---------- CASE 3: NORMAL ----------
+        else {
+            List<M_SRWA_12H_Summary_Entity> T1Master = 
+                M_SRWA_12H_Summary_Repo.getdatabydateListWithVersion(todate);
+            System.out.println("T1Master Size "+T1Master.size());
+            mv.addObject("reportsummary", T1Master);
+        }
 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -264,23 +265,23 @@ public class BRRS_M_SRWA_12H_ReportService {
 		// Convert string to Date
 		Date reportDate = dateformat.parse(todate);
 
-		// ARCHIVAL check
-		if ("ARCHIVAL".equalsIgnoreCase(type) && version != null && !version.trim().isEmpty()) {
-			logger.info("Service: Generating ARCHIVAL report for version {}", version);
-			return BRRS_M_SRWA_12HArchivalExcel(filename, reportId, fromdate, todate, currency, dtltype, type, version);
-		}
-		// RESUB check
-else if ("RESUB".equalsIgnoreCase(type) && 
-        (version == null || version.trim().isEmpty() || "null".equalsIgnoreCase(version))) {
+    // ARCHIVAL check
+    if ("ARCHIVAL".equalsIgnoreCase(type) && version != null && !version.trim().isEmpty()) {
+        logger.info("Service: Generating ARCHIVAL report for version {}", version);
+        return BRRS_M_SRWA_12HArchivalExcel(filename, reportId, fromdate, todate, currency, dtltype, type, version);
+    }
+    // RESUB check
+    else if ("RESUB".equalsIgnoreCase(type) && version != null && !version.trim().isEmpty()) {
+        logger.info("Service: Generating RESUB report for version {}", version);
 
-    logger.info("Service: Generating RESUB report for version {}", version);
+       
+        List<M_SRWA_12H_Archival_Summary_Entity> T1Master =
+                M_SRWA_12H_Archival_Summary_Repo.getdatabydateListarchival(reportDate, version);
 
-    List<M_SRWA_12H_Archival_Summary_Entity> T1Master = 
-        M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
+        // Generate Excel for RESUB
+        return BRRS_M_SRWA_12HResubExcel(filename, reportId, fromdate, todate, currency, dtltype, type, version);
+    }
 
-    // Generate Excel for RESUB
-    return BRRS_M_SRWA_12HResubExcel(filename, reportId, fromdate, todate, currency, dtltype, type, version);
-}
 
 
 
@@ -14606,77 +14607,36 @@ else if ("RESUB".equalsIgnoreCase(type) &&
 			return out.toByteArray();
 		}
 	}
+//////////////////////////////////////////RESUBMISSION///////////////////////////////////////////////////////////////////	
+/// Report Date | Report Version | Domain
+/// RESUB VIEW
+public List<Object[]> getM_SRWA_12HResub() {
+    List<Object[]> resubList = new ArrayList<>();
+    try {
+        List<M_SRWA_12H_Archival_Summary_Entity> latestArchivalList = 
+            M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersionAll();
 
-	// Resubmission for M_SRWA_12H
-	// public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HResub() {
-	// List<M_SRWA_12H_Archival_Summary_Entity> resubList = new ArrayList<>();
-	// try {
-	// List<M_SRWA_12H_Archival_Summary_Entity> latestArchivalList =
-	// M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
+        if (latestArchivalList != null && !latestArchivalList.isEmpty()) {
+            for (M_SRWA_12H_Archival_Summary_Entity entity : latestArchivalList) {
+                Object[] row = new Object[] {
+                    entity.getReportDate(),
+                    entity.getReportVersion()
+                };
+                resubList.add(row);
+            }
+            System.out.println("Fetched " + resubList.size() + " record(s)");
+        } else {
+            System.out.println("No archival data found.");
+        }
+    } catch (Exception e) {
+        System.err.println("Error fetching M_SRWA_12H Resub data: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return resubList;
+}
 
-	// if (latestArchivalList != null && !latestArchivalList.isEmpty()) {
-	// resubList.addAll(latestArchivalList);
-	// System.out.println("Fetched " + latestArchivalList.size() + " record(s)");
-	// } else {
-	// System.out.println("No archival data found.");
-	// }
-	// } catch (Exception e) {
-	// System.err.println("Error fetching M_SRWA_12H Resub data: " +
-	// e.getMessage());
-	// e.printStackTrace();
-	// }
-	// return resubList;
-	// }
-	public List<Object[]> getM_SRWA_12HResub() {
-		List<Object[]> resubList = new ArrayList<>();
-		try {
-			List<M_SRWA_12H_Archival_Summary_Entity> latestArchivalList = M_SRWA_12H_Archival_Summary_Repo
-					.getdatabydateListWithVersion();
 
-			if (latestArchivalList != null && !latestArchivalList.isEmpty()) {
-				for (M_SRWA_12H_Archival_Summary_Entity entity : latestArchivalList) {
-					// 🧩 Convert entity fields to Object[] for Thymeleaf
-					Object[] row = new Object[] {
-							entity.getReportDate(), // archival[0] → date
-							entity.getReportVersion() // archival[1] → version
-							// add more fields here if your Thymeleaf needs them
-					};
-					resubList.add(row);
-				}
-				System.out.println("Fetched " + resubList.size() + " record(s)");
-			} else {
-				System.out.println("No archival data found.");
-			}
-		} catch (Exception e) {
-			System.err.println("Error fetching M_SRWA_12H Resub data: " + e.getMessage());
-			e.printStackTrace();
-		}
-		return resubList;
-	}
-
-	// Archival for M_SRWA_12H
-	// public List<M_SRWA_12H_Archival_Summary_Entity> getM_SRWA_12HArchival() {
-	// List<M_SRWA_12H_Archival_Summary_Entity> archivalList = new ArrayList<>();
-
-	// try {
-	// List<M_SRWA_12H_Archival_Summary_Entity> repoData =
-	// M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersionAll();
-
-	// if (repoData != null && !repoData.isEmpty()) {
-	// archivalList.addAll(repoData);
-	// System.out.println(" Fetched " + repoData.size() + " archival record");
-	// M_SRWA_12H_Archival_Summary_Entity first = repoData.get(0);
-	// System.out.println("Latest archival version: " + first.getReportVersion());
-	// } else {
-	// System.out.println(" No archival data found.");
-	// }
-	// } catch (Exception e) {
-	// System.err.println(" Error fetching M_SRWA_12H Archival data: " +
-	// e.getMessage());
-	// e.printStackTrace();
-	// }
-	// return archivalList;
-	// }
+	//Archival View
 	public List<Object[]> getM_SRWA_12HArchival() {
 		List<Object[]> archivalList = new ArrayList<>();
 
@@ -14686,11 +14646,9 @@ else if ("RESUB".equalsIgnoreCase(type) &&
 
 			if (repoData != null && !repoData.isEmpty()) {
 				for (M_SRWA_12H_Archival_Summary_Entity entity : repoData) {
-					// 🧩 Convert each entity to Object[] for Thymeleaf
 					Object[] row = new Object[] {
-							entity.getReportDate(), // archival[0] → date
-							entity.getReportVersion() // archival[1] → version
-							// You can add more fields here if needed (e.g., entity.getDomain())
+							entity.getReportDate(), 
+							entity.getReportVersion() 
 					};
 					archivalList.add(row);
 				}
@@ -14773,19 +14731,15 @@ else if ("RESUB".equalsIgnoreCase(type) &&
 
     logger.info("Service: Starting Excel generation process in memory for RESUB Excel.");
 
-    // ✅ Check if type is RESUB and version is null/empty
-    if ("RESUB".equalsIgnoreCase(type) && 
-        (version == null || version.trim().isEmpty() || "null".equalsIgnoreCase(version))) {
-
-        logger.info("Service: Detected RESUB request without version — fetching latest archival data.");
+    if (type.equals("RESUB") & version != null) {
+       
     }
 
-    // ✅ Always fetch the latest available versioned data from archival
-    List<M_SRWA_12H_Archival_Summary_Entity> dataList = 
-            M_SRWA_12H_Archival_Summary_Repo.getdatabydateListWithVersion();
+    List<M_SRWA_12H_Archival_Summary_Entity> dataList =
+        M_SRWA_12H_Archival_Summary_Repo.getdatabydateListarchival(dateformat.parse(todate), version);
 
     if (dataList.isEmpty()) {
-        logger.warn("Service: No data found for M_SRWA_12H RESUB report. Returning empty result.");
+        logger.warn("Service: No data found for M_SRWA_12H report. Returning empty result.");
         return new byte[0];
     }
 

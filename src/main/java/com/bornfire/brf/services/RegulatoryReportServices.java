@@ -688,10 +688,10 @@ public class RegulatoryReportServices {
 					pageable, Filter, type, version);
 			break;
 			
-		case "M_SECA":
-			repdetail = BRRS_M_SECA_ReportService.getM_SECAcurrentDtl(reportId, fromdate, todate, currency, dtltype,
-					pageable, Filter, type, version);
-			break;
+		// case "M_SECA":
+		// 	repdetail = BRRS_M_SECA_ReportService.getM_SECAcurrentDtl(reportId, fromdate, todate, currency, dtltype,
+		// 			pageable, Filter, type, version);
+		// 	break;
 			
 //		case "M_OB":
 //			repdetail = BRRS_M_OB_ReportService.getM_OBcurrentDtl(reportId, fromdate, todate, currency, dtltype,
@@ -1496,10 +1496,10 @@ public class RegulatoryReportServices {
 					type, version);
 		} 
 		
-		else if ("M_SECADetail".equals(filename)) {
-			return BRRS_M_SECA_ReportService.BRRS_M_SECADetailExcel(filename, fromdate, todate, currency, dtltype,
-					type, version);
-		}
+		// else if ("M_SECADetail".equals(filename)) {
+		// 	return BRRS_M_SECA_ReportService.BRRS_M_SECADetailExcel(filename, fromdate, todate, currency, dtltype,
+		// 			type, version);
+		// }
 		
 //		else if ("M_OBDetail".equals(filename)) {
 //			return BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency, dtltype,
@@ -2111,10 +2111,10 @@ public class RegulatoryReportServices {
 				
 		} 
 		
-		else if ("M_SECADetail".equals(filename)) {
-				fileData = BRRS_M_SECA_ReportService.BRRS_M_SECADetailExcel(filename, fromdate, todate, currency,
-						dtltype, type, version);
-		}
+		// else if ("M_SECADetail".equals(filename)) {
+		// 		fileData = BRRS_M_SECA_ReportService.BRRS_M_SECADetailExcel(filename, fromdate, todate, currency,
+		// 				dtltype, type, version);
+		// }
 		
 //		else if ("M_OBDetail".equals(filename)) {
 //				fileData = BRRS_M_OB_ReportService.BRRS_M_OBDetailExcel(filename, fromdate, todate, currency,
@@ -2256,124 +2256,31 @@ public class RegulatoryReportServices {
 //	
 
 
-//Resubmission View 
-//Report Date | Version | Domain
-// public List<Object> getResub(String rptcode) {
-//     List<Object> resubmissionData = new ArrayList<>();
+// Resubmission View 
+// Report Date | Version | Domain
+public List<Object[]> getResub(String rptcode) {
+    List<Object[]> resubmissionData = new ArrayList<>();
 
-//     switch (rptcode) {
-//         case "M_SRWA_12H":
-//             try {
-//                 // choose a version or pass null to fetch latest
-//                 String reportVersion = null; 
+    switch (rptcode) {
+        case "M_SRWA_12H":
+            try {
+                List<Object[]> resubList = BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HResub();
+                resubmissionData.addAll(resubList);
+                System.out.println("Resubmission data fetched for M_SRWA_12H: " + resubList.size());
+            } catch (Exception e) {
+                System.err.println("Error fetching resubmission data for M_SRWA_12H: " + e.getMessage());
+                e.printStackTrace();
+            }
+            break;
 
-//                 // Call the correct method
-//                 List<M_SRWA_12H_Archival_Summary_Entity> resubList =
-//                         BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HResub();
+        default:
+            System.out.println("Unsupported report code: " + rptcode);
+    }
 
-//                 resubmissionData.addAll(resubList);
-
-//                 System.out.println(" Resubmission data fetched for M_SRWA_12H: " + resubList.size());
-//             } catch (Exception e) {
-//                 System.err.println(" Error fetching resubmission data: " + e.getMessage());
-//                 e.printStackTrace();
-//             }
-//             break;
-
-// 					case "Q_BRANCHNET":
-// 				try {
-// 					Map<String, List<?>> resubData = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNET_ResubAll();
-
-// 					resubmissionData.addAll((List<?>) resubData.get("Entity1"));
-// 					// resubmissionData.addAll((List<?>) resubData.get("Entity2"));
-// 					// resubmissionData.addAll((List<?>) resubData.get("Entity3"));
-// 					// resubmissionData.addAll((List<?>) resubData.get("Entity4"));
-// 					System.out.println("Resubmission data fetched for Q_BRANCHNET. Total records: " + resubmissionData.size());
-// 				} catch (Exception e) {
-// 					System.err.println("Error fetching resubmission data for Q_BRANCHNET: " + e.getMessage());
-// 					e.printStackTrace();
-// 				}
-// 				break;	
-
-// 				 case "M_FAS":
-//               try {
-//                   List<M_FAS_Archival_Detail_Entity> resubList =
-//                           BRRS_M_FAS_reportservice.getM_FASResub();
-//                   resubmissionData.addAll(resubList);
-//                   System.out.println("Resubmission data fetched for M_FAS: " + resubList.size());
-//               } catch (Exception e) {
-//                   System.err.println("Error fetching resubmission data: " + e.getMessage());
-//                   e.printStackTrace();
-//               }
-//               break;
+    return resubmissionData;
+}
 
 
-
-//         default:
-//             System.out.println(" Unsupported report code: " + rptcode);
-//     }
-
-//     return resubmissionData;
-// }
-
-
-
-//Archival View
-//Report Date | Version | Domain
-// public List<Object> getArchival1(String rptcode) {
-//     List<Object> archivalData = new ArrayList<>();
-
-    // switch (rptcode) {
-    //     case "M_SRWA_12H":
-    //         try {         
-    //             //  Pass reportVersion as null (to fetch the latest)
-    //             String reportVersion = null;
-    //             // ✅ Call the correct method signature
-    //             List<M_SRWA_12H_Archival_Summary_Entity> resubList =
-    //                     BRRS_M_SRWA_12H_reportservice.getM_SRWA_12HArchival();
-    //             archivalData.addAll(resubList);
-
-    //             System.out.println(" M_SRWA_12H Archival data Fetched: " + resubList.size());
-    //         } catch (Exception e) {
-    //             System.err.println(" Error fetching M_SRWA_12H archival data: " + e.getMessage());
-    //             e.printStackTrace();
-    //         }
-    //         break;
-
-	// 	case "Q_BRANCHNET":
-	// 			try {
-	// 				Map<String, List<?>> archivalMap = BRRS_Q_BRANCHNET_reportservice.getQ_BRANCHNETArchival();
-
-	// 				archivalData.addAll((List<?>) archivalMap.get("Entity1"));
-	// 				// archivalData.addAll((List<?>) archivalMap.get("Entity2"));
-	// 				// archivalData.addAll((List<?>) archivalMap.get("Entity3"));
-	// 				// archivalData.addAll((List<?>) archivalMap.get("Entity4"));
-
-	// 				System.out.println("Q_BRANCHNET archival data merged. Total: " + archivalData.size());
-	// 			} catch (Exception e) {
-	// 				System.err.println("Error fetching Q_BRANCHNET archival data: " + e.getMessage());
-	// 				e.printStackTrace();
-	// 			}
-	// 			break;	
-
-
-	// 			 case "M_FAS":
-    //         try {
-    //             // ✅ Call the M_FAS archival retrieval method
-    //             List<M_FAS_Archival_Detail_Entity> repoData =
-    //                     BRRS_M_FAS_reportservice.getM_FASArchival();
-
-    //             archivalData.addAll(repoData);
-    //             System.out.println("M_FAS Archival data fetched: " + repoData.size());
-    //         } catch (Exception e) {
-    //             System.err.println("Error fetching M_FAS archival data: " + e.getMessage());
-    //             e.printStackTrace();
-    //         }
-    //         break;
-    //     default:
-    //         System.out.println(" Unsupported report code: " + rptcode);
-    // }
-    // return archivalData;
 }
 
 

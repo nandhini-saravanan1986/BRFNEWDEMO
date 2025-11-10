@@ -402,8 +402,7 @@ function getVali(a) {
 										<th>Domain</th>
 									</tr>
 							</thead>
-							<!-- <tbody style="font-family: Arial;">
-							
+							<tbody style="font-family: Arial;">
 							<tr th:each="ReData : ${Resubmitdata }">
 								<td class="underline" th:attr="data-rptcode=${rptcode},
 								 data-todate=${#dates.format(ReData[0],'dd/MM/yyyy')},
@@ -412,23 +411,8 @@ function getVali(a) {
 								<td th:text="${ReData[1]}"></td>
 								<td th:text="${domain}"></td>
 								
-							</tr > -->
+							</tr >
 
-
-<tbody style="font-family: Arial;">
-<tr th:each="ReData : ${Resubmitdata}">
-
-<td class="underline"
-    th:attr="data-rptcode=${rptcode},
-             data-todate=${#dates.format(ReData.reportDate,'dd/MM/yyyy')},
-             data-version=${ReData.reportVersion}"
-    style="color: #08a6f1; cursor: pointer;"
-    th:text="${#dates.format(ReData.reportDate,'dd/MM/yyyy')}"
-    onclick="getReport(this, event)">
-</td>
-    <td th:text="${ReData.reportVersion}"></td>
-    <td th:text="${domain}"></td>
-</tr>
 <!-- <tr th:each="ReData : ${Resubmitdata}">
 <td class="underline"
     th:attr="data-rptcode=${rptcode},
