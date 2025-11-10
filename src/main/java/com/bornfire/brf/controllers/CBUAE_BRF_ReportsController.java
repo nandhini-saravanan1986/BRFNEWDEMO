@@ -95,6 +95,7 @@ import com.bornfire.brf.entities.Q_STAFF_Summary_Entity1;
 import com.bornfire.brf.entities.Q_STAFF_Summary_Entity2;
 import com.bornfire.brf.entities.Q_STAFF_Summary_Entity3;
 import com.bornfire.brf.entities.M_OB_Summary_Entity;
+import com.bornfire.brf.entities.M_SECA_Summary_Entity;
 import com.bornfire.brf.services.BRRS_M_AIDP_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA2_ReportService;
 import com.bornfire.brf.services.BRRS_M_CA4_ReportService;
@@ -119,6 +120,7 @@ import com.bornfire.brf.services.BRRS_Q_RLFA2_ReportService;
 import com.bornfire.brf.services.BRRS_Q_STAFF_Report_Service;
 import com.bornfire.brf.services.M_SIR_ReportService;
 import com.bornfire.brf.services.BRRS_M_OB_ReportService;
+import com.bornfire.brf.services.BRRS_M_SECA_ReportService;
 import com.bornfire.brf.services.RegulatoryReportServices;
 
 @Controller
@@ -1488,6 +1490,37 @@ public ResponseEntity<String> updateReportReSub(
 		         
 		      // call services
 		         BRRS_M_OB_reportservice.updateReport1(request);
+		         
+		         
+		         return ResponseEntity.ok(" Updated Successfully");
+		     } catch (Exception e) {
+		         e.printStackTrace();
+		         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                              .body("Update Failed: " + e.getMessage());
+		     }
+		 }
+
+		 @Autowired
+			BRRS_M_SECA_ReportService BRRS_M_SECA_reportservice;
+		 
+		 
+		 @RequestMapping(value = "/MSECAupdateAll", method = { RequestMethod.GET, RequestMethod.POST })
+		 @ResponseBody
+		 public ResponseEntity<String> updateReport(
+		     @RequestParam(required = false) 
+		     @DateTimeFormat(pattern = "dd/MM/yyyy") Date asondate,
+		     @ModelAttribute M_SECA_Summary_Entity request
+		    ) {
+
+		     try {
+		         System.out.println("came to single controller");
+		         
+		         // ✅ set the asondate into entity
+		         request.setReport_date(asondate);
+		         
+		         
+		      // call services
+		         BRRS_M_SECA_reportservice.updateReport1(request);
 		         
 		         
 		         return ResponseEntity.ok(" Updated Successfully");

@@ -1656,7 +1656,7 @@ function cancelModify() {
 
 
 	// Calculate total for R59
-	/*function calculateR59Totals() {
+	/*function 59Totals() {
 	    let total = 0;
 
 	        let C2 = parseFloat($("#R59_EQUITY").val().replace(/,/g, "")) || 0;
@@ -2457,21 +2457,6 @@ function cancelModify() {
 		}
 	});
 
-
-
-	$(document).ready(function() {
-	    // Calculate once on load
-	    calculateR41Totals();
-
-	    // Recalculate whenever R42–R63 values change
-	    for (let i = 42; i <= 63; i++) {
-	    	 if ([44, 49, 52, 58].includes(i)) continue;
-	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
-	            calculateR41Totals();
-	        });
-	    }
-	}); 
-	
 	// Calculate total for R58
 	function calculateR58Totals() {
 	    let totalC2 = 0;
@@ -2548,39 +2533,6 @@ function cancelModify() {
 		}
 	});
 	
-	// Calculate total for R64_OTHER_BORROW
-	function calculateR64Totals() {
-	    let total = 0;
-
-	    // Only these specific rows should be added
-	    let rowsToAdd = [11, 41];
-
-	    rowsToAdd.forEach(i => {
-	        let selector = `#R${i}_OTHER_BORROW`;
-	        let value = parseFloat($(selector).val()?.replace(/,/g, "")) || 0;
-	        total += value;
-	    });
-
-	    // Update R64 with total (formatted with commas)
-	    $("#R64_OTHER_BORROW").val(
-	        total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-	    );
-	}
-
-
-	$(document).ready(function() {
-	    // Calculate once on load
-	    calculateR64Totals();
-
-	    // Recalculate whenever R12–R63 values change
-	    for (let i = 12; i <= 63; i++) {
-	    	 if ([15, 29, 38, 39, 40, 44, 49, 52, 58].includes(i)) continue;
-	        $("#R" + i + "_OTHER_BORROW").on("input", function() {
-	            calculateR64Totals();
-	        });
-	    }
-	});
-	
 	</SCRIPT>
 
 <script>
@@ -2597,16 +2549,52 @@ function fileuploads(btn) {
     $('#loader').modal('show');
 
     // Pre-calculations
-    calculateR11Totals();
-    calculateR15Totals();
-    calculateR29Totals();
-    calculateR38Totals();
-    calculateR41Totals();
-    calculateR44Totals();
-    calculateR49Totals();
-    calculateR52Totals();
-    calculateR58Totals();
-    calculateR64Totals();
+calculateR14Totals();
+calculateR15Totals();
+calculateR16Totals();
+calculateR18Totals();
+calculateR19Totals();
+calculateR20Totals();
+calculateR21Totals();
+calculateR22Totals();
+calculateR23Totals();
+calculateR24Totals();
+calculateR25Totals();
+calculateR26Totals();
+calculateR27Totals();
+calculateR28Totals();
+calculateR29Totals();
+calculateR30Totals();
+calculateR31Totals();
+calculateR33Totals();
+calculateR34Totals();
+calculateR36Totals();
+calculateR37Totals();
+calculateR39Totals();
+calculateR40Totals();
+calculateR41Totals();
+calculateR42Totals();
+calculateR44Totals();
+calculateR45Totals();
+calculateR46Totals();
+calculateR48Totals();
+calculateR49Totals();
+calculateR50Totals();
+calculateR52Totals();
+calculateR53Totals();
+calculateR54Totals();
+calculateR55Totals();
+calculateR56Totals();
+calculateR57Totals();
+calculateR17Totals();
+calculateR32Totals();
+calculateR38Totals();
+calculateR47Totals();
+calculateR51Totals();
+calculateR43Totals();
+calculateR35Totals();
+calculateR13Totals();
+calculateR58Totals();
     
     console.log("✅ Calculations executed successfully");
 
@@ -2633,8 +2621,9 @@ function fileuploads(btn) {
     console.log("Selected type:", selectedType);
 
     // --- Entity fields (R10-R17) ---
-    for (let i = 11; i <= 64; i++) {
-        ["OTHER_BORROW"].forEach(field => {
+    for (let i = 13; i <= 59; i++) {
+    	["EQUITY", "BONDS", "BOBC", "TRES_BILLS", "REPURCHASE_AGREE", 
+    		"COM_PAPER", "CERT_OF_DEP", "PLEDGED_ASSET", "OTHER", "TOTAL"].forEach(field => {
             const input = $("#R" + i + "_" + field);
             if (input.length) {
                 formData.append(input.attr("name"), input.val());
@@ -4863,7 +4852,7 @@ function fileuploads(btn) {
 	readonly /></td>
 
                 <td style="text-align:right;">
-	<input class="display-input Show_input"
+	<input class="display-input Show_input nonEditable"
 	type="text"
 	th:value="${report.R36_BONDS != null ? #numbers.formatDecimal(report.R36_BONDS, 1, 'COMMA', 0, 'POINT') : '0'}"
 	id="R36_BONDS" name="R36_BONDS"
@@ -4871,7 +4860,7 @@ function fileuploads(btn) {
 	readonly /></td>
 
                 <td style="text-align:right;">
-	<input class="display-input Show_input"
+	<input class="display-input Show_input nonEditable"
 	type="text"
 	th:value="${report.R36_BOBC != null ? #numbers.formatDecimal(report.R36_BOBC, 1, 'COMMA', 0, 'POINT') : '0'}"
 	id="R36_BOBC" name="R36_BOBC"

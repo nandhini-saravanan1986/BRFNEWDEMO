@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,6 +50,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bornfire.brf.entities.M_SECA_Archival_Summary_Entity;
 //import com.bornfire.brf.entities.BRRS_M_SECA_Detail_Repo;
 import com.bornfire.brf.entities.M_SECA_Summary_Entity;
+
 import com.bornfire.brf.entities.BRRS_M_SECA_Summary_Repo;
 import com.bornfire.brf.entities.BRRS_M_SECA_Archival_Summary_Repo;
 //import com.bornfire.brf.entities.BRRS_M_SECA_Detail_Entity;
@@ -132,6 +134,111 @@ public class BRRS_M_SECA_ReportService {
 		mv.addObject("displaymode", "summary");
 		System.out.println("scv" + mv.getViewName());
 		return mv;
+	}
+	
+	
+	public void updateReport1(M_SECA_Summary_Entity updatedEntity) {
+	    System.out.println("Came to services1");
+	    System.out.println("Report Date: " + updatedEntity.getReport_date());
+
+	    M_SECA_Summary_Entity existing = BRRS_M_SECA_Summary_Repo.findById(updatedEntity.getReport_date())
+	            .orElseThrow(() -> new RuntimeException(
+	                    "Record not found for REPORT_DATE: " + updatedEntity.getReport_date()));
+
+	    try {
+	        // 1. Loop from R15 to R50 and copy fields
+	        for (int i = 14; i <= 57; i++) {
+		if (i == 17 || i == 32 || i == 35 || i == 38 || i == 43 || i == 47 || i == 51) {
+        continue;
+    }
+	            String prefix = "R" + i + "_";
+
+	            String[] fields = {"EQUITY", "BONDS", "BOBC", "TRES_BILLS", "REPURCHASE_AGREE", 
+	    	     		"COM_PAPER", "CERT_OF_DEP", "PLEDGED_ASSET", "OTHER"};
+	           
+
+	            for (String field : fields) {
+	                String getterName = "get" + prefix + field;
+	                String setterName = "set" + prefix + field;
+
+	                try {
+	                    Method getter = M_SECA_Summary_Entity.class.getMethod(getterName);
+	                    Method setter = M_SECA_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+	                    Object newValue = getter.invoke(updatedEntity);
+	                    setter.invoke(existing, newValue);
+
+	                } catch (NoSuchMethodException e) {
+	                    // Skip missing fields
+	                    continue;
+	                }
+	            }
+	        }
+	        
+// Loop through rows for formula fields 
+int[] targetRows = {13, 17, 32, 35, 38, 43, 47, 51, 58};
+
+for (int i : targetRows) {
+    String prefix = "R" + i + "_";
+
+    String[] fields = {
+    		"EQUITY", "BONDS", "BOBC", "TRES_BILLS", "REPURCHASE_AGREE", 
+     		"COM_PAPER", "CERT_OF_DEP", "PLEDGED_ASSET", "OTHER", "TOTAL"
+    };
+
+    for (String field : fields) {
+        String getterName = "get" + prefix + field;
+        String setterName = "set" + prefix + field;
+
+        try {
+            Method getter = M_SECA_Summary_Entity.class.getMethod(getterName);
+            Method setter = M_SECA_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+            Object newValue = getter.invoke(updatedEntity);
+            setter.invoke(existing, newValue);
+
+        } catch (NoSuchMethodException e) {
+            // Skip missing fields
+            continue;
+        }
+    }
+}
+
+for (int i = 14; i <= 57; i++) {
+	if (i == 17 || i == 32 || i == 35 || i == 38 || i == 43 || i == 47 || i == 51) {
+    continue;
+}
+            String prefix = "R" + i + "_";
+
+            String[] fields = {"TOTAL"};
+           
+
+            for (String field : fields) {
+                String getterName = "get" + prefix + field;
+                String setterName = "set" + prefix + field;
+
+                try {
+                    Method getter = M_SECA_Summary_Entity.class.getMethod(getterName);
+                    Method setter = M_SECA_Summary_Entity.class.getMethod(setterName, getter.getReturnType());
+
+                    Object newValue = getter.invoke(updatedEntity);
+                    setter.invoke(existing, newValue);
+
+                } catch (NoSuchMethodException e) {
+                    // Skip missing fields
+                    continue;
+                }
+            }
+        }
+
+}			
+
+	catch (Exception e) {
+	        throw new RuntimeException("Error while updating report fields", e);
+	    }
+
+	    // 3️⃣ Save updated entity
+	    BRRS_M_SECA_Summary_Repo.save(existing);
 	}
 
 //	public ModelAndView getM_SECAcurrentDtl(String reportId, String fromdate, String todate, String currency,
