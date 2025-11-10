@@ -310,7 +310,7 @@ PURPOSE		: BWRBRREPORT
 
 		//to fetch summary from the database - called from the summary button
 		function showdetails() {
-			 alert("Details page not available for Manual Report");
+			showResultModal('BRRS',' Details page not available for Manual Report');
 		}
 
 		function showsummary() {
@@ -428,7 +428,10 @@ PURPOSE		: BWRBRREPORT
 	<script>
 	// Show Modify (enable inputs & dropdowns)
 function showmodify(btn) {
-    $(".Show_input").removeAttr("readonly").removeAttr("disabled");
+    $(".Show_input").removeAttr("readonly").removeAttr("disabled").css({
+        "background-color": "#d3d3d3", // Set light gray background
+        
+    });
 
 //     for (let i = 10; i <= 17; i++) {
 //         $("#R" + i + "_TOTAL_LONG_POS_TEXT").hide();
@@ -736,8 +739,8 @@ function calculateR10Totals() {
 	    $.when(...deferreds)
 	        .done(function() {
 	            // This code runs if all four updates succeed.
-	            $("#resultModalLabel").text("Success");
-	            $("#resultModalBody").text("All reports updated successfully.");
+	            $("#resultModalLabel").text("BRRS");
+	            $("#resultModalBody").text("Updated successfully.");
 	            $("#resultModal").modal("show");
 	        })
 	        .fail(function(jqXHR) {
@@ -753,6 +756,8 @@ function calculateR10Totals() {
 	             $('#loader').modal('hide');
 	        });
 	}
+	
+	
 
 	</script>
 </head>
@@ -780,7 +785,7 @@ function calculateR10Totals() {
 						<!-- 📅 Date -->
 						<span class="white-text"
 							style="color: white !important; font-size: 16px; margin-right: 20px;">Report
-							Date: <span th:text="${asondate}">2025-07-04</span>
+							Date: <span th:text="${#strings.replace(asondate, '/', '-')}">2025-09-18</span>
 						</span>
 						<!-- Buttons -->
 						<input type="hidden" id="selectedTab" th:value="${displaymode}">
@@ -860,16 +865,16 @@ function calculateR10Totals() {
                      id="reports">
               <thead class="thead-light">
               <tr style="background-color: #b3b6b9;">
-                     <th style="text-align: left; padding-left: 20px; ">Commodity</th>
-                     <th style="text-align: left; padding-left: 20px; width: 150px;">Total Long position</th>
-                     <th style="text-align: left; vertical-align:center; width: 150px;">Total Short Position</th>
-                     <th style="text-align: left; vertical-align:center;width: 150px;">Gross Open Position</th>
-                     <th style="text-align: left; vertical-align:center; width: 250px;">Charge for Basis Risk, Interest Rate Risk and Forward Gap Risk</th>
-                     <th style="text-align: left;vertical-align:center; width: 250px;">Capital Charge for Basis Risk, Interest Rate Risk and Forward Gap Risk</th>
-                     <th style="text-align: center; width: 150px;">Net Open position</th>
-                     <th style="text-align: center; width: 150px;">Charge for Directional Risk (15 percent of Net Open Position)</th>
-                     <th style="text-align: center; width: 150px;">Capitla Charge for Directional Risk</th>
-                     <th style="text-align: center; width: 150px;">Total Capital Charge by Commodity</th>
+                     <th style="text-align: left; vertical-align:top;">Commodity</th>
+                     <th style="text-align: right; vertical-align:top; width: 150px;">Total Long position</th>
+                     <th style="text-align: right; vertical-align:top; width: 150px;">Total Short Position</th>
+                     <th style="text-align: right; vertical-align:top; width: 150px;">Gross Open Position</th>
+                     <th style="text-align: center; vertical-align:top; width: 250px;">Charge for Basis Risk, Interest Rate Risk and Forward Gap Risk (3 percent of Gross Position)</th>
+                     <th style="text-align: right; vertical-align:top; width: 250px;">Capital Charge for Basis Risk, Interest Rate Risk and Forward Gap Risk</th>
+                     <th style="text-align: right; vertical-align:top; width: 150px;">Net Open position</th>
+                     <th style="text-align: center; vertical-align:top; width: 150px;">Charge for Directional Risk (15 percent of Net Open Position)</th>
+                     <th style="text-align: right; vertical-align:top; width: 150px;">Capitla Charge for Directional Risk</th>
+                     <th style="text-align: right; vertical-align:top; width: 150px;">Total Capital Charge by Commodity</th>
                                    
               </tr>
 
@@ -880,15 +885,15 @@ function calculateR10Totals() {
 
               <tr>
                   <td style="padding-left: 20px"></td>
-                  <td style="padding-left: 20px">(P'000)</td>
-                  <td style="padding-left: 20px">(P'000)</td>
-                  <td style="padding-left: 20px">(P'000)</td>
-                  <td style="padding-left: 20px">Percent</td>
-                  <td style="padding-left: 20px">(P'000)</td>
-                  <td style="padding-left: 20px">(P'000)</td>
-                  <td style="padding-left: 20px">Percent</td>
-                  <td style="padding-left: 20px">(P'000)</td>
-                  <td style="padding-left: 20px">(P'000)</td>
+                  <td style="text-align: right; padding-left: 20px">(P'000)</td>
+                  <td style="text-align: right; padding-left: 20px">(P'000)</td>
+                  <td style="text-align: right; padding-left: 20px">(P'000)</td>
+                  <td style="text-align: center; padding-left: 20px">Percent</td>
+                  <td style="text-align: right; padding-left: 20px">(P'000)</td>
+                  <td style="text-align: right; padding-left: 20px">(P'000)</td>
+                  <td style="text-align: center; padding-left: 20px">Percent</td>
+                  <td style="text-align: right; padding-left: 20px">(P'000)</td>
+                  <td style="text-align: right; padding-left: 20px">(P'000)</td>
               </tr>
 
 <!-- R11 ROW -->
@@ -896,9 +901,8 @@ function calculateR10Totals() {
 
 	<!-- <td style="padding-left: 20px" th:text="${report.R10_PRODUCT}"></td> -->
 
-    <td id="ROW10" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW10" style=" font-weight: bold;">
+        <input type="text"
                th:value="${#strings.defaultString(report.R10_PRODUCT, 'N/A')}"
                id="R10_PRODUCT"
                name="R10_PRODUCT"
@@ -912,7 +916,7 @@ function calculateR10Totals() {
 			   th:value="${report.R10_TOTAL_LONG_POS != null ? #numbers.formatDecimal(report.R10_TOTAL_LONG_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R10_TOTAL_LONG_POS"
                name="R10_TOTAL_LONG_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -922,7 +926,7 @@ function calculateR10Totals() {
 			   th:value="${report.R10_TOTAL_SHORT_POS != null ? #numbers.formatDecimal(report.R10_TOTAL_SHORT_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R10_TOTAL_SHORT_POS"
                name="R10_TOTAL_SHORT_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -932,72 +936,66 @@ function calculateR10Totals() {
 			   th:value="${report.R10_GROSS_OPEN_POS != null ? #numbers.formatDecimal(report.R10_GROSS_OPEN_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R10_GROSS_OPEN_POS"
                name="R10_GROSS_OPEN_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW10" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
+        <input 
                type="text"
                th:value="0.03"
                id="R10_CHARGE_BASIS_RISK"
                name="R10_CHARGE_BASIS_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW10" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-    <input class="display-input Show_input"
-           type="text"
+    <td id="ROW10" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+    <input type="text"
            id="R10_CAPITAL_CHARGE_BASIS_RISK"
            name="R10_CAPITAL_CHARGE_BASIS_RISK"
-           style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+           style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
            readonly />
     </td>
 
-    <td id="ROW10" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-    <input class="display-input Show_input"
-           type="text"
+    <td id="ROW10" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+    <input type="text"
            id="R10_NET_OPEN_POS"
            name="R10_NET_OPEN_POS"
-           style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+           style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
            readonly />
     </td>
 
     <td id="ROW10" style="padding-left: 20px;  background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.15"
                id="R10_CHARGE_DIR_RISK"
                name="R10_CHARGE_DIR_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW10" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-    <input class="display-input Show_input"
-           type="text"
+    <td id="ROW10" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+    <input type="text"
            id="R10_CAPITAL_CHARGE_DIR_RISK"
            name="R10_CAPITAL_CHARGE_DIR_RISK"
-           style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+           style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
            readonly />
     </td>
 
-    <td id="ROW10" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-    <input class="display-input Show_input"
-           type="text"
+    <td id="ROW10" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+    <input type="text"
            id="R10_TOTAL_CAPITAL_CHARGE"
            name="R10_TOTAL_CAPITAL_CHARGE"
-           style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+           style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
            readonly />
     </td>
 
 </tr>
 <!-- ================== R11 ================== -->
 <tr>
-    <td id="ROW11" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW11" style="font-weight: bold;">
+        <input type="text"
                th:value="${#strings.defaultString(report.R11_PRODUCT, 'N/A')}"
                id="R11_PRODUCT"
                name="R11_PRODUCT"
@@ -1011,7 +1009,7 @@ function calculateR10Totals() {
                th:value="${report.R11_TOTAL_LONG_POS != null ? #numbers.formatDecimal(report.R11_TOTAL_LONG_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R11_TOTAL_LONG_POS"
                name="R11_TOTAL_LONG_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1021,7 +1019,7 @@ function calculateR10Totals() {
                th:value="${report.R11_TOTAL_SHORT_POS != null ? #numbers.formatDecimal(report.R11_TOTAL_SHORT_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R11_TOTAL_SHORT_POS"
                name="R11_TOTAL_SHORT_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1031,63 +1029,57 @@ function calculateR10Totals() {
                th:value="${report.R11_GROSS_OPEN_POS != null ? #numbers.formatDecimal(report.R11_GROSS_OPEN_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R11_GROSS_OPEN_POS"
                name="R11_GROSS_OPEN_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW11" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.03"
                id="R11_CHARGE_BASIS_RISK"
                name="R11_CHARGE_BASIS_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW11" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW11" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R11_CAPITAL_CHARGE_BASIS_RISK"
                name="R11_CAPITAL_CHARGE_BASIS_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW11" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW11" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R11_NET_OPEN_POS"
                name="R11_NET_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW11" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.15"
                id="R11_CHARGE_DIR_RISK"
                name="R11_CHARGE_DIR_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW11" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW11" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R11_CAPITAL_CHARGE_DIR_RISK"
                name="R11_CAPITAL_CHARGE_DIR_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW11" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW11" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R11_TOTAL_CAPITAL_CHARGE"
                name="R11_TOTAL_CAPITAL_CHARGE"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 </tr>
@@ -1095,13 +1087,13 @@ function calculateR10Totals() {
 <!-- ================== R12 ================== -->
 <tr>
     <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
+        <!-- <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.R12_PRODUCT, 'N/A')}"
                id="R12_PRODUCT"
                name="R12_PRODUCT"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
-               readonly />
+               readonly /> -->
     </td>
 
     <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
@@ -1110,17 +1102,17 @@ function calculateR10Totals() {
                th:value="${report.R12_TOTAL_LONG_POS != null ? #numbers.formatDecimal(report.R12_TOTAL_LONG_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R12_TOTAL_LONG_POS"
                name="R12_TOTAL_LONG_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW12" style="padding-left: 20px; font-weight: bold;">
         <input class="display-input Show_input"
-               type="text"
+        	   type="text"
                th:value="${report.R12_TOTAL_SHORT_POS != null ? #numbers.formatDecimal(report.R12_TOTAL_SHORT_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R12_TOTAL_SHORT_POS"
                name="R12_TOTAL_SHORT_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1130,63 +1122,57 @@ function calculateR10Totals() {
                th:value="${report.R12_GROSS_OPEN_POS != null ? #numbers.formatDecimal(report.R12_GROSS_OPEN_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R12_GROSS_OPEN_POS"
                name="R12_GROSS_OPEN_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW12" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.03"
                id="R12_CHARGE_BASIS_RISK"
                name="R12_CHARGE_BASIS_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW12" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW12" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R12_CAPITAL_CHARGE_BASIS_RISK"
                name="R12_CAPITAL_CHARGE_BASIS_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW12" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW12" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R12_NET_OPEN_POS"
                name="R12_NET_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW12" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.15"
                id="R12_CHARGE_DIR_RISK"
                name="R12_CHARGE_DIR_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW12" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW12" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R12_CAPITAL_CHARGE_DIR_RISK"
                name="R12_CAPITAL_CHARGE_DIR_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW12" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW12" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R12_TOTAL_CAPITAL_CHARGE"
                name="R12_TOTAL_CAPITAL_CHARGE"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 </tr>
@@ -1194,13 +1180,13 @@ function calculateR10Totals() {
 <!-- ================== R13 ================== -->
 <tr>
     <td id="ROW13" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
+        <!-- <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.R13_PRODUCT, 'N/A')}"
                id="R13_PRODUCT"
                name="R13_PRODUCT"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
-               readonly />
+               readonly /> -->
     </td>
 
     <td id="ROW13" style="padding-left: 20px; font-weight: bold;">
@@ -1209,7 +1195,7 @@ function calculateR10Totals() {
                th:value="${report.R13_TOTAL_LONG_POS != null ? #numbers.formatDecimal(report.R13_TOTAL_LONG_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R13_TOTAL_LONG_POS"
                name="R13_TOTAL_LONG_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1219,7 +1205,7 @@ function calculateR10Totals() {
                th:value="${report.R13_TOTAL_SHORT_POS != null ? #numbers.formatDecimal(report.R13_TOTAL_SHORT_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R13_TOTAL_SHORT_POS"
                name="R13_TOTAL_SHORT_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1229,63 +1215,57 @@ function calculateR10Totals() {
                th:value="${report.R13_GROSS_OPEN_POS != null ? #numbers.formatDecimal(report.R13_GROSS_OPEN_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R13_GROSS_OPEN_POS"
                name="R13_GROSS_OPEN_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW13" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.03"
                id="R13_CHARGE_BASIS_RISK"
                name="R13_CHARGE_BASIS_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW13" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW13" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R13_CAPITAL_CHARGE_BASIS_RISK"
                name="R13_CAPITAL_CHARGE_BASIS_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW13" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW13" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R13_NET_OPEN_POS"
                name="R13_NET_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW13" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.15"
                id="R13_CHARGE_DIR_RISK"
                name="R13_CHARGE_DIR_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW13" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW13" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R13_CAPITAL_CHARGE_DIR_RISK"
                name="R13_CAPITAL_CHARGE_DIR_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW13" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW13" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R13_TOTAL_CAPITAL_CHARGE"
                name="R13_TOTAL_CAPITAL_CHARGE"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 </tr>
@@ -1293,13 +1273,13 @@ function calculateR10Totals() {
 <!-- ================== R14 ================== -->
 <tr>
     <td id="ROW14" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
+        <!-- <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.R14_PRODUCT, 'N/A')}"
                id="R14_PRODUCT"
                name="R14_PRODUCT"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
-               readonly />
+               readonly /> -->
     </td>
 
     <td id="ROW14" style="padding-left: 20px; font-weight: bold;">
@@ -1308,7 +1288,7 @@ function calculateR10Totals() {
                th:value="${report.R14_TOTAL_LONG_POS != null ? #numbers.formatDecimal(report.R14_TOTAL_LONG_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R14_TOTAL_LONG_POS"
                name="R14_TOTAL_LONG_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1318,7 +1298,7 @@ function calculateR10Totals() {
                th:value="${report.R14_TOTAL_SHORT_POS != null ? #numbers.formatDecimal(report.R14_TOTAL_SHORT_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R14_TOTAL_SHORT_POS"
                name="R14_TOTAL_SHORT_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1328,63 +1308,57 @@ function calculateR10Totals() {
                th:value="${report.R14_GROSS_OPEN_POS != null ? #numbers.formatDecimal(report.R14_GROSS_OPEN_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R14_GROSS_OPEN_POS"
                name="R14_GROSS_OPEN_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW14" style="padding-left: 20px;  background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.03"
                id="R14_CHARGE_BASIS_RISK"
                name="R14_CHARGE_BASIS_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW14" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW14" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R14_CAPITAL_CHARGE_BASIS_RISK"
                name="R14_CAPITAL_CHARGE_BASIS_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW14" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW14" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R14_NET_OPEN_POS"
                name="R14_NET_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW14" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.15"
                id="R14_CHARGE_DIR_RISK"
                name="R14_CHARGE_DIR_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW14" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW14" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R14_CAPITAL_CHARGE_DIR_RISK"
                name="R14_CAPITAL_CHARGE_DIR_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW14" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW14" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R14_TOTAL_CAPITAL_CHARGE"
                name="R14_TOTAL_CAPITAL_CHARGE"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 </tr>
@@ -1392,13 +1366,13 @@ function calculateR10Totals() {
 <!-- ================== R15 ================== -->
 <tr>
     <td id="ROW15" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
+        <!-- <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.R15_PRODUCT, 'N/A')}"
                id="R15_PRODUCT"
                name="R15_PRODUCT"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
-               readonly />
+               readonly /> -->
     </td>
 
     <td id="ROW15" style="padding-left: 20px; font-weight: bold;">
@@ -1407,7 +1381,7 @@ function calculateR10Totals() {
                th:value="${report.R15_TOTAL_LONG_POS != null ? #numbers.formatDecimal(report.R15_TOTAL_LONG_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R15_TOTAL_LONG_POS"
                name="R15_TOTAL_LONG_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1417,7 +1391,7 @@ function calculateR10Totals() {
                th:value="${report.R15_TOTAL_SHORT_POS != null ? #numbers.formatDecimal(report.R15_TOTAL_SHORT_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R15_TOTAL_SHORT_POS"
                name="R15_TOTAL_SHORT_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1427,63 +1401,57 @@ function calculateR10Totals() {
                th:value="${report.R15_GROSS_OPEN_POS != null ? #numbers.formatDecimal(report.R15_GROSS_OPEN_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R15_GROSS_OPEN_POS"
                name="R15_GROSS_OPEN_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW15" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.03"
                id="R15_CHARGE_BASIS_RISK"
                name="R15_CHARGE_BASIS_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW15" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW15" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R15_CAPITAL_CHARGE_BASIS_RISK"
                name="R15_CAPITAL_CHARGE_BASIS_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW15" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW15" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R15_NET_OPEN_POS"
                name="R15_NET_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW15" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.15"
                id="R15_CHARGE_DIR_RISK"
                name="R15_CHARGE_DIR_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW15" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW15" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R15_CAPITAL_CHARGE_DIR_RISK"
                name="R15_CAPITAL_CHARGE_DIR_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW15" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW15" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R15_TOTAL_CAPITAL_CHARGE"
                name="R15_TOTAL_CAPITAL_CHARGE"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 </tr>
@@ -1491,13 +1459,13 @@ function calculateR10Totals() {
 <!-- ================== R16 ================== -->
 <tr>
     <td id="ROW16" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
+       <!--  <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.R16_PRODUCT, 'N/A')}"
                id="R16_PRODUCT"
                name="R16_PRODUCT"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
-               readonly />
+               readonly /> -->
     </td>
 
     <td id="ROW16" style="padding-left: 20px; font-weight: bold;">
@@ -1506,7 +1474,7 @@ function calculateR10Totals() {
                th:value="${report.R16_TOTAL_LONG_POS != null ? #numbers.formatDecimal(report.R16_TOTAL_LONG_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R16_TOTAL_LONG_POS"
                name="R16_TOTAL_LONG_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1516,7 +1484,7 @@ function calculateR10Totals() {
                th:value="${report.R16_TOTAL_SHORT_POS != null ? #numbers.formatDecimal(report.R16_TOTAL_SHORT_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R16_TOTAL_SHORT_POS"
                name="R16_TOTAL_SHORT_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
@@ -1526,159 +1494,144 @@ function calculateR10Totals() {
                th:value="${report.R16_GROSS_OPEN_POS != null ? #numbers.formatDecimal(report.R16_GROSS_OPEN_POS, 1, 'COMMA', 0, 'POINT') : '0'}"
                id="R16_GROSS_OPEN_POS"
                name="R16_GROSS_OPEN_POS"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW16" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.03"
                id="R16_CHARGE_BASIS_RISK"
                name="R16_CHARGE_BASIS_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW16" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW16" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R16_CAPITAL_CHARGE_BASIS_RISK"
                name="R16_CAPITAL_CHARGE_BASIS_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW16" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW16" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R16_NET_OPEN_POS"
                name="R16_NET_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW16" style="padding-left: 20px; background-color: #c6c6c6;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0.15"
                id="R16_CHARGE_DIR_RISK"
                name="R16_CHARGE_DIR_RISK"
-               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #c6c6c6; width: 200px; height: 28px; border-color: transparent; text-align: center;"
                readonly />
     </td>
 
-    <td id="ROW16" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW16" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R16_CAPITAL_CHARGE_DIR_RISK"
                name="R16_CAPITAL_CHARGE_DIR_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW16" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW16" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R16_TOTAL_CAPITAL_CHARGE"
                name="R16_TOTAL_CAPITAL_CHARGE"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 </tr>
 
 <!-- ================== R17 ================== -->
 <tr>
-    <td id="ROW17" style="padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
+    <td id="ROW17" style="font-weight: bold;">Total</td>
+    
+    <!-- <input class="display-input Show_input"
                type="text"
                th:value="${#strings.defaultString(report.R17_PRODUCT, 'N/A')}"
                id="R17_PRODUCT"
                name="R17_PRODUCT"
                style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
-               readonly />
-    </td>
+               readonly /> -->
 
-	<td id="ROW17" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+	<td id="ROW17" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R17_TOTAL_LONG_POS"
                name="R17_TOTAL_LONG_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-	<td id="ROW17" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+	<td id="ROW17" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R17_TOTAL_SHORT_POS"
                name="R17_TOTAL_SHORT_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-	<td id="ROW17" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+	<td id="ROW17" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R17_GROSS_OPEN_POS"
                name="R17_GROSS_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW17" style="padding-left: 20px;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0"
                id="R17_CHARGE_BASIS_RISK"
                name="R17_CHARGE_BASIS_RISK"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; font-weight: bold; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW17" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW17" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R17_CAPITAL_CHARGE_BASIS_RISK"
                name="R17_CAPITAL_CHARGE_BASIS_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW17" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW17" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R17_NET_OPEN_POS"
                name="R17_NET_OPEN_POS"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
     <td id="ROW17" style="padding-left: 20px;">
-        <input class="display-input Show_input"
-               type="text"
+        <input type="text"
                th:value="0"
                id="R17_CHARGE_DIR_RISK"
                name="R17_CHARGE_DIR_RISK"
-               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; text-align: left;"
+               style="background-color: #FFFFFF; width: 200px; height: 28px; border-color: transparent; font-weight: bold; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW17" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW17" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R17_CAPITAL_CHARGE_DIR_RISK"
                name="R17_CAPITAL_CHARGE_DIR_RISK"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 
-    <td id="ROW17" style="background-color:#ADFF2F;padding-left: 20px; font-weight: bold;">
-        <input class="display-input Show_input"
-               type="text"
+    <td id="ROW17" style="background-color: rgb(107, 122, 143); color: white; padding-left: 20px; font-weight: bold;">
+        <input type="text"
                id="R17_TOTAL_CAPITAL_CHARGE"
                name="R17_TOTAL_CAPITAL_CHARGE"
-               style="background-color:#ADFF2F; width: 200px; height: 28px; border-color: transparent; text-align: right;"
+               style="background-color: rgb(107, 122, 143); color: white;  width: 200px; height: 28px; border-color: transparent; text-align: right;"
                readonly />
     </td>
 </tr>
@@ -1696,7 +1649,7 @@ function calculateR10Totals() {
 								
     <button id="submitButton" 
             type="button"
-            class="custom-tab-btn Show_input" 
+            class="custom-tab-btn Show_input submitButton" 
             form="fileupload"
             th:attr="data-todate=${asondate}" 
             onclick="fileuploads(this);" 
@@ -1848,56 +1801,61 @@ function calculateR10Totals() {
 	}
 </style>
 <style>
-	.inner {
-		max-height: 600px;
-		/* Adjust height as needed */
-		overflow: auto;
-		border: 1px solid #dee2e6;
-	}
+.inner {
+	max-height: 600px;
+	/* Adjust height as needed */
+	overflow: auto;
+	border: 1px solid #dee2e6;
+}
 
-	/* Sticky thead */
-	#reports thead th {
-		position: sticky;
-		top: 0;
-		background-color: #f8f9fa;
-		/* Match Bootstrap thead-light */
-		z-index: 2;
-	}
+/* Sticky thead */
+#reports thead th {
+	position: sticky;
+	top: 0;
+	background-color: #f8f9fa;
+	/* Match Bootstrap thead-light */
+	z-index: 2;
+}
 
-	div.dataTables_wrapper div.dataTables_paginate {
-		text-align: right !important;
-		float: right !important;
-		width: auto;
-		margin-top: 10px;
-	}
+div.dataTables_wrapper div.dataTables_paginate {
+	text-align: right !important;
+	float: right !important;
+	width: auto;
+	margin-top: 10px;
+}
 
-	/* Ensure info text (e.g., "Showing 1 to X") stays on the left */
-	div.dataTables_wrapper div.dataTables_info {
-		float: left !important;
-		margin-top: 10px;
-	}
+/* Ensure info text (e.g., "Showing 1 to X") stays on the left */
+div.dataTables_wrapper div.dataTables_info {
+	float: left !important;
+	margin-top: 10px;
+}
 
-	.pagination {
-		margin: 0;
-	}
+.pagination {
+	margin: 0;
+}
 
-	.page-item.active .page-link {
-		background-color: #386276;
-		border-color: #386276;
-	}
+.page-item.active .page-link {
+	background-color: #386276;
+	border-color: #386276;
+}
 
-	.page-link {
-		color: #386276;
-	}
+.page-link {
+	color: #386276;
+}
 
-	.page-link:hover {
-		color: #2a4a5c;
-	}
+.page-link:hover {
+	color: #2a4a5c;
+}
 
-	.form-select {
-		display: inline-block;
-		width: auto;
-	}
+.form-select {
+	display: inline-block;
+	width: auto;
+}
+
+#submitButton {
+	background-color: #ffffff !important;
+	color: black !important;
+}
 </style>
 
 </html>
