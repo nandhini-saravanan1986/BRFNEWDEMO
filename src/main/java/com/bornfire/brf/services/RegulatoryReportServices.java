@@ -2006,14 +2006,14 @@ public class RegulatoryReportServices {
 				e.printStackTrace();
 			}
 			break;
-		case "M_SRWA_12G":
-			try {
-				archivalData = brrs_m_srwa_12g_reportservice.getM_SRWA_12GArchival();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
+	      case "M_SRWA_12G":
+              List<Object[]> srwagList = brrs_m_srwa_12g_reportservice.getM_SRWA_12GArchival();
+              archivalData.addAll(srwagList);
+              System.out.println("Fetched M_SRWA_12G archival data: " + srwagList.size());
+              break;
+//          default:
+//              System.out.println("No archival logic defined for report: " + rptcode);
+//              break;
 			
 		case "M_SRWA_12F":
 			try {
@@ -2272,6 +2272,17 @@ public List<Object[]> getResub(String rptcode) {
                 e.printStackTrace();
             }
             break;
+            
+        case "M_SRWA_12G":
+            try {
+                List<Object[]> resubList = brrs_m_srwa_12g_reportservice.getM_SRWA_12GResub();
+                resubmissionData.addAll(resubList);
+                System.out.println("Resubmission data fetched for M_SRWA_12G: " + resubList.size());
+            } catch (Exception e) {
+                System.err.println("Error fetching resubmission data for M_SRWA_12G: " + e.getMessage());
+                e.printStackTrace();
+            }
+            break;   
 
         default:
             System.out.println("Unsupported report code: " + rptcode);
